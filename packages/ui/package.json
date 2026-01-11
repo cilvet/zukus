@@ -7,7 +7,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tamagui/core": "^1.132.23"
+    "@tamagui/config": "^1.144.1",
+    "@tamagui/core": "^1.132.23",
+    "@tamagui/shorthands": "^1.144.1"
   },
   "peerDependencies": {
     "react": ">=18",
