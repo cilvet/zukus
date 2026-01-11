@@ -1,6 +1,6 @@
 # Fase 3: Crear App Mobile (Expo)
 
-**Objetivo:** Tener una app de Expo funcionando dentro del monorepo. **Inicio fresco**, no copiar zukus-again.
+**Objetivo:** Tener una app de Expo funcionando dentro del monorepo con pantallas sencillas. **Inicio fresco**, no copiar zukus-again.
 
 **Prerequisitos:** Fase 2 completada
 
@@ -17,10 +17,13 @@
 **zukus-again sirve como REFERENCIA** para:
 - Cómo configurar Expo Router
 - Cómo integrar Tamagui con Expo
-- Patrones de navegación
 - Estructura de carpetas
 
 Pero todo se escribe de nuevo, bajo supervisión.
+
+## ⚠️ Alcance de esta Fase
+
+Esta fase se limita a **crear la app funcionando con pantallas sencillas**. La navegación compleja (paneles, historial, detección de layout) se implementa en la **Fase 3.5**.
 
 ---
 
@@ -262,5 +265,5 @@ Para los siguientes pasos, consulta zukus-again para:
 
 ## Siguiente Fase
 
-→ [Fase 4: Conectar Mobile con UI](./fase-4-conectar-mobile-ui.md)
+→ [Fase 3.5: Sistema de Navegación](./fase-3-5-navegacion.md)
 

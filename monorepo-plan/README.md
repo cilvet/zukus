@@ -276,13 +276,14 @@ Cada fase tiene su archivo detallado en la carpeta `fases/`.
 
 | Fase | Nombre | Descripción | Estado |
 |------|--------|-------------|--------|
-| 0 | [Estructura Base](./fases/fase-0-estructura-base.md) | Crear el monorepo con Bun + Turborepo | 🔄 Pendiente verificación |
-| 1 | [Migrar Core](./fases/fase-1-migrar-core.md) | Migrar cilvet-dice como @zukus/core | ⬜ Pendiente |
-| 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI | ⬜ Pendiente |
-| 3 | [Crear App Mobile](./fases/fase-3-crear-app-mobile.md) | Inicio fresco de la app Expo | ⬜ Pendiente |
+| 0 | [Estructura Base](./fases/fase-0-estructura-base.md) | Crear el monorepo con Bun + Turborepo | ✅ Completado |
+| 1 | [Migrar Core](./fases/fase-1-migrar-core.md) | Migrar cilvet-dice como @zukus/core | ✅ Completado |
+| 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI + átomos | ⬜ Pendiente |
+| 3 | [Crear App Mobile](./fases/fase-3-crear-app-mobile.md) | Inicio fresco de la app Expo (pantallas sencillas) | ⬜ Pendiente |
+| 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ⬜ Pendiente |
 | 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ⬜ Pendiente |
 | 5 | [Desktop con Tauri](./fases/fase-5-desktop-tauri.md) | App de escritorio (en paralelo) | ⬜ Pendiente |
-| 6 | [Migrar Componentes](./fases/fase-6-migrar-componentes.md) | Componentes grandes desde zukusnextmicon | ⬜ Pendiente |
+| 6 | [Migrar Componentes](./fases/fase-6-migrar-componentes.md) | Componentes complejos (post-Tauri) | ⬜ Pendiente |
 
 ### Fases Pospuestas
 
@@ -307,19 +308,20 @@ Ver [fases-pospuestas.md](./fases/fases-pospuestas.md) para:
 ### Progreso Actual
 
 ```
-Fase 0: 🔄 Estructura Base (pendiente verificación humano)
-Fase 1: ⬜ Migrar Core
-Fase 2: ⬜ Crear @zukus/ui
-Fase 3: ⬜ Crear App Mobile
-Fase 4: ⬜ Conectar Mobile con UI
-Fase 5: ⬜ Desktop con Tauri
-Fase 6: ⬜ Migrar Componentes
+Fase 0:   ✅ Estructura Base
+Fase 1:   ✅ Migrar Core
+Fase 2:   ⬜ Crear @zukus/ui
+Fase 3:   ⬜ Crear App Mobile
+Fase 3.5: ⬜ Sistema de Navegación
+Fase 4:   ⬜ Conectar Mobile con UI
+Fase 5:   ⬜ Desktop con Tauri
+Fase 6:   ⬜ Migrar Componentes
 ```
 
 ### Última Actualización
 
 Fecha: 2026-01-11
-Nota: Fase 0 ejecutada, pendiente de verificación y aprobación por el humano.
+Nota: Fases 0 y 1 completadas. Añadida Fase 3.5 (navegación) entre Fase 3 y 4.
 
 ---
 
