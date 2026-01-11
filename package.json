@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "dev": "turbo dev",
-    "mobile": "turbo dev --filter=@zukus/mobile",
+    "mobile": "cd apps/mobile && expo start",
     "build": "turbo build",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
