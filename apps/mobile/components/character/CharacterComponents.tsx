@@ -238,6 +238,73 @@ export function HpBar({ current, max }: { current: number; max: number }) {
   )
 }
 
+/**
+ * Header compacto para mobile con swipe.
+ * Layout: [Nivel+Clase] [Avatar] [HP]
+ */
+export function CompactCharacterHeader({
+  level,
+  characterClass,
+  hpCurrent,
+  hpMax,
+}: {
+  level: number
+  characterClass: string
+  hpCurrent: number
+  hpMax: number
+}) {
+  return (
+    <XStack
+      alignItems="center"
+      justifyContent="space-between"
+      paddingVertical={12}
+      paddingHorizontal={16}
+      backgroundColor={theme.background}
+      borderBottomWidth={1}
+      borderBottomColor={theme.borderColor}
+    >
+      {/* Izquierda: Nivel + Clase */}
+      <YStack alignItems="flex-start" flex={1}>
+        <Text fontSize={11} color={theme.placeholderColor} textTransform="uppercase">
+          Nivel {level}
+        </Text>
+        <Text fontSize={14} fontWeight="700" color={theme.color}>
+          {characterClass}
+        </Text>
+      </YStack>
+
+      {/* Centro: Avatar */}
+      <YStack
+        width={48}
+        height={48}
+        borderRadius={24}
+        backgroundColor={theme.uiBackgroundColor}
+        borderWidth={2}
+        borderColor={theme.color}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text fontSize={20}>🧙</Text>
+      </YStack>
+
+      {/* Derecha: HP */}
+      <YStack alignItems="flex-end" flex={1}>
+        <Text fontSize={11} color={theme.placeholderColor} textTransform="uppercase">
+          HP
+        </Text>
+        <XStack alignItems="baseline" gap={2}>
+          <Text fontSize={16} fontWeight="700" color={theme.color}>
+            {hpCurrent}
+          </Text>
+          <Text fontSize={12} color={theme.placeholderColor}>
+            /{hpMax}
+          </Text>
+        </XStack>
+      </YStack>
+    </XStack>
+  )
+}
+
 export function AbilityDetailPanel({
   abilityKey,
   ability,

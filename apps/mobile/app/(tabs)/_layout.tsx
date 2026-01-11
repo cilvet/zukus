@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router'
 import { themes } from '@zukus/ui'
 import { Text, View, Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Topbar } from '../../components/layout'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
@@ -38,6 +39,7 @@ function TabIcon({ label, focused }: TabIconProps) {
 
 export default function TabsLayout() {
   const { width } = useWindowDimensions()
+  const insets = useSafeAreaInsets()
   const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
   // En desktop web: ocultar tabs, mostrar topbar
@@ -76,6 +78,10 @@ export default function TabsLayout() {
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
+        },
+        sceneStyle: {
+          paddingTop: insets.top,
+          backgroundColor: theme.background,
         },
       }}
     >
