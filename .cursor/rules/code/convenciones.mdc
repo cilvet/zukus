@@ -90,3 +90,26 @@ function calculateAC(character: Character): number { ... }
 ```
 
 Excepciones: librerías externas que requieran clases.
+
+## No Emojis
+
+No añadir emojis en ningún sitio de la app.
+
+```typescript
+// ❌ MAL
+const message = "¡Hola! 👋 Bienvenido";
+const status = "✅ Completado";
+const error = "❌ Error al procesar";
+
+// ✅ BIEN
+const message = "Hola! Bienvenido";
+const status = "Completado";
+const error = "Error al procesar";
+```
+
+Esta regla aplica a:
+- Textos en la UI
+- Mensajes de error
+- Comentarios en el código
+- Strings literales
+- Cualquier texto visible o no visible en la aplicación

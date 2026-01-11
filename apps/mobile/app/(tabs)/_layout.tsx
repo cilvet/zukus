@@ -1,9 +1,13 @@
 import { Tabs } from 'expo-router'
 import { themes } from '@zukus/ui'
-import { Text, View } from 'react-native'
+import { Text, View, Platform, useWindowDimensions } from 'react-native'
+import { YStack } from 'tamagui'
+import { Topbar } from '../../components/layout'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
 const theme = themes[CURRENT_THEME]
+
+const DESKTOP_BREAKPOINT = 768
 
 type TabIconProps = {
   label: string
@@ -33,6 +37,29 @@ function TabIcon({ label, focused }: TabIconProps) {
 }
 
 export default function TabsLayout() {
+  const { width } = useWindowDimensions()
+  const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+
+  // En desktop web: ocultar tabs, mostrar topbar
+  if (isWebDesktop) {
+    return (
+      <YStack flex={1} backgroundColor={theme.background}>
+        <Topbar />
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: { display: 'none' },
+          }}
+        >
+          <Tabs.Screen name="(character)" options={{ title: 'Personaje' }} />
+          <Tabs.Screen name="(spells)" options={{ title: 'Conjuros' }} />
+          <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
+        </Tabs>
+      </YStack>
+    )
+  }
+
+  // Mobile (nativo y web): mostrar tabs
   return (
     <Tabs
       screenOptions={{

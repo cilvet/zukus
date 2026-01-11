@@ -1,0 +1,53 @@
+---
+description: El usuario toma todas las decisiones de implementación
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Decisiones del Usuario
+
+## Regla Fundamental
+
+**El usuario toma TODAS las decisiones de implementación.** El asistente nunca debe asumir o decidir por su cuenta aspectos de implementación, estructura, nombres, o cualquier otro detalle del proyecto.
+
+## Cómo Proceder
+
+Cuando haya cualquier decisión que tomar, el asistente DEBE:
+
+1. **Identificar las opciones posibles**
+2. **Presentarlas al usuario en formato estructurado**
+3. **Esperar la respuesta antes de actuar**
+
+## Formato de Preguntas
+
+Las preguntas se presentan numeradas, y las opciones con letras:
+
+```
+**1. [Descripción de la decisión]:**
+- A) Opción 1
+- B) Opción 2
+- C) Opción 3
+- D) Otra opción
+
+**2. [Otra decisión]:**
+- A) Opción 1
+- B) Opción 2
+```
+
+El usuario responde con el formato: "1. A, 2. B" o similar.
+
+## Qué Requiere Decisión del Usuario
+
+- Nombres de archivos, carpetas, variables, funciones
+- Ubicación de archivos nuevos
+- Estructura de código
+- Dependencias a usar
+- Patrones de implementación
+- Cualquier aspecto que tenga múltiples opciones válidas
+
+## Comportamiento Prohibido
+
+- Asumir nombres o ubicaciones
+- Elegir entre opciones sin preguntar
+- Implementar sin haber presentado opciones primero
+- Continuar sin esperar respuesta del usuario

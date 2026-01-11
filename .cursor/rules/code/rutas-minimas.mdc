@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+# Archivos de Ruta Mínimos
+
+Los archivos dentro de `app/` (Expo Router) deben ser wrappers mínimos que solo importan y renderizan.
+
+```typescript
+// ✅ BIEN - archivo de ruta mínimo
+import { CharacterScreen } from '../../../screens'
+
+export default CharacterScreen
+```
+
+```typescript
+// ❌ MAL - lógica y UI directamente en el archivo de ruta
+export default function CharacterScreen() {
+  const [state, setState] = useState(...)
+  // 200+ líneas de código...
+}
+```
+
+**Estructura**:
+- Pantallas en `screens/[feature]/`
+- Lógica en `hooks/`
+- Archivos de ruta solo importan y deciden qué renderizar
