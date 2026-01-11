@@ -179,15 +179,6 @@ Verificar que la navegación funciona en:
 
 ---
 
-### 3.5.7 Commit
-
-```bash
-git add -A
-git commit -m "feat: add navigation system with proof of concept screens"
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 4:
@@ -200,7 +191,6 @@ Antes de pasar a la Fase 4:
 - [ ] La navegación funciona en web mobile
 - [ ] La navegación funciona en RN (al menos en simulador)
 - [ ] El humano ha validado el comportamiento
-- [ ] Commit hecho
 
 ---
 

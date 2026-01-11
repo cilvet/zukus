@@ -247,19 +247,6 @@ cd packages/ui && bun run typecheck
 
 ---
 
-### 2.9 Commit
-
-```bash
-git add -A
-git commit -m "feat: add @zukus/ui package with tamagui config structure"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 3, asegúrate de que:
@@ -270,7 +257,6 @@ Antes de pasar a la Fase 3, asegúrate de que:
 - [ ] Los archivos index.ts existen en cada carpeta
 - [ ] `bun install` funciona sin errores
 - [ ] El typecheck pasa
-- [ ] El commit está hecho
 
 ---
 

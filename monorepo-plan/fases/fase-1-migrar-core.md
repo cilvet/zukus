@@ -20,7 +20,6 @@ Los tests de cilvet-dice son rápidos, independientes y la prueba definitiva de 
 
 ```bash
 cp -R /Users/cilveti/personal/cilvet-dice packages/core
-rm -rf packages/core/.git
 rm -rf packages/core/node_modules
 rm -f packages/core/bun.lockb
 ```
@@ -158,19 +157,6 @@ cd packages/core && bun run typecheck
 
 ---
 
-### 1.8 Commit
-
-```bash
-git add -A
-git commit -m "feat: add @zukus/core package (migrated from cilvet-dice)"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 2, asegúrate de que:
@@ -182,7 +168,6 @@ Antes de pasar a la Fase 2, asegúrate de que:
 - [ ] **TODOS los tests pasan** (`bun test` exit 0)
 - [ ] El build genera `dist/index.js` y `dist/index.d.ts`
 - [ ] El typecheck pasa sin errores
-- [ ] El commit está hecho
 
 ---
 

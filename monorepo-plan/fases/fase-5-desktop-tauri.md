@@ -229,19 +229,6 @@ cd apps/desktop && bun run build
 
 ---
 
-### 5.9 Commit
-
-```bash
-git add -A
-git commit -m "feat: add desktop app with Tauri"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 6, asegúrate de que:
@@ -251,7 +238,6 @@ Antes de pasar a la Fase 6, asegúrate de que:
 - [ ] El script `build:web` existe en mobile
 - [ ] El modo desarrollo funciona (dos terminales)
 - [ ] El build de producción genera un ejecutable
-- [ ] El commit está hecho
 
 ---
 

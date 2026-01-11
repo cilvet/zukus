@@ -8,18 +8,16 @@
 
 ## Pasos
 
-### 0.1 Inicializar repositorio
+### 0.1 Crear carpeta del proyecto
 
 ```bash
 mkdir zukus
 cd zukus
-git init
 ```
 
 ```
 📁 Crear carpeta zukus/
 ✅ Verificar: ls zukus/ existe
-✅ Verificar: git status funciona
 ```
 
 ---
@@ -155,7 +153,6 @@ apps/desktop/src-tauri/target/
 
 ```bash
 mkdir -p apps packages
-touch apps/.gitkeep packages/.gitkeep
 ```
 
 ```
@@ -209,24 +206,11 @@ bun install
 
 ---
 
-### 0.8 Primer commit
-
-```bash
-git add -A
-git commit -m "chore: init monorepo structure with bun + turborepo"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 1, asegúrate de que:
 
-- [ ] La carpeta `zukus/` existe con git inicializado
+- [ ] La carpeta `zukus/` existe
 - [ ] El `.gitignore` está creado con el contenido correcto
 - [ ] El `package.json` tiene workspaces configurados
 - [ ] El `turbo.json` tiene el pipeline definido
@@ -234,7 +218,6 @@ Antes de pasar a la Fase 1, asegúrate de que:
 - [ ] El `tsconfig.json` base está creado
 - [ ] `bun install` ejecuta sin errores
 - [ ] `bunx turbo --version` funciona
-- [ ] El primer commit está hecho
 
 ---
 

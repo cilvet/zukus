@@ -311,19 +311,6 @@ cd apps/mobile && bun run web
 
 ---
 
-### 4.11 Commit
-
-```bash
-git add -A
-git commit -m "feat: connect mobile app with @zukus/ui and @zukus/core"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 5, asegúrate de que:
@@ -335,7 +322,6 @@ Antes de pasar a la Fase 5, asegúrate de que:
 - [ ] Los imports de @zukus/core funcionan (aunque sea solo tipos)
 - [ ] El typecheck pasa en la app mobile
 - [ ] La app arranca y se ve el tema aplicado
-- [ ] El commit está hecho
 
 ---
 

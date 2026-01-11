@@ -220,19 +220,6 @@ cd apps/mobile && bun run typecheck
 
 ---
 
-### 3.9 Commit
-
-```bash
-git add -A
-git commit -m "feat: add mobile app with expo (fresh start)"
-```
-
-```
-✅ Verificar: git log --oneline -1 (muestra el commit)
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de pasar a la Fase 4, asegúrate de que:
@@ -244,7 +231,6 @@ Antes de pasar a la Fase 4, asegúrate de que:
 - [ ] Los symlinks a @zukus/core y @zukus/ui existen
 - [ ] La app arranca en web sin errores
 - [ ] El typecheck pasa
-- [ ] El commit está hecho
 
 ---
 

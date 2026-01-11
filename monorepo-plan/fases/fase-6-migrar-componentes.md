@@ -71,10 +71,6 @@ Para cada componente/hook que migremos, seguiremos este proceso:
 2. El componente/hook es usable desde la app mobile
 3. Funciona igual que el original (o mejor)
 
-### Paso 4: Commit
-
-Un commit por cada componente/hook migrado.
-
 ---
 
 ## Migración Detallada
@@ -115,12 +111,6 @@ export { useSpecialChangesManagement } from './useSpecialChangesManagement'
 export { useBaseSourcesManagement } from './useBaseSourcesManagement'
 ```
 
-**Commit:**
-```bash
-git add -A
-git commit -m "feat(ui): migrate form management hooks from zukusnextmicon"
-```
-
 ---
 
 ### 6.2 Migrar EntityProvider
@@ -149,12 +139,6 @@ El EntityProvider es un sistema completo que incluye:
 ✅ Verificar: cd packages/ui && bun run typecheck
 ```
 
-**Commit:**
-```bash
-git add -A
-git commit -m "feat(ui): migrate EntityProvider from zukusnextmicon"
-```
-
 ---
 
 ### 6.3 Migrar componentes de Changes
@@ -173,12 +157,6 @@ git commit -m "feat(ui): migrate EntityProvider from zukusnextmicon"
 
 ```
 ✅ Verificar: cd packages/ui && bun run typecheck
-```
-
-**Commit:**
-```bash
-git add -A
-git commit -m "feat(ui): migrate Changes components from zukusnextmicon"
 ```
 
 ---
@@ -243,15 +221,6 @@ export default function TestComponentsScreen() {
 
 ---
 
-### 6.6 Commit final de la fase
-
-```bash
-git add -A
-git commit -m "feat(ui): complete component migration from zukusnextmicon"
-```
-
----
-
 ## Verificación Final de la Fase
 
 Antes de considerar esta fase completa:
@@ -263,7 +232,6 @@ Antes de considerar esta fase completa:
 - [ ] El typecheck pasa en @zukus/ui
 - [ ] El typecheck pasa en la app mobile
 - [ ] La app mobile puede importar y usar los componentes migrados
-- [ ] Commits hechos para cada grupo de componentes
 
 ---
 
