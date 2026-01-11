@@ -1,0 +1,995 @@
+{
+  "buffs": [
+      {
+          "originUniqueId": "conviccion-en-grupo",
+          "changes": [
+              {
+                  "bonusTypeId": "MORALE",
+                  "type": "SAVING_THROW",
+                  "savingThrowUniqueId": "ALL",
+                  "formula": {
+                      "expression": "4"
+                  }
+              }
+          ],
+          "uniqueId": "conviccion-en-grupo",
+          "originName": "Convicción en grupo",
+          "name": "Convicción en grupo",
+          "active": false,
+          "originType": "other",
+          "description": ""
+      },
+      {
+          "originType": "other",
+          "uniqueId": "circulo-proteccion-contra-el-mal",
+          "description": "",
+          "originName": "Círculo de protección contra el mal",
+          "changes": [
+              {
+                  "formula": {
+                      "expression": "2"
+                  },
+                  "type": "SAVING_THROW",
+                  "bonusTypeId": "RESISTANCE",
+                  "savingThrowUniqueId": "ALL"
+              },
+              {
+                  "bonusTypeId": "DEFLECTION",
+                  "formula": {
+                      "expression": "2"
+                  },
+                  "type": "AC"
+              }
+          ],
+          "originUniqueId": "circulo-proteccion-contra-el-mal",
+          "name": "Círculo de protección contra el mal",
+          "active": false
+      },
+      {
+          "name": "Aura de voluntad de Sigmar",
+          "description": "",
+          "originName": "Aura de voluntad de Sigmar",
+          "active": false,
+          "changes": [
+              {
+                  "savingThrowUniqueId": "WILL",
+                  "formula": {
+                      "expression": "6"
+                  },
+                  "bonusTypeId": "CIRCUMNSTANCE",
+                  "type": "SAVING_THROW"
+              }
+          ],
+          "originType": "other",
+          "uniqueId": "aura-de-voluntad-de-sigmar",
+          "originUniqueId": "aura-de-voluntad-de-sigmar"
+      }
+  ],
+  "skillData": [],
+  "name": "Gorwin",
+  "currentTemporalHp": 0,
+  "equipment": {
+      "items": [
+          {
+              "defaultWieldType": "twoHanded",
+              "wieldedContextChanges": [],
+              "equippedChanges": [],
+              "changes": [
+                  {
+                      "type": "DAMAGE",
+                      "formula": {
+                          "expression": "@ability.strength.modifier"
+                      },
+                      "bonusTypeId": "UNTYPED"
+                  }
+              ],
+              "enhancements": [
+                  {
+                      "description": "",
+                      "weaponOnlyContextualChanges": [
+                          {
+                              "optional": true,
+                              "variables": [],
+                              "appliesTo": "all",
+                              "changes": [
+                                  {
+                                      "originId": "",
+                                      "bonusTypeId": "UNTYPED",
+                                      "name": "Mage bane",
+                                      "originType": "item",
+                                      "type": "DAMAGE",
+                                      "formula": {
+                                          "expression": "2d6"
+                                      }
+                                  },
+                                  {
+                                      "formula": {
+                                          "expression": "2"
+                                      },
+                                      "bonusTypeId": "UNTYPED",
+                                      "originType": "item",
+                                      "type": "DAMAGE",
+                                      "name": "Mage bane",
+                                      "originId": ""
+                                  },
+                                  {
+                                      "originId": "",
+                                      "attackType": "all",
+                                      "name": "Mage bane",
+                                      "bonusTypeId": "UNTYPED",
+                                      "originType": "item",
+                                      "type": "ATTACK_ROLLS",
+                                      "formula": {
+                                          "expression": "2"
+                                      }
+                                  }
+                              ],
+                              "available": true,
+                              "name": "Mage bane",
+                              "type": "attack"
+                          }
+                      ],
+                      "casterLevel": 0,
+                      "cost": {
+                          "bonus": 2,
+                          "type": "bonus"
+                      },
+                      "name": "Mage bane",
+                      "uniqueId": "mage-bane"
+                  }
+              ],
+              "proficiencyType": "simple",
+              "itemType": "WEAPON",
+              "rangeIncrement": 100,
+              "damageDice": "1d8",
+              "equipped": true,
+              "damageType": {
+                  "damageType": "piercing",
+                  "type": "basic"
+              },
+              "weight": 2,
+              "name": "Longbow",
+              "isMasterwork": true,
+              "baseCritMultiplier": 3,
+              "enhancementBonus": 1,
+              "baseCritRange": 20,
+              "equipable": true,
+              "description": "",
+              "requiresLoading": false,
+              "specialChanges": [],
+              "ammunitionType": "ARROW",
+              "size": "MEDIUM",
+              "wieldedChanges": [],
+              "wielded": true,
+              "twoHanded": true,
+              "uniqueId": "longbow",
+              "weaponAttackType": "ranged",
+              "equippedContextChanges": []
+          }
+      ],
+      "money": 0
+  },
+  "classes": [
+      {
+          "baseAttackBonusProgression": "GOOD",
+          "uniqueId": "Guerrero psíquico",
+          "baseSavesProgression": {
+              "will": "POOR",
+              "fortitude": "GOOD",
+              "reflex": "POOR"
+          },
+          "sourceBook": "D&D 3.Txus",
+          "levels": [
+              {
+                  "classFeatures": [
+                      {
+                          "contextualChanges": [
+                              {
+                                  "available": true,
+                                  "changes": [
+                                      {
+                                          "originId": "flecha-energizada",
+                                          "damageType": {
+                                              "type": "halfAndHalf",
+                                              "firstDamageType": "piercing",
+                                              "secondDamageType": "electric"
+                                          },
+                                          "bonusTypeId": "UNTYPED",
+                                          "type": "DAMAGE_TYPE",
+                                          "originType": "classFeature",
+                                          "formula": {
+                                              "expression": ""
+                                          },
+                                          "name": "Flecha energizada"
+                                      },
+                                      {
+                                          "originId": "flecha-energizada",
+                                          "name": "Flecha energizada",
+                                          "type": "DAMAGE",
+                                          "originType": "classFeature",
+                                          "bonusTypeId": "UNTYPED",
+                                          "damageType": {
+                                              "type": "basic",
+                                              "damageType": "electric"
+                                          },
+                                          "formula": {
+                                              "expression": "1d6"
+                                          }
+                                      }
+                                  ],
+                                  "type": "attack",
+                                  "name": "Flecha energizada",
+                                  "optional": true,
+                                  "appliesTo": "ranged",
+                                  "variables": []
+                              }
+                          ],
+                          "uniqueId": "flecha-energizada",
+                          "featureType": "CLASS_FEATURE",
+                          "name": "Flecha energizada",
+                          "description": "Al realizar un ataque con un arma a distancia, puedes gastar 1 punto de poder para imbuir el proyectil o arma arrojadiza con un tipo de energía (frío, fuego, electricidad o sonido). El arma convertirá un 50% de su daño a daño del tipo de energía elegido y además causará 1d6 puntos de daño adicionales del tipo de energía seleccionado. Adicionalmente, puedes gastar tu foco psiónico cuando un proyectil o arma arrojadiza imbuidos con energía impacte contra un objetivo para crear una explosión de energía, con un radio de 10’ que infligirá el daño por energía del ataque a todas las criaturas que no fueran el objetivo del ataque. Esas criaturas pueden reducir el daño a la mitad con una TS de Reflejos con éxito (CD 10 + la mitad de tu nivel de guerrero psíquico + tu bonificador de Inteligencia). El arma o proyectil quedarán destruidos tras hacerlo explotar."
+                      },
+                      {
+                          "name": "Foco psiónico",
+                          "description": "",
+                          "featureType": "CLASS_FEATURE",
+                          "contextualChanges": [
+                              {
+                                  "optional": true,
+                                  "variables": [],
+                                  "name": "Foco psiónico",
+                                  "available": true,
+                                  "type": "attack",
+                                  "appliesTo": "all",
+                                  "changes": [
+                                      {
+                                          "formula": {
+                                              "expression": "@ability.intelligence.modifier"
+                                          },
+                                          "type": "DAMAGE",
+                                          "bonusTypeId": "UNTYPED",
+                                          "originId": "foco-psionico",
+                                          "originType": "classFeature",
+                                          "name": "Foco psiónico"
+                                      }
+                                  ]
+                              }
+                          ],
+                          "uniqueId": "foco-psionico"
+                      }
+                  ],
+                  "level": 1
+              }
+          ],
+          "hitDie": 8,
+          "description": "",
+          "classFeatures": [],
+          "spellCasting": false
+      }
+  ],
+  "skills": {
+      "knowledgeGeography": {
+          "armorCheckPenalty": 0,
+          "uniqueId": "knowledgeGeography",
+          "abilityModifierUniqueId": "int",
+          "name": {},
+          "hasSubSkills": false,
+          "trainedOnly": true
+      },
+      "moveSilently": {
+          "name": {},
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "dex",
+          "trainedOnly": false,
+          "armorCheckPenalty": 1,
+          "uniqueId": "moveSilently"
+      },
+      "bluff": {
+          "name": {},
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "dex",
+          "trainedOnly": false,
+          "uniqueId": "bluff",
+          "armorCheckPenalty": 1
+      },
+      "knowledgeLocal": {
+          "uniqueId": "knowledgeLocal",
+          "armorCheckPenalty": 0,
+          "name": {},
+          "trainedOnly": true,
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false
+      },
+      "ride": {
+          "name": {},
+          "armorCheckPenalty": 0,
+          "trainedOnly": false,
+          "uniqueId": "ride",
+          "abilityModifierUniqueId": "dex",
+          "hasSubSkills": false
+      },
+      "balance": {
+          "name": {},
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "dex",
+          "uniqueId": "balance",
+          "armorCheckPenalty": 1,
+          "trainedOnly": false
+      },
+      "disableDevice": {
+          "trainedOnly": true,
+          "hasSubSkills": false,
+          "uniqueId": "disableDevice",
+          "name": {},
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "int"
+      },
+      "survival": {
+          "uniqueId": "survival",
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "wis",
+          "trainedOnly": false,
+          "armorCheckPenalty": 0,
+          "name": {}
+      },
+      "knowledgeThePlanes": {
+          "abilityModifierUniqueId": "int",
+          "armorCheckPenalty": 0,
+          "name": {},
+          "trainedOnly": true,
+          "hasSubSkills": false,
+          "uniqueId": "knowledgeThePlanes"
+      },
+      "profession": {
+          "name": {},
+          "abilityModifierUniqueId": "wis",
+          "subSkills": [],
+          "trainedOnly": true,
+          "armorCheckPenalty": 0,
+          "hasSubSkills": true,
+          "uniqueId": "profession"
+      },
+      "climb": {
+          "uniqueId": "climb",
+          "armorCheckPenalty": 1,
+          "trainedOnly": false,
+          "abilityModifierUniqueId": "str",
+          "hasSubSkills": false,
+          "name": {}
+      },
+      "knowledgeDungeoneering": {
+          "trainedOnly": true,
+          "name": {},
+          "armorCheckPenalty": 0,
+          "uniqueId": "knowledgeDungeoneering",
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "int"
+      },
+      "perform": {
+          "abilityModifierUniqueId": "cha",
+          "subSkills": [],
+          "hasSubSkills": true,
+          "trainedOnly": true,
+          "uniqueId": "perform",
+          "name": {},
+          "armorCheckPenalty": 0
+      },
+      "tumble": {
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "dex",
+          "uniqueId": "tumble",
+          "armorCheckPenalty": 1,
+          "trainedOnly": true,
+          "name": {}
+      },
+      "sleightOfHand": {
+          "abilityModifierUniqueId": "dex",
+          "trainedOnly": true,
+          "hasSubSkills": false,
+          "uniqueId": "sleightOfHand",
+          "armorCheckPenalty": 1,
+          "name": {}
+      },
+      "useMagicDevice": {
+          "trainedOnly": true,
+          "name": {},
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "cha",
+          "hasSubSkills": false,
+          "uniqueId": "useMagicDevice"
+      },
+      "openLock": {
+          "name": {},
+          "abilityModifierUniqueId": "dex",
+          "armorCheckPenalty": 0,
+          "hasSubSkills": false,
+          "uniqueId": "openLock",
+          "trainedOnly": true
+      },
+      "search": {
+          "uniqueId": "search",
+          "armorCheckPenalty": 0,
+          "name": {},
+          "trainedOnly": false,
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false
+      },
+      "senseMotive": {
+          "uniqueId": "senseMotive",
+          "trainedOnly": false,
+          "armorCheckPenalty": 0,
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "int",
+          "name": {}
+      },
+      "knowledgeArcana": {
+          "uniqueId": "knowledgeArcana",
+          "trainedOnly": true,
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false,
+          "name": {}
+      },
+      "appraise": {
+          "uniqueId": "appraise",
+          "armorCheckPenalty": 0,
+          "hasSubSkills": false,
+          "trainedOnly": false,
+          "name": {},
+          "abilityModifierUniqueId": "int"
+      },
+      "concentration": {
+          "uniqueId": "concentration",
+          "name": {},
+          "abilityModifierUniqueId": "con",
+          "trainedOnly": false,
+          "hasSubSkills": false,
+          "armorCheckPenalty": 0
+      },
+      "autohypnosis": {
+          "name": {},
+          "abilityModifierUniqueId": "wis",
+          "armorCheckPenalty": 0,
+          "uniqueId": "autohypnosis",
+          "trainedOnly": true,
+          "hasSubSkills": false
+      },
+      "craft": {
+          "uniqueId": "craft",
+          "subSkills": [],
+          "trainedOnly": false,
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": true,
+          "name": {}
+      },
+      "heal": {
+          "armorCheckPenalty": 0,
+          "uniqueId": "heal",
+          "abilityModifierUniqueId": "wis",
+          "trainedOnly": false,
+          "hasSubSkills": false,
+          "name": {}
+      },
+      "forgery": {
+          "uniqueId": "forgery",
+          "trainedOnly": false,
+          "armorCheckPenalty": 0,
+          "name": {},
+          "hasSubSkills": false,
+          "abilityModifierUniqueId": "int"
+      },
+      "listen": {
+          "hasSubSkills": false,
+          "name": {},
+          "uniqueId": "listen",
+          "abilityModifierUniqueId": "wis",
+          "trainedOnly": false,
+          "armorCheckPenalty": 0
+      },
+      "useRope": {
+          "trainedOnly": false,
+          "armorCheckPenalty": 0,
+          "hasSubSkills": false,
+          "uniqueId": "useRope",
+          "name": {},
+          "abilityModifierUniqueId": "dex"
+      },
+      "knowledgeHistory": {
+          "trainedOnly": true,
+          "armorCheckPenalty": 0,
+          "uniqueId": "knowledgeHistory",
+          "hasSubSkills": false,
+          "name": {},
+          "abilityModifierUniqueId": "int"
+      },
+      "handleAnimal": {
+          "hasSubSkills": false,
+          "trainedOnly": true,
+          "uniqueId": "handleAnimal",
+          "name": {},
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "cha"
+      },
+      "knowledgeReligion": {
+          "abilityModifierUniqueId": "int",
+          "name": {},
+          "armorCheckPenalty": 0,
+          "uniqueId": "knowledgeReligion",
+          "trainedOnly": true,
+          "hasSubSkills": false
+      },
+      "hide": {
+          "armorCheckPenalty": 1,
+          "abilityModifierUniqueId": "dex",
+          "uniqueId": "hide",
+          "trainedOnly": false,
+          "hasSubSkills": false,
+          "name": {}
+      },
+      "swim": {
+          "armorCheckPenalty": 2,
+          "trainedOnly": false,
+          "abilityModifierUniqueId": "str",
+          "hasSubSkills": false,
+          "uniqueId": "swim",
+          "name": {}
+      },
+      "psicraft": {
+          "armorCheckPenalty": 0,
+          "trainedOnly": true,
+          "uniqueId": "psicraft",
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false,
+          "name": {}
+      },
+      "intimidate": {
+          "uniqueId": "intimidate",
+          "abilityModifierUniqueId": "cha",
+          "trainedOnly": false,
+          "hasSubSkills": false,
+          "armorCheckPenalty": 0,
+          "name": {}
+      },
+      "knowledgeArchitecture": {
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "int",
+          "name": {},
+          "uniqueId": "knowledgeArchitecture",
+          "trainedOnly": true,
+          "hasSubSkills": false
+      },
+      "knowledgeNature": {
+          "trainedOnly": true,
+          "uniqueId": "knowledgeNature",
+          "name": {},
+          "armorCheckPenalty": 0,
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false
+      },
+      "gatherInformation": {
+          "abilityModifierUniqueId": "cha",
+          "hasSubSkills": false,
+          "armorCheckPenalty": 0,
+          "uniqueId": "gatherInformation",
+          "name": {},
+          "trainedOnly": false
+      },
+      "diplomacy": {
+          "abilityModifierUniqueId": "cha",
+          "armorCheckPenalty": 0,
+          "name": {},
+          "trainedOnly": false,
+          "hasSubSkills": false,
+          "uniqueId": "diplomacy"
+      },
+      "usePisonicDevice": {
+          "name": {},
+          "armorCheckPenalty": 0,
+          "uniqueId": "usePisonicDevice",
+          "hasSubSkills": false,
+          "trainedOnly": true,
+          "abilityModifierUniqueId": "cha"
+      },
+      "spot": {
+          "hasSubSkills": false,
+          "trainedOnly": false,
+          "abilityModifierUniqueId": "wis",
+          "armorCheckPenalty": 0,
+          "uniqueId": "spot",
+          "name": {}
+      },
+      "knowledgeNobility": {
+          "abilityModifierUniqueId": "int",
+          "hasSubSkills": false,
+          "uniqueId": "knowledgeNobility",
+          "name": {},
+          "trainedOnly": true,
+          "armorCheckPenalty": 0
+      },
+      "disguise": {
+          "hasSubSkills": false,
+          "trainedOnly": false,
+          "abilityModifierUniqueId": "cha",
+          "name": {},
+          "armorCheckPenalty": 0,
+          "uniqueId": "disguise"
+      },
+      "escapeArtist": {
+          "uniqueId": "escapeArtist",
+          "abilityModifierUniqueId": "dex",
+          "hasSubSkills": false,
+          "trainedOnly": false,
+          "name": {},
+          "armorCheckPenalty": 1
+      },
+      "spellCraft": {
+          "abilityModifierUniqueId": "int",
+          "trainedOnly": true,
+          "armorCheckPenalty": 0,
+          "uniqueId": "spellCraft",
+          "name": {},
+          "hasSubSkills": false
+      },
+      "jump": {
+          "name": {},
+          "hasSubSkills": false,
+          "trainedOnly": false,
+          "uniqueId": "jump",
+          "abilityModifierUniqueId": "str",
+          "armorCheckPenalty": 1
+      },
+      "decipherScript": {
+          "abilityModifierUniqueId": "int",
+          "uniqueId": "decipherScript",
+          "trainedOnly": true,
+          "armorCheckPenalty": 0,
+          "name": {},
+          "hasSubSkills": false
+      }
+  },
+  "temporaryHp": 0,
+  "baseAbilityData": {
+      "strength": {
+          "baseScore": 14
+      },
+      "intelligence": {
+          "baseScore": 20
+      },
+      "wisdom": {
+          "baseScore": 8
+      },
+      "constitution": {
+          "baseScore": 14
+      },
+      "dexterity": {
+          "baseScore": 18
+      },
+      "charisma": {
+          "baseScore": 8
+      }
+  },
+  "feats": [
+      {
+          "name": "Puntería increíble",
+          "contextualChanges": [
+              {
+                  "type": "attack",
+                  "available": true,
+                  "name": "Puntería increíble",
+                  "optional": true,
+                  "changes": [
+                      {
+                          "formula": {
+                              "expression": "@ability.dexterity.modifier"
+                          },
+                          "originId": "punteria-increible",
+                          "originType": "feat",
+                          "type": "DAMAGE",
+                          "bonusTypeId": "UNTYPED",
+                          "name": "Puntería increíble"
+                      }
+                  ],
+                  "appliesTo": "ranged",
+                  "variables": []
+              }
+          ],
+          "description": "Adds dex to damage",
+          "uniqueId": "punteria-increible",
+          "featureType": "FEAT"
+      },
+      {
+          "uniqueId": "soltura-con-el-arco",
+          "featureType": "FEAT",
+          "description": "Adds dex to damage",
+          "name": "Soltura con el arco",
+          "changes": [
+              {
+                  "type": "ATTACK_ROLLS",
+                  "formula": {
+                      "expression": "1"
+                  },
+                  "bonusTypeId": "COMPETENCE",
+                  "attackType": "all"
+              }
+          ]
+      }
+  ],
+  "level": {
+      "level": 14,
+      "xp": 0,
+      "levelsData": [
+          {
+              "level": 1,
+              "hitDieRoll": 8,
+              "permanentIntelligenceStatAtLevel": 0,
+              "levelClassFeatures": [
+                  {
+                      "name": "Flecha energizada",
+                      "featureType": "CLASS_FEATURE",
+                      "description": "Al realizar un ataque con un arma a distancia, puedes gastar 1 punto de poder para imbuir el proyectil o arma arrojadiza con un tipo de energía (frío, fuego, electricidad o sonido). El arma convertirá un 50% de su daño a daño del tipo de energía elegido y además causará 1d6 puntos de daño adicionales del tipo de energía seleccionado. Adicionalmente, puedes gastar tu foco psiónico cuando un proyectil o arma arrojadiza imbuidos con energía impacte contra un objetivo para crear una explosión de energía, con un radio de 10’ que infligirá el daño por energía del ataque a todas las criaturas que no fueran el objetivo del ataque. Esas criaturas pueden reducir el daño a la mitad con una TS de Reflejos con éxito (CD 10 + la mitad de tu nivel de guerrero psíquico + tu bonificador de Inteligencia). El arma o proyectil quedarán destruidos tras hacerlo explotar.",
+                      "uniqueId": "flecha-energizada",
+                      "contextualChanges": [
+                          {
+                              "optional": true,
+                              "changes": [
+                                  {
+                                      "bonusTypeId": "UNTYPED",
+                                      "originType": "classFeature",
+                                      "formula": {
+                                          "expression": ""
+                                      },
+                                      "originId": "flecha-energizada",
+                                      "name": "Flecha energizada",
+                                      "type": "DAMAGE_TYPE",
+                                      "damageType": {
+                                          "firstDamageType": "piercing",
+                                          "type": "halfAndHalf",
+                                          "secondDamageType": "electric"
+                                      }
+                                  },
+                                  {
+                                      "name": "Flecha energizada",
+                                      "originId": "flecha-energizada",
+                                      "formula": {
+                                          "expression": "1d6"
+                                      },
+                                      "damageType": {
+                                          "type": "basic",
+                                          "damageType": "electric"
+                                      },
+                                      "type": "DAMAGE",
+                                      "originType": "classFeature",
+                                      "bonusTypeId": "UNTYPED"
+                                  }
+                              ],
+                              "name": "Flecha energizada",
+                              "type": "attack",
+                              "available": true,
+                              "variables": [],
+                              "appliesTo": "ranged"
+                          }
+                      ]
+                  },
+                  {
+                      "name": "Foco psiónico",
+                      "featureType": "CLASS_FEATURE",
+                      "contextualChanges": [
+                          {
+                              "type": "attack",
+                              "appliesTo": "all",
+                              "optional": true,
+                              "changes": [
+                                  {
+                                      "originType": "classFeature",
+                                      "type": "DAMAGE",
+                                      "formula": {
+                                          "expression": "@ability.intelligence.modifier"
+                                      },
+                                      "bonusTypeId": "UNTYPED",
+                                      "originId": "foco-psionico",
+                                      "name": "Foco psiónico"
+                                  }
+                              ],
+                              "available": true,
+                              "name": "Foco psiónico",
+                              "variables": []
+                          }
+                      ],
+                      "uniqueId": "foco-psionico",
+                      "description": ""
+                  }
+              ],
+              "classUniqueId": "Guerrero psíquico",
+              "skillRanks": [],
+              "levelFeats": [],
+              "hitDie": 8
+          },
+          {
+              "hitDieRoll": 1,
+              "level": 2,
+              "permanentIntelligenceStatAtLevel": 0,
+              "levelClassFeatures": [],
+              "hitDie": 8,
+              "skillRanks": [],
+              "classUniqueId": "Guerrero psíquico",
+              "levelFeats": []
+          },
+          {
+              "level": 3,
+              "skillRanks": [],
+              "levelClassFeatures": [],
+              "permanentIntelligenceStatAtLevel": 0,
+              "levelFeats": [],
+              "hitDieRoll": 1,
+              "classUniqueId": "Guerrero psíquico",
+              "hitDie": 8
+          },
+          {
+              "levelClassFeatures": [],
+              "classUniqueId": "Guerrero psíquico",
+              "hitDie": 8,
+              "hitDieRoll": 1,
+              "permanentIntelligenceStatAtLevel": 0,
+              "levelFeats": [],
+              "skillRanks": [],
+              "level": 4
+          },
+          {
+              "hitDie": 8,
+              "skillRanks": [],
+              "levelFeats": [],
+              "levelClassFeatures": [],
+              "hitDieRoll": 1,
+              "level": 5,
+              "classUniqueId": "Guerrero psíquico",
+              "permanentIntelligenceStatAtLevel": 0
+          },
+          {
+              "permanentIntelligenceStatAtLevel": 0,
+              "hitDie": 8,
+              "hitDieRoll": 1,
+              "levelFeats": [],
+              "levelClassFeatures": [],
+              "level": 6,
+              "skillRanks": [],
+              "classUniqueId": "Guerrero psíquico"
+          },
+          {
+              "classUniqueId": "Guerrero psíquico",
+              "skillRanks": [],
+              "levelClassFeatures": [],
+              "hitDieRoll": 1,
+              "levelFeats": [],
+              "level": 7,
+              "hitDie": 8,
+              "permanentIntelligenceStatAtLevel": 0
+          },
+          {
+              "permanentIntelligenceStatAtLevel": 0,
+              "skillRanks": [],
+              "hitDie": 8,
+              "levelFeats": [],
+              "hitDieRoll": 1,
+              "levelClassFeatures": [],
+              "classUniqueId": "Guerrero psíquico",
+              "level": 8
+          },
+          {
+              "levelFeats": [],
+              "hitDie": 8,
+              "skillRanks": [],
+              "hitDieRoll": 1,
+              "permanentIntelligenceStatAtLevel": 0,
+              "classUniqueId": "Guerrero psíquico",
+              "level": 9,
+              "levelClassFeatures": []
+          },
+          {
+              "level": 10,
+              "levelClassFeatures": [],
+              "hitDieRoll": 1,
+              "levelFeats": [],
+              "hitDie": 8,
+              "classUniqueId": "Guerrero psíquico",
+              "skillRanks": [],
+              "permanentIntelligenceStatAtLevel": 0
+          },
+          {
+              "levelClassFeatures": [],
+              "hitDie": 8,
+              "level": 11,
+              "permanentIntelligenceStatAtLevel": 0,
+              "skillRanks": [],
+              "hitDieRoll": 1,
+              "classUniqueId": "Guerrero psíquico",
+              "levelFeats": []
+          },
+          {
+              "levelFeats": [],
+              "hitDieRoll": 1,
+              "skillRanks": [],
+              "levelClassFeatures": [],
+              "classUniqueId": "Guerrero psíquico",
+              "level": 12,
+              "hitDie": 8,
+              "permanentIntelligenceStatAtLevel": 0
+          },
+          {
+              "levelFeats": [],
+              "levelClassFeatures": [],
+              "skillRanks": [],
+              "permanentIntelligenceStatAtLevel": 0,
+              "hitDie": 8,
+              "hitDieRoll": 1,
+              "level": 13,
+              "classUniqueId": "Guerrero psíquico"
+          },
+          {
+              "hitDie": 8,
+              "skillRanks": [],
+              "levelFeats": [],
+              "classUniqueId": "Guerrero psíquico",
+              "hitDieRoll": 1,
+              "level": 14,
+              "permanentIntelligenceStatAtLevel": 0,
+              "levelClassFeatures": []
+          }
+      ]
+  },
+  "race": {
+      "size": "MEDIUM",
+      "racialFeatures": [],
+      "uniqueId": "elf",
+      "languages": [],
+      "changes": [
+          {
+              "abilityUniqueId": "dexterity",
+              "type": "ABILITY_SCORE",
+              "bonusTypeId": "RACIAL",
+              "formula": {
+                  "expression": "2"
+              }
+          },
+          {
+              "type": "ABILITY_SCORE",
+              "formula": {
+                  "expression": "-2"
+              },
+              "bonusTypeId": "RACIAL",
+              "abilityUniqueId": "constitution"
+          },
+          {
+              "formula": {
+                  "expression": "2"
+              },
+              "skillUniqueId": "listen",
+              "type": "SKILL",
+              "bonusTypeId": "RACIAL"
+          },
+          {
+              "type": "SKILL",
+              "skillUniqueId": "search",
+              "bonusTypeId": "RACIAL",
+              "formula": {
+                  "expression": "2"
+              }
+          },
+          {
+              "type": "SKILL",
+              "formula": {
+                  "expression": "2"
+              },
+              "skillUniqueId": "spot",
+              "bonusTypeId": "RACIAL"
+          }
+      ],
+      "name": "Elf",
+      "baseSpeeds": {
+          "landSpeed": {
+              "value": 30
+          }
+      }
+  },
+  "currentDamage": 0
+}

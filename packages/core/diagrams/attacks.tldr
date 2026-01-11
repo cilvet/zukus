@@ -1,0 +1,474 @@
+{
+  "tldrawFileFormatVersion": 1,
+  "schema": {
+    "schemaVersion": 1,
+    "storeVersion": 4,
+    "recordVersions": {
+      "asset": {
+        "version": 1,
+        "subTypeKey": "type",
+        "subTypeVersions": {
+          "image": 2,
+          "video": 2,
+          "bookmark": 0
+        }
+      },
+      "camera": {
+        "version": 1
+      },
+      "document": {
+        "version": 2
+      },
+      "instance": {
+        "version": 17
+      },
+      "instance_page_state": {
+        "version": 3
+      },
+      "page": {
+        "version": 1
+      },
+      "shape": {
+        "version": 3,
+        "subTypeKey": "type",
+        "subTypeVersions": {
+          "group": 0,
+          "embed": 4,
+          "bookmark": 1,
+          "image": 2,
+          "text": 1,
+          "draw": 1,
+          "geo": 7,
+          "line": 0,
+          "note": 4,
+          "frame": 0,
+          "arrow": 1,
+          "highlight": 0,
+          "video": 1
+        }
+      },
+      "instance_presence": {
+        "version": 4
+      },
+      "pointer": {
+        "version": 1
+      }
+    }
+  },
+  "records": [
+    {
+      "gridSize": 10,
+      "name": "",
+      "meta": {},
+      "id": "document:document",
+      "typeName": "document"
+    },
+    {
+      "id": "pointer:pointer",
+      "typeName": "pointer",
+      "x": 605.9660187890235,
+      "y": 258.4640020042552,
+      "lastActivityTimestamp": 1689715004541,
+      "meta": {}
+    },
+    {
+      "meta": {},
+      "id": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "name": "Page 1",
+      "index": "a1",
+      "typeName": "page"
+    },
+    {
+      "x": 27.72112235782683,
+      "y": -17.109211831067114,
+      "z": 0.7913013653590883,
+      "meta": {},
+      "id": "camera:page:GVAmAxt5_vWwLPwPFLb0f",
+      "typeName": "camera"
+    },
+    {
+      "editingId": null,
+      "croppingId": null,
+      "selectedIds": [],
+      "hoveredId": null,
+      "erasingIds": [],
+      "hintingIds": [],
+      "focusLayerId": null,
+      "meta": {},
+      "id": "instance_page_state:page:GVAmAxt5_vWwLPwPFLb0f",
+      "pageId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "typeName": "instance_page_state"
+    },
+    {
+      "followingUserId": null,
+      "opacityForNextShape": 1,
+      "stylesForNextShape": {
+        "tldraw:geo": "rectangle",
+        "tldraw:horizontalAlign": "start"
+      },
+      "brush": null,
+      "scribble": null,
+      "cursor": {
+        "type": "default",
+        "color": "black",
+        "rotation": 0
+      },
+      "isFocusMode": false,
+      "exportBackground": true,
+      "isDebugMode": false,
+      "isToolLocked": false,
+      "screenBounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1031,
+        "h": 567
+      },
+      "zoomBrush": null,
+      "isGridMode": false,
+      "isPenMode": false,
+      "chatMessage": "",
+      "isChatting": false,
+      "highlightedUserIds": [],
+      "meta": {},
+      "id": "instance:instance",
+      "currentPageId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "typeName": "instance"
+    },
+    {
+      "x": 167.62963692085384,
+      "y": 11.40521768376405,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:W2tMrJuPZVi0pwn-yIQa6",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 119.78125,
+        "text": "Personaje",
+        "font": "draw",
+        "align": "middle",
+        "autoSize": true,
+        "scale": 2.2095614081901123
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    {
+      "x": 142.30395090000962,
+      "y": 154.78238177803067,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:1iWr6jFwe3SzhdRispsqx",
+      "type": "geo",
+      "props": {
+        "w": 427.60931766671837,
+        "h": 1026.1502589807371,
+        "geo": "rectangle",
+        "color": "black",
+        "labelColor": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "",
+        "align": "middle",
+        "verticalAlign": "middle",
+        "growY": 0,
+        "url": ""
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    {
+      "x": 156.31240090492696,
+      "y": 171.6238517547504,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:yXK1k43ThxQPcNxyXnaT2",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 389.15625,
+        "text": "Dotes, aptitudes de clase, bufos",
+        "font": "draw",
+        "align": "middle",
+        "autoSize": true,
+        "scale": 1
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a4",
+      "typeName": "shape"
+    },
+    {
+      "x": 689.545207218536,
+      "y": 152.9647114295842,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:12xb1wLPg-wIJe2-9fhqE",
+      "type": "geo",
+      "props": {
+        "w": 416.53107474432676,
+        "h": 478.2718616807732,
+        "geo": "rectangle",
+        "color": "black",
+        "labelColor": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "",
+        "align": "middle",
+        "verticalAlign": "middle",
+        "growY": 0,
+        "url": ""
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a5",
+      "typeName": "shape"
+    },
+    {
+      "x": 703.2949674309192,
+      "y": 163.58430143227062,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:-psSVztlNvljAIGjrxHhx",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 68.203125,
+        "text": "Arma",
+        "font": "draw",
+        "align": "middle",
+        "autoSize": true,
+        "scale": 0.9474287471544609
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a6",
+      "typeName": "shape"
+    },
+    {
+      "x": 413.09640138010565,
+      "y": 335.8220729652826,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:gY1AMr_5pGaHTWBNEatS2",
+      "type": "arrow",
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a9V",
+      "props": {
+        "dash": "draw",
+        "size": "m",
+        "fill": "none",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "type": "binding",
+          "boundShapeId": "shape:1iWr6jFwe3SzhdRispsqx",
+          "normalizedAnchor": {
+            "x": 0.47417787749852325,
+            "y": 0.9803285327146247
+          },
+          "isExact": false
+        },
+        "end": {
+          "type": "binding",
+          "boundShapeId": "shape:1SVUs68ZiOkXZcqg2rBZ-",
+          "normalizedAnchor": {
+            "x": 0.3797170230322738,
+            "y": 0.01239408148709752
+          },
+          "isExact": false
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "arrow",
+        "text": "",
+        "font": "draw"
+      },
+      "typeName": "shape"
+    },
+    {
+      "x": 834.8298054065244,
+      "y": 321.97059149131917,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:RTLkAUPvt2sfcnyVzipf1",
+      "type": "arrow",
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a9G",
+      "props": {
+        "dash": "draw",
+        "size": "m",
+        "fill": "none",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "type": "point",
+          "x": -37.428471216879984,
+          "y": 327.4131653725949
+        },
+        "end": {
+          "type": "binding",
+          "boundShapeId": "shape:1SVUs68ZiOkXZcqg2rBZ-",
+          "normalizedAnchor": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "isExact": false
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "arrow",
+        "text": "",
+        "font": "draw"
+      },
+      "typeName": "shape"
+    },
+    {
+      "x": 364.5028625910495,
+      "y": 1649.5262447619853,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:1SVUs68ZiOkXZcqg2rBZ-",
+      "type": "geo",
+      "props": {
+        "w": 596.8109723908103,
+        "h": 306.9183758512786,
+        "geo": "rectangle",
+        "color": "black",
+        "labelColor": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "",
+        "align": "middle",
+        "verticalAlign": "middle",
+        "growY": 0,
+        "url": ""
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "a9",
+      "typeName": "shape"
+    },
+    {
+      "x": 381.4701704356607,
+      "y": 1669.6380461525084,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:s3U9WnWFMU3plpq6ovxXf",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 242.46875,
+        "text": "Contexto de ataque",
+        "font": "draw",
+        "align": "middle",
+        "autoSize": true,
+        "scale": 1
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "aA",
+      "typeName": "shape"
+    },
+    {
+      "x": 154.579454462105,
+      "y": 223.33172657513694,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:LLbI64GEeagLo4955bN0w",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 399.765625,
+        "text": "Cambios estáticos\n- Cambios de ataque\n- Cambios de daño\n- Cambios de porcentaje de fallo\n- Cambios de confirmación de \ncrítico\n- Cambios de rango de crítico",
+        "font": "draw",
+        "align": "start",
+        "autoSize": true,
+        "scale": 1
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "aB",
+      "typeName": "shape"
+    },
+    {
+      "x": 153.687228477919,
+      "y": 464.9674902185392,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:ju0y0HdIarSlVs_jgLPHg",
+      "type": "geo",
+      "props": {
+        "w": 391.79028640401566,
+        "h": 700.4386713122229,
+        "geo": "rectangle",
+        "color": "black",
+        "labelColor": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "",
+        "align": "start",
+        "verticalAlign": "middle",
+        "growY": 0,
+        "url": ""
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "aC",
+      "typeName": "shape"
+    },
+    {
+      "x": 166.5360617443251,
+      "y": 491.0645340512947,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:qSrCosvLJf-XZ7mGicRCu",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 377.7980485908217,
+        "text": "Cambios contextuales:\n\n- Contienen array de cambios \nestáticos\n- Pueden ser opcionales o\nestáticos\n- Pueden tener variables (una o\nmúltiples sliders, con fórmula\nde rango)\n- los datos de las variables \npueden usarse dentro de las\nfórmulas de los cambios (por \nejemplo, @range)\n- puede haber condiciones\npara que aparezcan los cambios, \ndadas por fórmulas\n-",
+        "font": "draw",
+        "align": "start",
+        "autoSize": true,
+        "scale": 0.9178906351003184
+      },
+      "parentId": "page:GVAmAxt5_vWwLPwPFLb0f",
+      "index": "aD",
+      "typeName": "shape"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "jsx": "react-native",
+    "resolveJsonModule": true
+  },
+  "include": ["index.ts", "core/**/*", "srd/**/*", "data/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/**",
+    "visualPlayground",
+    "poc",
+    "icon-search",
+    "core/domain/entities/EntityManagementExpanded.ts",
+    "core/domain/entities/examples",
+    "core/domain/entities/forms",
+    "core/domain/entities/instances",
+    "core/domain/levels/conditions",
+    "core/domain/levels/entities"
+  ]
+}

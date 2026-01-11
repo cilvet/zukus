@@ -1,0 +1,412 @@
+---
+description: Sistema de Entidades - Infraestructura genérica para definir y gestionar tipos de datos
+globs:
+alwaysApply: false
+---
+
+# Sistema de Entidades
+
+Sistema genérico y reutilizable para definir tipos de datos mediante schemas y crear instancias validadas.
+
+**Ubicación**: `core/domain/entities/`
+
+---
+
+## Conceptos Clave
+
+### Schema = Definición de Tipo
+
+Un schema define la estructura de un tipo de entidad (como una clase TypeScript, pero en JSON).
+
+```typescript
+{
+  typeName: "spell",
+  description: "Conjuro de D&D 3.5",
+  addons: ["searchable", "taggable", "effectful"],
+  fields: [
+    { name: "level", type: "integer", description: "Nivel del conjuro" },
+    { name: "school", type: "string", description: "Escuela de magia" }
+  ]
+}
+```
+
+### Instancia = Dato Concreto
+
+Una instancia es un dato que cumple con un schema.
+
+```typescript
+{
+  id: "fireball",
+  entityType: "spell",
+  name: "Fireball",
+  level: 3,
+  school: "Evocation"
+}
+```
+
+---
+
+## Tipos de Campo
+
+### Primitivos
+
+| Tipo | Descripción | Ejemplo |
+|------|-------------|---------|
+| `string` | Texto | `"Evocation"` |
+| `integer` | Número entero | `3` |
+| `boolean` | Verdadero/falso | `true` |
+| `string_array` | Array de textos | `["V", "S", "M"]` |
+| `integer_array` | Array de números | `[1, 2, 3]` |
+
+### Especiales
+
+| Tipo | Descripción | Config Requerida |
+|------|-------------|------------------|
+| `enum` | Opciones predefinidas con metadatos | `options: EnumOption[]` |
+| `object` | Objeto anidado | `objectFields: Field[]` |
+| `object_array` | Array de objetos | `objectFields: Field[]` |
+| `reference` | Referencias a otras entidades | `referenceType: string` |
+| `image` | URL o path de imagen | - |
+| `dataTable` | Tabla con filas numeradas | `rowKey`, `columns` |
+
+### Propiedades de Campo
+
+```typescript
+{
+  name: "fieldName",           // Nombre del campo
+  type: "string",              // Tipo (ver tabla)
+  description: "...",          // Descripción opcional
+  optional: true,              // ¿Es opcional?
+  nonEmpty: true,              // ¿Requiere al menos un elemento? (arrays/refs)
+  allowedValues: ["a", "b"],   // Valores permitidos (deprecated, usar enum)
+  isFormula: true              // Flag para strings con fórmulas
+}
+```
+
+---
+
+## Enum con Metadatos
+
+Los enums modernos usan `options` con nombre y descripción.
+
+```json
+{
+  "name": "babProgression",
+  "type": "enum",
+  "options": [
+    { "value": "full", "name": "Completa", "description": "+1 por nivel" },
+    { "value": "medium", "name": "Media", "description": "+3/4 por nivel" },
+    { "value": "poor", "name": "Pobre", "description": "+1/2 por nivel" }
+  ]
+}
+```
+
+**Validación**: Los valores deben ser únicos y del mismo tipo (todos string o todos number).
+
+---
+
+## Objetos Anidados
+
+Usa `objectFields` para definir estructura interna.
+
+```json
+{
+  "name": "saves",
+  "type": "object",
+  "objectFields": [
+    {
+      "name": "fortitude",
+      "type": "enum",
+      "options": [
+        { "value": "good", "name": "Buena" },
+        { "value": "poor", "name": "Mala" }
+      ]
+    },
+    {
+      "name": "reflex",
+      "type": "enum",
+      "options": [
+        { "value": "good", "name": "Buena" },
+        { "value": "poor", "name": "Mala" }
+      ]
+    }
+  ]
+}
+```
+
+**Instancia**:
+```json
+{
+  "saves": {
+    "fortitude": "good",
+    "reflex": "poor"
+  }
+}
+```
+
+---
+
+## DataTable
+
+Tablas con filas numeradas y columnas tipadas. Ideal para progresiones por nivel.
+
+### Tipos de Columna
+
+| Tipo | Descripción | Propiedades |
+|------|-------------|-------------|
+| `integer` | Número entero | - |
+| `string` | Texto | - |
+| `boolean` | Verdadero/falso | - |
+| `reference` | Referencias a entidades | `referenceType`, `allowMultiple` |
+| `entityProvider` | Objetos Provider completos | `allowMultiple` |
+
+### Ejemplo con Referencias
+
+```json
+{
+  "name": "levels",
+  "type": "dataTable",
+  "rowKey": {
+    "name": "Nivel",
+    "startingNumber": 1,
+    "incremental": true
+  },
+  "columns": [
+    {
+      "id": "bab",
+      "name": "BAB",
+      "type": "integer"
+    },
+    {
+      "id": "features",
+      "name": "Aptitudes",
+      "type": "reference",
+      "referenceType": "classFeature",
+      "allowMultiple": true,
+      "optional": true
+    }
+  ]
+}
+```
+
+**Instancia**:
+```json
+{
+  "levels": {
+    "1": { "bab": 1, "features": ["sneak-attack-1d6"] },
+    "2": { "bab": 2, "features": ["evasion"] },
+    "3": { "bab": 3, "features": [] }
+  }
+}
+```
+
+### Ejemplo con EntityProvider
+
+```json
+{
+  "columns": [
+    {
+      "id": "providers",
+      "name": "Aptitudes",
+      "type": "entityProvider",
+      "allowMultiple": true,
+      "optional": true
+    }
+  ]
+}
+```
+
+**Instancia**:
+```json
+{
+  "levels": {
+    "1": {
+      "providers": [
+        { "granted": { "specificIds": ["sneak-attack-1d6", "trapfinding"] } }
+      ]
+    },
+    "2": {
+      "providers": [
+        { "granted": { "specificIds": ["evasion"] } },
+        { "selector": { "id": "rogue-talent", "entityType": "classFeature", "min": 1, "max": 1 } }
+      ]
+    }
+  }
+}
+```
+
+**Ver más**: `core/domain/levels/docs/dataTable-field.prd.md`
+
+---
+
+## Referencias
+
+Usa `reference` para apuntar a otras entidades.
+
+```json
+{
+  "name": "spellsKnown",
+  "type": "reference",
+  "referenceType": "spell",
+  "nonEmpty": true
+}
+```
+
+**Instancia**: Array de IDs de entidades del tipo referenciado.
+```json
+{
+  "spellsKnown": ["fireball", "magic-missile", "shield"]
+}
+```
+
+---
+
+## Addons
+
+Los addons añaden campos y comportamientos predefinidos a las entidades.
+
+| Addon | Campos que añade | Propósito |
+|-------|------------------|-----------|
+| `searchable` | `name`, `description` | Búsqueda y display en UI |
+| `taggable` | `tags: string[]` | Categorización |
+| `imageable` | `image?: string` | Icono o imagen |
+| `source` | `source?: SourceData` | Origen (compendio, página) |
+| `effectful` | `changes`, `specialChanges`, `effects` | Aplica efectos al personaje |
+| `suppressing` | `suppression?: SuppressionConfig[]` | Suprime otras entidades |
+
+**Todos los schemas incluyen automáticamente**: `id`, `entityType`
+
+---
+
+## Fórmulas
+
+Los campos `string` pueden marcarse con `isFormula: true` para indicar que contienen expresiones.
+
+```json
+{
+  "name": "skillPointsPerLevel",
+  "type": "string",
+  "isFormula": true,
+  "description": "Ej: '2 + @ability.intelligence.modifier'"
+}
+```
+
+Esto es solo un **hint para la UI** (autocompletado, validación). El sistema no evalúa fórmulas automáticamente.
+
+---
+
+## Validación
+
+### Crear Schema Zod
+
+```typescript
+import { createEntitySchema } from 'core/domain/entities';
+
+const schema = createEntitySchema(definition);
+const validated = schema.parse(instance); // Throws si no es válido
+```
+
+### Type Guards
+
+```typescript
+import { isEnumField, isDataTableField } from 'core/domain/entities/types/fields';
+
+if (isEnumField(field)) {
+  // field.options está disponible
+}
+
+if (isDataTableField(field)) {
+  // field.rowKey y field.columns están disponibles
+}
+```
+
+---
+
+## Casos de Uso Comunes
+
+### 1. Clase de Personaje
+
+```json
+{
+  "typeName": "class",
+  "addons": ["searchable", "taggable", "source"],
+  "fields": [
+    { "name": "hitDie", "type": "enum", "options": [...] },
+    { "name": "babProgression", "type": "enum", "options": [...] },
+    { "name": "saves", "type": "object", "objectFields": [...] },
+    { "name": "levels", "type": "dataTable", "rowKey": {...}, "columns": [...] }
+  ]
+}
+```
+
+### 2. Dote/Feat
+
+```json
+{
+  "typeName": "feat",
+  "addons": ["searchable", "taggable", "effectful", "source"],
+  "fields": [
+    { "name": "canBeTakenMultipleTimes", "type": "boolean" },
+    { "name": "repeatLimit", "type": "string", "isFormula": true, "optional": true },
+    { "name": "prerequisites", "type": "string", "optional": true }
+  ]
+}
+```
+
+### 3. Conjuro
+
+```json
+{
+  "typeName": "spell",
+  "addons": ["searchable", "taggable", "imageable", "effectful"],
+  "fields": [
+    { "name": "level", "type": "integer", "allowedValues": [0,1,2,3,4,5,6,7,8,9] },
+    { "name": "school", "type": "string" },
+    { "name": "components", "type": "string_array", "nonEmpty": true },
+    { "name": "classLevels", "type": "object_array", "objectFields": [...] }
+  ]
+}
+```
+
+---
+
+## Dónde Ver Más
+
+### Documentación
+
+- **PRD completo**: `core/domain/entities/EntityManagement.prd.md`
+- **Diseño expandido**: `core/domain/entities/EntityManagementExpanded.md`
+- **DataTable PRD**: `core/domain/levels/docs/dataTable-field.prd.md`
+- **Tipos de entidades**: `core/domain/levels/docs/entity-types.md`
+
+### Código
+
+- **Tipos base**: `core/domain/entities/types/base.ts`
+- **Definiciones de campo**: `core/domain/entities/types/fields.ts`
+- **Schema creation**: `core/domain/entities/schema/creation.ts`
+- **Schema validation**: `core/domain/entities/schema/validation.ts`
+
+### Ejemplos
+
+- **Schema de spell**: `core/domain/entities/examples/schemas/spell.schema.ts`
+- **Configs CGE**: `core/domain/entities/examples/configs/`
+- **Tests con enum**: `core/domain/entities/__tests__/fields/enumWithMetadata.spec.ts`
+- **Tests con dataTable**: Busca `dataTable` en `__tests__/`
+
+### Visual Playground
+
+- **Schemas JSON**: `visualPlayground/server/data/schemas/`
+- **Instancias JSON**: `visualPlayground/server/data/entities/{typeName}/`
+- **API**: `visualPlayground/server/index.ts`
+- **UI Editors**: `visualPlayground/src/components/entity-editor/`
+
+---
+
+## Reglas de Diseño
+
+1. **Schemas son declarativos**: No contienen lógica, solo estructura
+2. **Validación en runtime**: Usa Zod para validar instancias
+3. **Type-safe cuando sea posible**: Genera tipos TS desde schemas
+4. **Addons sobre herencia**: Componer comportamiento con addons, no jerarquías
+5. **Referencias explícitas**: Usa `reference` type, no strings sueltos
+6. **Enum moderno**: Usa `type: "enum"` con `options`, no `allowedValues` deprecado

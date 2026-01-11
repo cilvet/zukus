@@ -1,0 +1,37 @@
+# Visual Playground Rules
+
+## Package Manager
+
+**SIEMPRE usar pnpm en el visualPlayground**, no bun ni npm.
+
+```bash
+# ✅ CORRECTO
+cd visualPlayground
+pnpm install
+pnpm dev
+pnpm add [package]
+
+# ❌ INCORRECTO
+bun install
+npm install
+```
+
+## Estructura
+
+- El visualPlayground es un proyecto React independiente en `visualPlayground/`
+- Usa React Router para navegación entre páginas
+- Está completamente aislado del build principal
+- Puede importar del proyecto principal via `@root/*`
+
+## Dependencias
+
+Cuando el código del proyecto principal (`@root/*`) use dependencias que no estén en el playground:
+1. Instalarlas en el playground con `pnpm add [package]`
+2. Reiniciar el dev server
+
+## Scripts
+
+- `pnpm dev` - Desarrollo local
+- `pnpm dev:host` - Desarrollo con acceso desde red local
+- `pnpm build` - Build de producción
+- `pnpm lint` - Linting

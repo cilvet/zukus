@@ -1,0 +1,59 @@
+{
+  "line_items": [
+    {
+      "reference": "001018425500024   ",
+      "gtin": "",
+      "id": "B001018425500024",
+      "url": "/supermercado-entrega-en-el-dia/B001018425500024-anojo-babilla-1-a-en-filetes-plancha-pieza-para-asar-troceada-para-fondue/?parentCategoryId=6807.1379119",
+      "store_id": "000",
+      "purchase_as": "sale_type_weight",
+      "preparation_type": "0001",
+      "first-available-sku": "001018425500024   ",
+      "one_click_available": "true",
+      "shipping_method": "eci_express",
+      "delivery_date_timestamp": "2023-01-23",
+      "data_layer": {
+        "id": "001018425500024",
+        "status": "add",
+        "variant": "001018425500024   ",
+        "store_id": "000",
+        "name": "Añojo babilla 1ª A en filetes (plancha), pieza para asar, troceada para fondue",
+        "badges": {
+          "express": false,
+          "new": false,
+          "exclusive": false,
+          "eci_exclusive": false,
+          "coming_soon": false,
+          "express_delivery": false
+        },
+        "price": {
+          "o_price": 16.95,
+          "f_price": 14.95,
+          "discount": 2,
+          "discount_percent": 11,
+          "currency": "EUR"
+        },
+        "media": { "count": 0 },
+        "category": [
+          "Supermercado",
+          "Frescos",
+          "Carnicería",
+          "Vacuno",
+          "Añojo"
+        ],
+        "code_a": "B001018425500024",
+        "eci_provider": "El Corte Inglés",
+        "hierarchy": [
+          "supermercado-entrega-en-el-dia",
+          "frescos",
+          "carniceria",
+          "vacuno",
+          "anojo"
+        ],
+        "quantity": 1
+      },
+      "cuantity": 2000,
+      "units": 2000
+    }
+  ]
+}

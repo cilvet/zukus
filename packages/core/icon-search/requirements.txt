@@ -1,0 +1,9 @@
+torch
+transformers
+pillow
+faiss-cpu
+numpy
+fastapi
+uvicorn[standard]
+pydantic
+

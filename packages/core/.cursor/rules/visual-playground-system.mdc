@@ -1,0 +1,535 @@
+---
+alwaysApply: true
+---
+## 🏗️ Arquitectura
+
+### 3 Capas Principales
+
+```
+┌─────────────────────────────────────────┐
+│  Frontend (React + Vite)                │
+│  Puerto: 5173                           │
+│  - UI de edición de schemas/instancias  │
+│  - EntityTypeEditor (recursivo)         │
+│  - EntityInstanceEditor                 │
+│  - EntitySelector (virtualizado)        │
+└─────────────────┬───────────────────────┘
+                  │ HTTP REST API
+┌─────────────────▼───────────────────────┐
+│  Backend (Bun Server)                   │
+│  Puerto: 3001                           │
+│  - API REST (/api/entity-types, etc)    │
+│  - CRUD de schemas e instancias         │
+│  - CORS habilitado                      │
+└─────────────────┬───────────────────────┘
+                  │ File I/O
+┌─────────────────▼───────────────────────┐
+│  Storage (Archivos JSON)                │
+│  visualPlayground/server/data/          │
+│  ├── schemas/                           │
+│  │   └── {typeName}.json               │
+│  └── entities/                          │
+│      └── {typeName}/                    │
+│          └── {entityId}.json            │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## 📁 Estructura de Archivos
+
+```
+visualPlayground/
+├── server/                    # Backend
+│   ├── index.ts              # API REST principal
+│   ├── storage.ts            # Operaciones de archivo
+│   ├── types.ts              # Tipos del servidor
+│   └── data/                 # Persistencia
+│       ├── schemas/          # Definiciones de tipos
+│       │   ├── spell.json
+│       │   └── prueba.json
+│       └── entities/         # Instancias por tipo
+│           ├── spell/        # 2790 archivos
+│           └── prueba/
+│
+├── src/                      # Frontend
+│   ├── App.tsx              # Router principal
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── EntityManagementPage.tsx  # ⭐ Página principal
+│   │   ├── SpellSearchPage.tsx
+│   │   └── EntitySelectorsPage.tsx
+│   ├── components/
+│   │   ├── entity-editor/
+│   │   │   ├── EntityTypeEditor.tsx     # ⭐ Editor de schemas (RECURSIVO)
+│   │   │   └── EntityInstanceEditor.tsx # ⭐ Editor de instancias
+│   │   ├── shared/
+│   │   │   └── EntitySelector.tsx       # Selector virtualizado
+│   │   └── ui/              # Shadcn/ui components
+│   ├── lib/
+│   │   └── api.ts           # Cliente API REST
+│   └── data/
+│       ├── allSpells.ts     # 2792 conjuros importados
+│       └── spellSchema.ts   # Schema de conjuros
+│
+├── scripts/                  # Scripts de importación
+│   ├── convertSpells.ts     # conjuros.json → allSpells.ts
+│   └── importSpells.ts      # allSpells.ts → server/data/
+│
+└── package.json             # ⚠️ Usa pnpm lock
+```
+
+---
+
+## 🎯 EntityTypeEditor - Editor de Schemas (Componente Recursivo)
+
+### Características Principales
+
+**Componente `FieldEditor` 100% Recursivo:**
+- Se llama a sí mismo para campos `objectFields`
+- Soporte para anidamiento infinito
+- Padding dinámico según profundidad: `Math.max(8, 16 - (depth * 4))px`
+
+### Tipos de Campo Soportados
+
+```typescript
+type EntityFieldType = 
+  | 'string'         // Texto simple
+  | 'integer'        // Número entero
+  | 'boolean'        // Verdadero/falso
+  | 'string_array'   // Array de textos
+  | 'integer_array'  // Array de números
+  | 'reference'      // Referencias a otras entidades (requiere referenceType)
+  | 'object'         // Objeto con campos anidados (usa objectFields)
+  | 'object_array'   // Array de objetos (usa objectFields)
+```
+
+### Propiedades de Campo
+
+```typescript
+type EntityFieldDefinition = {
+  name: string                    // Nombre del campo (snake_case automático)
+  type: EntityFieldType           // Tipo del campo
+  description?: string            // Descripción opcional
+  optional?: boolean              // ¿Es opcional?
+  nonEmpty?: boolean              // ¿Requiere al menos un elemento? (arrays/refs)
+  allowedValues?: (string|number)[] // Valores permitidos (enum)
+  referenceType?: string          // Tipo de entidad referenciada (solo 'reference')
+  objectFields?: EntityFieldDefinition[] // Campos anidados (solo 'object'/'object_array')
+}
+```
+
+### Ejemplo de Schema Complejo
+
+```json
+{
+  "typeName": "character",
+  "description": "D&D Character",
+  "fields": [
+    {
+      "name": "level",
+      "type": "integer",
+      "description": "Character level",
+      "optional": false
+    },
+    {
+      "name": "stats",
+      "type": "object",
+      "description": "Character statistics",
+      "objectFields": [
+        {
+          "name": "abilities",
+          "type": "object",
+          "objectFields": [
+            {
+              "name": "strength",
+              "type": "object",
+              "objectFields": [
+                { "name": "base", "type": "integer" },
+                { "name": "modifier", "type": "integer" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "spells_known",
+      "type": "reference",
+      "referenceType": "spell",
+      "optional": true
+    }
+  ]
+}
+```
+
+### Visualización por Profundidad
+
+- **Nivel 0** (raíz): Fondo `bg-card/50`, padding 16px
+- **Nivel 1+**: Fondo `bg-muted/30`, padding reducido
+- **Badge** "Nivel X" en campos anidados
+- **Borde izquierdo** con `border-primary/30` para indicar anidamiento
+
+### Controles Disponibles en Cada Nivel
+
+Todos los campos (sin importar la profundidad) tienen:
+- ✅ Selector de tipo completo (todos los 8 tipos)
+- ✅ Input de nombre (slugificado automático)
+- ✅ Input de descripción
+- ✅ Toggle opcional/requerido
+- ✅ Toggle nonEmpty (si aplica)
+- ✅ Input de valores permitidos (si aplica)
+- ✅ Selector de referenceType (si es reference)
+- ✅ Botones mover arriba/abajo
+- ✅ Botón eliminar
+- ✅ **Botón "Añadir campo"** para objectFields
+
+---
+
+## 📝 EntityInstanceEditor - Editor de Instancias
+
+### Renderizado por Tipo
+
+El editor renderiza campos dinámicamente según su tipo:
+
+#### Campos Simples
+- **String**: `<Input>` o `<Select>` (si tiene allowedValues)
+- **Integer**: `<Input type="number">` o `<Select>` (si tiene allowedValues)
+- **Boolean**: `<Switch>`
+
+#### Arrays
+- **Con allowedValues**: Checkboxes múltiples con badges
+- **Sin allowedValues**: Lista dinámica con +/- botones
+
+#### Referencias (`ReferenceField`)
+```typescript
+// Filtrado automático por referenceType
+const filteredEntities = availableEntities.filter(
+  e => !referenceType || e.entityType === referenceType
+)
+
+// Si hay entidades disponibles
+<EntitySelector 
+  selectedIds={refs}
+  entities={filteredEntities}
+  entityType={referenceType}
+/>
+
+// Fallback: inputs manuales de IDs
+```
+
+#### Objetos (`ObjectField`)
+```typescript
+// Renderiza cada campo del objeto recursivamente
+<div className="border rounded-lg p-3 bg-muted/20">
+  {objectFields.map(nestedField => (
+    <FieldRenderer 
+      field={nestedField}
+      value={value[nestedField.name]}
+      onChange={(v) => onChange({...value, [nestedField.name]: v})}
+      availableEntities={availableEntities} // ⭐ Pasa entidades disponibles
+    />
+  ))}
+</div>
+```
+
+#### Arrays de Objetos (`ObjectArrayField`)
+```typescript
+// Botón para añadir nuevos objetos
+// Cada elemento usa ObjectField internamente
+arr.map((item, index) => (
+  <ObjectField 
+    value={item}
+    onChange={(v) => handleItemChange(index, v)}
+  />
+))
+```
+
+### Referencias Dentro de Objetos Anidados
+
+**¡Funcionan perfectamente!** El `availableEntities` se pasa recursivamente:
+
+```typescript
+// En ObjectField
+<FieldRenderer 
+  field={nestedField}
+  availableEntities={availableEntities} // ⭐ Se propaga
+/>
+
+// Llegará a ReferenceField que usa EntitySelector
+```
+
+---
+
+## 🔍 EntitySelector - Selector Virtualizado
+
+### Características
+
+- **Virtualización**: Usa `@tanstack/react-virtual` para manejar miles de entidades
+- **Búsqueda**: Filtrado en tiempo real por nombre
+- **Filtrado por tipo**: Opcional con `entityType`
+- **Selección múltiple o simple**: Controlado por `multiple` prop
+- **Badges de metadatos**: category, level, school, etc.
+
+### Uso
+
+```typescript
+<EntitySelector
+  selectedIds={['spell-1', 'spell-2']}
+  onChange={(ids) => setSelected(ids)}
+  entities={allEntities}
+  entityType="spell"      // Opcional: filtrar por tipo
+  multiple={true}
+  placeholder="Buscar conjuros..."
+  maxHeight={320}
+/>
+```
+
+---
+
+## 🔄 API REST
+
+### Entity Types (Schemas)
+
+```
+GET    /api/entity-types              # Listar todos
+POST   /api/entity-types              # Crear
+GET    /api/entity-types/:typeName    # Obtener uno
+PUT    /api/entity-types/:typeName    # Actualizar (con rename si cambia typeName)
+DELETE /api/entity-types/:typeName    # Eliminar (+ todas sus instancias)
+```
+
+### Entities (Instances)
+
+```
+GET    /api/entities/:typeName        # Listar todas del tipo
+POST   /api/entities/:typeName        # Crear
+GET    /api/entities/:typeName/:id    # Obtener una
+PUT    /api/entities/:typeName/:id    # Actualizar
+DELETE /api/entities/:typeName/:id    # Eliminar
+```
+
+### Storage Backend
+
+**Operaciones de Archivo** (`storage.ts`):
+```typescript
+// Schemas
+saveSchema(schema)              → schemas/{typeName}.json
+getSchema(typeName)             → Schema | null
+getAllSchemas()                 → Schema[]
+deleteSchema(typeName)          → Borra schema + entities dir
+renameSchema(old, new)          → Renombra + migra entidades
+
+// Entities
+saveEntity(typeName, entity)    → entities/{typeName}/{id}.json
+getEntity(typeName, id)         → Entity | null
+getAllEntities(typeName)        → Entity[]
+deleteEntity(typeName, id)      → Borra archivo
+```
+
+---
+
+## 🎨 Flujo de Trabajo Típico
+
+### 1. Crear un Tipo de Entidad
+
+```bash
+1. Navegar a http://localhost:5173/entity-management
+2. Click "Nuevo tipo"
+3. Definir typeName, description
+4. Añadir campos personalizados:
+   - Configurar nombre, tipo, descripción
+   - Marcar como opcional si es necesario
+   - Añadir allowedValues si aplica
+   - Para references: especificar referenceType
+   - Para objects: añadir objectFields (¡recursivo!)
+5. Guardar → Crea schemas/{typeName}.json
+```
+
+### 2. Crear Instancia de la Entidad
+
+```bash
+1. Seleccionar tipo en sidebar
+2. Click "Nueva instancia"
+3. Modal con EntityInstanceEditor:
+   - Campos base: id, name, description, tags
+   - Campos personalizados según schema
+   - Referencias: usar EntitySelector
+   - Objetos: formularios anidados
+4. Guardar → Crea entities/{typeName}/{id}.json
+```
+
+### 3. Editar/Eliminar
+
+- **Editar Schema**: Botón edit en SchemaCard → Abre EntityTypeEditor
+- **Editar Instancia**: Botón edit en InstanceRow → Modal con editor
+- **Eliminar Schema**: Botón delete → Confirmar → Borra schema + todas instancias
+- **Eliminar Instancia**: Botón delete → Confirmar → Borra archivo
+- **Duplicar Instancia**: Botón copy → Crea copia con `-copy-{timestamp}`
+
+---
+
+## 📊 Estructura de Datos
+
+### Schema Guardado
+
+```json
+{
+  "typeName": "spell",
+  "description": "D&D 3.5 Spell",
+  "addons": ["searchable", "taggable"],
+  "fields": [
+    {
+      "name": "level",
+      "type": "integer",
+      "description": "Spell level (0-9)",
+      "optional": false
+    },
+    {
+      "name": "school",
+      "type": "string",
+      "description": "Magic school"
+    }
+  ]
+}
+```
+
+### Instancia Guardada
+
+```json
+{
+  "id": "fireball",
+  "entityType": "spell",
+  "name": "Fireball",
+  "description": "A ball of fire...",
+  "tags": ["combat", "evocation"],
+  
+  "level": 3,
+  "school": "Evocation"
+}
+```
+
+---
+
+## 🛠️ Scripts de Importación
+
+### convertSpells.ts
+
+Convierte `conjuros.json` (formato de compendio) a `allSpells.ts` (array tipado):
+
+```bash
+cd visualPlayground
+pnpm run scripts/convertSpells.ts
+```
+
+**Resultado**: `src/data/allSpells.ts` con 2792 conjuros
+
+### importSpells.ts
+
+Importa `allSpells.ts` al sistema de persistencia:
+
+```bash
+cd visualPlayground
+pnpm run scripts/importSpells.ts
+```
+
+**Resultado**: 
+- `server/data/schemas/spell.json`
+- `server/data/entities/spell/*.json` (2790 archivos)
+
+---
+
+## 🐛 Debugging
+
+### Backend no responde
+```bash
+# Verificar si el servidor está corriendo
+lsof -ti:3001
+
+# Iniciar servidor backend
+cd visualPlayground
+pnpm run server
+```
+
+### Frontend no compila
+```bash
+# Verificar errores en consola
+cd visualPlayground
+pnpm dev
+
+# Limpiar y reinstalar
+rm -rf node_modules
+pnpm install
+```
+
+### Entidades no cargan
+1. Verificar que el backend esté corriendo (puerto 3001)
+2. Abrir Network tab en DevTools
+3. Verificar que las llamadas a `/api/entity-types` devuelvan 200
+4. Verificar archivos en `server/data/`
+
+---
+
+## ⚠️ Limitaciones Conocidas
+
+1. **No hay validación Zod en frontend**: La validación solo ocurre en backend
+2. **Archivos JSON planos**: No hay base de datos real (trade-off: simplicidad)
+3. **Sin transacciones**: Operaciones no son atómicas
+4. **Sin búsqueda fulltext**: Solo filtrado por nombre/ID en memoria
+5. **Sin índices**: Cargar todas las entidades puede ser lento con >10k instancias
+
+---
+
+## 🎯 Mejores Prácticas
+
+### Al Crear Schemas
+
+- ✅ Usa nombres descriptivos en `snake_case`
+- ✅ Añade `description` a todos los campos
+- ✅ Marca campos como `optional` solo si realmente lo son
+- ✅ Usa `allowedValues` para campos con opciones limitadas
+- ✅ Especifica `referenceType` en todas las referencias
+- ✅ Usa `nonEmpty: true` para arrays/referencias requeridas
+
+### Al Crear Instancias
+
+- ✅ Usa IDs únicos y descriptivos (slug format)
+- ✅ Añade `description` para contexto
+- ✅ Usa `tags` para categorización y búsqueda
+- ✅ Verifica referencias antes de guardar
+- ✅ Prueba la instancia antes de duplicarla masivamente
+
+### Al Trabajar con Objetos Anidados
+
+- ✅ Mantén la anidación a 2-3 niveles máximo
+- ✅ Usa nombres claros para campos anidados
+- ✅ Considera si un objeto debería ser una entidad separada con referencia
+- ✅ Documenta la estructura en el `description` del campo
+
+---
+
+## 🚀 Comandos Rápidos
+
+```bash
+# Desarrollo
+cd visualPlayground
+pnpm install        # Primera vez
+pnpm dev           # Frontend (puerto 5173)
+pnpm run server    # Backend (puerto 3001)
+
+# Scripts
+pnpm run scripts/convertSpells.ts   # conjuros.json → allSpells.ts
+pnpm run scripts/importSpells.ts    # allSpells.ts → server/data/
+
+# Limpieza
+rm -rf server/data/entities/spell   # Limpiar conjuros
+rm -rf node_modules && pnpm install # Reinstalar dependencias
+```
+
+---
+
+## 📖 Documentación Relacionada
+
+- [Sistema de Entidades Core](../core/domain/entities/README.md)
+- [Entity Management PRD](../core/domain/entities/EntityManagement.prd.md)
+- [Roadmap de Entidades](../core/domain/entities/roadmap/README.md)

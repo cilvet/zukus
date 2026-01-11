@@ -36,5 +36,5 @@ Consulta siempre `monorepo-plan/README.md` para ver el estado actualizado de cad
 
 1. **Inicio fresco**: No copiamos apps enteras, las creamos de nuevo bajo supervisión
 2. **Componentes propios**: No usamos componentes de Tamagui directamente, creamos los nuestros
-3. **Paso a paso**: Cada fase se verifica antes de pasar a la siguiente
+3. **Paso a paso**: Cada fase se verifica con el usuario antes de pasar a la siguiente
 4. **Core con tests**: La migración del core solo está completa cuando todos los tests pasan

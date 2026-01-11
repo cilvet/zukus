@@ -1,0 +1,20 @@
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# everything within the "pruebas" folder
+pruebas/*
+
+node_modules/
+.DS_Store
+
+dist/
+
+# Server data (entidades persistidas localmente)
+visualPlayground/server/data/
+
+# Assets locales (iconos, imágenes de librería)
+visualPlayground/server/assets/

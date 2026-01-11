@@ -1,0 +1,31 @@
+{
+  "name": "@zukus/core",
+  "version": "1.0.0",
+  "description": "Core D&D 5e system - dice, characters, spells, items",
+  "author": "Iñigo Cilveti",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./core/*": "./dist/core/*.js",
+    "./srd/*": "./dist/srd/*.js",
+    "./data/*": "./dist/data/*.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.21",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/jmespath": "^0.15.2",
+    "@types/lodash": "^4.17.20",
+    "jmespath": "^0.16.0",
+    "lodash": "^4.17.21",
+    "zod": "^4.1.5"
+  }
+}

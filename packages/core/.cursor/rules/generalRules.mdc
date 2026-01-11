@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Always use bun as a package manager, test runner and runtime. Never use anything else like npm or yarn.
+Always use typescript unless otherwise specified.

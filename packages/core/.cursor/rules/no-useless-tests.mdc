@@ -1,0 +1,76 @@
+---
+description: Prohibe crear tests que no ejecuten código funcional
+globs: 
+alwaysApply: true
+---
+
+# NO Tests Inútiles
+
+## Regla Fundamental
+
+**NUNCA crear tests que no ejecuten código funcional.**
+
+## ❌ Tests Prohibidos
+
+### 1. Verificación de Estructura de Datos
+```typescript
+// ❌ MAL - Solo verifica que los datos están como los pusiste
+it("should preserve metadata", () => {
+  const field = definition.fields.find(f => f.name === "foo");
+  expect(field?.type).toBe("string");
+  expect(field?.description).toBe("Some description");
+});
+```
+
+### 2. Conteo de Elementos Sin Lógica
+```typescript
+// ❌ MAL - Solo cuenta arrays sin ejecutar ninguna función
+it("should have correct number of fields", () => {
+  const fields = definition.fields;
+  expect(fields.length).toBe(3);
+});
+```
+
+### 3. Verificación de Propiedades de Objetos
+```typescript
+// ❌ MAL - Solo lee propiedades que ya definiste
+it("should have correct properties", () => {
+  expect(config.enabled).toBe(true);
+  expect(config.name).toBe("test");
+});
+```
+
+## ✅ Tests Válidos
+
+Los tests DEBEN ejecutar funciones reales del código:
+
+```typescript
+// ✅ BIEN - Ejecuta validación Zod
+it("should validate entity with enum values", () => {
+  const schema = createEntitySchema(definition);
+  expect(() => schema.parse(entity)).not.toThrow();
+});
+
+// ✅ BIEN - Ejecuta función de creación
+it("should create instance with defaults", () => {
+  const instance = createEntityInstance(definition);
+  expect(instance.field).toBe("expected");
+});
+
+// ✅ BIEN - Ejecuta función de generación
+it("should generate facets", () => {
+  const facets = generateFacets(definition, entities);
+  expect(facets).toHaveLength(3);
+});
+
+// ✅ BIEN - Ejecuta type guard
+it("should identify enum fields", () => {
+  expect(isEnumField(field)).toBe(true);
+});
+```
+
+## Regla Simple
+
+**Si el test solo lee un objeto sin llamar a ninguna función → ELIMÍNALO**
+
+Los tests existen para verificar que el **código funciona**, no para verificar que JavaScript puede leer propiedades de objetos.

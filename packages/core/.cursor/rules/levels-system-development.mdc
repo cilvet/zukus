@@ -1,0 +1,132 @@
+---
+description: Reglas para el desarrollo del Sistema de Niveles v2
+globs: core/domain/levels/**
+alwaysApply: false
+---
+# Desarrollo del Sistema de Niveles v2
+
+## Ubicación del Sistema
+
+Todo el código de este sistema está en `core/domain/levels/`.
+
+## Documentación de Referencia
+
+| Archivo | Propósito |
+|---------|-----------|
+| `core/domain/levels/IMPLEMENTATION_PLAN.md` | Plan maestro con estado de fases |
+| `core/domain/levels/START_HERE.md` | Punto de entrada para cada fase |
+| `core/domain/levels/docs/CONTEXT.md` | Contexto global y metodología |
+| `core/domain/levels/docs/phases/phase-X-clarifications.md` | Aclaraciones por fase |
+| `core/domain/levels/docs/phases/phase-X-full-context.md` | Contexto consolidado por fase |
+
+---
+
+## 🛑 REGLAS CRÍTICAS
+
+### 1. Test First (OBLIGATORIO)
+- **SIEMPRE escribir tests ANTES de implementar**
+- Los tests definen el comportamiento esperado
+- No se considera completo un entregable sin sus tests pasando
+
+### 2. Baby Steps (OBLIGATORIO)
+- Cada cambio debe ser pequeño y verificable
+- No hacer cambios grandes de una vez
+- Cada paso debe ser completamente funcional antes de pasar al siguiente
+
+### 3. Control del Humano (OBLIGATORIO)
+- **El humano supervisor debe confirmar CADA decisión de dominio**
+- Este es un dominio crítico; el humano tiene la última palabra
+- Presentar opciones y esperar confirmación antes de implementar
+- **NO asumir; PREGUNTAR**
+
+### 4. Una Fase a la Vez
+- Solo trabaja en la fase marcada como "🔄 EN PROGRESO"
+- NO avances a la siguiente fase sin confirmación explícita del humano
+- NO leas documentación de fases futuras innecesariamente
+
+---
+
+## Flujo de Trabajo por Fase
+
+### Al Iniciar una Fase
+
+1. **Leer el archivo de contexto de la fase**:
+   - `docs/phases/phase-X-full-context.md` (recomendado, todo en uno)
+   - O: `docs/phases/phase-X-clarifications.md` + código existente
+
+2. **Actualizar estado** en `IMPLEMENTATION_PLAN.md`:
+   ```markdown
+   ### Estado: 🔄 EN PROGRESO
+   ```
+
+3. **Presentar preguntas pendientes** al humano y **ESPERAR CONFIRMACIÓN**
+
+4. **Documentar decisiones** en el Apéndice de `IMPLEMENTATION_PLAN.md`
+
+### Al Implementar
+
+5. **Escribir tests primero** basados en casos de uso
+6. **Implementar** hasta que los tests pasen
+7. **Verificar** criterios de aceptación
+
+### Al Completar una Fase
+
+8. **Actualizar estado** a "✅ COMPLETADA"
+9. **Actualizar `START_HERE.md`** para la siguiente fase
+10. **Crear `phase-X+1-full-context.md`** si no existe
+11. **Notificar al humano** y esperar confirmación para continuar
+
+---
+
+## Estados de Fase
+
+| Símbolo | Estado | Significado |
+|---------|--------|-------------|
+| ⬜ | PENDIENTE | No iniciada |
+| 🔄 | EN PROGRESO | Fase activa |
+| ✅ | COMPLETADA | Fase terminada |
+| ⏸️ | BLOQUEADA | Esperando dependencia |
+
+---
+
+## Estructura de Archivos
+
+```
+core/domain/levels/
+├── IMPLEMENTATION_PLAN.md      # Plan maestro
+├── START_HERE.md               # Punto de entrada (se actualiza por fase)
+├── docs/
+│   ├── CONTEXT.md              # Contexto global
+│   └── phases/
+│       ├── phase-X-clarifications.md
+│       └── phase-X-full-context.md
+├── filtering/                  # Código de Fase 0
+├── suppression/                # Código de Fase 1
+├── conditions/                 # Código de Fase 2
+├── entities/                   # Código de Fase 3
+├── providers/                  # Código de Fase 4
+├── classes/                    # Código de Fase 5
+├── state/                      # Código de Fase 6
+├── evaluation/                 # Código de Fase 7
+└── __tests__/                  # Tests organizados por carpeta
+```
+
+---
+
+## Convenciones de Código
+
+- **Runtime/Package Manager**: Bun
+- **Tests**: Bun test
+- **Tipos**: TypeScript estricto
+- **Sin ternarios**: Preferir if/else
+- **Legibilidad**: Código elegante sobre optimización
+
+---
+
+## ❌ Comportamientos Prohibidos
+
+1. **NO escribir código sin confirmación del humano** en preguntas de dominio
+2. **NO avanzar de fase** sin confirmación explícita
+3. **NO asumir** decisiones de diseño
+4. **NO hacer cambios grandes** sin dividirlos en pasos pequeños
+5. **NO ignorar tests** — Test First es obligatorio

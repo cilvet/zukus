@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tema oscuro morado - colores base */
+    --background: 270 50% 8%;
+    --foreground: 280 20% 95%;
+    
+    /* Cards con fondo morado oscuro */
+    --card: 270 40% 12%;
+    --card-foreground: 280 20% 95%;
+    
+    /* Popovers */
+    --popover: 270 45% 10%;
+    --popover-foreground: 280 20% 95%;
+    
+    /* Primary - morado vibrante */
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - morado medio */
+    --secondary: 270 30% 20%;
+    --secondary-foreground: 280 20% 95%;
+    
+    /* Muted - morado apagado */
+    --muted: 270 30% 18%;
+    --muted-foreground: 270 10% 65%;
+    
+    /* Accent - morado brillante para hovers */
+    --accent: 270 40% 25%;
+    --accent-foreground: 280 20% 95%;
+    
+    /* Destructive - rojo para acciones destructivas */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Bordes morados sutiles */
+    --border: 270 30% 25%;
+    --input: 270 30% 25%;
+    
+    /* Ring - morado brillante para focus */
+    --ring: 270 80% 60%;
+    
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
