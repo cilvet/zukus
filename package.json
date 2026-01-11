@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "dev": "turbo dev",
+    "mobile": "turbo dev --filter=@zukus/mobile",
     "build": "turbo build",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
