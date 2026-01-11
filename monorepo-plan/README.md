@@ -278,7 +278,7 @@ Cada fase tiene su archivo detallado en la carpeta `fases/`.
 |------|--------|-------------|--------|
 | 0 | [Estructura Base](./fases/fase-0-estructura-base.md) | Crear el monorepo con Bun + Turborepo | ✅ Completado |
 | 1 | [Migrar Core](./fases/fase-1-migrar-core.md) | Migrar cilvet-dice como @zukus/core | ✅ Completado |
-| 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI + átomos | ⬜ Pendiente |
+| 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI + átomos | ✅ Completado |
 | 3 | [Crear App Mobile](./fases/fase-3-crear-app-mobile.md) | Inicio fresco de la app Expo (pantallas sencillas) | ⬜ Pendiente |
 | 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ⬜ Pendiente |
 | 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ⬜ Pendiente |
@@ -310,7 +310,7 @@ Ver [fases-pospuestas.md](./fases/fases-pospuestas.md) para:
 ```
 Fase 0:   ✅ Estructura Base
 Fase 1:   ✅ Migrar Core
-Fase 2:   ⬜ Crear @zukus/ui
+Fase 2:   ✅ Crear @zukus/ui
 Fase 3:   ⬜ Crear App Mobile
 Fase 3.5: ⬜ Sistema de Navegación
 Fase 4:   ⬜ Conectar Mobile con UI
@@ -321,7 +321,7 @@ Fase 6:   ⬜ Migrar Componentes
 ### Última Actualización
 
 Fecha: 2026-01-11
-Nota: Fases 0 y 1 completadas. Añadida Fase 3.5 (navegación) entre Fase 3 y 4.
+Nota: Fases 0, 1 y 2 completadas. Siguiente: Fase 3 (Crear App Mobile).
 
 ---
 
