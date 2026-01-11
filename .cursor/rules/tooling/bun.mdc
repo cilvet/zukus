@@ -1,0 +1,27 @@
+---
+description: Bun como herramienta principal
+globs: 
+alwaysApply: true
+---
+
+# Bun
+
+Usamos **bun** para todo:
+
+- Package manager (`bun install`, `bun add`)
+- Test runner (`bun test`)
+- Runtime (`bun run`)
+
+```bash
+# ✅ CORRECTO
+bun install
+bun add zod
+bun test
+bun run build
+
+# ❌ INCORRECTO
+npm install
+yarn add zod
+jest
+npx tsc
+```

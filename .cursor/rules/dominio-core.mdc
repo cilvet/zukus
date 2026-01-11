@@ -1,0 +1,31 @@
+---
+description: Referencias a la documentación de dominio del core
+globs: 
+alwaysApply: false
+---
+
+# Documentación de Dominio - @zukus/core
+
+Si necesitas entender el dominio de la aplicación (D&D 3.5, sistema de personajes, etc.), consulta estas rules:
+
+## Sistema Principal
+
+- [dd35-library-guide.mdc](mdc:.cursor/rules/core/dd35-library-guide.mdc) - Guía completa del sistema de cálculo de personajes
+- [formula-system.mdc](mdc:.cursor/rules/core/formula-system.mdc) - Sistema de fórmulas matemáticas y variables
+- [conditions-system.mdc](mdc:.cursor/rules/core/conditions-system.mdc) - Sistema de conditions para prerequisitos
+
+## Sistema de Entidades
+
+- [entity-system.mdc](mdc:.cursor/rules/core/entity-system.mdc) - Infraestructura genérica para schemas e instancias
+
+## Desarrollo
+
+- [levels-system.mdc](mdc:.cursor/rules/core/levels-system.mdc) - Desarrollo del Sistema de Niveles v2
+- [test-helpers.mdc](mdc:.cursor/rules/core/test-helpers.mdc) - Helpers para tests de personaje
+
+## Ubicación del código
+
+El core está en `packages/core/` y contiene:
+- `core/domain/` - Lógica de dominio (character, entities, formulae, etc.)
+- `srd/` - Datos del System Reference Document de D&D
+- `data/` - Datos de personajes y clases de ejemplo

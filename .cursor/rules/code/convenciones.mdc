@@ -1,0 +1,92 @@
+---
+description: Convenciones de código del proyecto
+globs: 
+alwaysApply: true
+---
+
+# Convenciones de Código
+
+## Ternarios
+
+- No usar ternarios anidados
+- Preferir if/else para lógica compleja
+
+```typescript
+// ❌ MAL
+const result = a ? (b ? x : y) : z;
+
+// ✅ BIEN
+if (a) {
+  if (b) {
+    result = x;
+  } else {
+    result = y;
+  }
+} else {
+  result = z;
+}
+```
+
+## Types vs Interfaces
+
+Usar `type` en lugar de `interface`.
+
+```typescript
+// ❌ MAL
+interface Character {
+  name: string;
+  level: number;
+}
+
+// ✅ BIEN
+type Character = {
+  name: string;
+  level: number;
+};
+```
+
+## Nombres Semánticos
+
+Las funciones deben tener nombres que describan claramente lo que hacen.
+
+```typescript
+// ❌ MAL
+function process(data) { ... }
+function handle(x) { ... }
+function doStuff() { ... }
+
+// ✅ BIEN
+function calculateTotalDamage(attack) { ... }
+function applyBonusToAbilityScore(bonus, ability) { ... }
+function compileCharacterChanges(character) { ... }
+```
+
+## Modularización
+
+- Dividir código en módulos pequeños y enfocados
+- Cada archivo debe tener una responsabilidad clara
+- Evitar archivos de más de 200-300 líneas
+
+## No Clases
+
+Evitar la creación de clases de TypeScript. Usar funciones y tipos en su lugar.
+
+```typescript
+// ❌ MAL
+class CharacterCalculator {
+  private character: Character;
+  
+  constructor(character: Character) {
+    this.character = character;
+  }
+  
+  calculateAC(): number { ... }
+}
+
+// ✅ BIEN
+type Character = { ... };
+
+function calculateAC(character: Character): number { ... }
+```
+
+Excepciones: librerías externas que requieran clases.

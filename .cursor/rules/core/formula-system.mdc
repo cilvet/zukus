@@ -1,0 +1,153 @@
+---
+description: When you need to create a formula or work with formulas in some capacity
+globs: packages/core/**
+alwaysApply: false
+---
+# Formula System Reference
+
+This document details the formula system used throughout the D&D 3.5 character calculation library. Formulas are mathematical expressions that can include dice rolls, variables, and functions.
+
+## Core Concepts
+
+### Formula Structure
+```typescript
+// From formulae/formula.ts
+type Formula = {
+  expression: string;                    // Main mathematical expression
+  substitutionData?: SubstitutionData;   // Variable definitions
+  extraData?: Record<string, any>;       // Additional metadata
+}
+```
+
+### Variable Substitution
+Variables use `@` prefix and support dot notation:
+- `@ability.strength.modifier` - Character ability modifiers
+- `@levels.class.fighter` - Class levels
+- `@bab.total` - Calculated values from character sheet
+- `@powerAttackPoints` - Contextual change variables
+
+## Supported Operations
+
+### Basic Math
+```typescript
+'1 + 1'                    // Addition, subtraction, multiplication, division
+'(1/2) * 3 + 1/4'         // Parentheses and order of operations
+```
+
+### Dice Expressions
+```typescript
+'1d4 + 3d6'               // Standard dice notation
+'2d20kh'                  // Dice selectors: kh (keep highest), kl, dh (drop highest), dl
+'4d6dl1'                  // Drop lowest 1
+'(@casterLevel)d6'        // Dynamic dice counts using variables
+'(1d6)d6'                 // Dice determining dice count
+```
+
+### Mathematical Functions
+```typescript
+'min(5, 10)'              // min(), max() - comparison functions
+'floor(3.7)'              // floor(), ceil() - rounding functions
+'min(6 + floor(max(@level - 11, 0) / 3), 9)' // Nested function calls
+```
+
+### Variable Examples
+```typescript
+'@ability.strength.modifier + @bab'           // Simple variable combination
+'@swordDamage * 2'                           // Nested substitution
+'(3d6 + 5) * @twoHandedMultiplier'          // Variables in complex expressions
+```
+
+## Formula Limitations
+
+### ❌ No Conditional Logic
+```typescript
+// NOT SUPPORTED - Ternary operators
+'@level > 10 ? 5 : 3'
+
+// NOT SUPPORTED - If/else statements  
+'if(@strength > 16, 4, 2)'
+
+// ✅ ALTERNATIVE: Use Change conditions instead
+// Define separate changes with condition objects
+```
+
+### ❌ No Comparison Operators
+```typescript
+// NOT SUPPORTED - Boolean comparisons in expressions
+'@level >= 5'
+'@ability.strength.modifier == 4'
+
+// ✅ ALTERNATIVE: Use Change conditions
+// Conditions are evaluated separately using Condition objects
+```
+
+### ❌ No String Operations
+```typescript
+// NOT SUPPORTED - String manipulation
+'@weaponName + " +1"'
+'concat(@firstName, @lastName)'
+```
+
+### ❌ No Programming Constructs
+```typescript
+// NOT SUPPORTED - Variable assignment
+'@temp = @level * 2; @temp + 5'
+
+// NOT SUPPORTED - Loops or arrays
+'for(i=0; i<@level; i++) { ... }'
+'[@damage1, @damage2].sum()'
+
+// NOT SUPPORTED - Local variables
+'let multiplier = 1.5; @damage * multiplier'
+```
+
+## Evaluation Order
+
+1. **Parentheses**: `(1/2) * 3`
+2. **Function calls**: `floor(3.7)`, `min(5, 10)`
+3. **Variable substitution**: `@ability.strength.modifier → 3`
+4. **Dice expressions**: `3d6 → 10`
+5. **Mathematical operations**: `* / + -` (standard precedence)
+
+## Design Philosophy
+
+The formula system is designed as a **mathematical expression evaluator**, not a programming language:
+
+- **Separation of Concerns**: Mathematical calculation (formulas) vs. logical evaluation (conditions)
+- **Deterministic**: Same inputs always produce same outputs (except for dice randomness)
+- **Readable**: Non-programmers can understand basic formulas
+- **Debuggable**: Clear evaluation order and variable substitution
+
+## Common Patterns
+
+### Damage Formulas
+```typescript
+'1d8 + @ability.strength.modifier'        // Basic weapon damage
+'(@powerAttackPoints * 2)'                // Power Attack bonus damage
+'(@spellLevel)d6 + @ability.intelligence.modifier' // Scaling spell damage
+```
+
+### Scaling Formulas
+```typescript
+'floor(@level / 3)'                       // Every 3 levels
+'min(5, floor(@level / 4))'              // Capped progression
+'max(1, @ability.wisdom.modifier)'       // Minimum 1
+```
+
+### Conditional Alternatives
+Instead of `@level > 10 ? 5 : 3`, create separate changes:
+```typescript
+// Change 1: applies when level <= 10
+{ 
+  formula: { expression: '3' },
+  conditions: [{ firstFormula: '@level', operator: '<=', secondFormula: '10' }]
+}
+
+// Change 2: applies when level > 10  
+{
+  formula: { expression: '5' },
+  conditions: [{ firstFormula: '@level', operator: '>', secondFormula: '10' }]
+}
+```
+
+For implementation details, see [calculateSources.ts](mdc:core/domain/character/calculation/sources/calculateSources.ts) and [diceRoller.test.ts](mdc:core/domain/rolls/DiceRoller/diceRoller.test.ts).

@@ -1,0 +1,40 @@
+---
+description: Mantener archivos de test pequeños y enfocados
+globs: 
+alwaysApply: true
+---
+
+# Archivos de Test Pequeños
+
+## Regla
+
+**No crear archivos de tests masivos.** Dividir los tests en múltiples archivos cuando sea necesario.
+
+## Por qué
+
+- Archivos pequeños son más fáciles de navegar y entender
+- Facilita ejecutar solo los tests relevantes durante el desarrollo
+- Reduce conflictos de merge
+- Mejora la legibilidad y mantenibilidad
+
+## Guía
+
+- Un archivo de test debe cubrir **una unidad lógica** (función, clase, o feature específica)
+- Si un archivo supera ~200-300 líneas, considerar dividirlo
+- Agrupar tests relacionados en carpetas si hay muchos archivos
+
+## Ejemplo
+
+```
+❌ MAL
+__tests__/
+  character.test.ts  # 2000 líneas con todo mezclado
+
+✅ BIEN
+__tests__/
+  character/
+    calculateAbilityScores.test.ts
+    calculateSavingThrows.test.ts
+    calculateArmorClass.test.ts
+    calculateAttacks.test.ts
+```
