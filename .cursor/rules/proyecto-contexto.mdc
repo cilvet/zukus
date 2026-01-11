@@ -1,0 +1,40 @@
+---
+description: Contexto general del proyecto Zukus y su migración a monorepo
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Contexto del Proyecto Zukus
+
+## ¿Qué es Zukus?
+
+Zukus es una aplicación para gestión de personajes de D&D 5e. Estamos en proceso de unificar varios repositorios en un único monorepo.
+
+## Repositorios Relevantes
+
+| Repositorio | Ruta | Descripción |
+|-------------|------|-------------|
+| **zukus** (este) | `/Users/cilveti/personal/zukus` | Monorepo objetivo donde se unifica todo |
+| **zukusnextmicon** | `/Users/cilveti/personal/zukusnextmicon` | App web actual (Next.js + Tamagui). Referencia para componentes y lógica |
+| **cilvet-dice** | `/Users/cilveti/personal/cilvet-dice` | Core del sistema de dados y cálculos de D&D. Se migra como `@zukus/core` |
+| **zukus-again** | (pendiente de confirmar ruta) | App mobile con Expo. Referencia para componentes UI y configuración Tamagui |
+
+## Plan de Migración
+
+El plan detallado está en `monorepo-plan/README.md` con las fases individuales en `monorepo-plan/fases/`.
+
+### Estado Actual de las Fases
+
+Consulta siempre `monorepo-plan/README.md` para ver el estado actualizado de cada fase.
+
+**IMPORTANTE:** Antes de trabajar en cualquier fase, verifica:
+1. Que la fase anterior está marcada como completada
+2. Que el humano ha verificado y aprobado la fase anterior
+3. Qué pasos específicos quedan pendientes en la fase actual
+
+## Principios del Proyecto
+
+1. **Inicio fresco**: No copiamos apps enteras, las creamos de nuevo bajo supervisión
+2. **Componentes propios**: No usamos componentes de Tamagui directamente, creamos los nuestros
+3. **Paso a paso**: Cada fase se verifica antes de pasar a la siguiente
+4. **Core con tests**: La migración del core solo está completa cuando todos los tests pasan

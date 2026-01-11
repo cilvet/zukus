@@ -1,0 +1,54 @@
+---
+description: Regla fundamental de verificación con el humano antes de continuar
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# ⚠️ VERIFICACIÓN OBLIGATORIA CON EL HUMANO
+
+## Regla Fundamental
+
+**NUNCA avances a la siguiente fase o paso importante sin verificar explícitamente con el humano que el paso actual está correctamente completado.**
+
+## Por qué es importante
+
+1. **Alineación mental**: El humano necesita comprender cada parte del proyecto
+2. **Detección temprana de errores**: Es más fácil arreglar problemas antes de que se acumulen
+3. **Control del proyecto**: El humano debe mantener el control sobre las decisiones
+4. **Evitar trabajo innecesario**: Mejor verificar antes que rehacer después
+
+## Qué hacer
+
+### ✅ CORRECTO
+
+```
+"He completado el paso X. Antes de continuar con el paso Y, ¿puedes verificar que todo está correcto?"
+
+"La Fase 0 está terminada. Aquí está el resumen de lo que se ha creado:
+- [lista de archivos/cambios]
+¿Confirmas que podemos pasar a la Fase 1?"
+```
+
+### ❌ INCORRECTO
+
+```
+"Fase 0 completada. Ahora paso a la Fase 1..."
+[continúa trabajando sin esperar confirmación]
+```
+
+## Puntos de verificación obligatorios
+
+1. **Al completar una fase del plan de migración**
+2. **Al crear estructura de carpetas significativa**
+3. **Al modificar configuraciones importantes (package.json, tsconfig, etc.)**
+4. **Al migrar código de otros repositorios**
+5. **Cuando algo no funcione como se esperaba**
+6. **Antes de hacer commits importantes**
+
+## Cómo pedir verificación
+
+1. Resume qué se ha hecho
+2. Lista los archivos creados/modificados
+3. Indica qué verificaciones has realizado tú (tests, builds, etc.)
+4. Pregunta explícitamente si se puede continuar
+5. **ESPERA la respuesta antes de continuar**
