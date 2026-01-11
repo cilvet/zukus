@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+dist/
+.next/
+.expo/
+.turbo/
+*.tsbuildinfo
+
+# Bun
+bun.lockb
+
+# Local env
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+
+# Tauri
+apps/desktop/src-tauri/target/
+
