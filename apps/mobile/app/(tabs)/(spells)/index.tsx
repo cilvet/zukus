@@ -1,13 +1,10 @@
-import { Platform, Pressable, StyleSheet, Dimensions, useWindowDimensions } from 'react-native'
+import { Platform, Pressable, useWindowDimensions } from 'react-native'
 import { useRouter } from 'expo-router'
-import { Text, YStack, XStack, ScrollView } from 'tamagui'
+import { Text, YStack, XStack, ScrollView, View } from 'tamagui'
 import { useState } from 'react'
-import { themes } from '@zukus/ui'
+import { useTheme } from '@zukus/ui'
 import { SidePanel, SidePanelContainer } from '../../../components/layout'
 import { useSidePanel } from '../../../hooks'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -102,10 +99,8 @@ const COMPONENT_INFO: Record<string, { icon: string; fullName: string; descripti
 export default function SpellsScreen() {
   const router = useRouter()
   const { width } = useWindowDimensions()
+  const { themeColors } = useTheme()
   const isDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
-
-  // DEBUG - quitar despues
-  console.log('DEBUG:', { platform: Platform.OS, width, isDesktop, breakpoint: DESKTOP_BREAKPOINT })
 
   const [selectedSpell, setSelectedSpell] = useState<string | null>(null)
   const { isOpen, currentContent, openPanel, closePanel } = useSidePanel()
@@ -153,12 +148,12 @@ export default function SpellsScreen() {
   if (isDesktop) {
     return (
       <SidePanelContainer>
-        <XStack flex={1} backgroundColor={theme.background}>
+        <XStack flex={1} backgroundColor="$background">
           {/* Columna 1: Lista de conjuros */}
-          <YStack width={280} borderRightWidth={1} borderRightColor={theme.borderColor}>
-            <YStack padding={16} borderBottomWidth={1} borderBottomColor={theme.borderColor}>
-              <Text fontSize={20} fontWeight="bold" color={theme.color}>Libro de Conjuros</Text>
-              <Text fontSize={12} color={theme.placeholderColor} marginTop={4}>
+          <YStack width={280} borderRightWidth={1} borderRightColor="$borderColor">
+            <YStack padding={16} borderBottomWidth={1} borderBottomColor="$borderColor">
+              <Text fontSize={20} fontWeight="bold" color="$color">Libro de Conjuros</Text>
+              <Text fontSize={12} color="$placeholderColor" marginTop={4}>
                 {MOCK_SPELLS.length} conjuros preparados
               </Text>
             </YStack>
@@ -167,10 +162,13 @@ export default function SpellsScreen() {
                 {MOCK_SPELLS.map((spell) => (
                   <Pressable
                     key={spell.id}
-                    style={[
-                      styles.spellCard,
-                      selectedSpell === spell.id && styles.spellCardSelected,
-                    ]}
+                    style={{
+                      backgroundColor: selectedSpell === spell.id ? themeColors.backgroundPress : themeColors.backgroundHover,
+                      padding: 14,
+                      borderRadius: 8,
+                      borderWidth: 1,
+                      borderColor: selectedSpell === spell.id ? themeColors.colorFocus : themeColors.borderColor,
+                    }}
                     onPress={() => handleSpellPress(spell.id, spell.name)}
                   >
                     <XStack alignItems="center" gap={12}>
@@ -178,15 +176,15 @@ export default function SpellsScreen() {
                         width={32}
                         height={32}
                         borderRadius={16}
-                        backgroundColor={theme.actionButton}
+                        backgroundColor="$actionButton"
                         alignItems="center"
                         justifyContent="center"
                       >
                         <Text fontSize={14} fontWeight="bold" color="#fff">{spell.level}</Text>
                       </YStack>
                       <YStack flex={1}>
-                        <Text fontSize={14} fontWeight="600" color={theme.color}>{spell.name}</Text>
-                        <Text fontSize={11} color={theme.placeholderColor}>{spell.school}</Text>
+                        <Text fontSize={14} fontWeight="600" color="$color">{spell.name}</Text>
+                        <Text fontSize={11} color="$placeholderColor">{spell.school}</Text>
                       </YStack>
                     </XStack>
                   </Pressable>
@@ -199,49 +197,52 @@ export default function SpellsScreen() {
           <YStack flex={1} minWidth={300}>
             {details && spellData ? (
               <ScrollView flex={1} showsVerticalScrollIndicator={false}>
-                <YStack padding={20} borderBottomWidth={1} borderBottomColor={theme.borderColor}>
-                  <Text fontSize={24} fontWeight="bold" color={theme.color}>{spellData.name}</Text>
-                  <Text fontSize={13} color={theme.placeholderColor} marginTop={4}>
+                <YStack padding={20} borderBottomWidth={1} borderBottomColor="$borderColor">
+                  <Text fontSize={24} fontWeight="bold" color="$color">{spellData.name}</Text>
+                  <Text fontSize={13} color="$placeholderColor" marginTop={4}>
                     Nivel {spellData.level} - {spellData.school}
                   </Text>
                 </YStack>
 
-                <XStack padding={16} borderBottomWidth={1} borderBottomColor={theme.borderColor}>
+                <XStack padding={16} borderBottomWidth={1} borderBottomColor="$borderColor">
                   <YStack flex={1} alignItems="center">
-                    <Text fontSize={11} color={theme.placeholderColor}>Tiempo</Text>
-                    <Text fontSize={13} fontWeight="600" color={theme.color}>{details.castingTime}</Text>
+                    <Text fontSize={11} color="$placeholderColor">Tiempo</Text>
+                    <Text fontSize={13} fontWeight="600" color="$color">{details.castingTime}</Text>
                   </YStack>
                   <YStack flex={1} alignItems="center">
-                    <Text fontSize={11} color={theme.placeholderColor}>Alcance</Text>
-                    <Text fontSize={13} fontWeight="600" color={theme.color}>{details.range}</Text>
+                    <Text fontSize={11} color="$placeholderColor">Alcance</Text>
+                    <Text fontSize={13} fontWeight="600" color="$color">{details.range}</Text>
                   </YStack>
                   <YStack flex={1} alignItems="center">
-                    <Text fontSize={11} color={theme.placeholderColor}>Duracion</Text>
-                    <Text fontSize={13} fontWeight="600" color={theme.color}>{details.duration}</Text>
+                    <Text fontSize={11} color="$placeholderColor">Duracion</Text>
+                    <Text fontSize={13} fontWeight="600" color="$color">{details.duration}</Text>
                   </YStack>
                 </XStack>
 
-                <YStack padding={20} borderBottomWidth={1} borderBottomColor={theme.borderColor}>
-                  <Text fontSize={12} fontWeight="600" color={theme.colorFocus} textTransform="uppercase" letterSpacing={1} marginBottom={12}>
+                <YStack padding={20} borderBottomWidth={1} borderBottomColor="$borderColor">
+                  <Text fontSize={12} fontWeight="600" color="$colorFocus" textTransform="uppercase" letterSpacing={1} marginBottom={12}>
                     Descripcion
                   </Text>
-                  <Text fontSize={14} color={theme.color} lineHeight={22}>
+                  <Text fontSize={14} color="$color" lineHeight={22}>
                     {details.description}
                   </Text>
                 </YStack>
 
                 <YStack padding={20}>
-                  <Text fontSize={12} fontWeight="600" color={theme.colorFocus} textTransform="uppercase" letterSpacing={1} marginBottom={12}>
+                  <Text fontSize={12} fontWeight="600" color="$colorFocus" textTransform="uppercase" letterSpacing={1} marginBottom={12}>
                     Componentes
                   </Text>
                   <YStack gap={10}>
                     {details.components.map((component, index) => (
                       <Pressable
                         key={index}
-                        style={({ pressed }) => [
-                          styles.componentCard,
-                          pressed && styles.componentCardPressed,
-                        ]}
+                        style={({ pressed }) => ({
+                          backgroundColor: pressed ? themeColors.backgroundPress : themeColors.backgroundHover,
+                          padding: 14,
+                          borderRadius: 8,
+                          borderWidth: 1,
+                          borderColor: themeColors.borderColor,
+                        })}
                         onPress={() => handleComponentPress(component)}
                       >
                         <XStack alignItems="center" gap={12}>
@@ -249,12 +250,12 @@ export default function SpellsScreen() {
                             {component.type === 'verbal' ? 'V' : component.type === 'somatic' ? 'S' : 'M'}
                           </Text>
                           <YStack flex={1}>
-                            <Text fontSize={14} fontWeight="600" color={theme.color}>{component.name}</Text>
-                            <Text fontSize={11} color={theme.placeholderColor} numberOfLines={1}>
+                            <Text fontSize={14} fontWeight="600" color="$color">{component.name}</Text>
+                            <Text fontSize={11} color="$placeholderColor" numberOfLines={1}>
                               {component.detail}
                             </Text>
                           </YStack>
-                          <Text fontSize={16} color={theme.color}>→</Text>
+                          <Text fontSize={16} color="$color">→</Text>
                         </XStack>
                       </Pressable>
                     ))}
@@ -264,7 +265,7 @@ export default function SpellsScreen() {
             ) : (
               <YStack flex={1} alignItems="center" justifyContent="center" padding={40}>
                 <Text fontSize={48} marginBottom={16}>📜</Text>
-                <Text fontSize={18} color={theme.placeholderColor} textAlign="center">
+                <Text fontSize={18} color="$placeholderColor" textAlign="center">
                   Selecciona un conjuro para ver su detalle
                 </Text>
               </YStack>
@@ -272,10 +273,10 @@ export default function SpellsScreen() {
           </YStack>
 
           {/* Columna 3: Placeholder o info */}
-          <YStack width={280} borderLeftWidth={1} borderLeftColor={theme.borderColor}>
+          <YStack width={280} borderLeftWidth={1} borderLeftColor="$borderColor">
             <YStack flex={1} alignItems="center" justifyContent="center" padding={20}>
               <Text fontSize={36} marginBottom={12}>✨</Text>
-              <Text fontSize={14} color={theme.placeholderColor} textAlign="center" lineHeight={20}>
+              <Text fontSize={14} color="$placeholderColor" textAlign="center" lineHeight={20}>
                 Selecciona un componente{'\n'}para ver su detalle en el panel lateral
               </Text>
             </YStack>
@@ -295,46 +296,46 @@ export default function SpellsScreen() {
             <YStack gap={16} padding={4}>
               <YStack
                 padding={20}
-                backgroundColor={theme.backgroundHover}
+                backgroundColor="$backgroundHover"
                 borderRadius={8}
                 borderWidth={1}
-                borderColor={theme.borderColor}
+                borderColor="$borderColor"
                 alignItems="center"
               >
-                <Text fontSize={48} fontWeight="bold" color={theme.colorFocus}>
+                <Text fontSize={48} fontWeight="bold" color="$colorFocus">
                   {COMPONENT_INFO[(currentContent.data?.componentType as string) ?? 'verbal']?.icon}
                 </Text>
-                <Text fontSize={14} color={theme.placeholderColor} marginTop={8}>
+                <Text fontSize={14} color="$placeholderColor" marginTop={8}>
                   Para: {currentContent.data?.spellName as string}
                 </Text>
               </YStack>
 
               <YStack
                 padding={16}
-                backgroundColor={theme.backgroundHover}
+                backgroundColor="$backgroundHover"
                 borderRadius={8}
                 borderWidth={1}
-                borderColor={theme.borderColor}
+                borderColor="$borderColor"
               >
-                <Text fontSize={12} fontWeight="600" color={theme.colorFocus} textTransform="uppercase" marginBottom={8}>
+                <Text fontSize={12} fontWeight="600" color="$colorFocus" textTransform="uppercase" marginBottom={8}>
                   Detalle especifico
                 </Text>
-                <Text fontSize={14} color={theme.color} fontStyle="italic">
+                <Text fontSize={14} color="$color" fontStyle="italic">
                   {(currentContent.data?.componentDetail as string) || 'Sin detalle especifico.'}
                 </Text>
               </YStack>
 
               <YStack
                 padding={16}
-                backgroundColor={theme.backgroundHover}
+                backgroundColor="$backgroundHover"
                 borderRadius={8}
                 borderWidth={1}
-                borderColor={theme.borderColor}
+                borderColor="$borderColor"
               >
-                <Text fontSize={12} fontWeight="600" color={theme.colorFocus} textTransform="uppercase" marginBottom={8}>
+                <Text fontSize={12} fontWeight="600" color="$colorFocus" textTransform="uppercase" marginBottom={8}>
                   Reglas generales
                 </Text>
-                <Text fontSize={14} color={theme.color} lineHeight={22}>
+                <Text fontSize={14} color="$color" lineHeight={22}>
                   {COMPONENT_INFO[(currentContent.data?.componentType as string) ?? 'verbal']?.description}
                 </Text>
               </YStack>
@@ -347,17 +348,10 @@ export default function SpellsScreen() {
 
   // Mobile: layout original con navegacion nativa
   return (
-    <ScrollView style={styles.container}>
-      {/* DEBUG banner - quitar despues */}
-      <YStack padding={8} backgroundColor="red">
-        <Text fontSize={12} color="white">
-          DEBUG: Platform={Platform.OS}, width={width}, isDesktop={String(isDesktop)}
-        </Text>
-      </YStack>
-
-      <YStack padding={20} borderBottomWidth={1} borderBottomColor={theme.borderColor}>
-        <Text fontSize={24} fontWeight="bold" color={theme.color}>Libro de Conjuros</Text>
-        <Text fontSize={14} color={theme.placeholderColor} marginTop={4}>
+    <ScrollView flex={1} backgroundColor="$background">
+      <YStack padding={20} borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text fontSize={24} fontWeight="bold" color="$color">Libro de Conjuros</Text>
+        <Text fontSize={14} color="$placeholderColor" marginTop={4}>
           {MOCK_SPELLS.length} conjuros preparados
         </Text>
       </YStack>
@@ -366,10 +360,13 @@ export default function SpellsScreen() {
         {MOCK_SPELLS.map((spell) => (
           <Pressable
             key={spell.id}
-            style={({ pressed }) => [
-              styles.spellCard,
-              pressed && styles.spellCardPressed,
-            ]}
+            style={({ pressed }) => ({
+              backgroundColor: pressed ? themeColors.backgroundPress : themeColors.backgroundHover,
+              padding: 14,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: themeColors.borderColor,
+            })}
             onPress={() => handleSpellPress(spell.id, spell.name)}
           >
             <XStack alignItems="center" gap={12}>
@@ -377,24 +374,24 @@ export default function SpellsScreen() {
                 width={32}
                 height={32}
                 borderRadius={16}
-                backgroundColor={theme.actionButton}
+                backgroundColor="$actionButton"
                 alignItems="center"
                 justifyContent="center"
               >
                 <Text fontSize={16} fontWeight="bold" color="#fff">{spell.level}</Text>
               </YStack>
               <YStack flex={1}>
-                <Text fontSize={16} fontWeight="600" color={theme.color}>{spell.name}</Text>
-                <Text fontSize={12} color={theme.placeholderColor} marginTop={2}>{spell.school}</Text>
+                <Text fontSize={16} fontWeight="600" color="$color">{spell.name}</Text>
+                <Text fontSize={12} color="$placeholderColor" marginTop={2}>{spell.school}</Text>
               </YStack>
-              <Text fontSize={18} color={theme.color}>→</Text>
+              <Text fontSize={18} color="$color">→</Text>
             </XStack>
           </Pressable>
         ))}
       </YStack>
 
-      <YStack margin={16} padding={16} backgroundColor={theme.uiBackgroundColor} borderRadius={8} borderWidth={1} borderColor={theme.borderColor}>
-        <Text fontSize={13} color={theme.placeholderColor} lineHeight={20}>
+      <YStack margin={16} padding={16} backgroundColor="$uiBackgroundColor" borderRadius={8} borderWidth={1} borderColor="$borderColor">
+        <Text fontSize={13} color="$placeholderColor" lineHeight={20}>
           Pulsa un conjuro para ver su detalle.
           Desde el detalle podras navegar a los componentes del conjuro (V, S, M).
         </Text>
@@ -402,34 +399,3 @@ export default function SpellsScreen() {
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.background,
-  },
-  spellCard: {
-    backgroundColor: theme.backgroundHover,
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.borderColor,
-  },
-  spellCardPressed: {
-    backgroundColor: theme.backgroundPress,
-  },
-  spellCardSelected: {
-    backgroundColor: theme.backgroundPress,
-    borderColor: theme.colorFocus,
-  },
-  componentCard: {
-    backgroundColor: theme.backgroundHover,
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.borderColor,
-  },
-  componentCardPressed: {
-    backgroundColor: theme.backgroundPress,
-  },
-})

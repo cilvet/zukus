@@ -1,23 +1,25 @@
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
-import { themes } from '@zukus/ui'
+import { useRouter } from 'expo-router'
 import {
   MOCK_CHARACTER,
   CharacterPager,
+  SectionHeader,
+  SectionCard,
+  StatBox,
+  AbilityCard,
+  SkillItem,
+  ItemCard,
 } from '../../components/character'
 
-const theme = themes.zukus
-
 // Versiones simples de las secciones para web (sin contexto de collapsible)
-import { useRouter } from 'expo-router'
-import { SectionHeader, SectionCard, StatBox, AbilityCard, SkillItem, ItemCard } from '../../components/character'
 
 function WebCombatSection() {
   return (
-    <View style={styles.page}>
+    <View style={{ flex: 1, height: '100%' }}>
       <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.content}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
@@ -43,10 +45,10 @@ function WebAbilitiesSection() {
   }
 
   return (
-    <View style={styles.page}>
+    <View style={{ flex: 1, height: '100%' }}>
       <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.content}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
@@ -87,10 +89,10 @@ function WebEquipmentSection() {
   }
 
   return (
-    <View style={styles.page}>
+    <View style={{ flex: 1, height: '100%' }}>
       <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.content}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
@@ -116,10 +118,10 @@ function WebSpellsSection() {
   }
 
   return (
-    <View style={styles.page}>
+    <View style={{ flex: 1, height: '100%' }}>
       <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.content}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
@@ -141,22 +143,22 @@ function WebSpellsSection() {
  */
 export function CharacterScreen() {
   return (
-    <YStack flex={1} backgroundColor={theme.background}>
+    <YStack flex={1} backgroundColor="$background">
       {/* Header fijo */}
       <XStack
         alignItems="center"
         justifyContent="space-between"
         paddingVertical={12}
         paddingHorizontal={16}
-        backgroundColor={theme.background}
+        backgroundColor="$background"
         borderBottomWidth={1}
-        borderBottomColor={theme.borderColor}
+        borderBottomColor="$borderColor"
       >
         <YStack alignItems="flex-start" flex={1}>
-          <Text fontSize={11} color={theme.placeholderColor} textTransform="uppercase">
+          <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
             Nivel {MOCK_CHARACTER.level}
           </Text>
-          <Text fontSize={14} fontWeight="700" color={theme.color}>
+          <Text fontSize={14} fontWeight="700" color="$color">
             {MOCK_CHARACTER.class}
           </Text>
         </YStack>
@@ -165,9 +167,9 @@ export function CharacterScreen() {
           width={48}
           height={48}
           borderRadius={24}
-          backgroundColor={theme.uiBackgroundColor}
+          backgroundColor="$uiBackgroundColor"
           borderWidth={2}
-          borderColor={theme.color}
+          borderColor="$color"
           alignItems="center"
           justifyContent="center"
         >
@@ -175,14 +177,14 @@ export function CharacterScreen() {
         </YStack>
 
         <YStack alignItems="flex-end" flex={1}>
-          <Text fontSize={11} color={theme.placeholderColor} textTransform="uppercase">
+          <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
             HP
           </Text>
           <XStack alignItems="baseline" gap={2}>
-            <Text fontSize={16} fontWeight="700" color={theme.color}>
+            <Text fontSize={16} fontWeight="700" color="$color">
               {MOCK_CHARACTER.hp.current}
             </Text>
-            <Text fontSize={12} color={theme.placeholderColor}>
+            <Text fontSize={12} color="$placeholderColor">
               /{MOCK_CHARACTER.hp.max}
             </Text>
           </XStack>
@@ -199,19 +201,3 @@ export function CharacterScreen() {
     </YStack>
   )
 }
-
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    height: '100%',
-  },
-  scroll: {
-    flex: 1,
-    backgroundColor: theme.background,
-  },
-  content: {
-    padding: 16,
-    paddingBottom: 32,
-    gap: 16,
-  },
-})

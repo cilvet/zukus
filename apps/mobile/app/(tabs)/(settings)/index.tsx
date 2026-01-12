@@ -1,222 +1,178 @@
-import { View, Text, ScrollView, StyleSheet, Platform } from 'react-native'
-import { themes, themeNames } from '@zukus/ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
+import { View, Text, ScrollView, XStack, YStack } from 'tamagui'
+import { Platform, Pressable } from 'react-native'
+import { useTheme } from '@zukus/ui'
 
 export default function SettingsScreen() {
+  const { themeName, setTheme, themeInfo, availableThemes } = useTheme()
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Ajustes</Text>
-        <Text style={styles.subtitle}>Configuración de la aplicación</Text>
-      </View>
+    <ScrollView flex={1} backgroundColor="$background">
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text fontSize={24} fontWeight="bold" color="$color">
+          Ajustes
+        </Text>
+        <Text fontSize={14} color="$placeholderColor" marginTop="$1">
+          Configuracion de la aplicacion
+        </Text>
+      </YStack>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Plataforma actual</Text>
-        <View style={styles.infoCard}>
-          <Text style={styles.infoLabel}>Sistema</Text>
-          <Text style={styles.infoValue}>{Platform.OS}</Text>
-        </View>
-        <View style={styles.infoCard}>
-          <Text style={styles.infoLabel}>Versión</Text>
-          <Text style={styles.infoValue}>{Platform.Version}</Text>
-        </View>
-      </View>
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text
+          fontSize={14}
+          fontWeight="600"
+          color="$colorFocus"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$3"
+        >
+          Plataforma actual
+        </Text>
+        <XStack
+          justifyContent="space-between"
+          paddingVertical="$3"
+          borderBottomWidth={1}
+          borderBottomColor="$borderColor"
+        >
+          <Text fontSize={15} color="$placeholderColor">
+            Sistema
+          </Text>
+          <Text fontSize={15} fontWeight="600" color="$color">
+            {Platform.OS}
+          </Text>
+        </XStack>
+        <XStack justifyContent="space-between" paddingVertical="$3">
+          <Text fontSize={15} color="$placeholderColor">
+            Version
+          </Text>
+          <Text fontSize={15} fontWeight="600" color="$color">
+            {Platform.Version}
+          </Text>
+        </XStack>
+      </YStack>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Tema actual</Text>
-        <View style={styles.themeCard}>
-          <View style={[styles.colorSwatch, { backgroundColor: theme.background }]}>
-            <View style={[styles.colorDot, { backgroundColor: theme.color }]} />
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text
+          fontSize={14}
+          fontWeight="600"
+          color="$colorFocus"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$3"
+        >
+          Tema actual
+        </Text>
+        <XStack
+          alignItems="center"
+          backgroundColor="$backgroundHover"
+          padding="$4"
+          borderRadius="$4"
+          borderWidth={1}
+          borderColor="$borderColor"
+        >
+          <View
+            width={48}
+            height={48}
+            borderRadius="$4"
+            alignItems="center"
+            justifyContent="center"
+            borderWidth={2}
+            borderColor="$borderColor"
+            backgroundColor={themeInfo.colors.background}
+          >
+            <View
+              width={24}
+              height={24}
+              borderRadius={12}
+              backgroundColor={themeInfo.colors.primary}
+            />
           </View>
-          <View style={styles.themeInfo}>
-            <Text style={styles.themeName}>Zukus</Text>
-            <Text style={styles.themeDescription}>Tema púrpura y dorado</Text>
-          </View>
-        </View>
-      </View>
+          <YStack marginLeft="$4">
+            <Text fontSize={18} fontWeight="600" color="$color">
+              {themeInfo.displayName}
+            </Text>
+            <Text fontSize={13} color="$placeholderColor" marginTop="$1">
+              Tema {themeInfo.checkboxVariant}
+            </Text>
+          </YStack>
+        </XStack>
+      </YStack>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Temas disponibles ({themeNames.length})</Text>
-        <View style={styles.themesGrid}>
-          {themeNames.map((themeName) => {
-            const t = themes[themeName]
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text
+          fontSize={14}
+          fontWeight="600"
+          color="$colorFocus"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$3"
+        >
+          Temas disponibles ({availableThemes.length})
+        </Text>
+        <XStack flexWrap="wrap" gap="$3">
+          {availableThemes.map((t) => {
+            const isSelected = t.name === themeName
             return (
-              <View key={themeName} style={styles.themePreview}>
-                <View style={[styles.miniSwatch, { backgroundColor: t.background }]}>
-                  <View style={[styles.miniDot, { backgroundColor: t.color }]} />
-                </View>
-                <Text style={styles.themePreviewName}>{themeName}</Text>
-              </View>
+              <Pressable key={t.name} onPress={() => setTheme(t.name)}>
+                <YStack alignItems="center" width={70}>
+                  <View
+                    width={48}
+                    height={48}
+                    borderRadius={24}
+                    alignItems="center"
+                    justifyContent="center"
+                    borderWidth={isSelected ? 3 : 1}
+                    borderColor={isSelected ? '$colorFocus' : '$borderColor'}
+                    backgroundColor={t.colors.background}
+                  >
+                    <View
+                      width={20}
+                      height={20}
+                      borderRadius={10}
+                      backgroundColor={t.colors.primary}
+                    />
+                  </View>
+                  <Text
+                    fontSize={10}
+                    color={isSelected ? '$colorFocus' : '$placeholderColor'}
+                    fontWeight={isSelected ? '600' : '400'}
+                    marginTop="$1"
+                    textAlign="center"
+                  >
+                    {t.displayName}
+                  </Text>
+                </YStack>
+              </Pressable>
             )
           })}
-        </View>
-      </View>
+        </XStack>
+      </YStack>
 
-      <View style={styles.navigationInfo}>
-        <Text style={styles.infoTitle}>Navegación</Text>
-        <Text style={styles.navDescription}>
-          Este tab no tiene navegación anidada.{'\n'}
-          Solo contiene esta pantalla de configuración.{'\n\n'}
-          Esto demuestra que cada tab puede tener su propia
-          estructura de navegación independiente.
+      <YStack
+        margin="$4"
+        padding="$4"
+        backgroundColor="$uiBackgroundColor"
+        borderRadius="$4"
+        borderWidth={1}
+        borderColor="$borderColor"
+      >
+        <Text fontSize={14} fontWeight="600" color="$colorFocus" marginBottom="$2">
+          Navegacion
         </Text>
-      </View>
+        <Text fontSize={13} color="$placeholderColor" lineHeight={20}>
+          Este tab no tiene navegacion anidada.{'\n'}
+          Solo contiene esta pantalla de configuracion.{'\n\n'}
+          Esto demuestra que cada tab puede tener su propia estructura de navegacion independiente.
+        </Text>
+      </YStack>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Zukus v0.0.1</Text>
-        <Text style={styles.footerSubtext}>Monorepo Demo</Text>
-      </View>
+      <YStack padding="$6" alignItems="center">
+        <Text fontSize={14} color="$placeholderColor">
+          Zukus v0.0.1
+        </Text>
+        <Text fontSize={12} color="$placeholderColor" opacity={0.6} marginTop="$1">
+          Monorepo Demo
+        </Text>
+      </YStack>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.background,
-  },
-  header: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.borderColor,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: theme.color,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: theme.placeholderColor,
-    marginTop: 4,
-  },
-  section: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.borderColor,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: theme.colorFocus,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: 12,
-  },
-  infoCard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.borderColor,
-  },
-  infoLabel: {
-    fontSize: 15,
-    color: theme.placeholderColor,
-  },
-  infoValue: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: theme.color,
-  },
-  themeCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.backgroundHover,
-    padding: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.borderColor,
-  },
-  colorSwatch: {
-    width: 48,
-    height: 48,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: theme.borderColor,
-  },
-  colorDot: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-  },
-  themeInfo: {
-    marginLeft: 16,
-  },
-  themeName: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: theme.color,
-  },
-  themeDescription: {
-    fontSize: 13,
-    color: theme.placeholderColor,
-    marginTop: 2,
-  },
-  themesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  themePreview: {
-    alignItems: 'center',
-    width: 70,
-  },
-  miniSwatch: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: theme.borderColor,
-  },
-  miniDot: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-  },
-  themePreviewName: {
-    fontSize: 10,
-    color: theme.placeholderColor,
-    marginTop: 4,
-    textAlign: 'center',
-  },
-  navigationInfo: {
-    margin: 16,
-    padding: 16,
-    backgroundColor: theme.uiBackgroundColor,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.borderColor,
-  },
-  infoTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: theme.colorFocus,
-    marginBottom: 8,
-  },
-  navDescription: {
-    fontSize: 13,
-    color: theme.placeholderColor,
-    lineHeight: 20,
-  },
-  footer: {
-    padding: 24,
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 14,
-    color: theme.placeholderColor,
-  },
-  footerSubtext: {
-    fontSize: 12,
-    color: theme.placeholderColor,
-    opacity: 0.6,
-    marginTop: 4,
-  },
-})

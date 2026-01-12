@@ -1,14 +1,12 @@
 import { Stack } from 'expo-router'
 import { Platform, useWindowDimensions } from 'react-native'
-import { themes } from '@zukus/ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
+import { useTheme } from '@zukus/ui'
 
 const DESKTOP_BREAKPOINT = 768
 
 export default function SpellsLayout() {
   const { width } = useWindowDimensions()
+  const { themeColors } = useTheme()
   const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
   return (
@@ -16,16 +14,19 @@ export default function SpellsLayout() {
       screenOptions={{
         headerShown: !isWebDesktop,
         headerStyle: {
-          backgroundColor: theme.background,
+          backgroundColor: themeColors.background,
         },
-        headerTintColor: theme.color,
+        headerTintColor: themeColors.color,
         headerTitleStyle: {
           fontWeight: '600',
         },
         contentStyle: {
-          backgroundColor: theme.background,
+          backgroundColor: themeColors.background,
         },
-        animation: 'slide_from_right',
+        animation: 'ios_from_right',
+        animationDuration: 200,
+        gestureEnabled: true,
+        fullScreenGestureEnabled: true,
       }}
     >
       <Stack.Screen

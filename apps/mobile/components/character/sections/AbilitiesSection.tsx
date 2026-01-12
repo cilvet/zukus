@@ -1,16 +1,13 @@
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { useRouter } from 'expo-router'
 import { YStack, XStack } from 'tamagui'
-import { themes } from '@zukus/ui'
 import { useCollapsibleHeaderContext } from '../../../contexts'
 import { SectionHeader, SectionCard, AbilityCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
 
-const theme = themes.zukus
-
 /**
- * Sección de ability scores y skills.
+ * Seccion de ability scores y skills.
  */
 export function AbilitiesSection() {
   const router = useRouter()
@@ -24,10 +21,10 @@ export function AbilitiesSection() {
   }
 
   return (
-    <View style={styles.page} collapsable={false}>
+    <View style={{ flex: 1 }} collapsable={false}>
       <Animated.ScrollView
-        style={styles.scroll}
-        contentContainerStyle={[styles.content, { paddingTop: headerHeight }]}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, paddingTop: headerHeight, gap: 16 }}
         showsVerticalScrollIndicator={false}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
@@ -84,18 +81,3 @@ export function AbilitiesSection() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-  },
-  scroll: {
-    flex: 1,
-    backgroundColor: theme.background,
-  },
-  content: {
-    padding: 16,
-    paddingBottom: 32,
-    gap: 16,
-  },
-})

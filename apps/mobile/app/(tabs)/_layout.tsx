@@ -1,51 +1,33 @@
+import React from 'react'
 import { Tabs } from 'expo-router'
-import { themes } from '@zukus/ui'
-import { Text, View, Platform, useWindowDimensions } from 'react-native'
+import { useTheme } from '@zukus/ui'
+import { Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { Topbar } from '../../components/layout'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
 
 const DESKTOP_BREAKPOINT = 768
 
-type TabIconProps = {
-  label: string
-  focused: boolean
+type TabBarIconProps = {
+  name: React.ComponentProps<typeof FontAwesome>['name']
+  color: string
 }
 
-function TabIcon({ label, focused }: TabIconProps) {
-  return (
-    <View
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 8,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 10,
-          fontWeight: focused ? '700' : '400',
-          color: focused ? theme.tabBarActive : theme.tabBarInactive,
-        }}
-      >
-        {label}
-      </Text>
-    </View>
-  )
+function TabBarIcon({ name, color }: TabBarIconProps) {
+  return <FontAwesome size={22} style={{ marginBottom: 2 }} name={name} color={color} />
 }
 
 export default function TabsLayout() {
   const { width } = useWindowDimensions()
   const insets = useSafeAreaInsets()
+  const { themeColors } = useTheme()
   const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
   // En desktop web: ocultar tabs, mostrar topbar
   if (isWebDesktop) {
     return (
-      <YStack flex={1} backgroundColor={theme.background}>
+      <YStack flex={1} backgroundColor={themeColors.background}>
         <Topbar />
         <Tabs
           screenOptions={{
@@ -67,21 +49,25 @@ export default function TabsLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: theme.tabBarBackground,
-          borderTopColor: theme.tabBarBorder,
+          backgroundColor: themeColors.tabBarBackground,
+          borderTopColor: themeColors.tabBarBorder,
           borderTopWidth: 1,
           height: 60,
           paddingBottom: 8,
         },
-        tabBarActiveTintColor: theme.tabBarActive,
-        tabBarInactiveTintColor: theme.tabBarInactive,
+        tabBarActiveTintColor: themeColors.tabBarActive,
+        tabBarInactiveTintColor: themeColors.tabBarInactive,
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 10,
           fontWeight: '600',
+          marginTop: 2,
+        },
+        tabBarIconStyle: {
+          marginBottom: 0,
         },
         sceneStyle: {
           paddingTop: insets.top,
-          backgroundColor: theme.background,
+          backgroundColor: themeColors.background,
         },
       }}
     >
@@ -89,27 +75,21 @@ export default function TabsLayout() {
         name="(character)"
         options={{
           title: 'Personaje',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon label="👤" focused={focused} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
       <Tabs.Screen
         name="(spells)"
         options={{
           title: 'Conjuros',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon label="✨" focused={focused} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="magic" color={color} />,
         }}
       />
       <Tabs.Screen
         name="(settings)"
         options={{
           title: 'Ajustes',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon label="⚙️" focused={focused} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
         }}
       />
     </Tabs>

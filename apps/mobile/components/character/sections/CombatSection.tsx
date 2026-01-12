@@ -1,24 +1,21 @@
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { YStack } from 'tamagui'
-import { themes } from '@zukus/ui'
 import { useCollapsibleHeaderContext } from '../../../contexts'
 import { SectionHeader, SectionCard, StatBox } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
 
-const theme = themes.zukus
-
 /**
- * Sección de estadísticas de combate.
+ * Seccion de estadisticas de combate.
  */
 export function CombatSection() {
   const { scrollHandler, headerHeight } = useCollapsibleHeaderContext()
 
   return (
-    <View style={styles.page} collapsable={false}>
+    <View style={{ flex: 1 }} collapsable={false}>
       <Animated.ScrollView
-        style={styles.scroll}
-        contentContainerStyle={[styles.content, { paddingTop: headerHeight }]}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, paddingTop: headerHeight, gap: 16 }}
         showsVerticalScrollIndicator={false}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
@@ -35,18 +32,3 @@ export function CombatSection() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-  },
-  scroll: {
-    flex: 1,
-    backgroundColor: theme.background,
-  },
-  content: {
-    padding: 16,
-    paddingBottom: 32,
-    gap: 16,
-  },
-})

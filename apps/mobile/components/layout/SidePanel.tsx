@@ -1,9 +1,6 @@
 import { Platform, Pressable } from 'react-native'
 import { Text, XStack, YStack, ScrollView } from 'tamagui'
-import { themes } from '@zukus/ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
+import { useTheme } from '@zukus/ui'
 
 type SidePanelProps = {
   isOpen: boolean
@@ -31,9 +28,9 @@ function HeaderButton({
           alignItems="center"
           justifyContent="center"
           borderRadius={4}
-          backgroundColor={pressed ? theme.backgroundHover : theme.uiBackgroundColor}
+          backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
           borderWidth={1}
-          borderColor={theme.borderColor}
+          borderColor="$borderColor"
         >
           {children}
         </XStack>
@@ -51,6 +48,8 @@ export function SidePanel({
   children,
   isLeftSide = false,
 }: SidePanelProps) {
+  const { themeColors } = useTheme()
+
   // Solo renderizar en web
   if (Platform.OS !== 'web') {
     return null
@@ -71,10 +70,10 @@ export function SidePanel({
       left={isLeftSide ? 8 : undefined}
       width="100%"
       maxWidth={350}
-      backgroundColor={theme.background}
+      backgroundColor={themeColors.background}
       borderWidth={1}
       borderRadius={8}
-      borderColor={theme.borderColor}
+      borderColor={themeColors.borderColor}
       padding={8}
       zIndex={1000}
       // Web shadow via style
@@ -89,13 +88,13 @@ export function SidePanel({
         paddingHorizontal={12}
         paddingVertical={10}
         borderBottomWidth={1}
-        borderBottomColor={theme.borderColor}
+        borderBottomColor="$borderColor"
         marginBottom={8}
       >
         <XStack alignItems="center" gap={8} flex={1}>
           {canGoBack && onBack && (
             <HeaderButton onPress={onBack}>
-              <Text fontSize={16} color={theme.color}>
+              <Text fontSize={16} color="$color">
                 ←
               </Text>
             </HeaderButton>
@@ -103,7 +102,7 @@ export function SidePanel({
           <Text
             fontSize={16}
             fontWeight="700"
-            color={theme.color}
+            color="$color"
             letterSpacing={1}
             textTransform="uppercase"
             numberOfLines={1}
@@ -114,7 +113,7 @@ export function SidePanel({
         </XStack>
 
         <HeaderButton onPress={onClose}>
-          <Text fontSize={16} color={theme.color}>
+          <Text fontSize={16} color="$color">
             x
           </Text>
         </HeaderButton>

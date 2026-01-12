@@ -1,6 +1,9 @@
 // Configuración de Tamagui
 export * from './config'
 
+// Contextos (ThemeProvider, useTheme, etc.)
+export * from './contexts'
+
 // Tipos de navegación compartidos
 export * from './navigation'
 

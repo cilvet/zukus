@@ -25,7 +25,8 @@ export default function SettingsLayout() {
         contentStyle: {
           backgroundColor: theme.background,
         },
-        animation: 'slide_from_right',
+        animation: 'ios_from_right',
+        animationDuration: 200,
       }}
     >
       <Stack.Screen

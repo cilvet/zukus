@@ -1,50 +1,63 @@
 import { Stack } from 'expo-router'
 import { TamaguiProvider, Theme } from 'tamagui'
-import { config, themes } from '@zukus/ui'
+import { config, ThemeProvider, useTheme } from '@zukus/ui'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
-import { Platform } from 'react-native'
+import { Platform, View, ActivityIndicator } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import * as NavigationBar from 'expo-navigation-bar'
 
-// Por ahora usamos un tema fijo, luego se puede hacer dinámico con Context
-const CURRENT_THEME = 'zukus' as keyof typeof themes
+function RootLayoutContent() {
+  const { themeName, themeColors, isLoading } = useTheme()
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NavigationBar.setBackgroundColorAsync(themeColors.background)
+      NavigationBar.setButtonStyleAsync('light')
+    }
+  }, [themeColors.background])
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#2e1a47', alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator size="large" color="#f3ca58" />
+      </View>
+    )
+  }
+
+  return (
+    <TamaguiProvider config={config}>
+      <Theme name={themeName}>
+        <StatusBar style="light" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: themeColors.background },
+            animation: 'ios_from_right',
+            animationDuration: 200,
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+      </Theme>
+    </TamaguiProvider>
+  )
+}
 
 export default function RootLayout() {
   const [loaded] = useFonts({
     // Las fuentes se cargarán cuando las configuremos
   })
 
-  const theme = themes[CURRENT_THEME]
-
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      import('expo-navigation-bar').then((NavigationBar) => {
-        NavigationBar.setBackgroundColorAsync(theme.background)
-        NavigationBar.setButtonStyleAsync('light')
-      })
-    }
-  }, [theme.background])
-
   return (
     <SafeAreaProvider>
-      <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.background }}>
-        <TamaguiProvider config={config}>
-          <Theme name={CURRENT_THEME}>
-            <StatusBar style="light" />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: theme.background },
-                animation: 'slide_from_right',
-              }}
-            >
-              <Stack.Screen name="index" />
-              <Stack.Screen name="(tabs)" />
-            </Stack>
-          </Theme>
-        </TamaguiProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider>
+          <RootLayoutContent />
+        </ThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   )
