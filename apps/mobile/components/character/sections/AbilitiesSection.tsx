@@ -1,20 +1,15 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
 import { useRouter } from 'expo-router'
 import { YStack, XStack } from 'tamagui'
-import { useCollapsibleHeaderContext } from '../../../contexts'
 import { SectionHeader, SectionCard, AbilityCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
 /**
  * Seccion de ability scores y skills.
  */
 export function AbilitiesSection() {
   const router = useRouter()
-  const { scrollHandler, headerHeight } = useCollapsibleHeaderContext()
 
   const handleAbilityPress = (abilityKey: string) => {
     router.push({
@@ -25,12 +20,10 @@ export function AbilitiesSection() {
 
   return (
     <View style={{ flex: 1 }} collapsable={false}>
-      <AnimatedScrollView
+      <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ padding: 16, paddingBottom: 32, paddingTop: headerHeight, gap: 16 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
         nestedScrollEnabled
       >
         <SectionCard>
@@ -81,7 +74,7 @@ export function AbilitiesSection() {
             ))}
           </YStack>
         </SectionCard>
-      </AnimatedScrollView>
+      </ScrollView>
     </View>
   )
 }

@@ -1,4 +1,5 @@
 export * from './CharacterComponents'
 export * from './CharacterPager'
+export * from './CharacterTabs'
 export * from './data'
 export * from './sections'

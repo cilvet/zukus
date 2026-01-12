@@ -1,27 +1,19 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated'
 import { YStack } from 'tamagui'
-import { useCollapsibleHeaderContext } from '../../../contexts'
 import { SectionHeader, SectionCard, StatBox } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
 /**
  * Seccion de estadisticas de combate.
  */
 export function CombatSection() {
-  const { scrollHandler, headerHeight } = useCollapsibleHeaderContext()
-
   return (
     <View style={{ flex: 1 }} collapsable={false}>
-      <AnimatedScrollView
+      <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ padding: 16, paddingBottom: 32, paddingTop: headerHeight, gap: 16 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
         showsVerticalScrollIndicator={false}
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
         nestedScrollEnabled
       >
         <SectionCard>
@@ -32,7 +24,7 @@ export function CombatSection() {
             <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="⭐" />
           </YStack>
         </SectionCard>
-      </AnimatedScrollView>
+      </ScrollView>
     </View>
   )
 }

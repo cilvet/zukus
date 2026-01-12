@@ -1,46 +1,26 @@
-import { View } from 'react-native'
-import Animated from 'react-native-reanimated'
+import { useRef, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import { useTheme } from '@zukus/ui'
-import { CollapsibleHeaderProvider, useCollapsibleHeaderContext } from '../../contexts'
 import {
   MOCK_CHARACTER,
   CharacterPager,
+  CharacterTabs,
   CombatSection,
   AbilitiesSection,
   EquipmentSection,
   SpellsSection,
 } from '../../components/character'
-
-const HEADER_HEIGHT = 72
+import type { CharacterPagerRef } from '../../components/character'
 
 /**
- * Header animado que se colapsa al scrollear.
+ * Header fijo con info del personaje.
  */
-function AnimatedHeader() {
-  const { headerAnimatedStyle } = useCollapsibleHeaderContext()
+function Header() {
   const { themeColors } = useTheme()
 
-  const headerBaseStyle = {
-    position: 'absolute' as const,
-    top: 0,
-    left: 0,
-    right: 0,
-    height: HEADER_HEIGHT,
-    zIndex: 100,
-    flexDirection: 'row' as const,
-    alignItems: 'center' as const,
-    justifyContent: 'space-between' as const,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: themeColors.background,
-    borderBottomWidth: 1,
-    borderBottomColor: themeColors.borderColor,
-  }
-
   return (
-    // @ts-expect-error - Reanimated style types conflict with RN ViewStyle
-    <Animated.View style={[headerBaseStyle, headerAnimatedStyle]}>
+    <View style={[styles.header, { backgroundColor: themeColors.background, borderBottomColor: themeColors.borderColor }]}>
       {/* Izquierda: Nivel + Clase */}
       <YStack alignItems="flex-start" flex={1}>
         <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
@@ -79,45 +59,60 @@ function AnimatedHeader() {
           </Text>
         </XStack>
       </YStack>
-    </Animated.View>
-  )
-}
-
-/**
- * Contenido principal con el pager.
- */
-function CharacterContent() {
-  return (
-    <CharacterPager>
-      <View key="combat" style={{ flex: 1 }}>
-        <CombatSection />
-      </View>
-      <View key="abilities" style={{ flex: 1 }}>
-        <AbilitiesSection />
-      </View>
-      <View key="equipment" style={{ flex: 1 }}>
-        <EquipmentSection />
-      </View>
-      <View key="spells" style={{ flex: 1 }}>
-        <SpellsSection />
-      </View>
-    </CharacterPager>
+    </View>
   )
 }
 
 /**
  * Pantalla de personaje para nativo.
- * Header colapsable + ViewPager swipeable.
+ * Header fijo + Tabs + ViewPager swipeable.
  */
 export function CharacterScreen() {
   const { themeColors } = useTheme()
+  const [currentPage, setCurrentPage] = useState(0)
+  const pagerRef = useRef<CharacterPagerRef>(null)
+
+  function handleTabPress(index: number) {
+    pagerRef.current?.setPage(index)
+    setCurrentPage(index)
+  }
 
   return (
-    <CollapsibleHeaderProvider headerHeight={HEADER_HEIGHT}>
-      <View style={{ flex: 1, backgroundColor: themeColors.background }}>
-        <AnimatedHeader />
-        <CharacterContent />
-      </View>
-    </CollapsibleHeaderProvider>
+    <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+      <Header />
+      <CharacterTabs currentPage={currentPage} onPageChange={handleTabPress} />
+      <CharacterPager ref={pagerRef} onPageChange={setCurrentPage}>
+        <View key="combat" style={styles.page}>
+          <CombatSection />
+        </View>
+        <View key="abilities" style={styles.page}>
+          <AbilitiesSection />
+        </View>
+        <View key="equipment" style={styles.page}>
+          <EquipmentSection />
+        </View>
+        <View key="spells" style={styles.page}>
+          <SpellsSection />
+        </View>
+      </CharacterPager>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: 72,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+  },
+  page: {
+    flex: 1,
+  },
+})

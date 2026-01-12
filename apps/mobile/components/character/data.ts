@@ -1,3 +1,19 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome'
+
+// Configuración de las páginas del character pager
+export type CharacterPage = {
+  key: string
+  label: string
+  icon: React.ComponentProps<typeof FontAwesome>['name']
+}
+
+export const CHARACTER_PAGES: CharacterPage[] = [
+  { key: 'combat', label: 'Combate', icon: 'shield' },
+  { key: 'abilities', label: 'Atributos', icon: 'star' },
+  { key: 'equipment', label: 'Equipo', icon: 'suitcase' },
+  { key: 'spells', label: 'Hechizos', icon: 'magic' },
+]
+
 // Mock data del personaje
 export const MOCK_CHARACTER = {
   name: 'Gandalf el Gris',
