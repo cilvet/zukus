@@ -42,30 +42,19 @@ export function CollapsibleHeaderProvider({
       lastScrollY.value = offsetY
       scrollY.value = offsetY
 
-      // Ignorar micro-movimientos
-      if (Math.abs(diff) < 2) return
-
-      if (diff > 0 && offsetY > 10) {
-        // Scroll down → ocultar
-        const newValue = headerTranslateY.value - diff * 0.5
-        headerTranslateY.value = Math.max(-headerHeight, newValue)
-      } else if (diff < 0) {
-        // Scroll up → mostrar
-        const newValue = headerTranslateY.value - diff * 0.5
-        headerTranslateY.value = Math.min(0, newValue)
-      }
-
       // Si estamos arriba del todo, mostrar header
       if (offsetY <= 0) {
-        headerTranslateY.value = withTiming(0, { duration: 150 })
-      }
-    },
-    onEndDrag: (event) => {
-      // Snap al estado más cercano
-      if (headerTranslateY.value > -headerHeight / 2) {
         headerTranslateY.value = withTiming(0, { duration: 200 })
-      } else {
+        return
+      }
+
+      // Animación determinista: siempre la misma velocidad
+      if (diff > 0 && offsetY > 10) {
+        // Scroll down → ocultar
         headerTranslateY.value = withTiming(-headerHeight, { duration: 200 })
+      } else if (diff < 0) {
+        // Scroll up → mostrar
+        headerTranslateY.value = withTiming(0, { duration: 200 })
       }
     },
   })
