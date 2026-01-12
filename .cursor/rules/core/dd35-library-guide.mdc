@@ -248,9 +248,7 @@ type CharacterBaseData = {
 ```
 
 ### 2. Calculation Pipeline
-The main calculation happens in [calculateCharacterSheet.ts](mdc:packages/core/core/domain/character/calculation/calculateCharacterSheet.ts):
-
-```typescript
+The main calculation happens in [calculateCharacterSheet.ts](mdc:packages/core/core/domain/character/calculation/calculateCharacterSheet.ts):```typescript
 const calculationFunctions = [
   getCalculatedSize,           // Size category first (affects many things)
   getCalculatedAbilityScores, // Ability scores (foundation for many calculations)
