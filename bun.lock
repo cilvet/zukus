@@ -9,8 +9,8 @@
         "typescript": "^5.0.0",
       },
     },
-    "apps/mobile": {
-      "name": "@zukus/mobile",
+    "apps/zukus": {
+      "name": "@zukus/app",
       "version": "0.0.1",
       "dependencies": {
         "@expo/vector-icons": "^15.0.3",
@@ -714,9 +714,9 @@
 
     "@xmldom/xmldom": ["@xmldom/xmldom@0.8.11", "", {}, "sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw=="],
 
-    "@zukus/core": ["@zukus/core@workspace:packages/core"],
+    "@zukus/app": ["@zukus/app@workspace:apps/zukus"],
 
-    "@zukus/mobile": ["@zukus/mobile@workspace:apps/mobile"],
+    "@zukus/core": ["@zukus/core@workspace:packages/core"],
 
     "@zukus/ui": ["@zukus/ui@workspace:packages/ui"],
 

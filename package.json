@@ -6,8 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun --cwd apps/mobile expo start",
-    "mobile": "cd apps/mobile && expo start",
+    "dev": "bun --cwd apps/zukus expo start",
+    "app": "cd apps/zukus && expo start",
     "build": "turbo build",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
