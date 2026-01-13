@@ -228,9 +228,7 @@ type Formula = {
 
 > **📖 For complete formula reference**: See [formula-system.mdc](mdc:.cursor/rules/core/formula-system.mdc) for detailed syntax, examples, and limitations.
 
-## Character Data Flow
-
-### 1. Base Data Structure
+## Character Data Flow### 1. Base Data Structure
 [CharacterBaseData](mdc:packages/core/core/domain/character/baseData/character.ts) contains all input data:
 
 ```typescript

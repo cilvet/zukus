@@ -1,47 +1,69 @@
 import { Stack } from 'expo-router'
+import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native'
 import { TamaguiProvider, Theme } from 'tamagui'
 import { config, ThemeProvider, useTheme } from '@zukus/ui'
 import { useFonts } from 'expo-font'
-import { useEffect } from 'react'
-import { Platform, View, ActivityIndicator } from 'react-native'
+import { useMemo } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import * as NavigationBar from 'expo-navigation-bar'
 
-function RootLayoutContent() {
+function ThemedApp() {
   const { themeName, themeColors, isLoading } = useTheme()
 
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      NavigationBar.setBackgroundColorAsync(themeColors.background)
-      NavigationBar.setButtonStyleAsync('light')
-    }
-  }, [themeColors.background])
+  // Create a navigation theme that matches our app theme
+  const navigationTheme = useMemo(() => ({
+    dark: true,
+    colors: {
+      primary: themeColors.color,
+      background: themeColors.background,
+      card: themeColors.background,
+      text: themeColors.color,
+      border: themeColors.borderColor,
+      notification: themeColors.colorFocus,
+    },
+    fonts: {
+      regular: {
+        fontFamily: 'System',
+        fontWeight: '400' as const,
+      },
+      medium: {
+        fontFamily: 'System',
+        fontWeight: '500' as const,
+      },
+      bold: {
+        fontFamily: 'System',
+        fontWeight: '700' as const,
+      },
+      heavy: {
+        fontFamily: 'System',
+        fontWeight: '800' as const,
+      },
+    },
+  }), [themeColors])
 
   if (isLoading) {
-    return (
-      <View style={{ flex: 1, backgroundColor: '#2e1a47', alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color="#f3ca58" />
-      </View>
-    )
+    return null
   }
 
   return (
     <TamaguiProvider config={config}>
       <Theme name={themeName}>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: themeColors.background },
-            animation: 'ios_from_right',
-            animationDuration: 200,
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(tabs)" />
-        </Stack>
+        <NavigationThemeProvider value={navigationTheme}>
+          <StatusBar style="light" />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: themeColors.background },
+              animation: 'ios_from_right',
+              animationDuration: 200,
+            }}
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+        </NavigationThemeProvider>
       </Theme>
     </TamaguiProvider>
   )
@@ -53,12 +75,12 @@ export default function RootLayout() {
   })
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
         <ThemeProvider>
-          <RootLayoutContent />
+          <ThemedApp />
         </ThemeProvider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   )
 }

@@ -30,6 +30,7 @@ export const CharacterPager = forwardRef<CharacterPagerRef, CharacterPagerProps>
         ref={pagerRef}
         style={styles.pager}
         initialPage={0}
+        offscreenPageLimit={1}
         onPageSelected={(e) => onPageChange?.(e.nativeEvent.position)}
       >
         {children}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
 export type PanelState = {
   id: string
@@ -7,12 +7,8 @@ export type PanelState = {
 }
 
 type HistoryState = {
-  panelDepth?: number
-}
-
-type NavigationState = {
-  currentPanel: PanelState | null
-  depth: number
+  panelIndex: number
+  panelHistory: PanelState[]
 }
 
 function parseUrlParams(): PanelState | null {
@@ -44,68 +40,89 @@ function createPanelUrl(panel: PanelState | null): string {
   return `${basePath}?${params.toString()}`
 }
 
-function getDepthFromHistory(): number {
-  if (typeof window === 'undefined') {
-    return 0
-  }
-  const state = window.history.state as HistoryState | null
-  return state?.panelDepth || 0
-}
-
-function readCurrentState(): NavigationState {
-  return {
-    currentPanel: parseUrlParams(),
-    depth: getDepthFromHistory(),
-  }
+function getInitialHistory(): PanelState[] {
+  const initial = parseUrlParams()
+  return initial ? [initial] : []
 }
 
 /**
  * Hook para manejar la navegación del Side Panel en desktop web.
  * 
- * Usa la URL como fuente de verdad para el panel actual, y history.state
- * para saber la profundidad de navegación (si podemos ir hacia atrás).
+ * Mantiene un array de historial de paneles para soportar navegación hacia atrás
+ * entre paneles. La URL refleja el panel actual.
  */
 export function usePanelNavigation() {
-  const [state, setState] = useState<NavigationState>(readCurrentState)
+  const [history, setHistory] = useState<PanelState[]>(getInitialHistory)
+  const historyRef = useRef<PanelState[]>(history)
+
+  // Mantener el ref sincronizado con el estado
+  useEffect(() => {
+    historyRef.current = history
+  }, [history])
 
   // Escuchar eventos popstate (cuando el usuario navega con botones del navegador)
   useEffect(() => {
-    const handlePopState = () => {
-      setState(readCurrentState())
+    const handlePopState = (event: PopStateEvent) => {
+      const state = event.state as HistoryState | null
+      if (state && state.panelHistory) {
+        setHistory(state.panelHistory)
+      } else {
+        // Sin estado guardado, leer de la URL
+        const panel = parseUrlParams()
+        setHistory(panel ? [panel] : [])
+      }
     }
     
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  const isPanelOpen = state.currentPanel !== null
-  const canGoBack = state.depth > 1
+  const currentPanel = history.length > 0 ? history[history.length - 1] : null
+  const isPanelOpen = currentPanel !== null
+  const canGoBack = history.length > 1
 
   const openPanel = useCallback((id: string, type: string, name?: string) => {
     const newPanel: PanelState = { id, type, name }
-    const newDepth = state.depth + 1
+    const newHistory = [...historyRef.current, newPanel]
 
-    const historyState: HistoryState = { panelDepth: newDepth }
+    const historyState: HistoryState = {
+      panelIndex: newHistory.length - 1,
+      panelHistory: newHistory,
+    }
     window.history.pushState(historyState, '', createPanelUrl(newPanel))
     
-    // Actualizar estado local inmediatamente
-    setState({ currentPanel: newPanel, depth: newDepth })
-  }, [state.depth])
+    setHistory(newHistory)
+  }, [])
 
   const closePanel = useCallback(() => {
-    const historyState: HistoryState = { panelDepth: 0 }
+    const historyState: HistoryState = {
+      panelIndex: -1,
+      panelHistory: [],
+    }
     window.history.pushState(historyState, '', createPanelUrl(null))
     
-    setState({ currentPanel: null, depth: 0 })
+    setHistory([])
   }, [])
 
   const goBack = useCallback(() => {
-    // El estado se actualizará via el listener de popstate
-    window.history.back()
+    if (historyRef.current.length <= 1) {
+      return
+    }
+    
+    const newHistory = historyRef.current.slice(0, -1)
+    const previousPanel = newHistory[newHistory.length - 1]
+
+    const historyState: HistoryState = {
+      panelIndex: newHistory.length - 1,
+      panelHistory: newHistory,
+    }
+    window.history.pushState(historyState, '', createPanelUrl(previousPanel))
+    
+    setHistory(newHistory)
   }, [])
 
   return {
-    currentPanel: state.currentPanel,
+    currentPanel,
     isPanelOpen,
     canGoBack,
     openPanel,

@@ -1,5 +1,5 @@
 ---
-description: El usuario toma todas las decisiones de implementación
+description: El usuario toma las decisiones importantes de implementación
 globs: ["**/*"]
 alwaysApply: true
 ---
@@ -8,46 +8,38 @@ alwaysApply: true
 
 ## Regla Fundamental
 
-**El usuario toma TODAS las decisiones de implementación.** El asistente nunca debe asumir o decidir por su cuenta aspectos de implementación, estructura, nombres, o cualquier otro detalle del proyecto.
+**El usuario toma las decisiones importantes de implementación.** Para decisiones menores o convencionales, el asistente puede proceder usando su criterio, siguiendo las convenciones del proyecto.
 
-## Cómo Proceder
+## Decisiones que REQUIEREN Consulta
 
-Cuando haya cualquier decisión que tomar, el asistente DEBE:
+Preguntar al usuario antes de actuar:
 
-1. **Identificar las opciones posibles**
-2. **Presentarlas al usuario en formato estructurado**
-3. **Esperar la respuesta antes de actuar**
+- **Arquitectura**: Nuevos patrones, estructuras de carpetas, organización del proyecto
+- **Dependencias**: Añadir librerías nuevas al proyecto
+- **Cambios de alcance**: Modificar algo distinto a lo solicitado
+- **Múltiples enfoques válidos**: Cuando hay varias formas razonables de resolver algo
+- **Nombres de dominio**: Nombres de entidades, conceptos de negocio, features
+- **Cambios breaking**: Modificaciones que afectan otras partes del código
+
+## Decisiones que el Asistente PUEDE Tomar
+
+Proceder sin preguntar:
+
+- **Nombres técnicos obvios**: Variables locales, parámetros con nombre claro por contexto
+- **Ubicación obvia**: Archivo nuevo junto a archivos similares existentes
+- **Convenciones del proyecto**: Seguir patrones ya establecidos en el código
+- **Implementación directa**: Cuando solo hay una forma razonable de hacerlo
+- **Refactors menores**: Extraer función, renombrar variable local
 
 ## Formato de Preguntas
 
-Las preguntas se presentan numeradas, y las opciones con letras:
+Cuando sea necesario preguntar, usar formato estructurado:
 
 ```
 **1. [Descripción de la decisión]:**
 - A) Opción 1
 - B) Opción 2
-- C) Opción 3
-- D) Otra opción
-
-**2. [Otra decisión]:**
-- A) Opción 1
-- B) Opción 2
+- C) Otra opción
 ```
 
-El usuario responde con el formato: "1. A, 2. B" o similar.
-
-## Qué Requiere Decisión del Usuario
-
-- Nombres de archivos, carpetas, variables, funciones
-- Ubicación de archivos nuevos
-- Estructura de código
-- Dependencias a usar
-- Patrones de implementación
-- Cualquier aspecto que tenga múltiples opciones válidas
-
-## Comportamiento Prohibido
-
-- Asumir nombres o ubicaciones
-- Elegir entre opciones sin preguntar
-- Implementar sin haber presentado opciones primero
-- Continuar sin esperar respuesta del usuario
+El usuario responde con: "1. A" o similar.

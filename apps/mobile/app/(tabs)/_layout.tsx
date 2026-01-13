@@ -43,6 +43,9 @@ export default function TabsLayout() {
     )
   }
 
+  // Tab bar base height (without safe area)
+  const TAB_BAR_HEIGHT = 56
+
   // Mobile (nativo y web): mostrar tabs
   return (
     <Tabs
@@ -52,8 +55,9 @@ export default function TabsLayout() {
           backgroundColor: themeColors.tabBarBackground,
           borderTopColor: themeColors.tabBarBorder,
           borderTopWidth: 1,
-          height: 60,
-          paddingBottom: 8,
+          height: TAB_BAR_HEIGHT + insets.bottom,
+          paddingBottom: insets.bottom,
+          paddingTop: 6,
         },
         tabBarActiveTintColor: themeColors.tabBarActive,
         tabBarInactiveTintColor: themeColors.tabBarInactive,
@@ -64,10 +68,6 @@ export default function TabsLayout() {
         },
         tabBarIconStyle: {
           marginBottom: 0,
-        },
-        sceneStyle: {
-          paddingTop: insets.top,
-          backgroundColor: themeColors.background,
         },
       }}
     >
