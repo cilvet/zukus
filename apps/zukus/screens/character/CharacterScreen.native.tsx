@@ -1,9 +1,14 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
-import { useTheme } from '@zukus/ui'
 import {
-  MOCK_CHARACTER,
+  useTheme,
+  useCharacterStore,
+  useCharacterName,
+  useCharacterLevel,
+  useCharacterHitPoints,
+} from '@zukus/ui'
+import {
   CharacterPager,
   CharacterTabs,
   CombatSection,
@@ -17,37 +22,51 @@ import {
   NotesSection,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
+import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 
 /**
  * Header fijo con info del personaje.
+ * Usa selectores de Zustand para re-renders granulares.
  */
 function Header() {
   const { themeColors } = useTheme()
+  const name = useCharacterName()
+  const level = useCharacterLevel()
+  const hitPoints = useCharacterHitPoints()
+
+  const levelNumber = level?.level ?? 0
+  const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
+  const currentHp = hitPoints?.currentHp ?? 0
+  const maxHp = hitPoints?.maxHp ?? 0
 
   return (
     <View style={[styles.header, { backgroundColor: themeColors.background, borderBottomColor: themeColors.borderColor }]}>
       {/* Izquierda: Nivel + Clase */}
       <YStack alignItems="flex-start" flex={1}>
         <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
-          Nivel {MOCK_CHARACTER.level}
+          Nivel {levelNumber}
         </Text>
         <Text fontSize={14} fontWeight="700" color="$color">
-          {MOCK_CHARACTER.class}
+          {className}
         </Text>
       </YStack>
 
-      {/* Centro: Avatar */}
-      <YStack
-        width={48}
-        height={48}
-        borderRadius={24}
-        backgroundColor="$uiBackgroundColor"
-        borderWidth={2}
-        borderColor="$color"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text fontSize={20}>🧙</Text>
+      {/* Centro: Avatar + Nombre */}
+      <YStack alignItems="center">
+        <YStack
+          width={48}
+          height={48}
+          borderRadius={24}
+          backgroundColor="$uiBackgroundColor"
+          borderWidth={2}
+          borderColor="$color"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text fontSize={16} fontWeight="700" color="$color">
+            {name.charAt(0)}
+          </Text>
+        </YStack>
       </YStack>
 
       {/* Derecha: HP */}
@@ -57,10 +76,10 @@ function Header() {
         </Text>
         <XStack alignItems="baseline" gap={2}>
           <Text fontSize={16} fontWeight="700" color="$color">
-            {MOCK_CHARACTER.hp.current}
+            {currentHp}
           </Text>
           <Text fontSize={12} color="$placeholderColor">
-            /{MOCK_CHARACTER.hp.max}
+            /{maxHp}
           </Text>
         </XStack>
       </YStack>
@@ -71,11 +90,18 @@ function Header() {
 /**
  * Pantalla de personaje para nativo.
  * Header fijo + Tabs + ViewPager swipeable.
+ * Inicializa el store de Zustand con los datos del personaje.
  */
 export function CharacterScreen() {
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<CharacterPagerRef>(null)
+  const setCharacter = useCharacterStore((state) => state.setCharacter)
+
+  // Inicializar el store con el personaje de prueba
+  useEffect(() => {
+    setCharacter(testCharacterSheet, testBaseData)
+  }, [setCharacter])
 
   function handleTabPress(index: number) {
     pagerRef.current?.setPage(index)

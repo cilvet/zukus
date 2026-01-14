@@ -9,7 +9,9 @@
   "dependencies": {
     "@tamagui/config": "^1.144.1",
     "@tamagui/core": "^1.132.23",
-    "@tamagui/shorthands": "^1.144.1"
+    "@tamagui/shorthands": "^1.144.1",
+    "@zukus/core": "workspace:*",
+    "zustand": "^5.0.10"
   },
   "peerDependencies": {
     "react": ">=18",

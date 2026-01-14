@@ -4,6 +4,9 @@ export * from './config'
 // Contextos (ThemeProvider, useTheme, etc.)
 export * from './contexts'
 
+// Stores (Zustand)
+export * from './stores'
+
 // Tipos de navegación compartidos
 export * from './navigation'
 

@@ -1,4 +1,15 @@
-import { YStack, XStack } from 'tamagui'
+import { useEffect } from 'react'
+import { YStack, XStack, Text } from 'tamagui'
+import {
+  useCharacterStore,
+  useCharacterSheet,
+  useCharacterAbilities,
+  useCharacterLevel,
+  useCharacterHitPoints,
+  useCharacterArmorClass,
+  useCharacterInitiative,
+  useCharacterBAB,
+} from '@zukus/ui'
 import { usePanelNavigation } from '../../hooks'
 import {
   MOCK_CHARACTER,
@@ -14,18 +25,37 @@ import {
   AbilityDetailPanel,
   GenericDetailPanel,
 } from '../../components/character'
+import type { Ability } from '../../components/character/data'
 import {
   SidePanel,
   SidePanelContainer,
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
+import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 
 /**
- * Pantalla de personaje para desktop web.
- * Layout: columnas horizontales con Side Panel para detalles.
+ * Mapea los datos de ability del core al formato esperado por AbilityCard.
  */
-export function CharacterScreenDesktop() {
+function mapAbility(coreAbility: { totalScore: number; totalModifier: number }): Ability {
+  return {
+    score: coreAbility.totalScore,
+    modifier: coreAbility.totalModifier,
+  }
+}
+
+/**
+ * Contenido de la pantalla desktop (usa selectores de Zustand).
+ */
+function CharacterScreenDesktopContent() {
+  const characterSheet = useCharacterSheet()
+  const abilities = useCharacterAbilities()
+  const level = useCharacterLevel()
+  const hitPoints = useCharacterHitPoints()
+  const armorClass = useCharacterArmorClass()
+  const initiative = useCharacterInitiative()
+  const bab = useCharacterBAB()
+
   const {
     currentPanel,
     isPanelOpen,
@@ -50,6 +80,36 @@ export function CharacterScreenDesktop() {
     return currentPanel?.name || 'Detail'
   }
 
+  // Obtener ability para el panel de detalle
+  const getAbilityForPanel = (abilityKey: string): Ability | null => {
+    if (!abilities) return null
+    const abilityMap: Record<string, { totalScore: number; totalModifier: number }> = {
+      strength: abilities.strength,
+      dexterity: abilities.dexterity,
+      constitution: abilities.constitution,
+      intelligence: abilities.intelligence,
+      wisdom: abilities.wisdom,
+      charisma: abilities.charisma,
+    }
+    const coreAbility = abilityMap[abilityKey]
+    if (!coreAbility) return null
+    return mapAbility(coreAbility)
+  }
+
+  // Si no hay datos aún, mostrar loading
+  if (!characterSheet || !abilities) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$color">Cargando personaje...</Text>
+      </YStack>
+    )
+  }
+
+  const levelNumber = level?.level ?? 0
+  const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
+  const currentHp = hitPoints?.currentHp ?? 0
+  const maxHp = hitPoints?.maxHp ?? 0
+
   return (
     <SidePanelContainer>
       <ColumnsContainer>
@@ -57,18 +117,18 @@ export function CharacterScreenDesktop() {
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <CharacterHeader
-              name={MOCK_CHARACTER.name}
-              level={MOCK_CHARACTER.level}
-              race={MOCK_CHARACTER.race}
-              characterClass={MOCK_CHARACTER.class}
+              name={characterSheet.name}
+              level={levelNumber}
+              race=""
+              characterClass={className}
             />
-            <HpBar current={MOCK_CHARACTER.hp.current} max={MOCK_CHARACTER.hp.max} />
+            <HpBar current={currentHp} max={maxHp} />
             <SectionCard>
-              <SectionHeader icon="⚔️" title="Combat Stats" />
+              <SectionHeader icon="*" title="Combat Stats" />
               <YStack gap={8}>
-                <StatBox label="Armor Class" value={MOCK_CHARACTER.ac} icon="🛡️" />
-                <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="👟" />
-                <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="⭐" />
+                <StatBox label="Armor Class" value={armorClass?.totalAc.totalValue ?? 10} icon="AC" />
+                <StatBox label="Initiative" value={`+${initiative?.totalValue ?? 0}`} icon="IN" />
+                <StatBox label="BAB" value={`+${bab?.totalValue ?? 0}`} icon="BA" />
               </YStack>
             </SectionCard>
           </YStack>
@@ -78,39 +138,39 @@ export function CharacterScreenDesktop() {
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="✨" title="Ability Scores" />
+              <SectionHeader icon="*" title="Ability Scores" />
               <YStack gap={12}>
                 <XStack justifyContent="space-between">
                   <AbilityCard
                     abilityKey="strength"
-                    ability={MOCK_CHARACTER.abilities.strength}
+                    ability={mapAbility(abilities.strength)}
                     onPress={() => handleAbilityPress('strength')}
                   />
                   <AbilityCard
                     abilityKey="dexterity"
-                    ability={MOCK_CHARACTER.abilities.dexterity}
+                    ability={mapAbility(abilities.dexterity)}
                     onPress={() => handleAbilityPress('dexterity')}
                   />
                   <AbilityCard
                     abilityKey="constitution"
-                    ability={MOCK_CHARACTER.abilities.constitution}
+                    ability={mapAbility(abilities.constitution)}
                     onPress={() => handleAbilityPress('constitution')}
                   />
                 </XStack>
                 <XStack justifyContent="space-between">
                   <AbilityCard
                     abilityKey="intelligence"
-                    ability={MOCK_CHARACTER.abilities.intelligence}
+                    ability={mapAbility(abilities.intelligence)}
                     onPress={() => handleAbilityPress('intelligence')}
                   />
                   <AbilityCard
                     abilityKey="wisdom"
-                    ability={MOCK_CHARACTER.abilities.wisdom}
+                    ability={mapAbility(abilities.wisdom)}
                     onPress={() => handleAbilityPress('wisdom')}
                   />
                   <AbilityCard
                     abilityKey="charisma"
-                    ability={MOCK_CHARACTER.abilities.charisma}
+                    ability={mapAbility(abilities.charisma)}
                     onPress={() => handleAbilityPress('charisma')}
                   />
                 </XStack>
@@ -119,11 +179,11 @@ export function CharacterScreenDesktop() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 3: Skills */}
+        {/* Columna 3: Skills (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="📚" title="Skills" />
+              <SectionHeader icon="#" title="Skills" />
               <YStack>
                 {MOCK_CHARACTER.skills.map((skill, index) => (
                   <SkillItem key={index} skill={skill} />
@@ -133,11 +193,11 @@ export function CharacterScreenDesktop() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 4: Equipment */}
+        {/* Columna 4: Equipment (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="🎒" title="Equipment" />
+              <SectionHeader icon="E" title="Equipment" />
               <YStack gap={8}>
                 {MOCK_CHARACTER.equipment.map((item, idx) => (
                   <ItemCard
@@ -152,11 +212,11 @@ export function CharacterScreenDesktop() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 5: Spells */}
+        {/* Columna 5: Spells (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="📜" title="Spells" />
+              <SectionHeader icon="S" title="Spells" />
               <YStack gap={8}>
                 {MOCK_CHARACTER.spells.map((spell, idx) => (
                   <ItemCard
@@ -179,10 +239,10 @@ export function CharacterScreenDesktop() {
         canGoBack={canGoBack}
         title={getPanelTitle()}
       >
-        {currentPanel?.type === 'ability' && currentPanel?.id && MOCK_CHARACTER.abilities[currentPanel.id as keyof typeof MOCK_CHARACTER.abilities] && (
+        {currentPanel?.type === 'ability' && currentPanel?.id && getAbilityForPanel(currentPanel.id) && (
           <AbilityDetailPanel
             abilityKey={currentPanel.id}
-            ability={MOCK_CHARACTER.abilities[currentPanel.id as keyof typeof MOCK_CHARACTER.abilities]}
+            ability={getAbilityForPanel(currentPanel.id)!}
           />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (
@@ -191,4 +251,20 @@ export function CharacterScreenDesktop() {
       </SidePanel>
     </SidePanelContainer>
   )
+}
+
+/**
+ * Pantalla de personaje para desktop web.
+ * Layout: columnas horizontales con Side Panel para detalles.
+ * Inicializa el store de Zustand con los datos del personaje.
+ */
+export function CharacterScreenDesktop() {
+  const setCharacter = useCharacterStore((state) => state.setCharacter)
+
+  // Inicializar el store con el personaje de prueba
+  useEffect(() => {
+    setCharacter(testCharacterSheet, testBaseData)
+  }, [setCharacter])
+
+  return <CharacterScreenDesktopContent />
 }
