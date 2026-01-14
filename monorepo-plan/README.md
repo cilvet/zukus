@@ -283,7 +283,7 @@ Cada fase tiene su archivo detallado en la carpeta `fases/`.
 | 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ✅ Completado |
 | 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ✅ Completado |
 | 5 | [Desktop con Tauri](./fases/fase-5-desktop-tauri.md) | App de escritorio (en paralelo) | ✅ Completado |
-| 6 | [Migrar Componentes](./fases/fase-6-migrar-componentes.md) | Componentes complejos (post-Tauri) | ⬜ Pendiente |
+| 6 | [Visualización de Personaje](./fases/fase-6-visualizacion-personaje.md) | CharacterStore (Zustand) + secciones de visualización | 🔄 En progreso (6.1 ✅) |
 
 ### Fases Pospuestas
 
@@ -315,13 +315,13 @@ Fase 3:   ✅ Crear App Mobile
 Fase 3.5: ✅ Sistema de Navegación
 Fase 4:   ✅ Conectar Mobile con UI
 Fase 5:   ✅ Desktop con Tauri
-Fase 6:   ⬜ Migrar Componentes
+Fase 6:   🔄 Visualización de Personaje (6.1 ✅)
 ```
 
 ### Última Actualización
 
-Fecha: 2026-01-11
-Nota: Fases 0, 1, 2, 3, 3.5, 4 y 5 completadas. Siguiente: Fase 6 (Migrar Componentes).
+Fecha: 2026-01-14
+Nota: Fases 0, 1, 2, 3, 3.5, 4 y 5 completadas. Fase 6 en progreso: Sub-fase 6.1 (CharacterStore con Zustand) completada.
 
 ---
 
