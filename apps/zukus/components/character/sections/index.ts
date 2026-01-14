@@ -1,5 +1,6 @@
 export { CombatSection } from './CombatSection'
 export { AbilitiesSection } from './AbilitiesSection'
+export { BuffsSection } from './BuffsSection'
 export { EquipmentSection } from './EquipmentSection'
 export { SpellsSection } from './SpellsSection'
 export { FeaturesSection } from './FeaturesSection'

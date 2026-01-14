@@ -1,2 +1,1 @@
-// Aquí exportaremos componentes más complejos
-// Algunos migrados de zukusnextmicon (con lógica de estado)
+export { AbilityCard, type AbilityCardProps } from './character'

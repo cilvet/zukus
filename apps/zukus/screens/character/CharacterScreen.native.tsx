@@ -13,6 +13,7 @@ import {
   CharacterTabs,
   CombatSection,
   AbilitiesSection,
+  BuffsSection,
   EquipmentSection,
   SpellsSection,
   FeaturesSection,
@@ -118,6 +119,9 @@ export function CharacterScreen() {
         </View>
         <View key="abilities" style={styles.page}>
           <AbilitiesSection />
+        </View>
+        <View key="buffs" style={styles.page}>
+          <BuffsSection />
         </View>
         <View key="equipment" style={styles.page}>
           <EquipmentSection />

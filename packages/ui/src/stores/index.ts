@@ -12,4 +12,6 @@ export {
   useCharacterSavingThrows,
   useCharacterSkills,
   useCharacterAttacks,
+  useCharacterBuffs,
+  useGlowingAbility,
 } from './characterStore'

@@ -2,28 +2,19 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useRouter } from 'expo-router'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterAbilities } from '@zukus/ui'
-import { SectionHeader, SectionCard, AbilityCard, SkillItem } from '../CharacterComponents'
+import { useCharacterAbilities, useGlowingAbility, AbilityCard } from '@zukus/ui'
+import { SectionHeader, SectionCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
-import type { Ability } from '../data'
-
-/**
- * Mapea los datos de ability del core al formato esperado por AbilityCard.
- */
-function mapAbility(coreAbility: { totalScore: number; totalModifier: number }): Ability {
-  return {
-    score: coreAbility.totalScore,
-    modifier: coreAbility.totalModifier,
-  }
-}
 
 /**
  * Seccion de ability scores y skills.
  * Usa selector de Zustand para abilities (re-render granular).
+ * El AbilityCard animado viene de @zukus/ui.
  */
 export function AbilitiesSection() {
   const router = useRouter()
   const abilities = useCharacterAbilities()
+  const glowingAbility = useGlowingAbility()
 
   const handleAbilityPress = (abilityKey: string) => {
     router.push({
@@ -59,34 +50,46 @@ export function AbilitiesSection() {
             <XStack justifyContent="space-between">
               <AbilityCard
                 abilityKey="strength"
-                ability={mapAbility(abilities.strength)}
+                score={abilities.strength.totalScore}
+                modifier={abilities.strength.totalModifier}
+                isGlowing={glowingAbility === 'strength'}
                 onPress={() => handleAbilityPress('strength')}
               />
               <AbilityCard
                 abilityKey="dexterity"
-                ability={mapAbility(abilities.dexterity)}
+                score={abilities.dexterity.totalScore}
+                modifier={abilities.dexterity.totalModifier}
+                isGlowing={glowingAbility === 'dexterity'}
                 onPress={() => handleAbilityPress('dexterity')}
               />
               <AbilityCard
                 abilityKey="constitution"
-                ability={mapAbility(abilities.constitution)}
+                score={abilities.constitution.totalScore}
+                modifier={abilities.constitution.totalModifier}
+                isGlowing={glowingAbility === 'constitution'}
                 onPress={() => handleAbilityPress('constitution')}
               />
             </XStack>
             <XStack justifyContent="space-between">
               <AbilityCard
                 abilityKey="intelligence"
-                ability={mapAbility(abilities.intelligence)}
+                score={abilities.intelligence.totalScore}
+                modifier={abilities.intelligence.totalModifier}
+                isGlowing={glowingAbility === 'intelligence'}
                 onPress={() => handleAbilityPress('intelligence')}
               />
               <AbilityCard
                 abilityKey="wisdom"
-                ability={mapAbility(abilities.wisdom)}
+                score={abilities.wisdom.totalScore}
+                modifier={abilities.wisdom.totalModifier}
+                isGlowing={glowingAbility === 'wisdom'}
                 onPress={() => handleAbilityPress('wisdom')}
               />
               <AbilityCard
                 abilityKey="charisma"
-                ability={mapAbility(abilities.charisma)}
+                score={abilities.charisma.totalScore}
+                modifier={abilities.charisma.totalModifier}
+                isGlowing={glowingAbility === 'charisma'}
                 onPress={() => handleAbilityPress('charisma')}
               />
             </XStack>

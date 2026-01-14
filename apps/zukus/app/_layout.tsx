@@ -3,11 +3,28 @@ import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/nati
 import { TamaguiProvider, Theme } from 'tamagui'
 import { config, ThemeProvider, useTheme } from '@zukus/ui'
 import { useFonts } from 'expo-font'
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { Platform } from 'react-native'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+
+// React Scan solo en desarrollo y web
+let reactScanInitialized = false
+if (__DEV__ && typeof window !== 'undefined') {
+  try {
+    const { scan } = require('react-scan')
+    scan({
+      enabled: true,
+      log: true,
+    })
+    reactScanInitialized = true
+  } catch (error) {
+    // react-scan no disponible o error al cargar
+    console.warn('react-scan no pudo inicializarse:', error)
+  }
+}
 
 function ThemedApp() {
   const { themeName, themeColors, isLoading } = useTheme()

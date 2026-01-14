@@ -10,11 +10,11 @@ export * from './stores'
 // Tipos de navegación compartidos
 export * from './navigation'
 
-// Átomos (componentes propios - se añadirán)
-// export * from './atoms'
+// Átomos (componentes propios)
+export * from './atoms'
 
-// Componentes (más complejos - se añadirán)
-// export * from './components'
+// Componentes (más complejos)
+export * from './components'
 
 // Hooks (se añadirán)
 // export * from './hooks'

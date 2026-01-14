@@ -9,6 +9,11 @@ import {
   useCharacterArmorClass,
   useCharacterInitiative,
   useCharacterBAB,
+  useGlowingAbility,
+  useCharacterBuffs,
+  AbilityCard,
+  Checkbox,
+  type CheckboxVariant,
 } from '@zukus/ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -17,7 +22,6 @@ import {
   SectionHeader,
   SectionCard,
   StatBox,
-  AbilityCard,
   SkillItem,
   ItemCard,
   CharacterHeader,
@@ -32,17 +36,8 @@ import {
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
-import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
+import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
 
-/**
- * Mapea los datos de ability del core al formato esperado por AbilityCard.
- */
-function mapAbility(coreAbility: { totalScore: number; totalModifier: number }): Ability {
-  return {
-    score: coreAbility.totalScore,
-    modifier: coreAbility.totalModifier,
-  }
-}
 
 /**
  * Contenido de la pantalla desktop (usa selectores de Zustand).
@@ -55,6 +50,9 @@ function CharacterScreenDesktopContent() {
   const armorClass = useCharacterArmorClass()
   const initiative = useCharacterInitiative()
   const bab = useCharacterBAB()
+  const glowingAbility = useGlowingAbility()
+  const buffs = useCharacterBuffs()
+  const toggleBuff = useCharacterStore((state) => state.toggleBuff)
 
   const {
     currentPanel,
@@ -93,7 +91,10 @@ function CharacterScreenDesktopContent() {
     }
     const coreAbility = abilityMap[abilityKey]
     if (!coreAbility) return null
-    return mapAbility(coreAbility)
+    return {
+      score: coreAbility.totalScore,
+      modifier: coreAbility.totalModifier,
+    }
   }
 
   // Si no hay datos aún, mostrar loading
@@ -143,34 +144,46 @@ function CharacterScreenDesktopContent() {
                 <XStack justifyContent="space-between">
                   <AbilityCard
                     abilityKey="strength"
-                    ability={mapAbility(abilities.strength)}
+                    score={abilities.strength.totalScore}
+                    modifier={abilities.strength.totalModifier}
+                    isGlowing={glowingAbility === 'strength'}
                     onPress={() => handleAbilityPress('strength')}
                   />
                   <AbilityCard
                     abilityKey="dexterity"
-                    ability={mapAbility(abilities.dexterity)}
+                    score={abilities.dexterity.totalScore}
+                    modifier={abilities.dexterity.totalModifier}
+                    isGlowing={glowingAbility === 'dexterity'}
                     onPress={() => handleAbilityPress('dexterity')}
                   />
                   <AbilityCard
                     abilityKey="constitution"
-                    ability={mapAbility(abilities.constitution)}
+                    score={abilities.constitution.totalScore}
+                    modifier={abilities.constitution.totalModifier}
+                    isGlowing={glowingAbility === 'constitution'}
                     onPress={() => handleAbilityPress('constitution')}
                   />
                 </XStack>
                 <XStack justifyContent="space-between">
                   <AbilityCard
                     abilityKey="intelligence"
-                    ability={mapAbility(abilities.intelligence)}
+                    score={abilities.intelligence.totalScore}
+                    modifier={abilities.intelligence.totalModifier}
+                    isGlowing={glowingAbility === 'intelligence'}
                     onPress={() => handleAbilityPress('intelligence')}
                   />
                   <AbilityCard
                     abilityKey="wisdom"
-                    ability={mapAbility(abilities.wisdom)}
+                    score={abilities.wisdom.totalScore}
+                    modifier={abilities.wisdom.totalModifier}
+                    isGlowing={glowingAbility === 'wisdom'}
                     onPress={() => handleAbilityPress('wisdom')}
                   />
                   <AbilityCard
                     abilityKey="charisma"
-                    ability={mapAbility(abilities.charisma)}
+                    score={abilities.charisma.totalScore}
+                    modifier={abilities.charisma.totalModifier}
+                    isGlowing={glowingAbility === 'charisma'}
                     onPress={() => handleAbilityPress('charisma')}
                   />
                 </XStack>
@@ -179,7 +192,35 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 3: Skills (mock por ahora) */}
+        {/* Columna 3: Buffs/Conjuros Activos */}
+        <VerticalSection>
+          <YStack width="100%" gap={16}>
+            <SectionCard>
+              <SectionHeader icon="*" title="Conjuros Activos" />
+              <YStack gap={0}>
+                {buffs
+                  .filter((buff) => BUFF_DISPLAY_INFO[buff.uniqueId])
+                  .map((buff) => {
+                    const displayInfo = BUFF_DISPLAY_INFO[buff.uniqueId]
+                    const abilityKey = BUFF_ABILITY_MAP[buff.uniqueId]
+
+                    return (
+                      <Checkbox
+                        key={buff.uniqueId}
+                        checked={buff.active}
+                        onCheckedChange={() => toggleBuff(buff.uniqueId, abilityKey)}
+                        label={`${displayInfo.emoji} ${displayInfo.name}`}
+                        size="small"
+                        variant={displayInfo.checkboxVariant as CheckboxVariant}
+                      />
+                    )
+                  })}
+              </YStack>
+            </SectionCard>
+          </YStack>
+        </VerticalSection>
+
+        {/* Columna 4: Skills (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
@@ -193,7 +234,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 4: Equipment (mock por ahora) */}
+        {/* Columna 5: Equipment (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
@@ -212,7 +253,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 5: Spells (mock por ahora) */}
+        {/* Columna 6: Spells (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>

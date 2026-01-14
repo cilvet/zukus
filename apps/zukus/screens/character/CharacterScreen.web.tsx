@@ -1,13 +1,23 @@
+import { useEffect } from 'react'
 import { View, ScrollView } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import { useRouter } from 'expo-router'
+import {
+  useCharacterStore,
+  useCharacterAbilities,
+  useGlowingAbility,
+  useCharacterBuffs,
+  AbilityCard,
+  Checkbox,
+  type CheckboxVariant,
+} from '@zukus/ui'
+import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
 import {
   MOCK_CHARACTER,
   CharacterPager,
   SectionHeader,
   SectionCard,
   StatBox,
-  AbilityCard,
   SkillItem,
   ItemCard,
 } from '../../components/character'
@@ -37,11 +47,27 @@ function WebCombatSection() {
 
 function WebAbilitiesSection() {
   const router = useRouter()
+  const abilities = useCharacterAbilities()
+  const glowingAbility = useGlowingAbility()
+
   const handleAbilityPress = (abilityKey: string) => {
     router.push({
       pathname: '/(tabs)/(character)/[id]',
       params: { id: abilityKey, type: 'ability' },
     })
+  }
+
+  // Si no hay datos aún, mostrar placeholder
+  if (!abilities) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <YStack padding={16}>
+          <SectionCard>
+            <SectionHeader icon="*" title="Cargando..." />
+          </SectionCard>
+        </YStack>
+      </View>
+    )
   }
 
   return (
@@ -52,22 +78,58 @@ function WebAbilitiesSection() {
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
-          <SectionHeader icon="✨" title="Ability Scores" />
+          <SectionHeader icon="*" title="Ability Scores" />
           <YStack gap={12}>
             <XStack justifyContent="space-between">
-              <AbilityCard abilityKey="strength" ability={MOCK_CHARACTER.abilities.strength} onPress={() => handleAbilityPress('strength')} />
-              <AbilityCard abilityKey="dexterity" ability={MOCK_CHARACTER.abilities.dexterity} onPress={() => handleAbilityPress('dexterity')} />
-              <AbilityCard abilityKey="constitution" ability={MOCK_CHARACTER.abilities.constitution} onPress={() => handleAbilityPress('constitution')} />
+              <AbilityCard
+                abilityKey="strength"
+                score={abilities.strength.totalScore}
+                modifier={abilities.strength.totalModifier}
+                isGlowing={glowingAbility === 'strength'}
+                onPress={() => handleAbilityPress('strength')}
+              />
+              <AbilityCard
+                abilityKey="dexterity"
+                score={abilities.dexterity.totalScore}
+                modifier={abilities.dexterity.totalModifier}
+                isGlowing={glowingAbility === 'dexterity'}
+                onPress={() => handleAbilityPress('dexterity')}
+              />
+              <AbilityCard
+                abilityKey="constitution"
+                score={abilities.constitution.totalScore}
+                modifier={abilities.constitution.totalModifier}
+                isGlowing={glowingAbility === 'constitution'}
+                onPress={() => handleAbilityPress('constitution')}
+              />
             </XStack>
             <XStack justifyContent="space-between">
-              <AbilityCard abilityKey="intelligence" ability={MOCK_CHARACTER.abilities.intelligence} onPress={() => handleAbilityPress('intelligence')} />
-              <AbilityCard abilityKey="wisdom" ability={MOCK_CHARACTER.abilities.wisdom} onPress={() => handleAbilityPress('wisdom')} />
-              <AbilityCard abilityKey="charisma" ability={MOCK_CHARACTER.abilities.charisma} onPress={() => handleAbilityPress('charisma')} />
+              <AbilityCard
+                abilityKey="intelligence"
+                score={abilities.intelligence.totalScore}
+                modifier={abilities.intelligence.totalModifier}
+                isGlowing={glowingAbility === 'intelligence'}
+                onPress={() => handleAbilityPress('intelligence')}
+              />
+              <AbilityCard
+                abilityKey="wisdom"
+                score={abilities.wisdom.totalScore}
+                modifier={abilities.wisdom.totalModifier}
+                isGlowing={glowingAbility === 'wisdom'}
+                onPress={() => handleAbilityPress('wisdom')}
+              />
+              <AbilityCard
+                abilityKey="charisma"
+                score={abilities.charisma.totalScore}
+                modifier={abilities.charisma.totalModifier}
+                isGlowing={glowingAbility === 'charisma'}
+                onPress={() => handleAbilityPress('charisma')}
+              />
             </XStack>
           </YStack>
         </SectionCard>
         <SectionCard>
-          <SectionHeader icon="📚" title="Skills" />
+          <SectionHeader icon="#" title="Skills" />
           <YStack>
             {MOCK_CHARACTER.skills.map((skill, index) => (
               <SkillItem key={index} skill={skill} />
@@ -108,6 +170,66 @@ function WebEquipmentSection() {
   )
 }
 
+function WebBuffsSection() {
+  const buffs = useCharacterBuffs()
+  const toggleBuff = useCharacterStore((state) => state.toggleBuff)
+
+  // Filtrar solo los buffs de enhancement que tenemos info de display
+  const enhancementBuffs = buffs.filter((buff) => BUFF_DISPLAY_INFO[buff.uniqueId])
+
+  if (enhancementBuffs.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <YStack padding={16}>
+          <SectionCard>
+            <SectionHeader icon="*" title="Sin buffs disponibles" />
+          </SectionCard>
+        </YStack>
+      </View>
+    )
+  }
+
+  return (
+    <View style={{ flex: 1, height: '100%' }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32, gap: 16 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <SectionCard>
+          <SectionHeader icon="*" title="Conjuros Activos" />
+          <YStack gap={0}>
+            {enhancementBuffs.map((buff) => {
+              const displayInfo = BUFF_DISPLAY_INFO[buff.uniqueId]
+              const abilityKey = BUFF_ABILITY_MAP[buff.uniqueId]
+
+              return (
+                <Checkbox
+                  key={buff.uniqueId}
+                  checked={buff.active}
+                  onCheckedChange={() => toggleBuff(buff.uniqueId, abilityKey)}
+                  label={`${displayInfo.emoji} ${displayInfo.name}`}
+                  size="small"
+                  variant={displayInfo.checkboxVariant as CheckboxVariant}
+                />
+              )
+            })}
+          </YStack>
+        </SectionCard>
+
+        <SectionCard>
+          <SectionHeader icon="?" title="Info" />
+          <Text fontSize={12} color="$placeholderColor" lineHeight={18}>
+            Los conjuros de mejora otorgan +4 al atributo correspondiente mientras estén activos.
+            {'\n\n'}
+            Esta sección es de prueba para verificar el funcionamiento del sistema de buffs.
+          </Text>
+        </SectionCard>
+      </ScrollView>
+    </View>
+  )
+}
+
 function WebSpellsSection() {
   const router = useRouter()
   const handleSpellPress = (spellId: string, spellName: string) => {
@@ -140,8 +262,16 @@ function WebSpellsSection() {
 /**
  * Pantalla de personaje para web mobile.
  * Header fijo (no colapsable) + swipe views.
+ * Inicializa el store de Zustand con los datos del personaje.
  */
 export function CharacterScreen() {
+  const setCharacter = useCharacterStore((state) => state.setCharacter)
+
+  // Inicializar el store con el personaje de prueba
+  useEffect(() => {
+    setCharacter(testCharacterSheet, testBaseData)
+  }, [setCharacter])
+
   return (
     <YStack flex={1} backgroundColor="$background">
       {/* Header fijo */}
@@ -195,6 +325,7 @@ export function CharacterScreen() {
       <CharacterPager>
         <WebCombatSection />
         <WebAbilitiesSection />
+        <WebBuffsSection />
         <WebEquipmentSection />
         <WebSpellsSection />
       </CharacterPager>

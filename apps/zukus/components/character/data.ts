@@ -10,6 +10,7 @@ export type CharacterPage = {
 export const CHARACTER_PAGES: CharacterPage[] = [
   { key: 'combat', label: 'Combate', icon: 'shield' },
   { key: 'abilities', label: 'Atributos', icon: 'star' },
+  { key: 'buffs', label: 'Buffs', icon: 'bolt' },
   { key: 'equipment', label: 'Equipo', icon: 'suitcase' },
   { key: 'spells', label: 'Hechizos', icon: 'magic' },
   { key: 'features', label: 'Rasgos', icon: 'trophy' },
