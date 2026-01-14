@@ -280,8 +280,8 @@ Cada fase tiene su archivo detallado en la carpeta `fases/`.
 | 1 | [Migrar Core](./fases/fase-1-migrar-core.md) | Migrar cilvet-dice como @zukus/core | ✅ Completado |
 | 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI + átomos | ✅ Completado |
 | 3 | [Crear App Mobile](./fases/fase-3-crear-app-mobile.md) | Inicio fresco de la app Expo (pantallas sencillas) | ✅ Completado |
-| 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ⬜ Pendiente |
-| 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ⬜ Pendiente |
+| 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ✅ Completado |
+| 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ✅ Completado |
 | 5 | [Desktop con Tauri](./fases/fase-5-desktop-tauri.md) | App de escritorio (en paralelo) | ⬜ Pendiente |
 | 6 | [Migrar Componentes](./fases/fase-6-migrar-componentes.md) | Componentes complejos (post-Tauri) | ⬜ Pendiente |
 
@@ -312,8 +312,8 @@ Fase 0:   ✅ Estructura Base
 Fase 1:   ✅ Migrar Core
 Fase 2:   ✅ Crear @zukus/ui
 Fase 3:   ✅ Crear App Mobile
-Fase 3.5: ⬜ Sistema de Navegación
-Fase 4:   ⬜ Conectar Mobile con UI
+Fase 3.5: ✅ Sistema de Navegación
+Fase 4:   ✅ Conectar Mobile con UI
 Fase 5:   ⬜ Desktop con Tauri
 Fase 6:   ⬜ Migrar Componentes
 ```
@@ -321,7 +321,7 @@ Fase 6:   ⬜ Migrar Componentes
 ### Última Actualización
 
 Fecha: 2026-01-11
-Nota: Fases 0, 1, 2 y 3 completadas. Siguiente: Fase 3.5 (Sistema de Navegación).
+Nota: Fases 0, 1, 2, 3, 3.5 y 4 completadas. Siguiente: Fase 5 (Desktop con Tauri).
 
 ---
 
