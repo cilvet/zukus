@@ -1,6 +1,6 @@
 # Fase 6: Migrar Componentes de UI
 
-**Objetivo:** Migrar componentes complejos con lógica de estado desde zukusnextmicon a @zukus/ui.
+**Objetivo:** Migrar componentes complejos con lógica de estado desde zukusnextmicon a apps/zukus/ui/.
 
 **Prerequisitos:** Fase 5 completada (Tauri funcionando)
 
@@ -55,7 +55,7 @@ Para cada componente/hook que migremos, seguiremos este proceso:
 
 ### Paso 2: Adaptar
 
-1. Copiar el código a @zukus/ui
+1. Copiar el código a apps/zukus/ui/
 2. Eliminar dependencias de:
    - Next.js (`useRouter`, `useSearchParams`)
    - MUI
@@ -198,7 +198,7 @@ Crear una pantalla de prueba en la app mobile que use los componentes migrados.
 
 ```typescript
 import { View } from '@tamagui/core'
-import { useChangesManagement } from '@zukus/ui'
+import { useChangesManagement } from 'apps/zukus/ui'
 
 export default function TestComponentsScreen() {
   // Verificar que el hook es importable y usable
@@ -229,7 +229,7 @@ Antes de considerar esta fase completa:
 - [ ] `EntityProvider` está migrado con todos sus archivos
 - [ ] Los componentes de Changes están migrados
 - [ ] Todos los exports están actualizados en `packages/ui/src/index.ts`
-- [ ] El typecheck pasa en @zukus/ui
+- [ ] El typecheck pasa en apps/zukus/ui/
 - [ ] El typecheck pasa en la app mobile
 - [ ] La app mobile puede importar y usar los componentes migrados
 

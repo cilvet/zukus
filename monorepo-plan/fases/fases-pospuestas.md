@@ -20,7 +20,7 @@ Este documento contiene las fases que hemos decidido posponer para más adelante
 ### Pasos cuando se retome
 
 1. Configurar `turbo.json` para ejecutar tests en paralelo
-2. Añadir tests de ejemplo en @zukus/ui
+2. Añadir tests de ejemplo en apps/zukus/ui/
 3. Añadir tests de integración en apps/mobile
 4. Configurar CI/CD para ejecutar tests automáticamente
 

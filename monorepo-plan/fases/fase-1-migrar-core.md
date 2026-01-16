@@ -189,5 +189,5 @@ Verificar que los archivos de test siguen el patrón `*.test.ts` o `*.spec.ts` y
 
 ## Siguiente Fase
 
-→ [Fase 2: Crear @zukus/ui](./fase-2-crear-zukus-ui.md)
+→ [Fase 2: Crear estructura UI en apps/zukus/ui/](./fase-2-crear-zukus-ui.md)
 

@@ -71,7 +71,7 @@ Cambios:
   },
   "dependencies": {
     "@zukus/core": "workspace:*",
-    "@zukus/ui": "workspace:*",
+    # UI integrada en apps/zukus/ui/,
     "expo": "~50.0.0",
     "expo-router": "~3.4.0",
     "react": "18.2.0",
@@ -188,7 +188,7 @@ bun install
 ```
 ✅ Verificar: bun install (exit 0)
 ✅ Verificar: ls apps/mobile/node_modules/@zukus/core (symlink existe)
-✅ Verificar: ls apps/mobile/node_modules/@zukus/ui (symlink existe)
+✅ Verificar: # Verificación ya no necesaria (UI integrada en apps/zukus/ui/) (symlink existe)
 ```
 
 ---
@@ -228,7 +228,7 @@ Antes de pasar a la Fase 4, asegúrate de que:
 - [ ] El nombre en package.json es `@zukus/mobile`
 - [ ] Las dependencias del workspace están configuradas
 - [ ] Expo Router está configurado con `app/` directory
-- [ ] Los symlinks a @zukus/core y @zukus/ui existen
+- [ ] Los symlink a @zukus/core existe
 - [ ] La app arranca en web sin errores
 - [ ] El typecheck pasa
 

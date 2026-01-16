@@ -1,6 +1,6 @@
-# Fase 4: Conectar Mobile con @zukus/ui
+# Fase 4: Conectar Mobile con UI (apps/zukus/ui/)
 
-**Objetivo:** Que la app mobile use la configuración de Tamagui desde @zukus/ui y verificar que los packages del workspace funcionan correctamente integrados.
+**Objetivo:** Que la app mobile use la configuración de Tamagui desde apps/zukus/ui/ y verificar que los packages del workspace funcionan correctamente integrados.
 
 **Prerequisitos:** Fase 3 completada (app mobile arrancando)
 
@@ -8,7 +8,7 @@
 
 ## Pasos
 
-### 4.1 Completar configuración de Tamagui en @zukus/ui
+### 4.1 Completar configuración de Tamagui en apps/zukus/ui/
 
 Antes de conectar, necesitamos que la configuración de Tamagui esté funcional.
 
@@ -139,7 +139,7 @@ declare module '@tamagui/core' {
 
 ---
 
-### 4.4 Crear TamaguiProvider en @zukus/ui
+### 4.4 Crear TamaguiProvider en apps/zukus/ui/
 
 ```
 📁 Crear packages/ui/src/config/TamaguiProvider.tsx
@@ -188,7 +188,7 @@ export { TamaguiProvider } from './TamaguiProvider'
 
 ```typescript
 import { Stack } from 'expo-router'
-import { TamaguiProvider } from '@zukus/ui'
+import { TamaguiProvider } from 'apps/zukus/ui'
 
 export default function RootLayout() {
   return (
@@ -200,7 +200,7 @@ export default function RootLayout() {
 ```
 
 ```
-✅ Verificar: grep -q "@zukus/ui" apps/mobile/app/_layout.tsx
+✅ Verificar: # Verificación actualizada para nueva estructura
 ```
 
 ---
@@ -315,10 +315,10 @@ cd apps/mobile && bun run web
 
 Antes de pasar a la Fase 5, asegúrate de que:
 
-- [ ] La configuración de Tamagui en @zukus/ui está completa (tokens, themes, config)
-- [ ] El TamaguiProvider está exportado desde @zukus/ui
+- [ ] La configuración de Tamagui en apps/zukus/ui/ está completa (tokens, themes, config)
+- [ ] El TamaguiProvider está exportado desde apps/zukus/ui/
 - [ ] La app mobile usa TamaguiProvider en _layout.tsx
-- [ ] Los imports de @zukus/ui funcionan
+- [ ] Los imports de apps/zukus/ui/ funcionan
 - [ ] Los imports de @zukus/core funcionan (aunque sea solo tipos)
 - [ ] El typecheck pasa en la app mobile
 - [ ] La app arranca y se ve el tema aplicado
@@ -327,12 +327,12 @@ Antes de pasar a la Fase 5, asegúrate de que:
 
 ## Troubleshooting
 
-### Error: Cannot find module '@zukus/ui'
+### Error: Error de importación desde apps/zukus/ui/
 
 Verificar que:
 1. `bun install` se ejecutó desde el root del monorepo
-2. El package.json de mobile tiene `"@zukus/ui": "workspace:*"`
-3. Existe el symlink en `apps/mobile/node_modules/@zukus/ui`
+2. El package.json de mobile tiene `# UI integrada en apps/zukus/ui/`
+3. Existe el symlink en `la estructura apps/zukus/ui/`
 
 ### Error: TamaguiProvider not found
 

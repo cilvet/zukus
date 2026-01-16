@@ -1,0 +1,35 @@
+---
+description: Desarrollo multiplataforma - móvil, web y desktop
+alwaysApply: true
+---
+
+# Desarrollo Multiplataforma
+
+## Plataformas
+
+
+Por defecto, levantaremos el proyecto con `bun run dev`, que levanta todas las apps. 
+Se pueden levantar las apps por separado si es necesario. 
+
+El usuario prueba habitualmente en **móvil y web**. No olvides ninguna plataforma.
+
+## Objetivo: Máximo Código Compartido
+
+Los componentes van en `apps/zukus/ui/`. Solo se separa código cuando hay diferencias irreconciliables entre plataformas.
+
+```
+apps/zukus/ui/components/
+  MiComponente.tsx          # Compartido (preferido)
+  MiComponente.native.tsx   # Solo si es necesario
+  MiComponente.web.tsx      # Solo si es necesario
+```
+
+## Reglas de Decisión
+
+**Compartir** cuando:
+- La lógica es idéntica
+- Las diferencias son solo de estilo (usar tokens de Tamagui)
+
+**Separar** cuando:
+- APIs nativas incompatibles (ej: navegación, gestos específicos)
+- Rendimiento crítico requiere implementación distinta

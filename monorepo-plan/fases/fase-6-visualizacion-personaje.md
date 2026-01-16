@@ -34,7 +34,7 @@
 
 **Objetivo:** Crear el contexto de personaje y verificar que los datos del core llegan a la UI.
 
-### 6.1.1 Crear CharacterContext en @zukus/ui
+### 6.1.1 Crear CharacterContext en apps/zukus/ui/
 
 ```
 📁 Crear packages/ui/src/contexts/CharacterContext.tsx
@@ -168,7 +168,7 @@ Crear un componente simple que muestre:
 
 ### Verificación de Sub-fase 6.1
 
-- [x] `CharacterStore` (Zustand) creado y exportado desde `@zukus/ui` ✅
+- [x] `CharacterStore` (Zustand) creado y exportado desde `apps/zukus/ui/` ✅
 - [x] Tipos del core son importables ✅
 - [x] Personaje de prueba creado con `buildCharacter()` ✅
 - [x] Store integrado en la app (native + desktop) ✅

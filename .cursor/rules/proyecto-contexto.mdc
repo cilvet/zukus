@@ -1,40 +1,42 @@
 ---
-description: Contexto general del proyecto Zukus y su migración a monorepo
-globs: ["**/*"]
+description: Contexto general del proyecto Zukus
 alwaysApply: true
 ---
 
 # Contexto del Proyecto Zukus
 
-## ¿Qué es Zukus?
+Zukus es una aplicación para gestión de personajes de D&D 3.5.
 
-Zukus es una aplicación para gestión de personajes de D&D 5e. Estamos en proceso de unificar varios repositorios en un único monorepo.
+## Estado del Proyecto
 
-## Repositorios Relevantes
+**Lee siempre `monorepo-plan/README.md`** para conocer el estado actual de las fases. Las fases individuales están en `monorepo-plan/fases/`.
 
-| Repositorio | Ruta | Descripción |
-|-------------|------|-------------|
-| **zukus** (este) | `/Users/cilveti/personal/zukus` | Monorepo objetivo donde se unifica todo |
-| **zukusnextmicon** | `/Users/cilveti/personal/zukusnextmicon` | App web actual (Next.js + Tamagui). Referencia para componentes y lógica |
-| **cilvet-dice** | `/Users/cilveti/personal/cilvet-dice` | Core del sistema de dados y cálculos de D&D. Se migra como `@zukus/core` |
-| **zukus-again** | (pendiente de confirmar ruta) | App mobile con Expo. Referencia para componentes UI y configuración Tamagui |
+Antes de trabajar en cualquier fase:
+1. Verifica que la fase anterior está completada
+2. Lee los pasos pendientes de la fase actual
 
-## Plan de Migración
+## Estructura del Monorepo
 
-El plan detallado está en `monorepo-plan/README.md` con las fases individuales en `monorepo-plan/fases/`.
+```
+apps/
+  zukus/          # App Expo (iOS, Android, Web)
+    ui/           # Componentes, config Tamagui, stores
+    components/   # Componentes de pantallas
+    screens/      # Wrappers de rutas
+  desktop/        # Tauri (envuelve build web de zukus)
 
-### Estado Actual de las Fases
+packages/
+  core/           # @zukus/core - Lógica de dominio D&D
+```
 
-Consulta siempre `monorepo-plan/README.md` para ver el estado actualizado de cada fase.
+## Repositorios de Referencia
 
-**IMPORTANTE:** Antes de trabajar en cualquier fase, verifica:
-1. Que la fase anterior está marcada como completada
-2. Que el humano ha verificado y aprobado la fase anterior
-3. Qué pasos específicos quedan pendientes en la fase actual
+| Repo | Ruta | Uso |
+|------|------|-----|
+| **zukusnextmicon** | `/Users/cilveti/personal/zukusnextmicon` | Referencia para lógica de componentes y hooks |
 
-## Principios del Proyecto
+## Principios
 
-1. **Inicio fresco**: No copiamos apps enteras, las creamos de nuevo bajo supervisión
-2. **Componentes propios**: No usamos componentes de Tamagui directamente, creamos los nuestros
-3. **Paso a paso**: Cada fase se verifica con el usuario antes de pasar a la siguiente
-4. **Core con tests**: La migración del core solo está completa cuando todos los tests pasan
+1. **Inicio fresco**: No copiar apps, reescribir bajo supervisión
+2. **Componentes propios**: No usar componentes de Tamagui directamente
+3. **Core con tests**: Los tests del core deben pasar siempre

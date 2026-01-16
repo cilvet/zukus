@@ -1,4 +1,4 @@
-# Fase 2: Crear @zukus/ui (Estructura Base)
+# Fase 2: Crear estructura UI en apps/zukus/ui/ (Estructura Base)
 
 **Objetivo:** Tener el package de UI con la configuración de Tamagui lista y la estructura preparada para nuestros componentes propios.
 
@@ -38,7 +38,7 @@ mkdir -p packages/ui/src/{atoms,components,hooks,config}
 
 ```json
 {
-  "name": "@zukus/ui",
+  # UI integrada en apps/zukus (no es package separado),
   "version": "0.0.1",
   "main": "src/index.ts",
   "types": "src/index.ts",

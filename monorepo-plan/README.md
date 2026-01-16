@@ -175,7 +175,7 @@ zukus/
 │   │   ├── srd/             # Contenido SRD
 │   │   └── dist/            # Build output
 │   │
-│   └── ui/                  # @zukus/ui
+│   └── ui/                  # Componentes UI (apps/zukus/ui/)
 │       ├── src/
 │       │   ├── atoms/       # Componentes propios (no Tamagui)
 │       │   ├── components/  # Componentes complejos migrados
@@ -240,13 +240,13 @@ zukus/
 
 ```
 apps/mobile
-├── @zukus/ui
+├── UI en apps/zukus/ui/
 └── @zukus/core
 
 apps/desktop
 └── (usa el build web de apps/mobile)
 
-@zukus/ui
+UI en apps/zukus/ui/
 ├── @zukus/core (solo tipos)
 └── tamagui (solo config)
 
@@ -259,7 +259,7 @@ apps/desktop
 ```
 Usuario interactúa con UI
         ↓
-@zukus/ui (componentes React)
+apps/zukus/ui/ (componentes React)
         ↓
 Repositorio (interfaz abstracta)
         ↓
@@ -278,10 +278,10 @@ Cada fase tiene su archivo detallado en la carpeta `fases/`.
 |------|--------|-------------|--------|
 | 0 | [Estructura Base](./fases/fase-0-estructura-base.md) | Crear el monorepo con Bun + Turborepo | ✅ Completado |
 | 1 | [Migrar Core](./fases/fase-1-migrar-core.md) | Migrar cilvet-dice como @zukus/core | ✅ Completado |
-| 2 | [Crear @zukus/ui](./fases/fase-2-crear-zukus-ui.md) | Estructura base del package de UI + átomos | ✅ Completado |
+| 2 | [Crear estructura UI](./fases/fase-2-crear-zukus-ui.md) | Estructura base de UI en apps/zukus/ui/ + átomos | ✅ Completado |
 | 3 | [Crear App Mobile](./fases/fase-3-crear-app-mobile.md) | Inicio fresco de la app Expo (pantallas sencillas) | ✅ Completado |
 | 3.5 | [Sistema de Navegación](./fases/fase-3-5-navegacion.md) | PoC de navegación multiplataforma | ✅ Completado |
-| 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar @zukus/ui en la app | ✅ Completado |
+| 4 | [Conectar Mobile con UI](./fases/fase-4-conectar-mobile-ui.md) | Integrar UI (apps/zukus/ui/) en la app | ✅ Completado |
 | 5 | [Desktop con Tauri](./fases/fase-5-desktop-tauri.md) | App de escritorio (en paralelo) | ✅ Completado |
 | 6 | [Visualización de Personaje](./fases/fase-6-visualizacion-personaje.md) | CharacterStore (Zustand) + secciones de visualización | 🔄 En progreso (6.1 ✅) |
 
@@ -310,7 +310,7 @@ Ver [fases-pospuestas.md](./fases/fases-pospuestas.md) para:
 ```
 Fase 0:   ✅ Estructura Base
 Fase 1:   ✅ Migrar Core
-Fase 2:   ✅ Crear @zukus/ui
+Fase 2:   ✅ Crear estructura UI en apps/zukus/ui/
 Fase 3:   ✅ Crear App Mobile
 Fase 3.5: ✅ Sistema de Navegación
 Fase 4:   ✅ Conectar Mobile con UI
