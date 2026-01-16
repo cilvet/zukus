@@ -1,6 +1,6 @@
 import { Platform, useWindowDimensions, StyleSheet } from 'react-native'
 import { XStack, YStack, ScrollView } from 'tamagui'
-import { themes } from '@zukus/ui'
+import { themes } from '../../ui'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
 const theme = themes[CURRENT_THEME]

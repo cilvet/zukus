@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { YStack, XStack, Text } from 'tamagui'
-import { Checkbox, useCharacterBuffs, useCharacterStore, type CheckboxVariant } from '@zukus/ui'
+import { YStack, Text } from 'tamagui'
+import { Checkbox, useCharacterBuffs, useCharacterStore, type CheckboxVariant } from '../../../ui'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
 import { BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../../data/testCharacter'
 

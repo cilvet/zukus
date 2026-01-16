@@ -14,7 +14,7 @@ import {
   AbilityCard,
   Checkbox,
   type CheckboxVariant,
-} from '@zukus/ui'
+} from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
   MOCK_CHARACTER,

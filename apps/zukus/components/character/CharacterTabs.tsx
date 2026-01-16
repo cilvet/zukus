@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Modal, Pressable, StyleSheet } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { Text, XStack, YStack } from 'tamagui'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../ui'
 import { CHARACTER_PAGES } from './data'
 
 type CharacterTabsProps = {

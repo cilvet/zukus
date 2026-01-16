@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tabs } from 'expo-router'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../ui'
 import { Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'

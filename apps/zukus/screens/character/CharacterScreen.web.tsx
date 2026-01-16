@@ -10,7 +10,7 @@ import {
   AbilityCard,
   Checkbox,
   type CheckboxVariant,
-} from '@zukus/ui'
+} from '../../ui'
 import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
 import {
   MOCK_CHARACTER,

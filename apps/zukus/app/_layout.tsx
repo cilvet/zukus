@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router'
 import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native'
 import { TamaguiProvider, Theme } from 'tamagui'
-import { config, ThemeProvider, useTheme } from '@zukus/ui'
+import { config, ThemeProvider, useTheme } from '../ui'
 import { useFonts } from 'expo-font'
 import { useMemo, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'

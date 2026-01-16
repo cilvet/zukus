@@ -1,6 +1,6 @@
-import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native'
+  import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
-import { themes, type CharacterDetailParams } from '@zukus/ui'
+import { themes, type CharacterDetailParams } from '../../../ui'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
 const theme = themes[CURRENT_THEME]

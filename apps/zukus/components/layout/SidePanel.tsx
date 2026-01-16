@@ -1,6 +1,6 @@
 import { Platform, Pressable } from 'react-native'
 import { Text, XStack, YStack, ScrollView } from 'tamagui'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../ui'
 
 type SidePanelProps = {
   isOpen: boolean

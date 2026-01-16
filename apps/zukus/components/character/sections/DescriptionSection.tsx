@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet } from 'react-native'
 import { Text, YStack } from 'tamagui'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../../ui'
 
 export function DescriptionSection() {
   const { themeColors } = useTheme()

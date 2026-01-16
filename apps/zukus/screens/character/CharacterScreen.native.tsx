@@ -7,7 +7,7 @@ import {
   useCharacterName,
   useCharacterLevel,
   useCharacterHitPoints,
-} from '@zukus/ui'
+} from '../../ui'
 import {
   CharacterPager,
   CharacterTabs,

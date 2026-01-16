@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, XStack, YStack } from 'tamagui'
 import { Platform, Pressable } from 'react-native'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../../ui'
 
 export default function SettingsScreen() {
   const { themeName, setTheme, themeInfo, availableThemes } = useTheme()

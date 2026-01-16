@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
-import { themes } from '@zukus/ui'
+import { themes } from '../../ui'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
 const theme = themes[CURRENT_THEME]

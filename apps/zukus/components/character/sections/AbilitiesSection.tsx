@@ -2,14 +2,14 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useRouter } from 'expo-router'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterAbilities, useGlowingAbility, AbilityCard } from '@zukus/ui'
+import { useCharacterAbilities, useGlowingAbility, AbilityCard } from '../../../ui'
 import { SectionHeader, SectionCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
 
 /**
  * Seccion de ability scores y skills.
  * Usa selector de Zustand para abilities (re-render granular).
- * El AbilityCard animado viene de @zukus/ui.
+ * El AbilityCard animado viene de ui local.
  */
 export function AbilitiesSection() {
   const router = useRouter()

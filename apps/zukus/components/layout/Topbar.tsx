@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { Text, XStack } from 'tamagui'
 import { useRouter, usePathname } from 'expo-router'
-import { themes } from '@zukus/ui'
+import { themes } from '../../ui'
 
 const CURRENT_THEME = 'zukus' as keyof typeof themes
 const theme = themes[CURRENT_THEME]

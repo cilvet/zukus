@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 import { Platform, useWindowDimensions } from 'react-native'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../../ui'
 
 const DESKTOP_BREAKPOINT = 768
 

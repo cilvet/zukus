@@ -16,9 +16,11 @@
         "@expo/vector-icons": "^15.0.3",
         "@react-native-async-storage/async-storage": "^2.2.0",
         "@react-navigation/native": "^7.1.8",
+        "@tamagui/config": "^1.144.1",
+        "@tamagui/core": "^1.132.23",
+        "@tamagui/shorthands": "^1.144.1",
         "@types/react-swipeable-views": "^0.13.6",
         "@zukus/core": "workspace:*",
-        "@zukus/ui": "workspace:*",
         "expo": "~54.0.31",
         "expo-constants": "~18.0.13",
         "expo-font": "^14.0.10",
@@ -41,6 +43,7 @@
         "react-native-worklets": "0.5.1",
         "react-swipeable-views": "^0.14.1",
         "tamagui": "^1.144.1",
+        "zustand": "^5.0.10",
       },
       "devDependencies": {
         "@tauri-apps/api": "^2",
@@ -63,34 +66,6 @@
       "devDependencies": {
         "@types/bun": "^1.2.21",
         "typescript": "^5.2.2",
-      },
-    },
-    "packages/ui": {
-      "name": "@zukus/ui",
-      "version": "0.0.1",
-      "dependencies": {
-        "@tamagui/config": "^1.144.1",
-        "@tamagui/core": "^1.132.23",
-        "@tamagui/shorthands": "^1.144.1",
-        "@zukus/core": "workspace:*",
-        "zustand": "^5.0.10",
-      },
-      "devDependencies": {
-        "@types/react": "^18.0.0",
-        "bun-types": "^1.3.5",
-        "expo-haptics": "^15.0.8",
-        "expo-linear-gradient": "^15.0.8",
-        "react-native-reanimated": "~4.1.1",
-        "react-native-svg": "^15.12.1",
-      },
-      "peerDependencies": {
-        "@react-native-async-storage/async-storage": "^2.2.0",
-        "expo-haptics": ">=12",
-        "expo-linear-gradient": ">=12",
-        "react": ">=18",
-        "react-native": ">=0.70",
-        "react-native-reanimated": ">=3",
-        "react-native-svg": ">=13",
       },
     },
   },
@@ -799,9 +774,7 @@
 
     "@types/lodash": ["@types/lodash@4.17.23", "", {}, "sha512-RDvF6wTulMPjrNdCoYRC8gNR880JNGT8uB+REUpC2Ns4pRqQJhGz90wh7rgdXDPpCczF3VGktDuFGVnz8zP7HA=="],
 
-    "@types/node": ["@types/node@20.19.29", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-YrT9ArrGaHForBaCNwFjoqJWmn8G1Pr7+BH/vwyLHciA9qT/wSiuOhxGCT50JA5xLvFBd6PIiGkE3afxcPE1nw=="],
-
-    "@types/prop-types": ["@types/prop-types@15.7.15", "", {}, "sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw=="],
+    "@types/node": ["@types/node@20.19.30", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-WJtwWJu7UdlvzEAUm484QNg5eAoq5QR08KDNx7g45Usrs2NtOPiX8ugDqmKdXkyL03rBqU5dYNYVQetEpBHq2g=="],
 
     "@types/react": ["@types/react@19.1.17", "", { "dependencies": { "csstype": "^3.0.2" } }, "sha512-Qec1E3mhALmaspIrhWt9jkQMNdw6bReVu64mjvhbhq2NFPftLPVr+l1SZgmw/66WwBNpDh7ao5AT6gF5v41PFA=="],
 
@@ -826,8 +799,6 @@
     "@zukus/app": ["@zukus/app@workspace:apps/zukus"],
 
     "@zukus/core": ["@zukus/core@workspace:packages/core"],
-
-    "@zukus/ui": ["@zukus/ui@workspace:packages/ui"],
 
     "abort-controller": ["abort-controller@3.0.0", "", { "dependencies": { "event-target-shim": "^5.0.0" } }, "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg=="],
 
@@ -1838,10 +1809,6 @@
     "@rollup/pluginutils/estree-walker": ["estree-walker@2.0.2", "", {}, "sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w=="],
 
     "@types/graceful-fs/@types/node": ["@types/node@25.0.6", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-NNu0sjyNxpoiW3YuVFfNz7mxSQ+S4X2G28uqg2s+CzoqoQjLPsWSbsFFyztIAqt2vb8kfEAsJNepMGPTxFDx3Q=="],
-
-    "@zukus/ui/@types/react": ["@types/react@18.3.27", "", { "dependencies": { "@types/prop-types": "*", "csstype": "^3.2.2" } }, "sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w=="],
-
-    "@zukus/ui/react-native-svg": ["react-native-svg@15.15.1", "", { "dependencies": { "css-select": "^5.1.0", "css-tree": "^1.1.3", "warn-once": "0.1.1" }, "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-ZUD1xwc3Hwo4cOmOLumjJVoc7lEf9oQFlHnLmgccLC19fNm6LVEdtB+Cnip6gEi0PG3wfvVzskViEtrySQP8Fw=="],
 
     "ansi-escapes/type-fest": ["type-fest@0.21.3", "", {}, "sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w=="],
 

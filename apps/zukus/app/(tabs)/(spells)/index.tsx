@@ -2,7 +2,7 @@ import { Platform, Pressable, useWindowDimensions } from 'react-native'
 import { useRouter } from 'expo-router'
 import { Text, YStack, XStack, ScrollView, View } from 'tamagui'
 import { useState } from 'react'
-import { useTheme } from '@zukus/ui'
+import { useTheme } from '../../../ui'
 import { SidePanel, SidePanelContainer } from '../../../components/layout'
 import { useSidePanel } from '../../../hooks'
 
