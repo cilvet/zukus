@@ -410,6 +410,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   size = 'medium',
   variant: variantOverride,
 }) => {
+  "use no memo"; // Reanimated shared values are mutable by design
   const { themeInfo } = useTheme()
   const { colors, checkboxVariant: themeVariant, checkboxColors, checkboxAnimateGlow } = themeInfo
   const variant = variantOverride ?? themeVariant

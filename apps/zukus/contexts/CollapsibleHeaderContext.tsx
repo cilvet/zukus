@@ -31,6 +31,7 @@ export function CollapsibleHeaderProvider({
   children,
   headerHeight = HEADER_HEIGHT,
 }: CollapsibleHeaderProviderProps) {
+  "use no memo"; // Reanimated shared values are mutable by design
   const scrollY = useSharedValue(0)
   const lastScrollY = useSharedValue(0)
   const headerTranslateY = useSharedValue(0)

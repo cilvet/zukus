@@ -23,6 +23,7 @@
     "@tamagui/shorthands": "^1.144.1",
     "@types/react-swipeable-views": "^0.13.6",
     "@zukus/core": "workspace:*",
+    "babel-plugin-react-compiler": "^19.0.0-beta-af1b7da-20250417",
     "expo": "~54.0.31",
     "expo-constants": "~18.0.13",
     "expo-font": "^14.0.10",

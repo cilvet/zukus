@@ -275,6 +275,8 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  "use no memo"; // React Compiler doesn't support try/finally yet
+
   const [themeName, setThemeState] = useState<ThemeName>('zukus')
   const [isLoading, setIsLoading] = useState(true)
 

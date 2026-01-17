@@ -39,6 +39,7 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
   modifier,
   onPress,
 }) => {
+  "use no memo"; // Reanimated shared values are mutable by design
   // Detectar cambios en el score - retorna un contador que se incrementa en cada cambio
   const glowTrigger = useGlowOnChange(score)
   const { themeInfo } = useTheme()

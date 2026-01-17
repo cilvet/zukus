@@ -21,6 +21,7 @@ type UseCollapsibleHeaderOptions = {
  * y reaparece al scrollear hacia arriba.
  */
 export function useCollapsibleHeader(options: UseCollapsibleHeaderOptions = {}) {
+  "use no memo"; // Reanimated shared values are mutable by design
   const headerHeight = options.headerHeight ?? HEADER_HEIGHT
 
   // Offset actual del scroll
