@@ -2,19 +2,30 @@ import { Pressable } from 'react-native'
 import { Text, XStack, YStack, Card } from 'tamagui'
 import { ABILITY_INFO, type Ability, type Skill } from './data'
 
-export function SectionHeader({ icon, title }: { icon: string; title: string }) {
+export function SectionHeader({
+  icon,
+  title,
+  action,
+}: {
+  icon: string
+  title: string
+  action?: React.ReactNode
+}) {
   return (
-    <XStack alignItems="center" gap={8} marginBottom={12}>
-      <Text fontSize={14}>{icon}</Text>
-      <Text
-        fontSize={12}
-        fontWeight="700"
-        color="$color"
-        letterSpacing={1.5}
-        textTransform="uppercase"
-      >
-        {title}
-      </Text>
+    <XStack alignItems="center" justifyContent="space-between" marginBottom={12}>
+      <XStack alignItems="center" gap={8}>
+        <Text fontSize={14}>{icon}</Text>
+        <Text
+          fontSize={12}
+          fontWeight="700"
+          color="$color"
+          letterSpacing={1.5}
+          textTransform="uppercase"
+        >
+          {title}
+        </Text>
+      </XStack>
+      {action}
     </XStack>
   )
 }

@@ -189,6 +189,100 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
   )
 }
 
+/**
+ * Versión compacta del AbilityCard - una línea horizontal
+ */
+export const AbilityCardCompact: React.FC<AbilityCardProps> = ({
+  abilityKey,
+  score,
+  modifier,
+  onPress,
+}) => {
+  "use no memo"; // Reanimated shared values are mutable by design
+  const glowTrigger = useGlowOnChange(score)
+  const { themeInfo } = useTheme()
+  const colors = themeInfo.colors
+
+  const glowProgress = useSharedValue(0)
+  const numberScale = useSharedValue(1)
+
+  useEffect(() => {
+    if (glowTrigger > 0) {
+      glowProgress.value = withSequence(
+        withTiming(1, { duration: 250, easing: Easing.out(Easing.cubic) }),
+        withTiming(0, { duration: 1200, easing: Easing.out(Easing.cubic) })
+      )
+
+      numberScale.value = withSequence(
+        withTiming(1.15, { duration: 150, easing: Easing.out(Easing.cubic) }),
+        withTiming(1, { duration: 300, easing: Easing.out(Easing.cubic) })
+      )
+    }
+  }, [glowTrigger, glowProgress, numberScale])
+
+  const animatedBorderStyle = useAnimatedStyle(() => {
+    const borderColor = interpolateColor(glowProgress.value, [0, 1], [colors.border, '#ffffff'])
+    return { borderColor }
+  }, [colors])
+
+  const animatedBackgroundGlowStyle = useAnimatedStyle(() => {
+    return { opacity: glowProgress.value * 0.2 }
+  }, [])
+
+  const animatedNumberStyle = useAnimatedStyle(() => {
+    return { transform: [{ scale: numberScale.value }] }
+  }, [])
+
+  const abbr = ABILITY_ABBR[abilityKey] ?? abilityKey.toUpperCase().slice(0, 3)
+
+  return (
+    <Animated.View
+      style={[
+        stylesCompact.cardWrapper,
+        animatedBorderStyle,
+        { backgroundColor: colors.background },
+      ]}
+    >
+      <Animated.View style={[stylesCompact.backgroundGlow, animatedBackgroundGlowStyle]} />
+      <Pressable
+        onPress={onPress}
+        android_ripple={{ color: `${colors.accent}50` }}
+        style={stylesCompact.pressable}
+      >
+        {({ pressed }) => (
+          <YStack
+            paddingVertical={8}
+            paddingHorizontal={12}
+            flexDirection="row"
+            alignItems="center"
+            width="100%"
+            opacity={pressed ? 0.7 : 1}
+          >
+            <Text
+              fontFamily="$label"
+              fontSize={13}
+              fontWeight="700"
+              color={colors.primary}
+              flex={1}
+            >
+              {abbr}
+            </Text>
+            <Animated.View style={[animatedNumberStyle, { flexDirection: 'row', alignItems: 'center', gap: 8 }]}>
+              <Text fontSize={16} fontWeight="800" color="#ffffff" textAlign="right" minWidth={36}>
+                {modifier > 0 ? '+' : ''}
+                {modifier}
+              </Text>
+              <Text fontSize={14} color={colors.accent} textAlign="center" minWidth={32}>
+                ({score})
+              </Text>
+            </Animated.View>
+          </YStack>
+        )}
+      </Pressable>
+    </Animated.View>
+  )
+}
+
 const styles = StyleSheet.create({
   cardWrapper: {
     width: 65,
@@ -216,6 +310,26 @@ const styles = StyleSheet.create({
   shineGradient: {
     flex: 1,
     width: '100%',
+  },
+  pressable: {
+    width: '100%',
+  },
+})
+
+const stylesCompact = StyleSheet.create({
+  cardWrapper: {
+    borderRadius: 6,
+    borderWidth: 1.5,
+    overflow: 'hidden',
+  },
+  backgroundGlow: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
   },
   pressable: {
     width: '100%',

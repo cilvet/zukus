@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
+import { View, Pressable } from 'react-native'
 import {
   useCharacterStore,
   useCharacterSheet,
@@ -11,6 +12,7 @@ import {
   useCharacterBAB,
   useCharacterBuffs,
   AbilityCard,
+  AbilityCardCompact,
   Checkbox,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
@@ -27,7 +29,7 @@ import {
   GenericDetailPanel,
 } from '../../components/character'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility } from '@zukus/core'
+import type { CalculatedAbility, CalculatedAbilities } from '@zukus/core'
 import {
   SidePanel,
   SidePanelContainer,
@@ -36,6 +38,150 @@ import {
 } from '../../components/layout'
 import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 import { type DetailType, getDetailTitle, isValidDetailType } from '../../navigation'
+
+const ABILITY_COLUMNS = [
+  ['strength', 'dexterity', 'constitution'],
+  ['intelligence', 'wisdom', 'charisma'],
+]
+
+/**
+ * Icono simple de grid (3x2)
+ */
+function GridIcon({ size = 16, color = '#888' }: { size?: number; color?: string }) {
+  return (
+    <View style={{ width: size, height: size, flexDirection: 'row', gap: 2 }}>
+      <View style={{ flex: 1, gap: 2 }}>
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+      </View>
+      <View style={{ flex: 1, gap: 2 }}>
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+      </View>
+      <View style={{ flex: 1, gap: 2 }}>
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+        <View style={{ flex: 1, backgroundColor: color, borderRadius: 1 }} />
+      </View>
+    </View>
+  )
+}
+
+/**
+ * Icono simple de lista (líneas horizontales)
+ */
+function ListIcon({ size = 16, color = '#888' }: { size?: number; color?: string }) {
+  return (
+    <View style={{ width: size, height: size, gap: 3, justifyContent: 'center' }}>
+      <View style={{ height: 2, backgroundColor: color, borderRadius: 1 }} />
+      <View style={{ height: 2, backgroundColor: color, borderRadius: 1 }} />
+      <View style={{ height: 2, backgroundColor: color, borderRadius: 1 }} />
+    </View>
+  )
+}
+
+/**
+ * Card de Ability Scores con toggle para desktop
+ */
+function DesktopAbilitiesCard({
+  abilities,
+  onAbilityPress,
+}: {
+  abilities: CalculatedAbilities
+  onAbilityPress: (abilityKey: string) => void
+}) {
+  const [isCompactView, setIsCompactView] = useState(false)
+
+  const toggleView = () => {
+    setIsCompactView(!isCompactView)
+  }
+
+  return (
+    <SectionCard>
+      <SectionHeader
+        icon="*"
+        title="Ability Scores"
+        action={
+          <Pressable onPress={toggleView}>
+            {({ pressed }) => (
+              <View
+                style={{
+                  padding: 6,
+                  borderRadius: 4,
+                  opacity: pressed ? 0.5 : 1,
+                }}
+              >
+                {isCompactView ? <GridIcon size={16} color="#888" /> : <ListIcon size={16} color="#888" />}
+              </View>
+            )}
+          </Pressable>
+        }
+      />
+      {isCompactView ? (
+        <XStack gap={8}>
+          {ABILITY_COLUMNS.map((column, colIndex) => (
+            <YStack key={colIndex} flex={1} gap={6}>
+              {column.map((key) => {
+                const ability = abilities[key as keyof typeof abilities]
+                return (
+                  <AbilityCardCompact
+                    key={key}
+                    abilityKey={key}
+                    score={ability.totalScore}
+                    modifier={ability.totalModifier}
+                    onPress={() => onAbilityPress(key)}
+                  />
+                )
+              })}
+            </YStack>
+          ))}
+        </XStack>
+      ) : (
+        <YStack gap={12}>
+          <XStack justifyContent="space-between">
+            <AbilityCard
+              abilityKey="strength"
+              score={abilities.strength.totalScore}
+              modifier={abilities.strength.totalModifier}
+              onPress={() => onAbilityPress('strength')}
+            />
+            <AbilityCard
+              abilityKey="dexterity"
+              score={abilities.dexterity.totalScore}
+              modifier={abilities.dexterity.totalModifier}
+              onPress={() => onAbilityPress('dexterity')}
+            />
+            <AbilityCard
+              abilityKey="constitution"
+              score={abilities.constitution.totalScore}
+              modifier={abilities.constitution.totalModifier}
+              onPress={() => onAbilityPress('constitution')}
+            />
+          </XStack>
+          <XStack justifyContent="space-between">
+            <AbilityCard
+              abilityKey="intelligence"
+              score={abilities.intelligence.totalScore}
+              modifier={abilities.intelligence.totalModifier}
+              onPress={() => onAbilityPress('intelligence')}
+            />
+            <AbilityCard
+              abilityKey="wisdom"
+              score={abilities.wisdom.totalScore}
+              modifier={abilities.wisdom.totalModifier}
+              onPress={() => onAbilityPress('wisdom')}
+            />
+            <AbilityCard
+              abilityKey="charisma"
+              score={abilities.charisma.totalScore}
+              modifier={abilities.charisma.totalModifier}
+              onPress={() => onAbilityPress('charisma')}
+            />
+          </XStack>
+        </YStack>
+      )}
+    </SectionCard>
+  )
+}
 
 
 /**
@@ -135,51 +281,7 @@ function CharacterScreenDesktopContent() {
         {/* Columna 2: Ability Scores */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
-            <SectionCard>
-              <SectionHeader icon="*" title="Ability Scores" />
-              <YStack gap={12}>
-                <XStack justifyContent="space-between">
-                  <AbilityCard
-                    abilityKey="strength"
-                    score={abilities.strength.totalScore}
-                    modifier={abilities.strength.totalModifier}
-                    onPress={() => handleAbilityPress('strength')}
-                  />
-                  <AbilityCard
-                    abilityKey="dexterity"
-                    score={abilities.dexterity.totalScore}
-                    modifier={abilities.dexterity.totalModifier}
-                    onPress={() => handleAbilityPress('dexterity')}
-                  />
-                  <AbilityCard
-                    abilityKey="constitution"
-                    score={abilities.constitution.totalScore}
-                    modifier={abilities.constitution.totalModifier}
-                    onPress={() => handleAbilityPress('constitution')}
-                  />
-                </XStack>
-                <XStack justifyContent="space-between">
-                  <AbilityCard
-                    abilityKey="intelligence"
-                    score={abilities.intelligence.totalScore}
-                    modifier={abilities.intelligence.totalModifier}
-                    onPress={() => handleAbilityPress('intelligence')}
-                  />
-                  <AbilityCard
-                    abilityKey="wisdom"
-                    score={abilities.wisdom.totalScore}
-                    modifier={abilities.wisdom.totalModifier}
-                    onPress={() => handleAbilityPress('wisdom')}
-                  />
-                  <AbilityCard
-                    abilityKey="charisma"
-                    score={abilities.charisma.totalScore}
-                    modifier={abilities.charisma.totalModifier}
-                    onPress={() => handleAbilityPress('charisma')}
-                  />
-                </XStack>
-              </YStack>
-            </SectionCard>
+            <DesktopAbilitiesCard abilities={abilities} onAbilityPress={handleAbilityPress} />
           </YStack>
         </VerticalSection>
 

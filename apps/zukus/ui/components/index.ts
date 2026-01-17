@@ -1,1 +1,1 @@
-export { AbilityCard, type AbilityCardProps } from './character'
+export { AbilityCard, AbilityCardCompact, type AbilityCardProps } from './character'
