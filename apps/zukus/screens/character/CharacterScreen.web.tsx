@@ -4,13 +4,11 @@ import { Text, XStack, YStack } from 'tamagui'
 import {
   useCharacterStore,
   useCharacterAbilities,
-  useGlowingAbility,
   useCharacterBuffs,
   AbilityCard,
   Checkbox,
-  type CheckboxVariant,
 } from '../../ui'
-import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
+import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 import {
   MOCK_CHARACTER,
   CharacterPager,
@@ -48,7 +46,6 @@ function WebCombatSection() {
 function WebAbilitiesSection() {
   const navigateToDetail = useNavigateToDetail()
   const abilities = useCharacterAbilities()
-  const glowingAbility = useGlowingAbility()
 
   const handleAbilityPress = (abilityKey: string) => {
     navigateToDetail('ability', abilityKey)
@@ -82,21 +79,18 @@ function WebAbilitiesSection() {
                 abilityKey="strength"
                 score={abilities.strength.totalScore}
                 modifier={abilities.strength.totalModifier}
-                isGlowing={glowingAbility === 'strength'}
                 onPress={() => handleAbilityPress('strength')}
               />
               <AbilityCard
                 abilityKey="dexterity"
                 score={abilities.dexterity.totalScore}
                 modifier={abilities.dexterity.totalModifier}
-                isGlowing={glowingAbility === 'dexterity'}
                 onPress={() => handleAbilityPress('dexterity')}
               />
               <AbilityCard
                 abilityKey="constitution"
                 score={abilities.constitution.totalScore}
                 modifier={abilities.constitution.totalModifier}
-                isGlowing={glowingAbility === 'constitution'}
                 onPress={() => handleAbilityPress('constitution')}
               />
             </XStack>
@@ -105,21 +99,18 @@ function WebAbilitiesSection() {
                 abilityKey="intelligence"
                 score={abilities.intelligence.totalScore}
                 modifier={abilities.intelligence.totalModifier}
-                isGlowing={glowingAbility === 'intelligence'}
                 onPress={() => handleAbilityPress('intelligence')}
               />
               <AbilityCard
                 abilityKey="wisdom"
                 score={abilities.wisdom.totalScore}
                 modifier={abilities.wisdom.totalModifier}
-                isGlowing={glowingAbility === 'wisdom'}
                 onPress={() => handleAbilityPress('wisdom')}
               />
               <AbilityCard
                 abilityKey="charisma"
                 score={abilities.charisma.totalScore}
                 modifier={abilities.charisma.totalModifier}
-                isGlowing={glowingAbility === 'charisma'}
                 onPress={() => handleAbilityPress('charisma')}
               />
             </XStack>
@@ -169,10 +160,7 @@ function WebBuffsSection() {
   const buffs = useCharacterBuffs()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
 
-  // Filtrar solo los buffs de enhancement que tenemos info de display
-  const enhancementBuffs = buffs.filter((buff) => BUFF_DISPLAY_INFO[buff.uniqueId])
-
-  if (enhancementBuffs.length === 0) {
+  if (buffs.length === 0) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <YStack padding={16}>
@@ -194,18 +182,15 @@ function WebBuffsSection() {
         <SectionCard>
           <SectionHeader icon="*" title="Conjuros Activos" />
           <YStack gap={0}>
-            {enhancementBuffs.map((buff) => {
-              const displayInfo = BUFF_DISPLAY_INFO[buff.uniqueId]
-              const abilityKey = BUFF_ABILITY_MAP[buff.uniqueId]
-
+            {buffs.map((buff) => {
               return (
                 <Checkbox
                   key={buff.uniqueId}
                   checked={buff.active}
-                  onCheckedChange={() => toggleBuff(buff.uniqueId, abilityKey)}
-                  label={`${displayInfo.emoji} ${displayInfo.name}`}
+                  onCheckedChange={() => toggleBuff(buff.uniqueId)}
+                  label={buff.name}
                   size="small"
-                  variant={displayInfo.checkboxVariant as CheckboxVariant}
+                  variant="diamond"
                 />
               )
             })}

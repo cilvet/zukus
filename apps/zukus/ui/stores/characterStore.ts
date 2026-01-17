@@ -21,11 +21,6 @@ type CharacterState = {
    * Gestiona todas las operaciones de actualización del personaje.
    */
   updater: CharacterUpdater | null
-  /**
-   * Tracking de qué ability fue modificada para trigger de animaciones.
-   * Se limpia automáticamente después de 1 segundo.
-   */
-  glowingAbility: string | null
 }
 
 type CharacterActions = {
@@ -34,7 +29,7 @@ type CharacterActions = {
   clearCharacter: () => void
 
   // Buff Management
-  toggleBuff: (buffUniqueId: string, abilityKey?: string) => UpdateResult
+  toggleBuff: (buffUniqueId: string) => UpdateResult
   addBuff: (buff: Buff) => UpdateResult
   editBuff: (buff: Buff) => UpdateResult
   deleteBuff: (buffId: string) => UpdateResult
@@ -66,10 +61,6 @@ type CharacterActions = {
 
   // Rest
   rest: () => UpdateResult
-
-  // UI State
-  clearGlowingAbility: () => void
-  triggerGlow: (abilityKey: string) => void
 }
 
 type CharacterStore = CharacterState & CharacterActions
@@ -82,7 +73,6 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   characterSheet: null,
   baseData: null,
   updater: null,
-  glowingAbility: null,
 
   // =============================================================================
   // Inicialización
@@ -103,22 +93,10 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   // Buff Management
   // =============================================================================
 
-  toggleBuff: (buffUniqueId: string, abilityKey?: string) => {
+  toggleBuff: (buffUniqueId: string) => {
     const { updater } = get()
     if (!updater) return notSetResult
-
-    const result = updater.toggleBuff(buffUniqueId)
-
-    // Trigger glow si el buff se activó
-    if (result.success && abilityKey) {
-      const baseData = updater.getCharacterBaseData()
-      const buff = baseData?.buffs.find((b) => b.uniqueId === buffUniqueId)
-      if (buff?.active) {
-        get().triggerGlow(abilityKey)
-      }
-    }
-
-    return result
+    return updater.toggleBuff(buffUniqueId)
   },
 
   addBuff: (buff: Buff) => {
@@ -266,26 +244,6 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     if (!updater) return notSetResult
     return updater.rest()
   },
-
-  // =============================================================================
-  // UI State
-  // =============================================================================
-
-  clearGlowingAbility: () => {
-    set({ glowingAbility: null })
-  },
-
-  triggerGlow: (abilityKey: string) => {
-    set({ glowingAbility: abilityKey })
-
-    // Auto-limpiar después de 1 segundo
-    setTimeout(() => {
-      const current = get()
-      if (current.glowingAbility === abilityKey) {
-        set({ glowingAbility: null })
-      }
-    }, 1000)
-  },
 }))
 
 // =============================================================================
@@ -342,10 +300,6 @@ export function useCharacterAttacks() {
 
 export function useCharacterBuffs() {
   return useCharacterStore((state) => state.baseData?.buffs ?? EMPTY_BUFFS)
-}
-
-export function useGlowingAbility() {
-  return useCharacterStore((state) => state.glowingAbility)
 }
 
 // =============================================================================

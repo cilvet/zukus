@@ -9,11 +9,9 @@ import {
   useCharacterArmorClass,
   useCharacterInitiative,
   useCharacterBAB,
-  useGlowingAbility,
   useCharacterBuffs,
   AbilityCard,
   Checkbox,
-  type CheckboxVariant,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -36,7 +34,7 @@ import {
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
-import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
+import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 import { type DetailType, getDetailTitle, isValidDetailType } from '../../navigation'
 
 
@@ -51,7 +49,6 @@ function CharacterScreenDesktopContent() {
   const armorClass = useCharacterArmorClass()
   const initiative = useCharacterInitiative()
   const bab = useCharacterBAB()
-  const glowingAbility = useGlowingAbility()
   const buffs = useCharacterBuffs()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
 
@@ -146,21 +143,18 @@ function CharacterScreenDesktopContent() {
                     abilityKey="strength"
                     score={abilities.strength.totalScore}
                     modifier={abilities.strength.totalModifier}
-                    isGlowing={glowingAbility === 'strength'}
                     onPress={() => handleAbilityPress('strength')}
                   />
                   <AbilityCard
                     abilityKey="dexterity"
                     score={abilities.dexterity.totalScore}
                     modifier={abilities.dexterity.totalModifier}
-                    isGlowing={glowingAbility === 'dexterity'}
                     onPress={() => handleAbilityPress('dexterity')}
                   />
                   <AbilityCard
                     abilityKey="constitution"
                     score={abilities.constitution.totalScore}
                     modifier={abilities.constitution.totalModifier}
-                    isGlowing={glowingAbility === 'constitution'}
                     onPress={() => handleAbilityPress('constitution')}
                   />
                 </XStack>
@@ -169,21 +163,18 @@ function CharacterScreenDesktopContent() {
                     abilityKey="intelligence"
                     score={abilities.intelligence.totalScore}
                     modifier={abilities.intelligence.totalModifier}
-                    isGlowing={glowingAbility === 'intelligence'}
                     onPress={() => handleAbilityPress('intelligence')}
                   />
                   <AbilityCard
                     abilityKey="wisdom"
                     score={abilities.wisdom.totalScore}
                     modifier={abilities.wisdom.totalModifier}
-                    isGlowing={glowingAbility === 'wisdom'}
                     onPress={() => handleAbilityPress('wisdom')}
                   />
                   <AbilityCard
                     abilityKey="charisma"
                     score={abilities.charisma.totalScore}
                     modifier={abilities.charisma.totalModifier}
-                    isGlowing={glowingAbility === 'charisma'}
                     onPress={() => handleAbilityPress('charisma')}
                   />
                 </XStack>
@@ -198,23 +189,18 @@ function CharacterScreenDesktopContent() {
             <SectionCard>
               <SectionHeader icon="*" title="Conjuros Activos" />
               <YStack gap={0}>
-                {buffs
-                  .filter((buff) => BUFF_DISPLAY_INFO[buff.uniqueId])
-                  .map((buff) => {
-                    const displayInfo = BUFF_DISPLAY_INFO[buff.uniqueId]
-                    const abilityKey = BUFF_ABILITY_MAP[buff.uniqueId]
-
-                    return (
-                      <Checkbox
-                        key={buff.uniqueId}
-                        checked={buff.active}
-                        onCheckedChange={() => toggleBuff(buff.uniqueId, abilityKey)}
-                        label={`${displayInfo.emoji} ${displayInfo.name}`}
-                        size="small"
-                        variant={displayInfo.checkboxVariant as CheckboxVariant}
-                      />
-                    )
-                  })}
+                {buffs.map((buff) => {
+                  return (
+                    <Checkbox
+                      key={buff.uniqueId}
+                      checked={buff.active}
+                      onCheckedChange={() => toggleBuff(buff.uniqueId)}
+                      label={buff.name}
+                      size="small"
+                      variant="diamond"
+                    />
+                  )
+                })}
               </YStack>
             </SectionCard>
           </YStack>

@@ -15,6 +15,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useGlowOnChange } from '../../../hooks'
 
 const ABILITY_ABBR: Record<string, string> = {
   strength: 'STR',
@@ -29,7 +30,6 @@ export type AbilityCardProps = {
   abilityKey: string
   score: number
   modifier: number
-  isGlowing?: boolean
   onPress?: () => void
 }
 
@@ -37,9 +37,10 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
   abilityKey,
   score,
   modifier,
-  isGlowing = false,
   onPress,
 }) => {
+  // Detectar cambios en el score - retorna un contador que se incrementa en cada cambio
+  const glowTrigger = useGlowOnChange(score)
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 
@@ -52,7 +53,8 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
   const SHINE_WIDTH = 50
 
   useEffect(() => {
-    if (isGlowing) {
+    // glowTrigger > 0 significa que hubo al menos un cambio después del mount
+    if (glowTrigger > 0) {
       // Animate border glow and background
       glowProgress.value = withSequence(
         withTiming(1, {
@@ -85,7 +87,7 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
         withTiming(0, { duration: 300, easing: Easing.out(Easing.cubic) })
       )
     }
-  }, [isGlowing, glowProgress, shinePosition, numberScale, numberTranslateY])
+  }, [glowTrigger, glowProgress, shinePosition, numberScale, numberTranslateY])
 
   const animatedBorderStyle = useAnimatedStyle(() => {
     const borderColor = interpolateColor(glowProgress.value, [0, 1], [colors.border, '#ffffff'])

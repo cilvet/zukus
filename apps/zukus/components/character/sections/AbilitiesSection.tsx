@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterAbilities, useGlowingAbility, AbilityCard } from '../../../ui'
+import { useCharacterAbilities, AbilityCard } from '../../../ui'
 import { SectionHeader, SectionCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
 import { useNavigateToDetail } from '../../../navigation'
@@ -9,12 +9,11 @@ import { useNavigateToDetail } from '../../../navigation'
 /**
  * Seccion de ability scores y skills.
  * Usa selector de Zustand para abilities (re-render granular).
- * El AbilityCard animado viene de ui local.
+ * El AbilityCard detecta cambios en su score y hace glow automáticamente.
  */
 export function AbilitiesSection() {
   const navigateToDetail = useNavigateToDetail()
   const abilities = useCharacterAbilities()
-  const glowingAbility = useGlowingAbility()
 
   const handleAbilityPress = (abilityKey: string) => {
     navigateToDetail('ability', abilityKey)
@@ -49,21 +48,18 @@ export function AbilitiesSection() {
                 abilityKey="strength"
                 score={abilities.strength.totalScore}
                 modifier={abilities.strength.totalModifier}
-                isGlowing={glowingAbility === 'strength'}
                 onPress={() => handleAbilityPress('strength')}
               />
               <AbilityCard
                 abilityKey="dexterity"
                 score={abilities.dexterity.totalScore}
                 modifier={abilities.dexterity.totalModifier}
-                isGlowing={glowingAbility === 'dexterity'}
                 onPress={() => handleAbilityPress('dexterity')}
               />
               <AbilityCard
                 abilityKey="constitution"
                 score={abilities.constitution.totalScore}
                 modifier={abilities.constitution.totalModifier}
-                isGlowing={glowingAbility === 'constitution'}
                 onPress={() => handleAbilityPress('constitution')}
               />
             </XStack>
@@ -72,21 +68,18 @@ export function AbilitiesSection() {
                 abilityKey="intelligence"
                 score={abilities.intelligence.totalScore}
                 modifier={abilities.intelligence.totalModifier}
-                isGlowing={glowingAbility === 'intelligence'}
                 onPress={() => handleAbilityPress('intelligence')}
               />
               <AbilityCard
                 abilityKey="wisdom"
                 score={abilities.wisdom.totalScore}
                 modifier={abilities.wisdom.totalModifier}
-                isGlowing={glowingAbility === 'wisdom'}
                 onPress={() => handleAbilityPress('wisdom')}
               />
               <AbilityCard
                 abilityKey="charisma"
                 score={abilities.charisma.totalScore}
                 modifier={abilities.charisma.totalModifier}
-                isGlowing={glowingAbility === 'charisma'}
                 onPress={() => handleAbilityPress('charisma')}
               />
             </XStack>

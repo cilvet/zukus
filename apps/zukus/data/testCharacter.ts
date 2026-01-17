@@ -16,6 +16,7 @@ import {
  */
 const enhancementBuffs = [
   { ...bullStrength, active: false },
+  { ...bullStrength, uniqueId: 'bulls-strength-2', active: false },
   { ...catsGrace, active: false },
   { ...bearsEndurance, active: false },
   { ...foxsCunning, active: false },
@@ -41,31 +42,3 @@ const characterBuilder = buildCharacter()
 
 export const testBaseData = characterBuilder.build()
 export const testCharacterSheet = characterBuilder.buildCharacterSheet()
-
-/**
- * Mapa de buff uniqueId -> abilityKey para la UI.
- * Usado por BuffsSection para saber qué ability se afecta.
- */
-export const BUFF_ABILITY_MAP: Record<string, string> = {
-  'bulls-strength': 'strength',
-  'cats-grace': 'dexterity',
-  'bears-endurance': 'constitution',
-  'foxs-cunning': 'intelligence',
-  'owls-wisdom': 'wisdom',
-  'eagles-splendor': 'charisma',
-}
-
-/**
- * Info de display para los buffs de enhancement.
- */
-export const BUFF_DISPLAY_INFO: Record<
-  string,
-  { name: string; emoji: string; checkboxVariant: string }
-> = {
-  'bulls-strength': { name: 'Fuerza de Toro', emoji: '🐂', checkboxVariant: 'diamond' },
-  'cats-grace': { name: 'Gracia Felina', emoji: '🐱', checkboxVariant: 'circle' },
-  'bears-endurance': { name: 'Resistencia del Oso', emoji: '🐻', checkboxVariant: 'gothic' },
-  'foxs-cunning': { name: 'Astucia del Zorro', emoji: '🦊', checkboxVariant: 'gear' },
-  'owls-wisdom': { name: 'Sabiduría del Búho', emoji: '🦉', checkboxVariant: 'shield' },
-  'eagles-splendor': { name: 'Esplendor del Águila', emoji: '🦅', checkboxVariant: 'star' },
-}

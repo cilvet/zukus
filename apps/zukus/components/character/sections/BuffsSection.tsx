@@ -1,22 +1,18 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, Text } from 'tamagui'
-import { Checkbox, useCharacterBuffs, useCharacterStore, type CheckboxVariant } from '../../../ui'
+import { Checkbox, useCharacterBuffs, useCharacterStore } from '../../../ui'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
-import { BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../../data/testCharacter'
 
 /**
  * Sección de Buffs/Conjuros Activos.
- * Muestra checkboxes para activar/desactivar buffs de enhancement.
+ * Muestra checkboxes para activar/desactivar buffs.
  */
 export function BuffsSection() {
   const buffs = useCharacterBuffs()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
 
-  // Filtrar solo los buffs de enhancement que tenemos info de display
-  const enhancementBuffs = buffs.filter((buff) => BUFF_DISPLAY_INFO[buff.uniqueId])
-
-  if (enhancementBuffs.length === 0) {
+  if (buffs.length === 0) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <YStack padding={16}>
@@ -39,18 +35,15 @@ export function BuffsSection() {
         <SectionCard>
           <SectionHeader icon="*" title="Conjuros Activos" />
           <YStack gap={0}>
-            {enhancementBuffs.map((buff) => {
-              const displayInfo = BUFF_DISPLAY_INFO[buff.uniqueId]
-              const abilityKey = BUFF_ABILITY_MAP[buff.uniqueId]
-
+            {buffs.map((buff) => {
               return (
                 <Checkbox
                   key={buff.uniqueId}
                   checked={buff.active}
-                  onCheckedChange={() => toggleBuff(buff.uniqueId, abilityKey)}
-                  label={`${displayInfo.emoji} ${displayInfo.name}`}
+                  onCheckedChange={() => toggleBuff(buff.uniqueId)}
+                  label={buff.name}
                   size="small"
-                  variant={displayInfo.checkboxVariant as CheckboxVariant}
+                  variant="diamond"
                 />
               )
             })}
