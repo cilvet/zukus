@@ -17,6 +17,10 @@ import {
   Checkbox,
   SavingThrowCard,
   ArmorClassCard,
+  InitiativeCard,
+  InitiativeDetailPanel,
+  BABCard,
+  BABDetailPanel,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -225,6 +229,14 @@ function CharacterScreenDesktopContent() {
     openPanel('armorClass', 'armorClass', getDetailTitle('armorClass', 'armorClass'))
   }
 
+  const handleInitiativePress = () => {
+    openPanel('initiative', 'initiative', getDetailTitle('initiative', 'initiative'))
+  }
+
+  const handleBABPress = () => {
+    openPanel('bab', 'bab', getDetailTitle('bab', 'bab'))
+  }
+
   const handleItemPress = (itemId: string, itemName: string) => {
     openPanel(itemId, 'item', itemName)
   }
@@ -300,8 +312,19 @@ function CharacterScreenDesktopContent() {
             <SectionCard>
               <SectionHeader icon="*" title="Combat Stats" />
               <YStack gap={8}>
-                <StatBox label="Initiative" value={`+${initiative?.totalValue ?? 0}`} icon="IN" />
-                <StatBox label="BAB" value={`+${bab?.totalValue ?? 0}`} icon="BA" />
+                {initiative && (
+                  <InitiativeCard
+                    totalValue={initiative.totalValue}
+                    onPress={handleInitiativePress}
+                  />
+                )}
+                {bab && (
+                  <BABCard
+                    totalValue={bab.totalValue}
+                    multipleAttacks={bab.multipleBaseAttackBonuses}
+                    onPress={handleBABPress}
+                  />
+                )}
               </YStack>
             </SectionCard>
             {savingThrows && (
@@ -441,6 +464,19 @@ function CharacterScreenDesktopContent() {
             touchSourceValues={armorClass.touchAc.sourceValues}
             flatFootedValue={armorClass.flatFootedAc.totalValue}
             flatFootedSourceValues={armorClass.flatFootedAc.sourceValues}
+          />
+        )}
+        {currentPanel?.type === 'initiative' && initiative && (
+          <InitiativeDetailPanel
+            totalValue={initiative.totalValue}
+            sourceValues={initiative.sourceValues}
+          />
+        )}
+        {currentPanel?.type === 'bab' && bab && (
+          <BABDetailPanel
+            totalValue={bab.totalValue}
+            multipleAttacks={bab.multipleBaseAttackBonuses}
+            sourceValues={bab.sourceValues}
           />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (

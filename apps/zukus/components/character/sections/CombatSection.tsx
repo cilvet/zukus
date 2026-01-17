@@ -13,6 +13,7 @@ export function CombatSection() {
   const savingThrows = useCharacterSavingThrows()
   const armorClass = useCharacterArmorClass()
   const initiative = useCharacterInitiative()
+  const bab = useCharacterBAB()
   const navigateToDetail = useNavigateToDetail()
 
   const handleSavingThrowPress = (savingThrowKey: string) => {
@@ -25,6 +26,10 @@ export function CombatSection() {
 
   const handleInitiativePress = () => {
     navigateToDetail('initiative', 'initiative')
+  }
+
+  const handleBABPress = () => {
+    navigateToDetail('bab', 'bab')
   }
 
   return (
@@ -56,8 +61,13 @@ export function CombatSection() {
                 onPress={handleInitiativePress}
               />
             )}
-            <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="SPD" />
-            <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="PROF" />
+            {bab && (
+              <BABCard
+                totalValue={bab.totalValue}
+                multipleAttacks={bab.multipleBaseAttackBonuses}
+                onPress={handleBABPress}
+              />
+            )}
           </YStack>
         </SectionCard>
 

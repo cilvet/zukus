@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useTheme, SavingThrowDetailPanel } from '../../ui'
+import { useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
@@ -122,6 +122,45 @@ function ArmorClassDetail() {
   )
 }
 
+function InitiativeDetail() {
+  const initiative = useCharacterInitiative()
+
+  if (!initiative) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <InitiativeDetailPanel
+      totalValue={initiative.totalValue}
+      sourceValues={initiative.sourceValues}
+    />
+  )
+}
+
+function BABDetail() {
+  const bab = useCharacterBAB()
+
+  if (!bab) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <BABDetailPanel
+      totalValue={bab.totalValue}
+      multipleAttacks={bab.multipleBaseAttackBonuses}
+      sourceValues={bab.sourceValues}
+    />
+  )
+}
+
 function NotImplementedDetail({ type, id }: { type: string; id: string }) {
   return (
     <YStack flex={1} justifyContent="center" alignItems="center" padding={20}>
@@ -196,6 +235,10 @@ export function DetailScreen() {
         return <SavingThrowDetail savingThrowKey={id} />
       case 'armorClass':
         return <ArmorClassDetail />
+      case 'initiative':
+        return <InitiativeDetail />
+      case 'bab':
+        return <BABDetail />
       case 'skill':
       case 'spell':
       case 'buff':
