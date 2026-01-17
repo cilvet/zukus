@@ -4,13 +4,13 @@
   "description": "Core D&D 5e system - dice, characters, spells, items",
   "author": "Iñigo Cilveti",
   "license": "ISC",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.ts",
+  "types": "index.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./core/*": "./dist/core/*.js",
-    "./srd/*": "./dist/srd/*.js",
-    "./data/*": "./dist/data/*.js"
+    ".": "./index.ts",
+    "./core/*": "./core/*.ts",
+    "./srd/*": "./srd/*.ts",
+    "./data/*": "./data/*.ts"
   },
   "scripts": {
     "build": "tsc",

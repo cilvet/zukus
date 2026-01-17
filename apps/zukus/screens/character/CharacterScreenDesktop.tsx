@@ -30,6 +30,7 @@ import {
   GenericDetailPanel,
 } from '../../components/character'
 import type { Ability } from '../../components/character/data'
+import type { CalculatedAbility } from '@zukus/core'
 import {
   SidePanel,
   SidePanelContainer,
@@ -79,17 +80,13 @@ function CharacterScreenDesktopContent() {
   }
 
   // Obtener ability para el panel de detalle
-  const getAbilityForPanel = (abilityKey: string): Ability | null => {
+  const getCalculatedAbility = (abilityKey: string): CalculatedAbility | null => {
     if (!abilities) return null
-    const abilityMap: Record<string, { totalScore: number; totalModifier: number }> = {
-      strength: abilities.strength,
-      dexterity: abilities.dexterity,
-      constitution: abilities.constitution,
-      intelligence: abilities.intelligence,
-      wisdom: abilities.wisdom,
-      charisma: abilities.charisma,
-    }
-    const coreAbility = abilityMap[abilityKey]
+    return abilities[abilityKey] as CalculatedAbility | undefined ?? null
+  }
+
+  const getAbilityForPanel = (abilityKey: string): Ability | null => {
+    const coreAbility = getCalculatedAbility(abilityKey)
     if (!coreAbility) return null
     return {
       score: coreAbility.totalScore,
@@ -284,6 +281,7 @@ function CharacterScreenDesktopContent() {
           <AbilityDetailPanel
             abilityKey={currentPanel.id}
             ability={getAbilityForPanel(currentPanel.id)!}
+            sourceValues={getCalculatedAbility(currentPanel.id)?.sourceValues}
           />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (

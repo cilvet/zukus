@@ -1,9 +1,10 @@
-import { View, ScrollView, StyleSheet, Pressable } from 'react-native'
+import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
 import { useCharacterAbilities, useTheme } from '../../ui'
 import { AbilityDetailPanel, ABILITY_INFO } from '../../components/character'
 import type { Ability } from '../../components/character/data'
+import type { CalculatedAbility } from '@zukus/core'
 
 type DetailType = 'ability' | 'skill' | 'spell' | 'buff' | 'equipment'
 
@@ -40,16 +41,7 @@ function AbilityDetail({ abilityKey }: { abilityKey: string }) {
     )
   }
   
-  const abilityMap: Record<string, { totalScore: number; totalModifier: number }> = {
-    strength: abilities.strength,
-    dexterity: abilities.dexterity,
-    constitution: abilities.constitution,
-    intelligence: abilities.intelligence,
-    wisdom: abilities.wisdom,
-    charisma: abilities.charisma,
-  }
-  
-  const coreAbility = abilityMap[abilityKey]
+  const coreAbility = abilities[abilityKey] as CalculatedAbility | undefined
   if (!coreAbility) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center">
@@ -63,7 +55,13 @@ function AbilityDetail({ abilityKey }: { abilityKey: string }) {
     modifier: coreAbility.totalModifier,
   }
   
-  return <AbilityDetailPanel abilityKey={abilityKey} ability={ability} />
+  return (
+    <AbilityDetailPanel 
+      abilityKey={abilityKey} 
+      ability={ability} 
+      sourceValues={coreAbility.sourceValues}
+    />
+  )
 }
 
 function NotImplementedDetail({ type, id }: { type: string; id: string }) {
