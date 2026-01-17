@@ -200,7 +200,7 @@ export function CharacterHeader({
         alignItems="center"
         justifyContent="center"
       >
-        <Text fontSize={32}>🧙</Text>
+        <Text fontSize={32}>CHAR</Text>
       </YStack>
       <YStack alignItems="center" gap={4}>
         <Text fontSize={20} fontWeight="800" color="$color">
@@ -217,7 +217,7 @@ export function CharacterHeader({
 export function HpBar({ current, max }: { current: number; max: number }) {
   return (
     <SectionCard>
-      <SectionHeader icon="❤️" title="Hit Points" />
+      <SectionHeader icon="HP" title="Hit Points" />
       <YStack gap={8}>
         <XStack alignItems="baseline" gap={4}>
           <Text fontSize={32} fontWeight="700" color="$color">
@@ -291,7 +291,7 @@ export function CompactCharacterHeader({
         alignItems="center"
         justifyContent="center"
       >
-        <Text fontSize={20}>🧙</Text>
+        <Text fontSize={20}>CHAR</Text>
       </YStack>
 
       {/* Derecha: HP */}

@@ -4,26 +4,7 @@ import { Text, YStack, XStack, Card } from 'tamagui'
 import type { SourceValue } from '@zukus/core'
 import { SourceValuesTable } from './SourceValuesTable'
 import { useTheme } from '../../contexts/ThemeContext'
-
-type ACType = 'total' | 'touch' | 'flatFooted'
-
-const AC_TYPE_INFO: Record<ACType, { name: string; fullName: string; description: string }> = {
-  total: {
-    name: 'Total',
-    fullName: 'Total AC',
-    description: 'Your full Armor Class including armor, shield, Dexterity modifier, size modifier, natural armor, deflection bonuses, and other bonuses.',
-  },
-  touch: {
-    name: 'Touch',
-    fullName: 'Touch AC',
-    description: 'Your AC against touch attacks. Touch attacks ignore armor, shields, and natural armor bonuses. They include most spells that require an attack roll.',
-  },
-  flatFooted: {
-    name: 'Flat-Footed',
-    fullName: 'Flat-Footed AC',
-    description: 'Your AC when caught flat-footed (before acting in combat or when unable to react). You lose your Dexterity bonus to AC and some other bonuses.',
-  },
-}
+import { AC_TYPE_INFO, type ACType } from '../../../components/character/data'
 
 export type ArmorClassDetailPanelProps = {
   totalValue: number

@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterSavingThrows, useCharacterArmorClass, SavingThrowCard, ArmorClassCard } from '../../../ui'
+import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import { SectionHeader, SectionCard, StatBox } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
@@ -12,6 +12,7 @@ import { MOCK_CHARACTER } from '../data'
 export function CombatSection() {
   const savingThrows = useCharacterSavingThrows()
   const armorClass = useCharacterArmorClass()
+  const initiative = useCharacterInitiative()
   const navigateToDetail = useNavigateToDetail()
 
   const handleSavingThrowPress = (savingThrowKey: string) => {
@@ -20,6 +21,10 @@ export function CombatSection() {
 
   const handleArmorClassPress = () => {
     navigateToDetail('armorClass', 'armorClass')
+  }
+
+  const handleInitiativePress = () => {
+    navigateToDetail('initiative', 'initiative')
   }
 
   return (
@@ -32,7 +37,7 @@ export function CombatSection() {
       >
         {armorClass && (
           <SectionCard>
-            <SectionHeader icon="🛡️" title="Armor Class" />
+            <SectionHeader icon="AC" title="Armor Class" />
             <ArmorClassCard
               totalAC={armorClass.totalAc.totalValue}
               touchAC={armorClass.touchAc.totalValue}
@@ -43,16 +48,22 @@ export function CombatSection() {
         )}
 
         <SectionCard>
-          <SectionHeader icon="⚔️" title="Combat Stats" />
+          <SectionHeader icon="CMBT" title="Combat Stats" />
           <YStack gap={8}>
-            <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="👟" />
-            <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="⭐" />
+            {initiative && (
+              <InitiativeCard
+                totalValue={initiative.totalValue}
+                onPress={handleInitiativePress}
+              />
+            )}
+            <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="SPD" />
+            <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="PROF" />
           </YStack>
         </SectionCard>
 
         {savingThrows && (
           <SectionCard>
-            <SectionHeader icon="🎯" title="Saving Throws" />
+            <SectionHeader icon="SAVE" title="Saving Throws" />
             <XStack gap={8}>
               <SavingThrowCard
                 savingThrowKey="fortitude"

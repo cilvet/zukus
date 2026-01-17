@@ -7,17 +7,17 @@ const theme = themes[CURRENT_THEME]
 
 const COMPONENT_INFO: Record<string, { icon: string; fullName: string; description: string }> = {
   verbal: {
-    icon: '🗣️',
+    icon: 'V',
     fullName: 'Componente Verbal',
     description: 'La mayoría de los conjuros requieren la recitación de palabras místicas. Las palabras en sí no son la fuente del poder del conjuro; más bien, la combinación particular de sonidos, con tono y resonancia específicos, pone en marcha las hebras de la magia.',
   },
   somatic: {
-    icon: '🤚',
+    icon: 'S',
     fullName: 'Componente Somático',
     description: 'Los gestos de lanzamiento de conjuros pueden incluir una gesticulación enérgica o un conjunto intrincado de gestos. Si un conjuro requiere un componente somático, el lanzador debe tener libre uso de al menos una mano para realizar estos gestos.',
   },
   material: {
-    icon: '💎',
+    icon: 'M',
     fullName: 'Componente Material',
     description: 'Lanzar algunos conjuros requiere objetos particulares, especificados entre paréntesis en la entrada del componente. Un personaje puede usar una bolsa de componentes o un foco de lanzamiento de conjuros en lugar de los componentes especificados para un conjuro.',
   },
@@ -73,7 +73,7 @@ export default function SpellComponentScreen() {
         </View>
 
         <View style={styles.successBox}>
-          <Text style={styles.successTitle}>✅ Navegación funcionando</Text>
+          <Text style={styles.successTitle}>OK - Navegación funcionando</Text>
           <Text style={styles.successText}>
             Has llegado al nivel más profundo de navegación anidada.
             Esto demuestra que el stack navigation funciona correctamente

@@ -32,11 +32,11 @@ function WebCombatSection() {
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
-          <SectionHeader icon="⚔️" title="Combat Stats" />
+          <SectionHeader icon="CMBT" title="Combat Stats" />
           <YStack gap={8}>
-            <StatBox label="Armor Class" value={MOCK_CHARACTER.ac} icon="🛡️" />
-            <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="👟" />
-            <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="⭐" />
+            <StatBox label="Armor Class" value={MOCK_CHARACTER.ac} icon="AC" />
+            <StatBox label="Speed" value={`${MOCK_CHARACTER.speed}ft`} icon="SPD" />
+            <StatBox label="Proficiency" value={`+${MOCK_CHARACTER.proficiencyBonus}`} icon="PROF" />
           </YStack>
         </SectionCard>
       </ScrollView>
@@ -63,7 +63,7 @@ function WebEquipmentSection() {
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
-          <SectionHeader icon="🎒" title="Equipment" />
+          <SectionHeader icon="EQP" title="Equipment" />
           <YStack gap={8}>
             {MOCK_CHARACTER.equipment.map((item, idx) => (
               <ItemCard key={idx} name={item.name} subtitle={item.type} onPress={() => handleItemPress(`equipment-${idx}`, item.name)} />
@@ -144,7 +144,7 @@ function WebSpellsSection() {
         showsVerticalScrollIndicator={false}
       >
         <SectionCard>
-          <SectionHeader icon="📜" title="Spells" />
+          <SectionHeader icon="SPL" title="Spells" />
           <YStack gap={8}>
             {MOCK_CHARACTER.spells.map((spell, idx) => (
               <ItemCard key={idx} name={spell.name} subtitle={`Level ${spell.level}`} onPress={() => handleSpellPress(`spell-${idx}`, spell.name)} />
@@ -200,7 +200,7 @@ export function CharacterScreen() {
           alignItems="center"
           justifyContent="center"
         >
-          <Text fontSize={20}>🧙</Text>
+          <Text fontSize={20}>CHAR</Text>
         </YStack>
 
         <YStack alignItems="flex-end" flex={1}>

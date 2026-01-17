@@ -133,7 +133,7 @@ export default function SpellDetailScreen() {
                 onPress={() => handleComponentPress(component)}
               >
                 <Text style={styles.componentIcon}>
-                  {component.type === 'verbal' ? '🗣️' : component.type === 'somatic' ? '🤚' : '💎'}
+                  {component.type === 'verbal' ? 'V' : component.type === 'somatic' ? 'S' : 'M'}
                 </Text>
                 <View style={styles.componentInfo}>
                   <Text style={styles.componentName}>{component.name}</Text>
