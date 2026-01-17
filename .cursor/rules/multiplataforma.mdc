@@ -33,3 +33,23 @@ apps/zukus/ui/components/
 **Separar** cuando:
 - APIs nativas incompatibles (ej: navegación, gestos específicos)
 - Rendimiento crítico requiere implementación distinta
+
+## TypeScript y Extensiones de Plataforma
+
+TypeScript no entiende `.native.ts` / `.web.ts`. Para que compile, crear un archivo base:
+
+```
+hooks/
+  useMyHook.ts           # Base para TypeScript (re-exporta de .web.ts)
+  useMyHook.native.ts    # Metro usa en nativo
+  useMyHook.web.ts       # Metro usa en web
+  useMyHook.types.ts     # Tipos compartidos (opcional)
+```
+
+```typescript
+// useMyHook.ts
+export { useMyHook } from './useMyHook.web'
+export type { MyHookResult } from './useMyHook.types'
+```
+
+Metro resuelve automaticamente `.native.ts` o `.web.ts` en runtime.

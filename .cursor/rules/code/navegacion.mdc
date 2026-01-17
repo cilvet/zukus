@@ -1,0 +1,78 @@
+---
+description: Sistema de navegacion a pantallas de detalle
+globs: 
+alwaysApply: true
+---
+
+# Navegacion a Detalles
+
+## Como Navegar
+
+Usar el hook unificado en lugar de `router.push` o `openPanel` directamente:
+
+```typescript
+import { useNavigateToDetail } from '../../navigation'
+
+const navigateToDetail = useNavigateToDetail()
+
+// Navegar a un detalle
+navigateToDetail('ability', 'strength')
+navigateToDetail('spell', 'fireball', 'Bola de Fuego')  // con nombre custom
+```
+
+El hook hace lo correcto segun la plataforma:
+- Desktop web: abre SidePanel
+- Mobile: navega con stack (Expo Router)
+
+## Como Añadir un Nuevo Tipo de Detalle
+
+1. **Añadir el tipo** en `navigation/detailRegistry.tsx`:
+
+```typescript
+export type DetailType = 'ability' | 'skill' | ... | 'nuevoTipo'
+
+export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
+  // ...existentes...
+  nuevoTipo: {
+    getTitle: (id) => /* logica para obtener titulo */,
+  },
+}
+```
+
+2. **Crear el componente** de detalle en `components/character/`:
+
+```typescript
+// NuevoTipoDetailPanel.tsx
+export function NuevoTipoDetailPanel({ id }: { id: string }) {
+  // ...
+}
+```
+
+3. **Añadir al switch de mobile** en `screens/detail/DetailScreen.tsx`:
+
+```typescript
+switch (type) {
+  case 'ability':
+    return <AbilityDetail abilityKey={id} />
+  case 'nuevoTipo':
+    return <NuevoTipoDetail id={id} />
+  // ...
+}
+```
+
+4. **Añadir al SidePanel de desktop** en `screens/character/CharacterScreenDesktop.tsx`:
+
+```typescript
+{currentPanel?.type === 'nuevoTipo' && (
+  <NuevoTipoDetailPanel id={currentPanel.id} />
+)}
+```
+
+## Archivos Clave
+
+| Archivo | Proposito |
+|---------|-----------|
+| `navigation/detailRegistry.tsx` | Tipos y titulos de detalle |
+| `navigation/useNavigateToDetail.ts` | Hook unificado |
+| `screens/detail/DetailScreen.tsx` | Renderiza detalles en mobile |
+| `screens/character/CharacterScreenDesktop.tsx` | Renderiza detalles en SidePanel |
