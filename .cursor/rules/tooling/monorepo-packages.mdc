@@ -1,0 +1,31 @@
+---
+description: Configuracion de paquetes internos del monorepo
+globs: 
+alwaysApply: true
+---
+
+# Paquetes Internos del Monorepo
+
+Los paquetes en `packages/` son internos y se consumen directamente desde los fuentes.
+
+## Configuración del package.json
+
+```json
+{
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  }
+}
+```
+
+## Reglas
+
+- **NO** apuntar a `dist/` - no hay proceso de build para paquetes internos
+- **NO** ejecutar `bun run build` en paquetes internos
+- Los cambios en el código fuente se reflejan inmediatamente
+
+## Por qué
+
+En un monorepo, TypeScript y el bundler (Metro/Vite) resuelven los imports directamente desde los fuentes. Compilar a `dist/` añade friccion innecesaria.

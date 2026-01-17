@@ -47,26 +47,43 @@ Evaluar cada potencial regla con estos criterios:
 ## 5. Propuestas de Reglas
 Para cada regla que consideres valiosa, presenta:
 
-### Propuesta [N]: [Título Descriptivo]
+### Propuesta [N]: [Titulo Descriptivo]
 
 **Fuente**: Usuario | Agente | Ambos
 
-**Acción**: Nueva regla | Editar regla existente: `[nombre-archivo.mdc]`
+**Accion**: Nueva regla | Editar regla existente: `[nombre-archivo.mdc]`
 
-**Justificación**:
-[Explica por qué esto mejora el contexto y previene tener que explicarlo de nuevo]
+**Justificacion**:
+[Explica por que esto mejora el contexto y previene tener que explicarlo de nuevo]
+
+**Ubicacion**: `.cursor/rules/[carpeta]/[nombre].mdc`
+- Decidir la carpeta segun el tipo de regla (code/, tooling/, testing/, workflow/, core/, etc.)
+- Revisar las carpetas existentes en `.cursor/rules/` para mantener coherencia
+
+**alwaysApply**: true | false
+- `true`: Regla que siempre debe aplicarse (convenciones generales, tooling, etc.)
+- `false`: Regla que solo aplica en contextos especificos
 
 **Contenido Propuesto**:
 ```markdown
-[Contenido completo de la regla en formato Markdown]
+---
+description: [Descripcion corta de la regla]
+globs: 
+alwaysApply: [true|false]
+---
+
+# [Titulo]
+
+[Contenido de la regla]
 - Incluir principios clave
-- Incluir 1-2 ejemplos (✅ correcto vs ❌ evitar)
+- Incluir 1-2 ejemplos (correcto vs evitar)
 - Ser conciso y accionable
 ```
 
-**Ubicación Sugerida**:
-- Si es nueva: `.cursor/rules/[nombre-sugerido].mdc`
-- Si es edición: indicar sección específica a modificar
+**IMPORTANTE sobre el formato .mdc**:
+- Siempre incluir el frontmatter YAML con `description`, `globs`, y `alwaysApply`
+- Dejar `globs:` vacio (sin valor) - NO usamos globs porque no funcionan bien
+- El contenido va despues del frontmatter
 
 ---
 
