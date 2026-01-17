@@ -1,0 +1,103 @@
+---
+description: Proceso para memoizar componentes de listas cuando el React Compiler no es suficiente
+globs: 
+alwaysApply: false
+---
+
+# Memoizacion Manual de Listas
+
+Cuando el React Compiler no optimiza suficientemente una lista con muchos items (ej: 46 skills), seguir este proceso.
+
+## 1. Excluir del React Compiler
+
+En `babel.config.js`, añadir exclusiones para los archivos que memoizaremos manualmente:
+
+```javascript
+sources: (filename) => {
+  // ... otras exclusiones ...
+  if (filename.includes("MiComponente")) return false;
+  return filename.endsWith(".tsx");
+},
+```
+
+**Por que**: El React Compiler entra en conflicto con `React.memo` manual. Errores tipicos:
+- "Invalid hook call" en la funcion de comparacion del memo
+- "Expected a constant size argument for useMemoCache"
+
+## 2. Memoizar el Componente de Fila
+
+```typescript
+import { memo } from 'react'
+
+function MiFilaInner({ id, valor, onPress }: Props) {
+  // ... render ...
+}
+
+export const MiFila = memo(
+  MiFilaInner,
+  (prev, next) => {
+    // Retorna true si NO debe re-renderizar
+    return prev.valor === next.valor
+  }
+)
+```
+
+## 3. Props Estables en el Padre
+
+**TODOS los props deben ser referencias estables**, o la memoizacion no sirve:
+
+```typescript
+// Objetos → useMemo
+const colors = useMemo(() => ({
+  primary: theme.primary,
+  accent: theme.accent,
+}), [theme.primary, theme.accent])
+
+// Funciones → useCallback
+const handlePress = useCallback((id: string) => {
+  navigateTo(id)
+}, [navigateTo])
+```
+
+## 4. Evitar Arrow Functions Inline
+
+El problema mas comun. Cada render crea una nueva funcion:
+
+```typescript
+// MAL - Nueva funcion en cada render
+<MiFila onPress={() => handlePress(item.id)} />
+
+// BIEN - Referencia estable
+<MiFila 
+  id={item.id}
+  onPress={handlePress}  // El componente llama handlePress(id) internamente
+/>
+```
+
+Esto requiere cambiar la interfaz del componente:
+
+```typescript
+// Antes
+type Props = { onPress: () => void }
+
+// Despues
+type Props = { 
+  id: string
+  onPress: (id: string) => void 
+}
+```
+
+## Checklist
+
+- [ ] Archivo excluido del React Compiler en babel.config.js
+- [ ] Componente envuelto en `memo` con comparacion personalizada
+- [ ] Objetos props memoizados con `useMemo`
+- [ ] Funciones props memoizadas con `useCallback`
+- [ ] Sin arrow functions inline en renderItem/map
+- [ ] Interfaz de funciones recibe ID como parametro
+
+## Cuando Aplicar
+
+- Listas con muchos items (30+)
+- Componentes que se re-renderizan cuando no deberian
+- Cuando react-scan u otras herramientas muestran renders innecesarios

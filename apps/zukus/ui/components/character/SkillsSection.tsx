@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import { FlatList, Pressable, StyleSheet } from 'react-native'
+import { useState, useMemo, useCallback } from 'react'
+import { Pressable, StyleSheet } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
 import { YStack, XStack, Text } from 'tamagui'
 import type { CalculatedSingleSkill, CalculatedSkills } from '@zukus/core'
 import { useCharacterSkills } from '../../stores/characterStore'
-import { useNavigateToDetail, useIsDesktop } from '../../../navigation'
+import { useNavigateToDetail } from '../../../navigation'
 import { useBookmarkedSkills } from '../../../hooks'
 import { useTheme } from '../../contexts/ThemeContext'
 import { SkillRow } from './SkillRow'
+import type { SkillRowColors } from './SkillRowContent'
 
 type FilterType = 'all' | 'class' | 'trained'
 
@@ -78,14 +80,13 @@ function FilterChip({
   label,
   isActive,
   onPress,
+  colors,
 }: {
   label: string
   isActive: boolean
   onPress: () => void
+  colors: SkillRowColors & { background: string }
 }) {
-  const { themeInfo } = useTheme()
-  const colors = themeInfo.colors
-
   return (
     <Pressable
       onPress={onPress}
@@ -113,22 +114,46 @@ function FilterChip({
 }
 
 /**
- * Sección de Skills con filtros y lista.
- * Compartido entre mobile y desktop.
- * En mobile usa .map() para evitar FlatList dentro de ScrollView.
- * En desktop usa FlatList con scroll propio.
+ * Sección de Skills con filtros y lista virtualizada.
+ * 
+ * Usa FlashList en mobile y desktop para virtualización eficiente.
+ * 
+ * Optimizaciones aplicadas:
+ * - useTheme elevado al padre (evita 46 suscripciones)
+ * - SkillRowContent optimizado por React Compiler
+ * - Animaciones aisladas en SkillRow wrapper con "use no memo"
+ * - FlashList v2 para cell recycling eficiente
  */
 export function SkillsSection() {
   const skills = useCharacterSkills()
   const navigateToDetail = useNavigateToDetail()
   const { bookmarkedSkills, toggleBookmark } = useBookmarkedSkills()
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
-  const isDesktop = useIsDesktop()
+  
+  // Elevar useTheme al padre para evitar 46 suscripciones a contexto
+  const { themeInfo } = useTheme()
+  
+  // Memoizar colors para evitar nuevos objetos en cada render
+  const colors = useMemo<SkillRowColors & { background: string }>(() => ({
+    primary: themeInfo.colors.primary,
+    accent: themeInfo.colors.accent,
+    border: themeInfo.colors.border,
+    background: themeInfo.colors.background,
+  }), [themeInfo.colors.primary, themeInfo.colors.accent, themeInfo.colors.border, themeInfo.colors.background])
 
-  // El compilador de React 19 optimiza esto automáticamente
+  // Procesar skills
   const flat = skills ? flattenSkills(skills, bookmarkedSkills) : []
   const filtered = filterSkills(flat, activeFilter)
   const processedSkills = sortSkills(filtered)
+
+  // Funciones memoizadas para evitar nuevas referencias en cada render
+  const handleSkillPress = useCallback((skillId: string) => {
+    navigateToDetail('skill', skillId)
+  }, [navigateToDetail])
+
+  const handleToggleBookmark = useCallback((skillId: string) => {
+    toggleBookmark(skillId)
+  }, [toggleBookmark])
 
   if (!skills) {
     return (
@@ -138,24 +163,6 @@ export function SkillsSection() {
     )
   }
 
-  const handleSkillPress = (skillId: string) => {
-    navigateToDetail('skill', skillId)
-  }
-
-  const renderSkillRow = (item: FlatSkill) => (
-    <SkillRow
-      key={item.uniqueId}
-      skillId={item.uniqueId}
-      name={item.displayName}
-      abilityKey={item.abilityModifierUniqueId}
-      totalBonus={item.totalBonus}
-      isClassSkill={item.isClassSkill}
-      isBookmarked={item.isBookmarked}
-      onPress={() => handleSkillPress(item.uniqueId)}
-      onToggleBookmark={() => toggleBookmark(item.uniqueId)}
-    />
-  )
-
   return (
     <YStack flex={1}>
       {/* Filter chips */}
@@ -164,46 +171,47 @@ export function SkillsSection() {
           label="All"
           isActive={activeFilter === 'all'}
           onPress={() => setActiveFilter('all')}
+          colors={colors}
         />
         <FilterChip
           label="Class"
           isActive={activeFilter === 'class'}
           onPress={() => setActiveFilter('class')}
+          colors={colors}
         />
         <FilterChip
           label="Trained"
           isActive={activeFilter === 'trained'}
           onPress={() => setActiveFilter('trained')}
+          colors={colors}
         />
       </XStack>
 
-      {/* Skills list - FlatList solo en desktop, .map() en mobile */}
-      {isDesktop ? (
-        <FlatList
-          data={processedSkills}
-          keyExtractor={(item) => item.uniqueId}
-          renderItem={({ item }) => renderSkillRow(item)}
-          ListEmptyComponent={
-            <YStack padding={20} alignItems="center">
-              <Text color="$placeholderColor">
-                No hay skills que coincidan con el filtro
-              </Text>
-            </YStack>
-          }
-        />
-      ) : (
-        <YStack>
-          {processedSkills.length > 0 ? (
-            processedSkills.map((item) => renderSkillRow(item))
-          ) : (
-            <YStack padding={20} alignItems="center">
-              <Text color="$placeholderColor">
-                No hay skills que coincidan con el filtro
-              </Text>
-            </YStack>
-          )}
-        </YStack>
-      )}
+      {/* Skills list - FlashList en todas las plataformas */}
+      <FlashList
+        data={processedSkills}
+        keyExtractor={(item) => item.uniqueId}
+        renderItem={({ item }) => (
+          <SkillRow
+            skillId={item.uniqueId}
+            name={item.displayName}
+            abilityKey={item.abilityModifierUniqueId}
+            totalBonus={item.totalBonus}
+            isClassSkill={item.isClassSkill}
+            isBookmarked={item.isBookmarked}
+            colors={colors}
+            onPress={handleSkillPress}
+            onToggleBookmark={handleToggleBookmark}
+          />
+        )}
+        ListEmptyComponent={
+          <YStack padding={20} alignItems="center">
+            <Text color="$placeholderColor">
+              No hay skills que coincidan con el filtro
+            </Text>
+          </YStack>
+        }
+      />
     </YStack>
   )
 }

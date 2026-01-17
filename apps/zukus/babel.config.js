@@ -21,6 +21,10 @@ module.exports = function (api) {
             if (filename.includes("node_modules")) return false;
             if (filename.includes("/packages/")) return false;
             if (!filename.includes("/apps/zukus/")) return false;
+            // Excluir archivos de skills con memoización manual
+            if (filename.includes("SkillRow")) return false;
+            if (filename.includes("SkillsSection")) return false;
+            if (filename.includes("AbilitiesSection")) return false;
             return filename.endsWith(".tsx");
           },
         },

@@ -9,5 +9,6 @@ export { BABCard, type BABCardProps } from './BABCard'
 export { BABDetailPanel, type BABDetailPanelProps } from './BABDetailPanel'
 export { SourceValuesTable, type SourceValuesTableProps } from './SourceValuesTable'
 export { SkillRow } from './SkillRow'
+export { SkillRowContent, type SkillRowColors } from './SkillRowContent'
 export { SkillDetailPanel } from './SkillDetailPanel'
 // NOTE: SavingThrowsSection, SkillsSection and ArmorClassSection not exported here to avoid circular dependency with navigation
