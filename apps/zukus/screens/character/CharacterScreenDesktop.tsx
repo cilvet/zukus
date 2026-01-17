@@ -5,6 +5,7 @@ import {
   useCharacterStore,
   useCharacterSheet,
   useCharacterAbilities,
+  useCharacterSavingThrows,
   useCharacterLevel,
   useCharacterHitPoints,
   useCharacterArmorClass,
@@ -14,6 +15,8 @@ import {
   AbilityCard,
   AbilityCardCompact,
   Checkbox,
+  SavingThrowCard,
+  ArmorClassCard,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -27,9 +30,11 @@ import {
   HpBar,
   AbilityDetailPanel,
   GenericDetailPanel,
+  ArmorClassDetailPanel,
 } from '../../components/character'
+import { SavingThrowDetailPanel } from '../../ui'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility, CalculatedAbilities } from '@zukus/core'
+import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow } from '@zukus/core'
 import {
   SidePanel,
   SidePanelContainer,
@@ -190,6 +195,7 @@ function DesktopAbilitiesCard({
 function CharacterScreenDesktopContent() {
   const characterSheet = useCharacterSheet()
   const abilities = useCharacterAbilities()
+  const savingThrows = useCharacterSavingThrows()
   const level = useCharacterLevel()
   const hitPoints = useCharacterHitPoints()
   const armorClass = useCharacterArmorClass()
@@ -209,6 +215,14 @@ function CharacterScreenDesktopContent() {
 
   const handleAbilityPress = (abilityKey: string) => {
     openPanel(abilityKey, 'ability', getDetailTitle('ability', abilityKey))
+  }
+
+  const handleSavingThrowPress = (savingThrowKey: string) => {
+    openPanel(savingThrowKey, 'savingThrow', getDetailTitle('savingThrow', savingThrowKey))
+  }
+
+  const handleArmorClassPress = () => {
+    openPanel('armorClass', 'armorClass', getDetailTitle('armorClass', 'armorClass'))
   }
 
   const handleItemPress = (itemId: string, itemName: string) => {
@@ -240,6 +254,11 @@ function CharacterScreenDesktopContent() {
     }
   }
 
+  const getSavingThrowForPanel = (savingThrowKey: string): CalculatedSavingThrow | null => {
+    if (!savingThrows) return null
+    return savingThrows[savingThrowKey as keyof typeof savingThrows] ?? null
+  }
+
   // Si no hay datos aún, mostrar loading
   if (!characterSheet || !abilities) {
     return (
@@ -267,14 +286,46 @@ function CharacterScreenDesktopContent() {
               characterClass={className}
             />
             <HpBar current={currentHp} max={maxHp} />
+            {armorClass && (
+              <SectionCard>
+                <SectionHeader icon="*" title="Armor Class" />
+                <ArmorClassCard
+                  totalAC={armorClass.totalAc.totalValue}
+                  touchAC={armorClass.touchAc.totalValue}
+                  flatFootedAC={armorClass.flatFootedAc.totalValue}
+                  onPress={handleArmorClassPress}
+                />
+              </SectionCard>
+            )}
             <SectionCard>
               <SectionHeader icon="*" title="Combat Stats" />
               <YStack gap={8}>
-                <StatBox label="Armor Class" value={armorClass?.totalAc.totalValue ?? 10} icon="AC" />
                 <StatBox label="Initiative" value={`+${initiative?.totalValue ?? 0}`} icon="IN" />
                 <StatBox label="BAB" value={`+${bab?.totalValue ?? 0}`} icon="BA" />
               </YStack>
             </SectionCard>
+            {savingThrows && (
+              <SectionCard>
+                <SectionHeader icon="*" title="Saving Throws" />
+                <XStack gap={8}>
+                  <SavingThrowCard
+                    savingThrowKey="fortitude"
+                    totalValue={savingThrows.fortitude.totalValue}
+                    onPress={() => handleSavingThrowPress('fortitude')}
+                  />
+                  <SavingThrowCard
+                    savingThrowKey="reflex"
+                    totalValue={savingThrows.reflex.totalValue}
+                    onPress={() => handleSavingThrowPress('reflex')}
+                  />
+                  <SavingThrowCard
+                    savingThrowKey="will"
+                    totalValue={savingThrows.will.totalValue}
+                    onPress={() => handleSavingThrowPress('will')}
+                  />
+                </XStack>
+              </SectionCard>
+            )}
           </YStack>
         </VerticalSection>
 
@@ -373,6 +424,23 @@ function CharacterScreenDesktopContent() {
             abilityKey={currentPanel.id}
             ability={getAbilityForPanel(currentPanel.id)!}
             sourceValues={getCalculatedAbility(currentPanel.id)?.sourceValues}
+          />
+        )}
+        {currentPanel?.type === 'savingThrow' && currentPanel?.id && getSavingThrowForPanel(currentPanel.id) && (
+          <SavingThrowDetailPanel
+            savingThrowKey={currentPanel.id}
+            totalValue={getSavingThrowForPanel(currentPanel.id)!.totalValue}
+            sourceValues={getSavingThrowForPanel(currentPanel.id)?.sourceValues}
+          />
+        )}
+        {currentPanel?.type === 'armorClass' && armorClass && (
+          <ArmorClassDetailPanel
+            totalValue={armorClass.totalAc.totalValue}
+            totalSourceValues={armorClass.totalAc.sourceValues}
+            touchValue={armorClass.touchAc.totalValue}
+            touchSourceValues={armorClass.touchAc.sourceValues}
+            flatFootedValue={armorClass.flatFootedAc.totalValue}
+            flatFootedSourceValues={armorClass.flatFootedAc.sourceValues}
           />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (

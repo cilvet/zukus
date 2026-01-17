@@ -1,9 +1,15 @@
 import { ABILITY_INFO } from '../components/character'
 
+const SAVING_THROW_NAMES: Record<string, string> = {
+  fortitude: 'Fortitude',
+  reflex: 'Reflex',
+  will: 'Will',
+}
+
 /**
  * Tipos de detalle soportados en la navegación.
  */
-export type DetailType = 'ability' | 'skill' | 'spell' | 'buff' | 'equipment' | 'item'
+export type DetailType = 'ability' | 'savingThrow' | 'armorClass' | 'skill' | 'spell' | 'buff' | 'equipment' | 'item'
 
 /**
  * Configuración de un tipo de detalle.
@@ -24,6 +30,12 @@ export type DetailConfig = {
 export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   ability: {
     getTitle: (id) => ABILITY_INFO[id]?.name ?? 'Ability',
+  },
+  savingThrow: {
+    getTitle: (id) => SAVING_THROW_NAMES[id] ?? 'Saving Throw',
+  },
+  armorClass: {
+    getTitle: () => 'Armor Class',
   },
   skill: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

@@ -1,10 +1,10 @@
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterAbilities, useTheme } from '../../ui'
-import { AbilityDetailPanel } from '../../components/character'
+import { useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useTheme, SavingThrowDetailPanel } from '../../ui'
+import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility } from '@zukus/core'
+import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
 import { type DetailType, isValidDetailType, getDetailTitle } from '../../navigation'
 
 type SlugParams = {
@@ -38,7 +38,7 @@ function parseSlug(slug: string | string[] | undefined): ParsedSlug {
 
 function AbilityDetail({ abilityKey }: { abilityKey: string }) {
   const abilities = useCharacterAbilities()
-  
+
   if (!abilities) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center">
@@ -46,7 +46,7 @@ function AbilityDetail({ abilityKey }: { abilityKey: string }) {
       </YStack>
     )
   }
-  
+
   const coreAbility = abilities[abilityKey] as CalculatedAbility | undefined
   if (!coreAbility) {
     return (
@@ -55,17 +55,69 @@ function AbilityDetail({ abilityKey }: { abilityKey: string }) {
       </YStack>
     )
   }
-  
+
   const ability: Ability = {
     score: coreAbility.totalScore,
     modifier: coreAbility.totalModifier,
   }
-  
+
   return (
-    <AbilityDetailPanel 
-      abilityKey={abilityKey} 
-      ability={ability} 
+    <AbilityDetailPanel
+      abilityKey={abilityKey}
+      ability={ability}
       sourceValues={coreAbility.sourceValues}
+    />
+  )
+}
+
+function SavingThrowDetail({ savingThrowKey }: { savingThrowKey: string }) {
+  const savingThrows = useCharacterSavingThrows()
+
+  if (!savingThrows) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const savingThrow = savingThrows[savingThrowKey as keyof typeof savingThrows] as CalculatedSavingThrow | undefined
+  if (!savingThrow) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Saving Throw no encontrado: {savingThrowKey}</Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <SavingThrowDetailPanel
+      savingThrowKey={savingThrowKey}
+      totalValue={savingThrow.totalValue}
+      sourceValues={savingThrow.sourceValues}
+    />
+  )
+}
+
+function ArmorClassDetail() {
+  const armorClass = useCharacterArmorClass()
+
+  if (!armorClass) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <ArmorClassDetailPanel
+      totalValue={armorClass.totalAc.totalValue}
+      totalSourceValues={armorClass.totalAc.sourceValues}
+      touchValue={armorClass.touchAc.totalValue}
+      touchSourceValues={armorClass.touchAc.sourceValues}
+      flatFootedValue={armorClass.flatFootedAc.totalValue}
+      flatFootedSourceValues={armorClass.flatFootedAc.sourceValues}
     />
   )
 }
@@ -110,6 +162,8 @@ function InvalidRoute() {
  * 
  * Rutas soportadas:
  * - /detail/ability/[abilityKey] - Detalle de ability score
+ * - /detail/savingThrow/[savingThrowKey] - Detalle de saving throw
+ * - /detail/armorClass/armorClass - Detalle de armor class
  * - /detail/skill/[skillId] - Detalle de skill (pendiente)
  * - /detail/spell/[spellId] - Detalle de spell (pendiente)
  * - /detail/buff/[buffId] - Detalle de buff (pendiente)
@@ -138,6 +192,10 @@ export function DetailScreen() {
     switch (type) {
       case 'ability':
         return <AbilityDetail abilityKey={id} />
+      case 'savingThrow':
+        return <SavingThrowDetail savingThrowKey={id} />
+      case 'armorClass':
+        return <ArmorClassDetail />
       case 'skill':
       case 'spell':
       case 'buff':
