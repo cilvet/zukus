@@ -1,10 +1,26 @@
 import { create } from 'zustand'
-import { calculateCharacterSheet } from '@zukus/core'
-import type { CharacterSheet, CharacterBaseData } from '@zukus/core'
+import {
+  CharacterUpdater,
+  calculateCharacterSheet,
+} from '@zukus/core'
+import type {
+  CharacterSheet,
+  CharacterBaseData,
+  UpdateResult,
+  Buff,
+  Item,
+  Equipment,
+  SpecialFeature,
+} from '@zukus/core'
 
 type CharacterState = {
   characterSheet: CharacterSheet | null
   baseData: CharacterBaseData | null
+  /**
+   * Instancia del CharacterUpdater del core.
+   * Gestiona todas las operaciones de actualización del personaje.
+   */
+  updater: CharacterUpdater | null
   /**
    * Tracking de qué ability fue modificada para trigger de animaciones.
    * Se limpia automáticamente después de 1 segundo.
@@ -13,90 +29,268 @@ type CharacterState = {
 }
 
 type CharacterActions = {
+  // Inicialización
   setCharacter: (characterSheet: CharacterSheet, baseData: CharacterBaseData) => void
   clearCharacter: () => void
-  /**
-   * TEMPORAL: Toggle de buff directamente en el store.
-   * En producción esto debería usar el CharacterUpdater del core.
-   * Implementado directamente aquí para pruebas de la UI.
-   */
-  toggleBuff: (buffUniqueId: string, abilityKey?: string) => void
+
+  // Buff Management
+  toggleBuff: (buffUniqueId: string, abilityKey?: string) => UpdateResult
+  addBuff: (buff: Buff) => UpdateResult
+  editBuff: (buff: Buff) => UpdateResult
+  deleteBuff: (buffId: string) => UpdateResult
+  toggleSharedBuff: (buffId: string) => UpdateResult
+
+  // Equipment Management
+  updateEquippedItems: (equipment: Equipment) => UpdateResult
+  addItemToInventory: (item: Item) => UpdateResult
+  removeItemFromInventory: (itemUniqueId: string) => UpdateResult
+  updateItem: (item: Item) => UpdateResult
+  toggleItemEquipped: (itemUniqueId: string) => UpdateResult
+
+  // Special Features Management
+  addSpecialFeature: (feature: SpecialFeature) => UpdateResult
+  updateSpecialFeature: (featureUniqueId: string, feature: SpecialFeature) => UpdateResult
+  removeSpecialFeature: (featureUniqueId: string) => UpdateResult
+  updateSpecialFeatures: (specialFeatures: SpecialFeature[]) => UpdateResult
+
+  // Character Properties
+  updateName: (name: string) => UpdateResult
+  updateTheme: (theme: string) => UpdateResult
+  updateHp: (hpAdded: number) => UpdateResult
+  setCurrentCharacterLevel: (level: number) => UpdateResult
+
+  // Resource Management
+  consumeResource: (resourceId: string, amount?: number) => UpdateResult
+  rechargeResource: (resourceId: string, amount?: number) => UpdateResult
+  rechargeAllResources: () => UpdateResult
+
+  // Rest
+  rest: () => UpdateResult
+
+  // UI State
   clearGlowingAbility: () => void
+  triggerGlow: (abilityKey: string) => void
 }
 
 type CharacterStore = CharacterState & CharacterActions
+
+const notSetResult: UpdateResult = { success: false, error: 'Character not set' }
+const EMPTY_BUFFS: readonly Buff[] = []
 
 export const useCharacterStore = create<CharacterStore>((set, get) => ({
   // State
   characterSheet: null,
   baseData: null,
+  updater: null,
   glowingAbility: null,
 
-  // Actions
+  // =============================================================================
+  // Inicialización
+  // =============================================================================
+
   setCharacter: (characterSheet, baseData) => {
-    set({ characterSheet, baseData })
+    const updater = new CharacterUpdater(baseData, [], (sheet, data) => {
+      set({ characterSheet: sheet, baseData: data })
+    })
+    set({ characterSheet, baseData, updater })
   },
 
   clearCharacter: () => {
-    set({ characterSheet: null, baseData: null })
+    set({ characterSheet: null, baseData: null, updater: null })
   },
 
-  /**
-   * TEMPORAL: Toggle de buff directamente en el store.
-   *
-   * NOTA: Esta implementación es para pruebas de UI únicamente.
-   * En producción, se debería usar el CharacterUpdater del core
-   * que maneja correctamente la inmutabilidad y validaciones.
-   *
-   * @param buffUniqueId - El uniqueId del buff a togglear
-   * @param abilityKey - Opcional, el ability afectada (para animación de glow)
-   */
+  // =============================================================================
+  // Buff Management
+  // =============================================================================
+
   toggleBuff: (buffUniqueId: string, abilityKey?: string) => {
-    const { baseData } = get()
-    if (!baseData) return
+    const { updater } = get()
+    if (!updater) return notSetResult
 
-    // Crear copia del baseData con el buff toggleado
-    const updatedBuffs = baseData.buffs.map((buff) => {
-      if (buff.uniqueId === buffUniqueId) {
-        return { ...buff, active: !buff.active }
+    const result = updater.toggleBuff(buffUniqueId)
+
+    // Trigger glow si el buff se activó
+    if (result.success && abilityKey) {
+      const baseData = updater.getCharacterBaseData()
+      const buff = baseData?.buffs.find((b) => b.uniqueId === buffUniqueId)
+      if (buff?.active) {
+        get().triggerGlow(abilityKey)
       }
-      return buff
-    })
-
-    const updatedBaseData: CharacterBaseData = {
-      ...baseData,
-      buffs: updatedBuffs,
     }
 
-    // Recalcular el character sheet
-    const updatedSheet = calculateCharacterSheet(updatedBaseData)
-
-    // Determinar si el buff se activó (para glow)
-    const buffWasActivated = updatedBuffs.find((b) => b.uniqueId === buffUniqueId)?.active
-
-    set({
-      baseData: updatedBaseData,
-      characterSheet: updatedSheet,
-      glowingAbility: buffWasActivated && abilityKey ? abilityKey : null,
-    })
-
-    // Auto-limpiar glowingAbility después de 1 segundo
-    if (buffWasActivated && abilityKey) {
-      setTimeout(() => {
-        const current = get()
-        if (current.glowingAbility === abilityKey) {
-          set({ glowingAbility: null })
-        }
-      }, 1000)
-    }
+    return result
   },
+
+  addBuff: (buff: Buff) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.addBuff(buff)
+  },
+
+  editBuff: (buff: Buff) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.editBuff(buff)
+  },
+
+  deleteBuff: (buffId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.deleteBuff(buffId)
+  },
+
+  toggleSharedBuff: (buffId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.toggleSharedBuff(buffId)
+  },
+
+  // =============================================================================
+  // Equipment Management
+  // =============================================================================
+
+  updateEquippedItems: (equipment: Equipment) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateEquippedItems(equipment)
+  },
+
+  addItemToInventory: (item: Item) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.addItemToInventory(item)
+  },
+
+  removeItemFromInventory: (itemUniqueId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.removeItemFromInventory(itemUniqueId)
+  },
+
+  updateItem: (item: Item) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateItem(item)
+  },
+
+  toggleItemEquipped: (itemUniqueId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.toggleItemEquipped(itemUniqueId)
+  },
+
+  // =============================================================================
+  // Special Features Management
+  // =============================================================================
+
+  addSpecialFeature: (feature: SpecialFeature) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.addSpecialFeature(feature)
+  },
+
+  updateSpecialFeature: (featureUniqueId: string, feature: SpecialFeature) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateSpecialFeature(featureUniqueId, feature)
+  },
+
+  removeSpecialFeature: (featureUniqueId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.removeSpecialFeature(featureUniqueId)
+  },
+
+  updateSpecialFeatures: (specialFeatures: SpecialFeature[]) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateSpecialFeatures(specialFeatures)
+  },
+
+  // =============================================================================
+  // Character Properties
+  // =============================================================================
+
+  updateName: (name: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateName(name)
+  },
+
+  updateTheme: (theme: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateTheme(theme)
+  },
+
+  updateHp: (hpAdded: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateHp(hpAdded)
+  },
+
+  setCurrentCharacterLevel: (level: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.setCurrentCharacterLevel(level)
+  },
+
+  // =============================================================================
+  // Resource Management
+  // =============================================================================
+
+  consumeResource: (resourceId: string, amount?: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.consumeResource(resourceId, amount)
+  },
+
+  rechargeResource: (resourceId: string, amount?: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.rechargeResource(resourceId, amount)
+  },
+
+  rechargeAllResources: () => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.rechargeAllResources()
+  },
+
+  // =============================================================================
+  // Rest
+  // =============================================================================
+
+  rest: () => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.rest()
+  },
+
+  // =============================================================================
+  // UI State
+  // =============================================================================
 
   clearGlowingAbility: () => {
     set({ glowingAbility: null })
   },
+
+  triggerGlow: (abilityKey: string) => {
+    set({ glowingAbility: abilityKey })
+
+    // Auto-limpiar después de 1 segundo
+    setTimeout(() => {
+      const current = get()
+      if (current.glowingAbility === abilityKey) {
+        set({ glowingAbility: null })
+      }
+    }, 1000)
+  },
 }))
 
+// =============================================================================
 // Selectores para acceso granular (evitan re-renders innecesarios)
+// =============================================================================
 
 export function useCharacterSheet() {
   return useCharacterStore((state) => state.characterSheet)
@@ -147,9 +341,46 @@ export function useCharacterAttacks() {
 }
 
 export function useCharacterBuffs() {
-  return useCharacterStore((state) => state.baseData?.buffs ?? [])
+  return useCharacterStore((state) => state.baseData?.buffs ?? EMPTY_BUFFS)
 }
 
 export function useGlowingAbility() {
   return useCharacterStore((state) => state.glowingAbility)
+}
+
+// =============================================================================
+// Selectores de acciones (para componentes que solo necesitan acciones)
+// =============================================================================
+
+export function useCharacterActions() {
+  return useCharacterStore((state) => ({
+    // Buff actions
+    toggleBuff: state.toggleBuff,
+    addBuff: state.addBuff,
+    editBuff: state.editBuff,
+    deleteBuff: state.deleteBuff,
+    toggleSharedBuff: state.toggleSharedBuff,
+    // Equipment actions
+    updateEquippedItems: state.updateEquippedItems,
+    addItemToInventory: state.addItemToInventory,
+    removeItemFromInventory: state.removeItemFromInventory,
+    updateItem: state.updateItem,
+    toggleItemEquipped: state.toggleItemEquipped,
+    // Special Features actions
+    addSpecialFeature: state.addSpecialFeature,
+    updateSpecialFeature: state.updateSpecialFeature,
+    removeSpecialFeature: state.removeSpecialFeature,
+    updateSpecialFeatures: state.updateSpecialFeatures,
+    // Character properties actions
+    updateName: state.updateName,
+    updateTheme: state.updateTheme,
+    updateHp: state.updateHp,
+    setCurrentCharacterLevel: state.setCurrentCharacterLevel,
+    // Resource actions
+    consumeResource: state.consumeResource,
+    rechargeResource: state.rechargeResource,
+    rechargeAllResources: state.rechargeAllResources,
+    // Rest
+    rest: state.rest,
+  }))
 }
