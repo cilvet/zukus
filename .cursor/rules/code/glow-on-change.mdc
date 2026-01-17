@@ -1,0 +1,44 @@
+---
+description: Hook para efecto de brillo reactivo cuando un valor cambia
+globs: 
+alwaysApply: true
+---
+
+# Efecto de Brillo Reactivo (useGlowOnChange)
+
+Usar el hook `useGlowOnChange` en cualquier componente que muestre un valor que pueda cambiar y deba tener feedback visual.
+
+## Ubicacion
+
+```typescript
+import { useGlowOnChange } from '../hooks'
+```
+
+## Uso
+
+```typescript
+function StatCard({ value }: { value: number }) {
+  // Retorna un contador que se incrementa en cada cambio
+  const glowTrigger = useGlowOnChange(value)
+
+  useEffect(() => {
+    if (glowTrigger > 0) {
+      // Disparar animacion de brillo
+    }
+  }, [glowTrigger])
+
+  return <Card>{value}</Card>
+}
+```
+
+## Comportamiento
+
+- Ignora el primer render (no brilla al montar)
+- Detecta cada cambio del valor (incluso cambios repetidos)
+- Retorna un contador, no un booleano (para que useEffect siempre se dispare)
+
+## Donde aplicarlo
+
+- AbilityCards (score)
+- Stats de combate (AC, HP, Initiative, etc.)
+- Cualquier valor numerico que pueda cambiar por buffs, items, o acciones

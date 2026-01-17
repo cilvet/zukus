@@ -1,0 +1,37 @@
+---
+description: Configuracion y practicas para React 19 con el compilador
+globs: 
+alwaysApply: true
+---
+
+# React 19 y el Compilador
+
+Este proyecto usa React 19 con el compilador de React activado.
+
+## No es necesario
+
+- `useMemo` - El compilador optimiza automaticamente
+- `useCallback` - El compilador optimiza automaticamente  
+- `React.memo` - El compilador decide cuando memorizar
+
+## Escribir codigo simple
+
+```typescript
+// BIEN - Codigo directo, el compilador optimiza
+function MyComponent({ items }) {
+  const filtered = items.filter(x => x.active)
+  const sorted = filtered.sort((a, b) => a.name.localeCompare(b.name))
+  
+  return <List items={sorted} />
+}
+
+// INNECESARIO - No anadir useMemo manualmente
+function MyComponent({ items }) {
+  const filtered = useMemo(() => items.filter(x => x.active), [items])
+  // ...
+}
+```
+
+## Refs y efectos siguen igual
+
+`useRef`, `useState`, `useEffect` se usan normalmente.

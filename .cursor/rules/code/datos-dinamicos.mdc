@@ -1,0 +1,35 @@
+---
+description: Preferir datos dinámicos sobre mapas estáticos duplicados
+globs: 
+alwaysApply: true
+---
+
+# Datos Dinamicos sobre Mapas Estaticos
+
+Preferir usar la informacion que ya viene en los objetos en lugar de mantener mapas estaticos separados.
+
+## Evitar
+
+```typescript
+// MAL - Mapa estatico duplicando informacion
+const BUFF_DISPLAY_INFO = {
+  'bulls-strength': { name: 'Fuerza de Toro' },
+  'cats-grace': { name: 'Gracia Felina' },
+}
+
+// Uso
+<Text>{BUFF_DISPLAY_INFO[buff.uniqueId].name}</Text>
+```
+
+## Preferir
+
+```typescript
+// BIEN - Usar datos del propio objeto
+<Text>{buff.name}</Text>
+```
+
+## Por que
+
+- Evita duplicacion de informacion
+- Reduce mantenimiento (un solo lugar para actualizar)
+- Los objetos del dominio ya contienen la informacion necesaria
