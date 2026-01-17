@@ -52,8 +52,8 @@ function WebAbilitiesSection() {
 
   const handleAbilityPress = (abilityKey: string) => {
     router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: abilityKey, type: 'ability' },
+      pathname: '/(tabs)/(character)/detail/[...slug]',
+      params: { slug: ['ability', abilityKey] },
     })
   }
 

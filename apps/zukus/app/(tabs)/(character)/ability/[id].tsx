@@ -1,3 +1,6 @@
+// TODO: Eliminar este archivo - es legacy del PoC de navegación.
+// La navegación ahora usa detail/[...slug].tsx para rutas de detalle.
+
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { useLocalSearchParams, Stack } from 'expo-router'
 import { themes } from '../../../../ui'
