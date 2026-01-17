@@ -18,7 +18,6 @@ import {
 import { usePanelNavigation } from '../../hooks'
 import {
   MOCK_CHARACTER,
-  ABILITY_INFO,
   SectionHeader,
   SectionCard,
   StatBox,
@@ -38,6 +37,7 @@ import {
   VerticalSection,
 } from '../../components/layout'
 import { testCharacterSheet, testBaseData, BUFF_ABILITY_MAP, BUFF_DISPLAY_INFO } from '../../data/testCharacter'
+import { type DetailType, getDetailTitle, isValidDetailType } from '../../navigation'
 
 
 /**
@@ -65,7 +65,7 @@ function CharacterScreenDesktopContent() {
   } = usePanelNavigation()
 
   const handleAbilityPress = (abilityKey: string) => {
-    openPanel(abilityKey, 'ability', ABILITY_INFO[abilityKey]?.name)
+    openPanel(abilityKey, 'ability', getDetailTitle('ability', abilityKey))
   }
 
   const handleItemPress = (itemId: string, itemName: string) => {
@@ -73,10 +73,13 @@ function CharacterScreenDesktopContent() {
   }
 
   const getPanelTitle = (): string => {
-    if (currentPanel?.type === 'ability' && currentPanel?.id) {
-      return ABILITY_INFO[currentPanel.id]?.name || 'Ability'
+    if (!currentPanel?.type || !currentPanel?.id) {
+      return 'Detail'
     }
-    return currentPanel?.name || 'Detail'
+    if (!isValidDetailType(currentPanel.type)) {
+      return currentPanel.name ?? 'Detail'
+    }
+    return getDetailTitle(currentPanel.type, currentPanel.id, currentPanel.name)
   }
 
   // Obtener ability para el panel de detalle

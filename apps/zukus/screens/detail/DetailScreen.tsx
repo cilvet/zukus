@@ -2,17 +2,22 @@ import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
 import { useCharacterAbilities, useTheme } from '../../ui'
-import { AbilityDetailPanel, ABILITY_INFO } from '../../components/character'
+import { AbilityDetailPanel } from '../../components/character'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility } from '@zukus/core'
-
-type DetailType = 'ability' | 'skill' | 'spell' | 'buff' | 'equipment'
+import { type DetailType, isValidDetailType, getDetailTitle } from '../../navigation'
 
 type SlugParams = {
   slug: string[]
 }
 
-function parseSlug(slug: string | string[] | undefined): { type: DetailType | null; id: string | null; extra: string[] } {
+type ParsedSlug = {
+  type: DetailType | null
+  id: string | null
+  extra: string[]
+}
+
+function parseSlug(slug: string | string[] | undefined): ParsedSlug {
   if (!slug) {
     return { type: null, id: null, extra: [] }
   }
@@ -20,11 +25,12 @@ function parseSlug(slug: string | string[] | undefined): { type: DetailType | nu
   const parts = Array.isArray(slug) ? slug : [slug]
   const [type, id, ...extra] = parts
   
-  const validTypes: DetailType[] = ['ability', 'skill', 'spell', 'buff', 'equipment']
-  const isValidType = validTypes.includes(type as DetailType)
+  if (!isValidDetailType(type)) {
+    return { type: null, id: id ?? null, extra }
+  }
   
   return {
-    type: isValidType ? (type as DetailType) : null,
+    type,
     id: id ?? null,
     extra,
   }
@@ -117,14 +123,10 @@ export function DetailScreen() {
   
   // Determinar el título para el header
   const getTitle = (): string => {
-    if (!type || !id) return 'Detalle'
-    
-    if (type === 'ability') {
-      return ABILITY_INFO[id]?.name ?? 'Ability'
+    if (!type || !id) {
+      return 'Detalle'
     }
-    
-    // Para otros tipos, capitalizar el id
-    return id.charAt(0).toUpperCase() + id.slice(1)
+    return getDetailTitle(type, id)
   }
   
   // Renderizar contenido según el tipo

@@ -1,10 +1,10 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useRouter } from 'expo-router'
 import { YStack, XStack } from 'tamagui'
 import { useCharacterAbilities, useGlowingAbility, AbilityCard } from '../../../ui'
 import { SectionHeader, SectionCard, SkillItem } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
+import { useNavigateToDetail } from '../../../navigation'
 
 /**
  * Seccion de ability scores y skills.
@@ -12,15 +12,12 @@ import { MOCK_CHARACTER } from '../data'
  * El AbilityCard animado viene de ui local.
  */
 export function AbilitiesSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
   const abilities = useCharacterAbilities()
   const glowingAbility = useGlowingAbility()
 
   const handleAbilityPress = (abilityKey: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/detail/[...slug]',
-      params: { slug: ['ability', abilityKey] },
-    })
+    navigateToDetail('ability', abilityKey)
   }
 
   // Si no hay datos aún, mostrar placeholder

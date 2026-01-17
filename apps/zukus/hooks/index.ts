@@ -1,5 +1,5 @@
 export { usePanelNavigation } from './usePanelNavigation'
-export type { PanelState } from './usePanelNavigation'
+export type { PanelState, PanelNavigationResult } from './usePanelNavigation'
 export { useCollapsibleHeader } from './useCollapsibleHeader'
 export { useSidePanel } from './useSidePanel'
 export type { SidePanelContent } from './useSidePanel'

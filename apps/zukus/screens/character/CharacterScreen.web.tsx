@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { View, ScrollView } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
-import { useRouter } from 'expo-router'
 import {
   useCharacterStore,
   useCharacterAbilities,
@@ -21,6 +20,7 @@ import {
   SkillItem,
   ItemCard,
 } from '../../components/character'
+import { useNavigateToDetail } from '../../navigation'
 
 // Versiones simples de las secciones para web (sin contexto de collapsible)
 
@@ -46,15 +46,12 @@ function WebCombatSection() {
 }
 
 function WebAbilitiesSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
   const abilities = useCharacterAbilities()
   const glowingAbility = useGlowingAbility()
 
   const handleAbilityPress = (abilityKey: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/detail/[...slug]',
-      params: { slug: ['ability', abilityKey] },
-    })
+    navigateToDetail('ability', abilityKey)
   }
 
   // Si no hay datos aún, mostrar placeholder
@@ -142,12 +139,10 @@ function WebAbilitiesSection() {
 }
 
 function WebEquipmentSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
+  
   const handleItemPress = (itemId: string, itemName: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: itemId, type: 'item', name: itemName },
-    })
+    navigateToDetail('equipment', itemId, itemName)
   }
 
   return (
@@ -231,12 +226,10 @@ function WebBuffsSection() {
 }
 
 function WebSpellsSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
+  
   const handleSpellPress = (spellId: string, spellName: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: spellId, type: 'item', name: spellName },
-    })
+    navigateToDetail('spell', spellId, spellName)
   }
 
   return (
