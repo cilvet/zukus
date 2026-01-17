@@ -1,14 +1,2 @@
-export type PanelState = {
-  id: string
-  type: string
-  name?: string
-}
-
-export type PanelNavigationResult = {
-  currentPanel: PanelState | null
-  isPanelOpen: boolean
-  canGoBack: boolean
-  openPanel: (id: string, type: string, name?: string) => void
-  closePanel: () => void
-  goBack: () => void
-}
+// Re-export desde el store para mantener compatibilidad
+export type { PanelState, PanelNavigationResult } from '../ui/stores'

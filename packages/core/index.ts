@@ -17,6 +17,9 @@ export type { CalculatedAbility, CalculatedAbilities } from "./core/domain/chara
 // Types - Saving Throws
 export type { CalculatedSavingThrow, CalculatedSavingThrows } from "./core/domain/character/calculatedSheet/calculatedSavingThrows";
 
+// Types - Skills
+export type { CalculatedSingleSkill, CalculatedParentSkill, CalculatedSkill, CalculatedSkills } from "./core/domain/character/calculatedSheet/calculatedSkills";
+
 // Types - Sources
 export type { SourceValue } from "./core/domain/character/calculatedSheet/sources";
 export { BonusTypesValues } from "./core/domain/character/baseData/changes";

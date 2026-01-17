@@ -8,4 +8,6 @@ export { InitiativeDetailPanel, type InitiativeDetailPanelProps } from './Initia
 export { BABCard, type BABCardProps } from './BABCard'
 export { BABDetailPanel, type BABDetailPanelProps } from './BABDetailPanel'
 export { SourceValuesTable, type SourceValuesTableProps } from './SourceValuesTable'
-// NOTE: SavingThrowsSection and ArmorClassSection not exported here to avoid circular dependency with navigation
+export { SkillRow } from './SkillRow'
+export { SkillDetailPanel } from './SkillDetailPanel'
+// NOTE: SavingThrowsSection, SkillsSection and ArmorClassSection not exported here to avoid circular dependency with navigation

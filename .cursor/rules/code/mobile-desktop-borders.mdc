@@ -1,0 +1,52 @@
+---
+description: Convención de bordes para secciones en mobile vs desktop
+globs:
+alwaysApply: true
+---
+
+# Bordes en Secciones: Mobile vs Desktop
+
+## Regla
+
+Las secciones del character sheet deben seguir convenciones visuales diferentes según la plataforma.
+
+## Mobile (Native y Web Mobile)
+
+**Sin bordes** - Usar `YStack` directamente con `SectionHeader`:
+
+```typescript
+// ✅ CORRECTO - Mobile
+<YStack gap={12}>
+  <SectionHeader icon="#" title="Skills" />
+  <SkillsSection />
+</YStack>
+```
+
+```typescript
+// ❌ INCORRECTO - Mobile
+<SectionCard>
+  <SectionHeader icon="#" title="Skills" />
+  <SkillsSection />
+</SectionCard>
+```
+
+## Desktop
+
+**Con bordes** - Envolver en `SectionCard`:
+
+```typescript
+// ✅ CORRECTO - Desktop
+<SectionCard>
+  <SectionHeader icon="#" title="Skills" />
+  <SkillsSection />
+</SectionCard>
+```
+
+## Archivos Afectados
+
+- Mobile: `components/character/sections/*.tsx`
+- Desktop: `screens/character/CharacterScreenDesktop.tsx`
+
+## Por Qué
+
+Desktop tiene más espacio y las tarjetas con bordes ayudan a separar visualmente las columnas. Mobile es más compacto y los bordes añaden ruido visual innecesario.

@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { useRouter } from 'expo-router'
 import { Platform, useWindowDimensions } from 'react-native'
 import { usePanelNavigation } from '../hooks'
@@ -26,7 +25,7 @@ export function useNavigateToDetail() {
   
   const isDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
-  return useCallback((type: DetailType, id: string, customName?: string) => {
+  const navigateToDetail = (type: DetailType, id: string, customName?: string) => {
     if (!isValidDetailType(type)) {
       console.warn(`Invalid detail type: ${type}`)
       return
@@ -45,7 +44,9 @@ export function useNavigateToDetail() {
       pathname: '/(tabs)/(character)/detail/[...slug]',
       params: { slug: [type, id] },
     })
-  }, [isDesktop, router, panelNav])
+  }
+
+  return navigateToDetail
 }
 
 /**

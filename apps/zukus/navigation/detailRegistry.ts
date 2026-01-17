@@ -1,5 +1,14 @@
 import { ABILITY_INFO } from '../components/character'
 
+/**
+ * Helper para obtener el nombre de una skill desde el store.
+ * Como no podemos usar hooks aquí, necesitaremos que el customName se pase desde donde se llama.
+ */
+function getSkillName(skillId: string): string {
+  // Fallback: capitalizar el skillId
+  return skillId.charAt(0).toUpperCase() + skillId.slice(1).replace(/([A-Z])/g, ' $1').trim()
+}
+
 const SAVING_THROW_NAMES: Record<string, string> = {
   fortitude: 'Fortitude',
   reflex: 'Reflex',
@@ -44,7 +53,7 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
     getTitle: () => 'Base Attack Bonus',
   },
   skill: {
-    getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
+    getTitle: (id) => getSkillName(id),
   },
   spell: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

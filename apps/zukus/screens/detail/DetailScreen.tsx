@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel } from '../../ui'
+import { useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
@@ -161,6 +161,62 @@ function BABDetail() {
   )
 }
 
+function SkillDetail({ skillId }: { skillId: string }) {
+  const skills = useCharacterSkills()
+
+  if (!skills) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  // Buscar en skills y en sub-skills
+  let skill = skills[skillId]
+  
+  if (!skill) {
+    // Buscar en sub-skills de parent skills
+    for (const parentSkill of Object.values(skills)) {
+      if (parentSkill.type === 'parent') {
+        const subSkill = parentSkill.subSkills.find(s => s.uniqueId === skillId)
+        if (subSkill) {
+          skill = subSkill
+          break
+        }
+      }
+    }
+  }
+
+  if (!skill) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Skill no encontrada: {skillId}</Text>
+      </YStack>
+    )
+  }
+
+  if (skill.type === 'parent') {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">
+          Esta es una parent skill. Selecciona una sub-skill específica.
+        </Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <SkillDetailPanel
+      skillName={skill.name}
+      abilityKey={skill.abilityModifierUniqueId}
+      totalBonus={skill.totalBonus}
+      isClassSkill={skill.isClassSkill}
+      sourceValues={skill.sourceValues}
+    />
+  )
+}
+
 function NotImplementedDetail({ type, id }: { type: string; id: string }) {
   return (
     <YStack flex={1} justifyContent="center" alignItems="center" padding={20}>
@@ -240,6 +296,7 @@ export function DetailScreen() {
       case 'bab':
         return <BABDetail />
       case 'skill':
+        return <SkillDetail skillId={id} />
       case 'spell':
       case 'buff':
       case 'equipment':

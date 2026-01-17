@@ -1,0 +1,46 @@
+---
+description: Evitar FlatList dentro de ScrollView
+globs: 
+alwaysApply: true
+---
+
+# FlatList en Contextos Anidados
+
+## Problema
+
+React Native lanza warning cuando FlatList está dentro de ScrollView con la misma orientación:
+
+```
+VirtualizedLists should never be nested inside plain ScrollViews
+```
+
+## Solución
+
+Usar `.map()` en lugar de FlatList cuando el componente estará dentro de un ScrollView:
+
+```typescript
+// MAL - FlatList dentro de ScrollView
+<ScrollView>
+  <FlatList data={items} renderItem={...} />
+</ScrollView>
+
+// BIEN - .map() para listas anidadas
+<ScrollView>
+  <YStack>
+    {items.map((item) => <ItemRow key={item.id} {...item} />)}
+  </YStack>
+</ScrollView>
+```
+
+## Excepción
+
+En desktop donde el componente tiene su propio scroll (no está dentro de ScrollView), FlatList es preferible para virtualización.
+
+```typescript
+// Patrón: detectar plataforma
+{isDesktop ? (
+  <FlatList data={items} ... />
+) : (
+  items.map((item) => <ItemRow key={item.id} {...item} />)
+)}
+```

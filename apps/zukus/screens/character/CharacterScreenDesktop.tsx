@@ -6,6 +6,7 @@ import {
   useCharacterSheet,
   useCharacterAbilities,
   useCharacterSavingThrows,
+  useCharacterSkills,
   useCharacterLevel,
   useCharacterHitPoints,
   useCharacterArmorClass,
@@ -21,6 +22,7 @@ import {
   InitiativeDetailPanel,
   BABCard,
   BABDetailPanel,
+  SkillDetailPanel,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -28,7 +30,6 @@ import {
   SectionHeader,
   SectionCard,
   StatBox,
-  SkillItem,
   ItemCard,
   CharacterHeader,
   HpBar,
@@ -37,8 +38,9 @@ import {
   ArmorClassDetailPanel,
 } from '../../components/character'
 import { SavingThrowDetailPanel } from '../../ui'
+import { SkillsSection } from '../../ui/components/character/SkillsSection'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow } from '@zukus/core'
+import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, CalculatedSingleSkill } from '@zukus/core'
 import {
   SidePanel,
   SidePanelContainer,
@@ -200,6 +202,7 @@ function CharacterScreenDesktopContent() {
   const characterSheet = useCharacterSheet()
   const abilities = useCharacterAbilities()
   const savingThrows = useCharacterSavingThrows()
+  const skills = useCharacterSkills()
   const level = useCharacterLevel()
   const hitPoints = useCharacterHitPoints()
   const armorClass = useCharacterArmorClass()
@@ -269,6 +272,33 @@ function CharacterScreenDesktopContent() {
   const getSavingThrowForPanel = (savingThrowKey: string): CalculatedSavingThrow | null => {
     if (!savingThrows) return null
     return savingThrows[savingThrowKey as keyof typeof savingThrows] ?? null
+  }
+
+  const getSkillForPanel = (skillId: string): CalculatedSingleSkill | null => {
+    if (!skills) return null
+    
+    // Buscar en skills directas
+    let skill = skills[skillId]
+    
+    // Si no se encuentra, buscar en sub-skills
+    if (!skill) {
+      for (const parentSkill of Object.values(skills)) {
+        if (parentSkill.type === 'parent') {
+          const subSkill = parentSkill.subSkills.find(s => s.uniqueId === skillId)
+          if (subSkill) {
+            return subSkill
+          }
+        }
+      }
+      return null
+    }
+    
+    // Si es parent skill, no mostrarlo
+    if (skill.type === 'parent') {
+      return null
+    }
+    
+    return skill
   }
 
   // Si no hay datos aún, mostrar loading
@@ -352,10 +382,14 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 2: Ability Scores */}
+        {/* Columna 2: Ability Scores + Skills */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <DesktopAbilitiesCard abilities={abilities} onAbilityPress={handleAbilityPress} />
+            <SectionCard>
+              <SectionHeader icon="#" title="Skills" />
+              <SkillsSection />
+            </SectionCard>
           </YStack>
         </VerticalSection>
 
@@ -382,21 +416,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 4: Skills (mock por ahora) */}
-        <VerticalSection>
-          <YStack width="100%" gap={16}>
-            <SectionCard>
-              <SectionHeader icon="#" title="Skills" />
-              <YStack>
-                {MOCK_CHARACTER.skills.map((skill, index) => (
-                  <SkillItem key={index} skill={skill} />
-                ))}
-              </YStack>
-            </SectionCard>
-          </YStack>
-        </VerticalSection>
-
-        {/* Columna 5: Equipment (mock por ahora) */}
+        {/* Columna 4: Equipment (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
@@ -415,7 +435,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 6: Spells (mock por ahora) */}
+        {/* Columna 5: Spells (mock por ahora) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
@@ -477,6 +497,15 @@ function CharacterScreenDesktopContent() {
             totalValue={bab.totalValue}
             multipleAttacks={bab.multipleBaseAttackBonuses}
             sourceValues={bab.sourceValues}
+          />
+        )}
+        {currentPanel?.type === 'skill' && currentPanel?.id && getSkillForPanel(currentPanel.id) && (
+          <SkillDetailPanel
+            skillName={getSkillForPanel(currentPanel.id)!.name}
+            abilityKey={getSkillForPanel(currentPanel.id)!.abilityModifierUniqueId}
+            totalBonus={getSkillForPanel(currentPanel.id)!.totalBonus}
+            isClassSkill={getSkillForPanel(currentPanel.id)!.isClassSkill}
+            sourceValues={getSkillForPanel(currentPanel.id)!.sourceValues}
           />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (

@@ -16,15 +16,7 @@ import Animated, {
 import { LinearGradient } from 'expo-linear-gradient'
 import { useTheme } from '../../contexts/ThemeContext'
 import { useGlowOnChange } from '../../../hooks'
-
-const ABILITY_ABBR: Record<string, string> = {
-  strength: 'STR',
-  dexterity: 'DEX',
-  constitution: 'CON',
-  intelligence: 'INT',
-  wisdom: 'WIS',
-  charisma: 'CHA',
-}
+import { getAbilityAbbr } from '../../constants'
 
 export type AbilityCardProps = {
   abilityKey: string
@@ -121,7 +113,7 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
     onPress?.()
   }
 
-  const abbr = ABILITY_ABBR[abilityKey] ?? abilityKey.toUpperCase().slice(0, 3)
+  const abbr = getAbilityAbbr(abilityKey)
 
   return (
     <Animated.View
@@ -233,7 +225,7 @@ export const AbilityCardCompact: React.FC<AbilityCardProps> = ({
     return { transform: [{ scale: numberScale.value }] }
   }, [])
 
-  const abbr = ABILITY_ABBR[abilityKey] ?? abilityKey.toUpperCase().slice(0, 3)
+  const abbr = getAbilityAbbr(abilityKey)
 
   return (
     <Animated.View

@@ -3,8 +3,8 @@ import { View, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { useCharacterAbilities, AbilityCard, AbilityCardCompact } from '../../../ui'
-import { SectionHeader, SectionCard, SkillItem } from '../CharacterComponents'
-import { MOCK_CHARACTER } from '../data'
+import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SkillsSection } from '../../../ui/components/character/SkillsSection'
 import { useNavigateToDetail } from '../../../navigation'
 
 const ABILITY_ORDER = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']
@@ -172,15 +172,10 @@ export function AbilitiesSection() {
           )}
         </YStack>
 
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="#" title="Skills" />
-          <YStack>
-            {/* Skills siguen usando mock por ahora - se migrarán en fase 6.5 */}
-            {MOCK_CHARACTER.skills.map((skill, index) => (
-              <SkillItem key={index} skill={skill} />
-            ))}
-          </YStack>
-        </SectionCard>
+          <SkillsSection />
+        </YStack>
       </ScrollView>
     </View>
   )

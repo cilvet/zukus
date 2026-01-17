@@ -20,4 +20,5 @@ export {
   type BABDetailPanelProps,
   SourceValuesTable,
   type SourceValuesTableProps,
+  SkillDetailPanel,
 } from './character'

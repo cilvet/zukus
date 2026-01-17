@@ -52,3 +52,30 @@ alwaysApply: true
 3. Indica qué verificaciones has realizado tú (tests, builds, etc.)
 4. Pregunta explícitamente si se puede continuar
 5. **ESPERA la respuesta antes de continuar**
+
+## Integración de Componentes
+
+**Un componente NO está completo hasta que esté integrado y sea visible/usable en la aplicación.**
+
+### ✅ CORRECTO
+
+1. Implementar componente
+2. Integrarlo en las vistas donde se usará (mobile, desktop)
+3. Verificar que se puede acceder y probar
+4. ENTONCES pedir verificación al humano
+
+### ❌ INCORRECTO
+
+1. Implementar componente
+2. Exportarlo en index.ts
+3. Pedir verificación sin integrarlo → **El humano no puede probarlo**
+
+### Ejemplo
+
+Si implementas `SkillsSection`:
+- ✅ Añadirlo a `AbilitiesSection.tsx` (mobile)
+- ✅ Añadirlo a `CharacterScreenDesktop.tsx` (desktop)
+- ✅ Asegurar que hay navegación para acceder
+- ❌ Solo crearlo y exportarlo
+
+**Razón**: "No sé cómo pretendes que lo pruebe si no está en la vista de personaje" - Usuario

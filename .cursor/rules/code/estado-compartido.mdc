@@ -1,0 +1,50 @@
+---
+description: Cuándo usar Zustand vs useState para estado
+globs: 
+alwaysApply: true
+---
+
+# Estado Compartido: Zustand vs useState
+
+## Regla
+
+**useState**: Solo para estado local de UN componente
+**Zustand**: Para estado que necesitan MÚLTIPLES componentes
+
+## Problema Común
+
+Hooks con `useState` que se usan en múltiples componentes crean instancias separadas:
+
+```typescript
+// MAL - Cada componente que llame a usePanel tiene su propio estado
+function usePanel() {
+  const [isOpen, setIsOpen] = useState(false)
+  return { isOpen, open: () => setIsOpen(true) }
+}
+
+// ComponenteA llama usePanel() → instancia A
+// ComponenteB llama usePanel() → instancia B (estado diferente!)
+```
+
+## Solución
+
+```typescript
+// BIEN - Store de Zustand, estado compartido
+const usePanelStore = create((set) => ({
+  isOpen: false,
+  open: () => set({ isOpen: true }),
+}))
+
+// ComponenteA y ComponenteB ven el mismo estado
+```
+
+## Cuándo Usar Zustand
+
+- Estado del Side Panel (navegación)
+- Estado del personaje (ya existe characterStore)
+- Cualquier estado que deba sincronizarse entre componentes no relacionados
+
+## Cuándo Usar useState
+
+- Estado local de un solo componente (toggle, input value, etc.)
+- Estado que no necesita compartirse
