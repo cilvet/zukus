@@ -86,3 +86,59 @@ export function insertVariableInFormula(
 
   return `${beforeAt}@${variableId} ${afterSearchTerm}`
 }
+
+export type InsertionResult = {
+  newText: string
+  newCursorPosition: number
+}
+
+/**
+ * Inserta texto en una posición específica del cursor.
+ */
+export function insertTextAtCursor(
+  text: string,
+  cursorPosition: number,
+  textToInsert: string
+): InsertionResult {
+  const before = text.slice(0, cursorPosition)
+  const after = text.slice(cursorPosition)
+  
+  return {
+    newText: before + textToInsert + after,
+    newCursorPosition: cursorPosition + textToInsert.length,
+  }
+}
+
+/**
+ * Inserta paréntesis y coloca el cursor en medio.
+ */
+export function insertParentheses(
+  text: string,
+  cursorPosition: number
+): InsertionResult {
+  const before = text.slice(0, cursorPosition)
+  const after = text.slice(cursorPosition)
+  
+  return {
+    newText: before + '()' + after,
+    newCursorPosition: cursorPosition + 1, // Cursor entre paréntesis
+  }
+}
+
+/**
+ * Inserta una función con paréntesis vacíos y coloca el cursor en medio.
+ */
+export function insertFunction(
+  text: string,
+  cursorPosition: number,
+  functionName: string
+): InsertionResult {
+  const before = text.slice(0, cursorPosition)
+  const after = text.slice(cursorPosition)
+  const insertion = `${functionName}()`
+  
+  return {
+    newText: before + insertion + after,
+    newCursorPosition: cursorPosition + functionName.length + 1, // Cursor entre paréntesis
+  }
+}

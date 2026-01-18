@@ -3,6 +3,9 @@ import {
   getMentionInfo,
   filterVariables,
   insertVariableInFormula,
+  insertTextAtCursor,
+  insertParentheses,
+  insertFunction,
   type VariableDefinition,
 } from './formulaAutocomplete'
 
@@ -139,5 +142,115 @@ describe('insertVariableInFormula', () => {
     const mentionInfo = { active: true, atPosition: 0, searchTerm: '' }
     const result = insertVariableInFormula('@', mentionInfo, 'foo')
     expect(result.endsWith(' ')).toBe(true)
+  })
+})
+
+describe('insertTextAtCursor', () => {
+  it('inserts text at the beginning', () => {
+    const result = insertTextAtCursor('world', 0, 'hello ')
+    expect(result.newText).toBe('hello world')
+    expect(result.newCursorPosition).toBe(6)
+  })
+
+  it('inserts text at the end', () => {
+    const result = insertTextAtCursor('hello', 5, ' world')
+    expect(result.newText).toBe('hello world')
+    expect(result.newCursorPosition).toBe(11)
+  })
+
+  it('inserts text in the middle', () => {
+    const result = insertTextAtCursor('helloworld', 5, ' ')
+    expect(result.newText).toBe('hello world')
+    expect(result.newCursorPosition).toBe(6)
+  })
+
+  it('inserts symbol in formula', () => {
+    const result = insertTextAtCursor('1d20 5', 5, '+ ')
+    expect(result.newText).toBe('1d20 + 5')
+    expect(result.newCursorPosition).toBe(7)
+  })
+
+  it('handles empty text', () => {
+    const result = insertTextAtCursor('', 0, '+')
+    expect(result.newText).toBe('+')
+    expect(result.newCursorPosition).toBe(1)
+  })
+})
+
+describe('insertParentheses', () => {
+  it('inserts parentheses at the beginning', () => {
+    const result = insertParentheses('1 + 2', 0)
+    expect(result.newText).toBe('()1 + 2')
+    expect(result.newCursorPosition).toBe(1)
+  })
+
+  it('inserts parentheses at the end', () => {
+    const result = insertParentheses('1 + 2', 5)
+    expect(result.newText).toBe('1 + 2()')
+    expect(result.newCursorPosition).toBe(6)
+  })
+
+  it('inserts parentheses in the middle', () => {
+    const result = insertParentheses('1 + 2 * 3', 6)
+    expect(result.newText).toBe('1 + 2 ()* 3')
+    expect(result.newCursorPosition).toBe(7)
+  })
+
+  it('cursor is positioned between parentheses', () => {
+    const result = insertParentheses('test', 2)
+    expect(result.newText).toBe('te()st')
+    expect(result.newCursorPosition).toBe(3)
+    expect(result.newText[result.newCursorPosition - 1]).toBe('(')
+    expect(result.newText[result.newCursorPosition]).toBe(')')
+  })
+
+  it('handles empty text', () => {
+    const result = insertParentheses('', 0)
+    expect(result.newText).toBe('()')
+    expect(result.newCursorPosition).toBe(1)
+  })
+})
+
+describe('insertFunction', () => {
+  it('inserts function at the beginning', () => {
+    const result = insertFunction('1 + 2', 0, 'floor')
+    expect(result.newText).toBe('floor()1 + 2')
+    expect(result.newCursorPosition).toBe(6)
+  })
+
+  it('inserts function at the end', () => {
+    const result = insertFunction('1 + ', 4, 'ceil')
+    expect(result.newText).toBe('1 + ceil()')
+    expect(result.newCursorPosition).toBe(9)
+  })
+
+  it('inserts function in the middle', () => {
+    const result = insertFunction('1 + 2', 4, 'abs')
+    expect(result.newText).toBe('1 + abs()2')
+    expect(result.newCursorPosition).toBe(8)
+  })
+
+  it('cursor is positioned between parentheses', () => {
+    const result = insertFunction('test', 2, 'round')
+    expect(result.newText).toBe('teround()st')
+    expect(result.newCursorPosition).toBe(8)
+    expect(result.newText[result.newCursorPosition - 1]).toBe('(')
+    expect(result.newText[result.newCursorPosition]).toBe(')')
+  })
+
+  it('handles different function names', () => {
+    const result1 = insertFunction('', 0, 'min')
+    expect(result1.newText).toBe('min()')
+    expect(result1.newCursorPosition).toBe(4)
+
+    const result2 = insertFunction('', 0, 'max')
+    expect(result2.newText).toBe('max()')
+    expect(result2.newCursorPosition).toBe(4)
+  })
+
+  it('handles empty text', () => {
+    const result = insertFunction('', 0, 'floor')
+    expect(result.newText).toBe('floor()')
+    expect(result.newCursorPosition).toBe(6)
   })
 })

@@ -13,8 +13,12 @@ import {
   getMentionInfo,
   filterVariables,
   insertVariableInFormula,
+  insertTextAtCursor,
+  insertParentheses,
+  insertFunction,
   type VariableDefinition,
 } from './formulaAutocomplete'
+import { FormulaToolbar } from './FormulaToolbar'
 
 // Datos mock para desarrollo visual
 const MOCK_VARIABLES: VariableDefinition[] = [
@@ -62,6 +66,7 @@ export function FormulaEditorModal({
   const insets = useSafeAreaInsets()
   const inputRef = useRef<TextInput>(null)
   const [formula, setFormula] = useState(initialValue)
+  const [cursorPosition, setCursorPosition] = useState(0)
 
   // Sincronizar con initialValue cuando cambia
   useEffect(() => {
@@ -97,6 +102,43 @@ export function FormulaEditorModal({
     }, 50)
   }
 
+  const [pendingSelection, setPendingSelection] = useState<{ start: number; end: number } | null>(
+    null
+  )
+
+  useEffect(() => {
+    if (pendingSelection && inputRef.current) {
+      setTimeout(() => {
+        inputRef.current?.focus()
+        inputRef.current?.setNativeProps({
+          selection: pendingSelection,
+        })
+        setPendingSelection(null)
+      }, 0)
+    }
+  }, [pendingSelection])
+
+  const handleInsertSymbol = (symbol: string) => {
+    const { newText, newCursorPosition } = insertTextAtCursor(formula, cursorPosition, symbol)
+    setFormula(newText)
+    setCursorPosition(newCursorPosition)
+    setPendingSelection({ start: newCursorPosition, end: newCursorPosition })
+  }
+
+  const handleInsertParentheses = () => {
+    const { newText, newCursorPosition } = insertParentheses(formula, cursorPosition)
+    setFormula(newText)
+    setCursorPosition(newCursorPosition)
+    setPendingSelection({ start: newCursorPosition, end: newCursorPosition })
+  }
+
+  const handleInsertFunction = (functionName: string) => {
+    const { newText, newCursorPosition } = insertFunction(formula, cursorPosition, functionName)
+    setFormula(newText)
+    setCursorPosition(newCursorPosition)
+    setPendingSelection({ start: newCursorPosition, end: newCursorPosition })
+  }
+
   // Agrupar por categoría
   const groupedVariables = filteredVariables.reduce(
     (acc, variable) => {
@@ -118,49 +160,58 @@ export function FormulaEditorModal({
       presentationStyle="fullScreen"
       onRequestClose={onClose}
     >
-      <View
-        flex={1}
-        backgroundColor="$background"
-        paddingTop={insets.top}
-        paddingBottom={insets.bottom}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        {/* Header */}
-        <XStack
-          paddingHorizontal={16}
-          paddingVertical={12}
-          justifyContent="space-between"
-          alignItems="center"
-          borderBottomWidth={1}
-          borderBottomColor="$borderColor"
+        <View
+          flex={1}
+          backgroundColor="$background"
+          paddingTop={insets.top}
         >
-          <Pressable onPress={onClose} hitSlop={8}>
-            <Text fontSize={16} color="$color">
-              Cancel
+          {/* Header */}
+          <XStack
+            paddingHorizontal={16}
+            paddingVertical={12}
+            justifyContent="space-between"
+            alignItems="center"
+            borderBottomWidth={1}
+            borderBottomColor="$borderColor"
+          >
+            <Pressable onPress={onClose} hitSlop={8}>
+              <Text fontSize={16} color="$color">
+                Cancel
+              </Text>
+            </Pressable>
+
+            <Text fontSize={16} fontWeight="600" color="$color">
+              Edit Formula
             </Text>
-          </Pressable>
 
-          <Text fontSize={16} fontWeight="600" color="$color">
-            Edit Formula
-          </Text>
+            <Pressable onPress={handleApply} hitSlop={8}>
+              <Text fontSize={16} fontWeight="600" color="$blue10">
+                Apply
+              </Text>
+            </Pressable>
+          </XStack>
 
-          <Pressable onPress={handleApply} hitSlop={8}>
-            <Text fontSize={16} fontWeight="600" color="$blue10">
-              Apply
-            </Text>
-          </Pressable>
-        </XStack>
-
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={0}
-        >
-          <YStack flex={1} padding={16} gap={12}>
+          <ScrollView
+            flex={1}
+            contentContainerStyle={{ padding: 16, gap: 12, flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+          >
             {/* Input de fórmula */}
             <TextInput
               ref={inputRef}
               value={formula}
-              onChangeText={setFormula}
+              onChangeText={(text) => {
+                setFormula(text)
+                setCursorPosition(text.length)
+              }}
+              onSelectionChange={(event) => {
+                const position = event.nativeEvent.selection.start
+                setCursorPosition(position)
+              }}
               placeholder="Type @ to insert variables"
               placeholderTextColor="#666"
               multiline
@@ -186,6 +237,7 @@ export function FormulaEditorModal({
                   style={{ maxHeight: 250 }}
                   showsVerticalScrollIndicator={false}
                   keyboardShouldPersistTaps="handled"
+                  nestedScrollEnabled
                 >
                   <YStack padding={4}>
                     {categoryOrder.map((category) => {
@@ -257,9 +309,16 @@ export function FormulaEditorModal({
                 Type @ to autocomplete variables
               </Text>
             )}
-          </YStack>
-        </KeyboardAvoidingView>
-      </View>
+          </ScrollView>
+
+          {/* Toolbar de símbolos y funciones - fija al fondo */}
+          <FormulaToolbar
+            onInsertSymbol={handleInsertSymbol}
+            onInsertParentheses={handleInsertParentheses}
+            onInsertFunction={handleInsertFunction}
+          />
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
   )
 }
