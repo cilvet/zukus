@@ -16,6 +16,7 @@ import {
   useCharacterBAB,
   useCharacterBuffs,
   useCharacterImageUrl,
+  useCharacterAttacks,
   AbilityCard,
   AbilityCardCompact,
   Checkbox,
@@ -27,6 +28,8 @@ import {
   BABCard,
   BABDetailPanel,
   SkillDetailPanel,
+  AttacksSection,
+  AttackDetailPanel,
 } from '../../ui'
 import { usePanelNavigation } from '../../hooks'
 import {
@@ -313,6 +316,7 @@ function CharacterScreenDesktopContent() {
   const initiative = useCharacterInitiative()
   const bab = useCharacterBAB()
   const buffs = useCharacterBuffs()
+  const attackData = useCharacterAttacks()
   const imageUrl = useCharacterImageUrl()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
   const navigateToDetail = useNavigateToDetail()
@@ -350,6 +354,18 @@ function CharacterScreenDesktopContent() {
   const handleItemPress = (itemId: string, itemName: string) => {
     openPanel(itemId, 'item', itemName)
   }
+
+  const handleAttackPress = (attack: { weaponUniqueId?: string; name: string }) => {
+    const id = attack.weaponUniqueId ?? attack.name
+    openPanel(id, 'attack', attack.name)
+  }
+
+  const attackForPanel =
+    currentPanel?.type === 'attack' && currentPanel?.id && attackData
+      ? attackData.attacks.find(
+          (a) => a.weaponUniqueId === currentPanel.id || a.name === currentPanel.id
+        )
+      : null
 
   const handleHitPointsPress = () => {
     navigateToDetail('hitPoints', 'hitPoints')
@@ -496,6 +512,15 @@ function CharacterScreenDesktopContent() {
                 </XStack>
               </SectionCard>
             )}
+            {attackData && attackData.attacks.length > 0 && (
+              <SectionCard>
+                <SectionHeader icon="*" title="Attacks" />
+                <AttacksSection
+                  attacks={attackData.attacks}
+                  onAttackPress={handleAttackPress}
+                />
+              </SectionCard>
+            )}
           </YStack>
         </VerticalSection>
 
@@ -627,6 +652,9 @@ function CharacterScreenDesktopContent() {
             isClassSkill={getSkillForPanel(currentPanel.id)!.isClassSkill}
             sourceValues={getSkillForPanel(currentPanel.id)!.sourceValues}
           />
+        )}
+        {attackForPanel && attackData && (
+          <AttackDetailPanel attack={attackForPanel} attackData={attackData} />
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (
           <GenericDetailPanel title={currentPanel.name} />

@@ -12,7 +12,8 @@
     "test": "turbo test",
     "typecheck": "turbo typecheck",
     "lint": "turbo lint",
-    "clean": "turbo clean && rm -rf node_modules"
+    "clean": "turbo clean && rm -rf node_modules",
+    "rulesync": "bun scripts/rulesync.ts"
   },
   "devDependencies": {
     "turbo": "^2.3.0",

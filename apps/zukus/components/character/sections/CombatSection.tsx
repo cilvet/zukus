@@ -1,9 +1,10 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard } from '../../../ui'
+import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
+import type { CalculatedAttack } from '@zukus/core'
 
 /**
  * Seccion de estadisticas de combate.
@@ -13,6 +14,7 @@ export function CombatSection() {
   const armorClass = useCharacterArmorClass()
   const initiative = useCharacterInitiative()
   const bab = useCharacterBAB()
+  const attackData = useCharacterAttacks()
   const navigateToDetail = useNavigateToDetail()
 
   const handleSavingThrowPress = (savingThrowKey: string) => {
@@ -29,6 +31,11 @@ export function CombatSection() {
 
   const handleBABPress = () => {
     navigateToDetail('bab', 'bab')
+  }
+
+  const handleAttackPress = (attack: CalculatedAttack) => {
+    const id = attack.weaponUniqueId ?? attack.name
+    navigateToDetail('attack', id, attack.name)
   }
 
   return (
@@ -90,6 +97,16 @@ export function CombatSection() {
                 onPress={() => handleSavingThrowPress('will')}
               />
             </XStack>
+          </SectionCard>
+        )}
+
+        {attackData && attackData.attacks.length > 0 && (
+          <SectionCard>
+            <SectionHeader icon="ATK" title="Attacks" />
+            <AttacksSection
+              attacks={attackData.attacks}
+              onAttackPress={handleAttackPress}
+            />
           </SectionCard>
         )}
       </ScrollView>

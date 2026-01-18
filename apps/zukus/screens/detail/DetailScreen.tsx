@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel } from '../../ui'
+import { useCharacterStore, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
@@ -218,6 +218,32 @@ function SkillDetail({ skillId }: { skillId: string }) {
   )
 }
 
+function AttackDetail({ attackId }: { attackId: string }) {
+  const attackData = useCharacterAttacks()
+
+  if (!attackData) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const attack = attackData.attacks.find(
+    (a) => a.weaponUniqueId === attackId || a.name === attackId
+  )
+
+  if (!attack) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Ataque no encontrado: {attackId}</Text>
+      </YStack>
+    )
+  }
+
+  return <AttackDetailPanel attack={attack} attackData={attackData} />
+}
+
 function HitPointsDetail() {
   const hitPoints = useCharacterHitPoints()
   const abilities = useCharacterAbilities()
@@ -399,9 +425,12 @@ export function DetailScreen() {
         return <HitPointsDetail />
       case 'skill':
         return <SkillDetail skillId={id} />
+      case 'attack':
+        return <AttackDetail attackId={id} />
       case 'spell':
       case 'buff':
       case 'equipment':
+      case 'item':
         return <NotImplementedDetail type={type} id={id} />
       default:
         return <InvalidRoute />

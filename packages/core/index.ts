@@ -30,3 +30,39 @@ export type { Buff } from "./core/domain/character/baseData/buffs";
 
 // Types - Equipment
 export type { Equipment, Item } from "./core/domain/character/baseData/equipment";
+
+// Types - Attacks
+export type {
+  CalculatedAttack,
+  CalculatedAttackData,
+  CalculatedAttackBonus,
+  BaseCalculatedAttack,
+  CalculatedWeaponAttack,
+  ResolvedAttackContext,
+} from "./core/domain/character/calculatedSheet/attacks/calculatedAttack";
+export type {
+  AttackType,
+  AttackChange,
+  AttackRollChange,
+  WieldTypes,
+} from "./core/domain/character/baseData/attacks";
+export type {
+  AttackContextualChange,
+  ResolvedAttackContextualChange,
+} from "./core/domain/character/baseData/contextualChange";
+export type { ContextualVariable, ResolvedContextualVariable } from "./core/domain/character/baseData/variable";
+
+// Attack Calculation
+export { calculateAttackBonus } from "./core/domain/character/calculation/attacks/attack/calculateAttackBonus/calculateAttackBonus";
+export { getAttackDamageFormula } from "./core/domain/character/calculation/attacks/attack/getAttackDamageFormula";
+export { getWeaponAttackContext } from "./core/domain/character/calculatedSheet/attacks/attackContext/availableAttackContext";
+export type { SubstitutionIndex } from "./core/domain/character/calculation/sources/calculateSources";
+
+// Weapons
+export type { Weapon } from "./core/domain/weapons/weapon";
+
+// Formula System
+export { substituteExpression, fillFormulaWithValues } from "./core/domain/formulae/formula";
+export type { Formula, NormalFormula, SwitchFormula } from "./core/domain/formulae/formula";
+export { getRollExpression } from "./core/domain/rolls/expressionAnalysis/expressionAnalysis";
+export { getResolvedRollExpression } from "./core/domain/rolls/DiceRoller/diceRoller";

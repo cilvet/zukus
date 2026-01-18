@@ -12,4 +12,14 @@ export { SourceValuesTable, type SourceValuesTableProps } from './SourceValuesTa
 export { SkillRow } from './SkillRow'
 export { SkillRowContent, type SkillRowColors } from './SkillRowContent'
 export { SkillDetailPanel } from './SkillDetailPanel'
+export {
+  AttackCard,
+  type AttackCardProps,
+  AttacksSection,
+  type AttacksSectionProps,
+  AttackDetailPanel,
+  type AttackDetailPanelProps,
+  ContextualChangeToggle,
+  type ContextualChangeToggleProps,
+} from './attacks'
 // NOTE: SavingThrowsSection, SkillsSection and ArmorClassSection not exported here to avoid circular dependency with navigation

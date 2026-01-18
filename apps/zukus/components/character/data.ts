@@ -18,6 +18,7 @@ export const CHARACTER_PAGES: CharacterPage[] = [
   { key: 'inventory', label: 'Inventario', icon: 'briefcase' },
   { key: 'description', label: 'Descripción', icon: 'user' },
   { key: 'notes', label: 'Notas', icon: 'pencil' },
+  { key: 'playground', label: 'Playground', icon: 'code' },
 ]
 
 // Mock data del personaje
