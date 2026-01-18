@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router'
+import { Stack, useRouter, useSegments } from 'expo-router'
 import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native'
 import { TamaguiProvider, Theme } from 'tamagui'
 import { config, ThemeProvider, useTheme } from '../ui'
@@ -6,9 +6,9 @@ import { useFonts } from 'expo-font'
 import { useMemo, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Platform } from 'react-native'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { AuthProvider, useAuth } from '../contexts'
 
 // React Scan solo en desarrollo y web
 let reactScanInitialized = false
@@ -28,6 +28,9 @@ if (__DEV__ && typeof window !== 'undefined') {
 
 function ThemedApp() {
   const { themeName, themeColors, isLoading } = useTheme()
+  const { session, isLoading: isAuthLoading } = useAuth()
+  const router = useRouter()
+  const segments = useSegments()
 
   // Create a navigation theme that matches our app theme
   const navigationTheme = useMemo(() => ({
@@ -60,6 +63,21 @@ function ThemedApp() {
     },
   }), [themeColors])
 
+  useEffect(() => {
+    if (isAuthLoading) return
+    const [rootSegment] = segments
+    const inAuthGroup = rootSegment === '(auth)'
+
+    if (!session && !inAuthGroup) {
+      router.replace('/(auth)/login')
+      return
+    }
+
+    if (session && inAuthGroup) {
+      router.replace('/(tabs)/(character)')
+    }
+  }, [isAuthLoading, segments, router, session])
+
   if (isLoading) {
     return null
   }
@@ -78,6 +96,7 @@ function ThemedApp() {
             }}
           >
             <Stack.Screen name="index" />
+            <Stack.Screen name="(auth)" />
             <Stack.Screen name="(tabs)" />
           </Stack>
         </NavigationThemeProvider>
@@ -95,7 +114,9 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <ThemeProvider>
-          <ThemedApp />
+          <AuthProvider>
+            <ThemedApp />
+          </AuthProvider>
         </ThemeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View, Pressable } from 'react-native'
 import {
@@ -47,7 +47,6 @@ import {
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
-import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 import { type DetailType, getDetailTitle, isValidDetailType } from '../../navigation'
 
 const ABILITY_COLUMNS = [
@@ -519,15 +518,8 @@ function CharacterScreenDesktopContent() {
 /**
  * Pantalla de personaje para desktop web.
  * Layout: columnas horizontales con Side Panel para detalles.
- * Inicializa el store de Zustand con los datos del personaje.
+ * Consume el personaje cargado en el store.
  */
 export function CharacterScreenDesktop() {
-  const setCharacter = useCharacterStore((state) => state.setCharacter)
-
-  // Inicializar el store con el personaje de prueba
-  useEffect(() => {
-    setCharacter(testCharacterSheet, testBaseData)
-  }, [setCharacter])
-
   return <CharacterScreenDesktopContent />
 }

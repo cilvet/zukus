@@ -1,3 +1,5 @@
-import { CharacterScreen } from '../../../screens'
+import { CharacterListScreen } from '../../../screens/character/CharacterListScreen'
 
-export default CharacterScreen
+export default function CharacterListRoute() {
+  return <CharacterListScreen />
+}

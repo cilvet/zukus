@@ -1,13 +1,17 @@
 import { useLocalSearchParams } from 'expo-router'
-import { View } from 'react-native'
+import { useWindowDimensions } from 'react-native'
 import { Text, YStack } from 'tamagui'
-import { CharacterScreen } from '../../../screens'
+import { CharacterScreen, CharacterScreenDesktop } from '../../../screens'
 import { useCharacterSync } from '../../../hooks'
 
-export default function CharacterDetailRoute() {
+const DESKTOP_BREAKPOINT = 768
+
+export default function CharacterDetailRouteWeb() {
   const { id } = useLocalSearchParams<{ id: string }>()
+  const { width } = useWindowDimensions()
   const characterId = id ?? ''
   const { isLoading, error } = useCharacterSync(characterId)
+  const isDesktop = width >= DESKTOP_BREAKPOINT
 
   if (!characterId) {
     return (
@@ -33,9 +37,9 @@ export default function CharacterDetailRoute() {
     )
   }
 
-  return (
-    <View style={{ flex: 1 }}>
-      <CharacterScreen />
-    </View>
-  )
+  if (isDesktop) {
+    return <CharacterScreenDesktop />
+  }
+
+  return <CharacterScreen />
 }

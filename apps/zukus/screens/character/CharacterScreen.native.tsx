@@ -1,12 +1,12 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import {
   useTheme,
-  useCharacterStore,
   useCharacterName,
   useCharacterLevel,
   useCharacterHitPoints,
+  useCharacterSheet,
 } from '../../ui'
 import {
   CharacterPager,
@@ -23,7 +23,6 @@ import {
   NotesSection,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
-import { testCharacterSheet, testBaseData } from '../../data/testCharacter'
 
 /**
  * Header fijo con info del personaje.
@@ -91,22 +90,27 @@ function Header() {
 /**
  * Pantalla de personaje para nativo.
  * Header fijo + Tabs + ViewPager swipeable.
- * Inicializa el store de Zustand con los datos del personaje.
+ * Consume el personaje cargado en el store.
  */
 export function CharacterScreen() {
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<CharacterPagerRef>(null)
-  const setCharacter = useCharacterStore((state) => state.setCharacter)
-
-  // Inicializar el store con el personaje de prueba
-  useEffect(() => {
-    setCharacter(testCharacterSheet, testBaseData)
-  }, [setCharacter])
+  const characterSheet = useCharacterSheet()
 
   function handleTabPress(index: number) {
     pagerRef.current?.setPage(index)
     setCurrentPage(index)
+  }
+
+  if (!characterSheet) {
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <View style={styles.loadingContainer}>
+          <Text color="$placeholderColor">Cargando personaje...</Text>
+        </View>
+      </View>
+    )
   }
 
   return (
@@ -164,5 +168,10 @@ const styles = StyleSheet.create({
   },
   page: {
     flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })

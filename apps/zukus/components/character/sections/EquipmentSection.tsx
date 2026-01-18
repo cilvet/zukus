@@ -1,21 +1,18 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useRouter } from 'expo-router'
 import { YStack } from 'tamagui'
 import { SectionHeader, SectionCard, ItemCard } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
+import { useNavigateToDetail } from '../../../navigation'
 
 /**
  * Seccion de equipamiento/inventario.
  */
 export function EquipmentSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
 
   const handleItemPress = (itemId: string, itemName: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: itemId, type: 'item', name: itemName },
-    })
+    navigateToDetail('equipment', itemId, itemName)
   }
 
   return (

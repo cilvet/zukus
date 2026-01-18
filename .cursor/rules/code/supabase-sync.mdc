@@ -1,0 +1,94 @@
+---
+description: Patrón para sincronización bidireccional con Supabase Realtime. Leer cuando se toque algo al respecto de esto.
+globs: 
+alwaysApply: false
+---
+
+# Sincronización con Supabase Realtime
+
+## Arquitectura
+
+La sincronización entre el dispositivo y Supabase usa tres mecanismos:
+
+### 1. DeviceId para Ignorar Echos
+
+Cada sesión genera un identificador único. Se guarda en `_deviceId` dentro del objeto que se envía a Supabase.
+
+```typescript
+// Al cargar el módulo (fuera del componente)
+const DEVICE_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
+
+// Al guardar
+await repository.save(id, data, DEVICE_ID)
+
+// Al recibir
+if (deviceId === DEVICE_ID) return // Es nuestro propio echo
+```
+
+**Por qué**: Supabase Realtime notifica TODOS los cambios, incluyendo los que nosotros hicimos. Sin esto, aplicaríamos nuestros propios cambios dos veces.
+
+### 2. Queue para Serializar Saves
+
+Solo UN save en progreso a la vez. Los cambios que llegan mientras hay un save activo se acumulan, y solo se envía el estado más reciente.
+
+```typescript
+const saveInProgressRef = useRef(false)
+const pendingDataRef = useRef<Data | null>(null)
+
+const processQueue = async () => {
+  if (saveInProgressRef.current) return
+  const data = pendingDataRef.current
+  if (!data) return
+  
+  pendingDataRef.current = null
+  saveInProgressRef.current = true
+  await doSave(data)
+  saveInProgressRef.current = false
+  
+  if (pendingDataRef.current) processQueue()
+}
+
+const persistData = (data: Data) => {
+  pendingDataRef.current = data
+  processQueue()
+}
+```
+
+**Por qué**: Sin esto, saves concurrentes pueden llegar a Supabase en orden incorrecto, causando que un estado viejo sobrescriba uno nuevo.
+
+### 3. Channels Únicos y Flag isMounted
+
+React StrictMode monta/desmonta componentes en desarrollo. Esto puede causar suscripciones duplicadas.
+
+```typescript
+// Channel único para cada suscripción
+const channelName = `resource-${id}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
+
+// Flag para ignorar eventos después de desmontar
+let isMounted = true
+const unsubscribe = repository.subscribe(id, (data) => {
+  if (!isMounted) return
+  // procesar...
+})
+
+return () => {
+  isMounted = false
+  unsubscribe()
+}
+```
+
+**Por qué**: Las suscripciones antiguas pueden seguir recibiendo eventos brevemente después de `unsubscribe()`. El channel único evita conflictos, y `isMounted` evita procesar eventos obsoletos.
+
+## Archivos Clave
+
+| Archivo | Responsabilidad |
+|---------|-----------------|
+| `hooks/useCharacterSync.ts` | Hook que conecta el store con Supabase |
+| `services/characterRepository.ts` | Métodos `save()` y `subscribe()` |
+| `ui/stores/characterStore.ts` | Estado local con `syncHandler` |
+
+## Errores Comunes a Evitar
+
+- **NO usar flags que afecten "el siguiente evento"** (como `skipNextSaveRef`). Causan pérdida de datos en cambios rápidos.
+- **NO asumir que `unsubscribe()` es instantáneo**. Siempre verificar `isMounted`.
+- **NO enviar saves en paralelo**. Serializar con una queue.

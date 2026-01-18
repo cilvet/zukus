@@ -1,4 +1,4 @@
-import { ABILITY_INFO } from '../components/character'
+import { ABILITY_INFO } from '../components/character/data'
 
 /**
  * Helper para obtener el nombre de una skill desde el store.

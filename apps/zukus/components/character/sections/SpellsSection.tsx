@@ -1,21 +1,18 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useRouter } from 'expo-router'
 import { YStack } from 'tamagui'
 import { SectionHeader, SectionCard, ItemCard } from '../CharacterComponents'
 import { MOCK_CHARACTER } from '../data'
+import { useNavigateToDetail } from '../../../navigation'
 
 /**
  * Seccion de hechizos.
  */
 export function SpellsSection() {
-  const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
 
   const handleSpellPress = (spellId: string, spellName: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: spellId, type: 'item', name: spellName },
-    })
+    navigateToDetail('spell', spellId, spellName)
   }
 
   return (

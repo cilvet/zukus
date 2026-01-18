@@ -3,8 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
 import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
-import { SectionHeader, SectionCard, StatBox } from '../CharacterComponents'
-import { MOCK_CHARACTER } from '../data'
+import { SectionHeader, SectionCard } from '../CharacterComponents'
 
 /**
  * Seccion de estadisticas de combate.

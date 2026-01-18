@@ -1,8 +1,5 @@
 import { create } from 'zustand'
-import {
-  CharacterUpdater,
-  calculateCharacterSheet,
-} from '@zukus/core'
+import { CharacterUpdater } from '@zukus/core'
 import type {
   CharacterSheet,
   CharacterBaseData,
@@ -21,12 +18,14 @@ type CharacterState = {
    * Gestiona todas las operaciones de actualización del personaje.
    */
   updater: CharacterUpdater | null
+  syncHandler: ((data: CharacterBaseData) => void) | null
 }
 
 type CharacterActions = {
   // Inicialización
   setCharacter: (characterSheet: CharacterSheet, baseData: CharacterBaseData) => void
   clearCharacter: () => void
+  setSyncHandler: (handler: ((data: CharacterBaseData) => void) | null) => void
 
   // Buff Management
   toggleBuff: (buffUniqueId: string) => UpdateResult
@@ -73,6 +72,7 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   characterSheet: null,
   baseData: null,
   updater: null,
+  syncHandler: null,
 
   // =============================================================================
   // Inicialización
@@ -81,12 +81,20 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   setCharacter: (characterSheet, baseData) => {
     const updater = new CharacterUpdater(baseData, [], (sheet, data) => {
       set({ characterSheet: sheet, baseData: data })
+      const handler = get().syncHandler
+      if (handler) {
+        handler(data)
+      }
     })
     set({ characterSheet, baseData, updater })
   },
 
   clearCharacter: () => {
-    set({ characterSheet: null, baseData: null, updater: null })
+    set({ characterSheet: null, baseData: null, updater: null, syncHandler: null })
+  },
+
+  setSyncHandler: (handler) => {
+    set({ syncHandler: handler })
   },
 
   // =============================================================================

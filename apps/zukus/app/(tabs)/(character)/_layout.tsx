@@ -34,11 +34,17 @@ export default function CharacterLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: 'Personaje',
+          title: 'Personajes',
         }}
       />
       <Stack.Screen
         name="[id]"
+        options={{
+          title: 'Detalle',
+        }}
+      />
+      <Stack.Screen
+        name="detail/[...slug]"
         options={{
           title: 'Detalle',
         }}
