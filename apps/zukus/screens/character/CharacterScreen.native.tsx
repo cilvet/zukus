@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
 import {
@@ -8,8 +8,10 @@ import {
   useCharacterLevel,
   useCharacterHitPoints,
   useCharacterSheet,
+  useCharacterImageUrl,
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
+import { useNavigateToDetail } from '../../navigation'
 import {
   CharacterPager,
   CharacterTabs,
@@ -35,11 +37,17 @@ function Header() {
   const name = useCharacterName()
   const level = useCharacterLevel()
   const hitPoints = useCharacterHitPoints()
+  const imageUrl = useCharacterImageUrl()
+  const navigateToDetail = useNavigateToDetail()
 
   const levelNumber = level?.level ?? 0
   const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
   const currentHp = hitPoints?.currentHp ?? 0
   const maxHp = hitPoints?.maxHp ?? 0
+
+  const handleHitPointsPress = () => {
+    navigateToDetail('hitPoints', 'hitPoints')
+  }
 
   return (
     <View style={[styles.header, { backgroundColor: themeColors.background, borderBottomColor: themeColors.borderColor }]}>
@@ -53,38 +61,54 @@ function Header() {
         </Text>
       </YStack>
 
-      {/* Centro: Avatar + Nombre */}
+      {/* Centro: Avatar */}
       <YStack alignItems="center">
-        <YStack
-          width={48}
-          height={48}
-          borderRadius={24}
-          backgroundColor="$uiBackgroundColor"
-          borderWidth={2}
-          borderColor="$color"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text fontSize={16} fontWeight="700" color="$color">
-            {name.charAt(0)}
-          </Text>
-        </YStack>
+        {imageUrl ? (
+          <Image
+            source={{ uri: imageUrl }}
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: 24,
+              backgroundColor: '#333',
+            }}
+          />
+        ) : (
+          <YStack
+            width={48}
+            height={48}
+            borderRadius={24}
+            backgroundColor="$uiBackgroundColor"
+            borderWidth={2}
+            borderColor="$color"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text fontSize={16} fontWeight="700" color="$color">
+              {name.charAt(0)}
+            </Text>
+          </YStack>
+        )}
       </YStack>
 
       {/* Derecha: HP */}
-      <YStack alignItems="flex-end" flex={1}>
-        <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
-          HP
-        </Text>
-        <XStack alignItems="baseline" gap={2}>
-          <Text fontSize={16} fontWeight="700" color="$color">
-            {currentHp}
-          </Text>
-          <Text fontSize={12} color="$placeholderColor">
-            /{maxHp}
-          </Text>
-        </XStack>
-      </YStack>
+      <Pressable onPress={handleHitPointsPress} hitSlop={8} style={{ flex: 1 }}>
+        {({ pressed }) => (
+          <YStack alignItems="flex-end" flex={1} opacity={pressed ? 0.7 : 1}>
+            <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
+              HP
+            </Text>
+            <XStack alignItems="baseline" gap={2}>
+              <Text fontSize={16} fontWeight="700" color="$color">
+                {currentHp}
+              </Text>
+              <Text fontSize={12} color="$placeholderColor">
+                /{maxHp}
+              </Text>
+            </XStack>
+          </YStack>
+        )}
+      </Pressable>
     </View>
   )
 }

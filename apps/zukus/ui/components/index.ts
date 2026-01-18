@@ -18,6 +18,8 @@ export {
   type BABCardProps,
   BABDetailPanel,
   type BABDetailPanelProps,
+  HitPointsDetailPanel,
+  type HitPointsDetailPanelProps,
   SourceValuesTable,
   type SourceValuesTableProps,
   SkillDetailPanel,

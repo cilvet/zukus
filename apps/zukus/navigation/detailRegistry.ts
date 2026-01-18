@@ -18,7 +18,7 @@ const SAVING_THROW_NAMES: Record<string, string> = {
 /**
  * Tipos de detalle soportados en la navegación.
  */
-export type DetailType = 'ability' | 'savingThrow' | 'armorClass' | 'initiative' | 'bab' | 'skill' | 'spell' | 'buff' | 'equipment' | 'item'
+export type DetailType = 'ability' | 'savingThrow' | 'armorClass' | 'initiative' | 'bab' | 'skill' | 'spell' | 'buff' | 'equipment' | 'item' | 'hitPoints'
 
 /**
  * Configuración de un tipo de detalle.
@@ -51,6 +51,9 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   bab: {
     getTitle: () => 'Base Attack Bonus',
+  },
+  hitPoints: {
+    getTitle: () => 'Hit Points',
   },
   skill: {
     getTitle: (id) => getSkillName(id),

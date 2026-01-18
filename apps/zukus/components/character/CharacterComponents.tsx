@@ -1,4 +1,4 @@
-import { Pressable } from 'react-native'
+import { Pressable, Image } from 'react-native'
 import { Text, XStack, YStack, Card } from 'tamagui'
 import { ABILITY_INFO, type Ability, type Skill } from './data'
 
@@ -174,11 +174,13 @@ export function CharacterHeader({
   level,
   race,
   characterClass,
+  imageUrl,
 }: {
   name: string
   level: number
   race: string
   characterClass: string
+  imageUrl?: string | null
 }) {
   return (
     <YStack
@@ -190,18 +192,32 @@ export function CharacterHeader({
       borderColor="$borderColor"
       borderRadius={4}
     >
-      <YStack
-        width={80}
-        height={80}
-        borderRadius={40}
-        backgroundColor="$uiBackgroundColor"
-        borderWidth={3}
-        borderColor="$color"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text fontSize={32}>CHAR</Text>
-      </YStack>
+      {imageUrl ? (
+        <Image
+          source={{ uri: imageUrl }}
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: '#333',
+          }}
+        />
+      ) : (
+        <YStack
+          width={80}
+          height={80}
+          borderRadius={40}
+          backgroundColor="$uiBackgroundColor"
+          borderWidth={3}
+          borderColor="$color"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text fontSize={28} fontWeight="700" color="$color">
+            {name.charAt(0).toUpperCase()}
+          </Text>
+        </YStack>
+      )}
       <YStack alignItems="center" gap={4}>
         <Text fontSize={20} fontWeight="800" color="$color">
           {name}
@@ -214,8 +230,11 @@ export function CharacterHeader({
   )
 }
 
-export function HpBar({ current, max }: { current: number; max: number }) {
-  return (
+export function HpBar({ current, max, onPress }: { current: number; max: number; onPress?: () => void }) {
+  const safeMax = Math.max(max, 1)
+  const hpPercentage = (current / safeMax) * 100
+
+  const content = (
     <SectionCard>
       <SectionHeader icon="HP" title="Hit Points" />
       <YStack gap={8}>
@@ -235,13 +254,23 @@ export function HpBar({ current, max }: { current: number; max: number }) {
         >
           <YStack
             height="100%"
-            width={`${(current / max) * 100}%`}
-            backgroundColor="#4ade80"
+            width={`${hpPercentage}%`}
+            backgroundColor="$color"
             borderRadius={4}
           />
         </YStack>
       </YStack>
     </SectionCard>
+  )
+
+  if (!onPress) {
+    return content
+  }
+
+  return (
+    <Pressable onPress={onPress} hitSlop={8} style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}>
+      {content}
+    </Pressable>
   )
 }
 

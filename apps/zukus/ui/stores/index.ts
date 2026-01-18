@@ -13,6 +13,8 @@ export {
   useCharacterSkills,
   useCharacterAttacks,
   useCharacterBuffs,
+  useCharacterImageUrl,
+  useCharacterBuild,
   useCharacterActions,
 } from './characterStore'
 

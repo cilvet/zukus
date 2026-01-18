@@ -319,6 +319,33 @@ export function useCharacterBuffs() {
   return useCharacterStore((state) => state.baseData?.buffs ?? EMPTY_BUFFS)
 }
 
+export function useCharacterImageUrl() {
+  return useCharacterStore((state) => (state.baseData as (CharacterBaseData & { imageUrl?: string }) | null)?.imageUrl ?? null)
+}
+
+export function useCharacterBuild() {
+  return useCharacterStore((state) => {
+    const baseData = state.baseData
+    if (!baseData) return null
+
+    const levelsData = baseData.level?.levelsData
+    if (!levelsData || levelsData.length === 0) return null
+
+    const classLevels = new Map<string, number>()
+    for (const levelData of levelsData) {
+      const current = classLevels.get(levelData.classUniqueId) || 0
+      classLevels.set(levelData.classUniqueId, current + 1)
+    }
+
+    const parts = Array.from(classLevels.entries()).map(([classId, levels]) => {
+      const className = baseData.classes?.find((c) => c.uniqueId === classId)?.name || classId
+      return `${className} ${levels}`
+    })
+
+    return parts.join(' / ')
+  })
+}
+
 // =============================================================================
 // Selectores de acciones (para componentes que solo necesitan acciones)
 // =============================================================================
