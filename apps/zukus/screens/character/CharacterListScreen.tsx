@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Pressable, useWindowDimensions } from 'react-native'
 import { useRouter } from 'expo-router'
 import { ScrollView, Text, XStack, YStack } from 'tamagui'
 import { useAuth } from '../../contexts'
-import { SupabaseCharacterRepository, type CharacterListItem } from '../../services/characterRepository'
+import { characterRepository, type CharacterListItem } from '../../services/characterRepository'
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -19,7 +19,6 @@ export function CharacterListScreen() {
   const { session } = useAuth()
   const { width } = useWindowDimensions()
   const isDesktop = width >= DESKTOP_BREAKPOINT
-  const repository = useMemo(() => new SupabaseCharacterRepository(), [])
 
   const [characters, setCharacters] = useState<CharacterListItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -34,7 +33,7 @@ export function CharacterListScreen() {
       setIsLoading(true)
       setError(null)
       try {
-        const data = await repository.listByUser()
+        const data = await characterRepository.listByUser()
         if (isMounted) {
           setCharacters(data)
           setIsLoading(false)
@@ -53,7 +52,7 @@ export function CharacterListScreen() {
     return () => {
       isMounted = false
     }
-  }, [repository, session])
+  }, [session])
 
   return (
     <ScrollView flex={1} backgroundColor="$background" contentContainerStyle={{ padding: 24 }}>

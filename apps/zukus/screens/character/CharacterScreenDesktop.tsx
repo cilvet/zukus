@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View, Pressable } from 'react-native'
+import { useLocalSearchParams } from 'expo-router'
+import { useCharacterSync } from '../../hooks'
 import {
   useCharacterStore,
   useCharacterSheet,
@@ -521,5 +523,33 @@ function CharacterScreenDesktopContent() {
  * Consume el personaje cargado en el store.
  */
 export function CharacterScreenDesktop() {
+  const { id } = useLocalSearchParams<{ id: string }>()
+  const characterId = id ?? ''
+  const { isLoading, error } = useCharacterSync(characterId)
+
+  if (!characterId) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
+        <Text color="$placeholderColor">Personaje invalido.</Text>
+      </YStack>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
+        <Text color="$placeholderColor">Cargando personaje...</Text>
+      </YStack>
+    )
+  }
+
+  if (error) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
+        <Text color="$colorFocus">{error}</Text>
+      </YStack>
+    )
+  }
+
   return <CharacterScreenDesktopContent />
 }

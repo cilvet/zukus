@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { calculateCharacterSheet, type CharacterBaseData } from '@zukus/core'
 import { useAuth } from '../contexts'
 import { useCharacterStore, setSyncHandler } from '../ui/stores/characterStore'
-import { SupabaseCharacterRepository } from '../services/characterRepository'
+import { characterRepository } from '../services/characterRepository'
 
 type CharacterSyncState = {
   isLoading: boolean
@@ -10,8 +10,13 @@ type CharacterSyncState = {
 }
 
 /**
+ * AVISO: NO CAMBIAR - Ver .cursor/rules/code/supabase-sync.mdc
+ * 
  * Identificador único de este dispositivo/sesión.
  * Se usa para ignorar echos de nuestros propios cambios que llegan desde Supabase Realtime.
+ * 
+ * Razón: Supabase Realtime notifica TODOS los cambios, incluyendo los que nosotros hicimos.
+ * Sin esto, aplicaríamos nuestros propios cambios dos veces.
  */
 const DEVICE_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
 
@@ -22,9 +27,16 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const repository = useMemo(() => new SupabaseCharacterRepository(), [])
-  
-  // Sistema de queue para serializar saves y evitar race conditions
+  /**
+   * AVISO: NO CAMBIAR - Ver .cursor/rules/code/supabase-sync.mdc
+   * 
+   * Sistema de queue para serializar saves y evitar race conditions.
+   * Solo UN save en progreso a la vez. Los cambios que llegan mientras hay un save
+   * activo se acumulan, y solo se envía el estado más reciente.
+   * 
+   * Razón: Sin esto, saves concurrentes pueden llegar a Supabase en orden incorrecto,
+   * causando que un estado viejo sobrescriba uno nuevo.
+   */
   const saveInProgressRef = useRef(false)
   const pendingDataRef = useRef<CharacterBaseData | null>(null)
   
@@ -43,7 +55,7 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       
       console.log('[SYNC] Guardando con deviceId:', DEVICE_ID)
       try {
-        await repository.save(characterId, data, DEVICE_ID)
+        await characterRepository.save(characterId, data, DEVICE_ID)
         console.log('[SYNC] Guardado OK')
       } catch (err) {
         console.warn('[SYNC] Error guardando:', err)
@@ -67,16 +79,24 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
     return () => {
       setSyncHandler(null)
     }
-  }, [characterId, repository])
+  }, [characterId])
 
   useEffect(() => {
     if (!session || !characterId) return
 
+    /**
+     * AVISO: NO CAMBIAR - Ver .cursor/rules/code/supabase-sync.mdc
+     * 
+     * Flag para ignorar eventos después de desmontar.
+     * 
+     * Razón: Las suscripciones antiguas pueden seguir recibiendo eventos
+     * brevemente después de unsubscribe(). Este flag evita procesar eventos obsoletos.
+     */
     let isMounted = true
     setIsLoading(true)
     setError(null)
 
-    repository
+    characterRepository
       .getById(characterId)
       .then((record) => {
         if (!isMounted) return
@@ -97,7 +117,7 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       })
 
     console.log('[SYNC] Creando suscripción para:', characterId)
-    const unsubscribe = repository.subscribe(characterId, (data, deviceId) => {
+    const unsubscribe = characterRepository.subscribe(characterId, (data, deviceId) => {
       console.log('[SYNC] Evento recibido:', { deviceId, myDeviceId: DEVICE_ID, isMounted })
       
       // Ignorar eventos si el componente ya se desmontó
@@ -124,7 +144,7 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       unsubscribe()
       clearCharacter()
     }
-  }, [characterId, clearCharacter, repository, session, setCharacter])
+  }, [characterId, clearCharacter, session, setCharacter])
 
   return { isLoading, error }
 }

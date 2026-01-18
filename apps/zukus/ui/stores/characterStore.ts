@@ -11,8 +11,14 @@ import type {
 } from '@zukus/core'
 
 /**
+ * AVISO: NO CAMBIAR - Ver .cursor/rules/code/supabase-sync.mdc
+ * 
  * Handler de sincronización global.
- * Se usa una variable fuera del store para evitar problemas de timing con React StrictMode.
+ * DEBE ser una variable fuera del store (NO en el state de Zustand).
+ * 
+ * Razón: React StrictMode hace mount/unmount/mount en desarrollo.
+ * Si el handler está en el state del store, hay un momento entre el cleanup
+ * y el nuevo effect donde el handler es null, causando pérdida de datos.
  */
 let syncHandler: ((data: CharacterBaseData) => void) | null = null
 

@@ -1,41 +1,5 @@
-import { useLocalSearchParams } from 'expo-router'
-import { View } from 'react-native'
-import { Text, YStack } from 'tamagui'
 import { CharacterScreen } from '../../../screens'
-import { useCharacterSync } from '../../../hooks'
 
 export default function CharacterDetailRoute() {
-  const { id } = useLocalSearchParams<{ id: string }>()
-  const characterId = id ?? ''
-  const { isLoading, error } = useCharacterSync(characterId)
-
-  if (!characterId) {
-    return (
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$placeholderColor">Personaje invalido.</Text>
-      </YStack>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$placeholderColor">Cargando personaje...</Text>
-      </YStack>
-    )
-  }
-
-  if (error) {
-    return (
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$colorFocus">{error}</Text>
-      </YStack>
-    )
-  }
-
-  return (
-    <View style={{ flex: 1 }}>
-      <CharacterScreen />
-    </View>
-  )
+  return <CharacterScreen />
 }

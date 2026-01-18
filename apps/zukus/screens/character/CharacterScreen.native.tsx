@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
+import { useLocalSearchParams } from 'expo-router'
 import {
   useTheme,
   useCharacterName,
@@ -8,6 +9,7 @@ import {
   useCharacterHitPoints,
   useCharacterSheet,
 } from '../../ui'
+import { useCharacterSync } from '../../hooks'
 import {
   CharacterPager,
   CharacterTabs,
@@ -96,11 +98,44 @@ export function CharacterScreen() {
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<CharacterPagerRef>(null)
+  const { id } = useLocalSearchParams<{ id: string }>()
+  const characterId = id ?? ''
+  const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
 
   function handleTabPress(index: number) {
     pagerRef.current?.setPage(index)
     setCurrentPage(index)
+  }
+
+  if (!characterId) {
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <View style={styles.loadingContainer}>
+          <Text color="$placeholderColor">Personaje invalido.</Text>
+        </View>
+      </View>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <View style={styles.loadingContainer}>
+          <Text color="$placeholderColor">Cargando personaje...</Text>
+        </View>
+      </View>
+    )
+  }
+
+  if (error) {
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <View style={styles.loadingContainer}>
+          <Text color="$colorFocus">{error}</Text>
+        </View>
+      </View>
+    )
   }
 
   if (!characterSheet) {

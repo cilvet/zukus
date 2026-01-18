@@ -13,8 +13,8 @@ export type CharacterDetailRecord = {
   modified: string | null
 }
 
-export class SupabaseCharacterRepository {
-  async listByUser(): Promise<CharacterListItem[]> {
+export const characterRepository = {
+  listByUser: async (): Promise<CharacterListItem[]> => {
     const { data, error } = await supabase
       .from('characters')
       .select('id, character_data, modified')
@@ -37,9 +37,9 @@ export class SupabaseCharacterRepository {
         }
       })
       .filter((item): item is CharacterListItem => Boolean(item))
-  }
+  },
 
-  async getById(id: string): Promise<CharacterDetailRecord | null> {
+  getById: async (id: string): Promise<CharacterDetailRecord | null> => {
     const { data, error } = await supabase
       .from('characters')
       .select('id, character_data, modified')
@@ -57,9 +57,9 @@ export class SupabaseCharacterRepository {
       characterData: data.character_data as CharacterBaseData,
       modified: (data.modified as string | null) ?? null,
     }
-  }
+  },
 
-  async save(id: string, data: CharacterBaseData, deviceId?: string): Promise<void> {
+  save: async (id: string, data: CharacterBaseData, deviceId?: string): Promise<void> => {
     const dataWithDevice = deviceId 
       ? { ...data, _deviceId: deviceId } 
       : data
@@ -75,13 +75,21 @@ export class SupabaseCharacterRepository {
     if (error) {
       throw error
     }
-  }
+  },
 
-  subscribe(
+  subscribe: (
     id: string, 
     onChange: (data: CharacterBaseData, deviceId: string | null) => void
-  ): () => void {
-    // Nombre único para evitar conflictos con suscripciones que aún no se han limpiado
+  ): (() => void) => {
+    /**
+     * AVISO: NO CAMBIAR - Ver .cursor/rules/code/supabase-sync.mdc
+     * 
+     * Nombre único para evitar conflictos con suscripciones que aún no se han limpiado.
+     * 
+     * Razón: React StrictMode monta/desmonta componentes en desarrollo.
+     * Las suscripciones antiguas pueden seguir recibiendo eventos brevemente después
+     * de unsubscribe(). El channel único evita conflictos entre suscripciones.
+     */
     const channelName = `character-${id}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
     const channel = supabase
       .channel(channelName)
@@ -108,5 +116,5 @@ export class SupabaseCharacterRepository {
     return () => {
       channel.unsubscribe()
     }
-  }
+  },
 }
