@@ -27,6 +27,8 @@ export type UseAttackContextResult = {
   selectedChanges: Set<string>
   /** Variables por cambio: { changeName: { variableId: value } } */
   variables: Record<string, Record<string, number>>
+  /** Substitution index con variables del personaje y contextual changes */
+  substitutionIndex: Record<string, number>
   /** Alternar selección de un cambio */
   toggleChange: (changeName: string) => void
   /** Actualizar valor de una variable */
@@ -88,6 +90,25 @@ export function useAttackContext(
       }))
   }, [availableContextualChanges, selectedChanges, variables])
 
+  // Calcula el substitution index (para uso en getDamageFormulaText)
+  const substitutionIndex = useMemo((): Record<string, number> => {
+    if (!characterSheet) return {}
+
+    const resolvedContextualChanges = getSelectedContextualChanges()
+    const variablesSubstitutionIndex: Record<string, number> = {}
+    
+    for (const change of resolvedContextualChanges) {
+      for (const variable of change.variables) {
+        variablesSubstitutionIndex[variable.identifier] = variable.value
+      }
+    }
+
+    return {
+      ...characterSheet.substitutionValues,
+      ...variablesSubstitutionIndex,
+    }
+  }, [characterSheet, getSelectedContextualChanges])
+
   // Recalcula el ataque cuando cambian los contextual changes o sus variables
   const calculatedAttack = useMemo((): CalculatedAttack => {
     // Si no hay character sheet o el ataque no es de arma, devolver el original
@@ -108,19 +129,6 @@ export function useAttackContext(
     // Construir el contexto resuelto
     const resolvedContextualChanges = getSelectedContextualChanges()
 
-    // Construir substitution index con las variables
-    const variablesSubstitutionIndex: Record<string, number> = {}
-    for (const change of resolvedContextualChanges) {
-      for (const variable of change.variables) {
-        variablesSubstitutionIndex[variable.identifier] = variable.value
-      }
-    }
-
-    const substitutionValues = {
-      ...characterSheet.substitutionValues,
-      ...variablesSubstitutionIndex,
-    }
-
     const resolvedContext = {
       attackType: attack.type,
       weapon,
@@ -131,7 +139,7 @@ export function useAttackContext(
     }
 
     // Recalcular bonus de ataque y daño
-    const newAttackBonus = calculateAttackBonus(resolvedContext, substitutionValues)
+    const newAttackBonus = calculateAttackBonus(resolvedContext, substitutionIndex)
     const newDamage = getAttackDamageFormula(resolvedContext, false)
     const newCriticalDamage = getAttackDamageFormula(resolvedContext, true)
 
@@ -141,7 +149,7 @@ export function useAttackContext(
       damage: newDamage,
       criticalDamage: newCriticalDamage,
     }
-  }, [attack, attackData?.attackChanges, characterSheet, getSelectedContextualChanges])
+  }, [attack, attackData?.attackChanges, characterSheet, getSelectedContextualChanges, substitutionIndex])
 
   const toggleChange = useCallback((changeName: string) => {
     setSelectedChanges((prev) => {
@@ -173,6 +181,7 @@ export function useAttackContext(
     availableContextualChanges,
     selectedChanges,
     variables,
+    substitutionIndex,
     toggleChange,
     updateVariable,
     getSelectedContextualChanges,

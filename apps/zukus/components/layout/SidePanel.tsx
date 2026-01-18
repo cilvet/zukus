@@ -123,7 +123,6 @@ export function SidePanel({
       <ScrollView
         flex={1}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 4 }}
       >
         {children}
       </ScrollView>

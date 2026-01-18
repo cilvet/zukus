@@ -2,6 +2,8 @@ import { XStack, YStack, Text } from 'tamagui'
 import type { AttackContextualChange, ContextualVariable } from '@zukus/core'
 import { Checkbox } from '../../../atoms'
 import { Slider } from '../../../atoms'
+import * as Haptics from 'expo-haptics'
+import { Platform } from 'react-native'
 
 export type ContextualChangeToggleProps = {
   contextualChange: AttackContextualChange
@@ -64,26 +66,42 @@ export function ContextualChangeToggle({
 
   const handleCheckedChange = () => {
     if (!isDisabled) {
+      // Trigger haptic feedback cuando se hace clic en el XStack
+      if (Platform.OS !== 'web') {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+      }
       onToggle()
     }
+  }
+
+  const handleSliderChange = (variableId: string, value: number) => {
+    // Si no está seleccionado, activarlo automáticamente
+    if (!isSelected && !isDisabled) {
+      onToggle()
+    }
+    // Actualizar el valor de la variable
+    onVariableChange?.(variableId, value)
   }
 
   return (
     <YStack
       gap={8}
-      padding={12}
-      backgroundColor="$background"
-      borderWidth={1}
-      borderColor={isSelected ? '$color' : '$borderColor'}
-      borderRadius={4}
       opacity={isDisabled ? 0.5 : 1}
+      width="100%"
     >
-      <XStack alignItems="center" gap={12}>
+      <XStack 
+        alignItems="center" 
+        gap={12}
+        onPress={handleCheckedChange}
+        cursor={isDisabled ? 'default' : 'pointer'}
+        hoverStyle={isDisabled ? {} : { opacity: 0.8 }}
+        pressStyle={isDisabled ? {} : { opacity: 0.6 }}
+      >
         <Checkbox
           checked={isSelected}
           onCheckedChange={handleCheckedChange}
           disabled={isDisabled}
-          size="medium"
+          size="small"
         />
 
         <YStack flex={1} gap={2}>
@@ -96,8 +114,8 @@ export function ContextualChangeToggle({
         </YStack>
       </XStack>
 
-      {hasVariables && isSelected && (
-        <YStack gap={8} marginLeft={36}>
+      {hasVariables && (
+        <YStack gap={12} marginLeft={36} paddingBottom={8}>
           {contextualChange.variables.map((variable: ContextualVariable) => {
             const currentValue = variables[variable.identifier] ?? variable.min
 
@@ -111,7 +129,7 @@ export function ContextualChangeToggle({
                   min={variable.min}
                   max={variable.max}
                   step={1}
-                  onValueChange={(value) => onVariableChange?.(variable.identifier, value)}
+                  onValueChange={(value) => handleSliderChange(variable.identifier, value)}
                   showValue
                 />
               </YStack>

@@ -62,7 +62,7 @@ export function SourceValuesTable({
       {/* Header */}
       <XStack
         paddingVertical={8}
-        paddingHorizontal={12}
+        paddingHorizontal={16}
         borderBottomWidth={1}
         borderBottomColor="$borderColor"
       >
@@ -86,7 +86,7 @@ export function SourceValuesTable({
           <XStack
             key={`${sv.sourceUniqueId}-${index}`}
             paddingVertical={8}
-            paddingHorizontal={12}
+            paddingHorizontal={16}
             borderBottomWidth={index < sourceValues.length - 1 ? 1 : 0}
             borderBottomColor="$borderColor"
             opacity={sv.relevant === false ? 0.4 : 1}

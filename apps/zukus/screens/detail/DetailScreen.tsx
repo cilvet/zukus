@@ -455,7 +455,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: 16,
-    paddingBottom: 32,
+    paddingVertical: 16,
   },
 })
