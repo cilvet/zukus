@@ -149,4 +149,3 @@ O simplemente menciona el comando en el chat:
 
 **Rules:** "Así es cómo hacemos las cosas"  
 **Commands:** "Haz esto ahora"
-

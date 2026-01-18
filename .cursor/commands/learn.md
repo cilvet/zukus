@@ -1,7 +1,3 @@
----
-description: "Learn from the conversation and propose new rules or improvements to existing ones"
----
-
 # learn
 
 Reflect deeply on this conversation to identify knowledge that should be captured in rules. The goal is: **"If it had to be explained once, it shouldn't need to be explained again"**.

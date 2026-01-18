@@ -119,4 +119,3 @@ Lista de checks para validar que el comando se completó correctamente:
 - [create-command.md](mdc:.cursor/commands/create-command.md) - Formato de comandos
 - Reglas de workspace sobre estructura y convenciones del proyecto
 - Carpeta de resúmenes: `.cursor/summaries/`
-

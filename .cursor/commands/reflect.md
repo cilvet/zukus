@@ -1,7 +1,3 @@
----
-description: "Deep reflection on the last implementation: rule adherence, verification, and refactoring opportunities"
----
-
 # ultrathink
 
 Take time to deeply reflect and reason about your most recent implementation work. Before reaching any conclusions, thoroughly analyze:
@@ -44,4 +40,3 @@ After your reflection, present your findings concisely to the user:
 - What refactoring opportunities exist
 
 **DO NOT implement any changes yet** - just share your reflections.
-
