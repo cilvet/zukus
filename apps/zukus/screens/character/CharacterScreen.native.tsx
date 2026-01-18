@@ -11,7 +11,7 @@ import {
   useCharacterImageUrl,
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
-import { useNavigateToDetail } from '../../navigation'
+import { useRouter } from 'expo-router'
 import {
   CharacterPager,
   CharacterTabs,
@@ -38,7 +38,7 @@ function Header() {
   const level = useCharacterLevel()
   const hitPoints = useCharacterHitPoints()
   const imageUrl = useCharacterImageUrl()
-  const navigateToDetail = useNavigateToDetail()
+  const router = useRouter()
 
   const levelNumber = level?.level ?? 0
   const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
@@ -46,7 +46,11 @@ function Header() {
   const maxHp = hitPoints?.maxHp ?? 0
 
   const handleHitPointsPress = () => {
-    navigateToDetail('hitPoints', 'hitPoints')
+    router.push('/(tabs)/(character)/detail/hitPoints/hitPoints')
+  }
+
+  const handleFormulaPlaygroundPress = () => {
+    router.push('/(tabs)/(character)/formula-playground')
   }
 
   return (
@@ -61,8 +65,8 @@ function Header() {
         </Text>
       </YStack>
 
-      {/* Centro: Avatar */}
-      <YStack alignItems="center">
+      {/* Centro: Avatar + Mini caja de fórmulas */}
+      <XStack alignItems="center" gap={8}>
         {imageUrl ? (
           <Image
             source={{ uri: imageUrl }}
@@ -89,7 +93,25 @@ function Header() {
             </Text>
           </YStack>
         )}
-      </YStack>
+        <Pressable onPress={handleFormulaPlaygroundPress} hitSlop={8}>
+          {({ pressed }) => (
+            <YStack
+              width={32}
+              height={32}
+              backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
+              borderWidth={1}
+              borderColor="$borderColor"
+              borderRadius={6}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text fontSize={14} fontWeight="700" color="$color">
+                f
+              </Text>
+            </YStack>
+          )}
+        </Pressable>
+      </XStack>
 
       {/* Derecha: HP */}
       <Pressable onPress={handleHitPointsPress} hitSlop={8} style={{ flex: 1 }}>

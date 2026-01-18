@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View, Pressable } from 'react-native'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useCharacterSync } from '../../hooks'
 import {
   useCharacterStore,
@@ -51,6 +51,7 @@ import {
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
+import { FormulaPlaygroundSection } from '../../components/character'
 import { type DetailType, getDetailTitle, isValidDetailType, useNavigateToDetail } from '../../navigation'
 
 const ABILITY_COLUMNS = [
@@ -315,6 +316,7 @@ function CharacterScreenDesktopContent() {
   const imageUrl = useCharacterImageUrl()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
   const navigateToDetail = useNavigateToDetail()
+  const router = useRouter()
 
   const {
     currentPanel,
@@ -351,6 +353,10 @@ function CharacterScreenDesktopContent() {
 
   const handleHitPointsPress = () => {
     navigateToDetail('hitPoints', 'hitPoints')
+  }
+
+  const handleFormulaPlaygroundPress = () => {
+    router.push('/(tabs)/(character)/formula-playground')
   }
 
   const getPanelTitle = (): string => {
@@ -436,6 +442,7 @@ function CharacterScreenDesktopContent() {
               race=""
               characterClass={className}
               imageUrl={imageUrl}
+              onFormulaPlaygroundPress={handleFormulaPlaygroundPress}
             />
             <HpBar current={currentHp} max={maxHp} onPress={handleHitPointsPress} />
             {armorClass && (
