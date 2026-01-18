@@ -17,9 +17,14 @@ import {
   useCharacterBuffs,
   useCharacterImageUrl,
   useCharacterAttacks,
+  useCharacterBaseData,
   AbilityCard,
   AbilityCardCompact,
   Checkbox,
+  EquipmentList,
+  EquipmentLayoutToggle,
+  EquipmentDetailPanel,
+  type EquipmentLayout,
   SavingThrowCard,
   ArmorClassCard,
   InitiativeCard,
@@ -31,6 +36,7 @@ import {
   AttacksSection,
   AttackDetailPanel,
 } from '../../ui'
+import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
 import {
   MOCK_CHARACTER,
@@ -319,8 +325,10 @@ function CharacterScreenDesktopContent() {
   const attackData = useCharacterAttacks()
   const imageUrl = useCharacterImageUrl()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
+  const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
+  const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
 
   const {
     currentPanel,
@@ -353,6 +361,10 @@ function CharacterScreenDesktopContent() {
 
   const handleItemPress = (itemId: string, itemName: string) => {
     openPanel(itemId, 'item', itemName)
+  }
+
+  const handleEquipmentPress = (itemId: string, itemName: string) => {
+    openPanel(itemId, 'equipment', itemName)
   }
 
   const handleAttackPress = (attack: { weaponUniqueId?: string; name: string }) => {
@@ -430,6 +442,11 @@ function CharacterScreenDesktopContent() {
     }
     
     return skill
+  }
+
+  const getEquipmentItemForPanel = (itemId: string) => {
+    if (!characterSheet) return null
+    return characterSheet.equipment.items.find((item) => item.uniqueId === itemId) ?? null
   }
 
   // Si no hay datos aún, mostrar loading
@@ -558,21 +575,27 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 4: Equipment (mock por ahora) */}
+        {/* Columna 4: Equipment */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="E" title="Equipment" />
-              <YStack gap={8}>
-                {MOCK_CHARACTER.equipment.map((item, idx) => (
-                  <ItemCard
-                    key={idx}
-                    name={item.name}
-                    subtitle={item.type}
-                    onPress={() => handleItemPress(`equipment-${idx}`, item.name)}
-                  />
-                ))}
-              </YStack>
+              <SectionHeader
+                icon="E"
+                title="Equipment"
+                action={<EquipmentLayoutToggle layout={equipmentLayout} onChange={setEquipmentLayout} />}
+              />
+              {!characterSheet ? (
+                <Text color="$placeholderColor">Cargando...</Text>
+              ) : characterSheet.equipment.items.length === 0 ? (
+                <Text color="$placeholderColor">Sin items en el inventario.</Text>
+              ) : (
+                <EquipmentList
+                  items={characterSheet.equipment.items}
+                  layout={equipmentLayout}
+                  onItemPress={(item) => handleEquipmentPress(item.uniqueId, item.name)}
+                  onToggleEquipped={(item) => toggleItemEquipped(item.uniqueId)}
+                />
+              )}
             </SectionCard>
           </YStack>
         </VerticalSection>
@@ -656,11 +679,104 @@ function CharacterScreenDesktopContent() {
         {attackForPanel && attackData && (
           <AttackDetailPanel attack={attackForPanel} attackData={attackData} />
         )}
+        {currentPanel?.type === 'equipment' && currentPanel?.id && getEquipmentItemForPanel(currentPanel.id) && (
+          <EquipmentDetailPanel
+            item={getEquipmentItemForPanel(currentPanel.id)!}
+            onToggleEquipped={() => toggleItemEquipped(currentPanel.id)}
+          />
+        )}
         {currentPanel?.type === 'item' && currentPanel?.name && (
           <GenericDetailPanel title={currentPanel.name} />
         )}
+        {currentPanel?.type === 'levelDetail' && currentPanel?.id && (
+          <LevelDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        )}
+        {currentPanel?.type === 'classSelectorDetail' && currentPanel?.id && (
+          <ClassSelectorDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        )}
       </SidePanel>
     </SidePanelContainer>
+  )
+}
+
+function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
+  const baseData = useCharacterBaseData()
+  const { updater } = useCharacterStore()
+  const { openPanel } = usePanelNavigation()
+
+  if (!baseData || !updater) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const levelSlot = baseData.levelSlots?.[levelIndex] ?? { classId: null, hpRoll: null }
+  const classEntity = levelSlot.classId ? baseData.classEntities?.[levelSlot.classId] : null
+  const className = classEntity?.name ?? null
+  const hitDie = classEntity?.hitDie ?? null
+
+  const handleOpenClassSelector = () => {
+    openPanel('classSelectorDetail', String(levelIndex))
+  }
+
+  const handleHpChange = (hp: number | null) => {
+    updateLevelHp(baseData, updater, levelIndex, hp)
+  }
+
+  const handleRollHp = () => {
+    // Placeholder
+  }
+
+  return (
+    <LevelDetail
+      levelIndex={levelIndex}
+      levelSlot={levelSlot}
+      className={className}
+      hitDie={hitDie}
+      onOpenClassSelector={handleOpenClassSelector}
+      onHpChange={handleHpChange}
+      onRollHp={handleRollHp}
+    />
+  )
+}
+
+function ClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
+  const baseData = useCharacterBaseData()
+  const { updater } = useCharacterStore()
+  const { closePanel } = usePanelNavigation()
+
+  if (!baseData || !updater) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const levelSlot = baseData.levelSlots?.[levelIndex]
+  const currentClassId = levelSlot?.classId ?? null
+
+  const handleSelectClass = (classId: string) => {
+    updateLevelClass(baseData, updater, levelIndex, classId)
+    closePanel()
+  }
+
+  const handleClose = () => {
+    closePanel()
+  }
+
+  const availableClasses = getAvailableClasses()
+
+  return (
+    <ClassSelectorDetail
+      levelIndex={levelIndex}
+      currentClassId={currentClassId}
+      availableClasses={availableClasses}
+      onSelectClass={handleSelectClass}
+      onClose={handleClose}
+    />
   )
 }
 

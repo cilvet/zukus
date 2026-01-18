@@ -22,4 +22,22 @@ export {
   ContextualChangeToggle,
   type ContextualChangeToggleProps,
 } from './attacks'
+export {
+  EquipmentItemView,
+  type EquipmentLayout,
+  EquipmentList,
+  EquipmentLayoutToggle,
+  EquipmentDetailPanel,
+  type EquipmentDetailLayout,
+} from './equipment'
+export {
+  AbilityScoresEditor,
+  LevelEditor,
+  ClassSelectorDetail,
+  type ClassSelectorDetailProps,
+  type ClassOption,
+  LevelDetail,
+  type LevelDetailProps,
+  type LevelSlotData,
+} from './editor'
 // NOTE: SavingThrowsSection, SkillsSection and ArmorClassSection not exported here to avoid circular dependency with navigation

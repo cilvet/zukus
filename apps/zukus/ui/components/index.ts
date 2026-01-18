@@ -32,3 +32,11 @@ export {
   ContextualChangeToggle,
   type ContextualChangeToggleProps,
 } from './character'
+export {
+  EquipmentItemView,
+  type EquipmentLayout,
+  EquipmentList,
+  EquipmentLayoutToggle,
+  EquipmentDetailPanel,
+  type EquipmentDetailLayout,
+} from './character'

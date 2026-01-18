@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel } from '../../ui'
+import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
+import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
-import { type DetailType, isValidDetailType, getDetailTitle } from '../../navigation'
+import { type DetailType, isValidDetailType, getDetailTitle, useNavigateToDetail } from '../../navigation'
 
 type SlugParams = {
   slug: string[]
@@ -96,6 +97,35 @@ function SavingThrowDetail({ savingThrowKey }: { savingThrowKey: string }) {
       savingThrowKey={savingThrowKey}
       totalValue={savingThrow.totalValue}
       sourceValues={savingThrow.sourceValues}
+    />
+  )
+}
+
+function EquipmentDetail({ itemId }: { itemId: string }) {
+  const characterSheet = useCharacterSheet()
+  const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
+
+  if (!characterSheet) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const item = characterSheet.equipment.items.find((entry) => entry.uniqueId === itemId)
+  if (!item) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Item no encontrado: {itemId}</Text>
+      </YStack>
+    )
+  }
+
+  return (
+    <EquipmentDetailPanel
+      item={item}
+      onToggleEquipped={() => toggleItemEquipped(item.uniqueId)}
     />
   )
 }
@@ -355,6 +385,87 @@ function NotImplementedDetail({ type, id }: { type: string; id: string }) {
   )
 }
 
+function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
+  const baseData = useCharacterBaseData()
+  const { updater } = useCharacterStore()
+  const navigateToDetail = useNavigateToDetail()
+
+  if (!baseData || !updater) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const levelSlot = baseData.levelSlots?.[levelIndex] ?? { classId: null, hpRoll: null }
+  const classEntity = levelSlot.classId ? baseData.classEntities?.[levelSlot.classId] : null
+  const className = classEntity?.name ?? null
+  const hitDie = classEntity?.hitDie ?? null
+
+  const handleOpenClassSelector = () => {
+    navigateToDetail('classSelectorDetail', String(levelIndex))
+  }
+
+  const handleHpChange = (hp: number | null) => {
+    updateLevelHp(baseData, updater, levelIndex, hp)
+  }
+
+  const handleRollHp = () => {
+    // Placeholder: la lógica de roll ya está en el handleHpChange
+  }
+
+  return (
+    <LevelDetail
+      levelIndex={levelIndex}
+      levelSlot={levelSlot}
+      className={className}
+      hitDie={hitDie}
+      onOpenClassSelector={handleOpenClassSelector}
+      onHpChange={handleHpChange}
+      onRollHp={handleRollHp}
+    />
+  )
+}
+
+function ClassSelectorDetailWrapper({ levelIndex }: { levelIndex: number}) {
+  const baseData = useCharacterBaseData()
+  const { updater } = useCharacterStore()
+  const router = useRouter()
+
+  if (!baseData || !updater) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const levelSlot = baseData.levelSlots?.[levelIndex]
+  const currentClassId = levelSlot?.classId ?? null
+
+  const handleSelectClass = (classId: string) => {
+    updateLevelClass(baseData, updater, levelIndex, classId)
+    router.back()
+  }
+
+  const handleClose = () => {
+    router.back()
+  }
+
+  const availableClasses = getAvailableClasses()
+
+  return (
+    <ClassSelectorDetail
+      levelIndex={levelIndex}
+      currentClassId={currentClassId}
+      availableClasses={availableClasses}
+      onSelectClass={handleSelectClass}
+      onClose={handleClose}
+    />
+  )
+}
+
 function InvalidRoute() {
   const router = useRouter()
   
@@ -429,8 +540,16 @@ export function DetailScreen() {
         return <AttackDetail attackId={id} />
       case 'spell':
       case 'buff':
-      case 'equipment':
       case 'item':
+        return <NotImplementedDetail type={type} id={id} />
+      case 'equipment':
+        return <EquipmentDetail itemId={id} />
+      case 'levelDetail':
+        return <LevelDetailWrapper levelIndex={parseInt(id)} />
+      case 'classSelectorDetail':
+        return <ClassSelectorDetailWrapper levelIndex={parseInt(id)} />
+      case 'entitySelectorDetail':
+      case 'customEntityDetail':
         return <NotImplementedDetail type={type} id={id} />
       default:
         return <InvalidRoute />
