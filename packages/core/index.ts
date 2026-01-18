@@ -56,7 +56,9 @@ export type { ContextualVariable, ResolvedContextualVariable } from "./core/doma
 export { calculateAttackBonus } from "./core/domain/character/calculation/attacks/attack/calculateAttackBonus/calculateAttackBonus";
 export { getAttackDamageFormula } from "./core/domain/character/calculation/attacks/attack/getAttackDamageFormula";
 export { getWeaponAttackContext } from "./core/domain/character/calculatedSheet/attacks/attackContext/availableAttackContext";
+export { getDamageFormulaText } from "./core/domain/character/calculation/attacks/attack/utils/getDamageText";
 export type { SubstitutionIndex } from "./core/domain/character/calculation/sources/calculateSources";
+export type { DamageSectionValue } from "./core/domain/character/calculation/attacks/attack/utils/getDamageText";
 
 // Weapons
 export type { Weapon } from "./core/domain/weapons/weapon";
@@ -66,3 +68,15 @@ export { substituteExpression, fillFormulaWithValues } from "./core/domain/formu
 export type { Formula, NormalFormula, SwitchFormula } from "./core/domain/formulae/formula";
 export { getRollExpression } from "./core/domain/rolls/expressionAnalysis/expressionAnalysis";
 export { getResolvedRollExpression } from "./core/domain/rolls/DiceRoller/diceRoller";
+
+// Operations (updater operations)
+export * as ops from "./core/domain/character/updater/operations";
+
+// Types - Levels
+export type { LevelSlot, ClassEntity, SystemLevelsEntity } from "./core/domain/levels/storage/types";
+export type { EntityProvider } from "./core/domain/levels/providers/types";
+export type { StandardEntity } from "./core/domain/entities/types/base";
+
+// Compendiums
+export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";
+export type { Compendium, CompendiumRegistry, CalculationContext } from "./core/domain/compendiums";

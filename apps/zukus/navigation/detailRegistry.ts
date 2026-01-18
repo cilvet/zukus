@@ -18,7 +18,23 @@ const SAVING_THROW_NAMES: Record<string, string> = {
 /**
  * Tipos de detalle soportados en la navegación.
  */
-export type DetailType = 'ability' | 'savingThrow' | 'armorClass' | 'initiative' | 'bab' | 'skill' | 'spell' | 'buff' | 'equipment' | 'item' | 'hitPoints' | 'attack'
+export type DetailType = 
+  | 'ability' 
+  | 'savingThrow' 
+  | 'armorClass' 
+  | 'initiative' 
+  | 'bab' 
+  | 'skill' 
+  | 'spell' 
+  | 'buff' 
+  | 'equipment' 
+  | 'item' 
+  | 'hitPoints' 
+  | 'attack'
+  | 'levelDetail'
+  | 'classSelectorDetail'
+  | 'entitySelectorDetail'
+  | 'customEntityDetail'
 
 /**
  * Configuración de un tipo de detalle.
@@ -71,6 +87,18 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
   },
   attack: {
+    getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
+  },
+  levelDetail: {
+    getTitle: (id) => `Nivel ${parseInt(id) + 1}`,
+  },
+  classSelectorDetail: {
+    getTitle: () => 'Seleccionar Clase',
+  },
+  entitySelectorDetail: {
+    getTitle: () => 'Seleccionar Entidad',
+  },
+  customEntityDetail: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
   },
 }

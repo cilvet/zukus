@@ -55,6 +55,12 @@ export default function CharacterLayout() {
           title: 'Habilidad',
         }}
       />
+      <Stack.Screen
+        name="edit/[id]"
+        options={{
+          title: 'Editar',
+        }}
+      />
     </Stack>
   )
 }

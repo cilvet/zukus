@@ -39,6 +39,7 @@ function Header() {
   const hitPoints = useCharacterHitPoints()
   const imageUrl = useCharacterImageUrl()
   const router = useRouter()
+  const { id } = useLocalSearchParams<{ id: string }>()
 
   const levelNumber = level?.level ?? 0
   const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
@@ -53,17 +54,27 @@ function Header() {
     router.push('/(tabs)/(character)/formula-playground')
   }
 
+  const handleLevelPress = () => {
+    if (id) {
+      router.push(`/(tabs)/(character)/edit/${id}`)
+    }
+  }
+
   return (
     <View style={[styles.header, { backgroundColor: themeColors.background, borderBottomColor: themeColors.borderColor }]}>
-      {/* Izquierda: Nivel + Clase */}
-      <YStack alignItems="flex-start" flex={1}>
-        <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
-          Nivel {levelNumber}
-        </Text>
-        <Text fontSize={14} fontWeight="700" color="$color">
-          {className}
-        </Text>
-      </YStack>
+      {/* Izquierda: Nivel + Clase (clickable para editar) */}
+      <Pressable onPress={handleLevelPress} hitSlop={8} style={{ flex: 1 }}>
+        {({ pressed }) => (
+          <YStack alignItems="flex-start" flex={1} opacity={pressed ? 0.7 : 1}>
+            <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
+              Nivel {levelNumber}
+            </Text>
+            <Text fontSize={14} fontWeight="700" color="$color">
+              {className}
+            </Text>
+          </YStack>
+        )}
+      </Pressable>
 
       {/* Centro: Avatar + Mini caja de fórmulas */}
       <XStack alignItems="center" gap={8}>
