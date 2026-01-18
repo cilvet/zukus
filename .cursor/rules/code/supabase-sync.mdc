@@ -8,7 +8,7 @@ alwaysApply: false
 
 ## Arquitectura
 
-La sincronización entre el dispositivo y Supabase usa tres mecanismos:
+La sincronización entre el dispositivo y Supabase usa cuatro mecanismos:
 
 ### 1. DeviceId para Ignorar Echos
 
@@ -79,16 +79,51 @@ return () => {
 
 **Por qué**: Las suscripciones antiguas pueden seguir recibiendo eventos brevemente después de `unsubscribe()`. El channel único evita conflictos, y `isMounted` evita procesar eventos obsoletos.
 
+### 4. SyncHandler como Variable Global (NO en Store State)
+
+El handler de sincronización debe ser una variable global fuera del store, NO parte del estado de Zustand.
+
+```typescript
+// En el store (characterStore.ts)
+let syncHandler: ((data: Data) => void) | null = null
+
+export function setSyncHandler(handler: ((data: Data) => void) | null) {
+  syncHandler = handler
+}
+
+// En el callback del updater
+const updater = new CharacterUpdater(data, [], (sheet, data) => {
+  set({ characterSheet: sheet, baseData: data })
+  if (syncHandler) {
+    syncHandler(data)
+  }
+})
+```
+
+```typescript
+// En el hook (useCharacterSync.ts)
+import { setSyncHandler } from '../ui/stores/characterStore'
+
+useEffect(() => {
+  const handler = (data) => { /* persistir */ }
+  setSyncHandler(handler)
+  return () => setSyncHandler(null)
+}, [characterId])
+```
+
+**Por qué**: React StrictMode hace mount/unmount/mount en desarrollo. Si el handler está en el state del store, hay un momento entre el cleanup y el nuevo effect donde el handler es `null`. Usando una variable global, el callback del updater siempre tiene acceso directo al handler actual.
+
 ## Archivos Clave
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
 | `hooks/useCharacterSync.ts` | Hook que conecta el store con Supabase |
 | `services/characterRepository.ts` | Métodos `save()` y `subscribe()` |
-| `ui/stores/characterStore.ts` | Estado local con `syncHandler` |
+| `ui/stores/characterStore.ts` | Estado local + `setSyncHandler` global |
 
 ## Errores Comunes a Evitar
 
 - **NO usar flags que afecten "el siguiente evento"** (como `skipNextSaveRef`). Causan pérdida de datos en cambios rápidos.
 - **NO asumir que `unsubscribe()` es instantáneo**. Siempre verificar `isMounted`.
 - **NO enviar saves en paralelo**. Serializar con una queue.
+- **NO poner el syncHandler en el state del store**. Usar variable global para evitar problemas de timing con StrictMode.

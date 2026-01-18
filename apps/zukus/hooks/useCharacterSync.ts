@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { calculateCharacterSheet, type CharacterBaseData } from '@zukus/core'
 import { useAuth } from '../contexts'
-import { useCharacterStore } from '../ui/stores/characterStore'
+import { useCharacterStore, setSyncHandler } from '../ui/stores/characterStore'
 import { SupabaseCharacterRepository } from '../services/characterRepository'
 
 type CharacterSyncState = {
@@ -19,7 +19,6 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
   const { session } = useAuth()
   const setCharacter = useCharacterStore((state) => state.setCharacter)
   const clearCharacter = useCharacterStore((state) => state.clearCharacter)
-  const setSyncHandler = useCharacterStore((state) => state.setSyncHandler)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -28,9 +27,20 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
   // Sistema de queue para serializar saves y evitar race conditions
   const saveInProgressRef = useRef(false)
   const pendingDataRef = useRef<CharacterBaseData | null>(null)
-
-  const doSave = useCallback(
-    async (data: CharacterBaseData) => {
+  
+  // Establecer el handler de sincronización
+  useEffect(() => {
+    if (!characterId) return
+    
+    const processQueue = async () => {
+      if (saveInProgressRef.current) return
+      
+      const data = pendingDataRef.current
+      if (!data) return
+      
+      pendingDataRef.current = null
+      saveInProgressRef.current = true
+      
       console.log('[SYNC] Guardando con deviceId:', DEVICE_ID)
       try {
         await repository.save(characterId, data, DEVICE_ID)
@@ -38,52 +48,26 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       } catch (err) {
         console.warn('[SYNC] Error guardando:', err)
       }
-    },
-    [characterId, repository],
-  )
-
-  const processQueue = useCallback(async () => {
-    if (saveInProgressRef.current) return
-    
-    const data = pendingDataRef.current
-    if (!data) return
-    
-    pendingDataRef.current = null
-    saveInProgressRef.current = true
-    
-    await doSave(data)
-    
-    saveInProgressRef.current = false
-    
-    // Si hay más cambios pendientes, procesarlos
-    if (pendingDataRef.current) {
-      processQueue()
+      
+      saveInProgressRef.current = false
+      
+      if (pendingDataRef.current) {
+        processQueue()
+      }
     }
-  }, [doSave])
-
-  const persistBaseData = useCallback(
-    (data: CharacterBaseData) => {
-      // Siempre guardamos el estado más reciente como pendiente
+    
+    const handler = (data: CharacterBaseData) => {
       pendingDataRef.current = data
-      // Intentamos procesar la queue
       processQueue()
-    },
-    [processQueue],
-  )
-
-  useEffect(() => {
-    if (!characterId) {
-      setSyncHandler(null)
-      setIsLoading(false)
-      setError('Personaje invalido')
-      return
     }
-
-    setSyncHandler(persistBaseData)
+    
+    // Establecer el handler (función global, no en el store state)
+    setSyncHandler(handler)
+    
     return () => {
       setSyncHandler(null)
     }
-  }, [persistBaseData, setSyncHandler])
+  }, [characterId, repository])
 
   useEffect(() => {
     if (!session || !characterId) return
