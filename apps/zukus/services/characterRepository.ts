@@ -4,6 +4,7 @@ import { supabase } from './supabaseClient'
 export type CharacterListItem = {
   id: string
   name: string
+  imageUrl: string | null
   modified: string | null
 }
 
@@ -28,15 +29,17 @@ export const characterRepository = {
 
     return data
       .map((row) => {
-        const characterData = row.character_data as CharacterBaseData | null
+        const characterData = row.character_data as (CharacterBaseData & { imageUrl?: string }) | null
         if (!characterData) return null
         return {
           id: row.id as string,
           name: characterData.name ?? 'Sin nombre',
+          imageUrl: characterData.imageUrl ?? null,
           modified: (row.modified as string | null) ?? null,
         }
       })
       .filter((item): item is CharacterListItem => Boolean(item))
+      .sort((a, b) => a.name.localeCompare(b.name))
   },
 
   getById: async (id: string): Promise<CharacterDetailRecord | null> => {
