@@ -13,8 +13,8 @@ type NavItem = {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Personaje', href: '/(tabs)/(character)', matchPath: '(character)' },
-  { label: 'Conjuros', href: '/(tabs)/(spells)', matchPath: '(spells)' },
+  { label: 'Mis personajes', href: '/(tabs)/(character)', matchPath: '(character)' },
+  { label: 'Mis compendios', href: '/(tabs)/(compendiums)', matchPath: '(compendiums)' },
   { label: 'Ajustes', href: '/(tabs)/(settings)', matchPath: '(settings)' },
 ]
 
@@ -56,13 +56,12 @@ export function Topbar() {
       height={56}
       paddingHorizontal={24}
       alignItems="center"
-      justifyContent="space-between"
       backgroundColor={theme.background}
       borderBottomWidth={1}
       borderBottomColor={theme.borderColor}
     >
-      {/* Logo / Brand */}
-      <XStack alignItems="center" gap={8}>
+      {/* Logo / Brand + Navigation Links */}
+      <XStack alignItems="center" gap={24}>
         <Text
           fontSize={20}
           fontWeight="800"
@@ -71,18 +70,13 @@ export function Topbar() {
         >
           ZUKUS
         </Text>
+        <XStack alignItems="center" gap={8}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = pathname.includes(item.matchPath)
+            return <NavLink key={item.href} item={item} isActive={isActive} />
+          })}
+        </XStack>
       </XStack>
-
-      {/* Navigation Links */}
-      <XStack alignItems="center" gap={8}>
-        {NAV_ITEMS.map((item) => {
-          const isActive = pathname.includes(item.matchPath)
-          return <NavLink key={item.href} item={item} isActive={isActive} />
-        })}
-      </XStack>
-
-      {/* Placeholder for future actions (user menu, etc) */}
-      <XStack width={80} />
     </XStack>
   )
 }

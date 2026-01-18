@@ -35,8 +35,8 @@ export default function TabsLayout() {
             tabBarStyle: { display: 'none' },
           }}
         >
-          <Tabs.Screen name="(character)" options={{ title: 'Personaje' }} />
-          <Tabs.Screen name="(spells)" options={{ title: 'Conjuros' }} />
+          <Tabs.Screen name="(character)" options={{ title: 'Personajes' }} />
+          <Tabs.Screen name="(compendiums)" options={{ title: 'Compendios' }} />
           <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
         </Tabs>
       </YStack>
@@ -74,15 +74,15 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="(character)"
         options={{
-          title: 'Personaje',
+          title: 'Personajes',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="(spells)"
+        name="(compendiums)"
         options={{
-          title: 'Conjuros',
-          tabBarIcon: ({ color }) => <TabBarIcon name="magic" color={color} />,
+          title: 'Compendios',
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
       <Tabs.Screen
