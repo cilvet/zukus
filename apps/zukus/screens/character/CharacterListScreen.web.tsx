@@ -86,9 +86,11 @@ function MobileList({ characters, isLoading, error, onSelect }: ListProps) {
                     <Text fontSize={16} fontWeight="500" color="$color" numberOfLines={1}>
                       {character.name}
                     </Text>
-                    <Text fontSize={12} color="$placeholderColor">
-                      {formatModified(character.modified)}
-                    </Text>
+                    {character.build ? (
+                      <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
+                        {character.build}
+                      </Text>
+                    ) : null}
                   </YStack>
                 </XStack>
               )}
@@ -182,9 +184,11 @@ function DesktopGrid({ characters, isLoading, error, onSelect }: ListProps) {
                       <Text fontSize={18} fontWeight="600" color="$color" numberOfLines={1}>
                         {character.name}
                       </Text>
-                      <Text fontSize={12} color="$placeholderColor">
-                        {formatModified(character.modified)}
-                      </Text>
+                      {character.build ? (
+                        <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
+                          {character.build}
+                        </Text>
+                      ) : null}
                     </YStack>
                   </XStack>
                 </YStack>
@@ -195,11 +199,4 @@ function DesktopGrid({ characters, isLoading, error, onSelect }: ListProps) {
       </YStack>
     </ScrollView>
   )
-}
-
-function formatModified(value: string | null) {
-  if (!value) return 'Sin cambios'
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return 'Sin cambios'
-  return date.toLocaleString()
 }

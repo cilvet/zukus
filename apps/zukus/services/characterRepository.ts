@@ -5,7 +5,26 @@ export type CharacterListItem = {
   id: string
   name: string
   imageUrl: string | null
+  build: string | null
   modified: string | null
+}
+
+function getBuildString(characterData: CharacterBaseData): string | null {
+  const levelsData = characterData.level?.levelsData
+  if (!levelsData || levelsData.length === 0) return null
+
+  const classLevels = new Map<string, number>()
+  for (const levelData of levelsData) {
+    const current = classLevels.get(levelData.classUniqueId) || 0
+    classLevels.set(levelData.classUniqueId, current + 1)
+  }
+
+  const parts = Array.from(classLevels.entries()).map(([classId, levels]) => {
+    const className = characterData.classes?.find((c) => c.uniqueId === classId)?.name || classId
+    return `${className} ${levels}`
+  })
+
+  return parts.join(' / ')
 }
 
 export type CharacterDetailRecord = {
@@ -35,6 +54,7 @@ export const characterRepository = {
           id: row.id as string,
           name: characterData.name ?? 'Sin nombre',
           imageUrl: characterData.imageUrl ?? null,
+          build: getBuildString(characterData),
           modified: (row.modified as string | null) ?? null,
         }
       })
