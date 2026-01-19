@@ -1,19 +1,37 @@
+import { useRouter } from 'expo-router'
 import { Image, Pressable, useWindowDimensions } from 'react-native'
-import { ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
+import { Button, ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList, type CharacterListItem } from '../../hooks'
 
 const DESKTOP_BREAKPOINT = 768
 
 export function CharacterListScreen() {
+  const router = useRouter()
   const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
   const { width } = useWindowDimensions()
   const isDesktop = width >= DESKTOP_BREAKPOINT
 
   if (!isDesktop) {
-    return <MobileList characters={characters} isLoading={isLoading} error={error} onSelect={navigateToCharacter} />
+    return (
+      <MobileList
+        characters={characters}
+        isLoading={isLoading}
+        error={error}
+        onSelect={navigateToCharacter}
+        onOpenServerList={() => router.push('/(tabs)/(character)/server-list')}
+      />
+    )
   }
 
-  return <DesktopGrid characters={characters} isLoading={isLoading} error={error} onSelect={navigateToCharacter} />
+  return (
+    <DesktopGrid
+      characters={characters}
+      isLoading={isLoading}
+      error={error}
+      onSelect={navigateToCharacter}
+      onOpenServerList={() => router.push('/(tabs)/(character)/server-list')}
+    />
+  )
 }
 
 type ListProps = {
@@ -21,11 +39,16 @@ type ListProps = {
   isLoading: boolean
   error: string | null
   onSelect: (id: string) => void
+  onOpenServerList: () => void
 }
 
-function MobileList({ characters, isLoading, error, onSelect }: ListProps) {
+function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
   return (
     <ScrollView flex={1} backgroundColor="$background">
+      <YStack padding="$4">
+        <Button onPress={onOpenServerList}>Ver lista server</Button>
+      </YStack>
+
       {isLoading ? (
         <YStack padding="$4">
           <Text color="$placeholderColor">Cargando personajes...</Text>
@@ -105,7 +128,7 @@ function MobileList({ characters, isLoading, error, onSelect }: ListProps) {
   )
 }
 
-function DesktopGrid({ characters, isLoading, error, onSelect }: ListProps) {
+function DesktopGrid({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
   return (
     <ScrollView flex={1} backgroundColor="$background" contentContainerStyle={{ padding: 32 }}>
       <YStack width={900} maxWidth="100%" alignSelf="center" gap="$5">
@@ -116,6 +139,9 @@ function DesktopGrid({ characters, isLoading, error, onSelect }: ListProps) {
           <Text fontSize={14} color="$placeholderColor">
             Selecciona un personaje para abrir la ficha.
           </Text>
+          <Button alignSelf="flex-start" onPress={onOpenServerList}>
+            Ver lista server
+          </Button>
         </YStack>
 
         {isLoading ? (

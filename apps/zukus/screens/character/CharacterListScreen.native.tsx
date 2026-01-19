@@ -1,12 +1,18 @@
 import { Image, Pressable } from 'react-native'
-import { ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
+import { useRouter } from 'expo-router'
+import { Button, ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList } from '../../hooks'
 
 export function CharacterListScreen() {
+  const router = useRouter()
   const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
 
   return (
     <ScrollView flex={1} backgroundColor="$background">
+      <YStack padding="$4">
+        <Button onPress={() => router.push('/(tabs)/(character)/server-list')}>Ver lista server</Button>
+      </YStack>
+
       {isLoading ? (
         <YStack padding="$4">
           <Text color="$placeholderColor">Cargando personajes...</Text>
