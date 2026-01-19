@@ -1,0 +1,22 @@
+---
+alwaysApply: true
+---
+
+# Server Bun (apps/server)
+
+Servidor HTTP en Bun para Zukus, ubicado en `apps/server/`. Expone `/health` y `/characters`, y usa Supabase con `SUPABASE_SERVICE_ROLE_KEY`.
+
+## Hosting
+
+Desplegado en Fly.io: `https://zukus-server.fly.dev/`
+
+## Deploy Manual
+
+1. `fly apps create zukus-server --region cdg`
+2. `fly secrets set -a zukus-server EXPO_PUBLIC_SUPABASE_URL="https://utimatychnwjuxogjfwc.supabase.co" SUPABASE_SERVICE_ROLE_KEY="..."`
+3. `fly deploy -a zukus-server -c apps/server/fly.toml`
+
+## Verificacion
+
+- `curl https://zukus-server.fly.dev/health`
+- `curl https://zukus-server.fly.dev/characters`
