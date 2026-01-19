@@ -16,6 +16,10 @@ type ChatMessage = {
   createdAt: number
 }
 
+// Constants
+const INPUT_BAR_HEIGHT = 68
+const SCROLL_THRESHOLD = 50 // Distance from bottom to consider "at bottom"
+
 // Assistant message with markdown rendering
 function AssistantMessage({ content, textColor, codeBackground }: { content: string; textColor: string; codeBackground: string }) {
   const markdownStyles = {
@@ -73,9 +77,6 @@ function AssistantMessage({ content, textColor, codeBackground }: { content: str
   )
 }
 
-// Toggle to enable/disable auto-scroll behavior
-const AUTO_SCROLL_ENABLED = false
-
 export function ChatScreen() {
   const { themeColors } = useTheme()
   const { session } = useAuth()
@@ -91,23 +92,30 @@ export function ChatScreen() {
   const [showScrollButton, setShowScrollButton] = useState(false)
   
   const isDesktop = Platform.OS === 'web' && width >= 768
-  const lastScrollTime = useRef(0)
+
+  // Typewriter effect refs
   const textBufferRef = useRef('')
   const isTypingRef = useRef(false)
-  const contentHeightRef = useRef(0)
-  const scrollViewHeightRef = useRef(0)
 
-  // Throttled scroll to end - smooth animation, max once per 100ms
+  // Smart auto-scroll refs
+  const lastScrollTime = useRef(0)
+  const lastScrollYRef = useRef(0)
+  const isAtBottomRef = useRef(true)
+  const userIsDraggingRef = useRef(false)
+
+  // Throttled scroll to end - only if user is at bottom, max once per 100ms
   const scrollToBottom = useCallback(() => {
-    if (!AUTO_SCROLL_ENABLED) return
-    
+    if (!isAtBottomRef.current) return
+
     const now = Date.now()
     if (now - lastScrollTime.current < 100) return
     lastScrollTime.current = now
-    
-    // Small delay to let layout update
+
+    // Small delay to let layout update, but check again before scrolling
     setTimeout(() => {
-      scrollRef.current?.scrollToEnd({ animated: true })
+      // Double-check user hasn't scrolled away during the delay
+      if (!isAtBottomRef.current) return
+      scrollRef.current?.scrollToEnd({ animated: false }) // No animation - instant scroll
     }, 50)
   }, [])
 
@@ -115,25 +123,68 @@ export function ChatScreen() {
   const handleScrollToBottom = useCallback(() => {
     scrollRef.current?.scrollToEnd({ animated: true })
     setShowScrollButton(false)
+    isAtBottomRef.current = true
   }, [])
 
-  // Check if user has scrolled away from bottom
+  // Track when user manually scrolls (drag)
+  const handleScrollBeginDrag = useCallback((event: { nativeEvent: { contentOffset: { y: number } } }) => {
+    // User started dragging - they're taking control of scroll
+    userIsDraggingRef.current = true
+    // Cancel any ongoing animated scroll by stopping at current position
+    const currentY = event.nativeEvent.contentOffset.y
+    scrollRef.current?.scrollTo({ y: currentY, animated: false })
+  }, [])
+
+  // Check scroll position to show/hide button and update isAtBottom
   const handleScroll = useCallback((event: { nativeEvent: { contentOffset: { y: number }; contentSize: { height: number }; layoutMeasurement: { height: number } } }) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
-    contentHeightRef.current = contentSize.height
-    scrollViewHeightRef.current = layoutMeasurement.height
-    
     const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
-    const threshold = 50 // Show button if more than 50px from bottom
-    
-    setShowScrollButton(distanceFromBottom > threshold)
+    const isAtBottom = distanceFromBottom <= SCROLL_THRESHOLD
+
+    // Detect scroll direction when user is dragging
+    if (userIsDraggingRef.current) {
+      const scrolledUp = contentOffset.y < lastScrollYRef.current - 5 // 5px tolerance
+
+      if (scrolledUp) {
+        // User scrolled up - disable auto-scroll immediately
+        isAtBottomRef.current = false
+      } else if (isAtBottom) {
+        // User scrolled to bottom - re-enable auto-scroll
+        isAtBottomRef.current = true
+      }
+    }
+
+    lastScrollYRef.current = contentOffset.y
+    setShowScrollButton(!isAtBottom)
   }, [])
 
-  // Track keyboard state and scroll to end when it opens
+  // When user stops dragging, momentum might continue
+  const handleScrollEndDrag = useCallback((event: { nativeEvent: { contentOffset: { y: number }; contentSize: { height: number }; layoutMeasurement: { height: number }; velocity?: { y: number } } }) => {
+    const { contentOffset, contentSize, layoutMeasurement, velocity } = event.nativeEvent
+    const hasNoMomentum = !velocity || Math.abs(velocity.y) < 0.1
+
+    // If no momentum, finalize scroll state now
+    if (hasNoMomentum) {
+      userIsDraggingRef.current = false
+      const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
+      isAtBottomRef.current = distanceFromBottom <= SCROLL_THRESHOLD
+    }
+    // Otherwise, onMomentumScrollEnd will handle it
+  }, [])
+
+  // When momentum scroll ends
+  const handleMomentumScrollEnd = useCallback((event: { nativeEvent: { contentOffset: { y: number }; contentSize: { height: number }; layoutMeasurement: { height: number } } }) => {
+    userIsDraggingRef.current = false
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
+    const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
+    isAtBottomRef.current = distanceFromBottom <= SCROLL_THRESHOLD
+  }, [])
+
+  // Track keyboard state and scroll to end when it opens (if user was at bottom)
   useEffect(() => {
     const showSub = Keyboard.addListener('keyboardDidShow', () => {
       setIsKeyboardOpen(true)
-      if (AUTO_SCROLL_ENABLED) {
+      if (isAtBottomRef.current) {
         scrollRef.current?.scrollToEnd({ animated: true })
       }
     })
@@ -152,7 +203,7 @@ export function ChatScreen() {
   }
 
   useEffect(() => {
-    if (AUTO_SCROLL_ENABLED) {
+    if (isAtBottomRef.current) {
       scrollRef.current?.scrollToEnd({ animated: true })
     }
   }, [messages.length])
@@ -182,6 +233,12 @@ export function ChatScreen() {
     setInput('')
     setIsSending(true)
     setErrorText(null)
+
+    // Always scroll to bottom when user sends a message
+    isAtBottomRef.current = true
+    setTimeout(() => {
+      scrollRef.current?.scrollToEnd({ animated: true })
+    }, 100)
 
     const payloadMessages: ServerChatMessage[] = nextMessages
       .filter((message) => message.role !== 'assistant' || message.content.trim().length > 0)
@@ -277,21 +334,21 @@ export function ChatScreen() {
     setIsSending(false)
   }
 
-  // Height of input bar for bottomOffset
-  const INPUT_BAR_HEIGHT = 68
-
   return (
     <YStack flex={1} backgroundColor={themeColors.background}>
       <KeyboardAwareScrollView
         ref={scrollRef}
         style={{ flex: 1 }}
-        contentContainerStyle={{ 
+        contentContainerStyle={{
           paddingHorizontal: 16,
           paddingTop: 12,
           paddingBottom: INPUT_BAR_HEIGHT + (isKeyboardOpen ? 0 : insets.bottom) + 8,
         }}
         keyboardShouldPersistTaps="handled"
         onScroll={handleScroll}
+        onScrollBeginDrag={handleScrollBeginDrag}
+        onScrollEndDrag={handleScrollEndDrag}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
         scrollEventThrottle={16}
       >
         {messages.length === 0 && (
@@ -398,12 +455,11 @@ export function ChatScreen() {
             value={input}
             onChangeText={setInput}
             placeholder="Escribe un mensaje"
-            editable={!isSending}
             backgroundColor="transparent"
             borderWidth={0}
             returnKeyType="send"
             onSubmitEditing={handleSend}
-            blurOnSubmit={false}
+            submitBehavior="submit"
             fontSize={17}
             height={40}
             paddingVertical={0}
