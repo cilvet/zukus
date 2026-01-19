@@ -575,7 +575,11 @@ export function DetailScreen() {
   
   return (
     <>
-      <Stack.Screen options={{ title: getTitle() }} />
+      <Stack.Screen 
+        options={{ 
+          title: getTitle(),
+        }} 
+      />
       <ScrollView
         style={[styles.container, { backgroundColor: themeColors.background }]}
         contentContainerStyle={styles.content}

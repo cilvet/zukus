@@ -21,6 +21,7 @@
   },
   "packageManager": "bun@1.0.0",
   "dependencies": {
-    "@react-native-community/slider": "^5.1.2"
+    "@react-native-community/slider": "^5.1.2",
+    "@react-navigation/elements": "^2.9.5"
   }
 }

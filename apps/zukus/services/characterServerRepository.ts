@@ -1,12 +1,5 @@
 import type { CharacterListItem } from './characterRepository'
-
-function getServerBaseUrl(): string {
-  return (
-    process.env.EXPO_PUBLIC_SERVER ||
-    process.env.NEXT_PUBLIC_SERVER ||
-    'https://zukus-server.fly.dev'
-  )
-}
+import { getServerBaseUrl } from './serverBaseUrl'
 
 export async function listCharactersFromServer(accessToken: string): Promise<CharacterListItem[]> {
   const response = await fetch(`${getServerBaseUrl()}/characters`, {

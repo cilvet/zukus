@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   useTheme,
   useCharacterName,
@@ -11,7 +12,7 @@ import {
   useCharacterImageUrl,
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
-import { useRouter } from 'expo-router'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import {
   CharacterPager,
   CharacterTabs,
@@ -156,10 +157,16 @@ export function CharacterScreen() {
   const characterId = id ?? ''
   const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
+  const insets = useSafeAreaInsets()
+  const router = useRouter()
 
   function handleTabPress(index: number) {
     pagerRef.current?.setPage(index)
     setCurrentPage(index)
+  }
+
+  function handleChatPress() {
+    router.push('/chat')
   }
 
   if (!characterId) {
@@ -229,6 +236,25 @@ export function CharacterScreen() {
           <EntitiesSection />
         </View>
       </CharacterPager>
+
+      {/* Botón flotante de chat */}
+      <Pressable
+        onPress={handleChatPress}
+        style={[
+          styles.fab,
+          {
+            bottom: 72 + insets.bottom,
+            backgroundColor: themeColors.actionButton,
+          },
+        ]}
+        hitSlop={8}
+      >
+        {({ pressed }) => (
+          <View style={[styles.fabContent, { opacity: pressed ? 0.8 : 1 }]}>
+            <FontAwesome name="comments" size={24} color={themeColors.textPrimary} />
+          </View>
+        )}
+      </Pressable>
     </View>
   )
 }
@@ -251,6 +277,24 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  fabContent: {
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

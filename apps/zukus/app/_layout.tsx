@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { AuthProvider, useAuth } from '../contexts'
 
 // React Scan solo en desarrollo y web
@@ -98,6 +99,20 @@ function ThemedApp() {
             <Stack.Screen name="index" />
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="chat"
+              options={{
+                headerShown: true,
+                headerTitle: 'Chat',
+                headerStyle: {
+                  backgroundColor: themeColors.background,
+                },
+                headerTintColor: themeColors.color,
+                headerTitleStyle: {
+                  fontWeight: '600',
+                },
+              }}
+            />
           </Stack>
         </NavigationThemeProvider>
       </Theme>
@@ -113,11 +128,13 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <ThemeProvider>
-          <AuthProvider>
-            <ThemedApp />
-          </AuthProvider>
-        </ThemeProvider>
+        <KeyboardProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <ThemedApp />
+            </AuthProvider>
+          </ThemeProvider>
+        </KeyboardProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   )

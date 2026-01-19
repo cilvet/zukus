@@ -2,6 +2,15 @@ import { loadEnv } from './env'
 import { listCharactersByUser } from './characters'
 import { getUserIdFromRequest } from './auth'
 import { initializeTelemetry, withSpan } from './telemetry'
+import { handleChatRequest } from './chat'
+
+function addCorsHeaders(response: Response): Response {
+  response.headers.set('Access-Control-Allow-Origin', '*')
+  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  response.headers.set('Access-Control-Max-Age', '86400')
+  return response
+}
 
 function resolvePort(env: Record<string, string>): number {
   const directPort = env.SERVER_PORT || env.PORT
@@ -35,8 +44,12 @@ const server = Bun.serve({
   async fetch(request) {
     const url = new URL(request.url)
 
+    if (request.method === 'OPTIONS') {
+      return addCorsHeaders(new Response(null, { status: 204 }))
+    }
+
     if (request.method === 'GET' && url.pathname === '/health') {
-      return new Response('ok')
+      return addCorsHeaders(new Response('ok'))
     }
 
     if (request.method === 'GET' && url.pathname === '/characters') {
@@ -45,19 +58,23 @@ const server = Bun.serve({
         try {
           const userId = await getUserIdFromRequest(request)
           if (!userId) {
-            return Response.json({ error: 'Unauthorized' }, { status: 401 })
+            return addCorsHeaders(Response.json({ error: 'Unauthorized' }, { status: 401 }))
           }
 
           const characters = await listCharactersByUser(userId)
-          return Response.json({ data: characters })
+          return addCorsHeaders(Response.json({ data: characters }))
         } catch (error) {
           const message = error instanceof Error ? error.message : 'Unknown error'
-          return Response.json({ error: message }, { status: 500 })
+          return addCorsHeaders(Response.json({ error: message }, { status: 500 }))
         }
       })
     }
 
-    return new Response('Not found', { status: 404 })
+    if (url.pathname === '/chat') {
+      return handleChatRequest(request)
+    }
+
+    return addCorsHeaders(new Response('Not found', { status: 404 }))
   },
 })
 

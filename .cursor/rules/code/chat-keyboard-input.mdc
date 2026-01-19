@@ -1,0 +1,257 @@
+---
+description: Patron para pantallas de chat con input flotante y teclado en React Native
+globs: 
+alwaysApply: false
+---
+
+# Chat con Input Flotante y Teclado
+
+## Dependencias
+
+```bash
+npx expo install react-native-keyboard-controller react-native-markdown-display
+```
+
+Añadir `KeyboardProvider` en el root layout.
+
+## Layout: Teclado + Input Flotante
+
+### Problema
+
+Con un ScrollView normal + input flotante, cuando el teclado se abre el área de scroll NO se reduce. El contenido queda oculto detrás del teclado/input.
+
+### Solución: KeyboardAwareScrollView + KeyboardStickyView
+
+```typescript
+import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller'
+
+<YStack flex={1}>
+  <KeyboardAwareScrollView
+    style={{ flex: 1 }}
+    contentContainerStyle={{ 
+      paddingBottom: INPUT_BAR_HEIGHT + (isKeyboardOpen ? 0 : insets.bottom),
+    }}
+    keyboardShouldPersistTaps="handled"
+    onScroll={handleScroll}
+    scrollEventThrottle={16}
+  >
+    {/* Mensajes */}
+  </KeyboardAwareScrollView>
+
+  <KeyboardStickyView
+    offset={{ closed: 0, opened: insets.bottom }}
+    style={{ position: 'absolute', bottom: insets.bottom, left: 0, right: 0 }}
+  >
+    {/* Input */}
+  </KeyboardStickyView>
+
+  {/* Safe area bottom */}
+  <YStack position="absolute" bottom={0} height={insets.bottom} backgroundColor="#000" />
+</YStack>
+```
+
+### Clave: paddingBottom Dinámico
+
+El `insets.bottom` solo debe sumarse cuando el teclado está CERRADO:
+
+```typescript
+const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+
+useEffect(() => {
+  const showSub = Keyboard.addListener('keyboardDidShow', () => setIsKeyboardOpen(true))
+  const hideSub = Keyboard.addListener('keyboardDidHide', () => setIsKeyboardOpen(false))
+  return () => { showSub.remove(); hideSub.remove() }
+}, [])
+
+paddingBottom: INPUT_BAR_HEIGHT + (isKeyboardOpen ? 0 : insets.bottom)
+```
+
+### Evitar
+
+- `KeyboardAvoidingView` de React Native - Problemático con Stack navigation
+- `useKeyboardHandler` de keyboard-controller - Causa crashes
+- `bottomOffset` en KeyboardAwareScrollView - Duplica espacio si ya tienes paddingBottom
+
+## Streaming en Mobile
+
+### Problema
+
+El fetch nativo de React Native no soporta streaming correctamente. Los mensajes no aparecen hasta que la respuesta completa.
+
+### Solución
+
+Usar `fetch` de `expo/fetch`:
+
+```typescript
+import { fetch } from 'expo/fetch'
+
+const response = await fetch(url, options)
+const reader = response.body.getReader()
+
+while (true) {
+  const { value, done } = await reader.read()
+  if (done) break
+  const chunk = decoder.decode(value, { stream: true })
+  onToken(chunk)
+}
+```
+
+## Efecto Typewriter
+
+### Problema
+
+Los tokens de streaming llegan en chunks grandes y se ven bruscos.
+
+### Solución: Buffer con Velocidad Dinámica
+
+Acumular tokens en un buffer y mostrarlos gradualmente. La velocidad se adapta al tamaño del buffer para no quedarse atrás:
+
+```typescript
+const textBufferRef = useRef('')
+const isTypingRef = useRef(false)
+
+const typewriterLoop = () => {
+  if (textBufferRef.current.length === 0) {
+    isTypingRef.current = false
+    return
+  }
+  
+  const bufferSize = textBufferRef.current.length
+  let charsToShow: number
+  let delay: number
+  
+  // Velocidad dinamica segun buffer
+  if (bufferSize < 10) {
+    charsToShow = Math.floor(Math.random() * 2) + 1  // 1-2 chars
+    delay = 20 + Math.random() * 15                   // 20-35ms
+  } else if (bufferSize < 50) {
+    charsToShow = Math.floor(Math.random() * 6) + 3  // 3-8 chars
+    delay = 15 + Math.random() * 10                   // 15-25ms
+  } else {
+    charsToShow = Math.floor(Math.random() * 11) + 10 // 10-20 chars
+    delay = 10                                         // 10ms (catch-up)
+  }
+  
+  const chars = textBufferRef.current.slice(0, charsToShow)
+  textBufferRef.current = textBufferRef.current.slice(charsToShow)
+  
+  // Actualizar mensaje...
+  setTimeout(typewriterLoop, delay)
+}
+
+// En onToken:
+onToken: (token) => {
+  textBufferRef.current += token
+  if (!isTypingRef.current) {
+    isTypingRef.current = true
+    typewriterLoop()
+  }
+}
+```
+
+## Markdown en Mensajes
+
+### Dependencia
+
+```bash
+bun add react-native-markdown-display
+```
+
+### Uso
+
+```typescript
+import Markdown from 'react-native-markdown-display'
+
+function AssistantMessage({ content, textColor, codeBackground }) {
+  const markdownStyles = {
+    body: { color: textColor, fontSize: 17, lineHeight: 24 },
+    paragraph: { marginTop: 0, marginBottom: 16 },
+    heading1: { color: textColor, fontSize: 24, fontWeight: '700', marginTop: 20, marginBottom: 12 },
+    heading2: { color: textColor, fontSize: 20, fontWeight: '600', marginTop: 18, marginBottom: 10 },
+    code_inline: { 
+      backgroundColor: codeBackground, 
+      paddingHorizontal: 4, 
+      paddingVertical: 2,
+      borderRadius: 4,
+      fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+    },
+    fence: { 
+      backgroundColor: codeBackground, 
+      padding: 12, 
+      borderRadius: 8,
+      marginVertical: 12,
+      fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+    },
+  }
+
+  return <Markdown style={markdownStyles}>{content}</Markdown>
+}
+```
+
+### Server: Instruir al Modelo
+
+El modelo debe saber que puede usar markdown directamente:
+
+```typescript
+const SYSTEM_PROMPT = `...
+Formatea tus respuestas usando Markdown de forma natural.
+Escribe el markdown directamente, no lo envuelvas en bloques de codigo.
+El cliente renderiza markdown de forma nativa.`
+```
+
+## Boton Flotante Scroll-to-Bottom
+
+Mostrar un boton cuando el usuario ha scrolleado hacia arriba:
+
+```typescript
+const [showScrollButton, setShowScrollButton] = useState(false)
+
+const handleScroll = (event) => {
+  const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
+  const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
+  setShowScrollButton(distanceFromBottom > 50)
+}
+
+const handleScrollToBottom = () => {
+  scrollRef.current?.scrollToEnd({ animated: true })
+  setShowScrollButton(false)
+}
+
+// Renderizar boton flotante encima del input cuando showScrollButton es true
+{showScrollButton && (
+  <KeyboardStickyView
+    offset={{ closed: 0, opened: insets.bottom }}
+    style={{ position: 'absolute', bottom: insets.bottom + INPUT_BAR_HEIGHT + 8, right: 16 }}
+  >
+    <Pressable onPress={handleScrollToBottom}>
+      <FontAwesome name="chevron-down" />
+    </Pressable>
+  </KeyboardStickyView>
+)}
+```
+
+## Auto-Scroll Configurable
+
+Usar un boolean para activar/desactivar auto-scroll:
+
+```typescript
+const AUTO_SCROLL_ENABLED = false
+
+const scrollToBottom = useCallback(() => {
+  if (!AUTO_SCROLL_ENABLED) return
+  scrollRef.current?.scrollToEnd({ animated: true })
+}, [])
+```
+
+Esto permite desactivar el auto-scroll mientras se desarrolla el boton manual.
+
+## Chat Fuera de Tabs
+
+Si el chat debe superponerse a las tabs, la ruta debe estar a nivel raiz:
+
+```
+app/
+  chat.tsx        # Nivel raiz, se superpone a tabs
+  (tabs)/
+    ...
+```
