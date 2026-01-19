@@ -40,3 +40,8 @@ export {
   EquipmentDetailPanel,
   type EquipmentDetailLayout,
 } from './character'
+export {
+  EntityCard,
+  EntityTypeGroup,
+  GenericEntityDetailPanel,
+} from './character'

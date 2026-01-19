@@ -75,7 +75,7 @@ export * as ops from "./core/domain/character/updater/operations";
 // Types - Levels
 export type { LevelSlot, ClassEntity, SystemLevelsEntity } from "./core/domain/levels/storage/types";
 export type { EntityProvider } from "./core/domain/levels/providers/types";
-export type { StandardEntity } from "./core/domain/entities/types/base";
+export type { StandardEntity, ComputedEntity, ComputedEntityMeta } from "./core/domain/entities/types/base";
 
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";

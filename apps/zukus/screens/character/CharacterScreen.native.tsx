@@ -25,6 +25,7 @@ import {
   InventorySection,
   DescriptionSection,
   NotesSection,
+  EntitiesSection,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
 
@@ -239,6 +240,9 @@ export function CharacterScreen() {
         </View>
         <View key="notes" style={styles.page}>
           <NotesSection />
+        </View>
+        <View key="entities" style={styles.page}>
+          <EntitiesSection />
         </View>
       </CharacterPager>
     </View>

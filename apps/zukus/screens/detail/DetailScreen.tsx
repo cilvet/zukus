@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData } from '../../ui'
+import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
@@ -466,9 +466,24 @@ function ClassSelectorDetailWrapper({ levelIndex }: { levelIndex: number}) {
   )
 }
 
+function ComputedEntityDetail({ entityId }: { entityId: string }) {
+  const computedEntities = useComputedEntities()
+  const entity = computedEntities.find((e) => e.id === entityId)
+
+  if (!entity) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Entidad no encontrada: {entityId}</Text>
+      </YStack>
+    )
+  }
+
+  return <GenericEntityDetailPanel entity={entity} />
+}
+
 function InvalidRoute() {
   const router = useRouter()
-  
+
   return (
     <YStack flex={1} justifyContent="center" alignItems="center" padding={20}>
       <Text fontSize={18} fontWeight="700" color="$color" marginBottom={8}>
@@ -551,6 +566,8 @@ export function DetailScreen() {
       case 'entitySelectorDetail':
       case 'customEntityDetail':
         return <NotImplementedDetail type={type} id={id} />
+      case 'computedEntity':
+        return <ComputedEntityDetail entityId={id} />
       default:
         return <InvalidRoute />
     }

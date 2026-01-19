@@ -40,4 +40,9 @@ export {
   type LevelDetailProps,
   type LevelSlotData,
 } from './editor'
+export {
+  EntityCard,
+  EntityTypeGroup,
+  GenericEntityDetailPanel,
+} from './entities'
 // NOTE: SavingThrowsSection, SkillsSection and ArmorClassSection not exported here to avoid circular dependency with navigation

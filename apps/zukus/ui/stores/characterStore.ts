@@ -8,6 +8,7 @@ import type {
   Item,
   Equipment,
   SpecialFeature,
+  ComputedEntity,
 } from '@zukus/core'
 
 /**
@@ -321,6 +322,12 @@ export function useCharacterBuffs() {
 
 export function useCharacterImageUrl() {
   return useCharacterStore((state) => (state.baseData as (CharacterBaseData & { imageUrl?: string }) | null)?.imageUrl ?? null)
+}
+
+const EMPTY_COMPUTED_ENTITIES: readonly ComputedEntity[] = []
+
+export function useComputedEntities() {
+  return useCharacterStore((state) => state.characterSheet?.computedEntities ?? EMPTY_COMPUTED_ENTITIES)
 }
 
 export function useCharacterBuild() {

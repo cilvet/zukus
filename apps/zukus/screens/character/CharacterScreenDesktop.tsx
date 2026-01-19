@@ -18,6 +18,7 @@ import {
   useCharacterImageUrl,
   useCharacterAttacks,
   useCharacterBaseData,
+  useComputedEntities,
   AbilityCard,
   AbilityCardCompact,
   Checkbox,
@@ -35,6 +36,8 @@ import {
   SkillDetailPanel,
   AttacksSection,
   AttackDetailPanel,
+  EntityTypeGroup,
+  GenericEntityDetailPanel,
 } from '../../ui'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
@@ -53,7 +56,7 @@ import {
 import { SavingThrowDetailPanel } from '../../ui'
 import { SkillsSection } from '../../ui/components/character/SkillsSection'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, CalculatedSingleSkill } from '@zukus/core'
+import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, CalculatedSingleSkill, ComputedEntity } from '@zukus/core'
 import {
   SidePanel,
   SidePanelContainer,
@@ -324,11 +327,26 @@ function CharacterScreenDesktopContent() {
   const buffs = useCharacterBuffs()
   const attackData = useCharacterAttacks()
   const imageUrl = useCharacterImageUrl()
+  const computedEntities = useComputedEntities()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
   const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
+
+  const entitiesByType = (() => {
+    const groups: Record<string, ComputedEntity[]> = {}
+    for (const entity of computedEntities) {
+      const type = entity.entityType
+      if (!groups[type]) {
+        groups[type] = []
+      }
+      groups[type].push(entity)
+    }
+    return groups
+  })()
+
+  const entityTypes = Object.keys(entitiesByType).sort()
 
   const {
     currentPanel,
@@ -372,11 +390,20 @@ function CharacterScreenDesktopContent() {
     openPanel(id, 'attack', attack.name)
   }
 
+  const handleEntityPress = (entity: ComputedEntity) => {
+    openPanel(entity.id, 'computedEntity', entity.name)
+  }
+
   const attackForPanel =
     currentPanel?.type === 'attack' && currentPanel?.id && attackData
       ? attackData.attacks.find(
           (a) => a.weaponUniqueId === currentPanel.id || a.name === currentPanel.id
         )
+      : null
+
+  const entityForPanel =
+    currentPanel?.type === 'computedEntity' && currentPanel?.id
+      ? computedEntities.find((e) => e.id === currentPanel.id) ?? null
       : null
 
   const handleHitPointsPress = () => {
@@ -618,6 +645,27 @@ function CharacterScreenDesktopContent() {
             </SectionCard>
           </YStack>
         </VerticalSection>
+
+        {/* Columna 6: Entities */}
+        {computedEntities.length > 0 && (
+          <VerticalSection>
+            <YStack width="100%" gap={16}>
+              <SectionCard>
+                <SectionHeader icon="E" title="Entities" />
+                <YStack gap={16}>
+                  {entityTypes.map((entityType) => (
+                    <EntityTypeGroup
+                      key={entityType}
+                      entityType={entityType}
+                      entities={entitiesByType[entityType]}
+                      onEntityPress={handleEntityPress}
+                    />
+                  ))}
+                </YStack>
+              </SectionCard>
+            </YStack>
+          </VerticalSection>
+        )}
       </ColumnsContainer>
 
       <SidePanel
@@ -693,6 +741,9 @@ function CharacterScreenDesktopContent() {
         )}
         {currentPanel?.type === 'classSelectorDetail' && currentPanel?.id && (
           <ClassSelectorDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        )}
+        {entityForPanel && (
+          <GenericEntityDetailPanel entity={entityForPanel} />
         )}
       </SidePanel>
     </SidePanelContainer>

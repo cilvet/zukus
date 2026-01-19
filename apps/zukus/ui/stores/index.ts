@@ -16,6 +16,7 @@ export {
   useCharacterImageUrl,
   useCharacterBuild,
   useCharacterActions,
+  useComputedEntities,
 } from './characterStore'
 
 export { usePanelStore } from './panelStore'
