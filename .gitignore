@@ -33,3 +33,7 @@ coverage/
 
 # Tauri
 apps/desktop/src-tauri/target/
+
+# Generated docs
+CLAUDE.md
+AGENTS.md

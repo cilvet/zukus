@@ -9,7 +9,8 @@ type RuleEntry = {
 };
 
 const RULES_DIR = path.join(process.cwd(), ".cursor", "rules");
-const OUTPUT_PATH = path.join(process.cwd(), "AGENTS.md");
+const AGENTS_OUTPUT_PATH = path.join(process.cwd(), "AGENTS.md");
+const CLAUDE_OUTPUT_PATH = path.join(process.cwd(), "CLAUDE.md");
 
 async function listRuleFiles(dirPath: string): Promise<string[]> {
   const entries = await readdir(dirPath, { withFileTypes: true });
@@ -69,9 +70,9 @@ function parseFrontMatter(content: string): {
   return { description, alwaysApply, body };
 }
 
-function buildAgentsMarkdown(alwaysApply: RuleEntry[], optional: RuleEntry[]): string {
+function buildAgentsMarkdown(alwaysApply: RuleEntry[], optional: RuleEntry[], title = "AGENTS"): string {
   const lines: string[] = [];
-  lines.push("# AGENTS");
+  lines.push(`# ${title}`);
   lines.push("");
   lines.push("## Always-apply rules");
   lines.push("");
@@ -124,8 +125,16 @@ async function main() {
   const alwaysApplyRules = rules.filter((rule) => rule.alwaysApply);
   const optionalRules = rules.filter((rule) => !rule.alwaysApply);
 
-  const markdown = buildAgentsMarkdown(alwaysApplyRules, optionalRules);
-  await writeFile(OUTPUT_PATH, markdown, "utf8");
+  const agentsMarkdown = buildAgentsMarkdown(alwaysApplyRules, optionalRules, "AGENTS");
+  const claudeMarkdown = buildAgentsMarkdown(alwaysApplyRules, optionalRules, "CLAUDE");
+
+  await Promise.all([
+    writeFile(AGENTS_OUTPUT_PATH, agentsMarkdown, "utf8"),
+    writeFile(CLAUDE_OUTPUT_PATH, claudeMarkdown, "utf8"),
+  ]);
+
+  console.log(`✓ Generated ${AGENTS_OUTPUT_PATH}`);
+  console.log(`✓ Generated ${CLAUDE_OUTPUT_PATH}`);
 }
 
 await main();
