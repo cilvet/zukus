@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
+    "@fortawesome/free-solid-svg-icons": "^6.7.0",
+    "@fortawesome/react-native-fontawesome": "^0.3.2",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-navigation/native": "^7.1.8",
     "@shopify/flash-list": "^2.2.0",
@@ -55,6 +57,7 @@
     "zustand": "^5.0.10"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-common-types": "^6.7.0",
     "@tauri-apps/api": "^2",
     "@tauri-apps/cli": "^2",
     "@types/react": "~19.1.0",

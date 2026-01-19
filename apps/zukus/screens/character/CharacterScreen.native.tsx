@@ -13,6 +13,8 @@ import {
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faHatWizard } from '@fortawesome/free-solid-svg-icons/faHatWizard'
 import {
   CharacterPager,
   CharacterTabs,
@@ -243,7 +245,7 @@ export function CharacterScreen() {
         style={[
           styles.fab,
           {
-            bottom: 72 + insets.bottom,
+            bottom: 16,
             backgroundColor: themeColors.actionButton,
           },
         ]}
@@ -251,7 +253,7 @@ export function CharacterScreen() {
       >
         {({ pressed }) => (
           <View style={[styles.fabContent, { opacity: pressed ? 0.8 : 1 }]}>
-            <FontAwesome name="comments" size={24} color={themeColors.textPrimary} />
+            <FontAwesomeIcon icon={faHatWizard as any} size={24} color={themeColors.accentContrastText} />
           </View>
         )}
       </Pressable>

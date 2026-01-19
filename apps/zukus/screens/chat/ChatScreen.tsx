@@ -371,7 +371,7 @@ export function ChatScreen() {
                     borderRadius={16}
                     backgroundColor={themeColors.actionButton}
                   >
-                    <Text color={themeColors.textPrimary} fontSize={17} lineHeight={24}>
+                    <Text color={themeColors.accentContrastText} fontSize={17} lineHeight={24}>
                       {message.content}
                     </Text>
                   </YStack>
@@ -483,7 +483,7 @@ export function ChatScreen() {
               <FontAwesome
                 name="send"
                 size={16}
-                color={themeColors.textPrimary}
+                color={themeColors.accentContrastText}
                 style={{ opacity: pressed ? 0.7 : 1 }}
               />
             )}
