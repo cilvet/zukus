@@ -1,0 +1,60 @@
+---
+alwaysApply: true
+---
+
+# Observabilidad del Server (Grafana + Tempo)
+
+Usamos Grafana Cloud (Tempo) para trazas del server Bun. La meta es medir latencias por tramo (auth, queries, etc.) y errores del server.
+
+## Dónde están las trazas
+
+- Stack Grafana: `https://inigocilveti.grafana.net`
+- Datasource Tempo: `grafanacloud-inigocilveti-traces`
+- Servicio: `service.name = zukus-server`
+
+## Spans disponibles hoy
+
+- `http.GET /characters` (span padre, latencia total)
+- `supabase.auth.getUser` (validación JWT)
+- `supabase.characters.list` (consulta a BD)
+- `server.startup` (span de arranque para validar el pipeline)
+
+Interpretación:
+- Total alto con hijos bajos → overhead del handler o red.
+- Auth alto → validación de token lenta.
+- Query alta → consulta o RLS lenta (posible falta de índices).
+
+## Script local para consultas
+
+Script: `scripts/grafana-traces.ts`
+
+Uso:
+```bash
+GRAFANA_URL="https://inigocilveti.grafana.net" \
+GRAFANA_API_KEY="glsa_..." \
+GRAFANA_TEMPO_DATASOURCE="grafanacloud-inigocilveti-traces" \
+bun scripts/grafana-traces.ts
+```
+
+Variables opcionales:
+- `TRACE_LOOKBACK_MINUTES` (default 15)
+- `TRACE_LIMIT` (default 20)
+- `TRACE_SERVICE_NAME` (default `zukus-server`)
+
+Notas:
+- La API de Tempo via proxy espera `start/end` en segundos (no ms/ns).
+- No guardar tokens en el repo. Pasarlos por env vars.
+
+## Tokens (API)
+
+El token válido para queries es un **Service Account Token** creado en el stack:
+`https://inigocilveti.grafana.net` → Administration → Service accounts → Create token.
+
+## Recomendaciones futuras
+
+- Para nuevos endpoints, crear spans padre `http.<METHOD> <route>` y spans hijos por operaciones clave.
+- Para IA (chat), crear spans como:
+  - `ai.request` (total)
+  - `ai.provider.call` (llamada al modelo)
+  - `ai.postprocess` (parse/guardrails)
+- Añadir atributos por span: `request.id`, `user.id`, `model`, `tokens.prompt`, `tokens.completion` cuando aplique.

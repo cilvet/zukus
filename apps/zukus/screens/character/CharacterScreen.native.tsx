@@ -19,10 +19,6 @@ import {
   AbilitiesSection,
   BuffsSection,
   EquipmentSection,
-  SpellsSection,
-  FeaturesSection,
-  ActionsSection,
-  InventorySection,
   DescriptionSection,
   NotesSection,
   EntitiesSection,
@@ -222,18 +218,6 @@ export function CharacterScreen() {
         </View>
         <View key="equipment" style={styles.page}>
           <EquipmentSection />
-        </View>
-        <View key="spells" style={styles.page}>
-          <SpellsSection />
-        </View>
-        <View key="features" style={styles.page}>
-          <FeaturesSection />
-        </View>
-        <View key="actions" style={styles.page}>
-          <ActionsSection />
-        </View>
-        <View key="inventory" style={styles.page}>
-          <InventorySection />
         </View>
         <View key="description" style={styles.page}>
           <DescriptionSection />

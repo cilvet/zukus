@@ -42,11 +42,8 @@ import {
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
 import {
-  MOCK_CHARACTER,
   SectionHeader,
   SectionCard,
-  StatBox,
-  ItemCard,
   CharacterHeader,
   HpBar,
   AbilityDetailPanel,
@@ -63,8 +60,7 @@ import {
   ColumnsContainer,
   VerticalSection,
 } from '../../components/layout'
-import { FormulaPlaygroundSection } from '../../components/character'
-import { type DetailType, getDetailTitle, isValidDetailType, useNavigateToDetail } from '../../navigation'
+import { getDetailTitle, isValidDetailType, useNavigateToDetail } from '../../navigation'
 
 const ABILITY_COLUMNS = [
   ['strength', 'dexterity', 'constitution'],
@@ -377,10 +373,6 @@ function CharacterScreenDesktopContent() {
     openPanel('bab', 'bab', getDetailTitle('bab', 'bab'))
   }
 
-  const handleItemPress = (itemId: string, itemName: string) => {
-    openPanel(itemId, 'item', itemName)
-  }
-
   const handleEquipmentPress = (itemId: string, itemName: string) => {
     openPanel(itemId, 'equipment', itemName)
   }
@@ -627,26 +619,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 5: Spells (mock por ahora) */}
-        <VerticalSection>
-          <YStack width="100%" gap={16}>
-            <SectionCard>
-              <SectionHeader icon="S" title="Spells" />
-              <YStack gap={8}>
-                {MOCK_CHARACTER.spells.map((spell, idx) => (
-                  <ItemCard
-                    key={idx}
-                    name={spell.name}
-                    subtitle={`Level ${spell.level}`}
-                    onPress={() => handleItemPress(`spell-${idx}`, spell.name)}
-                  />
-                ))}
-              </YStack>
-            </SectionCard>
-          </YStack>
-        </VerticalSection>
-
-        {/* Columna 6: Entities */}
+        {/* Columna 5: Entities */}
         {computedEntities.length > 0 && (
           <VerticalSection>
             <YStack width="100%" gap={16}>

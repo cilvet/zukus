@@ -12,65 +12,10 @@ export const CHARACTER_PAGES: CharacterPage[] = [
   { key: 'abilities', label: 'Atributos', icon: 'star' },
   { key: 'buffs', label: 'Buffs', icon: 'bolt' },
   { key: 'equipment', label: 'Equipo', icon: 'suitcase' },
-  { key: 'spells', label: 'Hechizos', icon: 'magic' },
-  { key: 'features', label: 'Rasgos', icon: 'trophy' },
-  { key: 'actions', label: 'Acciones', icon: 'flash' },
-  { key: 'inventory', label: 'Inventario', icon: 'briefcase' },
-  { key: 'description', label: 'Descripción', icon: 'user' },
+  { key: 'description', label: 'Descripcion', icon: 'user' },
   { key: 'notes', label: 'Notas', icon: 'pencil' },
-  { key: 'playground', label: 'Playground', icon: 'code' },
+  { key: 'entities', label: 'Entidades', icon: 'list' },
 ]
-
-// Mock data del personaje
-export const MOCK_CHARACTER = {
-  name: 'Gandalf el Gris',
-  level: 15,
-  race: 'Humano',
-  class: 'Mago',
-  hp: { current: 85, max: 120 },
-  ac: 15,
-  speed: 30,
-  proficiencyBonus: 5,
-  abilities: {
-    strength: { score: 10, modifier: 0 },
-    dexterity: { score: 14, modifier: 2 },
-    constitution: { score: 14, modifier: 2 },
-    intelligence: { score: 20, modifier: 5 },
-    wisdom: { score: 18, modifier: 4 },
-    charisma: { score: 16, modifier: 3 },
-  },
-  skills: [
-    { name: 'Arcana', modifier: 11, proficient: true },
-    { name: 'History', modifier: 11, proficient: true },
-    { name: 'Insight', modifier: 8, proficient: true },
-    { name: 'Investigation', modifier: 9, proficient: false },
-    { name: 'Perception', modifier: 8, proficient: true },
-    { name: 'Investigation', modifier: 9, proficient: false },
-    { name: 'Perception', modifier: 8, proficient: true },
-    { name: 'Investigation', modifier: 9, proficient: false },
-    { name: 'Perception', modifier: 8, proficient: true },
-    { name: 'Investigation', modifier: 9, proficient: false },
-    { name: 'Perception', modifier: 8, proficient: true },
-    { name: 'Investigation', modifier: 9, proficient: false },
-    { name: 'Perception', modifier: 8, proficient: true },
-    { name: 'Persuasion', modifier: 7, proficient: false },
-  ],
-  equipment: [
-    { name: 'Staff of Power', type: 'Weapon' },
-    { name: 'Robes of the Archmagi', type: 'Armor' },
-    { name: 'Ring of Protection', type: 'Wondrous Item' },
-    { name: 'Potion of Healing (x3)', type: 'Consumable' },
-    { name: 'Spellbook', type: 'Focus' },
-  ],
-  spells: [
-    { name: 'Fireball', level: 3 },
-    { name: 'Lightning Bolt', level: 3 },
-    { name: 'Counterspell', level: 3 },
-    { name: 'Dimension Door', level: 4 },
-    { name: 'Teleport', level: 7 },
-    { name: 'Wish', level: 9 },
-  ],
-}
 
 export const ABILITY_INFO: Record<string, { name: string; abbr: string; description: string }> = {
   strength: {

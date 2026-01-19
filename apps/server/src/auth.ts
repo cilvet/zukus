@@ -1,4 +1,5 @@
 import { supabase } from './supabaseClient'
+import { withSpan } from './telemetry'
 
 function extractBearerToken(request: Request): string | null {
   const header = request.headers.get('authorization')
@@ -15,8 +16,15 @@ export async function getUserIdFromRequest(request: Request): Promise<string | n
   const token = extractBearerToken(request)
   if (!token) return null
 
-  const { data, error } = await supabase.auth.getUser(token)
-  if (error || !data?.user) return null
+  return withSpan('supabase.auth.getUser', async (span) => {
+    span.setAttribute('auth.hasToken', true)
+    const { data, error } = await supabase.auth.getUser(token)
+    if (error || !data?.user) {
+      span.setAttribute('auth.success', false)
+      return null
+    }
 
-  return data.user.id
+    span.setAttribute('auth.success', true)
+    return data.user.id
+  })
 }
