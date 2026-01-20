@@ -1,10 +1,38 @@
 import { google } from '@ai-sdk/google'
-import { streamText } from 'ai'
-import { getUserIdFromRequest } from './auth'
+import { streamText, tool, stepCountIs } from 'ai'
+import { z } from 'zod'
+import { getUserFromRequest, type AuthUser } from './auth'
+import { listCharactersByUser } from './characters'
 import { withSpan } from './telemetry'
 
-const MODEL_ID = 'gemini-2.5-flash'
-const SYSTEM_PROMPT = `Eres un asistente util para Zukus.
+const MODEL_ID = 'gemini-3-flash-preview'
+
+function buildServerTools(userId: string) {
+  return {
+    listCharacters: tool({
+      description: 'Lista los personajes del usuario. Usa esta herramienta cuando el usuario pregunte por sus personajes o quiera saber que personajes tiene.',
+      inputSchema: z.object({}),
+      execute: async () => {
+        const characters = await listCharactersByUser(userId)
+        return {
+          characters: characters.map((c) => ({
+            id: c.id,
+            name: c.name,
+            build: c.build,
+          })),
+        }
+      },
+    }),
+  }
+}
+
+function buildSystemPrompt(user: AuthUser): string {
+  const userName = user.name?.split(' ')[0] ?? user.email?.split('@')[0] ?? null
+  const userContext = userName
+    ? `\nEl usuario se llama ${userName}. Puedes saludarle por su nombre al inicio de la conversacion, pero no lo repitas constantemente.`
+    : ''
+
+  return `Eres un asistente util para Zukus.${userContext}
 
 Formatea tus respuestas usando Markdown de forma natural:
 - Usa **negrita** para enfatizar conceptos importantes
@@ -14,6 +42,7 @@ Formatea tus respuestas usando Markdown de forma natural:
 - Usa encabezados (##, ###) para organizar respuestas largas
 
 Escribe el markdown directamente en tu respuesta, no lo envuelvas en bloques de codigo. El cliente renderiza markdown de forma nativa.`
+}
 
 type ChatRole = 'user' | 'assistant' | 'system'
 
@@ -92,12 +121,12 @@ export async function handleChatRequest(request: Request): Promise<Response> {
   return withSpan('http.POST /chat', async (span) => {
     span.setAttribute('http.route', '/chat')
 
-    const userId = await getUserIdFromRequest(request)
-    if (!userId) {
+    const user = await getUserFromRequest(request)
+    if (!user) {
       return Response.json({ error: 'Unauthorized' }, { status: 401, headers: corsHeaders })
     }
 
-    span.setAttribute('user.id', userId)
+    span.setAttribute('user.id', user.id)
 
     let body: unknown
     try {
@@ -116,14 +145,16 @@ export async function handleChatRequest(request: Request): Promise<Response> {
       aiSpan.setAttribute('ai.model', MODEL_ID)
       aiSpan.setAttribute('ai.messages.count', parsed.messages.length)
 
-      const result = await streamText({
+      const result = streamText({
         model: google(MODEL_ID),
-        system: SYSTEM_PROMPT,
+        system: buildSystemPrompt(user),
         messages: parsed.messages,
+        tools: buildServerTools(user.id),
+        stopWhen: stepCountIs(3),
         providerOptions: {
           google: {
             thinkingConfig: {
-              thinkingBudget: 0,
+              thinkingBudget: 150,
             },
           },
         },

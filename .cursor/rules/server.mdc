@@ -10,13 +10,27 @@ Servidor HTTP en Bun para Zukus, ubicado en `apps/server/`. Expone `/health` y `
 
 Desplegado en Fly.io: `https://zukus-server.fly.dev/`
 
-## Deploy Manual
+## Redespliegue (Deploy Actualización)
+
+Desde la raíz del proyecto:
+
+```bash
+fly deploy -a zukus-server -c apps/server/fly.toml
+```
+
+El comando:
+1. Construye la imagen Docker con Depot
+2. Actualiza las máquinas existentes con rolling strategy
+3. Verifica que las máquinas queden en buen estado
+4. Comprueba la configuración DNS
+
+## Setup Inicial (Solo Primera Vez)
 
 1. `fly apps create zukus-server --region cdg`
 2. `fly secrets set -a zukus-server EXPO_PUBLIC_SUPABASE_URL="https://utimatychnwjuxogjfwc.supabase.co" SUPABASE_SERVICE_ROLE_KEY="..."`
 3. `fly deploy -a zukus-server -c apps/server/fly.toml`
 
-## Verificacion
+## Verificación
 
 - `curl https://zukus-server.fly.dev/health`
 - `curl https://zukus-server.fly.dev/characters`

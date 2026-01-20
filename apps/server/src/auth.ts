@@ -12,7 +12,13 @@ function extractBearerToken(request: Request): string | null {
   return token.trim()
 }
 
-export async function getUserIdFromRequest(request: Request): Promise<string | null> {
+export type AuthUser = {
+  id: string
+  email: string | null
+  name: string | null
+}
+
+export async function getUserFromRequest(request: Request): Promise<AuthUser | null> {
   const token = extractBearerToken(request)
   if (!token) return null
 
@@ -25,6 +31,19 @@ export async function getUserIdFromRequest(request: Request): Promise<string | n
     }
 
     span.setAttribute('auth.success', true)
-    return data.user.id
+    const user = data.user
+    const metadata = user.user_metadata as Record<string, unknown> | undefined
+    const name = (metadata?.full_name ?? metadata?.name ?? null) as string | null
+
+    return {
+      id: user.id,
+      email: user.email ?? null,
+      name,
+    }
   })
+}
+
+export async function getUserIdFromRequest(request: Request): Promise<string | null> {
+  const user = await getUserFromRequest(request)
+  return user?.id ?? null
 }

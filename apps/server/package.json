@@ -5,15 +5,17 @@
   "scripts": {
     "dev": "./scripts/load-env.sh bun --watch src/index.ts",
     "start": "./scripts/load-env.sh bun src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "deploy": "cd ../.. && fly deploy -a zukus-server -c apps/server/fly.toml"
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.28",
-    "ai": "^5.0.87",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.57.2",
     "@opentelemetry/resources": "^1.30.1",
     "@opentelemetry/sdk-node": "^0.57.2",
-    "@supabase/supabase-js": "^2.47.7"
+    "@supabase/supabase-js": "^2.47.7",
+    "ai": "^5.0.87",
+    "zod": "^4.3.5"
   }
 }
