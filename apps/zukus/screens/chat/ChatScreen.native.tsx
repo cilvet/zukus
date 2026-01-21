@@ -8,6 +8,7 @@ import Markdown from 'react-native-markdown-display'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
+import { TypingIndicatorRow } from './typing-indicators'
 
 type ChatMessage = {
   id: string
@@ -104,6 +105,7 @@ function AssistantMessage({ content, textColor, codeBackground, borderColor }: {
     </Markdown>
   )
 }
+
 
 export function ChatScreen() {
   const { themeColors } = useTheme()
@@ -411,7 +413,11 @@ export function ChatScreen() {
             return (
               <XStack key={message.id} justifyContent="flex-start">
                 <YStack paddingVertical={4}>
-                  <AssistantMessage content={message.content} textColor={themeColors.color} codeBackground={themeColors.backgroundHover} borderColor={themeColors.borderColor} />
+                  {message.content.length === 0 && isSending ? (
+                    <TypingIndicatorRow />
+                  ) : (
+                    <AssistantMessage content={message.content} textColor={themeColors.color} codeBackground={themeColors.backgroundHover} borderColor={themeColors.borderColor} />
+                  )}
                 </YStack>
               </XStack>
             )

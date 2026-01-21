@@ -6,6 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
+import { TypingIndicatorRow } from './typing-indicators'
 
 type ChatMessage = {
   id: string
@@ -309,7 +310,11 @@ export function ChatScreenWeb() {
                 return (
                   <XStack key={message.id} justifyContent="flex-start">
                     <YStack paddingVertical={2} flex={1}>
-                      <AssistantMessage content={message.content} themeColors={themeColors} />
+                      {message.content.length === 0 && isSending ? (
+                        <TypingIndicatorRow />
+                      ) : (
+                        <AssistantMessage content={message.content} themeColors={themeColors} />
+                      )}
                     </YStack>
                   </XStack>
                 )
