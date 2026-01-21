@@ -25,6 +25,7 @@ export type DetailType =
   | 'initiative'
   | 'bab'
   | 'skill'
+  | 'chat'
   | 'spell'
   | 'buff'
   | 'equipment'
@@ -74,6 +75,9 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   skill: {
     getTitle: (id) => getSkillName(id),
+  },
+  chat: {
+    getTitle: () => 'Chat',
   },
   spell: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

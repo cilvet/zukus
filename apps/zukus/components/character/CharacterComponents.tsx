@@ -176,6 +176,7 @@ export function CharacterHeader({
   characterClass,
   imageUrl,
   onFormulaPlaygroundPress,
+  onChatPress,
 }: {
   name: string
   level: number
@@ -183,6 +184,7 @@ export function CharacterHeader({
   characterClass: string
   imageUrl?: string | null
   onFormulaPlaygroundPress?: () => void
+  onChatPress?: () => void
 }) {
   return (
     <YStack
@@ -225,25 +227,49 @@ export function CharacterHeader({
           <Text fontSize={20} fontWeight="800" color="$color">
             {name}
           </Text>
-          {onFormulaPlaygroundPress && (
-            <Pressable onPress={onFormulaPlaygroundPress} hitSlop={8}>
-              {({ pressed }) => (
-                <YStack
-                  width={32}
-                  height={32}
-                  backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
-                  borderWidth={1}
-                  borderColor="$borderColor"
-                  borderRadius={6}
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Text fontSize={14} fontWeight="700" color="$color">
-                    f
-                  </Text>
-                </YStack>
+          {(onFormulaPlaygroundPress || onChatPress) && (
+            <XStack alignItems="center" gap={6}>
+              {onFormulaPlaygroundPress && (
+                <Pressable onPress={onFormulaPlaygroundPress} hitSlop={8}>
+                  {({ pressed }) => (
+                    <YStack
+                      width={32}
+                      height={32}
+                      backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
+                      borderWidth={1}
+                      borderColor="$borderColor"
+                      borderRadius={6}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text fontSize={14} fontWeight="700" color="$color">
+                        f
+                      </Text>
+                    </YStack>
+                  )}
+                </Pressable>
               )}
-            </Pressable>
+              {onChatPress && (
+                <Pressable onPress={onChatPress} hitSlop={8}>
+                  {({ pressed }) => (
+                    <YStack
+                      width={32}
+                      height={32}
+                      backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
+                      borderWidth={1}
+                      borderColor="$borderColor"
+                      borderRadius={6}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text fontSize={12} fontWeight="700" color="$color">
+                        AI
+                      </Text>
+                    </YStack>
+                  )}
+                </Pressable>
+              )}
+            </XStack>
           )}
         </XStack>
         <Text fontSize={12} color="$placeholderColor">

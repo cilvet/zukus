@@ -50,6 +50,7 @@ import {
   GenericDetailPanel,
   ArmorClassDetailPanel,
 } from '../../components/character'
+import { ChatScreenWeb } from '../chat/ChatScreenWeb'
 import { SavingThrowDetailPanel } from '../../ui'
 import { SkillsSection } from '../../ui/components/character/SkillsSection'
 import type { Ability } from '../../components/character/data'
@@ -406,6 +407,10 @@ function CharacterScreenDesktopContent() {
     router.push('/(tabs)/(character)/formula-playground')
   }
 
+  const handleChatPress = () => {
+    navigateToDetail('chat', 'chat')
+  }
+
   const getPanelTitle = (): string => {
     if (!currentPanel?.type || !currentPanel?.id) {
       return 'Detail'
@@ -495,6 +500,7 @@ function CharacterScreenDesktopContent() {
               characterClass={className}
               imageUrl={imageUrl}
               onFormulaPlaygroundPress={handleFormulaPlaygroundPress}
+              onChatPress={handleChatPress}
             />
             <HpBar current={currentHp} max={maxHp} onPress={handleHitPointsPress} />
             {armorClass && (
@@ -647,6 +653,7 @@ function CharacterScreenDesktopContent() {
         onBack={goBack}
         canGoBack={canGoBack}
         title={getPanelTitle()}
+        disableScroll={currentPanel?.type === 'chat'}
       >
         {currentPanel?.type === 'ability' && currentPanel?.id && getAbilityForPanel(currentPanel.id) && (
           <AbilityDetailPanel
@@ -708,6 +715,9 @@ function CharacterScreenDesktopContent() {
         )}
         {currentPanel?.type === 'item' && currentPanel?.name && (
           <GenericDetailPanel title={currentPanel.name} />
+        )}
+        {currentPanel?.type === 'chat' && (
+          <ChatScreenWeb />
         )}
         {currentPanel?.type === 'levelDetail' && currentPanel?.id && (
           <LevelDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />

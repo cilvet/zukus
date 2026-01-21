@@ -10,6 +10,7 @@ type SidePanelProps = {
   title?: string
   children: React.ReactNode
   isLeftSide?: boolean
+  disableScroll?: boolean
 }
 
 function HeaderButton({
@@ -47,6 +48,7 @@ export function SidePanel({
   title = 'Panel',
   children,
   isLeftSide = false,
+  disableScroll = false,
 }: SidePanelProps) {
   const { themeColors } = useTheme()
 
@@ -120,12 +122,18 @@ export function SidePanel({
       </XStack>
 
       {/* Content */}
-      <ScrollView
-        flex={1}
-        showsVerticalScrollIndicator={false}
-      >
-        {children}
-      </ScrollView>
+      {disableScroll ? (
+        <YStack flex={1} minHeight={0}>
+          {children}
+        </YStack>
+      ) : (
+        <ScrollView
+          flex={1}
+          showsVerticalScrollIndicator={false}
+        >
+          {children}
+        </ScrollView>
+      )}
     </YStack>
   )
 }

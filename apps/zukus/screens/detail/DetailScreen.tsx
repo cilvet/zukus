@@ -8,6 +8,7 @@ import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getA
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
 import { type DetailType, isValidDetailType, getDetailTitle, useNavigateToDetail } from '../../navigation'
+import { ChatScreen } from '../chat/ChatScreen'
 
 type SlugParams = {
   slug: string[]
@@ -521,6 +522,7 @@ export function DetailScreen() {
   const { themeColors } = useTheme()
   
   const { type, id, extra } = parseSlug(slug)
+  const isChatDetail = type === 'chat'
   
   // Determinar el título para el header
   const getTitle = (): string => {
@@ -553,6 +555,8 @@ export function DetailScreen() {
         return <SkillDetail skillId={id} />
       case 'attack':
         return <AttackDetail attackId={id} />
+      case 'chat':
+        return <ChatScreen />
       case 'spell':
       case 'buff':
       case 'item':
@@ -580,12 +584,16 @@ export function DetailScreen() {
           title: getTitle(),
         }} 
       />
-      <ScrollView
-        style={[styles.container, { backgroundColor: themeColors.background }]}
-        contentContainerStyle={styles.content}
-      >
-        {renderContent()}
-      </ScrollView>
+      {isChatDetail ? (
+        <ChatScreen />
+      ) : (
+        <ScrollView
+          style={[styles.container, { backgroundColor: themeColors.background }]}
+          contentContainerStyle={styles.content}
+        >
+          {renderContent()}
+        </ScrollView>
+      )}
     </>
   )
 }
