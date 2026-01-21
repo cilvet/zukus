@@ -5,6 +5,7 @@ import { Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { Topbar } from '../../components/layout'
 
 const DESKTOP_BREAKPOINT = 768
@@ -36,6 +37,7 @@ export default function TabsLayout() {
           }}
         >
           <Tabs.Screen name="(character)" options={{ title: 'Personajes' }} />
+          <Tabs.Screen name="(dice)" options={{ title: 'Dados' }} />
           <Tabs.Screen name="(compendiums)" options={{ title: 'Compendios' }} />
           <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
         </Tabs>
@@ -76,6 +78,13 @@ export default function TabsLayout() {
         options={{
           title: 'Personajes',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="(dice)"
+        options={{
+          title: 'Dados',
+          tabBarIcon: ({ color }) => <FontAwesome5 size={20} name="dice-d20" color={color} />,
         }}
       />
       <Tabs.Screen

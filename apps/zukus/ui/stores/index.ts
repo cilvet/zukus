@@ -21,3 +21,13 @@ export {
 
 export { usePanelStore } from './panelStore'
 export type { PanelState, PanelNavigationResult } from './panelStore'
+
+export {
+  usePixelDiceStore,
+  usePixelDicePixel,
+  usePixelDiceRolls,
+  usePixelDiceLastRoll,
+  usePixelDiceIsConnecting,
+  usePixelDiceError,
+} from './pixelDiceStore'
+export type { PixelRollEntry } from './pixelDiceStore'
