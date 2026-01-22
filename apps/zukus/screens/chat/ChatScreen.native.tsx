@@ -387,6 +387,10 @@ export function ChatScreen() {
           </YStack>
         )}
 
+        <YStack paddingBottom={12}>
+          <TypingIndicatorRow />
+        </YStack>
+
         <YStack gap={6}>
           {messages.map((message) => {
             const isUser = message.role === 'user'

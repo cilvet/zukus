@@ -287,6 +287,10 @@ export function ChatScreenWeb() {
               </YStack>
             )}
 
+            <YStack paddingBottom={12}>
+              <TypingIndicatorRow />
+            </YStack>
+
             <YStack gap={20}>
               {messages.map((message) => {
                 if (message.role === 'user') {

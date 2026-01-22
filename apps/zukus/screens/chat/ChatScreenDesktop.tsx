@@ -343,6 +343,10 @@ export function ChatScreenDesktop() {
             onScrollEndDrag={handleScrollEndDrag}
             scrollEventThrottle={16}
           >
+            <YStack paddingBottom={12}>
+              <TypingIndicatorRow />
+            </YStack>
+
             <YStack gap={20}>
               {messages.map((message) => {
                 if (message.role === 'user') {

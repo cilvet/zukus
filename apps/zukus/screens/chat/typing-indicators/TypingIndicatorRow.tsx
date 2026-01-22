@@ -6,7 +6,7 @@ import { VerdantDot } from './VerdantDot'
 
 export function TypingIndicatorRow() {
   return (
-    <XStack justifyContent="flex-start" paddingVertical={6} paddingLeft={10} gap={12} alignItems="center">
+    <XStack justifyContent="flex-start" paddingVertical={6} paddingLeft={10} gap={24} alignItems="center">
       <FrostDot />
       <EmberDot />
       <ArcaneDot />
