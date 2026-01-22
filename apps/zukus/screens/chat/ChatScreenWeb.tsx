@@ -427,6 +427,23 @@ export function ChatScreenWeb() {
         >
           {isRecording || isTranscribing ? (
             <>
+              {/* Boton cancelar */}
+              {isRecording && !isTranscribing && (
+                <Pressable
+                  onPress={cancelRecording}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 16,
+                    backgroundColor: themeColors.borderColor,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FontAwesome name="times" size={14} color={themeColors.color} />
+                </Pressable>
+              )}
+
               {/* Waveform o texto transcribiendo */}
               <XStack flex={1} alignItems="center" justifyContent="center">
                 {isTranscribing ? (
@@ -465,6 +482,7 @@ export function ChatScreenWeb() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Escribe un mensaje..."
+                autoFocus
                 onKeyDown={handleKeyDown}
                 style={{
                   flex: 1,

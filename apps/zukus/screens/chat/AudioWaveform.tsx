@@ -7,9 +7,8 @@ type AudioWaveformProps = {
   barCount?: number
 }
 
-const DEFAULT_BAR_COUNT = 7
+const DEFAULT_BAR_COUNT = 24
 const BAR_WIDTH = 4
-const BAR_GAP = 3
 const MAX_BAR_HEIGHT = 28
 const MIN_BAR_HEIGHT = 6
 
@@ -58,17 +57,14 @@ export function AudioWaveform({
     })
   }, [meteringData, animatedValues, barCount])
 
-  const totalWidth = barCount * BAR_WIDTH + (barCount - 1) * BAR_GAP
-
   return (
     <View
       style={{
-        width: totalWidth,
+        flex: 1,
         height: MAX_BAR_HEIGHT,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: BAR_GAP,
+        justifyContent: 'space-evenly',
       }}
     >
       {animatedValues.map((height, index) => (

@@ -534,111 +534,129 @@ export function ChatScreen() {
             </Text>
           )}
 
-          {isRecording || isTranscribing ? (
-            <>
-              {/* Waveform o texto transcribiendo */}
-              <XStack flex={1} alignItems="center" justifyContent="center">
-                {isTranscribing ? (
-                  <Text color={themeColors.placeholderColor} fontSize={15}>
-                    Transcribiendo...
-                  </Text>
-                ) : (
-                  <AudioWaveform meteringData={meteringData} color={themeColors.actionButton} />
-                )}
-              </XStack>
+          {/* Boton cancelar */}
+          {isRecording && !isTranscribing && (
+            <Pressable
+              onPress={cancelRecording}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 16,
+                backgroundColor: themeColors.borderColor,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <FontAwesome name="times" size={14} color={themeColors.color} />
+            </Pressable>
+          )}
 
-              {/* Boton stop/spinner */}
-              <Pressable
-                onPress={handleSendAudio}
-                disabled={isTranscribing}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  backgroundColor: themeColors.actionButton,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {isTranscribing ? (
-                  <ActivityIndicator size="small" color={themeColors.accentContrastText} />
-                ) : (
-                  <FontAwesome
-                    name="arrow-up"
-                    size={16}
-                    color={themeColors.accentContrastText}
-                  />
-                )}
-              </Pressable>
-            </>
-          ) : (
-            <>
-              <Input
-                flex={1}
-                value={input}
-                onChangeText={setInput}
-                placeholder="Escribe un mensaje"
-                backgroundColor="transparent"
-                borderWidth={0}
-                returnKeyType="send"
-                onSubmitEditing={handleSend}
-                submitBehavior="submit"
-                fontSize={17}
-                height={40}
-                paddingVertical={0}
-                paddingHorizontal={0}
-              />
-
-              {input.trim() ? (
-                <Pressable
-                  onPress={handleSend}
-                  disabled={isSending}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    backgroundColor: isSending
-                      ? themeColors.borderColor
-                      : themeColors.actionButton,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {({ pressed }) => (
-                    <FontAwesome
-                      name="send"
-                      size={16}
-                      color={themeColors.accentContrastText}
-                      style={{ opacity: pressed ? 0.7 : 1 }}
-                    />
-                  )}
-                </Pressable>
+          {/* Waveform o texto transcribiendo - superpuesto al input */}
+          {(isRecording || isTranscribing) && (
+            <XStack flex={1} alignItems="center" justifyContent="center">
+              {isTranscribing ? (
+                <Text color={themeColors.placeholderColor} fontSize={15}>
+                  Transcribiendo...
+                </Text>
               ) : (
-                <Pressable
-                  onPress={handleMicrophonePress}
-                  disabled={isSending || isTranscribing}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    backgroundColor: (isSending || isTranscribing)
-                      ? themeColors.borderColor
-                      : themeColors.actionButton,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {({ pressed }) => (
-                    <FontAwesome
-                      name="microphone"
-                      size={18}
-                      color={themeColors.accentContrastText}
-                      style={{ opacity: pressed ? 0.7 : 1 }}
-                    />
-                  )}
-                </Pressable>
+                <AudioWaveform meteringData={meteringData} color={themeColors.actionButton} />
               )}
-            </>
+            </XStack>
+          )}
+
+          {/* Input siempre renderizado para mantener el teclado abierto */}
+          <Input
+            flex={isRecording || isTranscribing ? 0 : 1}
+            width={isRecording || isTranscribing ? 0 : undefined}
+            opacity={isRecording || isTranscribing ? 0 : 1}
+            pointerEvents={isRecording || isTranscribing ? 'none' : 'auto'}
+            value={input}
+            onChangeText={setInput}
+            placeholder="Escribe un mensaje"
+            autoFocus
+            backgroundColor="transparent"
+            borderWidth={0}
+            returnKeyType="send"
+            onSubmitEditing={handleSend}
+            submitBehavior="submit"
+            fontSize={17}
+            height={40}
+            paddingVertical={0}
+            paddingHorizontal={0}
+          />
+
+          {/* Boton enviar/mic/stop */}
+          {isRecording || isTranscribing ? (
+            <Pressable
+              onPress={handleSendAudio}
+              disabled={isTranscribing}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: themeColors.actionButton,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {isTranscribing ? (
+                <ActivityIndicator size="small" color={themeColors.accentContrastText} />
+              ) : (
+                <FontAwesome
+                  name="arrow-up"
+                  size={16}
+                  color={themeColors.accentContrastText}
+                />
+              )}
+            </Pressable>
+          ) : input.trim() ? (
+            <Pressable
+              onPress={handleSend}
+              disabled={isSending}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: isSending
+                  ? themeColors.borderColor
+                  : themeColors.actionButton,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {({ pressed }) => (
+                <FontAwesome
+                  name="send"
+                  size={16}
+                  color={themeColors.accentContrastText}
+                  style={{ opacity: pressed ? 0.7 : 1 }}
+                />
+              )}
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={handleMicrophonePress}
+              disabled={isSending || isTranscribing}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: (isSending || isTranscribing)
+                  ? themeColors.borderColor
+                  : themeColors.actionButton,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {({ pressed }) => (
+                <FontAwesome
+                  name="microphone"
+                  size={18}
+                  color={themeColors.accentContrastText}
+                  style={{ opacity: pressed ? 0.7 : 1 }}
+                />
+              )}
+            </Pressable>
           )}
         </XStack>
       </KeyboardStickyView>

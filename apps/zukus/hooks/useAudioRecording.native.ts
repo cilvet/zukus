@@ -1,32 +1,40 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import {
   useAudioRecorder,
+  useAudioRecorderState,
   RecordingPresets,
   AudioModule,
-  type RecordingStatus,
 } from 'expo-audio'
 import type { UseAudioRecordingResult } from './useAudioRecording.types'
 
 const METERING_HISTORY_SIZE = 20
-const METERING_UPDATE_INTERVAL = 100
+const METERING_POLL_INTERVAL = 100
 
 export function useAudioRecording(): UseAudioRecordingResult {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null)
   const [isRecording, setIsRecording] = useState(false)
   const [meteringData, setMeteringData] = useState<number[]>([])
 
-  const meteringIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  // Workaround para metering: pasar opciones CON isMeteringEnabled al hook,
+  // y llamar prepareToRecordAsync() SIN argumentos
+  // Ver: https://github.com/expo/expo/issues/37241
+  const recorderOptions = useMemo(
+    () => ({
+      ...RecordingPresets.HIGH_QUALITY,
+      isMeteringEnabled: true,
+    }),
+    []
+  )
 
-  const recordingOptions = {
-    ...RecordingPresets.HIGH_QUALITY,
-    isMeteringEnabled: true,
-  }
+  const recorder = useAudioRecorder(recorderOptions)
+  const recorderState = useAudioRecorderState(recorder, METERING_POLL_INTERVAL)
 
-  const recordingStatusUpdate = useCallback((status: RecordingStatus) => {
-    if (status.isRecording && status.metering !== undefined) {
+  // Actualizar metering cuando cambia el estado del recorder
+  useEffect(() => {
+    if (recorderState.isRecording && recorderState.metering !== undefined) {
       // Metering viene en dB, normalizamos a 0-1
       // Los valores tipicos van de -160 (silencio) a 0 (maximo)
-      const normalized = Math.max(0, Math.min(1, (status.metering + 60) / 60))
+      const normalized = Math.max(0, Math.min(1, (recorderState.metering + 60) / 60))
       setMeteringData((prev) => {
         const next = [...prev, normalized]
         if (next.length > METERING_HISTORY_SIZE) {
@@ -35,17 +43,7 @@ export function useAudioRecording(): UseAudioRecordingResult {
         return next
       })
     }
-  }, [])
-
-  const recorder = useAudioRecorder(recordingOptions, recordingStatusUpdate)
-
-  useEffect(() => {
-    return () => {
-      if (meteringIntervalRef.current) {
-        clearInterval(meteringIntervalRef.current)
-      }
-    }
-  }, [])
+  }, [recorderState.isRecording, recorderState.metering])
 
   const requestPermission = useCallback(async (): Promise<boolean> => {
     const status = await AudioModule.requestRecordingPermissionsAsync()
@@ -64,6 +62,7 @@ export function useAudioRecording(): UseAudioRecordingResult {
 
     try {
       setMeteringData([])
+      // NO pasar opciones aqui - deben ir en useAudioRecorder()
       await recorder.prepareToRecordAsync()
       recorder.record()
       setIsRecording(true)

@@ -361,3 +361,188 @@ app/
   (tabs)/
     ...
 ```
+
+## Mensajes de Audio
+
+### Especificaciones
+
+- Cuando el input está vacío, mostrar botón de micrófono en lugar de enviar
+- Al grabar: mostrar waveform animado + botón X (cancelar) + botón enviar
+- Al pulsar enviar: transcribir audio con Whisper y enviar automáticamente el texto
+- Durante transcripción: mostrar "Transcribiendo..." con spinner en el botón
+- El teclado debe permanecer abierto durante la grabación
+
+### Dependencias
+
+```bash
+cd apps/zukus && bun add expo-audio
+cd apps/server && bun add openai
+```
+
+Configurar `OPENAI_API_KEY` en el servidor (Fly.io secrets).
+
+### Arquitectura
+
+```
+[Usuario pulsa mic] → [Grabando + Waveform] → [Pulsa enviar]
+                                                    ↓
+[UI muestra "Transcribiendo..."] ← [POST /transcribe]
+                                                    ↓
+[Whisper API] → [Texto] → [Se envía como mensaje normal]
+```
+
+### Hook de Grabación (expo-audio)
+
+#### Workaround para Metering
+
+expo-audio tiene bugs con metering. La solución es:
+1. Pasar opciones con `isMeteringEnabled: true` a `useAudioRecorder()`
+2. Llamar `prepareToRecordAsync()` SIN argumentos
+3. Usar `useAudioRecorderState()` para polling del metering
+
+Ver: https://github.com/expo/expo/issues/37241
+
+```typescript
+const recorderOptions = useMemo(
+  () => ({
+    ...RecordingPresets.HIGH_QUALITY,
+    isMeteringEnabled: true,
+  }),
+  []
+)
+
+const recorder = useAudioRecorder(recorderOptions)
+const recorderState = useAudioRecorderState(recorder, 100) // Poll cada 100ms
+
+// Leer metering del estado
+useEffect(() => {
+  if (recorderState.isRecording && recorderState.metering !== undefined) {
+    // Normalizar dB a 0-1 (valores típicos: -160 silencio, 0 máximo)
+    const normalized = Math.max(0, Math.min(1, (recorderState.metering + 60) / 60))
+    // Actualizar datos del waveform...
+  }
+}, [recorderState.isRecording, recorderState.metering])
+
+// Al iniciar grabación: NO pasar opciones aquí
+await recorder.prepareToRecordAsync()
+recorder.record()
+```
+
+### Waveform Animado
+
+Componente con barras que ocupan todo el ancho disponible:
+
+```typescript
+const DEFAULT_BAR_COUNT = 24
+const BAR_WIDTH = 4
+const MAX_BAR_HEIGHT = 28
+const MIN_BAR_HEIGHT = 6
+
+<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+  {animatedValues.map((height, index) => (
+    <Animated.View
+      key={index}
+      style={{ width: BAR_WIDTH, height, backgroundColor: color, borderRadius: BAR_WIDTH / 2 }}
+    />
+  ))}
+</View>
+```
+
+### Mantener Teclado Abierto Durante Grabación
+
+#### Problema
+
+Cuando el usuario pulsa grabar, si el Input se desmonta el teclado se cierra.
+
+#### Solución
+
+Mantener el Input SIEMPRE renderizado, solo ocultarlo visualmente cuando graba:
+
+```typescript
+{/* Waveform visible durante grabación */}
+{(isRecording || isTranscribing) && (
+  <XStack flex={1} alignItems="center" justifyContent="center">
+    <AudioWaveform meteringData={meteringData} />
+  </XStack>
+)}
+
+{/* Input siempre renderizado - oculto durante grabación */}
+<Input
+  flex={isRecording || isTranscribing ? 0 : 1}
+  width={isRecording || isTranscribing ? 0 : undefined}
+  opacity={isRecording || isTranscribing ? 0 : 1}
+  pointerEvents={isRecording || isTranscribing ? 'none' : 'auto'}
+  autoFocus
+  // ... resto de props
+/>
+```
+
+Clave: El Input nunca se desmonta, solo cambia su visibilidad. Esto mantiene el foco y el teclado abierto.
+
+### Endpoint de Transcripción (Server)
+
+```typescript
+// apps/server/src/transcription.ts
+import OpenAI, { toFile } from 'openai'
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
+export async function handleTranscriptionRequest(request: Request) {
+  // Validar auth...
+
+  const formData = await request.formData()
+  const audioFile = formData.get('audio') as File | null
+
+  const arrayBuffer = await audioFile.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+
+  const transcription = await openai.audio.transcriptions.create({
+    file: await toFile(buffer, 'audio.m4a', { type: 'audio/m4a' }),
+    model: 'whisper-1',
+    language: 'es',
+  })
+
+  return Response.json({ text: transcription.text })
+}
+```
+
+### Servicio Cliente
+
+```typescript
+// apps/zukus/services/transcription.ts
+export async function transcribeAudio({ audioUri, accessToken }) {
+  const formData = new FormData()
+
+  // Web: blob URL
+  if (audioUri.startsWith('blob:')) {
+    const response = await fetch(audioUri)
+    const blob = await response.blob()
+    formData.append('audio', blob, 'recording.webm')
+  } else {
+    // Nativo: file:// URI
+    formData.append('audio', {
+      uri: audioUri,
+      type: 'audio/m4a',
+      name: 'recording.m4a',
+    } as unknown as Blob)
+  }
+
+  const result = await fetch(`${serverBaseUrl}/transcribe`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: formData,
+  })
+
+  return result.json()
+}
+```
+
+### Archivos Relacionados
+
+| Archivo | Propósito |
+|---------|-----------|
+| `hooks/useAudioRecording.native.ts` | Hook grabación nativo con metering real |
+| `hooks/useAudioRecording.web.ts` | Hook grabación web con metering simulado |
+| `screens/chat/AudioWaveform.tsx` | Componente visual de barras animadas |
+| `services/transcription.ts` | Cliente para endpoint de transcripción |
+| `server/src/transcription.ts` | Handler del servidor con Whisper |
