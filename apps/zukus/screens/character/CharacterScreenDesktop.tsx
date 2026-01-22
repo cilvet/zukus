@@ -38,6 +38,9 @@ import {
   AttackDetailPanel,
   EntityTypeGroup,
   GenericEntityDetailPanel,
+  BuffDetailPanel,
+  BuffEditScreen,
+  ChangeEditScreen,
 } from '../../ui'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
@@ -326,6 +329,8 @@ function CharacterScreenDesktopContent() {
   const imageUrl = useCharacterImageUrl()
   const computedEntities = useComputedEntities()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
+  const editBuff = useCharacterStore((state) => state.editBuff)
+  const deleteBuff = useCharacterStore((state) => state.deleteBuff)
   const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
@@ -473,6 +478,10 @@ function CharacterScreenDesktopContent() {
     return characterSheet.equipment.items.find((item) => item.uniqueId === itemId) ?? null
   }
 
+  const getBuffForPanel = (buffId: string) => {
+    return buffs.find((buff) => buff.uniqueId === buffId) ?? null
+  }
+
   // Si no hay datos aún, mostrar loading
   if (!characterSheet || !abilities) {
     return (
@@ -577,22 +586,37 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 3: Buffs/Conjuros Activos */}
+        {/* Columna 3: Buffs */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
-              <SectionHeader icon="*" title="Conjuros Activos" />
-              <YStack gap={0}>
+              <SectionHeader icon="*" title="Buffs" />
+              <YStack gap={4}>
                 {buffs.map((buff) => {
                   return (
-                    <Checkbox
+                    <Pressable
                       key={buff.uniqueId}
-                      checked={buff.active}
-                      onCheckedChange={() => toggleBuff(buff.uniqueId)}
-                      label={buff.name}
-                      size="small"
-                      variant="diamond"
-                    />
+                      onPress={() => navigateToDetail('buff', buff.uniqueId, buff.name)}
+                    >
+                      {({ pressed }) => (
+                        <XStack
+                          alignItems="center"
+                          gap={8}
+                          paddingVertical={4}
+                          opacity={pressed ? 0.6 : 1}
+                        >
+                          <Checkbox
+                            checked={buff.active}
+                            onCheckedChange={() => toggleBuff(buff.uniqueId)}
+                            size="small"
+                            variant="diamond"
+                          />
+                          <Text fontSize={14} color="$color" flex={1}>
+                            {buff.name}
+                          </Text>
+                        </XStack>
+                      )}
+                    </Pressable>
                   )
                 })}
               </YStack>
@@ -713,6 +737,37 @@ function CharacterScreenDesktopContent() {
             onToggleEquipped={() => toggleItemEquipped(currentPanel.id)}
           />
         )}
+        {currentPanel?.type === 'buff' && currentPanel?.id && getBuffForPanel(currentPanel.id) && (
+          <BuffDetailPanel
+            buff={getBuffForPanel(currentPanel.id)!}
+            onToggleActive={() => toggleBuff(currentPanel.id)}
+            onEdit={() => navigateToDetail('buffEdit', currentPanel.id, `Edit: ${getBuffForPanel(currentPanel.id)!.name}`)}
+            onDelete={() => {
+              deleteBuff(currentPanel.id)
+              closePanel()
+            }}
+          />
+        )}
+        {currentPanel?.type === 'buffEdit' && currentPanel?.id && getBuffForPanel(currentPanel.id) && (
+          <BuffEditScreen
+            buff={getBuffForPanel(currentPanel.id)!}
+            onSave={(updatedBuff) => {
+              editBuff(updatedBuff)
+              navigateToDetail('buff', currentPanel.id)
+            }}
+            onUpdate={(updatedBuff) => {
+              editBuff(updatedBuff)
+            }}
+            onDelete={() => {
+              deleteBuff(currentPanel.id)
+              closePanel()
+            }}
+            onCancel={() => navigateToDetail('buff', currentPanel.id)}
+          />
+        )}
+        {currentPanel?.type === 'changeEdit' && currentPanel?.id && (
+          <ChangeEditPanelContainer changeId={currentPanel.id} />
+        )}
         {currentPanel?.type === 'item' && currentPanel?.name && (
           <GenericDetailPanel title={currentPanel.name} />
         )}
@@ -810,6 +865,71 @@ function ClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number 
       availableClasses={availableClasses}
       onSelectClass={handleSelectClass}
       onClose={handleClose}
+    />
+  )
+}
+
+function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
+  const buffs = useCharacterBuffs()
+  const editBuff = useCharacterStore((state) => state.editBuff)
+  const { openPanel } = usePanelNavigation()
+
+  // Parsear el id: buffId:changeIndex o buffId:new
+  const [buffId, indexStr] = changeId.split(':')
+  const isNew = indexStr === 'new'
+  const changeIndex = isNew ? -1 : parseInt(indexStr, 10)
+
+  const buff = buffs.find((b) => b.uniqueId === buffId)
+
+  if (!buff) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Buff no encontrado</Text>
+      </YStack>
+    )
+  }
+
+  const changes = buff.changes ?? []
+  const change = isNew ? null : changes[changeIndex]
+
+  if (!isNew && !change) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Change no encontrado</Text>
+      </YStack>
+    )
+  }
+
+  type AnyChange = NonNullable<typeof buff.changes>[number]
+
+  const handleSave = (updatedChange: AnyChange) => {
+    const newChanges = [...changes]
+    if (isNew) {
+      newChanges.push(updatedChange)
+    } else {
+      newChanges[changeIndex] = updatedChange
+    }
+    editBuff({ ...buff, changes: newChanges })
+    openPanel('buffEdit', buffId)
+  }
+
+  const handleDelete = () => {
+    const newChanges = changes.filter((_, i) => i !== changeIndex)
+    editBuff({ ...buff, changes: newChanges })
+    openPanel('buffEdit', buffId)
+  }
+
+  const handleCancel = () => {
+    openPanel('buffEdit', buffId)
+  }
+
+  return (
+    <ChangeEditScreen
+      change={change ?? null}
+      isNew={isNew}
+      onSave={handleSave}
+      onDelete={isNew ? undefined : handleDelete}
+      onCancel={handleCancel}
     />
   )
 }

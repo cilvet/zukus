@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel } from '../../ui'
+import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
@@ -127,6 +127,160 @@ function EquipmentDetail({ itemId }: { itemId: string }) {
     <EquipmentDetailPanel
       item={item}
       onToggleEquipped={() => toggleItemEquipped(item.uniqueId)}
+    />
+  )
+}
+
+function BuffDetail({ buffId }: { buffId: string }) {
+  const buffs = useCharacterBuffs()
+  const toggleBuff = useCharacterStore((state) => state.toggleBuff)
+  const deleteBuff = useCharacterStore((state) => state.deleteBuff)
+  const navigateToDetail = useNavigateToDetail()
+  const router = useRouter()
+
+  const buff = buffs.find((b) => b.uniqueId === buffId)
+
+  if (!buff) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Buff no encontrado: {buffId}</Text>
+      </YStack>
+    )
+  }
+
+  const handleEdit = () => {
+    navigateToDetail('buffEdit', buff.uniqueId, `Edit: ${buff.name}`)
+  }
+
+  const handleDelete = () => {
+    deleteBuff(buff.uniqueId)
+    router.back()
+  }
+
+  return (
+    <BuffDetailPanel
+      buff={buff}
+      onToggleActive={() => toggleBuff(buff.uniqueId)}
+      onEdit={handleEdit}
+      onDelete={handleDelete}
+    />
+  )
+}
+
+function BuffEditDetail({ buffId }: { buffId: string }) {
+  const buffs = useCharacterBuffs()
+  const editBuff = useCharacterStore((state) => state.editBuff)
+  const deleteBuff = useCharacterStore((state) => state.deleteBuff)
+  const router = useRouter()
+
+  const buff = buffs.find((b) => b.uniqueId === buffId)
+
+  if (!buff) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Buff no encontrado: {buffId}</Text>
+      </YStack>
+    )
+  }
+
+  // Guardar y volver atrás (botón Save)
+  const handleSave = (updatedBuff: typeof buff) => {
+    editBuff(updatedBuff)
+    router.back()
+  }
+
+  // Solo guardar sin volver (para preservar estado antes de navegar a changeEdit)
+  const handleUpdate = (updatedBuff: typeof buff) => {
+    editBuff(updatedBuff)
+  }
+
+  const handleDelete = () => {
+    deleteBuff(buff.uniqueId)
+    // Volver dos pantallas: edit -> detail -> lista
+    router.back()
+    router.back()
+  }
+
+  const handleCancel = () => {
+    router.back()
+  }
+
+  return (
+    <BuffEditScreen
+      buff={buff}
+      onSave={handleSave}
+      onUpdate={handleUpdate}
+      onDelete={handleDelete}
+      onCancel={handleCancel}
+    />
+  )
+}
+
+/**
+ * Wrapper para edición de un Change.
+ * El id tiene formato: {buffId}:{changeIndex} o {buffId}:new
+ */
+function ChangeEditDetail({ changeId }: { changeId: string }) {
+  const buffs = useCharacterBuffs()
+  const editBuff = useCharacterStore((state) => state.editBuff)
+  const router = useRouter()
+
+  // Parsear el id: buffId:changeIndex o buffId:new
+  const [buffId, indexStr] = changeId.split(':')
+  const isNew = indexStr === 'new'
+  const changeIndex = isNew ? -1 : parseInt(indexStr, 10)
+
+  const buff = buffs.find((b) => b.uniqueId === buffId)
+
+  if (!buff) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Buff no encontrado: {buffId}</Text>
+      </YStack>
+    )
+  }
+
+  const changes = buff.changes ?? []
+  const change = isNew ? null : changes[changeIndex]
+
+  if (!isNew && !change) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Change no encontrado: {changeIndex}</Text>
+      </YStack>
+    )
+  }
+
+  type AnyChange = NonNullable<typeof buff.changes>[number]
+
+  const handleSave = (updatedChange: AnyChange) => {
+    const newChanges = [...changes]
+    if (isNew) {
+      newChanges.push(updatedChange)
+    } else {
+      newChanges[changeIndex] = updatedChange
+    }
+    editBuff({ ...buff, changes: newChanges })
+    router.back()
+  }
+
+  const handleDelete = () => {
+    const newChanges = changes.filter((_, i) => i !== changeIndex)
+    editBuff({ ...buff, changes: newChanges })
+    router.back()
+  }
+
+  const handleCancel = () => {
+    router.back()
+  }
+
+  return (
+    <ChangeEditScreen
+      change={change ?? null}
+      isNew={isNew}
+      onSave={handleSave}
+      onDelete={isNew ? undefined : handleDelete}
+      onCancel={handleCancel}
     />
   )
 }
@@ -557,8 +711,13 @@ export function DetailScreen() {
         return <AttackDetail attackId={id} />
       case 'chat':
         return <ChatScreen />
-      case 'spell':
       case 'buff':
+        return <BuffDetail buffId={id} />
+      case 'buffEdit':
+        return <BuffEditDetail buffId={id} />
+      case 'changeEdit':
+        return <ChangeEditDetail changeId={id} />
+      case 'spell':
       case 'item':
         return <NotImplementedDetail type={type} id={id} />
       case 'equipment':

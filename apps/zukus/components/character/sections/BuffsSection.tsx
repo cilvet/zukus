@@ -1,16 +1,20 @@
-import { View } from 'react-native'
+import { View, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { YStack, Text } from 'tamagui'
+import { YStack, XStack, Text } from 'tamagui'
 import { Checkbox, useCharacterBuffs, useCharacterStore } from '../../../ui'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { useNavigateToDetail } from '../../../navigation'
 
 /**
- * Sección de Buffs/Conjuros Activos.
- * Muestra checkboxes para activar/desactivar buffs.
+ * Sección de Buffs.
+ * Muestra lista de buffs con checkbox para activar/desactivar.
+ * Tocar el item navega al detalle del buff.
+ * El checkbox solo hace toggle, no navega.
  */
 export function BuffsSection() {
   const buffs = useCharacterBuffs()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
+  const navigateToDetail = useNavigateToDetail()
 
   if (buffs.length === 0) {
     return (
@@ -33,18 +37,33 @@ export function BuffsSection() {
         nestedScrollEnabled
       >
         <SectionCard>
-          <SectionHeader icon="*" title="Conjuros Activos" />
-          <YStack gap={0}>
+          <SectionHeader icon="*" title="Buffs" />
+          <YStack gap={4}>
             {buffs.map((buff) => {
               return (
-                <Checkbox
+                <Pressable
                   key={buff.uniqueId}
-                  checked={buff.active}
-                  onCheckedChange={() => toggleBuff(buff.uniqueId)}
-                  label={buff.name}
-                  size="small"
-                  variant="diamond"
-                />
+                  onPress={() => navigateToDetail('buff', buff.uniqueId, buff.name)}
+                >
+                  {({ pressed }) => (
+                    <XStack
+                      alignItems="center"
+                      gap={8}
+                      paddingVertical={4}
+                      opacity={pressed ? 0.6 : 1}
+                    >
+                      <Checkbox
+                        checked={buff.active}
+                        onCheckedChange={() => toggleBuff(buff.uniqueId)}
+                        size="small"
+                        variant="diamond"
+                      />
+                      <Text fontSize={14} color="$color" flex={1}>
+                        {buff.name}
+                      </Text>
+                    </XStack>
+                  )}
+                </Pressable>
               )
             })}
           </YStack>
@@ -53,9 +72,7 @@ export function BuffsSection() {
         <SectionCard>
           <SectionHeader icon="?" title="Info" />
           <Text fontSize={12} color="$placeholderColor" lineHeight={18}>
-            Los conjuros de mejora otorgan +4 al atributo correspondiente mientras estén activos.
-            {'\n\n'}
-            Esta sección es de prueba para verificar el funcionamiento del sistema de buffs.
+            Toca un buff para ver sus detalles. Usa el checkbox para activar/desactivar.
           </Text>
         </SectionCard>
       </ScrollView>

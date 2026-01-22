@@ -28,6 +28,8 @@ export type DetailType =
   | 'chat'
   | 'spell'
   | 'buff'
+  | 'buffEdit'
+  | 'changeEdit'
   | 'equipment'
   | 'item'
   | 'hitPoints'
@@ -84,6 +86,12 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   buff: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
+  },
+  buffEdit: {
+    getTitle: () => 'Edit Buff',
+  },
+  changeEdit: {
+    getTitle: (id) => id.includes(':new') ? 'New Change' : 'Edit Change',
   },
   equipment: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
