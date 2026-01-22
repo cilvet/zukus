@@ -537,6 +537,28 @@ export async function transcribeAudio({ audioUri, accessToken }) {
 }
 ```
 
+### Haptics (Solo Nativo)
+
+Añadir feedback háptico para dar sensación nativa a las interacciones de audio:
+
+```typescript
+import * as Haptics from 'expo-haptics'
+
+// Al empezar a grabar - feedback más notable
+async function handleMicrophonePress() {
+  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+  await startRecording()
+}
+
+// Al enviar audio - feedback más sutil
+async function handleSendAudio() {
+  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+  // ... resto de la lógica
+}
+```
+
+**Importante:** Solo aplicar haptics a acciones de audio, NO al envío de texto normal.
+
 ### Archivos Relacionados
 
 | Archivo | Propósito |

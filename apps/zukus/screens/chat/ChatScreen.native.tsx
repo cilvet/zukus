@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Markdown from 'react-native-markdown-display'
+import * as Haptics from 'expo-haptics'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
@@ -376,6 +377,7 @@ export function ChatScreen() {
     const accessToken = session?.access_token
     if (!accessToken || isTranscribing || isSending) return
 
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
     setIsTranscribing(true)
     setErrorText(null)
 
@@ -406,6 +408,7 @@ export function ChatScreen() {
   }
 
   async function handleMicrophonePress() {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
     await startRecording()
   }
 
