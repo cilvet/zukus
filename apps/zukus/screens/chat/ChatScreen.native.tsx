@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Platform, Pressable, useWindowDimensions, Keyboard, ScrollView as RNScrollView } from 'react-native'
+import { Platform, Pressable, useWindowDimensions, Keyboard, ScrollView as RNScrollView, ActivityIndicator } from 'react-native'
 import { Text, XStack, YStack, Input } from 'tamagui'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller'
@@ -8,7 +8,10 @@ import Markdown from 'react-native-markdown-display'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
+import { transcribeAudio } from '../../services/transcription'
 import { TypingIndicatorRow } from './typing-indicators'
+import { AudioWaveform } from './AudioWaveform'
+import { useAudioRecording } from '../../hooks'
 
 type ChatMessage = {
   id: string
@@ -120,6 +123,15 @@ export function ChatScreen() {
   const [errorText, setErrorText] = useState<string | null>(null)
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
   const [showScrollButton, setShowScrollButton] = useState(false)
+  const [isTranscribing, setIsTranscribing] = useState(false)
+
+  const {
+    isRecording,
+    meteringData,
+    startRecording,
+    stopRecording,
+    cancelRecording,
+  } = useAudioRecording()
   
   const isDesktop = Platform.OS === 'web' && width >= 768
 
@@ -238,16 +250,14 @@ export function ChatScreen() {
     }
   }, [messages.length])
 
-  async function handleSend() {
+  async function sendMessageWithText(text: string) {
     const accessToken = session?.access_token
-    const trimmed = input.trim()
-
-    if (!trimmed || !accessToken || isSending) return
+    if (!text || !accessToken || isSending) return
 
     const userMessage: ChatMessage = {
       id: createMessageId(),
       role: 'user',
-      content: trimmed,
+      content: text,
       createdAt: Date.now(),
     }
 
@@ -260,11 +270,9 @@ export function ChatScreen() {
 
     const nextMessages = [...messages, userMessage, assistantMessage]
     setMessages(nextMessages)
-    setInput('')
     setIsSending(true)
     setErrorText(null)
 
-    // Always scroll to bottom when user sends a message
     isAtBottomRef.current = true
     setTimeout(() => {
       scrollRef.current?.scrollToEnd({ animated: true })
@@ -277,22 +285,16 @@ export function ChatScreen() {
         content: message.content,
       }))
 
-    // Typewriter effect: show text gradually but adapt speed to keep up with agent
     const typewriterLoop = () => {
       if (textBufferRef.current.length === 0) {
         isTypingRef.current = false
         return
       }
-      
+
       const bufferSize = textBufferRef.current.length
-      
-      // Dynamic speed: show more characters when buffer is large
-      // Small buffer (< 10): 1-2 chars, smooth effect
-      // Medium buffer (10-50): 3-8 chars, catching up
-      // Large buffer (> 50): 10-20 chars, fast catch up
       let charsToShow: number
       let delay: number
-      
+
       if (bufferSize < 10) {
         charsToShow = Math.floor(Math.random() * 2) + 1
         delay = 20 + Math.random() * 15
@@ -303,11 +305,11 @@ export function ChatScreen() {
         charsToShow = Math.floor(Math.random() * 11) + 10
         delay = 10
       }
-      
+
       charsToShow = Math.min(charsToShow, bufferSize)
       const chars = textBufferRef.current.slice(0, charsToShow)
       textBufferRef.current = textBufferRef.current.slice(charsToShow)
-      
+
       setMessages((current) =>
         current.map((message) => {
           if (message.id !== assistantMessage.id) return message
@@ -315,7 +317,7 @@ export function ChatScreen() {
         }),
       )
       scrollToBottom()
-      
+
       setTimeout(typewriterLoop, delay)
     }
 
@@ -328,7 +330,7 @@ export function ChatScreen() {
 
     textBufferRef.current = ''
     let streamError: Error | null = null
-    
+
     try {
       await streamChatFromServer({
         accessToken,
@@ -342,15 +344,14 @@ export function ChatScreen() {
     } catch (error) {
       streamError = error instanceof Error ? error : new Error('Error al enviar mensaje')
     }
-    
-    // Ensure all remaining text is shown after stream ends (outside try/catch)
+
     const waitForBuffer = async () => {
       while (textBufferRef.current.length > 0) {
         await new Promise(resolve => setTimeout(resolve, 20))
       }
     }
     await waitForBuffer()
-    
+
     if (streamError) {
       setErrorText(streamError.message)
       setMessages((current) =>
@@ -362,6 +363,50 @@ export function ChatScreen() {
     }
 
     setIsSending(false)
+  }
+
+  async function handleSend() {
+    const trimmed = input.trim()
+    if (!trimmed) return
+    setInput('')
+    await sendMessageWithText(trimmed)
+  }
+
+  async function handleSendAudio() {
+    const accessToken = session?.access_token
+    if (!accessToken || isTranscribing || isSending) return
+
+    setIsTranscribing(true)
+    setErrorText(null)
+
+    try {
+      const audioUri = await stopRecording()
+      if (!audioUri) {
+        setIsTranscribing(false)
+        return
+      }
+
+      const result = await transcribeAudio({ audioUri, accessToken })
+      const transcribedText = result.text.trim()
+
+      if (!transcribedText) {
+        setErrorText('No se pudo transcribir el audio')
+        setIsTranscribing(false)
+        return
+      }
+
+      setIsTranscribing(false)
+
+      // Enviar automaticamente el texto transcrito
+      await sendMessageWithText(transcribedText)
+    } catch (error) {
+      setErrorText(error instanceof Error ? error.message : 'Error al transcribir')
+      setIsTranscribing(false)
+    }
+  }
+
+  async function handleMicrophonePress() {
+    await startRecording()
   }
 
   return (
@@ -488,44 +533,113 @@ export function ChatScreen() {
               {errorText}
             </Text>
           )}
-          <Input
-            flex={1}
-            value={input}
-            onChangeText={setInput}
-            placeholder="Escribe un mensaje"
-            backgroundColor="transparent"
-            borderWidth={0}
-            returnKeyType="send"
-            onSubmitEditing={handleSend}
-            submitBehavior="submit"
-            fontSize={17}
-            height={40}
-            paddingVertical={0}
-            paddingHorizontal={0}
-          />
-          <Pressable
-            onPress={handleSend}
-            disabled={isSending || !input.trim()}
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 20,
-              backgroundColor: (isSending || !input.trim()) 
-                ? themeColors.borderColor 
-                : themeColors.actionButton,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {({ pressed }) => (
-              <FontAwesome
-                name="send"
-                size={16}
-                color={themeColors.accentContrastText}
-                style={{ opacity: pressed ? 0.7 : 1 }}
+
+          {isRecording || isTranscribing ? (
+            <>
+              {/* Waveform o texto transcribiendo */}
+              <XStack flex={1} alignItems="center" justifyContent="center">
+                {isTranscribing ? (
+                  <Text color={themeColors.placeholderColor} fontSize={15}>
+                    Transcribiendo...
+                  </Text>
+                ) : (
+                  <AudioWaveform meteringData={meteringData} color={themeColors.actionButton} />
+                )}
+              </XStack>
+
+              {/* Boton stop/spinner */}
+              <Pressable
+                onPress={handleSendAudio}
+                disabled={isTranscribing}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: themeColors.actionButton,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {isTranscribing ? (
+                  <ActivityIndicator size="small" color={themeColors.accentContrastText} />
+                ) : (
+                  <FontAwesome
+                    name="arrow-up"
+                    size={16}
+                    color={themeColors.accentContrastText}
+                  />
+                )}
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <Input
+                flex={1}
+                value={input}
+                onChangeText={setInput}
+                placeholder="Escribe un mensaje"
+                backgroundColor="transparent"
+                borderWidth={0}
+                returnKeyType="send"
+                onSubmitEditing={handleSend}
+                submitBehavior="submit"
+                fontSize={17}
+                height={40}
+                paddingVertical={0}
+                paddingHorizontal={0}
               />
-            )}
-          </Pressable>
+
+              {input.trim() ? (
+                <Pressable
+                  onPress={handleSend}
+                  disabled={isSending}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 20,
+                    backgroundColor: isSending
+                      ? themeColors.borderColor
+                      : themeColors.actionButton,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="send"
+                      size={16}
+                      color={themeColors.accentContrastText}
+                      style={{ opacity: pressed ? 0.7 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              ) : (
+                <Pressable
+                  onPress={handleMicrophonePress}
+                  disabled={isSending || isTranscribing}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 20,
+                    backgroundColor: (isSending || isTranscribing)
+                      ? themeColors.borderColor
+                      : themeColors.actionButton,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="microphone"
+                      size={18}
+                      color={themeColors.accentContrastText}
+                      style={{ opacity: pressed ? 0.7 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              )}
+            </>
+          )}
         </XStack>
       </KeyboardStickyView>
 

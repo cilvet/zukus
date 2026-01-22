@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ScrollView, Pressable } from 'react-native'
+import { ScrollView, Pressable, ActivityIndicator } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import ReactMarkdown from 'react-markdown'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
+import { transcribeAudio } from '../../services/transcription'
 import { TypingIndicatorRow } from './typing-indicators'
+import { AudioWaveform } from './AudioWaveform'
+import { useAudioRecording } from '../../hooks'
 
 type ChatMessage = {
   id: string
@@ -91,6 +94,15 @@ export function ChatScreenWeb() {
   const [isSending, setIsSending] = useState(false)
   const [errorText, setErrorText] = useState<string | null>(null)
   const [showScrollButton, setShowScrollButton] = useState(false)
+  const [isTranscribing, setIsTranscribing] = useState(false)
+
+  const {
+    isRecording,
+    meteringData,
+    startRecording,
+    stopRecording,
+    cancelRecording,
+  } = useAudioRecording()
 
   const hasMessages = messages.length > 0
 
@@ -154,16 +166,14 @@ export function ChatScreenWeb() {
     }
   }, [messages.length, hasMessages])
 
-  async function handleSend() {
+  async function sendMessageWithText(text: string) {
     const accessToken = session?.access_token
-    const trimmed = input.trim()
-
-    if (!trimmed || !accessToken || isSending) return
+    if (!text || !accessToken || isSending) return
 
     const userMessage: ChatMessage = {
       id: createMessageId(),
       role: 'user',
-      content: trimmed,
+      content: text,
       createdAt: Date.now(),
     }
 
@@ -176,7 +186,6 @@ export function ChatScreenWeb() {
 
     const nextMessages = [...messages, userMessage, assistantMessage]
     setMessages(nextMessages)
-    setInput('')
     setIsSending(true)
     setErrorText(null)
 
@@ -259,11 +268,55 @@ export function ChatScreenWeb() {
     setIsSending(false)
   }
 
+  async function handleSend() {
+    const trimmed = input.trim()
+    if (!trimmed) return
+    setInput('')
+    await sendMessageWithText(trimmed)
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
     }
+  }
+
+  async function handleSendAudio() {
+    const accessToken = session?.access_token
+    if (!accessToken || isTranscribing || isSending) return
+
+    setIsTranscribing(true)
+    setErrorText(null)
+
+    try {
+      const audioUri = await stopRecording()
+      if (!audioUri) {
+        setIsTranscribing(false)
+        return
+      }
+
+      const result = await transcribeAudio({ audioUri, accessToken })
+      const transcribedText = result.text.trim()
+
+      if (!transcribedText) {
+        setErrorText('No se pudo transcribir el audio')
+        setIsTranscribing(false)
+        return
+      }
+
+      setIsTranscribing(false)
+
+      // Enviar automaticamente el texto transcrito
+      await sendMessageWithText(transcribedText)
+    } catch (error) {
+      setErrorText(error instanceof Error ? error.message : 'Error al transcribir')
+      setIsTranscribing(false)
+    }
+  }
+
+  async function handleMicrophonePress() {
+    await startRecording()
   }
 
   return (
@@ -372,38 +425,102 @@ export function ChatScreenWeb() {
           alignItems="center"
           gap={8}
         >
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Escribe un mensaje..."
-            onKeyDown={handleKeyDown}
-            style={{
-              flex: 1,
-              fontSize: 15,
-              color: themeColors.color,
-              backgroundColor: 'transparent',
-              border: 'none',
-              outline: 'none',
-              padding: '8px 0',
-              fontFamily: 'Roboto, sans-serif',
-            }}
-          />
-          <Pressable
-            onPress={handleSend}
-            disabled={isSending || !input.trim()}
-            style={({ pressed }) => ({
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: (isSending || !input.trim()) ? 'transparent' : themeColors.actionButton,
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: (isSending || !input.trim()) ? 0.3 : pressed ? 0.7 : 1,
-            })}
-          >
-            <FontAwesome name="arrow-up" size={16} color={(isSending || !input.trim()) ? themeColors.placeholderColor : themeColors.accentContrastText} />
-          </Pressable>
+          {isRecording || isTranscribing ? (
+            <>
+              {/* Waveform o texto transcribiendo */}
+              <XStack flex={1} alignItems="center" justifyContent="center">
+                {isTranscribing ? (
+                  <Text color={themeColors.placeholderColor} fontSize={14}>
+                    Transcribiendo...
+                  </Text>
+                ) : (
+                  <AudioWaveform meteringData={meteringData} color={themeColors.actionButton} />
+                )}
+              </XStack>
+
+              {/* Boton stop/spinner */}
+              <Pressable
+                onPress={handleSendAudio}
+                disabled={isTranscribing}
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 18,
+                  backgroundColor: themeColors.actionButton,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {isTranscribing ? (
+                  <ActivityIndicator size="small" color={themeColors.accentContrastText} />
+                ) : (
+                  <FontAwesome name="arrow-up" size={16} color={themeColors.accentContrastText} />
+                )}
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Escribe un mensaje..."
+                onKeyDown={handleKeyDown}
+                style={{
+                  flex: 1,
+                  fontSize: 15,
+                  color: themeColors.color,
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  padding: '8px 0',
+                  fontFamily: 'Roboto, sans-serif',
+                }}
+              />
+
+              {input.trim() ? (
+                <Pressable
+                  onPress={handleSend}
+                  disabled={isSending}
+                  style={({ pressed }) => ({
+                    width: 36,
+                    height: 36,
+                    borderRadius: 18,
+                    backgroundColor: isSending ? 'transparent' : themeColors.actionButton,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: isSending ? 0.3 : pressed ? 0.7 : 1,
+                  })}
+                >
+                  <FontAwesome
+                    name="arrow-up"
+                    size={16}
+                    color={isSending ? themeColors.placeholderColor : themeColors.accentContrastText}
+                  />
+                </Pressable>
+              ) : (
+                <Pressable
+                  onPress={handleMicrophonePress}
+                  disabled={isSending || isTranscribing}
+                  style={({ pressed }) => ({
+                    width: 36,
+                    height: 36,
+                    borderRadius: 18,
+                    backgroundColor: (isSending || isTranscribing) ? 'transparent' : themeColors.actionButton,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: (isSending || isTranscribing) ? 0.3 : pressed ? 0.7 : 1,
+                  })}
+                >
+                  <FontAwesome
+                    name="microphone"
+                    size={16}
+                    color={(isSending || isTranscribing) ? themeColors.placeholderColor : themeColors.accentContrastText}
+                  />
+                </Pressable>
+              )}
+            </>
+          )}
         </XStack>
       </YStack>
     </YStack>

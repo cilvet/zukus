@@ -3,6 +3,7 @@ import { listCharactersByUser } from './characters'
 import { getUserIdFromRequest } from './auth'
 import { initializeTelemetry, withSpan } from './telemetry'
 import { handleChatRequest } from './chat'
+import { handleTranscriptionRequest } from './transcription'
 
 function addCorsHeaders(response: Response): Response {
   response.headers.set('Access-Control-Allow-Origin', '*')
@@ -72,6 +73,10 @@ const server = Bun.serve({
 
     if (url.pathname === '/chat') {
       return handleChatRequest(request)
+    }
+
+    if (url.pathname === '/transcribe') {
+      return handleTranscriptionRequest(request)
     }
 
     return addCorsHeaders(new Response('Not found', { status: 404 }))
