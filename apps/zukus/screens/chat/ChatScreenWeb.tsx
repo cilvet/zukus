@@ -1,25 +1,17 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ScrollView, Pressable, ActivityIndicator } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import ReactMarkdown from 'react-markdown'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
-import { streamChatFromServer, type ChatMessage as ServerChatMessage } from '../../services/chatServer'
 import { transcribeAudio } from '../../services/transcription'
 import { TypingIndicatorRow } from './typing-indicators'
 import { AudioWaveform } from './AudioWaveform'
 import { useAudioRecording } from '../../hooks'
-
-type ChatMessage = {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  createdAt: number
-}
+import { useChatMessages, useSmartAutoScroll } from './hooks'
 
 const MAX_WIDTH = 720
-const SCROLL_THRESHOLD = 50
 
 function AssistantMessage({ content, themeColors }: { content: string; themeColors: ReturnType<typeof useTheme>['themeColors'] }) {
   return (
@@ -88,14 +80,32 @@ export function ChatScreenWeb() {
   const { session } = useAuth()
   const scrollRef = useRef<ScrollView>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const idRef = useRef(0)
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+
   const [input, setInput] = useState('')
-  const [isSending, setIsSending] = useState(false)
-  const [errorText, setErrorText] = useState<string | null>(null)
-  const [showScrollButton, setShowScrollButton] = useState(false)
   const [isTranscribing, setIsTranscribing] = useState(false)
 
+  // Chat messages hook
+  const {
+    messages,
+    isSending,
+    errorText,
+    sendMessage,
+    hasMessages,
+  } = useChatMessages({
+    accessToken: session?.access_token,
+    onNewContent: () => scrollToBottom(),
+  })
+
+  // Smart auto-scroll hook
+  const {
+    showScrollButton,
+    scrollToBottom,
+    handleScrollToBottom,
+    activateAutoScroll,
+    scrollHandlers,
+  } = useSmartAutoScroll(scrollRef)
+
+  // Audio recording hook
   const {
     isRecording,
     meteringData,
@@ -104,175 +114,17 @@ export function ChatScreenWeb() {
     cancelRecording,
   } = useAudioRecording()
 
-  const hasMessages = messages.length > 0
-
-  const textBufferRef = useRef('')
-  const isTypingRef = useRef(false)
-  const lastScrollTime = useRef(0)
-  const isAtBottomRef = useRef(true)
-  const lastScrollYRef = useRef(0)
-  const userIsDraggingRef = useRef(false)
-
-  const scrollToBottom = useCallback(() => {
-    if (!isAtBottomRef.current) return
-    const now = Date.now()
-    if (now - lastScrollTime.current < 100) return
-    lastScrollTime.current = now
-    setTimeout(() => {
-      if (!isAtBottomRef.current) return
-      scrollRef.current?.scrollToEnd({ animated: false })
-    }, 50)
-  }, [])
-
-  const handleScrollToBottom = useCallback(() => {
-    scrollRef.current?.scrollToEnd({ animated: true })
-    setShowScrollButton(false)
-    isAtBottomRef.current = true
-  }, [])
-
-  const handleScroll = useCallback((event: { nativeEvent: { contentOffset: { y: number }; contentSize: { height: number }; layoutMeasurement: { height: number } } }) => {
-    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
-    const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
-    const isAtBottom = distanceFromBottom <= SCROLL_THRESHOLD
-
-    if (userIsDraggingRef.current) {
-      const scrolledUp = contentOffset.y < lastScrollYRef.current - 5
-      if (scrolledUp) {
-        isAtBottomRef.current = false
-      } else if (isAtBottom) {
-        isAtBottomRef.current = true
-      }
-    }
-
-    lastScrollYRef.current = contentOffset.y
-    setShowScrollButton(!isAtBottom && hasMessages)
-  }, [hasMessages])
-
-  const handleScrollEndDrag = useCallback((event: { nativeEvent: { contentOffset: { y: number }; contentSize: { height: number }; layoutMeasurement: { height: number } } }) => {
-    userIsDraggingRef.current = false
-    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
-    const distanceFromBottom = contentSize.height - contentOffset.y - layoutMeasurement.height
-    isAtBottomRef.current = distanceFromBottom <= SCROLL_THRESHOLD
-  }, [])
-
-  const createMessageId = () => {
-    idRef.current += 1
-    return `${Date.now()}-${idRef.current}`
-  }
-
+  // Scroll when messages change
   useEffect(() => {
-    if (isAtBottomRef.current && hasMessages) {
-      scrollRef.current?.scrollToEnd({ animated: true })
-    }
-  }, [messages.length, hasMessages])
-
-  async function sendMessageWithText(text: string) {
-    const accessToken = session?.access_token
-    if (!text || !accessToken || isSending) return
-
-    const userMessage: ChatMessage = {
-      id: createMessageId(),
-      role: 'user',
-      content: text,
-      createdAt: Date.now(),
-    }
-
-    const assistantMessage: ChatMessage = {
-      id: createMessageId(),
-      role: 'assistant',
-      content: '',
-      createdAt: Date.now(),
-    }
-
-    const nextMessages = [...messages, userMessage, assistantMessage]
-    setMessages(nextMessages)
-    setIsSending(true)
-    setErrorText(null)
-
-    isAtBottomRef.current = true
-    setTimeout(() => {
-      scrollRef.current?.scrollToEnd({ animated: true })
-    }, 100)
-
-    const payloadMessages: ServerChatMessage[] = nextMessages
-      .filter((m) => m.role !== 'assistant' || m.content.trim().length > 0)
-      .map((m) => ({ role: m.role, content: m.content }))
-
-    const typewriterLoop = () => {
-      if (textBufferRef.current.length === 0) {
-        isTypingRef.current = false
-        return
-      }
-
-      const bufferSize = textBufferRef.current.length
-      let charsToShow: number
-      let delay: number
-
-      if (bufferSize < 10) {
-        charsToShow = Math.floor(Math.random() * 2) + 1
-        delay = 20 + Math.random() * 15
-      } else if (bufferSize < 50) {
-        charsToShow = Math.floor(Math.random() * 6) + 3
-        delay = 15 + Math.random() * 10
-      } else {
-        charsToShow = Math.floor(Math.random() * 11) + 10
-        delay = 10
-      }
-
-      charsToShow = Math.min(charsToShow, bufferSize)
-      const chars = textBufferRef.current.slice(0, charsToShow)
-      textBufferRef.current = textBufferRef.current.slice(charsToShow)
-
-      setMessages((current) =>
-        current.map((m) => m.id === assistantMessage.id ? { ...m, content: m.content + chars } : m)
-      )
-      scrollToBottom()
-      setTimeout(typewriterLoop, delay)
-    }
-
-    const startTyping = () => {
-      if (!isTypingRef.current && textBufferRef.current.length > 0) {
-        isTypingRef.current = true
-        typewriterLoop()
-      }
-    }
-
-    textBufferRef.current = ''
-    let streamError: Error | null = null
-
-    try {
-      await streamChatFromServer({
-        accessToken,
-        messages: payloadMessages,
-        onToken: (token) => {
-          if (!token) return
-          textBufferRef.current += token
-          startTyping()
-        },
-      })
-    } catch (error) {
-      streamError = error instanceof Error ? error : new Error('Error al enviar mensaje')
-    }
-
-    while (textBufferRef.current.length > 0) {
-      await new Promise(resolve => setTimeout(resolve, 20))
-    }
-
-    if (streamError) {
-      setErrorText(streamError.message)
-      setMessages((current) =>
-        current.map((m) => m.id === assistantMessage.id ? { ...m, content: m.content || 'No se pudo obtener respuesta.' } : m)
-      )
-    }
-
-    setIsSending(false)
-  }
+    scrollRef.current?.scrollToEnd({ animated: true })
+  }, [messages.length])
 
   async function handleSend() {
     const trimmed = input.trim()
     if (!trimmed) return
     setInput('')
-    await sendMessageWithText(trimmed)
+    activateAutoScroll()
+    await sendMessage(trimmed)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -287,7 +139,6 @@ export function ChatScreenWeb() {
     if (!accessToken || isTranscribing || isSending) return
 
     setIsTranscribing(true)
-    setErrorText(null)
 
     try {
       const audioUri = await stopRecording()
@@ -300,17 +151,14 @@ export function ChatScreenWeb() {
       const transcribedText = result.text.trim()
 
       if (!transcribedText) {
-        setErrorText('No se pudo transcribir el audio')
         setIsTranscribing(false)
         return
       }
 
       setIsTranscribing(false)
-
-      // Enviar automaticamente el texto transcrito
-      await sendMessageWithText(transcribedText)
-    } catch (error) {
-      setErrorText(error instanceof Error ? error.message : 'Error al transcribir')
+      activateAutoScroll()
+      await sendMessage(transcribedText)
+    } catch {
       setIsTranscribing(false)
     }
   }
@@ -327,9 +175,9 @@ export function ChatScreenWeb() {
             ref={scrollRef}
             style={{ flex: 1 }}
             contentContainerStyle={{ paddingTop: 24, paddingBottom: 24 }}
-            onScroll={handleScroll}
-            onScrollBeginDrag={() => { userIsDraggingRef.current = true }}
-            onScrollEndDrag={handleScrollEndDrag}
+            onScroll={(e) => scrollHandlers.onScroll(e, hasMessages)}
+            onScrollBeginDrag={() => scrollHandlers.onScrollBeginDrag({ nativeEvent: { contentOffset: { y: 0 }, contentSize: { height: 0 }, layoutMeasurement: { height: 0 } } })}
+            onScrollEndDrag={scrollHandlers.onScrollEndDrag}
             scrollEventThrottle={16}
           >
             {!hasMessages && (
@@ -427,7 +275,7 @@ export function ChatScreenWeb() {
         >
           {isRecording || isTranscribing ? (
             <>
-              {/* Boton cancelar */}
+              {/* Cancel button */}
               {isRecording && !isTranscribing && (
                 <Pressable
                   onPress={cancelRecording}
@@ -444,7 +292,7 @@ export function ChatScreenWeb() {
                 </Pressable>
               )}
 
-              {/* Waveform o texto transcribiendo */}
+              {/* Waveform or transcribing text */}
               <XStack flex={1} alignItems="center" justifyContent="center">
                 {isTranscribing ? (
                   <Text color={themeColors.placeholderColor} fontSize={14}>
@@ -455,7 +303,7 @@ export function ChatScreenWeb() {
                 )}
               </XStack>
 
-              {/* Boton stop/spinner */}
+              {/* Stop/spinner button */}
               <Pressable
                 onPress={handleSendAudio}
                 disabled={isTranscribing}
