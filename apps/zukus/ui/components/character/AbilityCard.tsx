@@ -23,6 +23,8 @@ export type AbilityCardProps = {
   score: number
   modifier: number
   onPress?: () => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 export const AbilityCard: React.FC<AbilityCardProps> = ({
@@ -30,10 +32,11 @@ export const AbilityCard: React.FC<AbilityCardProps> = ({
   score,
   modifier,
   onPress,
+  glowEnabled = true,
 }) => {
   "use no memo"; // Reanimated shared values are mutable by design
   // Detectar cambios en el score - retorna un contador que se incrementa en cada cambio
-  const glowTrigger = useGlowOnChange(score)
+  const glowTrigger = useGlowOnChange(score, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 
@@ -189,9 +192,10 @@ export const AbilityCardCompact: React.FC<AbilityCardProps> = ({
   score,
   modifier,
   onPress,
+  glowEnabled = true,
 }) => {
   "use no memo"; // Reanimated shared values are mutable by design
-  const glowTrigger = useGlowOnChange(score)
+  const glowTrigger = useGlowOnChange(score, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 

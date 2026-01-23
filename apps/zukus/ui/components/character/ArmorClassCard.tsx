@@ -27,15 +27,16 @@ type MiniACCardProps = {
   label: string
   value: number
   onPress?: () => void
+  glowEnabled?: boolean
 }
 
 /**
  * Mini card individual para un tipo de AC.
  * Muestra label arriba y valor abajo, con animación de brillo al cambiar.
  */
-const MiniACCard: React.FC<MiniACCardProps> = ({ label, value, onPress }) => {
+const MiniACCard: React.FC<MiniACCardProps> = ({ label, value, onPress, glowEnabled = true }) => {
   "use no memo"; // Reanimated shared values are mutable by design
-  const glowTrigger = useGlowOnChange(value)
+  const glowTrigger = useGlowOnChange(value, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 
@@ -167,6 +168,8 @@ export type ArmorClassCardProps = {
   touchAC: number
   flatFootedAC: number
   onPress?: () => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 /**
@@ -179,12 +182,13 @@ export const ArmorClassCard: React.FC<ArmorClassCardProps> = ({
   touchAC,
   flatFootedAC,
   onPress,
+  glowEnabled = true,
 }) => {
   return (
     <XStack gap={8}>
-      <MiniACCard label={AC_TYPE_NAMES.total} value={totalAC} onPress={onPress} />
-      <MiniACCard label={AC_TYPE_NAMES.touch} value={touchAC} onPress={onPress} />
-      <MiniACCard label={AC_TYPE_NAMES.flatFooted} value={flatFootedAC} onPress={onPress} />
+      <MiniACCard label={AC_TYPE_NAMES.total} value={totalAC} onPress={onPress} glowEnabled={glowEnabled} />
+      <MiniACCard label={AC_TYPE_NAMES.touch} value={touchAC} onPress={onPress} glowEnabled={glowEnabled} />
+      <MiniACCard label={AC_TYPE_NAMES.flatFooted} value={flatFootedAC} onPress={onPress} glowEnabled={glowEnabled} />
     </XStack>
   )
 }

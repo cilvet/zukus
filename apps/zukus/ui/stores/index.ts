@@ -38,3 +38,5 @@ export {
   useIsEditingNewBuff,
   useBuffEditActions,
 } from './buffEditStore'
+
+export { useVisiblePageStore, useIsPageVisible } from './visiblePageStore'

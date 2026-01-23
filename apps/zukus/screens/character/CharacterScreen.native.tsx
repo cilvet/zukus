@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 import { useLocalSearchParams, useRouter } from 'expo-router'
@@ -10,6 +10,7 @@ import {
   useCharacterHitPoints,
   useCharacterSheet,
   useCharacterImageUrl,
+  useVisiblePageStore,
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -25,6 +26,7 @@ import {
   DescriptionSection,
   NotesSection,
   EntitiesSection,
+  CHARACTER_PAGES,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
 
@@ -161,6 +163,19 @@ export function CharacterScreen() {
   const characterSheet = useCharacterSheet()
   const insets = useSafeAreaInsets()
   const router = useRouter()
+  const setVisiblePage = useVisiblePageStore((state) => state.setVisiblePage)
+
+  // Inicializar visiblePage en el mount
+  useEffect(() => {
+    setVisiblePage(CHARACTER_PAGES[0]?.key ?? null)
+    return () => setVisiblePage(null)
+  }, [setVisiblePage])
+
+  // Cuando la página está completamente visible (offset = 0), actualizar el store
+  function handlePageSettled(index: number) {
+    const pageKey = CHARACTER_PAGES[index]?.key ?? null
+    setVisiblePage(pageKey)
+  }
 
   function handleTabPress(index: number) {
     pagerRef.current?.setPage(index)
@@ -215,7 +230,7 @@ export function CharacterScreen() {
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <Header />
       <CharacterTabs currentPage={currentPage} onPageChange={handleTabPress} />
-      <CharacterPager ref={pagerRef} onPageChange={setCurrentPage}>
+      <CharacterPager ref={pagerRef} onPageChange={setCurrentPage} onPageSettled={handlePageSettled}>
         <View key="combat" style={styles.page}>
           <CombatSection />
         </View>

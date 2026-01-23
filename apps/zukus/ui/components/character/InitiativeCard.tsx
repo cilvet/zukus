@@ -20,6 +20,8 @@ import { useGlowOnChange } from '../../../hooks'
 export type InitiativeCardProps = {
   totalValue: number
   onPress?: () => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 /**
@@ -29,9 +31,10 @@ export type InitiativeCardProps = {
 export const InitiativeCard: React.FC<InitiativeCardProps> = ({
   totalValue,
   onPress,
+  glowEnabled = true,
 }) => {
   "use no memo"; // Reanimated shared values are mutable by design
-  const glowTrigger = useGlowOnChange(totalValue)
+  const glowTrigger = useGlowOnChange(totalValue, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 

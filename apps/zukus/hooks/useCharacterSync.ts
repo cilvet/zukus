@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { InteractionManager } from 'react-native'
 import { calculateCharacterSheet, type CharacterBaseData } from '@zukus/core'
 import { useAuth } from '../contexts'
 import { useCharacterStore, setSyncHandler } from '../ui/stores/characterStore'
@@ -53,10 +54,11 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       pendingDataRef.current = null
       saveInProgressRef.current = true
       
+      const saveStart = performance.now()
       console.log('[SYNC] Guardando con deviceId:', DEVICE_ID)
       try {
         await characterRepository.save(characterId, data, DEVICE_ID)
-        console.log('[SYNC] Guardado OK')
+        console.log(`[SYNC] Guardado OK (${(performance.now() - saveStart).toFixed(1)}ms)`)
       } catch (err) {
         console.warn('[SYNC] Error guardando:', err)
       }
@@ -69,8 +71,13 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
     }
     
     const handler = (data: CharacterBaseData) => {
+      const handlerStart = performance.now()
       pendingDataRef.current = data
-      processQueue()
+      // Diferir el guardado para no interrumpir animaciones
+      InteractionManager.runAfterInteractions(() => {
+        processQueue()
+      })
+      console.log(`[SYNC] Handler sync work: ${(performance.now() - handlerStart).toFixed(1)}ms`)
     }
     
     // Establecer el handler (función global, no en el store state)
@@ -133,9 +140,13 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       }
 
       // Es un cambio de otro dispositivo, lo aplicamos
-      console.log('[SYNC] Aplicando cambio de otro dispositivo')
-      const sheet = calculateCharacterSheet(data)
-      setCharacter(sheet, data)
+      // Usamos InteractionManager para no bloquear animaciones en curso
+      console.log('[SYNC] Aplicando cambio de otro dispositivo (esperando interacciones)')
+      InteractionManager.runAfterInteractions(() => {
+        if (!isMounted) return
+        const sheet = calculateCharacterSheet(data)
+        setCharacter(sheet, data)
+      })
     })
 
     return () => {

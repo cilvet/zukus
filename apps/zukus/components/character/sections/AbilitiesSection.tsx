@@ -3,7 +3,7 @@ import { View, Pressable } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 import { YStack, XStack, Text } from 'tamagui'
 import type { CalculatedSingleSkill, CalculatedSkills } from '@zukus/core'
-import { useCharacterAbilities, useCharacterSkills, AbilityCard, AbilityCardCompact } from '../../../ui'
+import { useCharacterAbilities, useCharacterSkills, AbilityCard, AbilityCardCompact, useIsPageVisible } from '../../../ui'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 import { useBookmarkedSkills } from '../../../hooks'
@@ -166,6 +166,7 @@ export function AbilitiesSection() {
   const { bookmarkedSkills, toggleBookmark } = useBookmarkedSkills()
   const [isCompactView, setIsCompactView] = useState(false)
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const glowEnabled = useIsPageVisible('abilities')
 
   // Elevar useTheme para evitar múltiples suscripciones
   const { themeInfo } = useTheme()
@@ -265,6 +266,7 @@ export function AbilitiesSection() {
                             score={ability.totalScore}
                             modifier={ability.totalModifier}
                             onPress={() => handleAbilityPress(key)}
+                            glowEnabled={glowEnabled}
                           />
                         )
                       })}
@@ -279,18 +281,21 @@ export function AbilitiesSection() {
                       score={abilities.strength.totalScore}
                       modifier={abilities.strength.totalModifier}
                       onPress={() => handleAbilityPress('strength')}
+                      glowEnabled={glowEnabled}
                     />
                     <AbilityCard
                       abilityKey="dexterity"
                       score={abilities.dexterity.totalScore}
                       modifier={abilities.dexterity.totalModifier}
                       onPress={() => handleAbilityPress('dexterity')}
+                      glowEnabled={glowEnabled}
                     />
                     <AbilityCard
                       abilityKey="constitution"
                       score={abilities.constitution.totalScore}
                       modifier={abilities.constitution.totalModifier}
                       onPress={() => handleAbilityPress('constitution')}
+                      glowEnabled={glowEnabled}
                     />
                   </XStack>
                   <XStack justifyContent="space-between">
@@ -299,18 +304,21 @@ export function AbilitiesSection() {
                       score={abilities.intelligence.totalScore}
                       modifier={abilities.intelligence.totalModifier}
                       onPress={() => handleAbilityPress('intelligence')}
+                      glowEnabled={glowEnabled}
                     />
                     <AbilityCard
                       abilityKey="wisdom"
                       score={abilities.wisdom.totalScore}
                       modifier={abilities.wisdom.totalModifier}
                       onPress={() => handleAbilityPress('wisdom')}
+                      glowEnabled={glowEnabled}
                     />
                     <AbilityCard
                       abilityKey="charisma"
                       score={abilities.charisma.totalScore}
                       modifier={abilities.charisma.totalModifier}
                       onPress={() => handleAbilityPress('charisma')}
+                      glowEnabled={glowEnabled}
                     />
                   </XStack>
                 </YStack>

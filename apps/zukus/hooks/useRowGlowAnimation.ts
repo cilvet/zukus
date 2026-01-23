@@ -17,22 +17,33 @@ type RowGlowAnimationResult = {
   animatedNumberStyle: ReturnType<typeof useAnimatedStyle>
 }
 
+type RowGlowAnimationOptions = {
+  /**
+   * Si es false, no se disparan animaciones.
+   * Útil para evitar animaciones en páginas que no están visibles.
+   * @default true
+   */
+  enabled?: boolean
+}
+
 /**
  * Hook que proporciona animaciones de brillo para filas (skills, items, etc).
- * 
+ *
  * Incluye:
  * - Background glow (fondo que se ilumina)
  * - Border glow (borde que aparece blanco)
  * - Number scale (el número hace un "pop")
- * 
+ *
  * @param value - El valor a observar para detectar cambios
  * @param borderColor - Color base del borde cuando no hay glow
+ * @param options - Opciones de configuración
  */
 export function useRowGlowAnimation<T>(
   value: T,
-  borderColor: string
+  borderColor: string,
+  options?: RowGlowAnimationOptions
 ): RowGlowAnimationResult {
-  const glowTrigger = useGlowOnChange(value)
+  const glowTrigger = useGlowOnChange(value, { enabled: options?.enabled })
   const glowProgress = useSharedValue(0)
   const numberScale = useSharedValue(1)
 

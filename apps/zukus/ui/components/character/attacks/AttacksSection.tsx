@@ -5,13 +5,15 @@ import { AttackCard } from './AttackCard'
 export type AttacksSectionProps = {
   attacks: CalculatedAttack[]
   onAttackPress?: (attack: CalculatedAttack) => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 /**
  * Seccion de ataques del character sheet.
  * Lista los ataques disponibles separados por tipo (melee/ranged).
  */
-export function AttacksSection({ attacks, onAttackPress }: AttacksSectionProps) {
+export function AttacksSection({ attacks, onAttackPress, glowEnabled = true }: AttacksSectionProps) {
   const meleeAttacks = attacks.filter(a => a.type === 'melee')
   const rangedAttacks = attacks.filter(a => a.type === 'ranged')
   const otherAttacks = attacks.filter(a => a.type !== 'melee' && a.type !== 'ranged')
@@ -40,6 +42,7 @@ export function AttacksSection({ attacks, onAttackPress }: AttacksSectionProps) 
               key={attack.weaponUniqueId ?? attack.name}
               attack={attack}
               onPress={() => onAttackPress?.(attack)}
+              glowEnabled={glowEnabled}
             />
           ))}
         </YStack>
@@ -55,6 +58,7 @@ export function AttacksSection({ attacks, onAttackPress }: AttacksSectionProps) 
               key={attack.weaponUniqueId ?? attack.name}
               attack={attack}
               onPress={() => onAttackPress?.(attack)}
+              glowEnabled={glowEnabled}
             />
           ))}
         </YStack>
@@ -70,6 +74,7 @@ export function AttacksSection({ attacks, onAttackPress }: AttacksSectionProps) 
               key={attack.weaponUniqueId ?? attack.name}
               attack={attack}
               onPress={() => onAttackPress?.(attack)}
+              glowEnabled={glowEnabled}
             />
           ))}
         </YStack>

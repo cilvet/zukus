@@ -18,6 +18,8 @@ import type { CalculatedAttack } from '@zukus/core'
 export type AttackCardProps = {
   attack: CalculatedAttack
   onPress?: () => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 function formatAttackBonus(value: number): string {
@@ -42,9 +44,9 @@ function formatDamage(damage: CalculatedAttack['damage']): string {
  * Tarjeta de ataque individual.
  * Muestra nombre del arma, bono de ataque y daño.
  */
-export function AttackCard({ attack, onPress }: AttackCardProps) {
+export function AttackCard({ attack, onPress, glowEnabled = true }: AttackCardProps) {
   "use no memo";
-  const glowTrigger = useGlowOnChange(attack.attackBonus.totalValue)
+  const glowTrigger = useGlowOnChange(attack.attackBonus.totalValue, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 

@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection } from '../../../ui'
+import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection, useIsPageVisible } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import { SectionHeader, SectionCard } from '../CharacterComponents'
 import type { CalculatedAttack } from '@zukus/core'
@@ -16,6 +16,7 @@ export function CombatSection() {
   const bab = useCharacterBAB()
   const attackData = useCharacterAttacks()
   const navigateToDetail = useNavigateToDetail()
+  const glowEnabled = useIsPageVisible('combat')
 
   const handleSavingThrowPress = (savingThrowKey: string) => {
     navigateToDetail('savingThrow', savingThrowKey)
@@ -54,6 +55,7 @@ export function CombatSection() {
               touchAC={armorClass.touchAc.totalValue}
               flatFootedAC={armorClass.flatFootedAc.totalValue}
               onPress={handleArmorClassPress}
+              glowEnabled={glowEnabled}
             />
           </SectionCard>
         )}
@@ -65,6 +67,7 @@ export function CombatSection() {
               <InitiativeCard
                 totalValue={initiative.totalValue}
                 onPress={handleInitiativePress}
+                glowEnabled={glowEnabled}
               />
             )}
             {bab && (
@@ -72,6 +75,7 @@ export function CombatSection() {
                 totalValue={bab.totalValue}
                 multipleAttacks={bab.multipleBaseAttackBonuses}
                 onPress={handleBABPress}
+                glowEnabled={glowEnabled}
               />
             )}
           </YStack>
@@ -85,16 +89,19 @@ export function CombatSection() {
                 savingThrowKey="fortitude"
                 totalValue={savingThrows.fortitude.totalValue}
                 onPress={() => handleSavingThrowPress('fortitude')}
+                glowEnabled={glowEnabled}
               />
               <SavingThrowCard
                 savingThrowKey="reflex"
                 totalValue={savingThrows.reflex.totalValue}
                 onPress={() => handleSavingThrowPress('reflex')}
+                glowEnabled={glowEnabled}
               />
               <SavingThrowCard
                 savingThrowKey="will"
                 totalValue={savingThrows.will.totalValue}
                 onPress={() => handleSavingThrowPress('will')}
+                glowEnabled={glowEnabled}
               />
             </XStack>
           </SectionCard>
@@ -106,6 +113,7 @@ export function CombatSection() {
             <AttacksSection
               attacks={attackData.attacks}
               onAttackPress={handleAttackPress}
+              glowEnabled={glowEnabled}
             />
           </SectionCard>
         )}

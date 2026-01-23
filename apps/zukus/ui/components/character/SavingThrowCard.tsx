@@ -27,15 +27,18 @@ export type SavingThrowCardProps = {
   savingThrowKey: string
   totalValue: number
   onPress?: () => void
+  /** Si es false, no se disparan animaciones de glow. Default: true */
+  glowEnabled?: boolean
 }
 
 export const SavingThrowCard: React.FC<SavingThrowCardProps> = ({
   savingThrowKey,
   totalValue,
   onPress,
+  glowEnabled = true,
 }) => {
   "use no memo"; // Reanimated shared values are mutable by design
-  const glowTrigger = useGlowOnChange(totalValue)
+  const glowTrigger = useGlowOnChange(totalValue, { enabled: glowEnabled })
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 
