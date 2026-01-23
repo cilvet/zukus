@@ -6,7 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useTheme } from '../../ui'
 import { useAuth } from '../../contexts/AuthContext'
 import { transcribeAudio } from '../../services/transcription'
-import { TypingIndicatorRow } from './typing-indicators'
+import { TypingIndicatorRow, DebugDotsRow } from './typing-indicators'
 import { AudioWaveform } from './AudioWaveform'
 import { useAudioRecording } from '../../hooks'
 import { useChatMessages, useSmartAutoScroll } from './hooks'
@@ -188,9 +188,8 @@ export function ChatScreenWeb() {
               </YStack>
             )}
 
-            <YStack paddingBottom={12}>
-              <TypingIndicatorRow />
-            </YStack>
+            {/* Debug dots row - hidden by default, enable in DebugDotsRow.tsx */}
+            <DebugDotsRow />
 
             <YStack gap={20}>
               {messages.map((message) => {

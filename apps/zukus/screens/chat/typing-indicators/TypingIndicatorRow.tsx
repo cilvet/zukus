@@ -1,16 +1,12 @@
 import { XStack } from 'tamagui'
-import { ArcaneDot } from './ArcaneDot'
-import { EmberDot } from './EmberDot'
-import { FrostDot } from './FrostDot'
-import { VerdantDot } from './VerdantDot'
+import { TypingDot } from './TypingDot'
 
+// Simple wrapper that shows the TypingDot in a row layout
+// Used when the assistant is generating a response
 export function TypingIndicatorRow() {
   return (
-    <XStack justifyContent="flex-start" paddingVertical={6} paddingLeft={10} gap={24} alignItems="center">
-      <FrostDot />
-      <EmberDot />
-      <ArcaneDot />
-      <VerdantDot />
+    <XStack justifyContent="flex-start" paddingVertical={2} paddingLeft={4} alignItems="center">
+      <TypingDot />
     </XStack>
   )
 }
