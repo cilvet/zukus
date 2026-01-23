@@ -1,9 +1,7 @@
-import { Platform, useWindowDimensions, StyleSheet } from 'react-native'
+import { Platform, useWindowDimensions, StyleSheet, View } from 'react-native'
 import { XStack, YStack, ScrollView } from 'tamagui'
-import { themes } from '../../ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
+import { LinearGradient } from 'expo-linear-gradient'
+import { useTheme } from '../../ui'
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -18,6 +16,7 @@ type ColumnsContainerProps = {
  */
 export function ColumnsContainer({ children }: ColumnsContainerProps) {
   const { width } = useWindowDimensions()
+  const { themeColors } = useTheme()
   const isMobile = Platform.OS !== 'web' || width < DESKTOP_BREAKPOINT
 
   if (isMobile) {
@@ -25,7 +24,7 @@ export function ColumnsContainer({ children }: ColumnsContainerProps) {
     return (
       <ScrollView
         flex={1}
-        backgroundColor={theme.background}
+        backgroundColor={themeColors.background}
         contentContainerStyle={styles.mobileContent}
         showsVerticalScrollIndicator={false}
       >
@@ -41,35 +40,64 @@ export function ColumnsContainer({ children }: ColumnsContainerProps) {
     )
   }
 
-  // Desktop: scroll horizontal con columnas centradas
+  // Desktop: scroll horizontal con gradiente de fondo estilo aurora
+  // Mezcla sutil del color de acento con viñeta oscura en las esquinas
+  const accentWithAlpha = `${themeColors.accent}15`
+  const darkVignette = 'rgba(0, 0, 0, 0.3)'
+
   return (
-    <ScrollView
-      horizontal
-      flex={1}
-      backgroundColor={theme.background}
-      contentContainerStyle={styles.desktopContent}
-      showsHorizontalScrollIndicator={false}
-      // @ts-ignore - Web-only property
-      scrollbarWidth="none"
-    >
-      <XStack
-        flexDirection="row"
-        alignItems="flex-start"
-        gap={16}
-        paddingHorizontal={16}
-        paddingVertical={16}
-        minWidth="100%"
-        justifyContent="center"
+    <View style={styles.desktopContainer}>
+      {/* Capa base: color de fondo del tema */}
+      <View style={[StyleSheet.absoluteFill, { backgroundColor: themeColors.background }]} />
+
+      {/* Capa de viñeta: oscurece sutilmente las esquinas */}
+      <LinearGradient
+        colors={[darkVignette, 'transparent', 'transparent', darkVignette]}
+        locations={[0, 0.3, 0.7, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+
+      {/* Capa de acento: toque sutil de color desde una esquina */}
+      <LinearGradient
+        colors={[accentWithAlpha, 'transparent']}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 0.6, y: 0.2 }}
+        style={StyleSheet.absoluteFill}
+      />
+
+      <ScrollView
+        horizontal
+        flex={1}
+        backgroundColor="transparent"
+        contentContainerStyle={styles.desktopContent}
+        showsHorizontalScrollIndicator={false}
+        // @ts-ignore - Web-only property
+        scrollbarWidth="none"
       >
-        {children}
-      </XStack>
-    </ScrollView>
+        <XStack
+          flexDirection="row"
+          alignItems="flex-start"
+          gap={16}
+          paddingHorizontal={16}
+          paddingVertical={16}
+          minWidth="100%"
+          justifyContent="center"
+        >
+          {children}
+        </XStack>
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   mobileContent: {
     flexGrow: 1,
+  },
+  desktopContainer: {
+    flex: 1,
   },
   desktopContent: {
     flexGrow: 1,

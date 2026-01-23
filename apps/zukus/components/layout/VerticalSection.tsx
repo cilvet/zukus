@@ -1,10 +1,6 @@
 import { ReactNode } from 'react'
 import { Platform, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
-import { themes } from '../../ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -34,7 +30,6 @@ export function VerticalSection({ children, width: columnWidth = 280 }: Vertical
       paddingHorizontal={isMobile ? 16 : 0}
       paddingTop={isMobile ? 16 : 0}
       overflow={isMobile ? 'visible' : 'scroll'}
-      backgroundColor={theme.background}
       // @ts-ignore - CSS property for web
       scrollbarWidth="none"
     >
