@@ -1,31 +1,27 @@
-import { Pressable } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import { ChangeCard } from './ChangeCard'
 import type { AnyChange } from './changeHelpers'
 import { useNavigateToDetail } from '../../../../navigation'
+import { Button } from '../../../atoms'
 
 type ChangesSectionProps = {
   buffId: string
   changes: AnyChange[]
-  /** Callback opcional cuando se actualizan los changes (para guardar al store primero) */
-  onBeforeNavigate?: () => void
 }
 
 /**
  * Sección que muestra la lista de Changes de un buff.
  * Usa navegación para editar changes.
  */
-export function ChangesSection({ buffId, changes, onBeforeNavigate }: ChangesSectionProps) {
+export function ChangesSection({ buffId, changes }: ChangesSectionProps) {
   'use no memo'
   const navigateToDetail = useNavigateToDetail()
 
   const handleEditChange = (index: number) => {
-    onBeforeNavigate?.()
     navigateToDetail('changeEdit', `${buffId}:${index}`)
   }
 
   const handleAddNew = () => {
-    onBeforeNavigate?.()
     navigateToDetail('changeEdit', `${buffId}:new`, 'New Change')
   }
 
@@ -36,21 +32,9 @@ export function ChangesSection({ buffId, changes, onBeforeNavigate }: ChangesSec
         <Text fontSize={13} fontWeight="600" color="$placeholderColor">
           Changes
         </Text>
-        <Pressable onPress={handleAddNew}>
-          {({ pressed }) => (
-            <XStack
-              paddingVertical={4}
-              paddingHorizontal={10}
-              backgroundColor="$accent"
-              borderRadius={6}
-              opacity={pressed ? 0.7 : 1}
-            >
-              <Text fontSize={12} fontWeight="600" color="$accentContrastText">
-                + Add
-              </Text>
-            </XStack>
-          )}
-        </Pressable>
+        <Button variant="primary" size="small" onPress={handleAddNew}>
+          + Add
+        </Button>
       </XStack>
 
       {/* Lista de changes */}

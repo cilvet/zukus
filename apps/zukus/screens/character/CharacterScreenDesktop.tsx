@@ -19,6 +19,8 @@ import {
   useCharacterAttacks,
   useCharacterBaseData,
   useComputedEntities,
+  useDraftBuff,
+  useBuffEditActions,
   AbilityCard,
   AbilityCardCompact,
   Checkbox,
@@ -748,22 +750,8 @@ function CharacterScreenDesktopContent() {
             }}
           />
         )}
-        {currentPanel?.type === 'buffEdit' && currentPanel?.id && getBuffForPanel(currentPanel.id) && (
-          <BuffEditScreen
-            buff={getBuffForPanel(currentPanel.id)!}
-            onSave={(updatedBuff) => {
-              editBuff(updatedBuff)
-              navigateToDetail('buff', currentPanel.id)
-            }}
-            onUpdate={(updatedBuff) => {
-              editBuff(updatedBuff)
-            }}
-            onDelete={() => {
-              deleteBuff(currentPanel.id)
-              closePanel()
-            }}
-            onCancel={() => navigateToDetail('buff', currentPanel.id)}
-          />
+        {currentPanel?.type === 'buffEdit' && currentPanel?.id && (
+          <BuffEditPanelContainer buffId={currentPanel.id} />
         )}
         {currentPanel?.type === 'changeEdit' && currentPanel?.id && (
           <ChangeEditPanelContainer changeId={currentPanel.id} />
@@ -869,17 +857,24 @@ function ClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number 
   )
 }
 
-function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
+function BuffEditPanelContainer({ buffId }: { buffId: string }) {
   const buffs = useCharacterBuffs()
-  const editBuff = useCharacterStore((state) => state.editBuff)
-  const { openPanel } = usePanelNavigation()
+  const deleteBuff = useCharacterStore((state) => state.deleteBuff)
+  const { openPanel, closePanel } = usePanelNavigation()
+  const draftBuff = useDraftBuff()
+  const { startEditing, save, discard } = useBuffEditActions()
 
-  // Parsear el id: buffId:changeIndex o buffId:new
-  const [buffId, indexStr] = changeId.split(':')
-  const isNew = indexStr === 'new'
-  const changeIndex = isNew ? -1 : parseInt(indexStr, 10)
+  const originalBuff = buffs.find((b) => b.uniqueId === buffId)
 
-  const buff = buffs.find((b) => b.uniqueId === buffId)
+  // Iniciar edicion si no hay draft o es de otro buff
+  useEffect(() => {
+    if (originalBuff && (!draftBuff || draftBuff.uniqueId !== buffId)) {
+      startEditing(originalBuff)
+    }
+  }, [originalBuff, draftBuff, buffId, startEditing])
+
+  // Usar el draft si existe, si no el original
+  const buff = draftBuff?.uniqueId === buffId ? draftBuff : originalBuff
 
   if (!buff) {
     return (
@@ -889,7 +884,52 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
     )
   }
 
-  const changes = buff.changes ?? []
+  const handleSave = () => {
+    save()
+    openPanel('buff', buffId)
+  }
+
+  const handleDelete = () => {
+    discard()
+    deleteBuff(buffId)
+    closePanel()
+  }
+
+  const handleCancel = () => {
+    discard()
+    openPanel('buff', buffId)
+  }
+
+  return (
+    <BuffEditScreen
+      buff={buff}
+      onSave={handleSave}
+      onDelete={handleDelete}
+      onCancel={handleCancel}
+    />
+  )
+}
+
+function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
+  const { openPanel } = usePanelNavigation()
+  const draftBuff = useDraftBuff()
+  const { updateChange, addChange, deleteChange } = useBuffEditActions()
+
+  // Parsear el id: buffId:changeIndex o buffId:new
+  const [buffId, indexStr] = changeId.split(':')
+  const isNew = indexStr === 'new'
+  const changeIndex = isNew ? -1 : parseInt(indexStr, 10)
+
+  // Leer del draft (ya deberia estar inicializado desde BuffEditPanelContainer)
+  if (!draftBuff || draftBuff.uniqueId !== buffId) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Buff no encontrado en edicion</Text>
+      </YStack>
+    )
+  }
+
+  const changes = draftBuff.changes ?? []
   const change = isNew ? null : changes[changeIndex]
 
   if (!isNew && !change) {
@@ -900,22 +940,19 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
     )
   }
 
-  type AnyChange = NonNullable<typeof buff.changes>[number]
+  type AnyChange = NonNullable<typeof draftBuff.changes>[number]
 
   const handleSave = (updatedChange: AnyChange) => {
-    const newChanges = [...changes]
     if (isNew) {
-      newChanges.push(updatedChange)
+      addChange(updatedChange)
     } else {
-      newChanges[changeIndex] = updatedChange
+      updateChange(changeIndex, updatedChange)
     }
-    editBuff({ ...buff, changes: newChanges })
     openPanel('buffEdit', buffId)
   }
 
   const handleDelete = () => {
-    const newChanges = changes.filter((_, i) => i !== changeIndex)
-    editBuff({ ...buff, changes: newChanges })
+    deleteChange(changeIndex)
     openPanel('buffEdit', buffId)
   }
 

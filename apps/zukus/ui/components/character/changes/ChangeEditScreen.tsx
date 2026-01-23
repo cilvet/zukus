@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { TextInput, StyleSheet, Pressable } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import { useTheme } from '../../../contexts/ThemeContext'
-import { SearchableSelectModal } from '../../../atoms'
+import { SearchableSelectModal, Button } from '../../../atoms'
 import { getFormulaExpression, type AnyChange } from './changeHelpers'
 
 type ChangeEditScreenProps = {
@@ -354,34 +354,14 @@ export function ChangeEditScreen({
       {/* Botones de accion */}
       <XStack gap={12} marginTop={8}>
         {onDelete && !isNew && (
-          <XStack
-            flex={1}
-            paddingVertical={12}
-            paddingHorizontal={16}
-            backgroundColor="$destructiveBackground"
-            borderRadius={8}
-            justifyContent="center"
-            pressStyle={{ opacity: 0.7 }}
-            onPress={onDelete}
-          >
-            <Text fontSize={14} fontWeight="600" color="$destructiveColor">
-              Delete
-            </Text>
-          </XStack>
+          <Button variant="destructive" onPress={onDelete} fullWidth>
+            Delete
+          </Button>
         )}
-        <XStack
-          flex={2}
-          paddingVertical={12}
-          paddingHorizontal={16}
-          backgroundColor="$accent"
-          borderRadius={8}
-          justifyContent="center"
-          pressStyle={{ opacity: 0.7 }}
-          onPress={handleSave}
-        >
-          <Text fontSize={14} fontWeight="600" color="$accentContrastText">
+        <XStack flex={onDelete && !isNew ? 2 : 1}>
+          <Button variant="primary" onPress={handleSave} fullWidth>
             {isNew ? 'Add Change' : 'Save Changes'}
-          </Text>
+          </Button>
         </XStack>
       </XStack>
 

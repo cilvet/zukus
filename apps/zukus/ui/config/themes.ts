@@ -22,7 +22,7 @@ export const zukus = {
   placeholderColor: '#8a6aab',
   outlineColor: '#a77ccb',
   textPrimary: '#f3ca58',
-  accentContrastText: '#f3ca58',
+  accentContrastText: '#2e1a47',
   uiBackgroundColor: 'rgba(46, 26, 71, 0.9)',
   uiBackgroundColorDark: 'rgba(20, 10, 30, 1)',
   actionButton: '#6e3f97',
@@ -30,6 +30,13 @@ export const zukus = {
   tabBarBorder: '#6e3f97',
   tabBarActive: '#f3ca58',
   tabBarInactive: '#a77ccb',
+  // Button tokens
+  accent: '#a77ccb',
+  accentHover: '#b98ddb',
+  accentPress: '#8a6aab',
+  destructiveColor: '#ff6b6b',
+  destructiveBackground: 'rgba(255, 107, 107, 0.15)',
+  destructiveBackgroundHover: 'rgba(255, 107, 107, 0.25)',
 }
 
 // Lightning theme (electric blue tones)
@@ -54,7 +61,7 @@ export const lightning = {
   placeholderColor: '#4a5a8e',
   outlineColor: '#5e77ed',
   textPrimary: '#73d4f2',
-  accentContrastText: '#ffffff',
+  accentContrastText: '#1a1a2e',
   uiBackgroundColor: 'rgba(26, 26, 46, 0.9)',
   uiBackgroundColorDark: 'rgba(15, 15, 25, 1)',
   actionButton: '#5e77ed',
@@ -62,6 +69,13 @@ export const lightning = {
   tabBarBorder: '#5e77ed',
   tabBarActive: '#73d4f2',
   tabBarInactive: '#5e77ed',
+  // Button tokens
+  accent: '#5e77ed',
+  accentHover: '#7a8ff3',
+  accentPress: '#4a62d8',
+  destructiveColor: '#ff6b6b',
+  destructiveBackground: 'rgba(255, 107, 107, 0.15)',
+  destructiveBackgroundHover: 'rgba(255, 107, 107, 0.25)',
 }
 
 // Cold Dark theme (icy blue tones)
@@ -94,6 +108,13 @@ export const coldDark = {
   tabBarBorder: 'rgba(177, 196, 216, 0.6)',
   tabBarActive: '#dde5f4',
   tabBarInactive: '#668eab',
+  // Button tokens
+  accent: '#668eab',
+  accentHover: '#7aa0bd',
+  accentPress: '#567a96',
+  destructiveColor: '#ff6b6b',
+  destructiveBackground: 'rgba(255, 107, 107, 0.15)',
+  destructiveBackgroundHover: 'rgba(255, 107, 107, 0.25)',
 }
 
 // Rogue theme (dark shadows with blood red accents)
@@ -126,6 +147,13 @@ export const rogue = {
   tabBarBorder: '#2a2a2a',
   tabBarActive: '#c4c4c4',
   tabBarInactive: '#555555',
+  // Button tokens
+  accent: '#8b1a1a',
+  accentHover: '#a52020',
+  accentPress: '#701515',
+  destructiveColor: '#ff4444',
+  destructiveBackground: 'rgba(255, 68, 68, 0.15)',
+  destructiveBackgroundHover: 'rgba(255, 68, 68, 0.25)',
 }
 
 // Druid theme (Everforest palette - natural forest tones)
@@ -158,6 +186,13 @@ export const druid = {
   tabBarBorder: '#475258',
   tabBarActive: '#d3c6aa',
   tabBarInactive: '#7a8478',
+  // Button tokens
+  accent: '#a7c080',
+  accentHover: '#b8d091',
+  accentPress: '#96af70',
+  destructiveColor: '#e67e80',
+  destructiveBackground: 'rgba(230, 126, 128, 0.15)',
+  destructiveBackgroundHover: 'rgba(230, 126, 128, 0.25)',
 }
 
 // Gruvbox theme (retro earth tones)
@@ -190,6 +225,13 @@ export const gruvbox = {
   tabBarBorder: '#504945',
   tabBarActive: '#ebdbb2',
   tabBarInactive: '#928374',
+  // Button tokens
+  accent: '#fabd2f',
+  accentHover: '#fbca4f',
+  accentPress: '#e8ab1f',
+  destructiveColor: '#fb4934',
+  destructiveBackground: 'rgba(251, 73, 52, 0.15)',
+  destructiveBackgroundHover: 'rgba(251, 73, 52, 0.25)',
 }
 
 // Nord theme (arctic frost)
@@ -222,6 +264,13 @@ export const nord = {
   tabBarBorder: '#4c566a',
   tabBarActive: '#eceff4',
   tabBarInactive: '#616e88',
+  // Button tokens
+  accent: '#88c0d0',
+  accentHover: '#9ad0e0',
+  accentPress: '#78b0c0',
+  destructiveColor: '#bf616a',
+  destructiveBackground: 'rgba(191, 97, 106, 0.15)',
+  destructiveBackgroundHover: 'rgba(191, 97, 106, 0.25)',
 }
 
 // Catppuccin Mocha theme (pastel dark)
@@ -254,6 +303,13 @@ export const catppuccin = {
   tabBarBorder: '#45475a',
   tabBarActive: '#cdd6f4',
   tabBarInactive: '#6c7086',
+  // Button tokens
+  accent: '#cba6f7',
+  accentHover: '#d5b6ff',
+  accentPress: '#b896e7',
+  destructiveColor: '#f38ba8',
+  destructiveBackground: 'rgba(243, 139, 168, 0.15)',
+  destructiveBackgroundHover: 'rgba(243, 139, 168, 0.25)',
 }
 
 // Tokyo Night theme (neon city)
@@ -286,6 +342,13 @@ export const tokyoNight = {
   tabBarBorder: '#3b4261',
   tabBarActive: '#c0caf5',
   tabBarInactive: '#565f89',
+  // Button tokens
+  accent: '#7aa2f7',
+  accentHover: '#8ab2ff',
+  accentPress: '#6a92e7',
+  destructiveColor: '#f7768e',
+  destructiveBackground: 'rgba(247, 118, 142, 0.15)',
+  destructiveBackgroundHover: 'rgba(247, 118, 142, 0.25)',
 }
 
 // Rosé Pine theme (soft roses and gold)
@@ -318,6 +381,13 @@ export const rosePine = {
   tabBarBorder: '#403d52',
   tabBarActive: '#e0def4',
   tabBarInactive: '#6e6a86',
+  // Button tokens
+  accent: '#ebbcba',
+  accentHover: '#f5ccca',
+  accentPress: '#dbacaa',
+  destructiveColor: '#eb6f92',
+  destructiveBackground: 'rgba(235, 111, 146, 0.15)',
+  destructiveBackgroundHover: 'rgba(235, 111, 146, 0.25)',
 }
 
 // Kanagawa theme (Japanese ink painting)
@@ -350,6 +420,13 @@ export const kanagawa = {
   tabBarBorder: '#54546d',
   tabBarActive: '#dcd7ba',
   tabBarInactive: '#727169',
+  // Button tokens
+  accent: '#7e9cd8',
+  accentHover: '#8eace8',
+  accentPress: '#6e8cc8',
+  destructiveColor: '#e46876',
+  destructiveBackground: 'rgba(228, 104, 118, 0.15)',
+  destructiveBackgroundHover: 'rgba(228, 104, 118, 0.25)',
 }
 
 // Dracula theme (vampire purple)
@@ -382,6 +459,13 @@ export const dracula = {
   tabBarBorder: '#44475a',
   tabBarActive: '#f8f8f2',
   tabBarInactive: '#6272a4',
+  // Button tokens
+  accent: '#bd93f9',
+  accentHover: '#cda3ff',
+  accentPress: '#ad83e9',
+  destructiveColor: '#ff5555',
+  destructiveBackground: 'rgba(255, 85, 85, 0.15)',
+  destructiveBackgroundHover: 'rgba(255, 85, 85, 0.25)',
 }
 
 // Solarized Dark theme (scientific precision)
@@ -414,6 +498,13 @@ export const solarized = {
   tabBarBorder: '#073642',
   tabBarActive: '#839496',
   tabBarInactive: '#586e75',
+  // Button tokens
+  accent: '#2aa198',
+  accentHover: '#3ab1a8',
+  accentPress: '#1a9188',
+  destructiveColor: '#dc322f',
+  destructiveBackground: 'rgba(220, 50, 47, 0.15)',
+  destructiveBackgroundHover: 'rgba(220, 50, 47, 0.25)',
 }
 
 // All custom themes

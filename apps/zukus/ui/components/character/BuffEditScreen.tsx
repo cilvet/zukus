@@ -1,60 +1,45 @@
-import { useState, useEffect } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import type { Buff } from '@zukus/core'
 import { useTheme } from '../../contexts/ThemeContext'
 import { ChangesSection } from './changes'
+import { useBuffEditActions } from '../../stores/buffEditStore'
+import { Button } from '../../atoms'
 
 type BuffEditScreenProps = {
   buff: Buff
-  /** Guardar y cerrar la pantalla */
-  onSave: (buff: Buff) => void
-  /** Solo guardar (sin cerrar) - para preservar estado antes de navegar */
-  onUpdate: (buff: Buff) => void
+  onSave: () => void
   onDelete: () => void
   onCancel: () => void
 }
 
 /**
  * Pantalla de edición de buff.
- * Se usa como contenido de una pantalla de navegación normal.
+ * Lee y escribe directamente al buffEditStore (draft).
  */
 export function BuffEditScreen({
   buff,
   onSave,
-  onUpdate,
   onDelete,
   onCancel,
 }: BuffEditScreenProps) {
   const { themeColors } = useTheme()
+  const { updateDraft } = useBuffEditActions()
 
-  // Estado local solo para nombre y descripción
-  const [name, setName] = useState(buff.name)
-  const [description, setDescription] = useState(buff.description)
-
-  // Sincronizar con el buff cuando cambia (ej: al volver de changeEdit)
-  useEffect(() => {
-    setName(buff.name)
-    setDescription(buff.description)
-  }, [buff])
-
-  const handleSave = () => {
-    const updatedBuff: Buff = {
-      ...buff,
-      name: name.trim() || buff.name,
-      description: description.trim(),
-    }
-    onSave(updatedBuff)
+  const handleNameChange = (value: string) => {
+    updateDraft({ name: value })
   }
 
-  // Guardar nombre y descripción al store antes de navegar a changeEdit
-  const handleBeforeNavigate = () => {
-    const updatedBuff: Buff = {
-      ...buff,
-      name: name.trim() || buff.name,
-      description: description.trim(),
+  const handleDescriptionChange = (value: string) => {
+    updateDraft({ description: value })
+  }
+
+  const handleSave = () => {
+    // Limpiar nombre si esta vacio
+    if (!buff.name.trim()) {
+      updateDraft({ name: 'Unnamed Buff' })
     }
-    onUpdate(updatedBuff)
+    onSave()
   }
 
   return (
@@ -65,8 +50,8 @@ export function BuffEditScreen({
           Name
         </Text>
         <TextInput
-          value={name}
-          onChangeText={setName}
+          value={buff.name}
+          onChangeText={handleNameChange}
           placeholder="Buff name"
           placeholderTextColor={themeColors.placeholderColor}
           style={[
@@ -86,8 +71,8 @@ export function BuffEditScreen({
           Description
         </Text>
         <TextInput
-          value={description}
-          onChangeText={setDescription}
+          value={buff.description}
+          onChangeText={handleDescriptionChange}
           placeholder="What does this buff do?"
           placeholderTextColor={themeColors.placeholderColor}
           multiline
@@ -108,38 +93,17 @@ export function BuffEditScreen({
       <ChangesSection
         buffId={buff.uniqueId}
         changes={buff.changes ?? []}
-        onBeforeNavigate={handleBeforeNavigate}
       />
 
       {/* Botones de accion */}
       <XStack gap={12} marginTop={8}>
-        <XStack
-          flex={1}
-          paddingVertical={12}
-          paddingHorizontal={16}
-          backgroundColor="$destructiveBackground"
-          borderRadius={8}
-          justifyContent="center"
-          pressStyle={{ opacity: 0.7 }}
-          onPress={onDelete}
-        >
-          <Text fontSize={14} fontWeight="600" color="$destructiveColor">
-            Delete
-          </Text>
-        </XStack>
-        <XStack
-          flex={2}
-          paddingVertical={12}
-          paddingHorizontal={16}
-          backgroundColor="$accent"
-          borderRadius={8}
-          justifyContent="center"
-          pressStyle={{ opacity: 0.7 }}
-          onPress={handleSave}
-        >
-          <Text fontSize={14} fontWeight="600" color="$accentContrastText">
+        <Button variant="destructive" onPress={onDelete} fullWidth>
+          Delete
+        </Button>
+        <XStack flex={2}>
+          <Button variant="primary" onPress={handleSave} fullWidth>
             Save Changes
-          </Text>
+          </Button>
         </XStack>
       </XStack>
     </YStack>

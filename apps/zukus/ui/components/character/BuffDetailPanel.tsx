@@ -1,6 +1,6 @@
 import { YStack, XStack, Text } from 'tamagui'
 import type { Buff } from '@zukus/core'
-import { Checkbox } from '../../atoms'
+import { Checkbox, Button } from '../../atoms'
 import { useTheme } from '../../contexts/ThemeContext'
 
 type BuffDetailPanelProps = {
@@ -185,26 +185,16 @@ export function BuffDetailPanel({
 
       {/* Botones de accion */}
       {(onEdit || onDelete) ? (
-        <XStack justifyContent="space-between" paddingTop={8}>
+        <XStack justifyContent="space-between" paddingTop={8} gap={12}>
           {onDelete ? (
-            <Text
-              fontSize={14}
-              color="$destructiveColor"
-              onPress={onDelete}
-              pressStyle={{ opacity: 0.7 }}
-            >
+            <Button variant="destructive" onPress={onDelete} size="small">
               Delete
-            </Text>
+            </Button>
           ) : <YStack />}
           {onEdit ? (
-            <Text
-              fontSize={14}
-              color={colors.accent}
-              onPress={onEdit}
-              pressStyle={{ opacity: 0.7 }}
-            >
+            <Button variant="primary" onPress={onEdit} size="small">
               Edit Buff
-            </Text>
+            </Button>
           ) : null}
         </XStack>
       ) : null}

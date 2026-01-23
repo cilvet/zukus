@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen } from '../../ui'
+import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
@@ -169,11 +169,22 @@ function BuffDetail({ buffId }: { buffId: string }) {
 
 function BuffEditDetail({ buffId }: { buffId: string }) {
   const buffs = useCharacterBuffs()
-  const editBuff = useCharacterStore((state) => state.editBuff)
   const deleteBuff = useCharacterStore((state) => state.deleteBuff)
   const router = useRouter()
+  const draftBuff = useDraftBuff()
+  const { startEditing, save, discard } = useBuffEditActions()
 
-  const buff = buffs.find((b) => b.uniqueId === buffId)
+  const originalBuff = buffs.find((b) => b.uniqueId === buffId)
+
+  // Iniciar edicion si no hay draft o es de otro buff
+  useEffect(() => {
+    if (originalBuff && (!draftBuff || draftBuff.uniqueId !== buffId)) {
+      startEditing(originalBuff)
+    }
+  }, [originalBuff, draftBuff, buffId, startEditing])
+
+  // Usar el draft si existe, si no el original
+  const buff = draftBuff?.uniqueId === buffId ? draftBuff : originalBuff
 
   if (!buff) {
     return (
@@ -183,25 +194,21 @@ function BuffEditDetail({ buffId }: { buffId: string }) {
     )
   }
 
-  // Guardar y volver atrás (botón Save)
-  const handleSave = (updatedBuff: typeof buff) => {
-    editBuff(updatedBuff)
+  const handleSave = () => {
+    save()
     router.back()
   }
 
-  // Solo guardar sin volver (para preservar estado antes de navegar a changeEdit)
-  const handleUpdate = (updatedBuff: typeof buff) => {
-    editBuff(updatedBuff)
-  }
-
   const handleDelete = () => {
-    deleteBuff(buff.uniqueId)
+    discard()
+    deleteBuff(buffId)
     // Volver dos pantallas: edit -> detail -> lista
     router.back()
     router.back()
   }
 
   const handleCancel = () => {
+    discard()
     router.back()
   }
 
@@ -209,7 +216,6 @@ function BuffEditDetail({ buffId }: { buffId: string }) {
     <BuffEditScreen
       buff={buff}
       onSave={handleSave}
-      onUpdate={handleUpdate}
       onDelete={handleDelete}
       onCancel={handleCancel}
     />
@@ -221,26 +227,25 @@ function BuffEditDetail({ buffId }: { buffId: string }) {
  * El id tiene formato: {buffId}:{changeIndex} o {buffId}:new
  */
 function ChangeEditDetail({ changeId }: { changeId: string }) {
-  const buffs = useCharacterBuffs()
-  const editBuff = useCharacterStore((state) => state.editBuff)
   const router = useRouter()
+  const draftBuff = useDraftBuff()
+  const { updateChange, addChange, deleteChange } = useBuffEditActions()
 
   // Parsear el id: buffId:changeIndex o buffId:new
   const [buffId, indexStr] = changeId.split(':')
   const isNew = indexStr === 'new'
   const changeIndex = isNew ? -1 : parseInt(indexStr, 10)
 
-  const buff = buffs.find((b) => b.uniqueId === buffId)
-
-  if (!buff) {
+  // Leer del draft (ya deberia estar inicializado desde BuffEditDetail)
+  if (!draftBuff || draftBuff.uniqueId !== buffId) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center">
-        <Text color="$placeholderColor">Buff no encontrado: {buffId}</Text>
+        <Text color="$placeholderColor">Buff no encontrado en edicion: {buffId}</Text>
       </YStack>
     )
   }
 
-  const changes = buff.changes ?? []
+  const changes = draftBuff.changes ?? []
   const change = isNew ? null : changes[changeIndex]
 
   if (!isNew && !change) {
@@ -251,22 +256,19 @@ function ChangeEditDetail({ changeId }: { changeId: string }) {
     )
   }
 
-  type AnyChange = NonNullable<typeof buff.changes>[number]
+  type AnyChange = NonNullable<typeof draftBuff.changes>[number]
 
   const handleSave = (updatedChange: AnyChange) => {
-    const newChanges = [...changes]
     if (isNew) {
-      newChanges.push(updatedChange)
+      addChange(updatedChange)
     } else {
-      newChanges[changeIndex] = updatedChange
+      updateChange(changeIndex, updatedChange)
     }
-    editBuff({ ...buff, changes: newChanges })
     router.back()
   }
 
   const handleDelete = () => {
-    const newChanges = changes.filter((_, i) => i !== changeIndex)
-    editBuff({ ...buff, changes: newChanges })
+    deleteChange(changeIndex)
     router.back()
   }
 
