@@ -81,15 +81,34 @@ function ChangeItem({ change }: { change: AnyChange }) {
   const { themeInfo } = useTheme()
   const colors = themeInfo.colors
 
+  const summary = getChangeSummary(change)
+  // Extraer el valor numérico si existe para destacarlo
+  const match = summary.match(/([+-]?\d+)/)
+  const value = match ? match[1] : null
+
   return (
     <XStack
-      paddingVertical={8}
-      paddingHorizontal={12}
+      paddingVertical={10}
+      paddingHorizontal={14}
       backgroundColor="$uiBackgroundColor"
-      borderRadius={6}
+      borderRadius={8}
+      borderWidth={1}
+      borderColor="$borderColor"
+      alignItems="center"
+      gap={10}
     >
-      <Text fontSize={13} color={colors.primary}>
-        {getChangeSummary(change)}
+      {value && (
+        <Text
+          fontSize={15}
+          fontWeight="700"
+          color={colors.accent}
+          minWidth={36}
+        >
+          {value.startsWith('-') ? value : `+${value.replace('+', '')}`}
+        </Text>
+      )}
+      <Text fontSize={13} color={colors.primary} flex={1}>
+        {summary.replace(/[+-]?\d+\s*/, '').trim()}
       </Text>
     </XStack>
   )
@@ -114,88 +133,146 @@ export function BuffDetailPanel({
   const hasSpecialChanges = buff.specialChanges && buff.specialChanges.length > 0
 
   return (
-    <YStack gap={20}>
-      {/* Header con nombre y toggle */}
-      <XStack alignItems="center" justifyContent="space-between">
-        <YStack flex={1} gap={4}>
-          <Text fontSize={24} fontWeight="700" color={colors.primary}>
-            {buff.name}
-          </Text>
-          <Text fontSize={12} color={colors.accent} textTransform="uppercase">
-            {buff.originType}
-          </Text>
-        </YStack>
-        <Checkbox
-          checked={buff.active}
-          onCheckedChange={onToggleActive}
-          size="small"
-          variant="diamond"
-        />
-      </XStack>
+    <YStack gap={24} padding={16}>
+      {/* Header con nombre y estado */}
+      <YStack gap={12}>
+        <XStack alignItems="flex-start" justifyContent="space-between" gap={16}>
+          <YStack flex={1} gap={6}>
+            <Text fontSize={22} fontWeight="700" color={colors.primary}>
+              {buff.name}
+            </Text>
+            <XStack alignItems="center" gap={8}>
+              <Text
+                fontSize={11}
+                fontWeight="600"
+                color={colors.accent}
+                textTransform="uppercase"
+                letterSpacing={0.5}
+              >
+                {buff.originType}
+              </Text>
+            </XStack>
+          </YStack>
+          <XStack
+            alignItems="center"
+            gap={10}
+            paddingVertical={8}
+            paddingHorizontal={12}
+            backgroundColor="$uiBackgroundColor"
+            borderRadius={8}
+          >
+            <Text
+              fontSize={12}
+              fontWeight="600"
+              color={buff.active ? colors.accent : '$placeholderColor'}
+            >
+              {buff.active ? 'Active' : 'Inactive'}
+            </Text>
+            <Checkbox
+              checked={buff.active}
+              onCheckedChange={onToggleActive}
+              size="small"
+              variant="diamond"
+            />
+          </XStack>
+        </XStack>
 
-      {/* Descripcion */}
-      {buff.description ? (
-        <YStack gap={8}>
-          <Text fontSize={13} fontWeight="600" color={colors.accent}>
-            Description
-          </Text>
-          <Text fontSize={14} color={colors.primary} lineHeight={20}>
+        {/* Descripcion inline si existe */}
+        {buff.description ? (
+          <Text fontSize={14} color="$placeholderColor" lineHeight={20}>
             {buff.description}
           </Text>
-        </YStack>
-      ) : null}
+        ) : null}
+      </YStack>
 
       {/* Changes */}
       {hasChanges ? (
         <YStack gap={12}>
-          <Text fontSize={13} fontWeight="600" color={colors.accent}>
-            Changes
-          </Text>
-          <YStack gap={6}>
+          <XStack alignItems="center" gap={8}>
+            <Text fontSize={13} fontWeight="600" color={colors.accent}>
+              Effects
+            </Text>
+            <Text fontSize={12} color="$placeholderColor">
+              ({buff.changes!.length})
+            </Text>
+          </XStack>
+          <YStack gap={8}>
             {buff.changes!.map((change, index) => (
               <ChangeItem key={`change-${index}`} change={change} />
             ))}
           </YStack>
         </YStack>
-      ) : null}
+      ) : (
+        <YStack
+          padding={16}
+          backgroundColor="$uiBackgroundColor"
+          borderRadius={8}
+          borderWidth={1}
+          borderColor="$borderColor"
+          borderStyle="dashed"
+          alignItems="center"
+        >
+          <Text fontSize={13} color="$placeholderColor">
+            No effects defined
+          </Text>
+        </YStack>
+      )}
 
-      {/* Contextual Changes - solo indicador por ahora */}
+      {/* Contextual Changes */}
       {hasContextualChanges ? (
         <YStack gap={8}>
           <Text fontSize={13} fontWeight="600" color={colors.accent}>
-            Contextual Changes
+            Contextual Effects
           </Text>
-          <Text fontSize={12} color="$placeholderColor">
-            {buff.contextualChanges!.length} contextual change(s)
-          </Text>
+          <XStack
+            padding={12}
+            backgroundColor="$uiBackgroundColor"
+            borderRadius={8}
+            borderWidth={1}
+            borderColor="$borderColor"
+          >
+            <Text fontSize={12} color="$placeholderColor">
+              {buff.contextualChanges!.length} contextual effect(s)
+            </Text>
+          </XStack>
         </YStack>
       ) : null}
 
-      {/* Special Changes - solo indicador por ahora */}
+      {/* Special Changes */}
       {hasSpecialChanges ? (
         <YStack gap={8}>
           <Text fontSize={13} fontWeight="600" color={colors.accent}>
-            Special Changes
+            Special Effects
           </Text>
-          <Text fontSize={12} color="$placeholderColor">
-            {buff.specialChanges!.length} special change(s)
-          </Text>
+          <XStack
+            padding={12}
+            backgroundColor="$uiBackgroundColor"
+            borderRadius={8}
+            borderWidth={1}
+            borderColor="$borderColor"
+          >
+            <Text fontSize={12} color="$placeholderColor">
+              {buff.specialChanges!.length} special effect(s)
+            </Text>
+          </XStack>
         </YStack>
       ) : null}
 
       {/* Botones de accion */}
       {(onEdit || onDelete) ? (
-        <XStack justifyContent="space-between" paddingTop={8} gap={12}>
+        <XStack gap={12} marginTop={8}>
           {onDelete ? (
             <Button variant="destructive" onPress={onDelete} size="small">
               Delete
             </Button>
-          ) : <YStack />}
-          {onEdit ? (
-            <Button variant="primary" onPress={onEdit} size="small">
-              Edit Buff
-            </Button>
           ) : null}
+          <XStack flex={1} justifyContent="flex-end">
+            {onEdit ? (
+              <Button variant="primary" onPress={onEdit}>
+                Edit Buff
+              </Button>
+            ) : null}
+          </XStack>
         </XStack>
       ) : null}
     </YStack>
