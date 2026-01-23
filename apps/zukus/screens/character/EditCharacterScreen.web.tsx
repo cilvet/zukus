@@ -1,13 +1,17 @@
 import { View, StyleSheet } from 'react-native'
-import { Text, YStack, ScrollView } from 'tamagui'
+import { Text, YStack, XStack, ScrollView } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
 import { useTheme, useCharacterSheet } from '../../ui'
 import { useCharacterSync } from '../../hooks'
-import { LevelEditor, AbilityScoresEditor } from '../../ui/components/character/editor'
+import {
+  LevelEditor,
+  AbilityScoresEditor,
+  CharacterInfoSection,
+} from '../../ui/components/character/editor'
 
 /**
  * Pantalla de edicion de personaje para web.
- * Permite editar niveles, clases y ability scores.
+ * Muestra las columnas lado a lado en desktop.
  */
 export function EditCharacterScreen() {
   const { themeColors } = useTheme()
@@ -59,10 +63,20 @@ export function EditCharacterScreen() {
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <ScrollView flex={1} contentContainerStyle={styles.scrollContent}>
-        <YStack gap="$6" paddingVertical="$4" paddingHorizontal="$4" maxWidth={600} width="100%" alignSelf="center">
-          <LevelEditor />
-          <AbilityScoresEditor />
-        </YStack>
+        <XStack gap="$6" paddingVertical="$4" paddingHorizontal="$4" maxWidth={1000} width="100%" alignSelf="center">
+          {/* Columna 1: Info + Abilities */}
+          <YStack flex={1} gap="$4">
+            <CharacterInfoSection />
+            <YStack paddingHorizontal={16}>
+              <AbilityScoresEditor />
+            </YStack>
+          </YStack>
+
+          {/* Columna 2: Niveles */}
+          <YStack flex={1} gap="$4">
+            <LevelEditor />
+          </YStack>
+        </XStack>
       </ScrollView>
     </View>
   )

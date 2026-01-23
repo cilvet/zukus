@@ -17,6 +17,10 @@ export {
   useCharacterBuild,
   useCharacterActions,
   useComputedEntities,
+  useCharacterDescription,
+  useCharacterAlignment,
+  useCharacterPhysicalTraits,
+  useCharacterBackgroundInfo,
 } from './characterStore'
 
 export { usePanelStore } from './panelStore'

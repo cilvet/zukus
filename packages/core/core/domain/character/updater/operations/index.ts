@@ -52,6 +52,17 @@ export {
 export {
   setName,
   setTheme,
+  setDescription,
+  setAlignment,
+  setAge,
+  setGender,
+  setHeight,
+  setWeight,
+  setEyes,
+  setHair,
+  setSkin,
+  setDeity,
+  setBackground,
 } from './characterPropertyOperations';
 
 // Re-export operations from levels updater

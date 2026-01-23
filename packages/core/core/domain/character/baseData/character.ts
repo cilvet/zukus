@@ -15,6 +15,15 @@ import { Resource } from "../../spells/resources";
 import type { StandardEntity } from "../../entities/types/base";
 import type { EntityInstance, LevelSlot, ClassEntity, SystemLevelsEntity } from "../../levels/storage/types";
 
+/**
+ * Alineamiento del personaje en D&D 3.5.
+ * Combinacion de eje ley/caos y bien/mal.
+ */
+export type Alignment = {
+  lawChaos: 'lawful' | 'neutral' | 'chaotic';
+  goodEvil: 'good' | 'neutral' | 'evil';
+};
+
 export type SpecialFeature = {
   uniqueId: string;
   title: string;
@@ -58,6 +67,29 @@ export type CharacterBaseData = {
   activeCompendiums?: string[];
   /** Custom entities organized by entityType */
   customEntities?: Record<string, StandardEntity[]>;
+
+  // ==========================================================================
+  // Character Description Fields
+  // ==========================================================================
+
+  /** Character description/notes */
+  description?: string;
+  /** Character alignment (null = no alignment) */
+  alignment?: Alignment | null;
+
+  // Physical characteristics
+  age?: string;
+  gender?: string;
+  height?: string;
+  weight?: string;
+  eyes?: string;
+  hair?: string;
+  skin?: string;
+
+  // Background
+  deity?: string;
+  /** Character backstory (multiline) */
+  background?: string;
   
   // ==========================================================================
   // New Level System (coexists with legacy system above)

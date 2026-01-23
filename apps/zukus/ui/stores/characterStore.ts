@@ -9,6 +9,7 @@ import type {
   Equipment,
   SpecialFeature,
   ComputedEntity,
+  Alignment,
 } from '@zukus/core'
 
 /**
@@ -67,6 +68,19 @@ type CharacterActions = {
   updateTheme: (theme: string) => UpdateResult
   updateHp: (hpAdded: number) => UpdateResult
   setCurrentCharacterLevel: (level: number) => UpdateResult
+
+  // Character Description
+  updateDescription: (description: string) => UpdateResult
+  updateAlignment: (alignment: Alignment | null) => UpdateResult
+  updateAge: (age: string) => UpdateResult
+  updateGender: (gender: string) => UpdateResult
+  updateHeight: (height: string) => UpdateResult
+  updateWeight: (weight: string) => UpdateResult
+  updateEyes: (eyes: string) => UpdateResult
+  updateHair: (hair: string) => UpdateResult
+  updateSkin: (skin: string) => UpdateResult
+  updateDeity: (deity: string) => UpdateResult
+  updateBackground: (background: string) => UpdateResult
 
   // Resource Management
   consumeResource: (resourceId: string, amount?: number) => UpdateResult
@@ -232,6 +246,76 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
   },
 
   // =============================================================================
+  // Character Description
+  // =============================================================================
+
+  updateDescription: (description: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateDescription(description)
+  },
+
+  updateAlignment: (alignment: Alignment | null) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateAlignment(alignment)
+  },
+
+  updateAge: (age: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateAge(age)
+  },
+
+  updateGender: (gender: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateGender(gender)
+  },
+
+  updateHeight: (height: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateHeight(height)
+  },
+
+  updateWeight: (weight: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateWeight(weight)
+  },
+
+  updateEyes: (eyes: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateEyes(eyes)
+  },
+
+  updateHair: (hair: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateHair(hair)
+  },
+
+  updateSkin: (skin: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateSkin(skin)
+  },
+
+  updateDeity: (deity: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateDeity(deity)
+  },
+
+  updateBackground: (background: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateBackground(background)
+  },
+
+  // =============================================================================
   // Resource Management
   // =============================================================================
 
@@ -381,11 +465,54 @@ export function useCharacterActions() {
     updateTheme: state.updateTheme,
     updateHp: state.updateHp,
     setCurrentCharacterLevel: state.setCurrentCharacterLevel,
+    // Character description actions
+    updateDescription: state.updateDescription,
+    updateAlignment: state.updateAlignment,
+    updateAge: state.updateAge,
+    updateGender: state.updateGender,
+    updateHeight: state.updateHeight,
+    updateWeight: state.updateWeight,
+    updateEyes: state.updateEyes,
+    updateHair: state.updateHair,
+    updateSkin: state.updateSkin,
+    updateDeity: state.updateDeity,
+    updateBackground: state.updateBackground,
     // Resource actions
     consumeResource: state.consumeResource,
     rechargeResource: state.rechargeResource,
     rechargeAllResources: state.rechargeAllResources,
     // Rest
     rest: state.rest,
+  }))
+}
+
+// =============================================================================
+// Character Description Selectors
+// =============================================================================
+
+export function useCharacterDescription() {
+  return useCharacterStore((state) => state.baseData?.description ?? '')
+}
+
+export function useCharacterAlignment() {
+  return useCharacterStore((state) => state.baseData?.alignment ?? null)
+}
+
+export function useCharacterPhysicalTraits() {
+  return useCharacterStore((state) => ({
+    age: state.baseData?.age ?? '',
+    gender: state.baseData?.gender ?? '',
+    height: state.baseData?.height ?? '',
+    weight: state.baseData?.weight ?? '',
+    eyes: state.baseData?.eyes ?? '',
+    hair: state.baseData?.hair ?? '',
+    skin: state.baseData?.skin ?? '',
+  }))
+}
+
+export function useCharacterBackgroundInfo() {
+  return useCharacterStore((state) => ({
+    deity: state.baseData?.deity ?? '',
+    background: state.baseData?.background ?? '',
   }))
 }

@@ -1,5 +1,5 @@
 import { Buff } from "../../baseData/buffs";
-import { CharacterBaseData, CharacterLevelData, SpecialFeature } from "../../baseData/character";
+import { CharacterBaseData, CharacterLevelData, SpecialFeature, Alignment } from "../../baseData/character";
 import { Equipment, Item } from "../../baseData/equipment";
 import { CharacterSheet } from "../../calculatedSheet/sheet";
 import { calculateCharacterSheet } from "../../calculation/calculateCharacterSheet";
@@ -279,8 +279,107 @@ export class CharacterUpdater implements ICharacterUpdater {
 
   updateName(name: string): UpdateResult {
     if (!this.character) return this.characterNotSet;
-    
+
     const result = ops.setName(this.character, name);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateDescription(description: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setDescription(this.character, description);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateAlignment(alignment: Alignment | null): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setAlignment(this.character, alignment);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateAge(age: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setAge(this.character, age);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateGender(gender: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setGender(this.character, gender);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateHeight(height: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setHeight(this.character, height);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateWeight(weight: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setWeight(this.character, weight);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateEyes(eyes: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setEyes(this.character, eyes);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateHair(hair: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setHair(this.character, hair);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateSkin(skin: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setSkin(this.character, skin);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateDeity(deity: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setDeity(this.character, deity);
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  updateBackground(background: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setBackground(this.character, background);
     this.character = result.character;
     this.notifyUpdate();
     return { success: true };

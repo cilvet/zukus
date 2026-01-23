@@ -1,4 +1,7 @@
 export { AbilityScoresEditor } from './AbilityScoresEditor'
+export { AlignmentGrid } from './AlignmentGrid'
+export { CharacterInfoSection } from './CharacterInfoSection'
+export { EditorPager, type EditorPagerRef } from './EditorPager'
 export { ClassSelectorDetail, type ClassSelectorDetailProps, type ClassOption } from './ClassSelectorDetail'
 export { LevelDetail, type LevelDetailProps, type LevelSlotData } from './LevelDetail'
 export { LevelProgressIndicator } from './LevelProgressIndicator'
