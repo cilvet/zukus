@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { useShallow } from 'zustand/react/shallow'
 import { CharacterUpdater } from '@zukus/core'
 import type {
   CharacterSheet,
@@ -499,20 +500,24 @@ export function useCharacterAlignment() {
 }
 
 export function useCharacterPhysicalTraits() {
-  return useCharacterStore((state) => ({
-    age: state.baseData?.age ?? '',
-    gender: state.baseData?.gender ?? '',
-    height: state.baseData?.height ?? '',
-    weight: state.baseData?.weight ?? '',
-    eyes: state.baseData?.eyes ?? '',
-    hair: state.baseData?.hair ?? '',
-    skin: state.baseData?.skin ?? '',
-  }))
+  return useCharacterStore(
+    useShallow((state) => ({
+      age: state.baseData?.age ?? '',
+      gender: state.baseData?.gender ?? '',
+      height: state.baseData?.height ?? '',
+      weight: state.baseData?.weight ?? '',
+      eyes: state.baseData?.eyes ?? '',
+      hair: state.baseData?.hair ?? '',
+      skin: state.baseData?.skin ?? '',
+    }))
+  )
 }
 
 export function useCharacterBackgroundInfo() {
-  return useCharacterStore((state) => ({
-    deity: state.baseData?.deity ?? '',
-    background: state.baseData?.background ?? '',
-  }))
+  return useCharacterStore(
+    useShallow((state) => ({
+      deity: state.baseData?.deity ?? '',
+      background: state.baseData?.background ?? '',
+    }))
+  )
 }

@@ -1,17 +1,23 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { ScrollView } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import { useCharacterStore, useCharacterBaseData } from '../../../stores'
 import { useNavigateToDetail } from '../../../../navigation'
 import { ops } from '@zukus/core'
 import type { LevelSlot } from '@zukus/core'
 import { LevelSlotRow } from './LevelSlotRow'
+import { CurrentLevelSelector } from './CurrentLevelSelector'
 
 const TOTAL_LEVELS = 20
 
-export function LevelEditor() {
+type LevelEditorProps = {
+  onRequestLevelChange: (level: number) => void
+}
+
+export function LevelEditor({
+  onRequestLevelChange,
+}: LevelEditorProps) {
   "use no memo"
-  
+
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
   const hasInitialized = useRef(false)
@@ -23,9 +29,8 @@ export function LevelEditor() {
       const currentSlots = baseData.levelSlots?.length ?? 0
 
       if (currentSlots < TOTAL_LEVELS) {
-        // Add missing slots up to 20
         let updatedData = { ...baseData }
-        
+
         while ((updatedData.levelSlots?.length ?? 0) < TOTAL_LEVELS) {
           const result = ops.addLevelSlot(updatedData as any)
           updatedData = result.character
@@ -43,7 +48,6 @@ export function LevelEditor() {
   const levelSlots = baseData?.levelSlots ?? []
   const classEntities = baseData?.classEntities
 
-  // Ensure we always show 20 slots
   const displaySlots: LevelSlot[] = Array.from({ length: TOTAL_LEVELS }, (_, index) => {
     return levelSlots[index] ?? { classId: null, hpRoll: null }
   })
@@ -54,15 +58,6 @@ export function LevelEditor() {
     navigateToDetail('levelDetail', String(levelIndex))
   }, [navigateToDetail])
 
-  const handleLevelChange = useCallback(
-    (newLevel: number) => {
-      if (updater) {
-        updater.setCurrentCharacterLevel(newLevel)
-      }
-    },
-    [updater]
-  )
-
   if (!baseData) {
     return (
       <YStack padding="$4" alignItems="center">
@@ -72,59 +67,70 @@ export function LevelEditor() {
   }
 
   return (
-    <YStack gap="$2" flex={1}>
-      <YStack paddingHorizontal="$4" paddingTop="$4">
+    <YStack gap={16} flex={1}>
+      {/* Level Selector */}
+      <YStack paddingHorizontal={16}>
+        <CurrentLevelSelector
+          currentLevel={currentLevel}
+          onLevelChange={(level) => {
+            if (updater) {
+              updater.setCurrentCharacterLevel(level)
+            }
+          }}
+        />
+      </YStack>
+
+      {/* Header */}
+      <YStack paddingHorizontal={16}>
         <Text fontSize={16} fontWeight="600" color="$color">
           Niveles
         </Text>
-        <Text fontSize={13} color="$placeholderColor" marginTop="$1">
+        <Text fontSize={13} color="$placeholderColor" marginTop={4}>
           Toca un nivel para configurarlo
         </Text>
       </YStack>
 
-      <ScrollView style={{ flex: 1 }}>
-        <YStack paddingBottom="$4">
-          {/* Header */}
-          <XStack
-            gap="$2"
-            paddingHorizontal="$4"
-            paddingBottom="$2"
-            marginBottom="$2"
-            borderBottomWidth={1}
-            borderColor="$borderColor"
-          >
-            <Text width={24} />
-            <Text width={80} fontWeight="bold" color="$color">
-              Nivel
-            </Text>
-            <Text flex={1} fontWeight="bold" color="$color">
-              Clase
-            </Text>
-          </XStack>
+      {/* Level List Header */}
+      <XStack
+        gap={8}
+        paddingHorizontal={16}
+        paddingBottom={8}
+        borderBottomWidth={1}
+        borderColor="$borderColor"
+      >
+        <Text width={24} />
+        <Text width={70} fontWeight="bold" fontSize={13} color="$placeholderColor">
+          Nivel
+        </Text>
+        <Text flex={1} fontWeight="bold" fontSize={13} color="$placeholderColor">
+          Clase
+        </Text>
+      </XStack>
 
-          {displaySlots.map((slot, index) => {
-            const isActive = index < currentLevel
-            const isNextActive = index + 1 < currentLevel
-            const isFirstLevel = index === 0
-            const isLastLevel = index === displaySlots.length - 1
+      {/* Level Rows */}
+      <YStack paddingBottom={16}>
+        {displaySlots.map((slot, index) => {
+          const isActive = index < currentLevel
+          const isNextActive = index + 1 < currentLevel
+          const isFirstLevel = index === 0
+          const isLastLevel = index === displaySlots.length - 1
 
-            return (
-              <LevelSlotRow
-                key={index}
-                levelIndex={index}
-                slot={slot}
-                isActive={isActive}
-                isNextActive={isNextActive}
-                isFirstLevel={isFirstLevel}
-                isLastLevel={isLastLevel}
-                classEntities={classEntities}
-                onRowPress={handleRowPress}
-                onLevelActivate={handleLevelChange}
-              />
-            )
-          })}
-        </YStack>
-      </ScrollView>
+          return (
+            <LevelSlotRow
+              key={index}
+              levelIndex={index}
+              slot={slot}
+              isActive={isActive}
+              isNextActive={isNextActive}
+              isFirstLevel={isFirstLevel}
+              isLastLevel={isLastLevel}
+              classEntities={classEntities}
+              onRowPress={handleRowPress}
+              onLevelActivate={onRequestLevelChange}
+            />
+          )
+        })}
+      </YStack>
     </YStack>
   )
 }

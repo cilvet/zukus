@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text, YStack, XStack } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
-import { useTheme, useCharacterSheet } from '../../ui'
+import { useTheme, useCharacterSheet, useCharacterStore } from '../../ui'
 import { SafeAreaBottomSpacer } from '../../components/layout'
 import { useCharacterSync } from '../../hooks'
 import {
@@ -91,10 +91,14 @@ function InfoColumn() {
 /**
  * Columna 2: Niveles
  */
-function LevelsColumn() {
+function LevelsColumn({
+  onRequestLevelChange,
+}: {
+  onRequestLevelChange: (level: number) => void
+}) {
   return (
     <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-      <LevelEditor />
+      <LevelEditor onRequestLevelChange={onRequestLevelChange} />
     </ScrollView>
   )
 }
@@ -109,6 +113,8 @@ export function EditCharacterScreen() {
   const characterId = id ?? ''
   const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
+  const { updater } = useCharacterStore()
+
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<EditorPagerRef>(null)
 
@@ -116,6 +122,13 @@ export function EditCharacterScreen() {
     pagerRef.current?.setPage(index)
     setCurrentPage(index)
   }
+
+  // Level change from dot press - direct change (no confirmation needed)
+  const handleRequestLevelChange = useCallback((level: number) => {
+    if (updater) {
+      updater.setCurrentCharacterLevel(level)
+    }
+  }, [updater])
 
   if (!characterId) {
     return (
@@ -169,7 +182,7 @@ export function EditCharacterScreen() {
           <InfoColumn />
         </View>
         <View key="levels" style={styles.page}>
-          <LevelsColumn />
+          <LevelsColumn onRequestLevelChange={handleRequestLevelChange} />
         </View>
       </EditorPager>
       <SafeAreaBottomSpacer />

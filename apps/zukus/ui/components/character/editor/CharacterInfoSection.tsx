@@ -9,10 +9,13 @@ import {
   useCharacterAlignment,
 } from '../../../stores/characterStore'
 import { AlignmentGrid } from './AlignmentGrid'
+import { ImagePlaceholder } from './ImagePlaceholder'
+import { CharacterFieldsSection } from './CharacterFieldsSection'
+import { BackgroundSection } from './BackgroundSection'
 
 /**
- * Seccion de informacion basica del personaje.
- * Incluye nombre, descripcion y alineamiento.
+ * Seccion de informacion completa del personaje.
+ * Incluye imagen, identidad, alineamiento, datos fisicos y trasfondo.
  */
 export function CharacterInfoSection() {
   const { themeColors } = useTheme()
@@ -36,60 +39,70 @@ export function CharacterInfoSection() {
     updateAlignment(newAlignment)
   }
 
-  return (
-    <YStack gap={20} padding={16}>
-      {/* Nombre */}
-      <YStack gap={8}>
-        <Text fontSize={13} fontWeight="600" color="$placeholderColor">
-          Nombre
-        </Text>
-        <TextInput
-          value={name}
-          onChangeText={handleNameChange}
-          placeholder="Nombre del personaje"
-          placeholderTextColor={themeColors.placeholderColor}
-          style={[
-            styles.input,
-            {
-              backgroundColor: themeColors.uiBackgroundColor,
-              color: themeColors.color,
-              borderColor: themeColors.borderColor,
-            },
-          ]}
-        />
-      </YStack>
+  const inputStyle = [
+    styles.input,
+    {
+      backgroundColor: themeColors.uiBackgroundColor,
+      color: themeColors.color,
+      borderColor: themeColors.borderColor,
+    },
+  ]
 
-      {/* Descripcion */}
-      <YStack gap={8}>
+  return (
+    <YStack gap={24} padding={16}>
+      {/* Imagen del personaje */}
+      <ImagePlaceholder />
+
+      {/* Identidad */}
+      <YStack gap={12}>
         <Text fontSize={13} fontWeight="600" color="$placeholderColor">
-          Descripcion
+          Identidad
         </Text>
-        <TextInput
-          value={description}
-          onChangeText={handleDescriptionChange}
-          placeholder="Descripcion del personaje..."
-          placeholderTextColor={themeColors.placeholderColor}
-          multiline
-          numberOfLines={4}
-          style={[
-            styles.input,
-            styles.textArea,
-            {
-              backgroundColor: themeColors.uiBackgroundColor,
-              color: themeColors.color,
-              borderColor: themeColors.borderColor,
-            },
-          ]}
-        />
+
+        {/* Nombre */}
+        <YStack gap={6}>
+          <Text fontSize={12} color="$placeholderColor">
+            Nombre
+          </Text>
+          <TextInput
+            value={name}
+            onChangeText={handleNameChange}
+            placeholder="Nombre del personaje"
+            placeholderTextColor={themeColors.placeholderColor}
+            style={inputStyle}
+          />
+        </YStack>
+
+        {/* Descripcion */}
+        <YStack gap={6}>
+          <Text fontSize={12} color="$placeholderColor">
+            Descripcion
+          </Text>
+          <TextInput
+            value={description}
+            onChangeText={handleDescriptionChange}
+            placeholder="Descripcion del personaje..."
+            placeholderTextColor={themeColors.placeholderColor}
+            multiline
+            numberOfLines={4}
+            style={[inputStyle, styles.textArea]}
+          />
+        </YStack>
       </YStack>
 
       {/* Alineamiento */}
-      <YStack gap={8}>
+      <YStack gap={12}>
         <Text fontSize={13} fontWeight="600" color="$placeholderColor">
           Alineamiento
         </Text>
         <AlignmentGrid value={alignment} onChange={handleAlignmentChange} />
       </YStack>
+
+      {/* Datos Fisicos */}
+      <CharacterFieldsSection />
+
+      {/* Trasfondo */}
+      <BackgroundSection />
     </YStack>
   )
 }

@@ -1,72 +1,77 @@
-import { XStack, Text, YStack, Select } from 'tamagui'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import { useState } from 'react'
+import { TextInput, StyleSheet } from 'react-native'
+import { XStack, Text } from 'tamagui'
+import { useTheme } from '../../../contexts/ThemeContext'
 
 export type CurrentLevelSelectorProps = {
   currentLevel: number
-  onLevelChange: (newLevel: number) => void
+  onLevelChange: (level: number) => void
 }
 
+/**
+ * Selector de nivel con input numerico simple.
+ */
 export function CurrentLevelSelector({
   currentLevel,
   onLevelChange,
 }: CurrentLevelSelectorProps) {
-  // Generar opciones de nivel 1-20
-  const levelOptions = Array.from({ length: 20 }, (_, i) => i + 1)
+  const { themeColors } = useTheme()
+  const [text, setText] = useState(String(currentLevel))
 
-  const handleLevelChange = (value: string) => {
-    const newLevel = parseInt(value, 10)
-    if (!isNaN(newLevel) && newLevel >= 1 && newLevel <= 20) {
-      onLevelChange(newLevel)
+  const handleChangeText = (value: string) => {
+    setText(value)
+  }
+
+  const handleBlur = () => {
+    const num = parseInt(text, 10)
+    if (!isNaN(num) && num >= 1 && num <= 20) {
+      onLevelChange(num)
+      setText(String(num))
+    } else {
+      setText(String(currentLevel))
     }
   }
 
   return (
-    <YStack
-      gap="$2"
-      padding="$3"
+    <XStack
+      alignItems="center"
+      justifyContent="space-between"
+      padding={12}
+      borderRadius={10}
       borderWidth={1}
-      borderColor="$borderColor"
-      borderRadius="$2"
-      backgroundColor="$background"
+      borderColor={themeColors.borderColor}
+      backgroundColor={themeColors.uiBackgroundColor}
     >
-      <Text fontSize={16} fontWeight="700" color="$color">
-        Current Character Level
+      <Text fontSize={14} color="$placeholderColor">
+        Nivel actual
       </Text>
-      <Select
-        value={currentLevel.toString()}
-        onValueChange={handleLevelChange}
-        disablePreventBodyScroll
-      >
-        <Select.Trigger width={200} iconAfter={<FontAwesome name="chevron-down" size={16} />}>
-          <Select.Value placeholder="Select level" />
-        </Select.Trigger>
-
-        <Select.Adapt when="sm" platform="touch">
-          <Select.Sheet modal dismissOnSnapToBottom>
-            <Select.Sheet.Frame>
-              <Select.Sheet.ScrollView>
-                <Select.Adapt.Contents />
-              </Select.Sheet.ScrollView>
-            </Select.Sheet.Frame>
-            <Select.Sheet.Overlay />
-          </Select.Sheet>
-        </Select.Adapt>
-
-        <Select.Content zIndex={200000}>
-          <Select.ScrollUpButton />
-          <Select.Viewport>
-            {levelOptions.map((level) => (
-              <Select.Item key={level} index={level - 1} value={level.toString()}>
-                <Select.ItemText>Level {level}</Select.ItemText>
-                <Select.ItemIndicator marginLeft="auto">
-                  <FontAwesome name="check" size={16} />
-                </Select.ItemIndicator>
-              </Select.Item>
-            ))}
-          </Select.Viewport>
-          <Select.ScrollDownButton />
-        </Select.Content>
-      </Select>
-    </YStack>
+      <TextInput
+        value={text}
+        onChangeText={handleChangeText}
+        onBlur={handleBlur}
+        keyboardType="number-pad"
+        selectTextOnFocus
+        style={[
+          styles.input,
+          {
+            color: themeColors.color,
+            borderColor: themeColors.borderColor,
+          },
+        ]}
+      />
+    </XStack>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    fontSize: 18,
+    fontWeight: '700',
+    textAlign: 'center',
+    width: 50,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderWidth: 1,
+    borderRadius: 6,
+  },
+})
