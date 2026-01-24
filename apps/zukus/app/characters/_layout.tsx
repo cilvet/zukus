@@ -1,28 +1,15 @@
 import { Stack, useRouter } from 'expo-router'
-import { Platform, useWindowDimensions, Pressable } from 'react-native'
+import { Pressable } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
-import { useTheme } from '../../../ui'
+import { useTheme } from '../../ui'
 
-const DESKTOP_BREAKPOINT = 768
-
-export default function CharacterLayout() {
-  const { width } = useWindowDimensions()
+export default function CharactersLayout() {
   const { themeColors } = useTheme()
   const router = useRouter()
-  const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
-  const HomeButton = () => (
-    <Pressable onPress={() => router.replace('/home')} hitSlop={8}>
-      <FontAwesome name="home" size={22} color={themeColors.color} style={{ marginLeft: 8 }} />
-    </Pressable>
-  )
-
-  // En desktop web: sin header (usamos el Side Panel)
-  // En mobile: header con navegación stack
   return (
     <Stack
       screenOptions={{
-        headerShown: !isWebDesktop,
         headerStyle: {
           backgroundColor: themeColors.background,
         },
@@ -42,15 +29,26 @@ export default function CharacterLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: 'Personajes',
-          headerLeft: () => <HomeButton />,
+          title: 'Mis Personajes',
+          headerLeft: () => (
+            <Pressable onPress={() => router.replace('/home')} hitSlop={8}>
+              <FontAwesome name="home" size={22} color={themeColors.color} style={{ marginLeft: 8 }} />
+            </Pressable>
+          ),
         }}
       />
       <Stack.Screen
         name="[id]"
         options={{
-          title: 'Detalle',
-          headerShown: false,
+          headerShown: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="edit/[id]"
+        options={{
+          headerShown: true,
+          title: '',
         }}
       />
       <Stack.Screen
@@ -60,15 +58,9 @@ export default function CharacterLayout() {
         }}
       />
       <Stack.Screen
-        name="ability/[id]"
+        name="formula-playground"
         options={{
-          title: 'Habilidad',
-        }}
-      />
-      <Stack.Screen
-        name="edit/[id]"
-        options={{
-          title: 'Editar',
+          title: 'Formula Playground',
         }}
       />
     </Stack>

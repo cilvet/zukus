@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Platform, Pressable, useWindowDimensions } from 'react-native'
+import { Platform, Pressable, useWindowDimensions, View } from 'react-native'
 import { ScrollView, Text, XStack, YStack } from 'tamagui'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 import type { BatteryEvent, PixelStatus, RollEvent } from '@systemic-games/pixels-core-connect'
 import { useGlowOnChange } from '../../hooks'
 import {
@@ -229,7 +230,8 @@ export function PixelDiceScreen() {
   const infoCardBackground = isGlowing ? themeColors.backgroundHover : themeColors.uiBackgroundColor
 
   return (
-    <ScrollView flex={1} backgroundColor={themeColors.background}>
+    <View style={{ flex: 1, backgroundColor: themeColors.background }}>
+      <ScrollView flex={1} backgroundColor={themeColors.background}>
       <YStack padding="$4" borderBottomWidth={1} borderBottomColor={themeColors.borderColor}>
         <Text fontSize={24} fontWeight="bold" color={themeColors.color}>
           Pixel Dice
@@ -535,5 +537,7 @@ export function PixelDiceScreen() {
         </XStack>
       </YStack>
     </ScrollView>
+    <SafeAreaBottomSpacer />
+  </View>
   )
 }

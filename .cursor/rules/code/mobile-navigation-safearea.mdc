@@ -1,0 +1,56 @@
+# Navegacion Mobile y Safe Area
+
+## Estructura de Navegacion
+
+### Mobile
+- `HomeScreen` con botones/cards navega a rutas fuera de `(tabs)`
+- Rutas: `/characters`, `/dice`, `/compendiums`, `/settings`
+- No usa TabBar nativa de Expo Router
+
+### Desktop Web
+- Mantiene `(tabs)` con Topbar
+- Sin cambios en la navegacion
+
+## CharacterScreen Mobile
+
+Usa `BottomTabBar` en lugar de dropdown:
+- Tabs en la parte inferior
+- Maximo 4 tabs visibles + "Mas" si hay mas de 5
+- `MoreOptionsSheet` para opciones adicionales
+
+## Safe Area Bottom (Android)
+
+**Problema**: Contenido aparece detras de los botones de navegacion de Android.
+
+**Solucion**: Usar `SafeAreaBottomSpacer` como hermano del ScrollView/contenido, NO dentro.
+
+```typescript
+// BIEN - Spacer como hermano
+<View style={{ flex: 1 }}>
+  <ScrollView flex={1}>
+    {/* contenido */}
+  </ScrollView>
+  <SafeAreaBottomSpacer />
+</View>
+
+// MAL - No funciona con Tamagui ScrollView
+<ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>
+  {/* contenido */}
+</ScrollView>
+```
+
+### Componente
+
+```typescript
+import { SafeAreaBottomSpacer } from '../../components/layout'
+
+// Usa fondo negro (#000) para Android
+<SafeAreaBottomSpacer />
+```
+
+### Excepciones
+
+Usar `useSafeAreaInsets` directamente cuando:
+- Posicionar elementos flotantes (FAB, botones absolutos)
+- Layouts con teclado e input flotante (ChatScreen)
+- Bottom sheets y modales

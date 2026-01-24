@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
+import { Platform, useWindowDimensions } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useAuth } from '../contexts'
 import { characterRepository, type CharacterListItem } from '../services/characterRepository'
 
+const DESKTOP_BREAKPOINT = 768
+
 export function useCharacterList() {
   const router = useRouter()
   const { session } = useAuth()
+  const { width } = useWindowDimensions()
+  const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
   const [characters, setCharacters] = useState<CharacterListItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -42,10 +47,18 @@ export function useCharacterList() {
   }, [session])
 
   const navigateToCharacter = (characterId: string) => {
-    router.push({
-      pathname: '/(tabs)/(character)/[id]',
-      params: { id: characterId },
-    })
+    // Desktop web usa (tabs), mobile usa rutas de nivel superior
+    if (isWebDesktop) {
+      router.push({
+        pathname: '/(tabs)/(character)/[id]',
+        params: { id: characterId },
+      })
+    } else {
+      router.push({
+        pathname: '/characters/[id]',
+        params: { id: characterId },
+      })
+    }
   }
 
   return {

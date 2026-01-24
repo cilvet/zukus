@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons/faHatWizard'
 import {
   CharacterPager,
-  CharacterTabs,
+  BottomTabBar,
   CombatSection,
   AbilitiesSection,
   BuffsSection,
@@ -29,6 +29,7 @@ import {
   CHARACTER_PAGES,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 
 /**
  * Header fijo con info del personaje.
@@ -49,16 +50,16 @@ function Header() {
   const maxHp = hitPoints?.maxHp ?? 0
 
   const handleHitPointsPress = () => {
-    router.push('/(tabs)/(character)/detail/hitPoints/hitPoints')
+    router.push('/characters/detail/hitPoints/hitPoints')
   }
 
   const handleFormulaPlaygroundPress = () => {
-    router.push('/(tabs)/(character)/formula-playground')
+    router.push('/characters/formula-playground')
   }
 
   const handleLevelPress = () => {
     if (id) {
-      router.push(`/(tabs)/(character)/edit/${id}`)
+      router.push(`/characters/edit/${id}`)
     }
   }
 
@@ -192,6 +193,7 @@ export function CharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Personaje invalido.</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -202,6 +204,7 @@ export function CharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Cargando personaje...</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -212,6 +215,7 @@ export function CharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$colorFocus">{error}</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -222,6 +226,7 @@ export function CharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Cargando personaje...</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -229,7 +234,6 @@ export function CharacterScreen() {
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <Header />
-      <CharacterTabs currentPage={currentPage} onPageChange={handleTabPress} />
       <CharacterPager ref={pagerRef} onPageChange={setCurrentPage} onPageSettled={handlePageSettled}>
         <View key="combat" style={styles.page}>
           <CombatSection />
@@ -254,13 +258,19 @@ export function CharacterScreen() {
         </View>
       </CharacterPager>
 
-      {/* Botón flotante de chat */}
+      <BottomTabBar
+        pages={CHARACTER_PAGES}
+        currentPage={currentPage}
+        onPageChange={handleTabPress}
+      />
+
+      {/* Boton flotante de chat */}
       <Pressable
         onPress={handleChatPress}
         style={[
           styles.fab,
           {
-            bottom: 16,
+            bottom: insets.bottom + 56 + 16,
             backgroundColor: themeColors.actionButton,
           },
         ]}

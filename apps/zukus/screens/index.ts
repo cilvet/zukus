@@ -2,3 +2,4 @@ export { CharacterScreen, CharacterScreenDesktop, CharacterListScreen, EditChara
 export { DetailScreen } from './detail'
 export { FormulaPlaygroundSection } from '../components/character/sections/FormulaPlaygroundSection'
 export { PixelDiceScreen } from './pixels'
+export { HomeScreen } from './HomeScreen'

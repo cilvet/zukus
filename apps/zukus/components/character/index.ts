@@ -1,6 +1,8 @@
 export * from './CharacterComponents'
 export * from './CharacterPager'
 export * from './CharacterTabs'
+export * from './BottomTabBar'
+export * from './MoreOptionsSheet'
 export * from './data'
 export * from './sections'
 export { ArmorClassDetailPanel } from '../../ui/components/character/ArmorClassDetailPanel'

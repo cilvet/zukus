@@ -45,62 +45,18 @@ export default function TabsLayout() {
     )
   }
 
-  // Tab bar base height (without safe area)
-  const TAB_BAR_HEIGHT = 56
-
-  // Mobile (nativo y web): mostrar tabs
+  // Mobile (nativo y web mobile): ocultar tabs, navegacion via HomeScreen
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: themeColors.tabBarBackground,
-          borderTopColor: themeColors.tabBarBorder,
-          borderTopWidth: 1,
-          height: TAB_BAR_HEIGHT + insets.bottom,
-          paddingBottom: insets.bottom,
-          paddingTop: 6,
-        },
-        tabBarActiveTintColor: themeColors.tabBarActive,
-        tabBarInactiveTintColor: themeColors.tabBarInactive,
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: '600',
-          marginTop: 2,
-        },
-        tabBarIconStyle: {
-          marginBottom: 0,
-        },
+        tabBarStyle: { display: 'none' },
       }}
     >
-      <Tabs.Screen
-        name="(character)"
-        options={{
-          title: 'Personajes',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="(dice)"
-        options={{
-          title: 'Dados',
-          tabBarIcon: ({ color }) => <FontAwesome5 size={20} name="dice-d20" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="(compendiums)"
-        options={{
-          title: 'Compendios',
-          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="(settings)"
-        options={{
-          title: 'Ajustes',
-          tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
-        }}
-      />
+      <Tabs.Screen name="(character)" options={{ title: 'Personajes' }} />
+      <Tabs.Screen name="(dice)" options={{ title: 'Dados' }} />
+      <Tabs.Screen name="(compendiums)" options={{ title: 'Compendios' }} />
+      <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
     </Tabs>
   )
 }

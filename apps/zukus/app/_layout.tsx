@@ -4,12 +4,15 @@ import { TamaguiProvider, Theme } from 'tamagui'
 import { config, ThemeProvider, useTheme } from '../ui'
 import { useFonts } from 'expo-font'
 import { useMemo, useEffect } from 'react'
+import { Platform, useWindowDimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { AuthProvider, useAuth } from '../contexts'
+
+const DESKTOP_BREAKPOINT = 768
 
 // React Scan solo en desarrollo y web
 let reactScanInitialized = false
@@ -32,6 +35,7 @@ function ThemedApp() {
   const { session, isLoading: isAuthLoading } = useAuth()
   const router = useRouter()
   const segments = useSegments()
+  const { width } = useWindowDimensions()
 
   // Create a navigation theme that matches our app theme
   const navigationTheme = useMemo(() => ({
@@ -75,9 +79,15 @@ function ThemedApp() {
     }
 
     if (session && inAuthGroup) {
-      router.replace('/(tabs)/(character)')
+      // Mobile va a /home, desktop va directo a tabs
+      const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+      if (isWebDesktop) {
+        router.replace('/(tabs)/(character)')
+      } else {
+        router.replace('/home')
+      }
     }
-  }, [isAuthLoading, segments, router, session])
+  }, [isAuthLoading, segments, router, session, width])
 
   if (isLoading) {
     return null
@@ -97,8 +107,38 @@ function ThemedApp() {
             }}
           >
             <Stack.Screen name="index" />
+            <Stack.Screen name="home" />
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="(tabs)" />
+            {/* Rutas de nivel superior para mobile */}
+            <Stack.Screen name="characters" />
+            <Stack.Screen
+              name="dice"
+              options={{
+                headerShown: true,
+                headerTitle: 'Dados',
+                headerStyle: { backgroundColor: themeColors.background },
+                headerTintColor: themeColors.color,
+              }}
+            />
+            <Stack.Screen
+              name="compendiums"
+              options={{
+                headerShown: true,
+                headerTitle: 'Compendios',
+                headerStyle: { backgroundColor: themeColors.background },
+                headerTintColor: themeColors.color,
+              }}
+            />
+            <Stack.Screen
+              name="settings"
+              options={{
+                headerShown: true,
+                headerTitle: 'Ajustes',
+                headerStyle: { backgroundColor: themeColors.background },
+                headerTintColor: themeColors.color,
+              }}
+            />
             <Stack.Screen
               name="chat"
               options={{

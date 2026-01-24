@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text, YStack, XStack } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
 import { useTheme, useCharacterSheet } from '../../ui'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 import { useCharacterSync } from '../../hooks'
 import {
   LevelEditor,
@@ -122,6 +123,7 @@ export function EditCharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Personaje invalido.</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -132,6 +134,7 @@ export function EditCharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Cargando personaje...</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -142,6 +145,7 @@ export function EditCharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$colorFocus">{error}</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -152,6 +156,7 @@ export function EditCharacterScreen() {
         <View style={styles.loadingContainer}>
           <Text color="$placeholderColor">Cargando personaje...</Text>
         </View>
+        <SafeAreaBottomSpacer />
       </View>
     )
   }
@@ -167,6 +172,7 @@ export function EditCharacterScreen() {
           <LevelsColumn />
         </View>
       </EditorPager>
+      <SafeAreaBottomSpacer />
     </View>
   )
 }

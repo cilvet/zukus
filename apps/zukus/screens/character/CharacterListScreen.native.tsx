@@ -1,14 +1,18 @@
-import { Image, Pressable } from 'react-native'
+import { Image, Pressable, View, StyleSheet } from 'react-native'
 import { useRouter } from 'expo-router'
 import { Button, ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList } from '../../hooks'
+import { useTheme } from '../../ui'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 
 export function CharacterListScreen() {
   const router = useRouter()
+  const { themeColors } = useTheme()
   const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
 
   return (
-    <ScrollView flex={1} backgroundColor="$background">
+    <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+      <ScrollView flex={1} backgroundColor="$background">
       <YStack padding="$4">
         <Button onPress={() => router.push('/(tabs)/(character)/server-list')}>Ver lista server</Button>
       </YStack>
@@ -89,5 +93,13 @@ export function CharacterListScreen() {
         ))}
       </YStack>
     </ScrollView>
+    <SafeAreaBottomSpacer />
+  </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})

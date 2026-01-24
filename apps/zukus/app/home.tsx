@@ -1,17 +1,18 @@
-import { Redirect } from 'expo-router'
 import { Platform, useWindowDimensions } from 'react-native'
+import { Redirect } from 'expo-router'
+import { HomeScreen } from '../screens'
 
 const DESKTOP_BREAKPOINT = 768
 
-export default function Index() {
+export default function Home() {
   const { width } = useWindowDimensions()
   const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
-  // Desktop web: redirigir a personajes (navegacion via Topbar)
+  // Desktop web: redirigir a personajes
   if (isWebDesktop) {
     return <Redirect href="/(tabs)/(character)" />
   }
 
-  // Mobile: redirigir a /home
-  return <Redirect href="/home" />
+  // Mobile: mostrar HomeScreen
+  return <HomeScreen />
 }
