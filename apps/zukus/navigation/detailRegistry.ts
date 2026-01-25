@@ -39,6 +39,7 @@ export type DetailType =
   | 'entitySelectorDetail'
   | 'customEntityDetail'
   | 'computedEntity'
+  | 'compendiumEntity'
 
 /**
  * Configuración de un tipo de detalle.
@@ -116,6 +117,9 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   computedEntity: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1).replace(/([A-Z])/g, ' $1').trim(),
+  },
+  compendiumEntity: {
+    getTitle: (id) => id, // El nombre real se pasa como customName
   },
 }
 

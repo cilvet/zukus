@@ -11,6 +11,7 @@ import { resolveProvider, getSelectedEntityInstances } from '@zukus/core'
 import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
 import { type DetailType, isValidDetailType, getDetailTitle, useNavigateToDetail } from '../../navigation'
 import { ChatScreen } from '../chat/ChatScreen'
+import { CompendiumEntityDetail } from '../../components/compendiums'
 
 type SlugParams = {
   slug: string[]
@@ -839,6 +840,8 @@ export function DetailScreen() {
         return <NotImplementedDetail type={type} id={id} />
       case 'computedEntity':
         return <ComputedEntityDetail entityId={id} />
+      case 'compendiumEntity':
+        return <CompendiumEntityDetail entityId={id} />
       default:
         return <InvalidRoute />
     }

@@ -1,0 +1,1 @@
+export { localCompendiumAdapter } from './localCompendiumAdapter';

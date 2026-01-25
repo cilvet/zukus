@@ -44,3 +44,23 @@ export {
 } from './buffEditStore'
 
 export { useVisiblePageStore, useIsPageVisible } from './visiblePageStore'
+
+export {
+  useCompendiumBrowserStore,
+  useCompendiums,
+  useCurrentCompendiumId,
+  useCurrentCompendiumName,
+  useEntityTypes,
+  useCurrentEntityType,
+  useCurrentEntityTypeName,
+  useEntities,
+  useEntitySchema,
+  useSearchQuery,
+  useActiveFilters,
+  useViewMode,
+  useIsLoading,
+  useIsLoadingEntities,
+  useCompendiumError,
+  useCompendiumActions,
+} from './compendiumBrowserStore'
+export type { FilterCriteria, CompendiumBrowserStore } from './compendiumBrowserStore'

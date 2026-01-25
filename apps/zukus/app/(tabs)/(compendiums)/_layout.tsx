@@ -23,8 +23,8 @@ export default function CompendiumsLayout() {
           fontWeight: '600',
         },
         headerLeft: () => (
-          <Pressable onPress={() => router.replace('/home')} hitSlop={8}>
-            <FontAwesome name="home" size={22} color={themeColors.color} style={{ marginLeft: 8 }} />
+          <Pressable onPress={() => router.back()} hitSlop={8}>
+            <FontAwesome name="chevron-left" size={18} color={themeColors.color} style={{ marginLeft: 8 }} />
           </Pressable>
         ),
         contentStyle: {
@@ -33,6 +33,8 @@ export default function CompendiumsLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: 'Compendios' }} />
+      <Stack.Screen name="[compendiumId]/index" options={{ title: '' }} />
+      <Stack.Screen name="[compendiumId]/[entityType]/index" options={{ title: '' }} />
     </Stack>
   )
 }

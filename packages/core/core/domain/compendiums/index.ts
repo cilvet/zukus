@@ -10,6 +10,14 @@ export type {
   CalculationContext
 } from './types';
 
+// Ports (arquitectura hexagonal)
+export type {
+  CompendiumDataPort,
+  EntityTypeInfo,
+  EntityListResult,
+  GetEntitiesOptions,
+} from './ports';
+
 // Functions
 export { resolveCompendiumContext } from './resolve';
 export { validateCustomEntities } from './validateCustomEntities';
