@@ -1,7 +1,7 @@
 import { CharacterBaseData } from "../../baseData/character";
 import { CharacterChanges } from "../sources/compileCharacterChanges";
 import { SubstitutionIndex } from "../sources/calculateSources";
-import { CharacterSheet } from "../../calculatedSheet/sheet";
+import { CharacterSheet, CharacterWarning } from "../../calculatedSheet/sheet";
 import { ContextualChange } from "../../baseData/contextualChange";
 import { CGEDefinitionChange, SpecialChange } from "../../baseData/specialChanges";
 import { CompiledEffects } from "../effects/compileEffects";
@@ -17,6 +17,11 @@ import type {
   LevelTable,
 } from "../../../cge/types";
 
+type KnownLimitsResult = {
+  limits: CalculatedKnownLimit[] | undefined;
+  warnings: CharacterWarning[];
+};
+
 /**
  * Calcula todos los CGEs del personaje a partir de los special changes.
  */
@@ -31,6 +36,7 @@ export const getCalculatedCGE: getSheetWithUpdatedField = (
   const cgeDefinitions = extractCGEDefinitions(specialChanges ?? []);
   const calculatedCGEs: Record<string, CalculatedCGE> = {};
   const indexValuesToUpdate: SubstitutionIndex = {};
+  const cgeWarnings: CharacterWarning[] = [];
 
   for (const definition of cgeDefinitions) {
     const { config } = definition;
@@ -41,7 +47,7 @@ export const getCalculatedCGE: getSheetWithUpdatedField = (
       continue;
     }
 
-    const calculatedCGE = calculateSingleCGE(
+    const { calculatedCGE, warnings } = calculateSingleCGE(
       config,
       classLevel,
       baseData,
@@ -50,10 +56,15 @@ export const getCalculatedCGE: getSheetWithUpdatedField = (
     );
 
     calculatedCGEs[config.id] = calculatedCGE;
+    cgeWarnings.push(...warnings);
   }
 
   return {
-    characterSheetFields: { cge: calculatedCGEs },
+    characterSheetFields: {
+      cge: calculatedCGEs,
+      // Warnings will be merged in calculateCharacterSheet
+      _cgeWarnings: cgeWarnings,
+    } as any,
     indexValues: indexValuesToUpdate,
   };
 };
@@ -73,23 +84,31 @@ function getClassLevel(baseData: CharacterBaseData, classId: string): number {
   return classLevels[classId] ?? 0;
 }
 
+type SingleCGEResult = {
+  calculatedCGE: CalculatedCGE;
+  warnings: CharacterWarning[];
+};
+
 function calculateSingleCGE(
   config: CGEConfig,
   classLevel: number,
   baseData: CharacterBaseData,
   substitutionIndex: SubstitutionIndex,
   indexValuesToUpdate: SubstitutionIndex
-): CalculatedCGE {
+): SingleCGEResult {
   const { variables } = config;
+  const warnings: CharacterWarning[] = [];
 
   // Leer limites de conocidos desde substitutionIndex (ya procesados por custom variables)
-  const knownLimits = calculateKnownLimits(
+  const knownResult = calculateKnownLimits(
     config,
     classLevel,
+    baseData,
     substitutionIndex,
     indexValuesToUpdate,
     variables.classPrefix
   );
+  warnings.push(...knownResult.warnings);
 
   // Calcular tracks leyendo valores finales de substitutionIndex
   const tracks = calculateTracks(
@@ -102,38 +121,46 @@ function calculateSingleCGE(
   );
 
   return {
-    id: config.id,
-    classId: config.classId,
-    entityType: config.entityType,
-    classLevel,
-    knownLimits,
-    tracks,
-    config,
+    calculatedCGE: {
+      id: config.id,
+      classId: config.classId,
+      entityType: config.entityType,
+      classLevel,
+      knownLimits: knownResult.limits,
+      tracks,
+      config,
+    },
+    warnings,
   };
 }
 
 function calculateKnownLimits(
   config: CGEConfig,
   classLevel: number,
+  baseData: CharacterBaseData,
   substitutionIndex: SubstitutionIndex,
   indexValuesToUpdate: SubstitutionIndex,
   classPrefix: string
-): CalculatedKnownLimit[] | undefined {
+): KnownLimitsResult {
+  const warnings: CharacterWarning[] = [];
+  const cgeState = baseData.cgeState?.[config.id];
+  const knownSelections = cgeState?.knownSelections ?? {};
+
   if (!config.known) {
-    return undefined;
+    return { limits: undefined, warnings };
   }
 
   const known = config.known;
 
   if (known.type === 'UNLIMITED') {
-    return undefined;
+    return { limits: undefined, warnings };
   }
 
   if (known.type === 'LIMITED_PER_ENTITY_LEVEL') {
     const table = known.table;
     const row = table[classLevel];
     if (!row) {
-      return [];
+      return { limits: [], warnings };
     }
 
     const limits: CalculatedKnownLimit[] = [];
@@ -144,13 +171,34 @@ function calculateKnownLimits(
         const varId = `${classPrefix}.known.${level}.max`;
         const customVarKey = valueIndexKeys.CUSTOM_VARIABLE(varId);
         const max = (substitutionIndex[customVarKey] as number) ?? baseMax;
-        limits.push({ level, max, current: 0 });
+
+        // Count known entities from cgeState
+        const current = knownSelections[String(level)]?.length ?? 0;
+
+        limits.push({ level, max, current });
+
+        // Generate warning if over limit
+        if (current > max) {
+          warnings.push({
+            type: 'known_limit_exceeded',
+            message: `${config.id}: ${current}/${max} level ${level} ${config.entityType}s known (${current - max} over limit)`,
+            context: {
+              cgeId: config.id,
+              entityType: config.entityType,
+              level,
+              current,
+              max,
+              over: current - max,
+            },
+          });
+        }
 
         // Exponer tambien sin prefijo para acceso conveniente
         indexValuesToUpdate[varId] = max;
+        indexValuesToUpdate[`${classPrefix}.known.${level}.current`] = current;
       }
     }
-    return limits;
+    return { limits, warnings };
   }
 
   if (known.type === 'LIMITED_TOTAL') {
@@ -161,14 +209,38 @@ function calculateKnownLimits(
         const varId = `${classPrefix}.known.total.max`;
         const customVarKey = valueIndexKeys.CUSTOM_VARIABLE(varId);
         const max = (substitutionIndex[customVarKey] as number) ?? row[0];
+
+        // Count total known entities from all levels
+        let current = 0;
+        for (const entityIds of Object.values(knownSelections)) {
+          current += entityIds.length;
+        }
+
+        // Generate warning if over limit
+        if (current > max) {
+          warnings.push({
+            type: 'known_limit_exceeded',
+            message: `${config.id}: ${current}/${max} total ${config.entityType}s known (${current - max} over limit)`,
+            context: {
+              cgeId: config.id,
+              entityType: config.entityType,
+              level: -1,
+              current,
+              max,
+              over: current - max,
+            },
+          });
+        }
+
         indexValuesToUpdate[varId] = max;
-        return [{ level: -1, max, current: 0 }];
+        indexValuesToUpdate[`${classPrefix}.known.total.current`] = current;
+        return { limits: [{ level: -1, max, current }], warnings };
       }
     }
-    return [];
+    return { limits: [], warnings };
   }
 
-  return undefined;
+  return { limits: undefined, warnings };
 }
 
 function calculateTracks(

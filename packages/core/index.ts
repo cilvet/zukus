@@ -97,3 +97,26 @@ export { getProvider } from "./core/domain/levels/updater/selectionOperations";
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";
 export type { Compendium, CompendiumRegistry, CalculationContext } from "./core/domain/compendiums";
+
+// CGE (Character Generation Engine)
+export type {
+  CGEConfig,
+  CGEState,
+  CalculatedCGE,
+  CalculatedTrack,
+  CalculatedSlot,
+  CalculatedKnownLimit,
+  CGEUpdateResult,
+  CGEWarning,
+} from "./core/domain/cge";
+
+export {
+  addKnownEntity,
+  removeKnownEntity,
+  getKnownEntitiesByCGE,
+  getKnownEntitiesByLevel,
+  getKnownCountsByLevel,
+  getTotalKnownCount,
+  isEntityKnown,
+  validateCGEConfig,
+} from "./core/domain/cge";

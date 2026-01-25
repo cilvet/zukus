@@ -102,7 +102,8 @@ export function calculateCharacterSheet(
   // Merge pending resource custom variables with existing custom variables
   // Use a Map to deduplicate by uniqueId (keep the last occurrence)
   const sheetWithPending = characterSheet as CharacterSheet & {
-    _pendingResourceCustomVariables?: typeof characterSheet.customVariables
+    _pendingResourceCustomVariables?: typeof characterSheet.customVariables;
+    _cgeWarnings?: CharacterWarning[];
   };
   if (sheetWithPending._pendingResourceCustomVariables) {
     const variableMap = new Map<string, typeof characterSheet.customVariables[0]>();
@@ -114,6 +115,12 @@ export function calculateCharacterSheet(
     }
     characterSheet.customVariables = Array.from(variableMap.values());
     delete sheetWithPending._pendingResourceCustomVariables;
+  }
+
+  // Merge CGE warnings
+  if (sheetWithPending._cgeWarnings) {
+    warnings.push(...sheetWithPending._cgeWarnings);
+    delete sheetWithPending._cgeWarnings;
   }
 
   // Populate remaining sheet fields
