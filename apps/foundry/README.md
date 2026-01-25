@@ -33,28 +33,12 @@ Foundry v12+ soporta DataModels (clases JS que definen el schema). Pero el usuar
 
 ---
 
-## Arquitectura Actual vs Objetivo
+## Arquitectura
 
-### Opcion A (implementada ahora)
-
-```
-Foundry Actor.system.* (formato Foundry)
-         ↓
-    Adapter convierte
-         ↓
-    CharacterBaseData
-         ↓
-    calculateCharacterSheet()
-         ↓
-    Display en UI
-```
-
-**Problema**: Los datos viven en formato Foundry. Para sincronizar con Zukus app, hay que convertir en ambas direcciones. Cada conversion es un punto de fallo.
-
-### Opcion B (objetivo)
+### Opcion B (IMPLEMENTADA)
 
 ```
-CharacterBaseData (en actor.flags.zukus)
+CharacterBaseData (en actor.flags.zukus.characterBaseData)
          ↓
     calculateCharacterSheet()
          ↓
@@ -65,15 +49,25 @@ CharacterBaseData (en actor.flags.zukus)
 
 **Ventaja**: El CharacterBaseData es el mismo objeto que usa la app. Sync trivial.
 
-### Por que elegimos Opcion B?
+### Por que Opcion B?
 
-1. **El objetivo es sincronizacion** - Si Foundry es standalone, Opcion A basta. Pero queremos sync con la app.
+1. **El objetivo es sincronizacion** - Zukus app y Foundry comparten el mismo formato de datos.
 
-2. **Reutilizamos CharacterUpdater y ops.*** - El core tiene operaciones como `toggleBuff()`, `addLevelSlot()`, etc. Con Opcion A las reimplementamos. Con Opcion B las reutilizamos.
+2. **Reutilizamos ops.*** - El core tiene operaciones como `toggleBuff()`, `modifyHp()`, etc. Las usamos directamente.
 
 3. **Consistencia de logica** - Si hay un bug o cambio en como se calcula algo, se arregla en un lugar (el core) y funciona en ambos sitios.
 
-4. **Mantenibilidad** - Con Opcion A, si cambia el schema de CharacterBaseData, hay que actualizar: el adapter, el template.json, y el character-data.ts. Con Opcion B, solo el core.
+4. **Mantenibilidad** - Si cambia el schema de CharacterBaseData, solo hay que actualizar el core.
+
+### Como funciona
+
+1. **Al crear Actor**: `_onCreate()` crea un CharacterBaseData por defecto y lo guarda en `flags.zukus.characterBaseData`
+
+2. **Al calcular**: `prepareDerivedData()` lee de flags y llama a `calculateCharacterSheet()`
+
+3. **Al editar formulario**: `_updateObject()` intercepta los cambios y los convierte en operaciones de `@zukus/core` (ej: cambio de ability score -> `updateAbilityScore()`)
+
+4. **Operaciones disponibles**: El ZukusActor expone metodos como `updateAbilityScore()`, `modifyHp()`, `toggleBuff()`, etc. que usan las operaciones del core.
 
 ---
 
@@ -130,20 +124,88 @@ tail -f ~/Library/Application\ Support/FoundryVTT/Logs/error.log
 
 ---
 
-## Proximos Pasos (Opcion B)
+## Estado Actual
 
-1. Guardar CharacterBaseData en `actor.flags.zukus.characterBaseData`
-2. Crear CharacterBaseData por defecto al crear Actor (usando `buildCharacter()`)
-3. En `prepareDerivedData()`, leer de flags en vez de usar adapter
-4. Interceptar `_updateObject()` para mapear cambios a operaciones
-5. Probar operaciones complejas (toggleBuff, addLevel)
-6. Implementar sync con API de Zukus
+**Implementado**:
+- [x] CharacterBaseData en `actor.flags.zukus.characterBaseData`
+- [x] Crear CharacterBaseData por defecto al crear Actor
+- [x] `prepareDerivedData()` lee de flags
+- [x] `_updateObject()` intercepta cambios y usa ops del core
+- [x] Operaciones basicas: `updateAbilityScore()`, `modifyHp()`, `toggleBuff()`
+- [x] Sistema de niveles: `addClass()`, `addLevel()` con seleccion de clase
+- [x] Compendio de Buffs desde @zukus/core (ver seccion abajo)
+
+**Pendiente**:
+- [ ] Implementar sync con API de Zukus
+- [ ] Migrar actores existentes de Option A a Option B
 
 ---
 
-## Archivos que leer para entender
+## Sistema de Compendios
 
-- `src/documents/actor.ts` - ZukusActor, donde se llama a calculateCharacterSheet()
-- `src/sheets/actor-sheet.ts` - UI y manejo de eventos
-- `src/adapters/foundry-to-core.ts` - Conversion actual (a eliminar en Opcion B)
-- `packages/core/core/domain/character/updater/operations/index.ts` - Operaciones disponibles
+### Filosofia
+
+El compendio de @zukus/core es la fuente de verdad. Foundry solo muestra una "vista" de ese compendio que los usuarios pueden arrastrar a los personajes. Toda la logica se ejecuta en el core.
+
+### Como funciona
+
+1. **Entidades en el core**: Los buffs (y otras entidades) se definen en `packages/core/core/domain/compendiums/examples/entities/buffs.ts`
+
+2. **Poblacion del compendio Foundry**: Al iniciar (`Hooks.once('ready')`), `populateBuffsCompendium()` lee las entidades del core y crea Items de Foundry en el pack `dnd35zukus.buffs`
+
+3. **Drop handler**: Cuando el usuario arrastra un buff del compendio al personaje, `_onDropItem()` en actor-sheet.ts:
+   - Detecta que es un item tipo `buff`
+   - Lee el `coreEntityId` guardado en el item
+   - Llama a `zukusActor.addBuffFromEntity(coreEntityId)`
+   - Esto usa `createBuffFromEntity()` y `ops.addBuff()` del core
+
+4. **Resultado**: El buff se anade al CharacterBaseData, no como un Item embebido de Foundry. El motor de calculo del core procesa los cambios.
+
+### Patron de entidades con changes
+
+Las entidades del core usan el addon `effectful` que anade un campo `legacy_changes`:
+
+```typescript
+{
+  id: 'buff-bulls-strength',
+  entityType: 'buff',
+  name: "Bull's Strength",
+  legacy_changes: [
+    {
+      type: 'ABILITY_SCORE',
+      abilityUniqueId: 'strength',
+      formula: { expression: '4' },
+      bonusTypeId: 'ENHANCEMENT',
+    },
+  ],
+}
+```
+
+El codigo de Foundry lee `entity.legacy_changes || entity.changes` para obtener los cambios.
+
+### Configuracion del pack
+
+En `system.json`:
+```json
+"packs": [
+  {
+    "name": "buffs",
+    "label": "Buffs",
+    "path": "packs/buffs",
+    "type": "Item",
+    "system": "dnd35zukus"
+  }
+]
+```
+
+La carpeta `packs/buffs/` debe existir (puede estar vacia). Foundry la usara como base de datos LevelDB para los items creados en runtime.
+
+---
+
+## Archivos clave
+
+- `src/documents/actor.ts` - ZukusActor con operaciones del core
+- `src/sheets/actor-sheet.ts` - UI, intercepta _updateObject(), drop handler
+- `src/compendium/foundry-compendium-context.ts` - Lee entidades del core, crea Buffs
+- `src/dnd35zukus.ts` - Init, ready hooks, populateBuffsCompendium()
+- `packages/core/core/domain/compendiums/examples/entities/buffs.ts` - Entidades de buff

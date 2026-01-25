@@ -70,6 +70,12 @@ export default defineConfig({
           resolve(__dirname, 'dist/lang')
         );
 
+        // Copy packs (compendium data)
+        copyDir(
+          resolve(__dirname, 'packs'),
+          resolve(__dirname, 'dist/packs')
+        );
+
         console.log('Static files copied to dist/');
       }
     }

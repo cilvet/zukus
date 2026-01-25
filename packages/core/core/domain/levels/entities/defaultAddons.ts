@@ -55,28 +55,46 @@ export const imageableAddon: AddonDefinition = {
 
 /**
  * Addon for entities that can apply effects to characters.
- * Provides: effects (optional), specialEffects (optional)
- * 
- * Note: effects is the new name for changes, specialEffects for specialChanges.
- * This renaming applies only to entity definitions in the levels system.
+ *
+ * Provides both legacy and new effect systems:
+ * - Legacy: legacy_changes, legacy_specialChanges, legacy_contextualChanges
+ * - New: effects (simplified target-based system)
+ *
+ * Most entities should use legacy_changes until the new Effect system is fully adopted.
  */
 export const effectfulAddon: AddonDefinition = {
   id: 'effectful',
   name: 'Effectful',
   fields: [
-    { 
-      name: 'effects', 
-      type: 'object_array', 
-      optional: true, 
-      description: 'Effects applied when entity is active (formerly "changes")',
-      objectFields: [], // Change schema is complex, validation handled separately
+    // Legacy system (currently used by most entities)
+    {
+      name: 'legacy_changes',
+      type: 'object_array',
+      optional: true,
+      description: 'Mechanical changes this entity applies (Change[])',
+      objectFields: [],
     },
-    { 
-      name: 'specialEffects', 
-      type: 'object_array', 
-      optional: true, 
-      description: 'Special effects like proficiencies (formerly "specialChanges")',
-      objectFields: [], // SpecialChange schema is complex, validation handled separately
+    {
+      name: 'legacy_specialChanges',
+      type: 'object_array',
+      optional: true,
+      description: 'Special changes like proficiencies (SpecialChange[])',
+      objectFields: [],
+    },
+    {
+      name: 'legacy_contextualChanges',
+      type: 'object_array',
+      optional: true,
+      description: 'Contextual/situational changes (ContextualChange[])',
+      objectFields: [],
+    },
+    // New Effect-based system
+    {
+      name: 'effects',
+      type: 'object_array',
+      optional: true,
+      description: 'Effects using the new target-based system (Effect[])',
+      objectFields: [],
     },
   ],
 };

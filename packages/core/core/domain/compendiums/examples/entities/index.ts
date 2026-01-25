@@ -1,6 +1,6 @@
 /**
  * D&D 3.5 Example Entities
- * 
+ *
  * Exports all entities for the D&D 3.5 compendium.
  */
 
@@ -8,7 +8,7 @@
 export { exampleSpells } from './spells';
 
 // Feats
-export { 
+export {
   allFeats,
   generalFeats,
   weaponFeats,
@@ -19,6 +19,16 @@ export {
   mountedFeats,
   magicFeats,
 } from './feats';
+
+// Buffs
+export {
+  allBuffs,
+  abilityBuffs,
+  defenseBuffs,
+  combatEnhancementBuffs,
+  movementBuffs,
+  saveBuffs,
+} from './buffs';
 
 // Classes are imported from srd/
 // - Fighter: srd/fighter/fighterClass.ts

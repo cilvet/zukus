@@ -16,12 +16,14 @@ export { validateCustomEntities } from './validateCustomEntities';
 export type { ValidationResult } from './validateCustomEntities';
 
 // Example context for testing
-export { 
+export {
   dnd35ExampleCalculationContext,
   dnd35ExampleCompendium,
   spellSchema,
   featSchema,
+  buffSchema,
   exampleSpells,
   allFeats,
+  allBuffs,
 } from './examples/dnd35ExampleContext';
 

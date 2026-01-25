@@ -26,6 +26,15 @@
       "path": "lang/es.json"
     }
   ],
+  "packs": [
+    {
+      "name": "buffs",
+      "label": "Buffs",
+      "path": "packs/buffs",
+      "type": "Item",
+      "system": "dnd35zukus"
+    }
+  ],
   "documentTypes": {
     "Actor": {
       "character": {

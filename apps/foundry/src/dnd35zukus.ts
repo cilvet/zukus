@@ -8,6 +8,7 @@ import { ZukusItem } from './documents/item';
 import { ZukusActorSheet } from './sheets/actor-sheet';
 import { CharacterData } from './data/character-data';
 import { DND35ZUKUS } from './config';
+import { getAvailableBuffs, getBuffEntity } from './compendium/foundry-compendium-context';
 
 // Import styles
 import './styles/system.scss';
@@ -47,10 +48,96 @@ Hooks.once('init', async () => {
 /**
  * Ready Hook - Called when Foundry is ready
  */
-Hooks.once('ready', () => {
+Hooks.once('ready', async () => {
   console.log('dnd35zukus | System ready');
   console.log('dnd35zukus | Using @zukus/core for character calculations');
+
+  // Populate buffs compendium from @zukus/core
+  await populateBuffsCompendium();
 });
+
+/**
+ * Populate the buffs compendium from @zukus/core entities.
+ * Creates Foundry Item documents for each buff entity.
+ */
+async function populateBuffsCompendium(): Promise<void> {
+  console.log('dnd35zukus | Looking for buffs compendium...');
+  console.log('dnd35zukus | Available packs:', Array.from(game.packs?.keys() || []));
+
+  const pack = game.packs?.get('dnd35zukus.buffs') as any;
+  if (!pack) {
+    console.warn('dnd35zukus | Buffs compendium not found');
+    return;
+  }
+
+  console.log('dnd35zukus | Found pack:', pack.collection, 'locked:', pack.locked);
+
+  // Check if compendium is already populated
+  const existingDocs = await pack.getDocuments();
+  if (existingDocs.length > 0) {
+    console.log('dnd35zukus | Buffs compendium already populated with', existingDocs.length, 'items');
+    return;
+  }
+
+  // Get buff entities from core compendium
+  const buffEntities = getAvailableBuffs();
+  console.log(`dnd35zukus | Populating buffs compendium with ${buffEntities.length} buffs`);
+
+  if (buffEntities.length === 0) {
+    console.warn('dnd35zukus | No buff entities found in core compendium');
+    return;
+  }
+
+  // Unlock the compendium for editing if needed
+  const wasLocked = pack.locked;
+  if (wasLocked) {
+    console.log('dnd35zukus | Unlocking compendium...');
+    await pack.configure({ locked: false });
+  }
+
+  // Create Item documents for each buff
+  let created = 0;
+  for (const buffInfo of buffEntities) {
+    const entity = getBuffEntity(buffInfo.id) as any;
+    if (!entity) {
+      console.warn(`dnd35zukus | Entity not found: ${buffInfo.id}`);
+      continue;
+    }
+
+    // Use legacy_changes (from effectful addon) or changes as fallback
+    const changes = entity.legacy_changes || entity.changes || [];
+
+    const itemData = {
+      name: entity.name,
+      type: 'buff',
+      img: 'icons/svg/aura.svg',
+      system: {
+        description: entity.description,
+        category: entity.category || 'Spell',
+        spellLevel: entity.spellLevel || 0,
+        duration: entity.duration || '',
+        // Store the core entity ID for reference when dropped
+        coreEntityId: entity.id,
+        changes: changes,
+      },
+    };
+
+    try {
+      await Item.create(itemData, { pack: pack.collection });
+      created++;
+      console.log(`dnd35zukus | Created buff: ${entity.name}`);
+    } catch (error) {
+      console.error(`dnd35zukus | Error creating buff item: ${entity.name}`, error);
+    }
+  }
+
+  // Re-lock if it was locked before
+  if (wasLocked) {
+    await pack.configure({ locked: true });
+  }
+
+  console.log(`dnd35zukus | Buffs compendium populated with ${created} items`);
+}
 
 /**
  * Preload Handlebars templates for faster rendering

@@ -8,7 +8,7 @@
         <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name"/>
       </h1>
       <div class="level-display">
-        {{localize "DND35ZUKUS.Level"}}: {{system.details.level}}
+        {{localize "DND35ZUKUS.Level"}}: {{characterLevel}}
       </div>
     </div>
 
@@ -44,11 +44,14 @@
         {{#each abilities as |ability|}}
         <div class="ability-card rollable" data-ability="{{ability.key}}" data-source-breakdown="abilities.{{ability.key}}">
           <div class="ability-label">{{ability.label}}</div>
-          <div class="ability-score">
+          <div class="ability-scores">
             <input type="number"
+                   class="ability-base-input"
                    name="system.abilities.{{ability.key}}.value"
                    value="{{ability.baseValue}}"
-                   data-dtype="Number"/>
+                   data-dtype="Number"
+                   title="Base score"/>
+            <span class="ability-total" title="Total score (with bonuses)">{{ability.score}}</span>
           </div>
           <div class="ability-modifier">{{ability.modifierDisplay}}</div>
         </div>
@@ -105,37 +108,90 @@
         </div>
       </div>
 
-      {{!-- Classes --}}
+      {{!-- Character Classes (from CharacterBaseData) --}}
       <h3>Classes</h3>
-      <div class="item-list classes-list">
-        {{#each itemsByType.classes as |item|}}
-        <div class="item" data-item-id="{{item._id}}">
-          <span class="item-name">{{item.name}}</span>
-          <span class="item-controls">
-            <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
-            <a class="item-delete" title="Delete"><i class="fas fa-trash"></i></a>
-          </span>
+      <div class="classes-section">
+        {{#if classes.length}}
+        <div class="class-list">
+          {{#each classes as |cls|}}
+          <div class="class-item">
+            <span class="class-name">{{cls.name}}</span>
+            <span class="class-level-wrapper">
+              <label>Lvl</label>
+              <input type="number"
+                     class="class-level-input"
+                     data-class-id="{{cls.id}}"
+                     value="{{cls.level}}"
+                     min="0"
+                     max="20"/>
+            </span>
+            <span class="class-hitdie">(d{{cls.hitDie}})</span>
+            <button type="button" class="add-class-level" data-class-id="{{cls.id}}" title="Add level in {{cls.name}}">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          {{/each}}
         </div>
-        {{/each}}
-        <div class="item-create" data-type="class">
-          <a><i class="fas fa-plus"></i> Add Class</a>
+        {{/if}}
+
+        {{!-- Available classes to add --}}
+        <div class="available-classes">
+          <label>Add Class:</label>
+          <div class="class-buttons">
+            {{#each availableClasses as |cls|}}
+            <button type="button" class="add-class-level" data-class-id="{{cls.id}}" title="{{cls.description}}">
+              <i class="fas fa-plus"></i> {{cls.name}} (d{{cls.hitDie}})
+            </button>
+            {{/each}}
+          </div>
         </div>
+
+        {{#if characterLevel}}
+        <div class="level-controls">
+          <button type="button" class="remove-level" title="Remove last level">
+            <i class="fas fa-minus"></i> Remove Level
+          </button>
+        </div>
+        {{/if}}
       </div>
 
-      {{!-- Buffs --}}
+      {{!-- Buffs from Core System --}}
       <h3>Active Buffs</h3>
-      <div class="item-list buffs-list">
-        {{#each itemsByType.buffs as |item|}}
-        <div class="item" data-item-id="{{item._id}}">
-          <span class="item-name">{{item.name}}</span>
-          <span class="item-controls">
-            <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
-            <a class="item-delete" title="Delete"><i class="fas fa-trash"></i></a>
-          </span>
+      <div class="buffs-section">
+        {{!-- Current buffs on character --}}
+        {{#if currentBuffs.length}}
+        <div class="buff-list">
+          {{#each currentBuffs as |buff|}}
+          <div class="buff-item {{#if buff.active}}active{{/if}}">
+            <span class="buff-toggle toggle-buff" data-buff-id="{{buff.uniqueId}}" title="Toggle buff">
+              {{#if buff.active}}
+              <i class="fas fa-check-circle"></i>
+              {{else}}
+              <i class="far fa-circle"></i>
+              {{/if}}
+            </span>
+            <span class="buff-name">{{buff.name}}</span>
+            <span class="buff-description" title="{{buff.description}}">{{buff.description}}</span>
+            <button type="button" class="remove-buff" data-buff-id="{{buff.uniqueId}}" title="Remove {{buff.name}}">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          {{/each}}
         </div>
-        {{/each}}
-        <div class="item-create" data-type="buff">
-          <a><i class="fas fa-plus"></i> Add Buff</a>
+        {{else}}
+        <p class="no-buffs">No active buffs</p>
+        {{/if}}
+
+        {{!-- Available buffs to add --}}
+        <div class="available-buffs">
+          <label>Add Buff:</label>
+          <div class="buff-buttons">
+            {{#each availableBuffs as |buff|}}
+            <button type="button" class="add-buff" data-buff-id="{{buff.id}}" title="{{buff.description}}">
+              <i class="fas fa-plus"></i> {{buff.name}}
+            </button>
+            {{/each}}
+          </div>
         </div>
       </div>
     </div>

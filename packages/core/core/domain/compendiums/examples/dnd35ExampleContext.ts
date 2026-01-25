@@ -17,11 +17,12 @@ import type {
 } from '../types';
 
 // Schemas
-import { 
-  spellSchema, 
-  featSchema, 
+import {
+  spellSchema,
+  featSchema,
   classFeatureSchema,
   classSchema,
+  buffSchema,
 } from './schemas';
 import { 
   systemLevelsSchemaDefinition, 
@@ -29,7 +30,7 @@ import {
 } from '../../levels/classSchemas/systemLevelsSchemas';
 
 // Entities
-import { exampleSpells, allFeats } from './entities';
+import { exampleSpells, allFeats, allBuffs } from './entities';
 
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
@@ -44,12 +45,13 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
 
 /**
  * D&D 3.5 Example Compendium
- * 
+ *
  * Contains:
  * - Spells: 10 example spells
  * - Feats: ~40 fighter bonus feats
  * - Classes: Fighter, Rogue
  * - Class Features: Rogue abilities
+ * - Buffs: ~15 classic buff spells
  * - System Levels: D&D 3.5 feat/ability progression
  * - Ability Increases: 6 entities for +1 to each ability
  */
@@ -57,19 +59,21 @@ const dnd35ExampleCompendium: Compendium = {
   id: 'dnd35-example',
   name: 'D&D 3.5 Example Compendium',
   version: '1.0.0',
-  description: 'Example compendium for D&D 3.5 with spells, feats, classes, class features, and system-level progressions',
+  description: 'Example compendium for D&D 3.5 with spells, feats, buffs, classes, class features, and system-level progressions',
   dependencies: [],
   schemas: [
-    spellSchema, 
-    featSchema, 
+    spellSchema,
+    featSchema,
     classSchema,
     classFeatureSchema,
+    buffSchema,
     systemLevelsSchemaDefinition,
     characterAbilityIncreaseSchemaDefinition,
   ],
   entities: {
     spell: exampleSpells,
     feat: allFeats,
+    buff: allBuffs,
     class: [fighterClass, rogueClass],
     classFeature: rogueClassFeatures,
     system_levels: [dnd35SystemLevels],
@@ -124,12 +128,12 @@ export { dnd35ExampleCompendium };
 /**
  * Re-export schemas for convenience
  */
-export { spellSchema, featSchema, classSchema, classFeatureSchema };
+export { spellSchema, featSchema, classSchema, classFeatureSchema, buffSchema };
 
 /**
  * Re-export entities for convenience
  */
-export { exampleSpells, allFeats };
+export { exampleSpells, allFeats, allBuffs };
 
 /**
  * Re-export classes for convenience
