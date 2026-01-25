@@ -154,7 +154,7 @@ function Header() {
  * Header fijo + Tabs + ViewPager swipeable.
  * Consume el personaje cargado en el store.
  */
-export function CharacterScreen() {
+export function CharacterScreenMobile() {
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<CharacterPagerRef>(null)

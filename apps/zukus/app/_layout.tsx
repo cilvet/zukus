@@ -79,10 +79,10 @@ function ThemedApp() {
     }
 
     if (session && inAuthGroup) {
-      // Mobile va a /home, desktop va directo a tabs
+      // Mobile va a /home, desktop va directo a characters
       const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
       if (isWebDesktop) {
-        router.replace('/(tabs)/(character)')
+        router.replace('/characters')
       } else {
         router.replace('/home')
       }

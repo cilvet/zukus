@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View, Pressable } from 'react-native'
 import { useLocalSearchParams } from 'expo-router'
-import { useCharacterSync, useEditPanelNavigation } from '../../hooks'
+import { useCharacterSync, usePanelNavigation } from '../../hooks'
 import {
   useCharacterStore,
   useCharacterSheet,
@@ -94,7 +94,18 @@ function EditCharacterScreenDesktopContent() {
     openPanel,
     closePanel,
     goBack,
-  } = useEditPanelNavigation()
+  } = usePanelNavigation('edit')
+
+  // Helper para parsear el path del panel: "type/id"
+  const parsePanelPath = (path: string | undefined): { type: string; id: string } | null => {
+    if (!path) return null
+    const [type, ...rest] = path.split('/')
+    const id = rest.join('/')
+    if (!type || !id) return null
+    return { type, id }
+  }
+
+  const panelInfo = parsePanelPath(currentPanel?.path)
 
   // Ensure 20 level slots exist on mount
   useEffect(() => {
@@ -127,7 +138,7 @@ function EditCharacterScreenDesktopContent() {
   })
 
   const handleLevelRowPress = useCallback((levelIndex: number) => {
-    openPanel(String(levelIndex), 'levelDetail', `Nivel ${levelIndex + 1}`)
+    openPanel(`levelDetail/${levelIndex}`, `Nivel ${levelIndex + 1}`)
   }, [openPanel])
 
   const handleLevelChange = useCallback((level: number) => {
@@ -138,8 +149,9 @@ function EditCharacterScreenDesktopContent() {
 
   const getPanelTitle = () => {
     if (!currentPanel) return ''
-    if (currentPanel.name) return currentPanel.name
-    return getDetailTitle(currentPanel.type as any, currentPanel.id)
+    if (currentPanel.title) return currentPanel.title
+    if (!panelInfo) return ''
+    return getDetailTitle(panelInfo.type as any, panelInfo.id)
   }
 
   if (!baseData) {
@@ -248,14 +260,14 @@ function EditCharacterScreenDesktopContent() {
         canGoBack={canGoBack}
         title={getPanelTitle()}
       >
-        {currentPanel?.type === 'levelDetail' && currentPanel?.id && (
-          <EditLevelDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        {panelInfo?.type === 'levelDetail' && panelInfo?.id && (
+          <EditLevelDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
         )}
-        {currentPanel?.type === 'classSelectorDetail' && currentPanel?.id && (
-          <EditClassSelectorDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        {panelInfo?.type === 'classSelectorDetail' && panelInfo?.id && (
+          <EditClassSelectorDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
         )}
-        {currentPanel?.type === 'entitySelectorDetail' && currentPanel?.id && (
-          <EditEntitySelectorDetailPanelContainer locationJson={currentPanel.id} />
+        {panelInfo?.type === 'entitySelectorDetail' && panelInfo?.id && (
+          <EditEntitySelectorDetailPanelContainer locationJson={panelInfo.id} />
         )}
       </SidePanel>
     </SidePanelContainer>
@@ -267,7 +279,7 @@ function EditCharacterScreenDesktopContent() {
 function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
-  const { openPanel } = useEditPanelNavigation()
+  const { openPanel } = usePanelNavigation('edit')
   const { getEntity, getEntityById, getAllEntities, getAllEntitiesFromAllTypes } = useCompendiumContext()
 
   if (!baseData || !updater) {
@@ -345,7 +357,7 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   }
 
   const handleOpenClassSelector = () => {
-    openPanel(String(levelIndex), 'classSelectorDetail', `Seleccionar Clase`)
+    openPanel(`classSelectorDetail/${levelIndex}`, 'Seleccionar Clase')
   }
 
   const handleHpChange = (hp: number | null) => {
@@ -358,16 +370,15 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
 
   const handleSelectorPress = (providerLocation: ProviderLocation) => {
     const locationJson = JSON.stringify(providerLocation)
-    openPanel(locationJson, 'entitySelectorDetail', 'Seleccionar')
+    openPanel(`entitySelectorDetail/${locationJson}`, 'Seleccionar')
   }
 
   const handleGrantedEntityPress = (entity: StandardEntity) => {
-    // Could open a detail panel for the entity
-    openPanel(entity.id, 'customEntityDetail', entity.name)
+    openPanel(`customEntityDetail/${entity.id}`, entity.name)
   }
 
   const handleSelectedEntityPress = (instance: EntityInstance) => {
-    openPanel(instance.entity.id, 'customEntityDetail', instance.entity.name)
+    openPanel(`customEntityDetail/${instance.entity.id}`, instance.entity.name)
   }
 
   return (
@@ -392,7 +403,7 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
 function EditClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
-  const { closePanel } = useEditPanelNavigation()
+  const { closePanel } = usePanelNavigation('edit')
 
   if (!baseData || !updater) {
     return (

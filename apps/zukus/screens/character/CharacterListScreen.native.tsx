@@ -14,7 +14,7 @@ export function CharacterListScreen() {
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <ScrollView flex={1} backgroundColor="$background">
       <YStack padding="$4">
-        <Button onPress={() => router.push('/(tabs)/(character)/server-list')}>Ver lista server</Button>
+        {/* TODO: Añadir ruta /characters/server-list si se necesita */}
       </YStack>
 
       {isLoading ? (

@@ -9,7 +9,7 @@ export default function Index() {
 
   // Desktop web: redirigir a personajes (navegacion via Topbar)
   if (isWebDesktop) {
-    return <Redirect href="/(tabs)/(character)" />
+    return <Redirect href="/characters" />
   }
 
   // Mobile: redirigir a /home

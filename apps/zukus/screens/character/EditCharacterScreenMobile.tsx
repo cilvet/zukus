@@ -118,7 +118,7 @@ function LevelsColumn({
  * Pantalla de edicion de personaje para mobile.
  * Usa ViewPager para swipe entre columnas.
  */
-export function EditCharacterScreen() {
+export function EditCharacterScreenMobile() {
   const { themeColors } = useTheme()
   const { id } = useLocalSearchParams<{ id: string }>()
   const characterId = id ?? ''

@@ -1,6 +1,7 @@
-// Este archivo existe para TypeScript - Metro resuelve .native/.web en runtime
-export { CharacterScreen } from './CharacterScreen.web'
+export { CharacterScreen } from './CharacterScreen'
 export { CharacterScreenDesktop } from './CharacterScreenDesktop'
-export { CharacterListScreen } from './CharacterListScreen.web'
-export { EditCharacterScreen } from './EditCharacterScreen.web'
+export { CharacterScreenMobile } from './CharacterScreenMobile'
+export { CharacterListScreen } from './CharacterListScreen'
+export { EditCharacterScreen } from './EditCharacterScreen'
 export { EditCharacterScreenDesktop } from './EditCharacterScreenDesktop'
+export { EditCharacterScreenMobile } from './EditCharacterScreenMobile'

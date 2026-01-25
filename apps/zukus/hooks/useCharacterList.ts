@@ -47,18 +47,11 @@ export function useCharacterList() {
   }, [session])
 
   const navigateToCharacter = (characterId: string) => {
-    // Desktop web usa (tabs), mobile usa rutas de nivel superior
-    if (isWebDesktop) {
-      router.push({
-        pathname: '/(tabs)/(character)/[id]',
-        params: { id: characterId },
-      })
-    } else {
-      router.push({
-        pathname: '/characters/[id]',
-        params: { id: characterId },
-      })
-    }
+    // Usar siempre la ruta unificada
+    router.push({
+      pathname: '/characters/[id]',
+      params: { id: characterId },
+    })
   }
 
   return {

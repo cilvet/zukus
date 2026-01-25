@@ -362,51 +362,62 @@ function CharacterScreenDesktopContent() {
     openPanel,
     closePanel,
     goBack,
-  } = usePanelNavigation()
+  } = usePanelNavigation('character')
+
+  // Helper para parsear el path del panel: "type/id"
+  const parsePanelPath = (path: string | undefined): { type: string; id: string } | null => {
+    if (!path) return null
+    const [type, ...rest] = path.split('/')
+    const id = rest.join('/')
+    if (!type || !id) return null
+    return { type, id }
+  }
+
+  const panelInfo = parsePanelPath(currentPanel?.path)
 
   const handleAbilityPress = (abilityKey: string) => {
-    openPanel(abilityKey, 'ability', getDetailTitle('ability', abilityKey))
+    openPanel(`ability/${abilityKey}`, getDetailTitle('ability', abilityKey))
   }
 
   const handleSavingThrowPress = (savingThrowKey: string) => {
-    openPanel(savingThrowKey, 'savingThrow', getDetailTitle('savingThrow', savingThrowKey))
+    openPanel(`savingThrow/${savingThrowKey}`, getDetailTitle('savingThrow', savingThrowKey))
   }
 
   const handleArmorClassPress = () => {
-    openPanel('armorClass', 'armorClass', getDetailTitle('armorClass', 'armorClass'))
+    openPanel('armorClass/armorClass', getDetailTitle('armorClass', 'armorClass'))
   }
 
   const handleInitiativePress = () => {
-    openPanel('initiative', 'initiative', getDetailTitle('initiative', 'initiative'))
+    openPanel('initiative/initiative', getDetailTitle('initiative', 'initiative'))
   }
 
   const handleBABPress = () => {
-    openPanel('bab', 'bab', getDetailTitle('bab', 'bab'))
+    openPanel('bab/bab', getDetailTitle('bab', 'bab'))
   }
 
   const handleEquipmentPress = (itemId: string, itemName: string) => {
-    openPanel(itemId, 'equipment', itemName)
+    openPanel(`equipment/${itemId}`, itemName)
   }
 
   const handleAttackPress = (attack: { weaponUniqueId?: string; name: string }) => {
     const id = attack.weaponUniqueId ?? attack.name
-    openPanel(id, 'attack', attack.name)
+    openPanel(`attack/${id}`, attack.name)
   }
 
   const handleEntityPress = (entity: ComputedEntity) => {
-    openPanel(entity.id, 'computedEntity', entity.name)
+    openPanel(`computedEntity/${entity.id}`, entity.name)
   }
 
   const attackForPanel =
-    currentPanel?.type === 'attack' && currentPanel?.id && attackData
+    panelInfo?.type === 'attack' && panelInfo?.id && attackData
       ? attackData.attacks.find(
-          (a) => a.weaponUniqueId === currentPanel.id || a.name === currentPanel.id
+          (a) => a.weaponUniqueId === panelInfo.id || a.name === panelInfo.id
         )
       : null
 
   const entityForPanel =
-    currentPanel?.type === 'computedEntity' && currentPanel?.id
-      ? computedEntities.find((e) => e.id === currentPanel.id) ?? null
+    panelInfo?.type === 'computedEntity' && panelInfo?.id
+      ? computedEntities.find((e) => e.id === panelInfo.id) ?? null
       : null
 
   const handleHitPointsPress = () => {
@@ -414,7 +425,7 @@ function CharacterScreenDesktopContent() {
   }
 
   const handleFormulaPlaygroundPress = () => {
-    router.push('/(tabs)/(character)/formula-playground')
+    router.push('/characters/formula-playground')
   }
 
   const handleChatPress = () => {
@@ -428,13 +439,13 @@ function CharacterScreenDesktopContent() {
   }
 
   const getPanelTitle = (): string => {
-    if (!currentPanel?.type || !currentPanel?.id) {
-      return 'Detail'
+    if (!panelInfo) {
+      return currentPanel?.title ?? 'Detail'
     }
-    if (!isValidDetailType(currentPanel.type)) {
-      return currentPanel.name ?? 'Detail'
+    if (!isValidDetailType(panelInfo.type)) {
+      return currentPanel?.title ?? 'Detail'
     }
-    return getDetailTitle(currentPanel.type, currentPanel.id, currentPanel.name)
+    return getDetailTitle(panelInfo.type, panelInfo.id, currentPanel?.title)
   }
 
   // Obtener ability para el panel de detalle
@@ -689,23 +700,23 @@ function CharacterScreenDesktopContent() {
         onBack={goBack}
         canGoBack={canGoBack}
         title={getPanelTitle()}
-        disableScroll={currentPanel?.type === 'chat'}
+        disableScroll={panelInfo?.type === 'chat'}
       >
-        {currentPanel?.type === 'ability' && currentPanel?.id && getAbilityForPanel(currentPanel.id) && (
+        {panelInfo?.type === 'ability' && panelInfo?.id && getAbilityForPanel(panelInfo.id) && (
           <AbilityDetailPanel
-            abilityKey={currentPanel.id}
-            ability={getAbilityForPanel(currentPanel.id)!}
-            sourceValues={getCalculatedAbility(currentPanel.id)?.sourceValues}
+            abilityKey={panelInfo.id}
+            ability={getAbilityForPanel(panelInfo.id)!}
+            sourceValues={getCalculatedAbility(panelInfo.id)?.sourceValues}
           />
         )}
-        {currentPanel?.type === 'savingThrow' && currentPanel?.id && getSavingThrowForPanel(currentPanel.id) && (
+        {panelInfo?.type === 'savingThrow' && panelInfo?.id && getSavingThrowForPanel(panelInfo.id) && (
           <SavingThrowDetailPanel
-            savingThrowKey={currentPanel.id}
-            totalValue={getSavingThrowForPanel(currentPanel.id)!.totalValue}
-            sourceValues={getSavingThrowForPanel(currentPanel.id)?.sourceValues}
+            savingThrowKey={panelInfo.id}
+            totalValue={getSavingThrowForPanel(panelInfo.id)!.totalValue}
+            sourceValues={getSavingThrowForPanel(panelInfo.id)?.sourceValues}
           />
         )}
-        {currentPanel?.type === 'armorClass' && armorClass && (
+        {panelInfo?.type === 'armorClass' && armorClass && (
           <ArmorClassDetailPanel
             totalValue={armorClass.totalAc.totalValue}
             totalSourceValues={armorClass.totalAc.sourceValues}
@@ -715,71 +726,71 @@ function CharacterScreenDesktopContent() {
             flatFootedSourceValues={armorClass.flatFootedAc.sourceValues}
           />
         )}
-        {currentPanel?.type === 'initiative' && initiative && (
+        {panelInfo?.type === 'initiative' && initiative && (
           <InitiativeDetailPanel
             totalValue={initiative.totalValue}
             sourceValues={initiative.sourceValues}
           />
         )}
-        {currentPanel?.type === 'bab' && bab && (
+        {panelInfo?.type === 'bab' && bab && (
           <BABDetailPanel
             totalValue={bab.totalValue}
             multipleAttacks={bab.multipleBaseAttackBonuses}
             sourceValues={bab.sourceValues}
           />
         )}
-        {currentPanel?.type === 'hitPoints' && (
+        {panelInfo?.type === 'hitPoints' && (
           <HitPointsDetailPanelContainer />
         )}
-        {currentPanel?.type === 'skill' && currentPanel?.id && getSkillForPanel(currentPanel.id) && (
+        {panelInfo?.type === 'skill' && panelInfo?.id && getSkillForPanel(panelInfo.id) && (
           <SkillDetailPanel
-            skillName={getSkillForPanel(currentPanel.id)!.name}
-            abilityKey={getSkillForPanel(currentPanel.id)!.abilityModifierUniqueId}
-            totalBonus={getSkillForPanel(currentPanel.id)!.totalBonus}
-            isClassSkill={getSkillForPanel(currentPanel.id)!.isClassSkill}
-            sourceValues={getSkillForPanel(currentPanel.id)!.sourceValues}
+            skillName={getSkillForPanel(panelInfo.id)!.name}
+            abilityKey={getSkillForPanel(panelInfo.id)!.abilityModifierUniqueId}
+            totalBonus={getSkillForPanel(panelInfo.id)!.totalBonus}
+            isClassSkill={getSkillForPanel(panelInfo.id)!.isClassSkill}
+            sourceValues={getSkillForPanel(panelInfo.id)!.sourceValues}
           />
         )}
         {attackForPanel && attackData && (
           <AttackDetailPanel attack={attackForPanel} attackData={attackData} />
         )}
-        {currentPanel?.type === 'equipment' && currentPanel?.id && getEquipmentItemForPanel(currentPanel.id) && (
+        {panelInfo?.type === 'equipment' && panelInfo?.id && getEquipmentItemForPanel(panelInfo.id) && (
           <EquipmentDetailPanel
-            item={getEquipmentItemForPanel(currentPanel.id)!}
-            onToggleEquipped={() => toggleItemEquipped(currentPanel.id)}
+            item={getEquipmentItemForPanel(panelInfo.id)!}
+            onToggleEquipped={() => toggleItemEquipped(panelInfo.id)}
           />
         )}
-        {currentPanel?.type === 'buff' && currentPanel?.id && getBuffForPanel(currentPanel.id) && (
+        {panelInfo?.type === 'buff' && panelInfo?.id && getBuffForPanel(panelInfo.id) && (
           <BuffDetailPanel
-            buff={getBuffForPanel(currentPanel.id)!}
-            onToggleActive={() => toggleBuff(currentPanel.id)}
-            onEdit={() => navigateToDetail('buffEdit', currentPanel.id, `Edit: ${getBuffForPanel(currentPanel.id)!.name}`)}
+            buff={getBuffForPanel(panelInfo.id)!}
+            onToggleActive={() => toggleBuff(panelInfo.id)}
+            onEdit={() => navigateToDetail('buffEdit', panelInfo.id, `Edit: ${getBuffForPanel(panelInfo.id)!.name}`)}
             onDelete={() => {
-              deleteBuff(currentPanel.id)
+              deleteBuff(panelInfo.id)
               closePanel()
             }}
           />
         )}
-        {currentPanel?.type === 'buffEdit' && currentPanel?.id && (
-          <BuffEditPanelContainer buffId={currentPanel.id} />
+        {panelInfo?.type === 'buffEdit' && panelInfo?.id && (
+          <BuffEditPanelContainer buffId={panelInfo.id} />
         )}
-        {currentPanel?.type === 'changeEdit' && currentPanel?.id && (
-          <ChangeEditPanelContainer changeId={currentPanel.id} />
+        {panelInfo?.type === 'changeEdit' && panelInfo?.id && (
+          <ChangeEditPanelContainer changeId={panelInfo.id} />
         )}
-        {currentPanel?.type === 'item' && currentPanel?.name && (
-          <GenericDetailPanel title={currentPanel.name} />
+        {panelInfo?.type === 'item' && currentPanel?.title && (
+          <GenericDetailPanel title={currentPanel.title} />
         )}
-        {currentPanel?.type === 'chat' && (
+        {panelInfo?.type === 'chat' && (
           <ChatScreenWeb />
         )}
-        {currentPanel?.type === 'levelDetail' && currentPanel?.id && (
-          <LevelDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        {panelInfo?.type === 'levelDetail' && panelInfo?.id && (
+          <LevelDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
         )}
-        {currentPanel?.type === 'classSelectorDetail' && currentPanel?.id && (
-          <ClassSelectorDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
+        {panelInfo?.type === 'classSelectorDetail' && panelInfo?.id && (
+          <ClassSelectorDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
         )}
-        {currentPanel?.type === 'entitySelectorDetail' && currentPanel?.id && (
-          <EntitySelectorDetailPanelContainer locationJson={currentPanel.id} />
+        {panelInfo?.type === 'entitySelectorDetail' && panelInfo?.id && (
+          <EntitySelectorDetailPanelContainer locationJson={panelInfo.id} />
         )}
         {entityForPanel && (
           <GenericEntityDetailPanel entity={entityForPanel} />
@@ -792,8 +803,8 @@ function CharacterScreenDesktopContent() {
 function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
-  const { openPanel } = usePanelNavigation()
-  const navigateToDetail = useNavigateToDetail()
+  const { openPanel } = usePanelNavigation('character')
+  const navigateToDetail = useNavigateToDetail('character')
   const { getEntity, getEntityById, getAllEntities, getAllEntitiesFromAllTypes } = useCompendiumContext()
 
   if (!baseData || !updater) {
@@ -871,7 +882,7 @@ function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   }
 
   const handleOpenClassSelector = () => {
-    openPanel('classSelectorDetail', String(levelIndex))
+    openPanel(`classSelectorDetail/${levelIndex}`)
   }
 
   const handleHpChange = (hp: number | null) => {
@@ -919,7 +930,7 @@ function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
 function ClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
-  const { closePanel } = usePanelNavigation()
+  const { closePanel } = usePanelNavigation('character')
 
   if (!baseData || !updater) {
     return (
@@ -977,7 +988,7 @@ function EntitySelectorDetailPanelContainer({ locationJson }: { locationJson: st
 function BuffEditPanelContainer({ buffId }: { buffId: string }) {
   const buffs = useCharacterBuffs()
   const deleteBuff = useCharacterStore((state) => state.deleteBuff)
-  const { openPanel, closePanel } = usePanelNavigation()
+  const { openPanel, closePanel } = usePanelNavigation('character')
   const draftBuff = useDraftBuff()
   const { startEditing, save, discard } = useBuffEditActions()
 
@@ -1003,7 +1014,7 @@ function BuffEditPanelContainer({ buffId }: { buffId: string }) {
 
   const handleSave = () => {
     save()
-    openPanel('buff', buffId)
+    openPanel(`buff/${buffId}`)
   }
 
   const handleDelete = () => {
@@ -1014,7 +1025,7 @@ function BuffEditPanelContainer({ buffId }: { buffId: string }) {
 
   const handleCancel = () => {
     discard()
-    openPanel('buff', buffId)
+    openPanel(`buff/${buffId}`)
   }
 
   return (
@@ -1028,7 +1039,7 @@ function BuffEditPanelContainer({ buffId }: { buffId: string }) {
 }
 
 function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
-  const { openPanel } = usePanelNavigation()
+  const { openPanel } = usePanelNavigation('character')
   const draftBuff = useDraftBuff()
   const { updateChange, addChange, deleteChange } = useBuffEditActions()
 
@@ -1065,16 +1076,16 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
     } else {
       updateChange(changeIndex, updatedChange)
     }
-    openPanel('buffEdit', buffId)
+    openPanel(`buffEdit/${buffId}`)
   }
 
   const handleDelete = () => {
     deleteChange(changeIndex)
-    openPanel('buffEdit', buffId)
+    openPanel(`buffEdit/${buffId}`)
   }
 
   const handleCancel = () => {
-    openPanel('buffEdit', buffId)
+    openPanel(`buffEdit/${buffId}`)
   }
 
   return (

@@ -10,7 +10,7 @@ export default function Home() {
 
   // Desktop web: redirigir a personajes
   if (isWebDesktop) {
-    return <Redirect href="/(tabs)/(character)" />
+    return <Redirect href="/characters" />
   }
 
   // Mobile: mostrar HomeScreen

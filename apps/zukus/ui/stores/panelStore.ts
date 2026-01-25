@@ -1,49 +1,78 @@
 import { create } from 'zustand'
 
-export type PanelState = {
+export type PanelEntry = {
+  path: string
+  title?: string
+}
+
+export type PanelScope = string // 'character' | 'edit' | cualquier otro
+
+type PanelState = {
+  stacks: Record<PanelScope, PanelEntry[]>
+  initialized: Record<PanelScope, boolean>
+  push: (scope: PanelScope, entry: PanelEntry) => void
+  pop: (scope: PanelScope) => void
+  clear: (scope: PanelScope) => void
+  replace: (scope: PanelScope, entries: PanelEntry[]) => void
+  markInitialized: (scope: PanelScope) => void
+}
+
+/**
+ * Store global para el estado de paneles.
+ * Soporta múltiples scopes (cada pantalla puede tener su propio stack).
+ */
+export const usePanelStore = create<PanelState>((set) => ({
+  stacks: {},
+  initialized: {},
+
+  push: (scope, entry) => set((state) => ({
+    stacks: {
+      ...state.stacks,
+      [scope]: [...(state.stacks[scope] || []), entry],
+    },
+  })),
+
+  pop: (scope) => set((state) => ({
+    stacks: {
+      ...state.stacks,
+      [scope]: (state.stacks[scope] || []).slice(0, -1),
+    },
+  })),
+
+  clear: (scope) => set((state) => ({
+    stacks: {
+      ...state.stacks,
+      [scope]: [],
+    },
+  })),
+
+  replace: (scope, entries) => set((state) => ({
+    stacks: {
+      ...state.stacks,
+      [scope]: entries,
+    },
+  })),
+
+  markInitialized: (scope) => set((state) => ({
+    initialized: {
+      ...state.initialized,
+      [scope]: true,
+    },
+  })),
+}))
+
+// Tipos legacy para compatibilidad durante la migración
+export type PanelState_Legacy = {
   id: string
   type: string
   name?: string
 }
 
 export type PanelNavigationResult = {
-  currentPanel: PanelState | null
+  currentPanel: PanelEntry | null
   isPanelOpen: boolean
   canGoBack: boolean
-  openPanel: (id: string, type: string, name?: string) => void
+  openPanel: (path: string, title?: string) => void
   closePanel: () => void
   goBack: () => void
 }
-
-type PanelStore = {
-  history: PanelState[]
-  initialized: boolean
-  initialize: (history: PanelState[]) => void
-  setHistory: (history: PanelState[]) => void
-  pushPanel: (panel: PanelState) => void
-  popPanel: () => void
-  clearHistory: () => void
-}
-
-/**
- * Store global para el estado del Side Panel en desktop.
- * Permite que múltiples componentes compartan el mismo estado.
- */
-export const usePanelStore = create<PanelStore>((set) => ({
-  history: [],
-  initialized: false,
-  
-  initialize: (history) => set({ history, initialized: true }),
-  
-  setHistory: (history) => set({ history }),
-  
-  pushPanel: (panel) => set((state) => ({
-    history: [...state.history, panel],
-  })),
-  
-  popPanel: () => set((state) => ({
-    history: state.history.slice(0, -1),
-  })),
-  
-  clearHistory: () => set({ history: [] }),
-}))

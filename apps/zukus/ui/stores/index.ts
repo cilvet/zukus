@@ -24,10 +24,7 @@ export {
 } from './characterStore'
 
 export { usePanelStore } from './panelStore'
-export type { PanelState, PanelNavigationResult } from './panelStore'
-
-export { useEditPanelStore } from './editPanelStore'
-export type { EditPanelState } from './editPanelStore'
+export type { PanelEntry, PanelNavigationResult } from './panelStore'
 
 export {
   usePixelDiceStore,

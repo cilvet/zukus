@@ -18,7 +18,7 @@ export function CharacterListScreen() {
         isLoading={isLoading}
         error={error}
         onSelect={navigateToCharacter}
-        onOpenServerList={() => router.push('/(tabs)/(character)/server-list')}
+        onOpenServerList={() => { /* TODO: Añadir ruta /characters/server-list */ }}
       />
     )
   }
@@ -29,7 +29,7 @@ export function CharacterListScreen() {
       isLoading={isLoading}
       error={error}
       onSelect={navigateToCharacter}
-      onOpenServerList={() => router.push('/(tabs)/(character)/server-list')}
+      onOpenServerList={() => { /* TODO: Añadir ruta /characters/server-list */ }}
     />
   )
 }
