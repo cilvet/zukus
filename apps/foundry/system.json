@@ -1,0 +1,43 @@
+{
+  "id": "dnd35zukus",
+  "title": "D&D 3.5e - Zukus",
+  "description": "D&D 3.5e implementation using the Zukus calculation engine with full stat traceability",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "authors": [
+    {
+      "name": "Zukus Team"
+    }
+  ],
+  "esmodules": ["dnd35zukus.js"],
+  "styles": ["styles/system.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "lang/es.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": ["biography"]
+      }
+    },
+    "Item": {
+      "class": {},
+      "feat": {},
+      "buff": {}
+    }
+  },
+  "primaryTokenAttribute": "hp.value",
+  "secondaryTokenAttribute": "ac.total"
+}

@@ -1,0 +1,40 @@
+{
+  "DND35ZUKUS": {
+    "SheetLabels": {
+      "Character": "Zukus Character Sheet"
+    },
+    "Ability": {
+      "strength": "Strength",
+      "dexterity": "Dexterity",
+      "constitution": "Constitution",
+      "intelligence": "Intelligence",
+      "wisdom": "Wisdom",
+      "charisma": "Charisma"
+    },
+    "AbilityAbbr": {
+      "strength": "STR",
+      "dexterity": "DEX",
+      "constitution": "CON",
+      "intelligence": "INT",
+      "wisdom": "WIS",
+      "charisma": "CHA"
+    },
+    "Tabs": {
+      "Abilities": "Abilities",
+      "Combat": "Combat",
+      "Skills": "Skills",
+      "Features": "Features"
+    },
+    "HP": "Hit Points",
+    "AC": "Armor Class",
+    "BAB": "Base Attack Bonus",
+    "Initiative": "Initiative",
+    "Saves": {
+      "Fortitude": "Fortitude",
+      "Reflex": "Reflex",
+      "Will": "Will"
+    },
+    "Level": "Level",
+    "SourceBreakdown": "Source Breakdown"
+  }
+}

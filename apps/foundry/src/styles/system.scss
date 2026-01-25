@@ -1,0 +1,258 @@
+/* Zukus D&D 3.5e System Styles */
+
+.dnd35zukus.sheet.actor {
+  --primary-color: #4a90d9;
+  --secondary-color: #2c3e50;
+  --background-color: #f5f5f5;
+  --card-background: #ffffff;
+  --border-color: #ddd;
+  --text-color: #333;
+  --text-muted: #666;
+
+  min-width: 600px;
+  min-height: 400px;
+
+  .window-content {
+    background: var(--background-color);
+    padding: 8px;
+  }
+
+  /* Header */
+  .sheet-header {
+    display: flex;
+    gap: 16px;
+    padding: 8px;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 8px;
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .header-fields {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      h1.charname {
+        margin: 0;
+        input {
+          font-size: 1.5em;
+          font-weight: bold;
+          border: none;
+          background: transparent;
+          width: 100%;
+        }
+      }
+
+      .level-display {
+        font-size: 1.1em;
+        color: var(--text-muted);
+      }
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      .stat-box {
+        text-align: center;
+        padding: 8px 16px;
+        background: var(--secondary-color);
+        color: white;
+        border-radius: 4px;
+        min-width: 60px;
+
+        .stat-label {
+          font-size: 0.8em;
+          opacity: 0.8;
+        }
+
+        .stat-value {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  /* Tabs */
+  .sheet-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+
+    .item {
+      padding: 8px 16px;
+      background: var(--card-background);
+      border: 1px solid var(--border-color);
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  /* Content */
+  .sheet-body {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 16px;
+
+    .tab {
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  /* Abilities Grid */
+  .abilities-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+
+    .ability-card {
+      text-align: center;
+      padding: 12px 8px;
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .ability-label {
+        font-size: 0.9em;
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 4px;
+      }
+
+      .ability-score {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: var(--text-color);
+
+        input {
+          width: 50px;
+          text-align: center;
+          font-size: inherit;
+          font-weight: inherit;
+          border: 1px solid transparent;
+          background: transparent;
+
+          &:focus {
+            border-color: var(--primary-color);
+            background: white;
+          }
+        }
+      }
+
+      .ability-modifier {
+        font-size: 1.2em;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* Combat Stats */
+  .combat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+
+    .combat-stat {
+      padding: 12px;
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+
+      .stat-label {
+        font-size: 0.85em;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+
+      .stat-value {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* Saves */
+  .saves-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+
+    .save-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+
+      .save-label {
+        font-weight: bold;
+      }
+
+      .save-value {
+        font-size: 1.2em;
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  /* Source Breakdown Tooltip */
+  .source-breakdown {
+    position: absolute;
+    background: var(--secondary-color);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    z-index: 100;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+    .source-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 0;
+
+      &.irrelevant {
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+    }
+
+    .source-total {
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin-top: 4px;
+      padding-top: 4px;
+      font-weight: bold;
+    }
+  }
+}
