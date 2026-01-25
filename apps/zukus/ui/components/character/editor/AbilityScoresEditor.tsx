@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { YStack, XStack, Text, Input as TamaguiInput } from 'tamagui'
 import { useCharacterStore, useCharacterBaseData } from '../../../stores'
 
@@ -60,8 +60,24 @@ function AbilityScoreRow({ abilityKey, abilityData, onScoreChange }: AbilityScor
   const modifier = calculateAbilityModifier(abilityData.baseScore)
   const label = ABILITY_LABELS[abilityKey] || abilityKey
 
+  // Estado local para el input - solo se aplica al hacer blur
+  const [inputValue, setInputValue] = useState(
+    abilityData.baseScore === 0 ? '' : abilityData.baseScore.toString()
+  )
+
+  // Sincronizar con el valor externo cuando cambia (ej: por otro componente)
+  useEffect(() => {
+    setInputValue(abilityData.baseScore === 0 ? '' : abilityData.baseScore.toString())
+  }, [abilityData.baseScore])
+
   const handleChangeText = (text: string) => {
-    const value = text.trim()
+    // Solo actualizar el estado local mientras se edita
+    setInputValue(text)
+  }
+
+  const handleBlur = () => {
+    // Aplicar el cambio solo al salir del input
+    const value = inputValue.trim()
     if (value === '') {
       onScoreChange(abilityKey, 0)
       return
@@ -69,6 +85,9 @@ function AbilityScoreRow({ abilityKey, abilityData, onScoreChange }: AbilityScor
     const score = parseInt(value, 10)
     if (!isNaN(score) && score >= 0 && score <= 99) {
       onScoreChange(abilityKey, score)
+    } else {
+      // Revertir al valor original si el input es inválido
+      setInputValue(abilityData.baseScore === 0 ? '' : abilityData.baseScore.toString())
     }
   }
 
@@ -87,8 +106,10 @@ function AbilityScoreRow({ abilityKey, abilityData, onScoreChange }: AbilityScor
 
       <XStack alignItems="center" gap="$2">
         <TamaguiInput
-          value={abilityData.baseScore === 0 ? '' : abilityData.baseScore.toString()}
+          value={inputValue}
           onChangeText={handleChangeText}
+          onBlur={handleBlur}
+          selectTextOnFocus
           keyboardType="numeric"
           textAlign="center"
           width={60}
@@ -147,7 +168,7 @@ export function AbilityScoresEditor() {
   }
 
   return (
-    <YStack gap="$4" width="100%" maxWidth={400} paddingHorizontal="$4">
+    <YStack gap="$4" width="100%">
       <YStack gap="$2">
         <Text fontSize="$6" fontWeight="bold" color="$color">
           Puntuaciones de Habilidad

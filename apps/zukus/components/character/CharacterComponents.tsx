@@ -177,6 +177,7 @@ export function CharacterHeader({
   imageUrl,
   onFormulaPlaygroundPress,
   onChatPress,
+  onEditPress,
 }: {
   name: string
   level: number
@@ -185,6 +186,7 @@ export function CharacterHeader({
   imageUrl?: string | null
   onFormulaPlaygroundPress?: () => void
   onChatPress?: () => void
+  onEditPress?: () => void
 }) {
   return (
     <YStack
@@ -272,9 +274,31 @@ export function CharacterHeader({
             </XStack>
           )}
         </XStack>
-        <Text fontSize={12} color="$placeholderColor">
-          Level {level} {race} {characterClass}
-        </Text>
+        {onEditPress ? (
+          <Pressable onPress={onEditPress} hitSlop={8}>
+            {({ pressed }) => (
+              <XStack
+                alignItems="center"
+                gap={4}
+                paddingHorizontal={8}
+                paddingVertical={4}
+                borderRadius={4}
+                backgroundColor={pressed ? '$backgroundHover' : 'transparent'}
+              >
+                <Text fontSize={12} color="$placeholderColor">
+                  Level {level} {race} {characterClass}
+                </Text>
+                <Text fontSize={10} color="$placeholderColor">
+                  {'>'}
+                </Text>
+              </XStack>
+            )}
+          </Pressable>
+        ) : (
+          <Text fontSize={12} color="$placeholderColor">
+            Level {level} {race} {characterClass}
+          </Text>
+        )}
       </YStack>
     </YStack>
   )

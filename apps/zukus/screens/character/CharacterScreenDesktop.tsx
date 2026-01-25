@@ -319,6 +319,7 @@ function HitPointsDetailPanelContainer() {
  * Contenido de la pantalla desktop (usa selectores de Zustand).
  */
 function CharacterScreenDesktopContent() {
+  const { id: characterId } = useLocalSearchParams<{ id: string }>()
   const characterSheet = useCharacterSheet()
   const abilities = useCharacterAbilities()
   const savingThrows = useCharacterSavingThrows()
@@ -420,6 +421,12 @@ function CharacterScreenDesktopContent() {
     navigateToDetail('chat', 'chat')
   }
 
+  const handleEditPress = () => {
+    if (characterId) {
+      router.push(`/characters/edit/${characterId}`)
+    }
+  }
+
   const getPanelTitle = (): string => {
     if (!currentPanel?.type || !currentPanel?.id) {
       return 'Detail'
@@ -514,6 +521,7 @@ function CharacterScreenDesktopContent() {
               imageUrl={imageUrl}
               onFormulaPlaygroundPress={handleFormulaPlaygroundPress}
               onChatPress={handleChatPress}
+              onEditPress={handleEditPress}
             />
             <HpBar current={currentHp} max={maxHp} onPress={handleHitPointsPress} />
             {armorClass && (

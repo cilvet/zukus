@@ -15,6 +15,7 @@ import {
 
 const EDITOR_PAGES = [
   { key: 'info', label: 'Info' },
+  { key: 'abilities', label: 'Abilities' },
   { key: 'levels', label: 'Niveles' },
 ]
 
@@ -75,12 +76,22 @@ function EditorTabs({
 }
 
 /**
- * Columna 1: Info basica y Ability Scores
+ * Columna 1: Info basica
  */
 function InfoColumn() {
   return (
     <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
       <CharacterInfoSection />
+    </ScrollView>
+  )
+}
+
+/**
+ * Columna 2: Ability Scores
+ */
+function AbilitiesColumn() {
+  return (
+    <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
       <YStack paddingHorizontal={16}>
         <AbilityScoresEditor />
       </YStack>
@@ -89,7 +100,7 @@ function InfoColumn() {
 }
 
 /**
- * Columna 2: Niveles
+ * Columna 3: Niveles
  */
 function LevelsColumn({
   onRequestLevelChange,
@@ -180,6 +191,9 @@ export function EditCharacterScreen() {
       <EditorPager ref={pagerRef} onPageChange={setCurrentPage}>
         <View key="info" style={styles.page}>
           <InfoColumn />
+        </View>
+        <View key="abilities" style={styles.page}>
+          <AbilitiesColumn />
         </View>
         <View key="levels" style={styles.page}>
           <LevelsColumn onRequestLevelChange={handleRequestLevelChange} />
