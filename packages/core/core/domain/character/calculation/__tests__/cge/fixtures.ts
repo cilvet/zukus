@@ -254,3 +254,146 @@ export function createBaseWizard(level: number = 1) {
     })
     .withClassLevels(wizard, level);
 }
+
+// ============================================================================
+// TABLAS DE CLERIC (Vancian sin known)
+// ============================================================================
+
+// Slots base del Cleric (sin slots de dominio)
+export const CLERIC_BASE_SLOTS_TABLE: LevelTable = {
+  1: [3, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  2: [4, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+  3: [4, 2, 1, 0, 0, 0, 0, 0, 0, 0],
+  4: [5, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+  5: [5, 3, 2, 1, 0, 0, 0, 0, 0, 0],
+};
+
+// Slots de dominio: 1 slot por nivel de conjuro disponible
+export const CLERIC_DOMAIN_SLOTS_TABLE: LevelTable = {
+  1: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  2: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  3: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+  4: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+  5: [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+};
+
+// ============================================================================
+// CGE CONFIG DE CLERIC
+// ============================================================================
+
+export const clericCGEConfig: CGEConfig = {
+  id: 'cleric-spells',
+  classId: 'cleric',
+  entityType: 'spell',
+  levelPath: '@entity.levels.cleric',
+
+  accessFilter: {
+    field: 'lists',
+    operator: 'contains',
+    value: 'cleric',
+  },
+
+  // SIN known config: el Cleric puede preparar cualquier conjuro clerical
+  // (no tiene spellbook, accede a toda la lista)
+
+  tracks: [
+    {
+      id: 'base',
+      label: 'base_slots',
+      resource: {
+        type: 'SLOTS',
+        table: CLERIC_BASE_SLOTS_TABLE,
+        bonusVariable: '@bonusSpells',
+        refresh: 'daily',
+      },
+      preparation: { type: 'BOUND' },
+    },
+    {
+      id: 'domain',
+      label: 'domain_slots',
+      // Filtro: solo conjuros de los dominios del personaje
+      filter: {
+        field: 'domains',
+        operator: 'intersects',
+        value: { expression: '@character.domains' },
+      },
+      resource: {
+        type: 'SLOTS',
+        table: CLERIC_DOMAIN_SLOTS_TABLE,
+        refresh: 'daily',
+      },
+      preparation: { type: 'BOUND' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'cleric.spell',
+    genericPrefix: 'spell',
+    casterLevelVar: 'castingClassLevel.cleric',
+  },
+
+  labels: {
+    known: 'divine_spells',
+    prepared: 'prepared_spells',
+    action: 'cast',
+  },
+};
+
+// ============================================================================
+// SPECIAL CHANGE CGE_DEFINITION (Cleric)
+// ============================================================================
+
+export const clericCGEDefinition: CGEDefinitionChange = {
+  type: 'CGE_DEFINITION',
+  config: clericCGEConfig,
+};
+
+// ============================================================================
+// CLASE CLERIC SIMPLIFICADA PARA TESTS
+// ============================================================================
+
+export const cleric: CharacterClass = {
+  name: "Cleric",
+  uniqueId: "cleric",
+  hitDie: 8,
+  baseAttackBonusProgression: BabType.MEDIUM,
+  baseSavesProgression: {
+    fortitude: SaveType.GOOD,
+    reflex: SaveType.POOR,
+    will: SaveType.GOOD,
+  },
+  classFeatures: [],
+  levels: [
+    {
+      level: 1,
+      classFeatures: [
+        {
+          name: 'Cleric Spellcasting',
+          description: 'Divine spellcasting with full spell list access',
+          featureType: featureTypes.CLASS_FEATURE,
+          uniqueId: 'cleric-spellcasting',
+          changes: [],
+          specialChanges: [clericCGEDefinition],
+        },
+      ],
+    },
+  ],
+  spellCasting: true,
+  spellCastingAbilityUniqueId: "wisdom",
+  allSpellsKnown: true, // Cleric tiene acceso a toda la lista
+};
+
+// ============================================================================
+// BUILDER HELPERS (Cleric)
+// ============================================================================
+
+export function createBaseCleric(level: number = 1) {
+  return buildCharacter()
+    .withName("Test Cleric")
+    .withBaseAbilityScores({
+      ...standardAbilityScores,
+      wisdom: 16, // +3 modifier para bonus spells
+      charisma: 10,
+    })
+    .withClassLevels(cleric, level);
+}
