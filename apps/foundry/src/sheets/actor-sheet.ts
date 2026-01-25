@@ -529,15 +529,51 @@ export class ZukusActorSheet extends ActorSheet {
 
     if (sources.length === 0) return;
 
+    // Calculate total
+    const total = sources
+      .filter(s => s.relevant !== false)
+      .reduce((sum, s) => sum + (s.value || 0), 0);
+
+    // Get a friendly label for the breakdown
+    const labelMap: Record<string, string> = {
+      'abilities.strength': 'Strength',
+      'abilities.dexterity': 'Dexterity',
+      'abilities.constitution': 'Constitution',
+      'abilities.intelligence': 'Intelligence',
+      'abilities.wisdom': 'Wisdom',
+      'abilities.charisma': 'Charisma',
+      'ac': 'Armor Class',
+      'touchAc': 'Touch AC',
+      'flatFootedAc': 'Flat-Footed AC',
+      'bab': 'Base Attack Bonus',
+      'initiative': 'Initiative',
+      'grapple': 'Grapple',
+      'saves.fortitude': 'Fortitude Save',
+      'saves.reflex': 'Reflex Save',
+      'saves.will': 'Will Save',
+    };
+    const label = labelMap[breakdownKey] || breakdownKey;
+
     // Create tooltip HTML
     const tooltipHtml = `
-      <div class="source-breakdown">
-        ${sources.map(s => `
-          <div class="source-item ${s.relevant === false ? 'irrelevant' : ''}">
-            <span class="source-name">${s.sourceName || 'Unknown'}</span>
-            <span class="source-value">${s.value >= 0 ? '+' : ''}${s.value}</span>
-          </div>
-        `).join('')}
+      <div class="source-breakdown-tooltip">
+        <div class="tooltip-header">${label}</div>
+        ${sources.map(s => {
+          const value = s.value || 0;
+          const sign = value >= 0 ? '+' : '';
+          const relevantClass = s.relevant === false ? 'irrelevant' : '';
+          const signClass = value > 0 ? 'positive' : value < 0 ? 'negative' : '';
+          return `
+            <div class="source-item ${relevantClass} ${signClass}">
+              <span class="source-name">${s.sourceName || 'Unknown'}</span>
+              <span class="source-value">${sign}${value}</span>
+            </div>
+          `;
+        }).join('')}
+        <div class="tooltip-total">
+          <span>Total</span>
+          <span class="total-value">${total >= 0 ? '+' : ''}${total}</span>
+        </div>
       </div>
     `;
 
@@ -546,10 +582,24 @@ export class ZukusActorSheet extends ActorSheet {
     $('body').append(tooltip);
 
     const rect = element.getBoundingClientRect();
+    const tooltipEl = tooltip[0];
+    const tooltipRect = tooltipEl.getBoundingClientRect();
+
+    // Position to the right of the element, but keep on screen
+    let left = rect.right + 10;
+    let top = rect.top;
+
+    // Keep tooltip on screen
+    if (left + tooltipRect.width > window.innerWidth) {
+      left = rect.left - tooltipRect.width - 10;
+    }
+    if (top + tooltipRect.height > window.innerHeight) {
+      top = window.innerHeight - tooltipRect.height - 10;
+    }
+
     tooltip.css({
-      position: 'fixed',
-      left: rect.right + 10,
-      top: rect.top,
+      left: left,
+      top: top,
     });
   }
 
@@ -557,6 +607,6 @@ export class ZukusActorSheet extends ActorSheet {
    * Hide source breakdown tooltip
    */
   private _hideSourceBreakdown(): void {
-    $('.source-breakdown').remove();
+    $('.source-breakdown-tooltip').remove();
   }
 }

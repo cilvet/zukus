@@ -194,6 +194,8 @@ export class ZukusActor extends Actor {
           charisma: sheet.abilityScores.charisma.sourceValues,
         },
         ac: sheet.armorClass.totalAc.sourceValues,
+        touchAc: sheet.armorClass.touchAc.sourceValues,
+        flatFootedAc: sheet.armorClass.flatFootedAc.sourceValues,
         bab: sheet.baseAttackBonus.sourceValues,
         saves: {
           fortitude: sheet.savingThrows.fortitude.sourceValues,
@@ -201,6 +203,7 @@ export class ZukusActor extends Actor {
           will: sheet.savingThrows.will.sourceValues,
         },
         initiative: sheet.initiative.sourceValues,
+        grapple: sheet.grapple.sourceValues,
       };
 
       // Sync HP values to system for token display
