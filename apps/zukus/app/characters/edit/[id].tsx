@@ -1,12 +1,13 @@
 import { Stack, useRouter } from 'expo-router'
 import { Text, XStack, YStack } from 'tamagui'
-import { Pressable } from 'react-native'
+import { Platform, Pressable, useWindowDimensions } from 'react-native'
 import { EditCharacterScreen } from '../../../screens'
-import { useCharacterName, useCharacterBuild, useTheme } from '../../../ui'
+import { useCharacterName, useCharacterBuild } from '../../../ui'
+
+const DESKTOP_BREAKPOINT = 768
 
 function CustomHeaderLeft() {
   const router = useRouter()
-  const { themeColors } = useTheme()
   const name = useCharacterName()
   const build = useCharacterBuild()
 
@@ -39,11 +40,14 @@ function CustomHeaderLeft() {
 }
 
 export default function EditCharacterRoute() {
+  const { width } = useWindowDimensions()
+  const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+
   return (
     <>
       <Stack.Screen
         options={{
-          headerShown: true,
+          headerShown: !isWebDesktop,
           headerTitle: '',
           headerLeft: () => <CustomHeaderLeft />,
           headerBackVisible: false,

@@ -1,13 +1,19 @@
 import { Stack, useRouter } from 'expo-router'
-import { Pressable } from 'react-native'
+import { Platform, Pressable, useWindowDimensions } from 'react-native'
+import { YStack } from 'tamagui'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useTheme } from '../../ui'
+import { Topbar } from '../../components/layout'
+
+const DESKTOP_BREAKPOINT = 768
 
 export default function CharactersLayout() {
   const { themeColors } = useTheme()
   const router = useRouter()
+  const { width } = useWindowDimensions()
+  const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
-  return (
+  const stackContent = (
     <Stack
       screenOptions={{
         headerStyle: {
@@ -24,6 +30,8 @@ export default function CharactersLayout() {
         animationDuration: 200,
         gestureEnabled: true,
         fullScreenGestureEnabled: true,
+        // En desktop web, ocultar headers porque tenemos Topbar
+        headerShown: !isWebDesktop,
       }}
     >
       <Stack.Screen
@@ -40,14 +48,12 @@ export default function CharactersLayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          headerShown: true,
           title: '',
         }}
       />
       <Stack.Screen
         name="edit/[id]"
         options={{
-          headerShown: true,
           title: '',
         }}
       />
@@ -65,4 +71,17 @@ export default function CharactersLayout() {
       />
     </Stack>
   )
+
+  // Desktop web: envolver con Topbar
+  if (isWebDesktop) {
+    return (
+      <YStack flex={1} backgroundColor={themeColors.background}>
+        <Topbar />
+        {stackContent}
+      </YStack>
+    )
+  }
+
+  // Mobile: solo el stack con headers normales
+  return stackContent
 }

@@ -13,7 +13,7 @@ type NavItem = {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Mis personajes', href: '/(tabs)/(character)', matchPath: '(character)' },
+  { label: 'Mis personajes', href: '/characters', matchPath: 'characters' },
   { label: 'Dados', href: '/(tabs)/(dice)', matchPath: '(dice)' },
   { label: 'Chat', href: '/chat', matchPath: 'chat' },
   { label: 'Mis compendios', href: '/(tabs)/(compendiums)', matchPath: '(compendiums)' },
