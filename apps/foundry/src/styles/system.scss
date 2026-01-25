@@ -26,6 +26,39 @@
     border: 1px solid var(--border-color);
     border-radius: 4px;
     margin-bottom: 8px;
+    position: relative;
+
+    .header-controls {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: flex;
+      gap: 4px;
+
+      button {
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        background: var(--background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        cursor: pointer;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: var(--primary-color);
+          color: white;
+          border-color: var(--primary-color);
+        }
+
+        i {
+          font-size: 0.9em;
+        }
+      }
+    }
 
     .profile-img {
       width: 100px;
@@ -364,6 +397,100 @@
     }
   }
 
+  /* Attacks Section */
+  .attacks-section {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--background-color);
+    border-radius: 4px;
+
+    .no-attacks {
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 8px 0;
+    }
+
+    .attack-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .attack-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--card-background);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .attack-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .attack-name {
+          font-weight: bold;
+          color: var(--text-color);
+        }
+
+        .attack-type {
+          font-size: 0.8em;
+          color: var(--primary-color);
+          text-transform: uppercase;
+        }
+      }
+
+      .attack-stats {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        .attack-bonus,
+        .attack-damage {
+          text-align: center;
+          min-width: 50px;
+
+          .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--text-color);
+            display: block;
+          }
+
+          .stat-label {
+            font-size: 0.7em;
+            color: var(--primary-color);
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .attack-roll {
+        padding: 8px 12px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1.1em;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
   /* Buffs Section */
   .buffs-section {
     margin-top: 16px;
@@ -467,6 +594,138 @@
 
           &:hover {
             background: var(--primary-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Attack Modal - outside sheet scope since it's a Foundry dialog */
+.attack-modal {
+  .attack-modal-content {
+    padding: 8px 0;
+
+    .attack-info {
+      margin-bottom: 16px;
+
+      .attack-type {
+        font-size: 0.9em;
+        color: #888;
+        text-transform: uppercase;
+      }
+    }
+
+    .attack-stats-preview {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 20px;
+      padding: 12px;
+      background: #f5f5f5;
+      border-radius: 4px;
+
+      .stat-preview {
+        text-align: center;
+
+        .stat-label {
+          display: block;
+          font-size: 0.8em;
+          color: #666;
+          margin-bottom: 4px;
+        }
+
+        .stat-value {
+          font-size: 1.5em;
+          font-weight: bold;
+          color: #333;
+        }
+      }
+    }
+
+    .context-changes-section {
+      margin-bottom: 20px;
+
+      h4 {
+        margin: 0 0 12px 0;
+        font-size: 1em;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 6px;
+      }
+
+      .context-changes-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .context-change-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+
+        input[type="checkbox"] {
+          margin: 0;
+        }
+
+        .change-name {
+          flex: 1;
+          font-weight: 500;
+        }
+
+        .change-effect {
+          font-size: 0.85em;
+          color: #4a90d9;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .attack-breakdown {
+      h4 {
+        margin: 0 0 12px 0;
+        font-size: 1em;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 6px;
+      }
+
+      .breakdown-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .breakdown-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 8px;
+        background: #fafafa;
+        border-radius: 3px;
+
+        .source-name {
+          color: #555;
+        }
+
+        .source-value {
+          font-weight: 500;
+          font-family: monospace;
+        }
+
+        &.irrelevant {
+          color: #999;
+
+          .source-name {
+            text-decoration: line-through;
           }
         }
       }

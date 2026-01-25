@@ -1,6 +1,14 @@
 <form class="{{cssClass}}" autocomplete="off">
   {{!-- Sheet Header --}}
   <header class="sheet-header">
+    <div class="header-controls">
+      <button type="button" class="import-character" title="Import character from JSON">
+        <i class="fas fa-file-import"></i>
+      </button>
+      <button type="button" class="export-character" title="Export character to JSON">
+        <i class="fas fa-file-export"></i>
+      </button>
+    </div>
     <img class="profile-img" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
     <div class="header-fields">
@@ -106,6 +114,38 @@
           <div class="stat-label">Grapple</div>
           <div class="stat-value">{{combat.grappleDisplay}}</div>
         </div>
+      </div>
+
+      {{!-- Attacks Section --}}
+      <h3>Attacks</h3>
+      <div class="attacks-section">
+        {{#if attacks.length}}
+        <div class="attack-list">
+          {{#each attacks as |attack|}}
+          <div class="attack-item" data-attack-index="{{attack.index}}">
+            <div class="attack-info">
+              <span class="attack-name">{{attack.name}}</span>
+              <span class="attack-type">{{attack.typeLabel}}</span>
+            </div>
+            <div class="attack-stats">
+              <div class="attack-bonus" data-source-breakdown="attacks.{{attack.index}}">
+                <span class="stat-value">{{attack.attackBonusDisplay}}</span>
+                <span class="stat-label">ATK</span>
+              </div>
+              <div class="attack-damage">
+                <span class="stat-value">{{attack.damageDisplay}}</span>
+                <span class="stat-label">DMG</span>
+              </div>
+            </div>
+            <button type="button" class="attack-roll" data-attack-index="{{attack.index}}" title="Quick Roll">
+              <i class="fas fa-dice-d20"></i>
+            </button>
+          </div>
+          {{/each}}
+        </div>
+        {{else}}
+        <p class="no-attacks">No weapons equipped</p>
+        {{/if}}
       </div>
 
       {{!-- Character Classes (from CharacterBaseData) --}}

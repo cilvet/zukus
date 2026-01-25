@@ -206,6 +206,13 @@ export class ZukusActor extends Actor {
         grapple: sheet.grapple.sourceValues,
       };
 
+      // Store attack data for the attacks section
+      systemData.attackData = {
+        attacks: sheet.attackData.attacks,
+        attackContextChanges: sheet.attackData.attackContextChanges,
+        attackChanges: sheet.attackData.attackChanges,
+      };
+
       // Sync HP values to system for token display
       systemData.hp.max = sheet.hitPoints.maxHp;
       systemData.hp.value = sheet.hitPoints.currentHp;

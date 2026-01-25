@@ -6,6 +6,8 @@
  */
 
 import { ZukusActor } from '../documents/actor';
+import { formatModifier } from '../adapters/core-to-foundry';
+import type { CalculatedAttack, AttackContextualChange } from '@zukus/core';
 
 export class ZukusActorSheet extends ActorSheet {
   /**
@@ -61,6 +63,9 @@ export class ZukusActorSheet extends ActorSheet {
     // Organize items by type
     context.itemsByType = this._prepareItems();
 
+    // Prepare attack data
+    context.attacks = this._prepareAttacks(context);
+
     // Prepare class data for the character
     context.classes = this._prepareClasses(context);
 
@@ -73,6 +78,13 @@ export class ZukusActorSheet extends ActorSheet {
     // Prepare buffs data
     context.currentBuffs = zukusActor.getBuffs();
     context.availableBuffs = ZukusActor.getAvailableBuffs();
+
+    // Store raw attack data for modal usage
+    context.attackData = (this.actor.system as any).attackData || {
+      attacks: [],
+      attackContextChanges: [],
+      attackChanges: [],
+    };
 
     // Add config
     context.config = CONFIG.DND35ZUKUS || {};
@@ -181,6 +193,59 @@ export class ZukusActorSheet extends ActorSheet {
   }
 
   /**
+   * Prepare attacks data for template
+   */
+  private _prepareAttacks(context: any): any[] {
+    const attackData = (this.actor.system as any).attackData;
+    if (!attackData?.attacks) {
+      return [];
+    }
+
+    return attackData.attacks.map((attack: CalculatedAttack, index: number) => ({
+      index,
+      name: attack.name,
+      type: attack.type,
+      typeLabel: this._getAttackTypeLabel(attack.type),
+      attackBonus: attack.attackBonus.totalValue,
+      attackBonusDisplay: formatModifier(attack.attackBonus.totalValue),
+      damageDisplay: this._formatDamage(attack.damage),
+      criticalDamageDisplay: this._formatDamage(attack.criticalDamage),
+      sourceValues: attack.attackBonus.sourceValues,
+      weaponUniqueId: attack.weaponUniqueId,
+    }));
+  }
+
+  /**
+   * Get human-readable attack type label
+   */
+  private _getAttackTypeLabel(type: string): string {
+    const labels: Record<string, string> = {
+      melee: 'Melee',
+      ranged: 'Ranged',
+      meleeTouch: 'Melee Touch',
+      rangedTouch: 'Ranged Touch',
+      spell: 'Spell',
+      spellLike: 'Spell-Like',
+    };
+    return labels[type] || type;
+  }
+
+  /**
+   * Format damage formula for display
+   */
+  private _formatDamage(damage: any): string {
+    if (!damage) return '-';
+    // DamageFormula can be ComplexDamageSection or SimpleDamageSectionWithType
+    if (damage.type === 'complex' && damage.baseDamage) {
+      return damage.name ?? damage.baseDamage.name ?? 'Damage';
+    }
+    if (damage.type === 'simple' && damage.formula) {
+      return damage.formula.expression ?? damage.name ?? 'Damage';
+    }
+    return damage.name ?? '-';
+  }
+
+  /**
    * Organize items by type
    */
   private _prepareItems(): Record<string, Item[]> {
@@ -225,6 +290,14 @@ export class ZukusActorSheet extends ActorSheet {
     html.find('.add-buff').on('click', this._onAddBuff.bind(this));
     html.find('.toggle-buff').on('click', this._onToggleBuff.bind(this));
     html.find('.remove-buff').on('click', this._onRemoveBuff.bind(this));
+
+    // Attack controls
+    html.find('.attack-item').on('click', this._onAttackClick.bind(this));
+    html.find('.attack-roll').on('click', this._onAttackRoll.bind(this));
+
+    // Import/Export controls
+    html.find('.import-character').on('click', this._onImportCharacter.bind(this));
+    html.find('.export-character').on('click', this._onExportCharacter.bind(this));
 
     // Source breakdown tooltips
     html.find('[data-source-breakdown]').on('mouseenter', this._showSourceBreakdown.bind(this));
@@ -504,6 +577,384 @@ export class ZukusActorSheet extends ActorSheet {
       }
       await super._updateObject(event, filteredData);
     }
+  }
+
+  /**
+   * Handle attack click - open modal with contextual changes
+   */
+  private async _onAttackClick(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    const attackIndex = Number(event.currentTarget.dataset.attackIndex);
+
+    const attackData = (this.actor.system as any).attackData;
+    if (!attackData?.attacks?.[attackIndex]) return;
+
+    const attack = attackData.attacks[attackIndex];
+    const contextChanges = attackData.attackContextChanges || [];
+
+    // Filter contextual changes applicable to this attack type
+    const applicableChanges = contextChanges.filter(
+      (change: AttackContextualChange) =>
+        change.appliesTo === 'all' || change.appliesTo === attack.type
+    );
+
+    // Open attack modal
+    await this._openAttackModal(attack, applicableChanges, attackIndex);
+  }
+
+  /**
+   * Handle quick attack roll (without opening modal)
+   */
+  private async _onAttackRoll(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const attackIndex = Number(event.currentTarget.dataset.attackIndex);
+    const attackData = (this.actor.system as any).attackData;
+    if (!attackData?.attacks?.[attackIndex]) return;
+
+    const attack = attackData.attacks[attackIndex];
+    await this._rollAttack(attack, []);
+  }
+
+  /**
+   * Open the attack modal with contextual changes
+   */
+  private async _openAttackModal(
+    attack: CalculatedAttack,
+    contextChanges: AttackContextualChange[],
+    attackIndex: number
+  ): Promise<void> {
+    const selectedChanges = new Set<string>();
+
+    const content = this._renderAttackModalContent(attack, contextChanges, selectedChanges);
+
+    const dialog = new Dialog({
+      title: attack.name,
+      content,
+      buttons: {
+        roll: {
+          icon: '<i class="fas fa-dice-d20"></i>',
+          label: 'Roll Attack',
+          callback: async () => {
+            const selectedArray = Array.from(selectedChanges);
+            const appliedChanges = contextChanges.filter(c => selectedArray.includes(c.name));
+            await this._rollAttack(attack, appliedChanges);
+          },
+        },
+        close: {
+          icon: '<i class="fas fa-times"></i>',
+          label: 'Cancel',
+        },
+      },
+      default: 'roll',
+      render: (html: JQuery) => {
+        // Set up change toggles
+        html.find('.context-change-toggle').on('change', (event) => {
+          const checkbox = event.currentTarget as HTMLInputElement;
+          const changeName = checkbox.dataset.changeName;
+          if (!changeName) return;
+
+          if (checkbox.checked) {
+            selectedChanges.add(changeName);
+          } else {
+            selectedChanges.delete(changeName);
+          }
+
+          // Update preview
+          this._updateAttackPreview(html, attack, contextChanges, selectedChanges);
+        });
+      },
+    }, {
+      width: 400,
+      classes: ['attack-modal'],
+    });
+
+    dialog.render(true);
+  }
+
+  /**
+   * Render the attack modal content
+   */
+  private _renderAttackModalContent(
+    attack: CalculatedAttack,
+    contextChanges: AttackContextualChange[],
+    selectedChanges: Set<string>
+  ): string {
+    const attackBonus = formatModifier(attack.attackBonus.totalValue);
+    const damageText = this._formatDamage(attack.damage);
+
+    let changesHtml = '';
+    if (contextChanges.length > 0) {
+      changesHtml = `
+        <div class="context-changes-section">
+          <h4>Modifiers</h4>
+          <div class="context-changes-list">
+            ${contextChanges.map(change => `
+              <label class="context-change-item">
+                <input type="checkbox"
+                       class="context-change-toggle"
+                       data-change-name="${change.name}"
+                       ${selectedChanges.has(change.name) ? 'checked' : ''}/>
+                <span class="change-name">${change.name}</span>
+                <span class="change-effect">${this._getChangeEffectText(change)}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="attack-modal-content">
+        <div class="attack-info">
+          <div class="attack-type">${this._getAttackTypeLabel(attack.type)}</div>
+        </div>
+
+        <div class="attack-stats-preview">
+          <div class="stat-preview">
+            <span class="stat-label">Attack</span>
+            <span class="stat-value attack-bonus-preview">${attackBonus}</span>
+          </div>
+          <div class="stat-preview">
+            <span class="stat-label">Damage</span>
+            <span class="stat-value damage-preview">${damageText}</span>
+          </div>
+        </div>
+
+        ${changesHtml}
+
+        <div class="attack-breakdown">
+          <h4>Attack Bonus Breakdown</h4>
+          <div class="breakdown-list">
+            ${attack.attackBonus.sourceValues.map(sv => `
+              <div class="breakdown-item ${sv.relevant === false ? 'irrelevant' : ''}">
+                <span class="source-name">${sv.sourceName}</span>
+                <span class="source-value">${formatModifier(sv.value)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Get effect text for a contextual change
+   */
+  private _getChangeEffectText(change: AttackContextualChange): string {
+    // Try to calculate the effect from the changes array
+    const effects: string[] = [];
+
+    if (change.changes) {
+      for (const c of change.changes) {
+        const changeType = (c as any).type;
+        const formula = (c as any).formula;
+        if (changeType === 'ATTACK_ROLLS' && formula?.expression) {
+          const val = parseInt(formula.expression, 10);
+          if (!isNaN(val)) {
+            effects.push(`${val >= 0 ? '+' : ''}${val} ATK`);
+          }
+        }
+        if (changeType === 'DAMAGE' && formula?.expression) {
+          const val = parseInt(formula.expression, 10);
+          if (!isNaN(val)) {
+            effects.push(`${val >= 0 ? '+' : ''}${val} DMG`);
+          }
+        }
+      }
+    }
+
+    return effects.join(', ') || '';
+  }
+
+  /**
+   * Update the attack preview when contextual changes are toggled
+   */
+  private _updateAttackPreview(
+    html: JQuery,
+    attack: CalculatedAttack,
+    contextChanges: AttackContextualChange[],
+    selectedChanges: Set<string>
+  ): void {
+    // Calculate modified attack bonus
+    let modifiedBonus = attack.attackBonus.totalValue;
+
+    for (const change of contextChanges) {
+      if (!selectedChanges.has(change.name)) continue;
+
+      if (change.changes) {
+        for (const c of change.changes) {
+          const changeType = (c as any).type;
+          const formula = (c as any).formula;
+          if (changeType === 'ATTACK_ROLLS' && formula?.expression) {
+            const val = parseInt(formula.expression, 10);
+            if (!isNaN(val)) {
+              modifiedBonus += val;
+            }
+          }
+        }
+      }
+    }
+
+    html.find('.attack-bonus-preview').text(formatModifier(modifiedBonus));
+  }
+
+  /**
+   * Handle import character from JSON
+   */
+  private async _onImportCharacter(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+
+    const content = `
+      <div class="import-dialog">
+        <p>Paste the CharacterBaseData JSON exported from Zukus app:</p>
+        <textarea id="import-json" style="width: 100%; height: 300px; font-family: monospace; font-size: 12px;"></textarea>
+      </div>
+    `;
+
+    const dialog = new Dialog({
+      title: 'Import Character',
+      content,
+      buttons: {
+        import: {
+          icon: '<i class="fas fa-file-import"></i>',
+          label: 'Import',
+          callback: async (html: JQuery) => {
+            const jsonText = (html.find('#import-json').val() as string || '').trim();
+
+            if (!jsonText) {
+              ui.notifications?.warn('No JSON provided');
+              return;
+            }
+
+            try {
+              const characterData = JSON.parse(jsonText);
+
+              // Basic validation - check for required fields
+              if (!characterData.baseAbilityData) {
+                throw new Error('Invalid CharacterBaseData: missing baseAbilityData');
+              }
+
+              // Update the actor's flags with the imported data
+              const zukusActor = this.actor as unknown as ZukusActor;
+              await zukusActor.setCharacterBaseData(characterData);
+
+              ui.notifications?.info(`Character data imported successfully!`);
+              this.render(false);
+            } catch (error) {
+              console.error('Import error:', error);
+              ui.notifications?.error(`Failed to import: ${(error as Error).message}`);
+            }
+          },
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: 'Cancel',
+        },
+      },
+      default: 'import',
+    }, {
+      width: 500,
+      height: 450,
+    });
+
+    dialog.render(true);
+  }
+
+  /**
+   * Handle export character to JSON
+   */
+  private async _onExportCharacter(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+
+    const zukusActor = this.actor as unknown as ZukusActor;
+    const characterData = zukusActor.getCharacterBaseData();
+
+    if (!characterData) {
+      ui.notifications?.warn('No character data to export');
+      return;
+    }
+
+    const jsonText = JSON.stringify(characterData, null, 2);
+
+    const content = `
+      <div class="export-dialog">
+        <p>Copy the CharacterBaseData JSON below:</p>
+        <textarea id="export-json" style="width: 100%; height: 300px; font-family: monospace; font-size: 12px;" readonly>${jsonText}</textarea>
+      </div>
+    `;
+
+    const dialog = new Dialog({
+      title: 'Export Character',
+      content,
+      buttons: {
+        copy: {
+          icon: '<i class="fas fa-copy"></i>',
+          label: 'Copy to Clipboard',
+          callback: async (html: JQuery) => {
+            const textarea = html.find('#export-json')[0] as HTMLTextAreaElement;
+            textarea.select();
+            document.execCommand('copy');
+            ui.notifications?.info('Copied to clipboard!');
+          },
+        },
+        close: {
+          icon: '<i class="fas fa-times"></i>',
+          label: 'Close',
+        },
+      },
+      default: 'copy',
+    }, {
+      width: 500,
+      height: 450,
+    });
+
+    dialog.render(true);
+  }
+
+  /**
+   * Roll an attack
+   */
+  private async _rollAttack(
+    attack: CalculatedAttack,
+    appliedChanges: AttackContextualChange[]
+  ): Promise<void> {
+    // Calculate modified attack bonus
+    let attackBonus = attack.attackBonus.totalValue;
+    const bonusSources: string[] = [];
+
+    for (const change of appliedChanges) {
+      if (change.changes) {
+        for (const c of change.changes) {
+          const changeType = (c as any).type;
+          const formula = (c as any).formula;
+          if (changeType === 'ATTACK_ROLLS' && formula?.expression) {
+            const val = parseInt(formula.expression, 10);
+            if (!isNaN(val)) {
+              attackBonus += val;
+              bonusSources.push(`${change.name}: ${val >= 0 ? '+' : ''}${val}`);
+            }
+          }
+        }
+      }
+    }
+
+    // Build the roll
+    const roll = new Roll('1d20 + @bonus', { bonus: attackBonus });
+    await roll.evaluate();
+
+    // Build flavor text
+    let flavor = `<strong>${attack.name}</strong> - ${this._getAttackTypeLabel(attack.type)} Attack`;
+    if (bonusSources.length > 0) {
+      flavor += `<br><small>Modifiers: ${bonusSources.join(', ')}</small>`;
+    }
+    flavor += `<br><small>Damage: ${this._formatDamage(attack.damage)}</small>`;
+
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor,
+    });
   }
 
   /**
