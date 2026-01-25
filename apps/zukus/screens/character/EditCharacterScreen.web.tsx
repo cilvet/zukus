@@ -1,7 +1,8 @@
+import { useCallback } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, YStack, XStack, ScrollView } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
-import { useTheme, useCharacterSheet } from '../../ui'
+import { useTheme, useCharacterSheet, useCharacterStore } from '../../ui'
 import { useCharacterSync } from '../../hooks'
 import {
   LevelEditor,
@@ -19,6 +20,13 @@ export function EditCharacterScreen() {
   const characterId = id ?? ''
   const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
+  const { updater } = useCharacterStore()
+
+  const handleRequestLevelChange = useCallback((level: number) => {
+    if (updater) {
+      updater.setCurrentCharacterLevel(level)
+    }
+  }, [updater])
 
   if (!characterId) {
     return (
@@ -74,7 +82,7 @@ export function EditCharacterScreen() {
 
           {/* Columna 2: Niveles */}
           <YStack flex={1} gap="$4">
-            <LevelEditor />
+            <LevelEditor onRequestLevelChange={handleRequestLevelChange} />
           </YStack>
         </XStack>
       </ScrollView>

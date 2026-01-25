@@ -44,7 +44,7 @@ import {
   BuffEditScreen,
   ChangeEditScreen,
 } from '../../ui'
-import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
+import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
 import {
   SectionHeader,
@@ -59,7 +59,9 @@ import { ChatScreenWeb } from '../chat/ChatScreenWeb'
 import { SavingThrowDetailPanel } from '../../ui'
 import { SkillsSection } from '../../ui/components/character/SkillsSection'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, CalculatedSingleSkill, ComputedEntity } from '@zukus/core'
+import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, CalculatedSingleSkill, ComputedEntity, ProviderLocation, StandardEntity, EntityInstance } from '@zukus/core'
+import { resolveProvider, getSelectedEntityInstances } from '@zukus/core'
+import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
 import {
   SidePanel,
   SidePanelContainer,
@@ -768,6 +770,9 @@ function CharacterScreenDesktopContent() {
         {currentPanel?.type === 'classSelectorDetail' && currentPanel?.id && (
           <ClassSelectorDetailPanelContainer levelIndex={parseInt(currentPanel.id)} />
         )}
+        {currentPanel?.type === 'entitySelectorDetail' && currentPanel?.id && (
+          <EntitySelectorDetailPanelContainer locationJson={currentPanel.id} />
+        )}
         {entityForPanel && (
           <GenericEntityDetailPanel entity={entityForPanel} />
         )}
@@ -780,6 +785,8 @@ function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
   const { openPanel } = usePanelNavigation()
+  const navigateToDetail = useNavigateToDetail()
+  const { getEntity, getEntityById, getAllEntities, getAllEntitiesFromAllTypes } = useCompendiumContext()
 
   if (!baseData || !updater) {
     return (
@@ -789,10 +796,71 @@ function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
     )
   }
 
+  const levelNumber = levelIndex + 1
   const levelSlot = baseData.levelSlots?.[levelIndex] ?? { classId: null, hpRoll: null }
   const classEntity = levelSlot.classId ? baseData.classEntities?.[levelSlot.classId] : null
   const className = classEntity?.name ?? null
   const hitDie = classEntity?.hitDie ?? null
+
+  // Calculate class level for this specific slot
+  function getClassLevelAtSlot(levelSlots: typeof baseData.levelSlots, index: number): number {
+    if (!levelSlots) return 0
+    const currentSlot = levelSlots[index]
+    if (!currentSlot?.classId) return 0
+    let count = 0
+    for (let i = 0; i <= index; i++) {
+      if (levelSlots[i]?.classId === currentSlot.classId) {
+        count++
+      }
+    }
+    return count
+  }
+
+  const classLevel = getClassLevelAtSlot(baseData.levelSlots, levelIndex)
+
+  // Get class providers for this level
+  const classProviders: ProviderWithResolution[] = []
+  if (classEntity && classLevel) {
+    const levelRow = classEntity.levels?.[String(classLevel)]
+    const providers = levelRow?.providers || []
+    providers.forEach((provider, providerIndex) => {
+      const providerLocation: ProviderLocation = {
+        type: 'classLevel',
+        classId: levelSlot.classId!,
+        classLevel,
+        providerIndex,
+      }
+      const entityType = provider.selector?.entityType
+      const allEntities = entityType ? getAllEntities(entityType) : getAllEntitiesFromAllTypes()
+      const getEntityFn = (id: string) => entityType ? getEntity(entityType, id) : getEntityById(id)
+      const resolution = resolveProvider(provider, allEntities, getEntityFn, { '@characterLevel': levelNumber })
+      const grantedEntities = resolution.granted?.entities || []
+      const selectedEntities = getSelectedEntityInstances(baseData, providerLocation)
+      classProviders.push({ provider, providerLocation, grantedEntities, selectedEntities })
+    })
+  }
+
+  // Get system-level providers (feats, ability increases)
+  const systemProviders: ProviderWithResolution[] = []
+  const systemLevels = baseData.systemLevelsEntity
+  if (systemLevels) {
+    const levelRow = systemLevels.levels?.[String(levelNumber)]
+    const providers = levelRow?.providers || []
+    providers.forEach((provider, providerIndex) => {
+      const providerLocation: ProviderLocation = {
+        type: 'systemLevel',
+        characterLevel: levelNumber,
+        providerIndex,
+      }
+      const entityType = provider.selector?.entityType
+      const allEntities = entityType ? getAllEntities(entityType) : getAllEntitiesFromAllTypes()
+      const getEntityFn = (id: string) => entityType ? getEntity(entityType, id) : getEntityById(id)
+      const resolution = resolveProvider(provider, allEntities, getEntityFn, { '@characterLevel': levelNumber })
+      const grantedEntities = resolution.granted?.entities || []
+      const selectedEntities = getSelectedEntityInstances(baseData, providerLocation)
+      systemProviders.push({ provider, providerLocation, grantedEntities, selectedEntities })
+    })
+  }
 
   const handleOpenClassSelector = () => {
     openPanel('classSelectorDetail', String(levelIndex))
@@ -806,15 +874,36 @@ function LevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
     // Placeholder
   }
 
+  const handleSelectorPress = (providerLocation: ProviderLocation) => {
+    // Navigate to entity selector detail
+    // We encode the provider location as JSON in the id
+    const locationJson = JSON.stringify(providerLocation)
+    navigateToDetail('entitySelectorDetail', locationJson)
+  }
+
+  const handleGrantedEntityPress = (entity: StandardEntity) => {
+    navigateToDetail('customEntityDetail', entity.id, entity.name)
+  }
+
+  const handleSelectedEntityPress = (instance: EntityInstance) => {
+    navigateToDetail('customEntityDetail', instance.entity.id, instance.entity.name)
+  }
+
   return (
     <LevelDetail
       levelIndex={levelIndex}
       levelSlot={levelSlot}
       className={className}
+      classLevel={classLevel}
       hitDie={hitDie}
+      systemProviders={systemProviders}
+      classProviders={classProviders}
       onOpenClassSelector={handleOpenClassSelector}
       onHpChange={handleHpChange}
       onRollHp={handleRollHp}
+      onSelectorPress={handleSelectorPress}
+      onGrantedEntityPress={handleGrantedEntityPress}
+      onSelectedEntityPress={handleSelectedEntityPress}
     />
   )
 }
@@ -855,6 +944,26 @@ function ClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number 
       onClose={handleClose}
     />
   )
+}
+
+function EntitySelectorDetailPanelContainer({ locationJson }: { locationJson: string }) {
+  // Parse the provider location from JSON
+  let providerLocation: ProviderLocation | null = null
+  try {
+    providerLocation = JSON.parse(locationJson)
+  } catch {
+    // Invalid JSON
+  }
+
+  if (!providerLocation) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Invalid provider location</Text>
+      </YStack>
+    )
+  }
+
+  return <EntitySelectorDetail providerLocation={providerLocation} />
 }
 
 function BuffEditPanelContainer({ buffId }: { buffId: string }) {

@@ -48,3 +48,16 @@ export {
   BuffEditScreen,
   ChangeEditScreen,
 } from './character'
+export {
+  EntityOptionRow,
+  SelectedEntityRow,
+  SelectorView,
+  EntitySelectorDetail,
+  ProviderSummaryRow,
+  useCompendiumContext,
+  useProviderSelection,
+  type EntitySelectorDetailProps,
+  type ProviderSummaryRowProps,
+  type UseProviderSelectionProps,
+  type UseProviderSelectionReturn,
+} from './EntityProvider'

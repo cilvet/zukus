@@ -4,9 +4,11 @@ import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
 import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
-import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses } from '../../ui/components/character/editor'
+import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
-import type { CalculatedAbility, CalculatedSavingThrow } from '@zukus/core'
+import type { CalculatedAbility, CalculatedSavingThrow, ProviderLocation, StandardEntity, EntityInstance } from '@zukus/core'
+import { resolveProvider, getSelectedEntityInstances } from '@zukus/core'
+import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
 import { type DetailType, isValidDetailType, getDetailTitle, useNavigateToDetail } from '../../navigation'
 import { ChatScreen } from '../chat/ChatScreen'
 
@@ -546,6 +548,7 @@ function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
   const navigateToDetail = useNavigateToDetail()
+  const { getEntity, getEntityById, getAllEntities, getAllEntitiesFromAllTypes } = useCompendiumContext()
 
   if (!baseData || !updater) {
     return (
@@ -555,10 +558,71 @@ function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
     )
   }
 
+  const levelNumber = levelIndex + 1
   const levelSlot = baseData.levelSlots?.[levelIndex] ?? { classId: null, hpRoll: null }
   const classEntity = levelSlot.classId ? baseData.classEntities?.[levelSlot.classId] : null
   const className = classEntity?.name ?? null
   const hitDie = classEntity?.hitDie ?? null
+
+  // Calculate class level for this specific slot
+  function getClassLevelAtSlot(levelSlots: typeof baseData.levelSlots, index: number): number {
+    if (!levelSlots) return 0
+    const currentSlot = levelSlots[index]
+    if (!currentSlot?.classId) return 0
+    let count = 0
+    for (let i = 0; i <= index; i++) {
+      if (levelSlots[i]?.classId === currentSlot.classId) {
+        count++
+      }
+    }
+    return count
+  }
+
+  const classLevel = getClassLevelAtSlot(baseData.levelSlots, levelIndex)
+
+  // Get class providers for this level
+  const classProviders: ProviderWithResolution[] = []
+  if (classEntity && classLevel) {
+    const levelRow = classEntity.levels?.[String(classLevel)]
+    const providers = levelRow?.providers || []
+    providers.forEach((provider, providerIndex) => {
+      const providerLocation: ProviderLocation = {
+        type: 'classLevel',
+        classId: levelSlot.classId!,
+        classLevel,
+        providerIndex,
+      }
+      const entityType = provider.selector?.entityType
+      const allEntities = entityType ? getAllEntities(entityType) : getAllEntitiesFromAllTypes()
+      const getEntityFn = (id: string) => entityType ? getEntity(entityType, id) : getEntityById(id)
+      const resolution = resolveProvider(provider, allEntities, getEntityFn, { '@characterLevel': levelNumber })
+      const grantedEntities = resolution.granted?.entities || []
+      const selectedEntities = getSelectedEntityInstances(baseData, providerLocation)
+      classProviders.push({ provider, providerLocation, grantedEntities, selectedEntities })
+    })
+  }
+
+  // Get system-level providers (feats, ability increases)
+  const systemProviders: ProviderWithResolution[] = []
+  const systemLevels = baseData.systemLevelsEntity
+  if (systemLevels) {
+    const levelRow = systemLevels.levels?.[String(levelNumber)]
+    const providers = levelRow?.providers || []
+    providers.forEach((provider, providerIndex) => {
+      const providerLocation: ProviderLocation = {
+        type: 'systemLevel',
+        characterLevel: levelNumber,
+        providerIndex,
+      }
+      const entityType = provider.selector?.entityType
+      const allEntities = entityType ? getAllEntities(entityType) : getAllEntitiesFromAllTypes()
+      const getEntityFn = (id: string) => entityType ? getEntity(entityType, id) : getEntityById(id)
+      const resolution = resolveProvider(provider, allEntities, getEntityFn, { '@characterLevel': levelNumber })
+      const grantedEntities = resolution.granted?.entities || []
+      const selectedEntities = getSelectedEntityInstances(baseData, providerLocation)
+      systemProviders.push({ provider, providerLocation, grantedEntities, selectedEntities })
+    })
+  }
 
   const handleOpenClassSelector = () => {
     navigateToDetail('classSelectorDetail', String(levelIndex))
@@ -569,7 +633,22 @@ function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
   }
 
   const handleRollHp = () => {
-    // Placeholder: la lógica de roll ya está en el handleHpChange
+    // Placeholder: la logica de roll ya esta en el handleHpChange
+  }
+
+  const handleSelectorPress = (providerLocation: ProviderLocation) => {
+    // Navigate to entity selector detail
+    // We encode the provider location as JSON in the id
+    const locationJson = JSON.stringify(providerLocation)
+    navigateToDetail('entitySelectorDetail', locationJson)
+  }
+
+  const handleGrantedEntityPress = (entity: StandardEntity) => {
+    navigateToDetail('customEntityDetail', entity.id, entity.name)
+  }
+
+  const handleSelectedEntityPress = (instance: EntityInstance) => {
+    navigateToDetail('customEntityDetail', instance.entity.id, instance.entity.name)
   }
 
   return (
@@ -577,10 +656,16 @@ function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
       levelIndex={levelIndex}
       levelSlot={levelSlot}
       className={className}
+      classLevel={classLevel}
       hitDie={hitDie}
+      systemProviders={systemProviders}
+      classProviders={classProviders}
       onOpenClassSelector={handleOpenClassSelector}
       onHpChange={handleHpChange}
       onRollHp={handleRollHp}
+      onSelectorPress={handleSelectorPress}
+      onGrantedEntityPress={handleGrantedEntityPress}
+      onSelectedEntityPress={handleSelectedEntityPress}
     />
   )
 }
@@ -636,6 +721,26 @@ function ComputedEntityDetail({ entityId }: { entityId: string }) {
   }
 
   return <GenericEntityDetailPanel entity={entity} />
+}
+
+function EntitySelectorDetailWrapper({ locationJson }: { locationJson: string }) {
+  // Parse the provider location from JSON
+  let providerLocation: ProviderLocation | null = null
+  try {
+    providerLocation = JSON.parse(locationJson)
+  } catch {
+    // Invalid JSON
+  }
+
+  if (!providerLocation) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Invalid provider location</Text>
+      </YStack>
+    )
+  }
+
+  return <EntitySelectorDetail providerLocation={providerLocation} />
 }
 
 function InvalidRoute() {
@@ -729,6 +834,7 @@ export function DetailScreen() {
       case 'classSelectorDetail':
         return <ClassSelectorDetailWrapper levelIndex={parseInt(id)} />
       case 'entitySelectorDetail':
+        return <EntitySelectorDetailWrapper locationJson={id} />
       case 'customEntityDetail':
         return <NotImplementedDetail type={type} id={id} />
       case 'computedEntity':

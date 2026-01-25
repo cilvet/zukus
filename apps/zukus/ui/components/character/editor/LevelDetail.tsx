@@ -5,24 +5,46 @@
  * - Level number header
  * - Class selector (with navigation to ClassSelectorDetail)
  * - HP Roll section with manual input and roll button
+ * - System-level providers (feats, ability increases)
+ * - Class-level providers (class features)
  */
 
-import { YStack, XStack, Text, ScrollView, Button, Input } from 'tamagui'
+import { YStack, XStack, Text, ScrollView, Button, Input, Separator } from 'tamagui'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import type {
+  EntityProvider,
+  StandardEntity,
+  EntityInstance,
+  ProviderLocation,
+} from '@zukus/core'
+import { ProviderSummaryRow } from '../../EntityProvider'
 
 export type LevelSlotData = {
   classId: string | null
   hpRoll: number | null
 }
 
+export type ProviderWithResolution = {
+  provider: EntityProvider
+  providerLocation: ProviderLocation
+  grantedEntities: StandardEntity[]
+  selectedEntities: EntityInstance[]
+}
+
 export type LevelDetailProps = {
   levelIndex: number
   levelSlot: LevelSlotData
   className: string | null
+  classLevel: number | null
   hitDie: number | null
+  systemProviders: ProviderWithResolution[]
+  classProviders: ProviderWithResolution[]
   onOpenClassSelector: () => void
   onHpChange: (hp: number | null) => void
   onRollHp: () => void
+  onSelectorPress: (providerLocation: ProviderLocation) => void
+  onGrantedEntityPress: (entity: StandardEntity) => void
+  onSelectedEntityPress: (entityInstance: EntityInstance) => void
 }
 
 function rollHitDie(hitDie: number, isFirstLevel: boolean): number {
@@ -34,14 +56,23 @@ export function LevelDetail({
   levelIndex,
   levelSlot,
   className,
+  classLevel,
   hitDie,
+  systemProviders,
+  classProviders,
   onOpenClassSelector,
   onHpChange,
   onRollHp,
+  onSelectorPress,
+  onGrantedEntityPress,
+  onSelectedEntityPress,
 }: LevelDetailProps) {
   const levelNumber = levelIndex + 1
   const isFirstLevel = levelIndex === 0
   const hasClass = levelSlot.classId !== null
+
+  const hasSystemProviders = systemProviders.length > 0
+  const hasClassProviders = classProviders.length > 0
 
   function handleHpInputChange(text: string) {
     const trimmed = text.trim()
@@ -135,8 +166,70 @@ export function LevelDetail({
           </YStack>
         )}
 
+        {/* Separator between HP and System Features */}
+        {hasClass && hasSystemProviders && <Separator borderColor="$borderColor" />}
+
+        {/* System Features (Feats, Ability Increases) */}
+        {hasSystemProviders && (
+          <YStack
+            backgroundColor="$background"
+            paddingVertical="$3"
+            borderRadius="$3"
+            borderWidth={1}
+            borderColor="$borderColor"
+            gap="$3"
+          >
+            <Text fontSize={16} fontWeight="700" paddingHorizontal="$3" color="$color">
+              Nivel {levelNumber}
+            </Text>
+            {systemProviders.map((providerData) => (
+              <YStack key={`system-${providerData.providerLocation.providerIndex}`} paddingHorizontal="$3">
+                <ProviderSummaryRow
+                  provider={providerData.provider}
+                  grantedEntities={providerData.grantedEntities}
+                  selectedEntities={providerData.selectedEntities}
+                  onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
+                  onGrantedEntityPress={onGrantedEntityPress}
+                  onSelectedEntityPress={onSelectedEntityPress}
+                />
+              </YStack>
+            ))}
+          </YStack>
+        )}
+
+        {/* Separator between System and Class Features */}
+        {hasSystemProviders && hasClassProviders && <Separator borderColor="$borderColor" />}
+
+        {/* Class Features */}
+        {hasClassProviders && (
+          <YStack
+            backgroundColor="$background"
+            paddingVertical="$3"
+            borderRadius="$3"
+            borderWidth={1}
+            borderColor="$borderColor"
+            gap="$3"
+          >
+            <Text fontSize={16} fontWeight="700" paddingHorizontal="$3" color="$color">
+              {className} {classLevel}
+            </Text>
+            {classProviders.map((providerData) => (
+              <YStack key={`class-${providerData.providerLocation.providerIndex}`} paddingHorizontal="$3">
+                <ProviderSummaryRow
+                  provider={providerData.provider}
+                  grantedEntities={providerData.grantedEntities}
+                  selectedEntities={providerData.selectedEntities}
+                  onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
+                  onGrantedEntityPress={onGrantedEntityPress}
+                  onSelectedEntityPress={onSelectedEntityPress}
+                />
+              </YStack>
+            ))}
+          </YStack>
+        )}
+
         {/* Message when no class is selected */}
-        {!hasClass && (
+        {!hasClass && !hasSystemProviders && (
           <YStack
             backgroundColor="$background"
             padding="$3"
@@ -146,6 +239,21 @@ export function LevelDetail({
           >
             <Text fontSize={14} color="$placeholderColor">
               Selecciona una clase para este nivel primero
+            </Text>
+          </YStack>
+        )}
+
+        {/* Message when no class but has system features */}
+        {!hasClass && hasSystemProviders && (
+          <YStack
+            backgroundColor="$background"
+            padding="$3"
+            borderRadius="$3"
+            borderWidth={1}
+            borderColor="$borderColor"
+          >
+            <Text fontSize={14} color="$placeholderColor">
+              Selecciona una clase para este nivel para configurar HP
             </Text>
           </YStack>
         )}

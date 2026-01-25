@@ -73,9 +73,26 @@ export { getResolvedRollExpression } from "./core/domain/rolls/DiceRoller/diceRo
 export * as ops from "./core/domain/character/updater/operations";
 
 // Types - Levels
-export type { LevelSlot, ClassEntity, SystemLevelsEntity } from "./core/domain/levels/storage/types";
-export type { EntityProvider } from "./core/domain/levels/providers/types";
+export type { LevelSlot, ClassEntity, SystemLevelsEntity, EntityInstance } from "./core/domain/levels/storage/types";
+export type { EntityProvider, Selector } from "./core/domain/levels/providers/types";
 export type { StandardEntity, ComputedEntity, ComputedEntityMeta } from "./core/domain/entities/types/base";
+
+// Types - Filtering
+export type { FilterResult, EntityFilter, SubstitutionIndex as FilterSubstitutionIndex } from "./core/domain/levels/filtering/types";
+
+// Types - Updater
+export type { ProviderLocation } from "./core/domain/levels/updater/types";
+
+// Provider Resolution
+export { resolveProvider } from "./core/domain/levels/providers/resolveProvider";
+
+// Entity Selection API
+export {
+  selectEntityInProvider,
+  deselectEntityFromProvider,
+  getSelectedEntityInstances,
+} from "./core/domain/levels/updater/entitySelectionApi";
+export { getProvider } from "./core/domain/levels/updater/selectionOperations";
 
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";
