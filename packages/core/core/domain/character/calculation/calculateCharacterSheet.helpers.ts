@@ -12,6 +12,7 @@ import {
   mergeCharacterChanges,
 } from "./sources/compileCharacterChanges";
 import { CompiledEffects, compileCharacterEffects } from "./effects/compileEffects";
+import { compileCGEVariableDefinitions } from "./cge/compileCGEChanges";
 import type { ResolvedCompendiumContext } from "../../compendiums/types";
 import type { ComputedEntity } from "../../entities/types/base";
 
@@ -122,11 +123,25 @@ export function compileAndMergeChanges(
     ...legacyContextualChanges,
     ...entitiesResult.contextualChanges,
   ];
-  const specialChanges = [
+
+  // Compile base special changes
+  const baseSpecialChanges: SpecialChange[] = [
     ...legacySpecialChanges,
     ...entitiesResult.specialChanges,
   ];
-  
+
+  // Generate CUSTOM_VARIABLE_DEFINITION from CGE definitions
+  // This allows effects and other sources to modify CGE variables
+  const cgeVariableDefinitions = compileCGEVariableDefinitions(
+    characterData,
+    baseSpecialChanges
+  );
+
+  const specialChanges: SpecialChange[] = [
+    ...baseSpecialChanges,
+    ...cgeVariableDefinitions,
+  ];
+
   // Compile effects from all sources (buffs + custom entities)
   const effects = compileCharacterEffects(characterData, entitiesResult.computedEntities);
   

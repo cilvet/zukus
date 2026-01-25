@@ -232,6 +232,107 @@ export type CGEConfig = {
 }
 
 // ============================================================================
+// CGE STATE (datos persistidos en CharacterBaseData)
+// ============================================================================
+
+/**
+ * Estado persistido de un CGE en el personaje.
+ * Similar a selectedInstanceIds del sistema de niveles.
+ */
+export type CGEState = {
+  /**
+   * Entidades conocidas seleccionadas, indexadas por nivel de entidad.
+   * Para Sorcerer: { "0": ["prestidigitation", "detect-magic"], "1": ["magic-missile"] }
+   */
+  knownSelections?: Record<string, string[]>
+
+  /**
+   * Valores actuales de slots por nivel (para recursos tipo SLOTS).
+   * { "0": 5, "1": 2 } significa 5 cantrips disponibles, 2 slots nivel 1
+   */
+  slotCurrentValues?: Record<string, number>
+
+  /**
+   * Valor actual del pool (para recursos tipo POOL).
+   */
+  poolCurrentValue?: number
+
+  /**
+   * Para preparacion BOUND: mapeo slot -> entityId.
+   * { "slot-1-0": "fireball", "slot-1-1": "magic-missile" }
+   */
+  boundPreparations?: Record<string, string>
+
+  /**
+   * Para preparacion LIST: entidades preparadas por nivel.
+   * Similar a knownSelections pero para preparados.
+   */
+  listPreparations?: Record<string, string[]>
+}
+
+// ============================================================================
+// CALCULATED CGE (resultado en CharacterSheet)
+// ============================================================================
+
+/**
+ * Slot calculado para un nivel de entidad.
+ */
+export type CalculatedSlot = {
+  level: number
+  max: number
+  current: number
+  bonus: number // Bonus de atributo u otros efectos
+}
+
+/**
+ * Limite de conocidos calculado para un nivel de entidad.
+ */
+export type CalculatedKnownLimit = {
+  level: number
+  max: number
+  current: number // Cuantos tiene seleccionados actualmente
+}
+
+/**
+ * Pool calculado (para recursos tipo POOL).
+ */
+export type CalculatedPool = {
+  max: number
+  current: number
+}
+
+/**
+ * Track calculado con sus recursos resueltos.
+ */
+export type CalculatedTrack = {
+  id: string
+  label?: string
+  resourceType: 'NONE' | 'SLOTS' | 'POOL'
+  slots?: CalculatedSlot[] // Si resourceType === 'SLOTS'
+  pool?: CalculatedPool // Si resourceType === 'POOL'
+  preparationType: 'NONE' | 'BOUND' | 'LIST'
+}
+
+/**
+ * CGE completamente calculado para el character sheet.
+ */
+export type CalculatedCGE = {
+  id: string
+  classId: string
+  entityType: string
+  classLevel: number // Nivel actual en la clase
+
+  /** Limites de conocidos por nivel (si aplica) */
+  knownLimits?: CalculatedKnownLimit[]
+
+  /** Tracks calculados */
+  tracks: CalculatedTrack[]
+
+  /** Config original (para referencia) */
+  config: CGEConfig
+}
+
+// ============================================================================
 // VALIDACIONES
 // ============================================================================
 

@@ -14,6 +14,7 @@ import { SpecialChange } from "./specialChanges";
 import { Resource } from "../../spells/resources";
 import type { StandardEntity } from "../../entities/types/base";
 import type { EntityInstance, LevelSlot, ClassEntity, SystemLevelsEntity } from "../../levels/storage/types";
+import type { CGEState } from "../../cge/types";
 
 /**
  * Alineamiento del personaje en D&D 3.5.
@@ -63,6 +64,13 @@ export type CharacterBaseData = {
   updatedAt: string;
   pinnedSkills?: string[];
   resourceCurrentValues?: ResourceCurrentValues;
+
+  /**
+   * Estado persistido de los CGEs del personaje.
+   * Keyed by CGE id (e.g., "sorcerer-spells").
+   */
+  cgeState?: Record<string, CGEState>;
+
   /** IDs of active compendiums for this character */
   activeCompendiums?: string[];
   /** Custom entities organized by entityType */

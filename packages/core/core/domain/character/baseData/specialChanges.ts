@@ -7,6 +7,7 @@ import { Formula } from "../../formulae/formula";
 import { z } from "zod";
 import { Source, SourceValue } from "../calculatedSheet/sources";
 import { BaseSource } from "./customVariables";
+import type { CGEConfig } from "../../cge/types";
 
 export const SpecialChangeTypesSchema = z.enum([
   "EXTRA_FEAT_SELECTION",
@@ -15,7 +16,8 @@ export const SpecialChangeTypesSchema = z.enum([
   "SHIELD_PROFICIENCY",
   "FINESSE",
   "RESOURCE_DEFINITION",
-  "CUSTOM_VARIABLE_DEFINITION"
+  "CUSTOM_VARIABLE_DEFINITION",
+  "CGE_DEFINITION"
 ]);
 
 export type SpecialChangeTypes = z.infer<typeof SpecialChangeTypesSchema>;
@@ -78,6 +80,15 @@ export type CustomVariableDefinitionChange = BaseSpecialChange & {
   baseSources: BaseSource[];
 };
 
+/**
+ * Define un CGE (Character Generation Engine) para gestionar
+ * entidades accionables como conjuros, maniobras, poderes, etc.
+ */
+export type CGEDefinitionChange = BaseSpecialChange & {
+  type: 'CGE_DEFINITION';
+  config: CGEConfig;
+};
+
 const a: CustomVariableDefinitionChange = {
   type: 'CUSTOM_VARIABLE_DEFINITION',
   variableId: 'custom_variable_id',
@@ -101,7 +112,8 @@ export type SpecialChange =
   | ShieldProficiencyChange
   | FinesseChange
   | ResourceDefinitionChange
-  | CustomVariableDefinitionChange;
+  | CustomVariableDefinitionChange
+  | CGEDefinitionChange;
 
 export type ContextualizedSpecialChange<
   T extends SpecialChange = SpecialChange

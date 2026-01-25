@@ -14,7 +14,7 @@ import {
 import { CharacterChanges } from "../sources/compileCharacterChanges";
 import { getCalculatedSourceValues } from "../sources/sumSources";
 import { valueIndexKeys } from "../valuesIndex/valuesIndex";
-import { CustomVariableDefinitionChange, ResourceDefinitionChange, SpecialChange } from "../../baseData/specialChanges";
+import { CustomVariableDefinitionChange, SpecialChange } from "../../baseData/specialChanges";
 import { BaseSource } from "../../baseData/customVariables";
 import { extractCustomVariableDependencies } from "../../../formulae/formula";
 
@@ -163,94 +163,6 @@ function convertBaseSourceToContextualizedChange(
   };
 }
 
-/**
- * Extracts resource definitions from special changes
- */
-function extractResourceDefinitions(
-  specialChanges?: SpecialChange[]
-): ResourceDefinitionChange[] {
-  if (!specialChanges) {
-    return [];
-  }
-
-  return specialChanges.filter(
-    (specialChange): specialChange is ResourceDefinitionChange =>
-      specialChange.type === 'RESOURCE_DEFINITION'
-  );
-}
-
-/**
- * Creates custom variables for all resource properties based on values in substitution index
- */
-function createResourceCustomVariables(
-  specialChanges: SpecialChange[] | undefined,
-  substitutionIndex: SubstitutionIndex
-): CustomVariable[] {
-  const resourceDefinitions = extractResourceDefinitions(specialChanges);
-  const resourceCustomVariables: CustomVariable[] = [];
-
-  resourceDefinitions.forEach(resourceDef => {
-    const resourceId = resourceDef.resourceId;
-    const resourceName = resourceDef.name;
-
-    // Get values from substitution index
-    const maxValue = substitutionIndex[`resources.${resourceId}.max`] ?? 0;
-    const minValue = substitutionIndex[`resources.${resourceId}.min`] ?? 0;
-    const currentValue = substitutionIndex[`resources.${resourceId}.current`] ?? 0;
-    const defaultChargesPerUse = substitutionIndex[`resources.${resourceId}.defaultChargesPerUse`] ?? 1;
-    const rechargeAmount = substitutionIndex[`resources.${resourceId}.rechargeAmount`] ?? 0;
-
-    // Create a source value for each property (since the actual sources are in the resource object)
-    const createSource = (value: number, propertyName: string): SourceValue[] => [{
-      value,
-      bonusTypeId: 'BASE',
-      relevant: true,
-      sourceName: `${resourceName} ${propertyName}`,
-      sourceUniqueId: `resources.${resourceId}.${propertyName}`,
-    }];
-
-    // Create custom variables for each resource property
-    resourceCustomVariables.push(
-      {
-        uniqueId: `resources.${resourceId}.max`,
-        name: `${resourceName} - Max`,
-        description: `Maximum value for ${resourceName}`,
-        totalValue: maxValue,
-        sources: createSource(maxValue, 'max'),
-      },
-      {
-        uniqueId: `resources.${resourceId}.min`,
-        name: `${resourceName} - Min`,
-        description: `Minimum value for ${resourceName}`,
-        totalValue: minValue,
-        sources: createSource(minValue, 'min'),
-      },
-      {
-        uniqueId: `resources.${resourceId}.current`,
-        name: `${resourceName} - Current`,
-        description: `Current value for ${resourceName}`,
-        totalValue: currentValue,
-        sources: createSource(currentValue, 'current'),
-      },
-      {
-        uniqueId: `resources.${resourceId}.defaultChargesPerUse`,
-        name: `${resourceName} - Default Charges Per Use`,
-        description: `Default charges consumed per use for ${resourceName}`,
-        totalValue: defaultChargesPerUse,
-        sources: createSource(defaultChargesPerUse, 'defaultChargesPerUse'),
-      },
-      {
-        uniqueId: `resources.${resourceId}.rechargeAmount`,
-        name: `${resourceName} - Recharge Amount`,
-        description: `Amount restored when ${resourceName} is recharged`,
-        totalValue: rechargeAmount,
-        sources: createSource(rechargeAmount, 'rechargeAmount'),
-      }
-    );
-  });
-
-  return resourceCustomVariables;
-}
 
 export const getCalculatedCustomVariables: getSheetWithUpdatedField = function (
   baseData: CharacterBaseData,
@@ -289,25 +201,9 @@ export const getCalculatedCustomVariables: getSheetWithUpdatedField = function (
     definitionsByVariableId
   );
 
-  // Extract resource definitions and create custom variables for them
-  const resourceCustomVariables = createResourceCustomVariables(
-    specialChanges,
-    index
-  );
-
-  // Combine regular custom variables with resource custom variables
-  // Use a Map to deduplicate by uniqueId (keep the last occurrence)
-  const variableMap = new Map<string, CustomVariable>();
-  
-  [...customVariables, ...resourceCustomVariables].forEach(variable => {
-    variableMap.set(variable.uniqueId, variable);
-  });
-  
-  const allCustomVariables = Array.from(variableMap.values());
-
   // Extract only the new index values that were added
   const indexValuesToUpdate: SubstitutionIndex = {};
-  
+
   // Get the difference between finalIndex and original index
   Object.keys(finalIndex).forEach(key => {
     if (!(key in index) || finalIndex[key] !== index[key]) {
@@ -317,7 +213,7 @@ export const getCalculatedCustomVariables: getSheetWithUpdatedField = function (
 
   return {
     characterSheetFields: {
-      customVariables: allCustomVariables,
+      customVariables,
     },
     indexValues: indexValuesToUpdate,
   };

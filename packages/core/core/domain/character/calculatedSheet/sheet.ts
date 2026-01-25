@@ -16,6 +16,7 @@ import { CustomVariable } from "./customVariables";
 import { CalculatedResources } from "../baseData/resources";
 import type { ComputedEntity } from "../../entities/types/base";
 import { usesLegacyLevelSystem } from "../calculation/classLevels/levelSystemDetection";
+import type { CalculatedCGE } from "../../cge/types";
 
 /**
  * Warning generated during character calculation.
@@ -51,6 +52,8 @@ export type CharacterSheet = {
   warnings: CharacterWarning[];
   /** Computed entities from customEntities with metadata */
   computedEntities: ComputedEntity[];
+  /** Calculated CGEs (spellcasting, maneuvers, etc.) */
+  cge: Record<string, CalculatedCGE>;
 };
 
 function getEmptyAbilityScore(abilityId: string): CalculatedAbility {
@@ -91,6 +94,7 @@ export function getInitialCharacterSheet(
     resources: {},
     warnings: [],
     computedEntities: [],
+    cge: {},
     abilityScores: {
       strength: getEmptyAbilityScore("strength"),
       dexterity: getEmptyAbilityScore("dexterity"),

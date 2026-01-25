@@ -19,6 +19,8 @@ import { getCalculatedSize } from "./size/calculateSize";
 import { getCalculatedSkills } from "./skills/calculateSkills";
 import { getCalculatedCustomVariables } from "./customVariables/calculateCustomVariables";
 import { getCalculatedResources } from "./resources/calculateResources";
+import { getResourceCustomVariables } from "./resources/createResourceCustomVariables";
+import { getCalculatedCGE } from "./cge/calculateCGE";
 import { SpecialChange } from "../baseData/specialChanges";
 import { CompiledEffects } from "./effects/compileEffects";
 import type { CalculationContext } from "../../compendiums/types";
@@ -54,8 +56,10 @@ const calculationFunctions: getSheetWithUpdatedField[] = [
   getCalculatedSavingThrows,
   getCalculatedArmorClass,
   getCalculatedSkills,
+  getCalculatedCustomVariables, // Procesa CGE variable definitions (generadas en compilacion)
+  getCalculatedCGE, // Lee valores finales de substitutionIndex
   getCalculatedResources,
-  getCalculatedCustomVariables,
+  getResourceCustomVariables, // Crea custom variables de resources (despues de calcularse)
 ];
 
 /**
@@ -94,6 +98,23 @@ export function calculateCharacterSheet(
     compiledChanges.specialChanges,
     compiledChanges.effects
   );
+
+  // Merge pending resource custom variables with existing custom variables
+  // Use a Map to deduplicate by uniqueId (keep the last occurrence)
+  const sheetWithPending = characterSheet as CharacterSheet & {
+    _pendingResourceCustomVariables?: typeof characterSheet.customVariables
+  };
+  if (sheetWithPending._pendingResourceCustomVariables) {
+    const variableMap = new Map<string, typeof characterSheet.customVariables[0]>();
+    for (const variable of characterSheet.customVariables) {
+      variableMap.set(variable.uniqueId, variable);
+    }
+    for (const variable of sheetWithPending._pendingResourceCustomVariables) {
+      variableMap.set(variable.uniqueId, variable);
+    }
+    characterSheet.customVariables = Array.from(variableMap.values());
+    delete sheetWithPending._pendingResourceCustomVariables;
+  }
 
   // Populate remaining sheet fields
   characterSheet.specialFeatures = getSpecialFeaturesFromSheet(
