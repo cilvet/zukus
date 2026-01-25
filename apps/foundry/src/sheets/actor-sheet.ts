@@ -8,6 +8,10 @@
 import { ZukusActor } from '../documents/actor';
 import { formatModifier } from '../adapters/core-to-foundry';
 import type { CalculatedAttack, AttackContextualChange } from '@zukus/core';
+import { getAuthState, onAuthStateChange, isLoggedIn } from '../supabase/auth';
+import { openLoginDialog, logoutFromZukus } from '../dialogs/login-dialog';
+import { openLinkCharacterDialog, unlinkCharacter } from '../dialogs/link-character-dialog';
+import { startSync, stopSync, isSyncing } from '../supabase/sync-manager';
 
 export class ZukusActorSheet extends ActorSheet {
   /**
@@ -28,6 +32,35 @@ export class ZukusActorSheet extends ActorSheet {
       ],
       dragDrop: [{ dragSelector: '.item-list .item', dropSelector: null }],
     });
+  }
+
+  /**
+   * Start syncing when the sheet is rendered (if linked)
+   */
+  protected async _render(force?: boolean, options?: RenderOptions): Promise<void> {
+    await super._render(force, options);
+
+    const zukusActor = this.actor as unknown as ZukusActor;
+    const zukusCharacterId = zukusActor.getZukusCharacterId();
+
+    // Start sync if linked, logged in, and not already syncing
+    if (zukusCharacterId && isLoggedIn() && !isSyncing(this.actor.id)) {
+      startSync(this.actor.id, zukusCharacterId, async (remoteData) => {
+        // Apply remote changes to the actor
+        console.log('[Zukus] Applying remote changes to actor');
+        await zukusActor.setCharacterBaseData(remoteData);
+        // Re-render the sheet to show updated data
+        this.render(false);
+      });
+    }
+  }
+
+  /**
+   * Stop syncing when the sheet is closed
+   */
+  async close(options?: FormApplication.CloseOptions): Promise<void> {
+    stopSync(this.actor.id);
+    return super.close(options);
   }
 
   /**
@@ -88,6 +121,16 @@ export class ZukusActorSheet extends ActorSheet {
 
     // Add config
     context.config = CONFIG.DND35ZUKUS || {};
+
+    // Add auth state for Zukus sync
+    const authState = getAuthState();
+    context.isLoggedIn = authState.session !== null;
+    context.userEmail = authState.user?.email ?? null;
+
+    // Add link state
+    context.isLinked = zukusActor.isLinkedToZukus();
+    context.linkedCharacterId = zukusActor.getZukusCharacterId();
+    context.isSyncing = isSyncing(this.actor.id);
 
     return context;
   }
@@ -298,6 +341,12 @@ export class ZukusActorSheet extends ActorSheet {
     // Import/Export controls
     html.find('.import-character').on('click', this._onImportCharacter.bind(this));
     html.find('.export-character').on('click', this._onExportCharacter.bind(this));
+
+    // Zukus sync controls
+    html.find('.zukus-login').on('click', this._onZukusLogin.bind(this));
+    html.find('.zukus-logout').on('click', this._onZukusLogout.bind(this));
+    html.find('.zukus-link').on('click', this._onZukusLink.bind(this));
+    html.find('.zukus-unlink').on('click', this._onZukusUnlink.bind(this));
 
     // Source breakdown tooltips
     html.find('[data-source-breakdown]').on('mouseenter', this._showSourceBreakdown.bind(this));
@@ -911,6 +960,43 @@ export class ZukusActorSheet extends ActorSheet {
     });
 
     dialog.render(true);
+  }
+
+  /**
+   * Handle Zukus login button click
+   */
+  private async _onZukusLogin(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    await openLoginDialog();
+    // Re-render after dialog closes to update UI
+    // The auth state change will trigger a re-render through the listener
+  }
+
+  /**
+   * Handle Zukus logout button click
+   */
+  private async _onZukusLogout(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    await logoutFromZukus();
+    this.render(false);
+  }
+
+  /**
+   * Handle Zukus link button click
+   */
+  private async _onZukusLink(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    const zukusActor = this.actor as unknown as ZukusActor;
+    await openLinkCharacterDialog(zukusActor);
+  }
+
+  /**
+   * Handle Zukus unlink button click
+   */
+  private async _onZukusUnlink(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    const zukusActor = this.actor as unknown as ZukusActor;
+    await unlinkCharacter(zukusActor);
   }
 
   /**

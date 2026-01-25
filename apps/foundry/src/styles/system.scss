@@ -799,3 +799,167 @@
     font-weight: bold;
   }
 }
+
+/* ================================
+   Zukus Cloud Sync Styles
+   ================================ */
+
+/* Header Zukus controls */
+.dnd35zukus.sheet.actor .sheet-header .header-controls {
+  .zukus-user,
+  .zukus-linked {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #4a90d9;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.85em;
+
+    i {
+      font-size: 0.9em;
+    }
+  }
+
+  .zukus-linked {
+    background: #27ae60;
+  }
+
+  .zukus-login {
+    width: auto;
+    padding: 0 8px;
+    font-size: 0.85em;
+
+    i {
+      margin-right: 4px;
+    }
+  }
+}
+
+/* Login Dialog */
+.zukus-login-dialog {
+  padding: 8px 0;
+
+  p {
+    margin-bottom: 16px;
+    color: #666;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+        border-color: #4a90d9;
+        box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.2);
+      }
+    }
+  }
+
+  .login-error {
+    margin-top: 8px;
+    padding: 8px;
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+  }
+}
+
+/* Link Character Dialog */
+.zukus-link-dialog {
+  padding: 8px 0;
+
+  p {
+    margin-bottom: 12px;
+    color: #666;
+  }
+
+  .character-list {
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    margin-bottom: 12px;
+  }
+
+  .character-option {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f5f5f5;
+    }
+
+    &.selected {
+      background: #e8f4fc;
+      border-left: 3px solid #4a90d9;
+    }
+
+    .character-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+
+      .character-name {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      .character-build {
+        color: #666;
+        font-size: 0.9em;
+      }
+    }
+
+    .character-meta {
+      .character-modified {
+        font-size: 0.8em;
+        color: #999;
+      }
+    }
+  }
+
+  .link-warning {
+    padding: 8px 12px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #795548;
+
+    i {
+      margin-right: 6px;
+      color: #ff9800;
+    }
+  }
+}
+
+/* Link dialog window size */
+.zukus-link-dialog-window {
+  .window-content {
+    padding: 12px;
+  }
+}

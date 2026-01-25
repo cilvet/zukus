@@ -25,10 +25,13 @@ import {
   getAvailableBuffs,
   createBuffFromEntity,
 } from '../compendium/foundry-compendium-context';
+import { pushLocalChanges, isSyncing } from '../supabase/sync-manager';
+import { isLoggedIn } from '../supabase/auth';
 
 // Type for the flags we store
 type ZukusFlags = {
   characterBaseData?: CharacterBaseData;
+  zukusCharacterId?: string;  // ID of the linked character in Supabase
 };
 
 export class ZukusActor extends Actor {
@@ -44,11 +47,46 @@ export class ZukusActor extends Actor {
   /**
    * Set the CharacterBaseData in flags.
    * Use this to update the character after applying operations.
+   * If linked to Zukus and syncing, will push changes to cloud.
    */
   async setCharacterBaseData(data: CharacterBaseData): Promise<void> {
     await this.update({
       'flags.zukus.characterBaseData': data,
     });
+
+    // If linked and syncing, push to Supabase
+    if (this.isLinkedToZukus() && isLoggedIn() && isSyncing(this.id)) {
+      pushLocalChanges(this.id, data);
+    }
+  }
+
+  // ============================================
+  // Zukus Cloud Sync Methods
+  // ============================================
+
+  /**
+   * Get the linked Zukus character ID (from Supabase).
+   */
+  getZukusCharacterId(): string | null {
+    const flags = this.flags as { zukus?: ZukusFlags };
+    return flags.zukus?.zukusCharacterId ?? null;
+  }
+
+  /**
+   * Set the linked Zukus character ID.
+   * Call this when linking to a cloud character.
+   */
+  async setZukusCharacterId(id: string | null): Promise<void> {
+    await this.update({
+      'flags.zukus.zukusCharacterId': id,
+    });
+  }
+
+  /**
+   * Check if this actor is linked to a Zukus cloud character.
+   */
+  isLinkedToZukus(): boolean {
+    return this.getZukusCharacterId() !== null;
   }
 
   /**

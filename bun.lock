@@ -17,6 +17,7 @@
       "name": "@zukus/foundry",
       "version": "0.1.0",
       "dependencies": {
+        "@supabase/supabase-js": "^2.47.7",
         "@zukus/core": "workspace:*",
       },
       "devDependencies": {

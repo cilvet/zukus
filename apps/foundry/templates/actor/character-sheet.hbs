@@ -2,6 +2,33 @@
   {{!-- Sheet Header --}}
   <header class="sheet-header">
     <div class="header-controls">
+      {{!-- Zukus Cloud Sync Controls --}}
+      {{#if isLoggedIn}}
+        <span class="zukus-user" title="Logged in as {{userEmail}}">
+          <i class="fas fa-user"></i>
+        </span>
+        {{#if isLinked}}
+          <span class="zukus-linked" title="Synced with Zukus">
+            <i class="fas fa-cloud"></i>
+          </span>
+          <button type="button" class="zukus-unlink" title="Unlink from Zukus">
+            <i class="fas fa-unlink"></i>
+          </button>
+        {{else}}
+          <button type="button" class="zukus-link" title="Link to Zukus character">
+            <i class="fas fa-link"></i>
+          </button>
+        {{/if}}
+        <button type="button" class="zukus-logout" title="Logout from Zukus">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      {{else}}
+        <button type="button" class="zukus-login" title="Login to Zukus to sync">
+          <i class="fas fa-cloud"></i> Sync
+        </button>
+      {{/if}}
+
+      {{!-- Import/Export Controls --}}
       <button type="button" class="import-character" title="Import character from JSON">
         <i class="fas fa-file-import"></i>
       </button>

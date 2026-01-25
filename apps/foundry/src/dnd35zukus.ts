@@ -9,6 +9,7 @@ import { ZukusActorSheet } from './sheets/actor-sheet';
 import { CharacterData } from './data/character-data';
 import { DND35ZUKUS } from './config';
 import { getAvailableBuffs, getBuffEntity } from './compendium/foundry-compendium-context';
+import { initAuth } from './supabase/auth';
 
 // Import styles
 import './styles/system.scss';
@@ -51,6 +52,10 @@ Hooks.once('init', async () => {
 Hooks.once('ready', async () => {
   console.log('dnd35zukus | System ready');
   console.log('dnd35zukus | Using @zukus/core for character calculations');
+
+  // Initialize Supabase auth (restores session from localStorage)
+  await initAuth();
+  console.log('dnd35zukus | Supabase auth initialized');
 
   // Populate buffs compendium from @zukus/core
   await populateBuffsCompendium();
