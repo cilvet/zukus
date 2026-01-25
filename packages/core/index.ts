@@ -76,6 +76,7 @@ export * as ops from "./core/domain/character/updater/operations";
 export type { LevelSlot, ClassEntity, SystemLevelsEntity, EntityInstance } from "./core/domain/levels/storage/types";
 export type { EntityProvider, Selector } from "./core/domain/levels/providers/types";
 export type { StandardEntity, ComputedEntity, ComputedEntityMeta } from "./core/domain/entities/types/base";
+export type { EntitySchemaDefinition } from "./core/domain/entities/types/schema";
 
 // Types - Filtering
 export type { FilterResult, EntityFilter, SubstitutionIndex as FilterSubstitutionIndex } from "./core/domain/levels/filtering/types";
@@ -96,7 +97,16 @@ export { getProvider } from "./core/domain/levels/updater/selectionOperations";
 
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";
-export type { Compendium, CompendiumRegistry, CalculationContext } from "./core/domain/compendiums";
+export type {
+  Compendium,
+  CompendiumReference,
+  CompendiumRegistry,
+  CalculationContext,
+  CompendiumDataPort,
+  EntityTypeInfo,
+  EntityListResult,
+  GetEntitiesOptions,
+} from "./core/domain/compendiums";
 
 // CGE (Character Generation Engine)
 export type {
@@ -105,12 +115,16 @@ export type {
   CalculatedCGE,
   CalculatedTrack,
   CalculatedSlot,
+  CalculatedBoundSlot,
   CalculatedKnownLimit,
   CGEUpdateResult,
   CGEWarning,
+  PreparationUpdateResult,
+  PreparationWarning,
 } from "./core/domain/cge";
 
 export {
+  // Known entity operations
   addKnownEntity,
   removeKnownEntity,
   getKnownEntitiesByCGE,
@@ -118,5 +132,17 @@ export {
   getKnownCountsByLevel,
   getTotalKnownCount,
   isEntityKnown,
+  // Preparation operations (Vancian)
+  prepareEntityInSlot,
+  unprepareSlot,
+  unprepareEntity,
+  getBoundPreparations,
+  getPreparedEntityInSlot,
+  getPreparationsByLevel,
+  isSlotPrepared,
+  getPreparationCountByEntity,
+  getUniquePreparedEntities,
+  getTotalPreparedCount,
+  // Validation
   validateCGEConfig,
 } from "./core/domain/cge";

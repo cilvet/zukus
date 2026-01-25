@@ -13,6 +13,7 @@ export type {
   CalculatedCGE,
   CalculatedTrack,
   CalculatedSlot,
+  CalculatedBoundSlot,
   CalculatedPool,
   CalculatedKnownLimit,
   KnownConfig,
@@ -46,3 +47,22 @@ export {
   getTotalKnownCount,
   isEntityKnown,
 } from './knownOperations';
+
+// Preparation Operations (Vancian-style)
+export type {
+  PreparationUpdateResult,
+  PreparationWarning,
+} from './preparationOperations';
+
+export {
+  prepareEntityInSlot,
+  unprepareSlot,
+  unprepareEntity,
+  getBoundPreparations,
+  getPreparedEntityInSlot,
+  getPreparationsByLevel,
+  isSlotPrepared,
+  getPreparationCountByEntity,
+  getUniquePreparedEntities,
+  getTotalPreparedCount,
+} from './preparationOperations';

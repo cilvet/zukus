@@ -14,7 +14,9 @@ import type {
   CalculatedTrack,
   CalculatedSlot,
   CalculatedKnownLimit,
+  CalculatedBoundSlot,
   LevelTable,
+  Track,
 } from "../../../cge/types";
 
 type KnownLimitsResult = {
@@ -111,7 +113,7 @@ function calculateSingleCGE(
   warnings.push(...knownResult.warnings);
 
   // Calcular tracks leyendo valores finales de substitutionIndex
-  const tracks = calculateTracks(
+  const tracksResult = calculateTracks(
     config,
     classLevel,
     baseData,
@@ -119,6 +121,7 @@ function calculateSingleCGE(
     indexValuesToUpdate,
     variables.classPrefix
   );
+  warnings.push(...tracksResult.warnings);
 
   return {
     calculatedCGE: {
@@ -127,7 +130,7 @@ function calculateSingleCGE(
       entityType: config.entityType,
       classLevel,
       knownLimits: knownResult.limits,
-      tracks,
+      tracks: tracksResult.tracks,
       config,
     },
     warnings,
@@ -243,6 +246,11 @@ function calculateKnownLimits(
   return { limits: undefined, warnings };
 }
 
+type TracksResult = {
+  tracks: CalculatedTrack[];
+  warnings: CharacterWarning[];
+};
+
 function calculateTracks(
   config: CGEConfig,
   classLevel: number,
@@ -250,8 +258,10 @@ function calculateTracks(
   substitutionIndex: SubstitutionIndex,
   indexValuesToUpdate: SubstitutionIndex,
   classPrefix: string
-): CalculatedTrack[] {
-  return config.tracks.map(track => {
+): TracksResult {
+  const warnings: CharacterWarning[] = [];
+
+  const tracks = config.tracks.map(track => {
     const calculatedTrack: CalculatedTrack = {
       id: track.id,
       label: track.label,
@@ -260,15 +270,17 @@ function calculateTracks(
     };
 
     if (track.resource.type === 'SLOTS') {
-      calculatedTrack.slots = calculateSlots(
-        track.resource.table,
+      const slotsResult = calculateSlots(
+        track,
         classLevel,
         baseData,
-        config.id,
+        config,
         substitutionIndex,
         indexValuesToUpdate,
         classPrefix
       );
+      calculatedTrack.slots = slotsResult.slots;
+      warnings.push(...slotsResult.warnings);
     }
 
     if (track.resource.type === 'POOL') {
@@ -278,24 +290,41 @@ function calculateTracks(
 
     return calculatedTrack;
   });
+
+  return { tracks, warnings };
 }
 
+type SlotsResult = {
+  slots: CalculatedSlot[];
+  warnings: CharacterWarning[];
+};
+
 function calculateSlots(
-  table: LevelTable,
+  track: Track,
   classLevel: number,
   baseData: CharacterBaseData,
-  cgeId: string,
+  config: CGEConfig,
   substitutionIndex: SubstitutionIndex,
   indexValuesToUpdate: SubstitutionIndex,
   classPrefix: string
-): CalculatedSlot[] {
+): SlotsResult {
+  if (track.resource.type !== 'SLOTS') {
+    return { slots: [], warnings: [] };
+  }
+
+  const table = track.resource.table;
   const row = table[classLevel];
   if (!row) {
-    return [];
+    return { slots: [], warnings: [] };
   }
 
   const slots: CalculatedSlot[] = [];
+  const warnings: CharacterWarning[] = [];
+  const cgeId = config.id;
   const cgeState = baseData.cgeState?.[cgeId];
+  const boundPreparations = cgeState?.boundPreparations ?? {};
+  const knownSelections = cgeState?.knownSelections ?? {};
+  const isBoundPreparation = track.preparation.type === 'BOUND';
 
   for (let level = 0; level < row.length; level++) {
     const baseMax = row[level];
@@ -308,12 +337,54 @@ function calculateSlots(
       // Obtener valor actual del estado persistido, o usar max como default
       const current = cgeState?.slotCurrentValues?.[String(level)] ?? max;
 
-      slots.push({
+      const calculatedSlot: CalculatedSlot = {
         level,
         max,
         current,
         bonus: 0, // TODO: Calcular bonus de atributo
-      });
+      };
+
+      // Si es BOUND preparation, construir los slots individuales
+      if (isBoundPreparation) {
+        const boundSlots: CalculatedBoundSlot[] = [];
+
+        for (let index = 0; index < max; index++) {
+          const slotId = `${level}-${index}`;
+          const preparedEntityId = boundPreparations[slotId];
+
+          boundSlots.push({
+            slotId,
+            level,
+            index,
+            preparedEntityId,
+          });
+
+          // Validar que la entidad preparada esta en los conocidos
+          if (preparedEntityId && config.known) {
+            const isKnown = isEntityInKnownSelections(
+              knownSelections,
+              preparedEntityId
+            );
+            if (!isKnown) {
+              warnings.push({
+                type: 'prepared_entity_not_known',
+                message: `${config.id}: Entity "${preparedEntityId}" is prepared in slot ${slotId} but is not in the spellbook`,
+                context: {
+                  cgeId,
+                  entityId: preparedEntityId,
+                  slotId,
+                  level,
+                  index,
+                },
+              });
+            }
+          }
+        }
+
+        calculatedSlot.boundSlots = boundSlots;
+      }
+
+      slots.push(calculatedSlot);
 
       // Exponer variables para acceso conveniente en formulas
       indexValuesToUpdate[varId] = max;
@@ -321,5 +392,66 @@ function calculateSlots(
     }
   }
 
-  return slots;
+  // Verificar preparaciones en slots que no existen (fuera de rango)
+  if (isBoundPreparation) {
+    const outOfBoundsWarnings = validateBoundPreparationsInRange(
+      boundPreparations,
+      slots,
+      config
+    );
+    warnings.push(...outOfBoundsWarnings);
+  }
+
+  return { slots, warnings };
+}
+
+/**
+ * Checks if an entity ID is in any of the known selections.
+ */
+function isEntityInKnownSelections(
+  knownSelections: Record<string, string[]>,
+  entityId: string
+): boolean {
+  for (const entityIds of Object.values(knownSelections)) {
+    if (entityIds.includes(entityId)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Validates that all bound preparations are within valid slot ranges.
+ */
+function validateBoundPreparationsInRange(
+  boundPreparations: Record<string, string>,
+  slots: CalculatedSlot[],
+  config: CGEConfig
+): CharacterWarning[] {
+  const warnings: CharacterWarning[] = [];
+
+  // Build a set of valid slot IDs
+  const validSlotIds = new Set<string>();
+  for (const slot of slots) {
+    for (let index = 0; index < slot.max; index++) {
+      validSlotIds.add(`${slot.level}-${index}`);
+    }
+  }
+
+  // Check each preparation
+  for (const slotId of Object.keys(boundPreparations)) {
+    if (!validSlotIds.has(slotId)) {
+      warnings.push({
+        type: 'preparation_slot_out_of_bounds',
+        message: `${config.id}: Preparation in slot ${slotId} is out of bounds (slot does not exist)`,
+        context: {
+          cgeId: config.id,
+          slotId,
+          entityId: boundPreparations[slotId],
+        },
+      });
+    }
+  }
+
+  return warnings;
 }

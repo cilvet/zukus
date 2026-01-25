@@ -275,6 +275,17 @@ export type CGEState = {
 // ============================================================================
 
 /**
+ * Slot individual calculado para preparacion BOUND.
+ * Representa un slot especifico en el que se puede preparar una entidad.
+ */
+export type CalculatedBoundSlot = {
+  slotId: string // "1-0", "1-1", "2-0", etc.
+  level: number
+  index: number
+  preparedEntityId?: string // ID de la entidad preparada, si hay
+}
+
+/**
  * Slot calculado para un nivel de entidad.
  */
 export type CalculatedSlot = {
@@ -282,6 +293,11 @@ export type CalculatedSlot = {
   max: number
   current: number
   bonus: number // Bonus de atributo u otros efectos
+  /**
+   * Para preparacion BOUND: slots individuales con sus preparaciones.
+   * Solo presente cuando el track tiene preparation.type === 'BOUND'
+   */
+  boundSlots?: CalculatedBoundSlot[]
 }
 
 /**
