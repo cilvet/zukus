@@ -21,6 +21,8 @@ export {
   useCharacterAlignment,
   useCharacterPhysicalTraits,
   useCharacterBackgroundInfo,
+  useCGE,
+  usePrimaryCGE,
 } from './characterStore'
 
 export { usePanelStore } from './panelStore'

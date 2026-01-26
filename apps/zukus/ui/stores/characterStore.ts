@@ -90,6 +90,12 @@ type CharacterActions = {
 
   // Rest
   rest: () => UpdateResult
+
+  // CGE (Spellcasting) Management
+  useSlotForCGE: (cgeId: string, level: number) => UpdateResult
+  refreshSlotsForCGE: (cgeId: string) => UpdateResult
+  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string) => UpdateResult
+  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number) => UpdateResult
 }
 
 type CharacterStore = CharacterState & CharacterActions
@@ -347,6 +353,34 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     if (!updater) return notSetResult
     return updater.rest()
   },
+
+  // =============================================================================
+  // CGE (Spellcasting) Management
+  // =============================================================================
+
+  useSlotForCGE: (cgeId: string, level: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.useSlotForCGE(cgeId, level)
+  },
+
+  refreshSlotsForCGE: (cgeId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.refreshSlotsForCGE(cgeId)
+  },
+
+  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId)
+  },
+
+  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.unprepareSlotForCGE(cgeId, slotLevel, slotIndex)
+  },
 }))
 
 // =============================================================================
@@ -410,9 +444,28 @@ export function useCharacterImageUrl() {
 }
 
 const EMPTY_COMPUTED_ENTITIES: readonly ComputedEntity[] = []
+const EMPTY_CGE: Record<string, import('@zukus/core').CalculatedCGE> = {}
 
 export function useComputedEntities() {
   return useCharacterStore((state) => state.characterSheet?.computedEntities ?? EMPTY_COMPUTED_ENTITIES)
+}
+
+export function useCGE() {
+  return useCharacterStore((state) => state.characterSheet?.cge ?? EMPTY_CGE)
+}
+
+/**
+ * Returns the first CGE if any exists, or null.
+ * Used for the CGE summary tab (ignoring multi-CGE for now).
+ */
+export function usePrimaryCGE() {
+  return useCharacterStore((state) => {
+    const cge = state.characterSheet?.cge
+    if (!cge) return null
+    const keys = Object.keys(cge)
+    if (keys.length === 0) return null
+    return cge[keys[0]]
+  })
 }
 
 export function useCharacterBuild() {
@@ -484,6 +537,11 @@ export function useCharacterActions() {
     rechargeAllResources: state.rechargeAllResources,
     // Rest
     rest: state.rest,
+    // CGE
+    useSlotForCGE: state.useSlotForCGE,
+    refreshSlotsForCGE: state.refreshSlotsForCGE,
+    prepareEntityForCGE: state.prepareEntityForCGE,
+    unprepareSlotForCGE: state.unprepareSlotForCGE,
   }))
 }
 

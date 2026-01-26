@@ -121,6 +121,8 @@ export type {
   CGEWarning,
   PreparationUpdateResult,
   PreparationWarning,
+  SlotUpdateResult,
+  SlotWarning,
 } from "./core/domain/cge";
 
 export {
@@ -143,6 +145,12 @@ export {
   getPreparationCountByEntity,
   getUniquePreparedEntities,
   getTotalPreparedCount,
+  // Slot operations (runtime usage)
+  useSlot,
+  refreshSlots,
+  getSlotCurrentValue,
+  getAllSlotCurrentValues,
+  hasUsedSlots,
   // Validation
   validateCGEConfig,
 } from "./core/domain/cge";

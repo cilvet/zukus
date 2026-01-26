@@ -11,6 +11,8 @@ import * as ops from "../../updater/operations";
 import { ClassFeature } from "../../../class/classFeatures";
 import { Feat } from "../../baseData/features/feats/feat";
 import type { StandardEntity } from "../../../entities/types/base";
+import { useSlot, refreshSlots } from "../../../cge/slotOperations";
+import { prepareEntityInSlot, unprepareSlot } from "../../../cge/preparationOperations";
 
 /**
  * Character Updater - Wrapper con estado sobre funciones puras.
@@ -1078,6 +1080,103 @@ export class CharacterUpdater implements ICharacterUpdater {
       },
     };
 
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  // =============================================================================
+  // CGE (Spellcasting) Management
+  // =============================================================================
+
+  /**
+   * Consume a slot from a CGE (e.g., cast a spell).
+   * @param cgeId The CGE identifier (e.g., "wizard-spells")
+   * @param level The spell level to consume
+   */
+  useSlotForCGE(cgeId: string, level: number): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = useSlot(this.character, cgeId, level);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Refresh all slots for a CGE (e.g., after a long rest).
+   * @param cgeId The CGE identifier (e.g., "wizard-spells")
+   */
+  refreshSlotsForCGE(cgeId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = refreshSlots(this.character, cgeId);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Prepare an entity in a specific slot (Vancian-style).
+   * @param cgeId The CGE identifier
+   * @param slotLevel The level of the slot
+   * @param slotIndex The index of the slot at that level (0-based)
+   * @param entityId The entity ID to prepare
+   */
+  prepareEntityForCGE(
+    cgeId: string,
+    slotLevel: number,
+    slotIndex: number,
+    entityId: string
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = prepareEntityInSlot(
+      this.character,
+      cgeId,
+      slotLevel,
+      slotIndex,
+      entityId
+    );
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Remove preparation from a specific slot.
+   * @param cgeId The CGE identifier
+   * @param slotLevel The level of the slot
+   * @param slotIndex The index of the slot at that level (0-based)
+   */
+  unprepareSlotForCGE(
+    cgeId: string,
+    slotLevel: number,
+    slotIndex: number
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = unprepareSlot(this.character, cgeId, slotLevel, slotIndex);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
     this.notifyUpdate();
     return { success: true };
   }

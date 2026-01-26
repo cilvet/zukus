@@ -1,4 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome'
+import type { CalculatedCGE } from '@zukus/core'
+import { usePrimaryCGE } from '../../ui'
 
 // Configuración de las páginas del character pager
 export type CharacterPage = {
@@ -7,7 +9,10 @@ export type CharacterPage = {
   icon: React.ComponentProps<typeof FontAwesome>['name']
 }
 
-export const CHARACTER_PAGES: CharacterPage[] = [
+/**
+ * Base pages without CGE tab.
+ */
+const BASE_PAGES: CharacterPage[] = [
   { key: 'combat', label: 'Combate', icon: 'shield' },
   { key: 'abilities', label: 'Atributos', icon: 'star' },
   { key: 'buffs', label: 'Buffs', icon: 'bolt' },
@@ -16,6 +21,56 @@ export const CHARACTER_PAGES: CharacterPage[] = [
   { key: 'notes', label: 'Notas', icon: 'pencil' },
   { key: 'entities', label: 'Entidades', icon: 'list' },
 ]
+
+/**
+ * @deprecated Use useCharacterPages() instead for dynamic CGE tab
+ */
+export const CHARACTER_PAGES: CharacterPage[] = BASE_PAGES
+
+/**
+ * Returns the localized label for a CGE based on its entityType.
+ */
+function getCGELabel(cge: CalculatedCGE): string {
+  const entityType = cge.entityType
+
+  // Map common entity types to Spanish labels
+  const labels: Record<string, string> = {
+    spell: 'Conjuros',
+    power: 'Poderes',
+    maneuver: 'Maniobras',
+    invocation: 'Invocaciones',
+    infusion: 'Infusiones',
+    mystery: 'Misterios',
+    utterance: 'Vocablos',
+  }
+
+  return labels[entityType] ?? 'Habilidades'
+}
+
+/**
+ * Hook that returns character pages with CGE tab inserted at position 2 if character has CGE.
+ */
+export function useCharacterPages(): CharacterPage[] {
+  const primaryCGE = usePrimaryCGE()
+
+  if (!primaryCGE) {
+    return BASE_PAGES
+  }
+
+  // Insert CGE tab at position 2 (after combat and abilities)
+  const cgePage: CharacterPage = {
+    key: 'cge',
+    label: getCGELabel(primaryCGE),
+    icon: 'magic',
+  }
+
+  return [
+    BASE_PAGES[0], // combat
+    BASE_PAGES[1], // abilities
+    cgePage,       // CGE (new)
+    ...BASE_PAGES.slice(2), // rest of pages
+  ]
+}
 
 export const ABILITY_INFO: Record<string, { name: string; abbr: string; description: string }> = {
   strength: {

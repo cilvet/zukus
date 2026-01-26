@@ -1,78 +1,256 @@
 ---
-description: Sistema de navegacion a pantallas de detalle
-globs: 
+description: Sistema de navegacion unificado desktop/mobile
+globs:
 alwaysApply: true
 ---
 
-# Navegacion a Detalles
+# Sistema de Navegacion
 
-## Como Navegar
+## Modelo Mental
 
-Usar el hook unificado en lugar de `router.push` o `openPanel` directamente:
+La navegacion en esta app es **analogica** entre plataformas:
+
+| Concepto | Mobile | Desktop |
+|----------|--------|---------|
+| Pantalla base | Tab activo | Columnas principales |
+| Ir a detalle | Stack push (nueva pantalla) | SidePanel abre |
+| Ir a sub-detalle | Stack push (encima) | SidePanel apila (historial) |
+| Volver | Stack pop | SidePanel pop (o cierra) |
+| URL | `/characters/detail/type/id` | `/characters?panel=type/id` |
+
+**Regla fundamental**: El historial se mantiene en ambas plataformas. Si navegas A → B → C, el boton "back" va C → B → A.
+
+---
+
+## REGLA CRITICA: Nunca usar router.push para detalles
 
 ```typescript
-import { useNavigateToDetail } from '../../navigation'
+// MAL - Rompe desktop
+router.push('/characters/cge')
+router.push('/some/path')
 
-const navigateToDetail = useNavigateToDetail()
-
-// Navegar a un detalle
-navigateToDetail('ability', 'strength')
-navigateToDetail('spell', 'fireball', 'Bola de Fuego')  // con nombre custom
+// BIEN - Funciona en ambas plataformas
+navigateToDetail('cgeManagement', cgeId, 'Gestionar Conjuros')
 ```
 
-El hook hace lo correcto segun la plataforma:
-- Desktop web: abre SidePanel
-- Mobile: navega con stack (Expo Router)
+---
 
-## Como Añadir un Nuevo Tipo de Detalle
+## Tipos de Pantallas
 
-1. **Añadir el tipo** en `navigation/detailRegistry.tsx`:
+### 1. Top-level (Tabs, pantallas raiz)
+- Se crean como rutas en `app/`
+- Tienen su propio layout
+- Ejemplos: Home, Compendiums list, Character sheet
+
+### 2. Detalle (contenido secundario)
+- Se accede via `navigateToDetail()`
+- Mobile: stack push
+- Desktop: SidePanel
+- Ejemplos: Ability detail, Buff detail, CGE Management
+
+### 3. Sub-detalle (detalle dentro de detalle)
+- Mismo mecanismo que detalle
+- Se apila en el historial
+- Ejemplos: Entity select (desde CGE Management)
+
+---
+
+## Checklist: Crear Nueva Pantalla de Detalle
+
+Cuando necesites crear una nueva pantalla de detalle, sigue TODOS estos pasos:
+
+### Paso 1: Definir el tipo
+
+En `navigation/detailRegistry.ts`:
 
 ```typescript
-export type DetailType = 'ability' | 'skill' | ... | 'nuevoTipo'
+// Añadir al union type
+export type DetailType =
+  | 'ability'
+  | ...
+  | 'miNuevoTipo'  // <-- añadir
 
+// Añadir al registry
 export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
-  // ...existentes...
-  nuevoTipo: {
-    getTitle: (id) => /* logica para obtener titulo */,
+  ...
+  miNuevoTipo: {
+    getTitle: (id) => 'Mi Titulo',  // o logica para obtener titulo
   },
 }
 ```
 
-2. **Crear el componente** de detalle en `components/character/`:
+### Paso 2: Crear el componente de contenido
+
+En `components/character/panels/MiNuevoPanel.tsx`:
 
 ```typescript
-// NuevoTipoDetailPanel.tsx
-export function NuevoTipoDetailPanel({ id }: { id: string }) {
-  // ...
+type MiNuevoPanelProps = {
+  id: string
+}
+
+export function MiNuevoPanel({ id }: MiNuevoPanelProps) {
+  // IMPORTANTE: Este componente NO debe tener:
+  // - Header de navegacion propio
+  // - SafeAreaView
+  // - Logica de plataforma (isDesktop, etc)
+
+  // Solo el contenido puro
+  return (
+    <ScrollView>
+      {/* contenido */}
+    </ScrollView>
+  )
 }
 ```
 
-3. **Añadir al switch de mobile** en `screens/detail/DetailScreen.tsx`:
+### Paso 3: Exportar el componente
+
+En `components/character/panels/index.ts`:
 
 ```typescript
-switch (type) {
-  case 'ability':
-    return <AbilityDetail abilityKey={id} />
-  case 'nuevoTipo':
-    return <NuevoTipoDetail id={id} />
-  // ...
-}
+export { MiNuevoPanel } from './MiNuevoPanel'
 ```
 
-4. **Añadir al SidePanel de desktop** en `screens/character/CharacterScreenDesktop.tsx`:
+En `components/character/index.ts` (verificar que exporta panels):
 
 ```typescript
-{currentPanel?.type === 'nuevoTipo' && (
-  <NuevoTipoDetailPanel id={currentPanel.id} />
+export * from './panels'
+```
+
+### Paso 4: Registrar en Mobile
+
+En `screens/detail/DetailScreen.tsx`, añadir al switch:
+
+```typescript
+case 'miNuevoTipo':
+  return <MiNuevoPanel id={id} />
+```
+
+### Paso 5: Registrar en Desktop
+
+En `screens/character/CharacterScreenDesktop.tsx`, añadir dentro del SidePanel:
+
+```typescript
+{panelInfo?.type === 'miNuevoTipo' && panelInfo?.id && (
+  <MiNuevoPanel id={panelInfo.id} />
 )}
 ```
+
+### Paso 6: Usar la navegacion
+
+Desde cualquier componente:
+
+```typescript
+const navigateToDetail = useNavigateToDetail()
+
+// En un handler (NO en el cuerpo del componente)
+const handlePress = () => {
+  navigateToDetail('miNuevoTipo', itemId, 'Titulo Opcional')
+}
+```
+
+---
+
+## Navegacion Anidada (Sub-detalles)
+
+Para navegar de un panel a otro:
+
+```typescript
+function PanelA({ id }: { id: string }) {
+  const navigateToDetail = useNavigateToDetail()
+
+  const handleGoToB = () => {
+    navigateToDetail('panelB', otroId, 'Titulo B')
+  }
+}
+```
+
+Para volver al panel anterior:
+
+```typescript
+function PanelB({ id }: { id: string }) {
+  const { goBack } = usePanelNavigation('character')
+
+  const handleDone = () => {
+    // ... hacer algo ...
+    goBack()  // Vuelve a PanelA
+  }
+}
+```
+
+---
+
+## PROBLEMA CONOCIDO: Errores de Hooks
+
+### Sintoma
+
+Al llamar `navigateToDetail()` desde un callback, aparece error:
+
+```
+Invalid hook call. Hooks can only be called inside of the body of a function component.
+```
+
+El stack trace apunta a una funcion pura (sin hooks) como `getCGELabel`.
+
+### Causa
+
+React detecta funciones que empiezan con "use" como hooks. Si tienes:
+
+```typescript
+// MAL - React piensa que useSlotForCGE es un hook
+const useSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
+
+// Esto causa error:
+onPress={() => useSlotForCGE(id)}
+```
+
+### Solucion
+
+Renombrar variables que vienen del store para que NO empiecen con "use":
+
+```typescript
+// BIEN
+const consumeSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
+
+onPress={() => consumeSlotForCGE(id)}
+```
+
+### Prevencion
+
+1. **Nunca nombrar variables locales con prefijo "use"** si no son hooks
+2. **En callbacks, evitar llamar funciones inline**. Preferir handlers definidos:
+
+```typescript
+// MAL - funcion inline en callback
+onPress={() => navigateToDetail('tipo', id, `Titulo ${getLabel(x)}`)}
+
+// BIEN - handler definido
+const handlePress = () => {
+  const title = `Titulo ${getLabel(x)}`
+  navigateToDetail('tipo', id, title)
+}
+
+onPress={handlePress}
+```
+
+---
 
 ## Archivos Clave
 
 | Archivo | Proposito |
 |---------|-----------|
-| `navigation/detailRegistry.tsx` | Tipos y titulos de detalle |
+| `navigation/detailRegistry.ts` | Tipos y titulos de detalle |
 | `navigation/useNavigateToDetail.ts` | Hook unificado |
+| `hooks/usePanelNavigation.ts` | Gestion del stack de paneles (desktop) |
+| `ui/stores/panelStore.ts` | Estado del panel (Zustand) |
 | `screens/detail/DetailScreen.tsx` | Renderiza detalles en mobile |
 | `screens/character/CharacterScreenDesktop.tsx` | Renderiza detalles en SidePanel |
+| `components/character/panels/` | Componentes de contenido reutilizables |
+
+---
+
+## Cuando NO usar este sistema
+
+- Pantallas top-level (crear ruta normal en `app/`)
+- Modales de confirmacion (usar componente Modal)
+- Flujos completamente separados del character sheet

@@ -40,6 +40,8 @@ export type DetailType =
   | 'customEntityDetail'
   | 'computedEntity'
   | 'compendiumEntity'
+  | 'cgeManagement'
+  | 'cgeEntitySelect'
 
 /**
  * Configuración de un tipo de detalle.
@@ -120,6 +122,12 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   compendiumEntity: {
     getTitle: (id) => id, // El nombre real se pasa como customName
+  },
+  cgeManagement: {
+    getTitle: () => 'Gestionar',
+  },
+  cgeEntitySelect: {
+    getTitle: (id) => `Seleccionar Nivel ${id}`,
   },
 }
 

@@ -19,6 +19,7 @@ import {
   useCharacterAttacks,
   useCharacterBaseData,
   useComputedEntities,
+  usePrimaryCGE,
   useDraftBuff,
   useBuffEditActions,
   AbilityCard,
@@ -54,6 +55,8 @@ import {
   AbilityDetailPanel,
   GenericDetailPanel,
   ArmorClassDetailPanel,
+  CGEManagementPanel,
+  CGEEntitySelectPanel,
 } from '../../components/character'
 import { ChatScreenWeb } from '../chat/ChatScreenWeb'
 import { SavingThrowDetailPanel } from '../../ui'
@@ -107,6 +110,152 @@ function ListIcon({ size = 16, color = '#888' }: { size?: number; color?: string
       <View style={{ height: 2, backgroundColor: color, borderRadius: 1 }} />
       <View style={{ height: 2, backgroundColor: color, borderRadius: 1 }} />
     </View>
+  )
+}
+
+/**
+ * Returns a label for CGE entity type (localized).
+ */
+function getCGELabel(entityType: string): string {
+  const labels: Record<string, string> = {
+    spell: 'Conjuros',
+    power: 'Poderes',
+    maneuver: 'Maniobras',
+    invocation: 'Invocaciones',
+  }
+  return labels[entityType] ?? 'Habilidades'
+}
+
+/**
+ * Groups prepared entities by level for display.
+ */
+function groupPreparedByLevel(
+  slots: import('@zukus/core').CalculatedSlot[]
+): Map<number, Map<string, number>> {
+  const byLevel = new Map<number, Map<string, number>>()
+
+  for (const slot of slots) {
+    if (!slot.boundSlots) continue
+
+    let levelMap = byLevel.get(slot.level)
+    if (!levelMap) {
+      levelMap = new Map<string, number>()
+      byLevel.set(slot.level, levelMap)
+    }
+
+    for (const boundSlot of slot.boundSlots) {
+      if (!boundSlot.preparedEntityId) continue
+      const current = levelMap.get(boundSlot.preparedEntityId) ?? 0
+      levelMap.set(boundSlot.preparedEntityId, current + 1)
+    }
+  }
+
+  return byLevel
+}
+
+/**
+ * CGE content for desktop view.
+ */
+function CGEDesktopContent({
+  cge,
+  onCast,
+}: {
+  cge: import('@zukus/core').CalculatedCGE
+  onCast: (level: number) => void
+}) {
+  const primaryTrack = cge.tracks[0]
+  const slots = primaryTrack?.slots ?? []
+  const preparedByLevel = groupPreparedByLevel(slots)
+
+  if (slots.length === 0) {
+    return (
+      <Text fontSize={12} color="$placeholderColor">
+        Sin slots disponibles.
+      </Text>
+    )
+  }
+
+  return (
+    <YStack gap={16}>
+      {slots.map((slot) => {
+        const levelEntities = preparedByLevel.get(slot.level) ?? new Map()
+        const entityEntries = Array.from(levelEntities.entries())
+        const levelLabel = slot.level === 0 ? 'Trucos' : `Nivel ${slot.level}`
+        const slotsLabel = slot.max > 0 ? ` (${slot.current}/${slot.max})` : ''
+        const hasSlots = slot.current > 0
+
+        if (entityEntries.length === 0 && slot.max === 0) {
+          return null
+        }
+
+        return (
+          <YStack key={slot.level} gap={8}>
+            <XStack alignItems="center" gap={8}>
+              <View style={{ flex: 1, height: 1, backgroundColor: '#333' }} />
+              <Text fontSize={11} color="$placeholderColor" fontWeight="600">
+                {levelLabel}{slotsLabel}
+              </Text>
+              <View style={{ flex: 1, height: 1, backgroundColor: '#333' }} />
+            </XStack>
+
+            {entityEntries.length === 0 ? (
+              <Text fontSize={11} color="$placeholderColor" textAlign="center">
+                Sin preparaciones
+              </Text>
+            ) : (
+              <YStack gap={4}>
+                {entityEntries.map(([entityId, count]) => {
+                  const displayName = entityId
+                    .replace(/-/g, ' ')
+                    .replace(/\b\w/g, (l) => l.toUpperCase())
+                  const countLabel = count > 1 ? ` x${count}` : ''
+
+                  return (
+                    <XStack
+                      key={entityId}
+                      alignItems="center"
+                      justifyContent="space-between"
+                      paddingVertical={6}
+                      paddingHorizontal={8}
+                      backgroundColor="$uiBackgroundColor"
+                      borderRadius={6}
+                    >
+                      <Text fontSize={12} color="$color" flex={1}>
+                        {displayName}{countLabel}
+                      </Text>
+
+                      <Pressable
+                        disabled={!hasSlots}
+                        onPress={() => onCast(slot.level)}
+                        hitSlop={8}
+                      >
+                        {({ pressed }) => (
+                          <XStack
+                            paddingVertical={4}
+                            paddingHorizontal={8}
+                            backgroundColor={hasSlots ? '$accentColor' : '$borderColor'}
+                            borderRadius={4}
+                            opacity={pressed ? 0.7 : hasSlots ? 1 : 0.5}
+                          >
+                            <Text
+                              fontSize={10}
+                              fontWeight="600"
+                              color={hasSlots ? '$accentContrastText' : '$placeholderColor'}
+                            >
+                              Lanzar
+                            </Text>
+                          </XStack>
+                        )}
+                      </Pressable>
+                    </XStack>
+                  )
+                })}
+              </YStack>
+            )}
+          </YStack>
+        )
+      })}
+    </YStack>
   )
 }
 
@@ -333,10 +482,12 @@ function CharacterScreenDesktopContent() {
   const attackData = useCharacterAttacks()
   const imageUrl = useCharacterImageUrl()
   const computedEntities = useComputedEntities()
+  const primaryCGE = usePrimaryCGE()
   const toggleBuff = useCharacterStore((state) => state.toggleBuff)
   const editBuff = useCharacterStore((state) => state.editBuff)
   const deleteBuff = useCharacterStore((state) => state.deleteBuff)
   const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
+  const consumeSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
@@ -354,6 +505,14 @@ function CharacterScreenDesktopContent() {
   })()
 
   const entityTypes = Object.keys(entitiesByType).sort()
+
+  // CGE labels and handlers
+  const cgeLabel = primaryCGE ? getCGELabel(primaryCGE.entityType) : ''
+  const handleManageCGE = () => {
+    if (primaryCGE) {
+      navigateToDetail('cgeManagement', primaryCGE.id, `Gestionar ${cgeLabel}`)
+    }
+  }
 
   const {
     currentPanel,
@@ -672,7 +831,41 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 5: Entities */}
+        {/* Columna 5: CGE (Spells/Abilities) */}
+        {primaryCGE && (
+          <VerticalSection>
+            <YStack width="100%" gap={16}>
+              <SectionCard>
+                <XStack alignItems="center" justifyContent="space-between" marginBottom={12}>
+                  <SectionHeader icon="*" title={cgeLabel} />
+                  <Pressable onPress={handleManageCGE} hitSlop={8}>
+                    {({ pressed }) => (
+                      <XStack
+                        paddingVertical={6}
+                        paddingHorizontal={12}
+                        backgroundColor="$uiBackgroundColor"
+                        borderRadius={6}
+                        borderWidth={1}
+                        borderColor="$borderColor"
+                        opacity={pressed ? 0.7 : 1}
+                      >
+                        <Text fontSize={12} fontWeight="600" color="$color">
+                          Gestionar
+                        </Text>
+                      </XStack>
+                    )}
+                  </Pressable>
+                </XStack>
+                <CGEDesktopContent
+                  cge={primaryCGE}
+                  onCast={(level) => consumeSlotForCGE(primaryCGE.id, level)}
+                />
+              </SectionCard>
+            </YStack>
+          </VerticalSection>
+        )}
+
+        {/* Columna 6: Entities */}
         {computedEntities.length > 0 && (
           <VerticalSection>
             <YStack width="100%" gap={16}>
@@ -794,6 +987,12 @@ function CharacterScreenDesktopContent() {
         )}
         {entityForPanel && (
           <GenericEntityDetailPanel entity={entityForPanel} />
+        )}
+        {panelInfo?.type === 'cgeManagement' && (
+          <CGEManagementPanel />
+        )}
+        {panelInfo?.type === 'cgeEntitySelect' && panelInfo?.id && (
+          <CGEEntitySelectPanel selectionId={panelInfo.id} />
         )}
       </SidePanel>
     </SidePanelContainer>

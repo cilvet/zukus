@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
 import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions } from '../../ui'
-import { AbilityDetailPanel, ArmorClassDetailPanel } from '../../components/character'
+import { AbilityDetailPanel, ArmorClassDetailPanel, CGEManagementPanel, CGEEntitySelectPanel } from '../../components/character'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow, ProviderLocation, StandardEntity, EntityInstance } from '@zukus/core'
@@ -842,6 +842,10 @@ export function DetailScreen() {
         return <ComputedEntityDetail entityId={id} />
       case 'compendiumEntity':
         return <CompendiumEntityDetail entityId={id} />
+      case 'cgeManagement':
+        return <CGEManagementPanel />
+      case 'cgeEntitySelect':
+        return <CGEEntitySelectPanel selectionId={id} />
       default:
         return <InvalidRoute />
     }

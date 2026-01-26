@@ -26,7 +26,8 @@ import {
   DescriptionSection,
   NotesSection,
   EntitiesSection,
-  CHARACTER_PAGES,
+  CGESummarySection,
+  useCharacterPages,
 } from '../../components/character'
 import type { CharacterPagerRef } from '../../components/character'
 import { SafeAreaBottomSpacer } from '../../components/layout'
@@ -154,6 +155,20 @@ function Header() {
  * Header fijo + Tabs + ViewPager swipeable.
  * Consume el personaje cargado en el store.
  */
+/**
+ * Maps page keys to their section components.
+ */
+const PAGE_COMPONENTS: Record<string, React.ComponentType> = {
+  combat: CombatSection,
+  abilities: AbilitiesSection,
+  cge: CGESummarySection,
+  buffs: BuffsSection,
+  equipment: EquipmentSection,
+  description: DescriptionSection,
+  notes: NotesSection,
+  entities: EntitiesSection,
+}
+
 export function CharacterScreenMobile() {
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
@@ -165,16 +180,17 @@ export function CharacterScreenMobile() {
   const insets = useSafeAreaInsets()
   const router = useRouter()
   const setVisiblePage = useVisiblePageStore((state) => state.setVisiblePage)
+  const pages = useCharacterPages()
 
   // Inicializar visiblePage en el mount
   useEffect(() => {
-    setVisiblePage(CHARACTER_PAGES[0]?.key ?? null)
+    setVisiblePage(pages[0]?.key ?? null)
     return () => setVisiblePage(null)
-  }, [setVisiblePage])
+  }, [setVisiblePage, pages])
 
   // Cuando la página está completamente visible (offset = 0), actualizar el store
   function handlePageSettled(index: number) {
-    const pageKey = CHARACTER_PAGES[index]?.key ?? null
+    const pageKey = pages[index]?.key ?? null
     setVisiblePage(pageKey)
   }
 
@@ -235,31 +251,19 @@ export function CharacterScreenMobile() {
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <Header />
       <CharacterPager ref={pagerRef} onPageChange={setCurrentPage} onPageSettled={handlePageSettled}>
-        <View key="combat" style={styles.page}>
-          <CombatSection />
-        </View>
-        <View key="abilities" style={styles.page}>
-          <AbilitiesSection />
-        </View>
-        <View key="buffs" style={styles.page}>
-          <BuffsSection />
-        </View>
-        <View key="equipment" style={styles.page}>
-          <EquipmentSection />
-        </View>
-        <View key="description" style={styles.page}>
-          <DescriptionSection />
-        </View>
-        <View key="notes" style={styles.page}>
-          <NotesSection />
-        </View>
-        <View key="entities" style={styles.page}>
-          <EntitiesSection />
-        </View>
+        {pages.map((page) => {
+          const PageComponent = PAGE_COMPONENTS[page.key]
+          if (!PageComponent) return null
+          return (
+            <View key={page.key} style={styles.page}>
+              <PageComponent />
+            </View>
+          )
+        })}
       </CharacterPager>
 
       <BottomTabBar
-        pages={CHARACTER_PAGES}
+        pages={pages}
         currentPage={currentPage}
         onPageChange={handleTabPress}
       />
