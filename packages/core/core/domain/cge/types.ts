@@ -5,18 +5,15 @@
  * accionables (conjuros, maniobras, poderes, invocaciones, etc.)
  */
 
+// Usar el sistema de filtros real de levels/filtering
+export type { EntityFilter } from '../levels/filtering/types';
+
 // ============================================================================
 // TIPOS BASE
 // ============================================================================
 
 export type Formula = {
   expression: string
-}
-
-export type EntityFilter = {
-  field: string
-  operator: 'equals' | 'contains' | 'intersects'
-  value: string | string[] | Formula // Formula para valores dinamicos como @character.domains
 }
 
 /**

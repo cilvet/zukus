@@ -28,11 +28,8 @@ export const wizardCGEConfig: CGEConfig = {
   entityType: 'spell',
   levelPath: '@entity.levels.wizard',
 
-  accessFilter: {
-    field: 'lists',
-    operator: 'contains',
-    value: 'wizard',
-  },
+  // TODO: accessFilter usando EntityFilter de levels/filtering cuando resolvamos
+  // el problema de niveles de conjuro variables en D&D 3.5
 
   // Wizard tiene libro de conjuros sin limite
   known: {
@@ -140,11 +137,7 @@ export const sorcererCGEConfig: CGEConfig = {
   entityType: 'spell',
   levelPath: '@entity.levels.sorcerer',
 
-  accessFilter: {
-    field: 'lists',
-    operator: 'contains',
-    value: 'sorcerer',
-  },
+  // TODO: accessFilter usando EntityFilter de levels/filtering
 
   known: {
     type: 'LIMITED_PER_ENTITY_LEVEL',
@@ -287,11 +280,7 @@ export const clericCGEConfig: CGEConfig = {
   entityType: 'spell',
   levelPath: '@entity.levels.cleric',
 
-  accessFilter: {
-    field: 'lists',
-    operator: 'contains',
-    value: 'cleric',
-  },
+  // TODO: accessFilter usando EntityFilter de levels/filtering
 
   // SIN known config: el Cleric puede preparar cualquier conjuro clerical
   // (no tiene spellbook, accede a toda la lista)
@@ -311,12 +300,7 @@ export const clericCGEConfig: CGEConfig = {
     {
       id: 'domain',
       label: 'domain_slots',
-      // Filtro: solo conjuros de los dominios del personaje
-      filter: {
-        field: 'domains',
-        operator: 'intersects',
-        value: { expression: '@character.domains' },
-      },
+      // TODO: filter para solo conjuros de dominios usando EntityFilter
       resource: {
         type: 'SLOTS',
         table: CLERIC_DOMAIN_SLOTS_TABLE,
