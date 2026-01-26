@@ -191,10 +191,11 @@ describe("Cleric CGE", () => {
       const baseTrack = cge?.tracks.find(t => t.id === 'base');
 
       // Cada slot level tiene boundSlots con slotIds correctos
+      // Formato: "{trackId}:{level}-{index}"
       const level1 = baseTrack?.slots?.find(s => s.level === 1);
       expect(level1?.boundSlots).toBeDefined();
       expect(level1?.boundSlots?.length).toBeGreaterThan(0);
-      expect(level1?.boundSlots?.[0].slotId).toBe('1-0');
+      expect(level1?.boundSlots?.[0].slotId).toBe('base:1-0');
       expect(level1?.boundSlots?.[0].level).toBe(1);
       expect(level1?.boundSlots?.[0].index).toBe(0);
     });

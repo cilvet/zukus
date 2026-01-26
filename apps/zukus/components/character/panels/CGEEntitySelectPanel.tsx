@@ -93,11 +93,12 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Parse selectionId: "level:slotIndex:cgeId"
-  const [levelStr, slotIndexStr, cgeIdFromParams] = selectionId.split(':')
+  // Parse selectionId: "level:slotIndex:cgeId:trackId"
+  const [levelStr, slotIndexStr, cgeIdFromParams, trackIdFromParams] = selectionId.split(':')
   const level = parseInt(levelStr ?? '0', 10)
   const slotIndex = parseInt(slotIndexStr ?? '0', 10)
   const cgeId = cgeIdFromParams ?? primaryCGE?.id ?? ''
+  const trackId = trackIdFromParams ?? 'base'
 
   // Get the CGE config to determine entity type and class
   const entityType = primaryCGE?.entityType ?? 'spell'
@@ -125,7 +126,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const levelLabel = getLevelLabel(level)
 
   const handleSelectEntity = (entityId: string) => {
-    const result = prepareEntityForCGE(cgeId, level, slotIndex, entityId)
+    const result = prepareEntityForCGE(cgeId, level, slotIndex, entityId, trackId)
     if (!result.success) {
       console.warn('Failed to prepare entity:', result.error)
       return

@@ -272,6 +272,7 @@ function calculateTracks(
     if (track.resource.type === 'SLOTS') {
       const slotsResult = calculateSlots(
         track,
+        track.id, // trackId for slot namespacing
         classLevel,
         baseData,
         config,
@@ -301,6 +302,7 @@ type SlotsResult = {
 
 function calculateSlots(
   track: Track,
+  trackId: string,
   classLevel: number,
   baseData: CharacterBaseData,
   config: CGEConfig,
@@ -362,7 +364,7 @@ function calculateSlots(
         const boundSlots: CalculatedBoundSlot[] = [];
 
         for (let index = 0; index < max; index++) {
-          const slotId = `${level}-${index}`;
+          const slotId = `${trackId}:${level}-${index}`;
           const preparedEntityId = boundPreparations[slotId];
 
           boundSlots.push({

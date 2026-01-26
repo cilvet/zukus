@@ -97,16 +97,16 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
     }
   }
 
-  const handleAddPreparation = (level: number, slotIndex: number) => {
+  const handleAddPreparation = (level: number, slotIndex: number, trackId: string) => {
     // Navigate to entity select using the unified navigation system
-    // Format: level:slotIndex:cgeId
-    const selectionId = `${level}:${slotIndex}:${primaryCGE.id}`
+    // Format: level:slotIndex:cgeId:trackId
+    const selectionId = `${level}:${slotIndex}:${primaryCGE.id}:${trackId}`
     const title = level === 0 ? 'Seleccionar Nivel 0' : `Seleccionar Nivel ${level}`
     navigateToDetail('cgeEntitySelect', selectionId, title)
   }
 
-  const handleRemovePreparation = (level: number, slotIndex: number) => {
-    unprepareSlotForCGE(primaryCGE.id, level, slotIndex)
+  const handleRemovePreparation = (level: number, slotIndex: number, trackId: string) => {
+    unprepareSlotForCGE(primaryCGE.id, level, slotIndex, trackId)
   }
 
   return (
@@ -165,7 +165,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                       {displayName}
                     </Text>
                     <Pressable
-                      onPress={() => handleRemovePreparation(slot.level, prep.slotIndex)}
+                      onPress={() => handleRemovePreparation(slot.level, prep.slotIndex, primaryTrack.id)}
                       hitSlop={8}
                     >
                       {({ pressed }) => (
@@ -182,7 +182,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
               {slot.boundSlots?.filter((bs) => !bs.preparedEntityId).map((emptySlot) => (
                 <Pressable
                   key={emptySlot.slotId}
-                  onPress={() => handleAddPreparation(slot.level, emptySlot.index)}
+                  onPress={() => handleAddPreparation(slot.level, emptySlot.index, primaryTrack.id)}
                 >
                   {({ pressed }) => (
                     <XStack

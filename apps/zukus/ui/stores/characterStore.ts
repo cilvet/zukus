@@ -94,8 +94,8 @@ type CharacterActions = {
   // CGE (Spellcasting) Management
   useSlotForCGE: (cgeId: string, level: number) => UpdateResult
   refreshSlotsForCGE: (cgeId: string) => UpdateResult
-  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string) => UpdateResult
-  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number) => UpdateResult
+  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string, trackId?: string) => UpdateResult
+  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number, trackId?: string) => UpdateResult
 }
 
 type CharacterStore = CharacterState & CharacterActions
@@ -370,16 +370,16 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     return updater.refreshSlotsForCGE(cgeId)
   },
 
-  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string) => {
+  prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string, trackId?: string) => {
     const { updater } = get()
     if (!updater) return notSetResult
-    return updater.prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId)
+    return updater.prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId, trackId)
   },
 
-  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number) => {
+  unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number, trackId?: string) => {
     const { updater } = get()
     if (!updater) return notSetResult
-    return updater.unprepareSlotForCGE(cgeId, slotLevel, slotIndex)
+    return updater.unprepareSlotForCGE(cgeId, slotLevel, slotIndex, trackId)
   },
 }))
 

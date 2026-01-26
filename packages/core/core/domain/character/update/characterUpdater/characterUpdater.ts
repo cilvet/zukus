@@ -1140,12 +1140,14 @@ export class CharacterUpdater implements ICharacterUpdater {
    * @param slotLevel The level of the slot
    * @param slotIndex The index of the slot at that level (0-based)
    * @param entityId The entity ID to prepare
+   * @param trackId The track ID (e.g., "base", "domain"). Defaults to "base".
    */
   prepareEntityForCGE(
     cgeId: string,
     slotLevel: number,
     slotIndex: number,
-    entityId: string
+    entityId: string,
+    trackId: string = 'base'
   ): UpdateResult {
     if (!this.character) return this.characterNotSet;
 
@@ -1154,7 +1156,8 @@ export class CharacterUpdater implements ICharacterUpdater {
       cgeId,
       slotLevel,
       slotIndex,
-      entityId
+      entityId,
+      trackId
     );
 
     if (result.warnings.length > 0) {
@@ -1171,15 +1174,17 @@ export class CharacterUpdater implements ICharacterUpdater {
    * @param cgeId The CGE identifier
    * @param slotLevel The level of the slot
    * @param slotIndex The index of the slot at that level (0-based)
+   * @param trackId The track ID (e.g., "base", "domain"). Defaults to "base".
    */
   unprepareSlotForCGE(
     cgeId: string,
     slotLevel: number,
-    slotIndex: number
+    slotIndex: number,
+    trackId: string = 'base'
   ): UpdateResult {
     if (!this.character) return this.characterNotSet;
 
-    const result = unprepareSlot(this.character, cgeId, slotLevel, slotIndex);
+    const result = unprepareSlot(this.character, cgeId, slotLevel, slotIndex, trackId);
 
     if (result.warnings.length > 0) {
       return { success: false, error: result.warnings[0].message };

@@ -488,6 +488,7 @@ function CharacterScreenDesktopContent() {
   const deleteBuff = useCharacterStore((state) => state.deleteBuff)
   const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
   const consumeSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
+  const rest = useCharacterStore((state) => state.rest)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')

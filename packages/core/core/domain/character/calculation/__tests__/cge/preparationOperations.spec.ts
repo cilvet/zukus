@@ -66,8 +66,9 @@ describe("CGE Preparation Operations (Vancian)", () => {
       );
 
       expect(result.warnings).toHaveLength(0);
+      // Slot IDs now include trackId: "base:level-index"
       expect(result.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "1-0": "magic-missile",
+        "base:1-0": "magic-missile",
       });
     });
 
@@ -83,7 +84,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
       expect(result.warnings).toHaveLength(1);
       expect(result.warnings[0].type).toBe("slot_already_prepared");
       expect(result.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "1-0": "mage-armor",
+        "base:1-0": "mage-armor",
       });
     });
 
@@ -96,8 +97,8 @@ describe("CGE Preparation Operations (Vancian)", () => {
 
       expect(result.warnings).toHaveLength(0);
       expect(result.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "1-0": "magic-missile",
-        "1-1": "magic-missile",
+        "base:1-0": "magic-missile",
+        "base:1-1": "magic-missile",
       });
     });
 
@@ -111,8 +112,8 @@ describe("CGE Preparation Operations (Vancian)", () => {
 
       expect(result.warnings).toHaveLength(0);
       expect(result.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "0-0": "prestidigitation",
-        "1-0": "magic-missile",
+        "base:0-0": "prestidigitation",
+        "base:1-0": "magic-missile",
       });
     });
 
@@ -154,7 +155,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
 
       expect(result.warnings).toHaveLength(0);
       expect(result.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "1-1": "mage-armor",
+        "base:1-1": "mage-armor",
       });
     });
 
@@ -207,7 +208,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
 
       expect(unprepareResult.removedCount).toBe(1);
       expect(unprepareResult.character.cgeState?.["wizard-spells"]?.boundPreparations).toEqual({
-        "1-1": "mage-armor",
+        "base:1-1": "mage-armor",
       });
     });
 
@@ -233,8 +234,8 @@ describe("CGE Preparation Operations (Vancian)", () => {
       const preparations = getBoundPreparations(result.character, "wizard-spells");
 
       expect(preparations).toEqual({
-        "1-0": "magic-missile",
-        "1-1": "mage-armor",
+        "base:1-0": "magic-missile",
+        "base:1-1": "mage-armor",
       });
     });
 
@@ -330,7 +331,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
       expect(level1Slots?.boundSlots).toBeDefined();
       expect(level1Slots?.boundSlots?.length).toBe(1); // Wizard level 1 has 1 level 1 slot
       expect(level1Slots?.boundSlots?.[0]).toEqual({
-        slotId: "1-0",
+        slotId: "base:1-0",
         level: 1,
         index: 0,
         preparedEntityId: "magic-missile",
@@ -382,7 +383,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
 
       const warning = sheet.warnings.find((w) => w.type === "preparation_slot_out_of_bounds");
       expect(warning).toBeDefined();
-      expect(warning?.message).toContain("1-5");
+      expect(warning?.message).toContain("base:1-5");
       expect(warning?.message).toContain("out of bounds");
     });
 

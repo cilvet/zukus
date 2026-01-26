@@ -40,24 +40,29 @@ export type PreparationWarning = {
 
 /**
  * Generates a slot ID for bound preparations.
- * Format: "{level}-{index}" (e.g., "1-0" for first level 1 slot)
+ * Format: "{trackId}:{level}-{index}" (e.g., "base:1-0" for first level 1 slot in base track)
  */
-function generateSlotId(level: number, index: number): string {
-  return `${level}-${index}`;
+function generateSlotId(trackId: string, level: number, index: number): string {
+  return `${trackId}:${level}-${index}`;
 }
 
 /**
- * Parses a slot ID into level and index.
+ * Parses a slot ID into trackId, level, and index.
  */
-function parseSlotId(slotId: string): { level: number; index: number } | null {
-  const parts = slotId.split('-');
+function parseSlotId(slotId: string): { trackId: string; level: number; index: number } | null {
+  const colonIndex = slotId.indexOf(':');
+  if (colonIndex === -1) return null;
+
+  const trackId = slotId.slice(0, colonIndex);
+  const rest = slotId.slice(colonIndex + 1);
+  const parts = rest.split('-');
   if (parts.length !== 2) return null;
 
   const level = parseInt(parts[0], 10);
   const index = parseInt(parts[1], 10);
 
   if (isNaN(level) || isNaN(index)) return null;
-  return { level, index };
+  return { trackId, level, index };
 }
 
 // =============================================================================
@@ -72,6 +77,7 @@ function parseSlotId(slotId: string): { level: number; index: number } | null {
  * @param slotLevel - The level of the slot (e.g., 1 for a level 1 spell slot)
  * @param slotIndex - The index of the slot at that level (0-based)
  * @param entityId - The entity ID to prepare
+ * @param trackId - The track ID (e.g., "base", "domain"). Defaults to "base".
  * @returns Updated character data with warnings
  *
  * Note: This does NOT check if the entity is known or if the slot exists.
@@ -82,10 +88,11 @@ export function prepareEntityInSlot(
   cgeId: string,
   slotLevel: number,
   slotIndex: number,
-  entityId: string
+  entityId: string,
+  trackId: string = 'base'
 ): PreparationUpdateResult {
   const warnings: PreparationWarning[] = [];
-  const slotId = generateSlotId(slotLevel, slotIndex);
+  const slotId = generateSlotId(trackId, slotLevel, slotIndex);
 
   // Get or initialize CGE state
   const cgeState = character.cgeState ?? {};
@@ -136,16 +143,18 @@ export function prepareEntityInSlot(
  * @param cgeId - The CGE to unprepare from
  * @param slotLevel - The level of the slot
  * @param slotIndex - The index of the slot at that level
+ * @param trackId - The track ID (e.g., "base", "domain"). Defaults to "base".
  * @returns Updated character data with warnings
  */
 export function unprepareSlot(
   character: CharacterBaseData,
   cgeId: string,
   slotLevel: number,
-  slotIndex: number
+  slotIndex: number,
+  trackId: string = 'base'
 ): PreparationUpdateResult {
   const warnings: PreparationWarning[] = [];
-  const slotId = generateSlotId(slotLevel, slotIndex);
+  const slotId = generateSlotId(trackId, slotLevel, slotIndex);
 
   const cgeState = character.cgeState;
   if (!cgeState) {
@@ -285,20 +294,22 @@ export function getPreparedEntityInSlot(
   character: CharacterBaseData,
   cgeId: string,
   slotLevel: number,
-  slotIndex: number
+  slotIndex: number,
+  trackId: string = 'base'
 ): string | undefined {
-  const slotId = generateSlotId(slotLevel, slotIndex);
+  const slotId = generateSlotId(trackId, slotLevel, slotIndex);
   return character.cgeState?.[cgeId]?.boundPreparations?.[slotId];
 }
 
 /**
- * Gets all preparations for a specific level.
+ * Gets all preparations for a specific level and track.
  * Returns an array of { index, entityId }.
  */
 export function getPreparationsByLevel(
   character: CharacterBaseData,
   cgeId: string,
-  level: number
+  level: number,
+  trackId: string = 'base'
 ): Array<{ index: number; entityId: string }> {
   const boundPreparations =
     character.cgeState?.[cgeId]?.boundPreparations ?? {};
@@ -306,7 +317,7 @@ export function getPreparationsByLevel(
 
   for (const [slotId, entityId] of Object.entries(boundPreparations)) {
     const parsed = parseSlotId(slotId);
-    if (parsed && parsed.level === level) {
+    if (parsed && parsed.trackId === trackId && parsed.level === level) {
       preparations.push({ index: parsed.index, entityId });
     }
   }
@@ -323,9 +334,10 @@ export function isSlotPrepared(
   character: CharacterBaseData,
   cgeId: string,
   slotLevel: number,
-  slotIndex: number
+  slotIndex: number,
+  trackId: string = 'base'
 ): boolean {
-  const slotId = generateSlotId(slotLevel, slotIndex);
+  const slotId = generateSlotId(trackId, slotLevel, slotIndex);
   return character.cgeState?.[cgeId]?.boundPreparations?.[slotId] !== undefined;
 }
 
