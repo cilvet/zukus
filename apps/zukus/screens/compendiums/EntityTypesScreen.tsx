@@ -27,7 +27,7 @@ export function EntityTypesScreen() {
 
   const handleEntityTypePress = async (typeName: string) => {
     await selectEntityType(typeName);
-    router.push(`/(tabs)/(compendiums)/${compendiumId}/${typeName}`);
+    router.push(`/compendiums/${compendiumId}/${typeName}`);
   };
 
   if (isLoading) {

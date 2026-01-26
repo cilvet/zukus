@@ -38,7 +38,7 @@ export default function TabsLayout() {
         >
           <Tabs.Screen name="(character)" options={{ title: 'Personajes' }} />
           <Tabs.Screen name="(dice)" options={{ title: 'Dados' }} />
-          <Tabs.Screen name="(compendiums)" options={{ title: 'Compendios' }} />
+          <Tabs.Screen name="compendiums" options={{ title: 'Compendios' }} />
           <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
         </Tabs>
       </YStack>
@@ -55,7 +55,7 @@ export default function TabsLayout() {
     >
       <Tabs.Screen name="(character)" options={{ title: 'Personajes' }} />
       <Tabs.Screen name="(dice)" options={{ title: 'Dados' }} />
-      <Tabs.Screen name="(compendiums)" options={{ title: 'Compendios' }} />
+      <Tabs.Screen name="compendiums" options={{ title: 'Compendios' }} />
       <Tabs.Screen name="(settings)" options={{ title: 'Ajustes' }} />
     </Tabs>
   )

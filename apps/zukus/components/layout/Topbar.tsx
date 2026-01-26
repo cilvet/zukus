@@ -16,7 +16,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Mis personajes', href: '/characters', matchPath: 'characters' },
   { label: 'Dados', href: '/(tabs)/(dice)', matchPath: '(dice)' },
   { label: 'Chat', href: '/chat', matchPath: 'chat' },
-  { label: 'Mis compendios', href: '/(tabs)/(compendiums)', matchPath: '(compendiums)' },
+  { label: 'Mis compendios', href: '/compendiums', matchPath: 'compendiums' },
   { label: 'Ajustes', href: '/(tabs)/(settings)', matchPath: '(settings)' },
 ]
 

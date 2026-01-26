@@ -26,7 +26,7 @@ export function CompendiumsScreenMobile() {
 
   const handleCompendiumPress = async (compendiumId: string) => {
     await selectCompendium(compendiumId);
-    router.push(`/(tabs)/(compendiums)/${compendiumId}`);
+    router.push(`/compendiums/${compendiumId}`);
   };
 
   // Calcular total de entidades por compendio
