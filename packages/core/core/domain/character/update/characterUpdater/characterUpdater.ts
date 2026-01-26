@@ -501,6 +501,15 @@ export class CharacterUpdater implements ICharacterUpdater {
       }
     }
 
+    // Refresh all CGE spell/power slots
+    const cgeIds = Object.keys(calculatedSheet.cge ?? {});
+    for (const cgeId of cgeIds) {
+      const cgeResult = this.refreshSlotsForCGE(cgeId);
+      if (!cgeResult.success) {
+        return { success: false, error: `Failed to refresh CGE slots for ${cgeId}: ${cgeResult.error}` };
+      }
+    }
+
     return { success: true };
   }
 

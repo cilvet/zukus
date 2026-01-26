@@ -597,6 +597,13 @@ function CharacterScreenDesktopContent() {
     }
   }
 
+  const handleRestPress = () => {
+    const result = rest()
+    if (!result.success) {
+      console.warn('Failed to rest:', result.error)
+    }
+  }
+
   const getPanelTitle = (): string => {
     if (!panelInfo) {
       return currentPanel?.title ?? 'Detail'
@@ -689,6 +696,7 @@ function CharacterScreenDesktopContent() {
               race=""
               characterClass={className}
               imageUrl={imageUrl}
+              onRestPress={handleRestPress}
               onFormulaPlaygroundPress={handleFormulaPlaygroundPress}
               onChatPress={handleChatPress}
               onEditPress={handleEditPress}

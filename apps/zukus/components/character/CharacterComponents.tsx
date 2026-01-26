@@ -1,4 +1,5 @@
 import { Pressable, Image } from 'react-native'
+import { FontAwesome6 } from '@expo/vector-icons'
 import { Text, XStack, YStack, Card } from 'tamagui'
 import { ABILITY_INFO, type Ability, type Skill } from './data'
 
@@ -177,6 +178,7 @@ export function CharacterHeader({
   imageUrl,
   onFormulaPlaygroundPress,
   onChatPress,
+  onRestPress,
   onEditPress,
 }: {
   name: string
@@ -186,6 +188,7 @@ export function CharacterHeader({
   imageUrl?: string | null
   onFormulaPlaygroundPress?: () => void
   onChatPress?: () => void
+  onRestPress?: () => void
   onEditPress?: () => void
 }) {
   return (
@@ -229,14 +232,14 @@ export function CharacterHeader({
           <Text fontSize={20} fontWeight="800" color="$color">
             {name}
           </Text>
-          {(onFormulaPlaygroundPress || onChatPress) && (
+          {(onFormulaPlaygroundPress || onChatPress || onRestPress) && (
             <XStack alignItems="center" gap={6}>
-              {onFormulaPlaygroundPress && (
-                <Pressable onPress={onFormulaPlaygroundPress} hitSlop={8}>
+              {onRestPress && (
+                <Pressable onPress={onRestPress} hitSlop={8}>
                   {({ pressed }) => (
                     <YStack
-                      width={32}
-                      height={32}
+                      width={28}
+                      height={28}
                       backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
                       borderWidth={1}
                       borderColor="$borderColor"
@@ -244,7 +247,25 @@ export function CharacterHeader({
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Text fontSize={14} fontWeight="700" color="$color">
+                      <FontAwesome6 name="fire" size={12} color="#f97316" />
+                    </YStack>
+                  )}
+                </Pressable>
+              )}
+              {onFormulaPlaygroundPress && (
+                <Pressable onPress={onFormulaPlaygroundPress} hitSlop={8}>
+                  {({ pressed }) => (
+                    <YStack
+                      width={28}
+                      height={28}
+                      backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
+                      borderWidth={1}
+                      borderColor="$borderColor"
+                      borderRadius={6}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text fontSize={12} fontWeight="700" color="$color">
                         f
                       </Text>
                     </YStack>
@@ -255,8 +276,8 @@ export function CharacterHeader({
                 <Pressable onPress={onChatPress} hitSlop={8}>
                   {({ pressed }) => (
                     <YStack
-                      width={32}
-                      height={32}
+                      width={28}
+                      height={28}
                       backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
                       borderWidth={1}
                       borderColor="$borderColor"
@@ -264,7 +285,7 @@ export function CharacterHeader({
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Text fontSize={12} fontWeight="700" color="$color">
+                      <Text fontSize={10} fontWeight="700" color="$color">
                         AI
                       </Text>
                     </YStack>

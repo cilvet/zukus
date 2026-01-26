@@ -11,6 +11,7 @@ import {
   useCharacterSheet,
   useCharacterImageUrl,
   useVisiblePageStore,
+  useCharacterStore,
 } from '../../ui'
 import { useCharacterSync } from '../../hooks'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -44,6 +45,7 @@ function Header() {
   const imageUrl = useCharacterImageUrl()
   const router = useRouter()
   const { id } = useLocalSearchParams<{ id: string }>()
+  const rest = useCharacterStore((state) => state.rest)
 
   const levelNumber = level?.level ?? 0
   const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
@@ -56,6 +58,13 @@ function Header() {
 
   const handleFormulaPlaygroundPress = () => {
     router.push('/characters/formula-playground')
+  }
+
+  const handleRestPress = () => {
+    const result = rest()
+    if (!result.success) {
+      console.warn('Failed to rest:', result.error)
+    }
   }
 
   const handleLevelPress = () => {
@@ -80,39 +89,39 @@ function Header() {
         )}
       </Pressable>
 
-      {/* Centro: Avatar + Mini caja de fórmulas */}
-      <XStack alignItems="center" gap={8}>
+      {/* Centro: Avatar + Botones */}
+      <XStack alignItems="center" gap={6}>
         {imageUrl ? (
           <Image
             source={{ uri: imageUrl }}
             style={{
-              width: 48,
-              height: 48,
-              borderRadius: 24,
+              width: 44,
+              height: 44,
+              borderRadius: 22,
               backgroundColor: '#333',
             }}
           />
         ) : (
           <YStack
-            width={48}
-            height={48}
-            borderRadius={24}
+            width={44}
+            height={44}
+            borderRadius={22}
             backgroundColor="$uiBackgroundColor"
             borderWidth={2}
             borderColor="$color"
             alignItems="center"
             justifyContent="center"
           >
-            <Text fontSize={16} fontWeight="700" color="$color">
+            <Text fontSize={14} fontWeight="700" color="$color">
               {name.charAt(0)}
             </Text>
           </YStack>
         )}
-        <Pressable onPress={handleFormulaPlaygroundPress} hitSlop={8}>
+        <Pressable onPress={handleRestPress} hitSlop={8}>
           {({ pressed }) => (
             <YStack
-              width={32}
-              height={32}
+              width={28}
+              height={28}
               backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
               borderWidth={1}
               borderColor="$borderColor"
@@ -120,7 +129,23 @@ function Header() {
               alignItems="center"
               justifyContent="center"
             >
-              <Text fontSize={14} fontWeight="700" color="$color">
+              <FontAwesome name="fire" size={12} color="#f97316" />
+            </YStack>
+          )}
+        </Pressable>
+        <Pressable onPress={handleFormulaPlaygroundPress} hitSlop={8}>
+          {({ pressed }) => (
+            <YStack
+              width={28}
+              height={28}
+              backgroundColor={pressed ? '$backgroundHover' : '$uiBackgroundColor'}
+              borderWidth={1}
+              borderColor="$borderColor"
+              borderRadius={6}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text fontSize={12} fontWeight="700" color="$color">
                 f
               </Text>
             </YStack>
