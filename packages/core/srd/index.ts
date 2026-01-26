@@ -5,4 +5,6 @@ export * from "./weaponEnhancements";
 export * from "./classFeatures";
 export * from "./feats";
 export * from "./fighter";
+export * from "./cleric";
+export * from "./druid";
 

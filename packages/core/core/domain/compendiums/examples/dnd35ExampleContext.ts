@@ -35,6 +35,8 @@ import { exampleSpells, allFeats, allBuffs } from './entities';
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
 import { rogueClass, rogueClassFeatures } from '../../../../srd/rogue';
+import { clericClass, clericClassFeatures } from '../../../../srd/cleric';
+import { druidClass, druidClassFeatures } from '../../../../srd/druid';
 
 // System levels from SRD
 import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLevels';
@@ -49,8 +51,8 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
  * Contains:
  * - Spells: 10 example spells
  * - Feats: ~40 fighter bonus feats
- * - Classes: Fighter, Rogue
- * - Class Features: Rogue abilities
+ * - Classes: Fighter, Rogue, Cleric, Druid
+ * - Class Features: Rogue, Cleric, and Druid abilities
  * - Buffs: ~15 classic buff spells
  * - System Levels: D&D 3.5 feat/ability progression
  * - Ability Increases: 6 entities for +1 to each ability
@@ -74,8 +76,8 @@ const dnd35ExampleCompendium: Compendium = {
     spell: exampleSpells,
     feat: allFeats,
     buff: allBuffs,
-    class: [fighterClass, rogueClass],
-    classFeature: rogueClassFeatures,
+    class: [fighterClass, rogueClass, clericClass, druidClass],
+    classFeature: [...rogueClassFeatures, ...clericClassFeatures, ...druidClassFeatures],
     system_levels: [dnd35SystemLevels],
     character_ability_increase: allAbilityIncreases,
   },
@@ -139,6 +141,8 @@ export { exampleSpells, allFeats, allBuffs };
  * Re-export classes for convenience
  */
 export { fighterClass, rogueClass, rogueClassFeatures };
+export { clericClass, clericClassFeatures };
+export { druidClass, druidClassFeatures };
 
 /**
  * Re-export system levels for convenience

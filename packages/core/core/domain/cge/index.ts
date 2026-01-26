@@ -66,3 +66,14 @@ export {
   getUniquePreparedEntities,
   getTotalPreparedCount,
 } from './preparationOperations';
+
+// Slot Operations (Runtime usage)
+export type { SlotUpdateResult, SlotWarning } from './slotOperations';
+
+export {
+  useSlot,
+  refreshSlots,
+  getSlotCurrentValue,
+  getAllSlotCurrentValues,
+  hasUsedSlots,
+} from './slotOperations';

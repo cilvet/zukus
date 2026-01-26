@@ -334,8 +334,21 @@ function calculateSlots(
       const customVarKey = valueIndexKeys.CUSTOM_VARIABLE(varId);
       const max = (substitutionIndex[customVarKey] as number) ?? baseMax;
 
-      // Obtener valor actual del estado persistido, o usar max como default
-      const current = cgeState?.slotCurrentValues?.[String(level)] ?? max;
+      // Obtener valor actual del estado persistido
+      // Si no hay valor, current = max (slots sin usar)
+      // Si hay valor negativo, significa "gastados desde max" (ej: -2 = max - 2)
+      // Si hay valor positivo, se usa directamente (para compatibilidad)
+      const storedValue = cgeState?.slotCurrentValues?.[String(level)];
+      let current: number;
+      if (storedValue === undefined) {
+        current = max;
+      } else if (storedValue <= 0) {
+        // Valor negativo o cero: interpretar como delta desde max
+        current = max + storedValue;
+      } else {
+        // Valor positivo: usar directamente (compatibilidad con valores absolutos)
+        current = storedValue;
+      }
 
       const calculatedSlot: CalculatedSlot = {
         level,
