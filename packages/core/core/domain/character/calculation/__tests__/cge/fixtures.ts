@@ -381,3 +381,113 @@ export function createBaseCleric(level: number = 1) {
     })
     .withClassLevels(cleric, level);
 }
+
+// ============================================================================
+// TABLAS DE WARLOCK (At-will)
+// ============================================================================
+
+// Invocaciones conocidas por nivel de clase (total, no por nivel de entidad)
+// En D&D 3.5, el Warlock tiene un numero total de invocaciones conocidas
+export const WARLOCK_KNOWN_TABLE: LevelTable = {
+  1: [1],  // 1 invocacion total
+  2: [2],
+  3: [2],
+  4: [3],
+  5: [3],
+  6: [4],  // Gana acceso a Lesser invocations
+};
+
+// ============================================================================
+// CGE CONFIG DE WARLOCK
+// ============================================================================
+
+export const warlockCGEConfig: CGEConfig = {
+  id: 'warlock-invocations',
+  classId: 'warlock',
+  entityType: 'invocation',
+  levelPath: '@entity.level', // Invocaciones tienen nivel fijo (Least, Lesser, etc)
+
+  // TODO: accessFilter para limitar por grado de invocacion
+  // (Least a nivel 1-5, Lesser a nivel 6+, Greater a nivel 11+, Dark a nivel 16+)
+
+  known: {
+    type: 'LIMITED_TOTAL',
+    table: WARLOCK_KNOWN_TABLE,
+  },
+
+  tracks: [
+    {
+      id: 'base',
+      // Recurso NONE: las invocaciones son at-will
+      resource: { type: 'NONE' },
+      // Sin preparacion: usa cualquier invocacion conocida
+      preparation: { type: 'NONE' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'warlock.invocation',
+    genericPrefix: 'invocation',
+    casterLevelVar: 'castingClassLevel.warlock',
+  },
+
+  labels: {
+    known: 'known_invocations',
+    action: 'invoke',
+  },
+};
+
+// ============================================================================
+// SPECIAL CHANGE CGE_DEFINITION (Warlock)
+// ============================================================================
+
+export const warlockCGEDefinition: CGEDefinitionChange = {
+  type: 'CGE_DEFINITION',
+  config: warlockCGEConfig,
+};
+
+// ============================================================================
+// CLASE WARLOCK SIMPLIFICADA PARA TESTS
+// ============================================================================
+
+export const warlock: CharacterClass = {
+  name: "Warlock",
+  uniqueId: "warlock",
+  hitDie: 6,
+  baseAttackBonusProgression: BabType.MEDIUM,
+  baseSavesProgression: {
+    fortitude: SaveType.POOR,
+    reflex: SaveType.POOR,
+    will: SaveType.GOOD,
+  },
+  classFeatures: [],
+  levels: [
+    {
+      level: 1,
+      classFeatures: [
+        {
+          name: 'Invocations',
+          description: 'At-will supernatural abilities',
+          featureType: featureTypes.CLASS_FEATURE,
+          uniqueId: 'warlock-invocations',
+          changes: [],
+          specialChanges: [warlockCGEDefinition],
+        },
+      ],
+    },
+  ],
+  spellCasting: false, // Warlock no es caster tradicional
+  spellCastingAbilityUniqueId: "charisma",
+  allSpellsKnown: false,
+};
+
+// ============================================================================
+// BUILDER HELPERS (Warlock)
+// ============================================================================
+
+export function createBaseWarlock(level: number = 1) {
+  return buildCharacter()
+    .withName("Test Warlock")
+    .withBaseAbilityScores(standardAbilityScores)
+    .withClassLevels(warlock, level);
+}
