@@ -6,7 +6,11 @@
  */
 
 // Usar el sistema de filtros real de levels/filtering
+import type { EntityFilter as EntityFilterType } from '../levels/filtering/types';
 export type { EntityFilter } from '../levels/filtering/types';
+
+// Alias for internal use
+type EntityFilter = EntityFilterType;
 
 // ============================================================================
 // TIPOS BASE

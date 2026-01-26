@@ -1,12 +1,10 @@
 import { Image, Pressable, View, StyleSheet } from 'react-native'
-import { useRouter } from 'expo-router'
-import { Button, ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
+import { ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList } from '../../hooks'
 import { useTheme } from '../../ui'
 import { SafeAreaBottomSpacer } from '../../components/layout'
 
 export function CharacterListScreen() {
-  const router = useRouter()
   const { themeColors } = useTheme()
   const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
 

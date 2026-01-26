@@ -620,3 +620,135 @@ export function createBasePsion(level: number = 1) {
     })
     .withClassLevels(psion, level);
 }
+
+// ============================================================================
+// TABLAS DE WARBLADE (Tome of Battle - LIST preparation)
+// ============================================================================
+
+// Maniobras conocidas por nivel de clase (total, no por nivel de maniobra)
+export const WARBLADE_KNOWN_TABLE: LevelTable = {
+  1: [3],  // 3 maniobras conocidas totales
+  2: [4],
+  3: [5],
+  4: [5],
+  5: [6],
+  6: [6],
+};
+
+// Maniobras readied (preparadas) por nivel de clase
+export const WARBLADE_READIED_TABLE: LevelTable = {
+  1: [3],  // Puede readiar todas sus conocidas a nivel 1
+  2: [3],
+  3: [3],
+  4: [4],
+  5: [4],
+  6: [4],
+};
+
+// ============================================================================
+// CGE CONFIG DE WARBLADE
+// ============================================================================
+
+export const warbladeCGEConfig: CGEConfig = {
+  id: 'warblade-maneuvers',
+  classId: 'warblade',
+  entityType: 'maneuver',
+  levelPath: '@entity.level', // Maniobras tienen nivel fijo
+
+  // TODO: accessFilter para disciplinas del Warblade
+  // (Iron Heart, Stone Dragon, Tiger Claw, White Raven, Diamond Mind)
+
+  known: {
+    type: 'LIMITED_TOTAL',
+    table: WARBLADE_KNOWN_TABLE,
+  },
+
+  tracks: [
+    {
+      id: 'base',
+      // Recurso NONE: no hay slots que gastar
+      // El sistema de readied/expended es via preparacion LIST
+      resource: { type: 'NONE' },
+
+      // Preparacion LIST: readied maneuvers
+      preparation: {
+        type: 'LIST',
+        structure: 'GLOBAL', // Lista unica, no separada por nivel
+        maxFormula: { expression: '@warblade.readiedManeuvers' }, // Variable que setea la clase
+        consumeOnUse: true, // Cada uso expende la maniobra
+        recovery: 'encounter', // Se recuperan al final del encuentro (o con swift action)
+      },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'warblade.maneuver',
+    genericPrefix: 'maneuver',
+    casterLevelVar: 'initiatorLevel.warblade',
+  },
+
+  labels: {
+    known: 'known_maneuvers',
+    prepared: 'readied_maneuvers',
+    action: 'initiate',
+  },
+};
+
+// ============================================================================
+// SPECIAL CHANGE CGE_DEFINITION (Warblade)
+// ============================================================================
+
+export const warbladeCGEDefinition: CGEDefinitionChange = {
+  type: 'CGE_DEFINITION',
+  config: warbladeCGEConfig,
+};
+
+// ============================================================================
+// CLASE WARBLADE SIMPLIFICADA PARA TESTS
+// ============================================================================
+
+export const warblade: CharacterClass = {
+  name: "Warblade",
+  uniqueId: "warblade",
+  hitDie: 12,
+  baseAttackBonusProgression: BabType.GOOD,
+  baseSavesProgression: {
+    fortitude: SaveType.GOOD,
+    reflex: SaveType.POOR,
+    will: SaveType.POOR,
+  },
+  classFeatures: [],
+  levels: [
+    {
+      level: 1,
+      classFeatures: [
+        {
+          name: 'Martial Maneuvers',
+          description: 'Martial maneuvers from Tome of Battle disciplines',
+          featureType: featureTypes.CLASS_FEATURE,
+          uniqueId: 'warblade-maneuvers',
+          changes: [],
+          specialChanges: [warbladeCGEDefinition],
+        },
+      ],
+    },
+  ],
+  spellCasting: false,
+  spellCastingAbilityUniqueId: "intelligence", // Para prerequisitos
+  allSpellsKnown: false,
+};
+
+// ============================================================================
+// BUILDER HELPERS (Warblade)
+// ============================================================================
+
+export function createBaseWarblade(level: number = 1) {
+  return buildCharacter()
+    .withName("Test Warblade")
+    .withBaseAbilityScores({
+      ...standardAbilityScores,
+      strength: 16, // Warblade es martial
+      intelligence: 14, // Para recovery y prerequisitos
+    })
+    .withClassLevels(warblade, level);
+}

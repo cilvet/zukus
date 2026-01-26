@@ -5,6 +5,9 @@ import { type DetailType, getDetailTitle, isValidDetailType } from './detailRegi
 
 const DESKTOP_BREAKPOINT = 768
 
+// Global timestamp for measuring navigation time
+export const NAVIGATION_PRESS_TIME = { value: 0, type: '' }
+
 /**
  * Hook que unifica la navegación a detalles entre plataformas.
  *

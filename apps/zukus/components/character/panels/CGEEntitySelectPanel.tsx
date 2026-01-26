@@ -1,8 +1,9 @@
-import { View, Pressable, TextInput, StyleSheet } from 'react-native'
+import { View, Pressable, TextInput, StyleSheet, Platform } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { useState } from 'react'
+import { useRouter } from 'expo-router'
 import { usePrimaryCGE, useTheme, useCharacterStore, useCompendiumContext } from '../../../ui'
 import { usePanelNavigation } from '../../../hooks'
 import type { StandardEntity } from '@zukus/core'
@@ -88,7 +89,8 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const primaryCGE = usePrimaryCGE()
   const compendium = useCompendiumContext()
   const prepareEntityForCGE = useCharacterStore((state) => state.prepareEntityForCGE)
-  const { goBack } = usePanelNavigation('character')
+  const panelNav = usePanelNavigation('character')
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
 
   // Parse selectionId: "level:slotIndex:cgeId"
@@ -124,10 +126,16 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
   const handleSelectEntity = (entityId: string) => {
     const result = prepareEntityForCGE(cgeId, level, slotIndex, entityId)
-    if (result.success) {
-      goBack()
-    } else {
+    if (!result.success) {
       console.warn('Failed to prepare entity:', result.error)
+      return
+    }
+
+    // Mobile nativo: usar router.back(), Web: usar panel navigation
+    if (Platform.OS !== 'web') {
+      router.back()
+    } else {
+      panelNav.goBack()
     }
   }
 
