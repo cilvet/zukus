@@ -491,3 +491,132 @@ export function createBaseWarlock(level: number = 1) {
     .withBaseAbilityScores(standardAbilityScores)
     .withClassLevels(warlock, level);
 }
+
+// ============================================================================
+// TABLAS DE PSION (Power Points)
+// ============================================================================
+
+// Power Points base por nivel de clase (simplificado para tests)
+// En D&D 3.5: 2, 6, 11, 17, 25, 35, 46, 58, 72, 88...
+export const PSION_PP_BY_LEVEL: Record<number, number> = {
+  1: 2,
+  2: 6,
+  3: 11,
+  4: 17,
+  5: 25,
+  6: 35,
+};
+
+// Poderes conocidos por nivel de poder (similar a Sorcerer)
+export const PSION_KNOWN_TABLE: LevelTable = {
+  1: [3, 1, 0, 0, 0, 0, 0, 0, 0, 0], // 3 de nivel 0-1, 1 de nivel 1
+  2: [5, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+  3: [5, 2, 1, 0, 0, 0, 0, 0, 0, 0],
+  4: [6, 3, 2, 0, 0, 0, 0, 0, 0, 0],
+  5: [6, 3, 2, 1, 0, 0, 0, 0, 0, 0],
+};
+
+// ============================================================================
+// CGE CONFIG DE PSION
+// ============================================================================
+
+export const psionCGEConfig: CGEConfig = {
+  id: 'psion-powers',
+  classId: 'psion',
+  entityType: 'power',
+  levelPath: '@entity.level', // Poderes psionicos tienen nivel fijo
+
+  // TODO: accessFilter para disciplinas
+
+  known: {
+    type: 'LIMITED_PER_ENTITY_LEVEL',
+    table: PSION_KNOWN_TABLE,
+  },
+
+  tracks: [
+    {
+      id: 'base',
+      // Recurso POOL: power points
+      resource: {
+        type: 'POOL',
+        // La formula referencia la variable de PP base + bonus por atributo
+        maxFormula: { expression: '@psion.powerPoints.base + @ability.intelligence.modifier * @class.psion.level' },
+        costPath: '@entity.level', // Coste = nivel del poder
+        refresh: 'daily',
+      },
+      // Sin preparacion: puede manifestar cualquier poder conocido
+      preparation: { type: 'NONE' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'psion.power',
+    genericPrefix: 'power',
+    casterLevelVar: 'manifesterLevel.psion',
+  },
+
+  labels: {
+    known: 'known_powers',
+    pool: 'power_points',
+    action: 'manifest',
+  },
+};
+
+// ============================================================================
+// SPECIAL CHANGE CGE_DEFINITION (Psion)
+// ============================================================================
+
+export const psionCGEDefinition: CGEDefinitionChange = {
+  type: 'CGE_DEFINITION',
+  config: psionCGEConfig,
+};
+
+// ============================================================================
+// CLASE PSION SIMPLIFICADA PARA TESTS
+// ============================================================================
+
+export const psion: CharacterClass = {
+  name: "Psion",
+  uniqueId: "psion",
+  hitDie: 4,
+  baseAttackBonusProgression: BabType.POOR,
+  baseSavesProgression: {
+    fortitude: SaveType.POOR,
+    reflex: SaveType.POOR,
+    will: SaveType.GOOD,
+  },
+  classFeatures: [],
+  levels: [
+    {
+      level: 1,
+      classFeatures: [
+        {
+          name: 'Psionics',
+          description: 'Psionic power manifestation using power points',
+          featureType: featureTypes.CLASS_FEATURE,
+          uniqueId: 'psion-psionics',
+          changes: [],
+          specialChanges: [psionCGEDefinition],
+        },
+      ],
+    },
+  ],
+  spellCasting: false, // Psion no es caster arcano/divino
+  spellCastingAbilityUniqueId: "intelligence",
+  allSpellsKnown: false,
+};
+
+// ============================================================================
+// BUILDER HELPERS (Psion)
+// ============================================================================
+
+export function createBasePsion(level: number = 1) {
+  return buildCharacter()
+    .withName("Test Psion")
+    .withBaseAbilityScores({
+      ...standardAbilityScores,
+      intelligence: 16, // +3 modifier para bonus PP
+      charisma: 10,
+    })
+    .withClassLevels(psion, level);
+}
