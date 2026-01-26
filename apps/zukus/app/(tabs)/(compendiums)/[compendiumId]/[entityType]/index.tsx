@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocalSearchParams } from 'expo-router'
-import { EntityListScreen } from '../../../../../screens/compendiums'
+import { useIsDesktop } from '../../../../../navigation'
+import { EntityListScreen, CompendiumsScreenDesktop } from '../../../../../screens/compendiums'
 import { useCompendiumBrowserStore } from '../../../../../ui/stores'
 
 export default function EntityListRoute() {
@@ -8,6 +9,7 @@ export default function EntityListRoute() {
     compendiumId: string
     entityType: string
   }>()
+  const isDesktop = useIsDesktop()
 
   const selectCompendium = useCompendiumBrowserStore((s) => s.selectCompendium)
   const selectEntityType = useCompendiumBrowserStore((s) => s.selectEntityType)
@@ -33,5 +35,7 @@ export default function EntityListRoute() {
     }
   }, [compendiumId, entityType, selectCompendium, selectEntityType])
 
-  return <EntityListScreen />
+  // Desktop: layout unificado de 3 columnas
+  // Mobile: pantalla de lista de entidades
+  return isDesktop ? <CompendiumsScreenDesktop /> : <EntityListScreen />
 }
