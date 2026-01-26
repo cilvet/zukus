@@ -1,4 +1,4 @@
-import { View, useWindowDimensions } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { YStack, XStack, Text, Spinner } from 'tamagui'
 import { FlashList } from '@shopify/flash-list'
 import type { StandardEntity } from '@zukus/core'
@@ -11,14 +11,10 @@ import {
   LayoutToggle,
   CompendiumEntityDetail,
 } from '../../components/compendiums'
-import { SidePanel, SidePanelContainer } from '../../components/layout'
 import { useTheme } from '../../ui'
-import { usePanelNavigation } from '../../hooks'
 import {
   useCurrentCompendiumId,
-  useCurrentCompendiumName,
   useCurrentEntityType,
-  useCurrentEntityTypeName,
   useEntityTypes,
   useEntities,
   useSearchQuery,
@@ -26,23 +22,22 @@ import {
   useIsLoading,
   useIsLoadingEntities,
   useCompendiumError,
+  useSelectedEntityId,
   useCompendiumActions,
 } from '../../ui/stores'
 import { SearchBar } from './SearchBar'
 
 /**
  * Pantalla principal de compendios para desktop.
- * Layout de 3 columnas: Sidebar | Content | SidePanel
+ * Layout de 2 columnas: Sidebar | Content
+ * El contenido cambia segun la navegacion (tipos, entidades, o detalle)
  */
 export function CompendiumsScreenDesktop() {
   const { themeColors, themeInfo } = useTheme()
-  const { height } = useWindowDimensions()
 
   // State
   const compendiumId = useCurrentCompendiumId()
-  const compendiumName = useCurrentCompendiumName()
   const entityType = useCurrentEntityType()
-  const entityTypeName = useCurrentEntityTypeName()
   const entityTypes = useEntityTypes()
   const entities = useEntities()
   const searchQuery = useSearchQuery()
@@ -50,15 +45,10 @@ export function CompendiumsScreenDesktop() {
   const isLoading = useIsLoading()
   const isLoadingEntities = useIsLoadingEntities()
   const error = useCompendiumError()
+  const selectedEntityId = useSelectedEntityId()
 
   // Actions
-  const { selectEntityType, setSearchQuery, toggleViewMode } = useCompendiumActions()
-
-  // Panel navigation
-  const { currentPanel, isPanelOpen, closePanel, openPanel } = usePanelNavigation('compendiums')
-
-  // Extract entityId from panel path (format: "compendiumEntity/entityId")
-  const panelEntityId = currentPanel?.path?.split('/')[1] || null
+  const { selectEntityType, selectEntity, setSearchQuery, toggleViewMode } = useCompendiumActions()
 
   // Filter entities by search
   const filteredEntities = searchQuery.trim()
@@ -76,75 +66,71 @@ export function CompendiumsScreenDesktop() {
   }
 
   const handleEntityPress = (entity: StandardEntity) => {
-    openPanel(`compendiumEntity/${entity.id}`, entity.name)
+    selectEntity(entity.id, entity.name)
   }
 
   const primaryColor = themeInfo.colors.primary
-  const contentHeight = height - 60 // Account for topbar
+
+  // Determinar que contenido mostrar
+  const showEntityDetail = !!selectedEntityId
+  const showEntities = !!entityType && !showEntityDetail
+  const showEntityTypes = !!compendiumId && !entityType
+  const showWelcome = !compendiumId
 
   return (
-    <SidePanelContainer>
-      <XStack flex={1}>
-        {/* Left Sidebar */}
-        <CompendiumSidebar />
+    <XStack flex={1}>
+      {/* Left Sidebar */}
+      <CompendiumSidebar />
 
-        {/* Main Content Area */}
-        <YStack flex={1} backgroundColor={themeColors.background}>
-          {/* Breadcrumbs */}
-          <XStack
-            paddingHorizontal={24}
-            paddingVertical={16}
-            borderBottomWidth={1}
-            borderBottomColor="$borderColor"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <CompendiumBreadcrumbs />
-
-            {/* View toggle - only when showing entities */}
-            {entityType && (
-              <LayoutToggle viewMode={viewMode} onToggle={toggleViewMode} />
-            )}
-          </XStack>
-
-          {/* Content */}
-          <View style={{ flex: 1 }}>
-            {isLoading ? (
-              <LoadingState />
-            ) : error ? (
-              <ErrorState message={error} />
-            ) : !compendiumId ? (
-              <EmptyState message="Selecciona un compendio del panel izquierdo para explorar su contenido" />
-            ) : !entityType ? (
-              <EntityTypesContent
-                entityTypes={entityTypes}
-                onEntityTypePress={handleEntityTypePress}
-              />
-            ) : isLoadingEntities ? (
-              <LoadingState />
-            ) : (
-              <EntitiesContent
-                entities={filteredEntities}
-                viewMode={viewMode}
-                searchQuery={searchQuery}
-                onSearchChange={setSearchQuery}
-                onEntityPress={handleEntityPress}
-                primaryColor={primaryColor}
-              />
-            )}
-          </View>
-        </YStack>
-
-        {/* Right SidePanel */}
-        <SidePanel
-          isOpen={isPanelOpen && !!panelEntityId}
-          title={currentPanel?.title || 'Detalle'}
-          onClose={closePanel}
+      {/* Main Content Area */}
+      <YStack flex={1} backgroundColor={themeColors.background}>
+        {/* Breadcrumbs */}
+        <XStack
+          paddingHorizontal={32}
+          paddingVertical={16}
+          borderBottomWidth={1}
+          borderBottomColor="$borderColor"
+          alignItems="center"
+          justifyContent="space-between"
         >
-          {panelEntityId && <CompendiumEntityDetail entityId={panelEntityId} />}
-        </SidePanel>
-      </XStack>
-    </SidePanelContainer>
+          <CompendiumBreadcrumbs />
+
+          {/* View toggle - only when showing entities list */}
+          {showEntities && (
+            <LayoutToggle viewMode={viewMode} onToggle={toggleViewMode} />
+          )}
+        </XStack>
+
+        {/* Content */}
+        <View style={{ flex: 1 }}>
+          {isLoading ? (
+            <LoadingState />
+          ) : error ? (
+            <ErrorState message={error} />
+          ) : showWelcome ? (
+            <EmptyState message="Selecciona un compendio del panel izquierdo para explorar su contenido" />
+          ) : showEntityTypes ? (
+            <EntityTypesContent
+              entityTypes={entityTypes}
+              onEntityTypePress={handleEntityTypePress}
+            />
+          ) : showEntityDetail ? (
+            <EntityDetailContent entityId={selectedEntityId} />
+          ) : isLoadingEntities ? (
+            <LoadingState />
+          ) : (
+            <EntitiesContent
+              entities={filteredEntities}
+              viewMode={viewMode}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onEntityPress={handleEntityPress}
+              primaryColor={primaryColor}
+            />
+          )}
+        </View>
+      </YStack>
+    </XStack>
   )
 }
 
@@ -196,24 +182,29 @@ function EntityTypesContent({ entityTypes, onEntityTypePress }: EntityTypesConte
   }
 
   return (
-    <YStack flex={1} padding={24} gap={16}>
-      <Text fontSize={14} color="$placeholderColor">
-        Selecciona un tipo de entidad para ver su contenido
-      </Text>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ padding: 32, paddingHorizontal: 48 }}
+    >
+      <YStack gap={16} maxWidth={600}>
+        <Text fontSize={14} color="$placeholderColor">
+          Selecciona un tipo de entidad para ver su contenido
+        </Text>
 
-      <YStack gap={12} maxWidth={600}>
-        {entityTypes.map((entityType) => (
-          <EntityTypeCard
-            key={entityType.typeName}
-            typeName={entityType.typeName}
-            displayName={entityType.displayName}
-            count={entityType.count}
-            description={entityType.description}
-            onPress={() => onEntityTypePress(entityType.typeName)}
-          />
-        ))}
+        <YStack gap={12}>
+          {entityTypes.map((entityType) => (
+            <EntityTypeCard
+              key={entityType.typeName}
+              typeName={entityType.typeName}
+              displayName={entityType.displayName}
+              count={entityType.count}
+              description={entityType.description}
+              onPress={() => onEntityTypePress(entityType.typeName)}
+            />
+          ))}
+        </YStack>
       </YStack>
-    </YStack>
+    </ScrollView>
   )
 }
 
@@ -236,26 +227,31 @@ function EntitiesContent({
 }: EntitiesContentProps) {
   if (viewMode === 'grid') {
     return (
-      <YStack flex={1} padding={24} gap={16}>
-        <SearchBar value={searchQuery} onChangeText={onSearchChange} />
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 32, paddingHorizontal: 48 }}
+      >
+        <YStack gap={24}>
+          <SearchBar value={searchQuery} onChangeText={onSearchChange} />
 
-        {entities.length === 0 ? (
-          <EmptyState
-            message={searchQuery ? 'No se encontraron resultados' : 'No hay entidades'}
-          />
-        ) : (
-          <XStack flexWrap="wrap" gap={16}>
-            {entities.map((entity) => (
-              <EntityGridCard
-                key={entity.id}
-                entity={entity}
-                onPress={() => onEntityPress(entity)}
-                primaryColor={primaryColor}
-              />
-            ))}
-          </XStack>
-        )}
-      </YStack>
+          {entities.length === 0 ? (
+            <EmptyState
+              message={searchQuery ? 'No se encontraron resultados' : 'No hay entidades'}
+            />
+          ) : (
+            <XStack flexWrap="wrap" gap={16}>
+              {entities.map((entity) => (
+                <EntityGridCard
+                  key={entity.id}
+                  entity={entity}
+                  onPress={() => onEntityPress(entity)}
+                  primaryColor={primaryColor}
+                />
+              ))}
+            </XStack>
+          )}
+        </YStack>
+      </ScrollView>
     )
   }
 
@@ -265,15 +261,17 @@ function EntitiesContent({
       <FlashList
         data={entities}
         renderItem={({ item }) => (
-          <EntityListItem
-            entity={item}
-            onPress={() => onEntityPress(item)}
-            primaryColor={primaryColor}
-          />
+          <View style={{ paddingHorizontal: 32 }}>
+            <EntityListItem
+              entity={item}
+              onPress={() => onEntityPress(item)}
+              primaryColor={primaryColor}
+            />
+          </View>
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
-          <YStack padding={24} paddingBottom={16}>
+          <YStack padding={32} paddingBottom={16}>
             <SearchBar value={searchQuery} onChangeText={onSearchChange} />
           </YStack>
         }
@@ -284,5 +282,22 @@ function EntitiesContent({
         }
       />
     </View>
+  )
+}
+
+type EntityDetailContentProps = {
+  entityId: string
+}
+
+function EntityDetailContent({ entityId }: EntityDetailContentProps) {
+  return (
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ padding: 32, paddingHorizontal: 48 }}
+    >
+      <YStack maxWidth={700}>
+        <CompendiumEntityDetail entityId={entityId} />
+      </YStack>
+    </ScrollView>
   )
 }

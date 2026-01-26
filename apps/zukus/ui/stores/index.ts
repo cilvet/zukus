@@ -55,6 +55,8 @@ export {
   useCurrentEntityTypeName,
   useEntities,
   useEntitySchema,
+  useSelectedEntityId,
+  useSelectedEntityName,
   useSearchQuery,
   useActiveFilters,
   useViewMode,

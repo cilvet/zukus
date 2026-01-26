@@ -28,6 +28,10 @@ type CompendiumBrowserState = {
   entities: StandardEntity[];
   schema: EntitySchemaDefinition | null;
 
+  // Entidad seleccionada (para vista de detalle)
+  selectedEntityId: string | null;
+  selectedEntityName: string | null;
+
   // Filtros
   searchQuery: string;
   activeFilters: FilterCriteria;
@@ -54,6 +58,10 @@ type CompendiumBrowserActions = {
   selectEntityType: (entityType: string) => Promise<void>;
   loadEntities: () => Promise<void>;
 
+  // Seleccion de entidad
+  selectEntity: (entityId: string, entityName: string) => void;
+  clearSelectedEntity: () => void;
+
   // Filtrado
   setSearchQuery: (query: string) => void;
   setFilter: (field: string, value: unknown) => void;
@@ -66,6 +74,7 @@ type CompendiumBrowserActions = {
   // Navegacion
   goBackToCompendiums: () => void;
   goBackToEntityTypes: () => void;
+  goBackToEntities: () => void;
 
   // Reset
   reset: () => void;
@@ -82,6 +91,8 @@ const initialState: CompendiumBrowserState = {
   currentEntityTypeName: null,
   entities: [],
   schema: null,
+  selectedEntityId: null,
+  selectedEntityName: null,
   searchQuery: '',
   activeFilters: {},
   viewMode: 'list',
@@ -154,6 +165,8 @@ export const useCompendiumBrowserStore = create<CompendiumBrowserStore>((set, ge
         currentEntityTypeName: typeInfo?.displayName || entityType,
         entities: result.entities,
         schema,
+        selectedEntityId: null,
+        selectedEntityName: null,
         searchQuery: '',
         activeFilters: {},
         isLoadingEntities: false,
@@ -164,6 +177,14 @@ export const useCompendiumBrowserStore = create<CompendiumBrowserStore>((set, ge
         isLoadingEntities: false,
       });
     }
+  },
+
+  selectEntity: (entityId: string, entityName: string) => {
+    set({ selectedEntityId: entityId, selectedEntityName: entityName });
+  },
+
+  clearSelectedEntity: () => {
+    set({ selectedEntityId: null, selectedEntityName: null });
   },
 
   loadEntities: async () => {
@@ -219,6 +240,8 @@ export const useCompendiumBrowserStore = create<CompendiumBrowserStore>((set, ge
       currentEntityTypeName: null,
       entities: [],
       schema: null,
+      selectedEntityId: null,
+      selectedEntityName: null,
       searchQuery: '',
       activeFilters: {},
     });
@@ -230,8 +253,17 @@ export const useCompendiumBrowserStore = create<CompendiumBrowserStore>((set, ge
       currentEntityTypeName: null,
       entities: [],
       schema: null,
+      selectedEntityId: null,
+      selectedEntityName: null,
       searchQuery: '',
       activeFilters: {},
+    });
+  },
+
+  goBackToEntities: () => {
+    set({
+      selectedEntityId: null,
+      selectedEntityName: null,
     });
   },
 
@@ -252,6 +284,8 @@ export const useCurrentEntityType = () => useCompendiumBrowserStore((s) => s.cur
 export const useCurrentEntityTypeName = () => useCompendiumBrowserStore((s) => s.currentEntityTypeName);
 export const useEntities = () => useCompendiumBrowserStore((s) => s.entities);
 export const useEntitySchema = () => useCompendiumBrowserStore((s) => s.schema);
+export const useSelectedEntityId = () => useCompendiumBrowserStore((s) => s.selectedEntityId);
+export const useSelectedEntityName = () => useCompendiumBrowserStore((s) => s.selectedEntityName);
 export const useSearchQuery = () => useCompendiumBrowserStore((s) => s.searchQuery);
 export const useActiveFilters = () => useCompendiumBrowserStore((s) => s.activeFilters);
 export const useViewMode = () => useCompendiumBrowserStore((s) => s.viewMode);
@@ -270,6 +304,8 @@ export const useCompendiumActions = () =>
       selectCompendium: s.selectCompendium,
       selectEntityType: s.selectEntityType,
       loadEntities: s.loadEntities,
+      selectEntity: s.selectEntity,
+      clearSelectedEntity: s.clearSelectedEntity,
       setSearchQuery: s.setSearchQuery,
       setFilter: s.setFilter,
       clearFilters: s.clearFilters,
@@ -277,6 +313,7 @@ export const useCompendiumActions = () =>
       toggleViewMode: s.toggleViewMode,
       goBackToCompendiums: s.goBackToCompendiums,
       goBackToEntityTypes: s.goBackToEntityTypes,
+      goBackToEntities: s.goBackToEntities,
       reset: s.reset,
     }))
   );
