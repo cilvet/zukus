@@ -1,0 +1,75 @@
+# Headers y Topbar en Desktop Web
+
+## El Problema
+
+En desktop web, el Topbar ya proporciona la navegacion principal. Si los layouts internos (Stack) tambien muestran sus headers, aparecen duplicados.
+
+## La Solucion
+
+### Rutas DENTRO de (tabs)
+
+Las rutas dentro de `app/(tabs)/` heredan el Topbar del `(tabs)/_layout.tsx`. Los Stacks internos deben ocultar su header:
+
+```typescript
+// app/(tabs)/compendiums/_layout.tsx
+const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+
+return (
+  <Stack
+    screenOptions={{
+      // CRITICO: Ocultar header en desktop
+      headerShown: !isWebDesktop,
+      // ... resto de opciones
+    }}
+  >
+    {/* screens */}
+  </Stack>
+)
+```
+
+### Rutas FUERA de (tabs)
+
+Las rutas fuera de (tabs) (como `/characters`) necesitan agregar su propio Topbar en desktop:
+
+```typescript
+// app/characters/_layout.tsx
+const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+
+const stackContent = (
+  <Stack screenOptions={{ headerShown: !isWebDesktop }}>
+    {/* screens */}
+  </Stack>
+)
+
+if (isWebDesktop) {
+  return (
+    <YStack flex={1}>
+      <Topbar />
+      {stackContent}
+    </YStack>
+  )
+}
+
+return stackContent
+```
+
+## Checklist para Nuevas Rutas
+
+1. [ ] Determinar si la ruta esta dentro o fuera de (tabs)
+2. [ ] Si dentro: Solo poner `headerShown: !isWebDesktop`
+3. [ ] Si fuera: Agregar Topbar wrapper en desktop
+4. [ ] Verificar que DESKTOP_BREAKPOINT = 768
+5. [ ] Probar en desktop y mobile
+
+## Constante Compartida
+
+```typescript
+const DESKTOP_BREAKPOINT = 768
+const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
+```
+
+## Archivos de Referencia
+
+- `app/(tabs)/_layout.tsx` - Topbar para rutas dentro de tabs
+- `app/(tabs)/compendiums/_layout.tsx` - Ejemplo dentro de tabs
+- `app/characters/_layout.tsx` - Ejemplo fuera de tabs
