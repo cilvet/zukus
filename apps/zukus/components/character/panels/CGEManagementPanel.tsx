@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
-import { usePrimaryCGE, useCharacterStore, useCompendiumContext } from '../../../ui'
+import { usePrimaryCGE, useCharacterStore, useCompendiumContext, EntityImage } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import type { CalculatedSlot, CalculatedCGE } from '@zukus/core'
 
@@ -147,7 +147,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                 const displayName = entity?.name ?? prep.entityId
                   .replace(/-/g, ' ')
                   .replace(/_/g, ' ')
-                  .replace(/\b\w/g, (l) => l.toUpperCase())
+                  .replace(/\b\w/g, (l: string) => l.toUpperCase())
                 // Only hide border on last prepared if there are no empty slots after
                 const isLastItem = index === levelPreps.length - 1 && !hasEmptySlots
 
@@ -161,19 +161,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                     borderBottomWidth={isLastItem ? 0 : 1}
                     borderBottomColor="$borderColor"
                   >
-                    {/* Image placeholder */}
-                    <YStack
-                      width={36}
-                      height={36}
-                      borderRadius={6}
-                      backgroundColor="$backgroundHover"
-                      borderWidth={1}
-                      borderColor="$borderColor"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Text fontSize={10} color="$placeholderColor">IMG</Text>
-                    </YStack>
+                    <EntityImage image={entity?.image} fallbackText={displayName} />
 
                     <Text fontSize={14} color="$color" flex={1}>
                       {displayName}
@@ -213,8 +201,8 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                       >
                         {/* Empty image placeholder */}
                         <YStack
-                          width={36}
-                          height={36}
+                          width={40}
+                          height={40}
                           borderRadius={6}
                           borderWidth={1}
                           borderColor="$borderColor"
@@ -222,7 +210,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                           alignItems="center"
                           justifyContent="center"
                         >
-                          <Text fontSize={14} color="$placeholderColor">+</Text>
+                          <Text fontSize={16} color="$placeholderColor">+</Text>
                         </YStack>
 
                         <Text fontSize={14} color="$placeholderColor" flex={1}>

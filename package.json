@@ -17,6 +17,7 @@
     "deploy:server": "fly deploy -a zukus-server -c apps/server/fly.toml"
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^2.93.2",
     "turbo": "^2.3.0",
     "typescript": "^5.0.0"
   },

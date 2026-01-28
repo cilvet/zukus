@@ -61,3 +61,10 @@ export {
   type UseProviderSelectionProps,
   type UseProviderSelectionReturn,
 } from './EntityProvider'
+export {
+  ClassLevelFilter,
+  DEFAULT_SPELLCASTING_CLASSES,
+  type ClassLevelFilterProps,
+  type ClassOption,
+} from './filters'
+export { EntityImage, type EntityImageProps } from './EntityImage'

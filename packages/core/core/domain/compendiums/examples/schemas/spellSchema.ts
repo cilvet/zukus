@@ -1,96 +1,98 @@
 /**
  * Schema definition for D&D 3.5 Spells
+ *
+ * This schema matches the structure of the enriched spells loaded from
+ * the external data source (spells.json) and enriched with class-level
+ * relations via the relation system.
+ *
+ * Key differences from a "simple" spell schema:
+ * - No `level` field: levels are per-class and stored in classData.classLevels
+ * - `spellResistance` is a string (e.g., "Si", "No", "Si (inofensivo)")
+ * - `classData` contains the enriched relation data
  */
 
 import type { EntitySchemaDefinition } from '../../../entities/types/schema';
 
 export const spellSchema: EntitySchemaDefinition = {
   typeName: 'spell',
-  description: 'D&D 3.5 Spell',
-  version: '1.0.0',
-  addons: ['searchable', 'taggable'],
+  description: 'D&D 3.5 Spell (enriched with class-level relations)',
+  version: '2.0.0',
+  addons: ['searchable', 'imageable'],
   fields: [
-    {
-      name: 'level',
-      type: 'integer',
-      description: 'Spell level (0-9)',
-    },
     {
       name: 'school',
       type: 'string',
-      description: 'Magic school (Escuela)',
+      description: 'Magic school (e.g., "abjuración", "evocación")',
     },
     {
       name: 'subschool',
       type: 'string',
       optional: true,
-      description: 'Magic subschool (SubEscuela)',
+      description: 'Magic subschool',
     },
     {
       name: 'descriptors',
       type: 'string_array',
       optional: true,
-      description: 'Spell descriptors (descriptores)',
+      description: 'Spell descriptors (e.g., "fuerza", "fuego")',
     },
     {
       name: 'components',
       type: 'string_array',
-      description: 'Spell components (V, S, M, F, FD, PX, etc)',
+      description: 'Spell components (V, S, M, F, FD, etc.)',
     },
     {
       name: 'castingTime',
       type: 'string',
-      description: 'Casting time (tiempoLanzamiento)',
+      optional: true,
+      description: 'Casting time (e.g., "1 acción estándar")',
     },
     {
       name: 'range',
       type: 'string',
-      description: 'Spell range (alcance)',
+      optional: true,
+      description: 'Spell range (e.g., "Corto", "Medio", "0\'")',
     },
     {
       name: 'duration',
       type: 'string',
-      description: 'Spell duration (duracion)',
+      optional: true,
+      description: 'Spell duration (e.g., "1 minuto / NL")',
     },
     {
       name: 'area',
       type: 'string',
       optional: true,
-      description: 'Area of effect (area)',
+      description: 'Area of effect',
     },
     {
       name: 'target',
       type: 'string',
       optional: true,
-      description: 'Target (objetivo)',
+      description: 'Spell target',
     },
     {
       name: 'effect',
       type: 'string',
       optional: true,
-      description: 'Effect (efecto)',
+      description: 'Spell effect description',
     },
     {
       name: 'savingThrow',
       type: 'string',
       optional: true,
-      description: 'Saving throw type (tiradaSalvacion)',
+      description: 'Saving throw (e.g., "Voluntad niega")',
     },
     {
       name: 'spellResistance',
-      type: 'boolean',
-      description: 'Whether spell allows spell resistance (resistenciaConjuros)',
+      type: 'string',
+      description: 'Spell resistance (e.g., "Si", "No", "Si (inofensivo)")',
     },
     {
-      name: 'classes',
-      type: 'string_array',
-      description: 'Classes that can cast this spell',
-    },
-    {
-      name: 'manual',
+      name: 'source',
       type: 'string',
       optional: true,
-      description: 'Source book (manual)',
+      description: 'Source book',
     },
     {
       name: 'originalName',
@@ -98,18 +100,7 @@ export const spellSchema: EntitySchemaDefinition = {
       optional: true,
       description: 'Original English name',
     },
-    {
-      name: 'shortdescription',
-      type: 'string',
-      optional: true,
-      description: 'Short description',
-    },
-    {
-      name: 'visualdescription',
-      type: 'string',
-      optional: true,
-      description: 'Visual description',
-    },
+    // Note: classData is added at runtime by the relation enrichment process
+    // and is not part of the raw entity schema
   ],
 };
-

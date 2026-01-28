@@ -33,6 +33,7 @@ type CGEEntitySelectPanelProps = {
 }
 
 type EnrichedSpell = StandardEntity & {
+  image?: string
   classData?: {
     classLevelKeys: string[]
     classLevels: Record<string, number>
@@ -332,6 +333,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
             name={item.name}
             description={item.description}
             levelLabel={levelLabelForClass(item)}
+            image={item.image}
             color={textColor}
             placeholderColor={placeholderColor}
             onPress={handleSelectEntity}

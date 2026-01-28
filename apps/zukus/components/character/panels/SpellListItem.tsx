@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
+import { EntityImage } from '../../../ui'
 
 /**
  * Altura fija del item - DEBE coincidir con estimatedItemSize de FlashList.
@@ -11,6 +12,7 @@ export type SpellListItemProps = {
   name: string
   description: string | undefined
   levelLabel: string | null
+  image: string | undefined
   color: string
   placeholderColor: string
   onPress: (id: string) => void
@@ -29,6 +31,7 @@ export function SpellListItem({
   name,
   description,
   levelLabel,
+  image,
   color,
   placeholderColor,
   onPress,
@@ -36,37 +39,41 @@ export function SpellListItem({
   return (
     <Pressable onPress={() => onPress(id)} style={styles.container}>
       {({ pressed }) => (
-        <YStack
+        <XStack
           height={SPELL_ITEM_HEIGHT}
-          justifyContent="center"
+          alignItems="center"
           paddingHorizontal={16}
+          gap={12}
           opacity={pressed ? 0.6 : 1}
           borderBottomWidth={1}
           borderBottomColor="$borderColor"
-          gap={4}
         >
-          <XStack alignItems="center" justifyContent="space-between">
-            <Text
-              fontSize={15}
-              color={color}
-              fontWeight="500"
-              flex={1}
-              numberOfLines={1}
-            >
-              {name}
-            </Text>
-            {levelLabel !== null && (
-              <Text fontSize={12} color={placeholderColor} marginLeft={8}>
-                {levelLabel}
+          <EntityImage image={image} fallbackText={name} />
+
+          <YStack flex={1} gap={4}>
+            <XStack alignItems="center" justifyContent="space-between">
+              <Text
+                fontSize={15}
+                color={color}
+                fontWeight="500"
+                flex={1}
+                numberOfLines={1}
+              >
+                {name}
+              </Text>
+              {levelLabel !== null && (
+                <Text fontSize={12} color={placeholderColor} marginLeft={8}>
+                  {levelLabel}
+                </Text>
+              )}
+            </XStack>
+            {description && (
+              <Text fontSize={12} color={placeholderColor} numberOfLines={2}>
+                {description}
               </Text>
             )}
-          </XStack>
-          {description && (
-            <Text fontSize={12} color={placeholderColor} numberOfLines={2}>
-              {description}
-            </Text>
-          )}
-        </YStack>
+          </YStack>
+        </XStack>
       )}
     </Pressable>
   )

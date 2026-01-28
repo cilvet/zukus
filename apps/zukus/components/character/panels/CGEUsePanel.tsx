@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
-import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme } from '../../../ui'
+import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme, EntityImage } from '../../../ui'
 import type { CalculatedCGE, CalculatedSlot } from '@zukus/core'
 
 type CGEUsePanelProps = {
@@ -131,7 +131,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                   const displayName = entity?.name ?? entityId
                     .replace(/-/g, ' ')
                     .replace(/_/g, ' ')
-                    .replace(/\b\w/g, (l) => l.toUpperCase())
+                    .replace(/\b\w/g, (l: string) => l.toUpperCase())
                   const isLast = index === entityEntries.length - 1
                   const hasSlots = slotsRemaining > 0
                   const countLabel = data.count > 1 ? ` x${data.count}` : ''
@@ -146,19 +146,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                       borderBottomWidth={isLast ? 0 : 1}
                       borderBottomColor="$borderColor"
                     >
-                      {/* Image placeholder */}
-                      <YStack
-                        width={36}
-                        height={36}
-                        borderRadius={6}
-                        backgroundColor="$backgroundHover"
-                        borderWidth={1}
-                        borderColor="$borderColor"
-                        alignItems="center"
-                        justifyContent="center"
-                      >
-                        <Text fontSize={10} color="$placeholderColor">IMG</Text>
-                      </YStack>
+                      <EntityImage image={entity?.image} fallbackText={displayName} />
 
                       <YStack flex={1} gap={2}>
                         <Text fontSize={14} color="$color">
