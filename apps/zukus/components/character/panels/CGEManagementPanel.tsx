@@ -1,9 +1,10 @@
 import { Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
-import { usePrimaryCGE, useCharacterStore, useCompendiumContext, EntityImage } from '../../../ui'
+import { usePrimaryCGE, useCharacterStore, useCompendiumContext } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import type { CalculatedSlot, CalculatedCGE } from '@zukus/core'
+import { EntityRow, EmptySlotRow, LevelHeader } from './EntityRow'
 
 type CGEManagementPanelProps = {
   cge?: CalculatedCGE | null
@@ -104,18 +105,18 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
   return (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{ paddingVertical: 16, gap: 16 }}
+      contentContainerStyle={{ paddingVertical: 12 }}
       showsVerticalScrollIndicator={false}
     >
-      {/* Summary - simplified to just "X / Y" */}
-      <XStack justifyContent="center" paddingVertical={8} paddingHorizontal={16}>
-        <Text fontSize={14} color="$placeholderColor">
+      {/* Summary */}
+      <XStack justifyContent="center" paddingVertical={6} paddingHorizontal={16}>
+        <Text fontSize={12} color="$placeholderColor">
           {totalPrepared} / {totalSlots} preparados
         </Text>
       </XStack>
 
       {/* Preparations by level */}
-      <YStack gap={16}>
+      <YStack>
         {slots.map((slot) => {
           if (slot.max === 0) return null
 
@@ -127,107 +128,54 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
 
           return (
             <YStack key={slot.level}>
-              {/* Level header with borders */}
-              <YStack
-                borderTopWidth={1}
-                borderBottomWidth={1}
-                borderColor="$borderColor"
-                paddingVertical={10}
-                marginBottom={8}
-              >
-                <Text fontSize={12} color="$placeholderColor" fontWeight="600" textAlign="center">
-                  {levelLabel} ({preparedCount}/{slot.max})
-                </Text>
-              </YStack>
+              <LevelHeader label={levelLabel} count={`${preparedCount}/${slot.max}`} />
 
               {/* Prepared entities */}
               {levelPreps.map((prep, index) => {
-                // Get entity name from compendium, fallback to formatted ID
                 const entity = compendium.getEntityById(prep.entityId)
                 const displayName = entity?.name ?? prep.entityId
                   .replace(/-/g, ' ')
                   .replace(/_/g, ' ')
                   .replace(/\b\w/g, (l: string) => l.toUpperCase())
-                // Only hide border on last prepared if there are no empty slots after
                 const isLastItem = index === levelPreps.length - 1 && !hasEmptySlots
 
                 return (
-                  <XStack
+                  <EntityRow
                     key={prep.slotId}
-                    alignItems="center"
-                    paddingVertical={10}
-                    paddingHorizontal={16}
-                    gap={12}
-                    borderBottomWidth={isLastItem ? 0 : 1}
-                    borderBottomColor="$borderColor"
-                  >
-                    <EntityImage image={entity?.image} fallbackText={displayName} />
-
-                    <Text fontSize={14} color="$color" flex={1}>
-                      {displayName}
-                    </Text>
-                    <Pressable
-                      onPress={() => handleRemovePreparation(slot.level, prep.slotIndex, primaryTrack.id)}
-                      hitSlop={8}
-                    >
-                      {({ pressed }) => (
-                        <Text fontSize={12} color="$colorFocus" opacity={pressed ? 0.6 : 1}>
-                          Quitar
-                        </Text>
-                      )}
-                    </Pressable>
-                  </XStack>
-                )
-              })}
-
-              {/* Empty slots - show each individually */}
-              {emptySlots.map((emptySlot, index) => {
-                const isLastEmpty = index === emptySlots.length - 1
-
-                return (
-                  <Pressable
-                    key={emptySlot.slotId}
-                    onPress={() => handleAddPreparation(slot.level, emptySlot.index, primaryTrack.id)}
-                  >
-                    {({ pressed }) => (
-                      <XStack
-                        alignItems="center"
-                        paddingVertical={10}
-                        paddingHorizontal={16}
-                        gap={12}
-                        borderBottomWidth={isLastEmpty ? 0 : 1}
-                        borderBottomColor="$borderColor"
-                        opacity={pressed ? 0.6 : 1}
+                    name={displayName}
+                    image={entity?.image}
+                    isLast={isLastItem}
+                    rightElement={
+                      <Pressable
+                        onPress={() => handleRemovePreparation(slot.level, prep.slotIndex, primaryTrack.id)}
+                        hitSlop={8}
                       >
-                        {/* Empty image placeholder */}
-                        <YStack
-                          width={40}
-                          height={40}
-                          borderRadius={6}
-                          borderWidth={1}
-                          borderColor="$borderColor"
-                          borderStyle="dashed"
-                          alignItems="center"
-                          justifyContent="center"
-                        >
-                          <Text fontSize={16} color="$placeholderColor">+</Text>
-                        </YStack>
-
-                        <Text fontSize={14} color="$placeholderColor" flex={1}>
-                          Preparar...
-                        </Text>
-                      </XStack>
-                    )}
-                  </Pressable>
+                        {({ pressed }) => (
+                          <Text fontSize={11} color="$colorFocus" opacity={pressed ? 0.6 : 1}>
+                            Quitar
+                          </Text>
+                        )}
+                      </Pressable>
+                    }
+                  />
                 )
               })}
+
+              {/* Empty slots */}
+              {emptySlots.map((emptySlot, index) => (
+                <EmptySlotRow
+                  key={emptySlot.slotId}
+                  isLast={index === emptySlots.length - 1}
+                  onPress={() => handleAddPreparation(slot.level, emptySlot.index, primaryTrack.id)}
+                />
+              ))}
             </YStack>
           )
         })}
       </YStack>
 
       {/* Info */}
-      <Text fontSize={12} color="$placeholderColor" lineHeight={18} paddingTop={8} paddingHorizontal={16}>
+      <Text fontSize={11} color="$placeholderColor" lineHeight={16} paddingTop={10} paddingHorizontal={16}>
         Selecciona los {entityTypeLabel.toLowerCase()} que quieres preparar para cada nivel.
       </Text>
     </ScrollView>

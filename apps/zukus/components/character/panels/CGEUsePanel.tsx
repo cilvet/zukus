@@ -1,8 +1,9 @@
 import { Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
-import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme, EntityImage } from '../../../ui'
-import type { CalculatedCGE, CalculatedSlot, CalculatedBoundSlot } from '@zukus/core'
+import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme } from '../../../ui'
+import type { CalculatedCGE, CalculatedBoundSlot } from '@zukus/core'
+import { EntityRow, LevelHeader, ENTITY_ROW_PADDING_HORIZONTAL } from './EntityRow'
 
 type CGEUsePanelProps = {
   cge?: CalculatedCGE | null
@@ -97,10 +98,10 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
   return (
     <ScrollView
       style={{ flex: 1 }}
-      contentContainerStyle={{ paddingVertical: 16, gap: 16 }}
+      contentContainerStyle={{ paddingVertical: 12 }}
       showsVerticalScrollIndicator={false}
     >
-      <YStack gap={16}>
+      <YStack>
         {slots.map((slot) => {
           if (slot.max === 0) return null
 
@@ -112,80 +113,71 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
             const groupedByEntity = groupBoundSlotsByEntity(preparedSlots)
             const entityEntries = Array.from(groupedByEntity.entries())
 
-            // Calculate total available for this level
             const totalAvailable = preparedSlots.filter(bs => !bs.used).length
             const totalPrepared = preparedSlots.length
 
             return (
               <YStack key={slot.level}>
-                {/* Level header */}
-                <YStack
-                  borderTopWidth={1}
-                  borderBottomWidth={1}
-                  borderColor="$borderColor"
-                  paddingVertical={10}
-                  marginBottom={8}
-                >
-                  <Text fontSize={12} color="$placeholderColor" fontWeight="600" textAlign="center">
-                    {levelLabel} ({totalAvailable}/{totalPrepared} disponibles)
-                  </Text>
-                </YStack>
+                <LevelHeader label={levelLabel} count={`${totalAvailable}/${totalPrepared} disponibles`} />
 
-                {/* Grouped entities */}
                 {entityEntries.length === 0 ? (
                   <Text
-                    fontSize={13}
+                    fontSize={11}
                     color="$placeholderColor"
                     textAlign="center"
-                    paddingVertical={12}
-                    paddingHorizontal={16}
+                    paddingVertical={10}
+                    paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
                   >
                     Sin preparaciones
                   </Text>
                 ) : (
-                  entityEntries.map(([entityId, data], index) => (
-                    <GroupedEntityRow
-                      key={entityId}
-                      entityId={entityId}
-                      available={data.available}
-                      total={data.total}
-                      slots={data.slots}
-                      compendium={compendium}
-                      accentColor={accentColor}
-                      disabledColor={themeColors.borderColor}
-                      isLast={index === entityEntries.length - 1}
-                      onCast={handleCastBoundEntity}
-                    />
-                  ))
+                  entityEntries.map(([entityId, data], index) => {
+                    const entity = compendium.getEntityById(entityId)
+                    const displayName = entity?.name ?? entityId
+                      .replace(/-/g, ' ')
+                      .replace(/_/g, ' ')
+                      .replace(/\b\w/g, (l: string) => l.toUpperCase())
+                    const canCast = data.available > 0
+                    const subtitle = data.total > 1
+                      ? `${data.available}/${data.total} disponibles`
+                      : !canCast ? 'Usado' : undefined
+
+                    return (
+                      <EntityRow
+                        key={entityId}
+                        name={displayName}
+                        image={entity?.image}
+                        subtitle={subtitle}
+                        isLast={index === entityEntries.length - 1}
+                        opacity={canCast ? 1 : 0.5}
+                        rightElement={
+                          <CastButton
+                            canCast={canCast}
+                            accentColor={accentColor}
+                            disabledColor={themeColors.borderColor}
+                            onPress={() => handleCastBoundEntity(data.slots)}
+                          />
+                        }
+                      />
+                    )
+                  })
                 )}
               </YStack>
             )
           }
 
-          // For non-BOUND: show level-based slots (existing behavior)
+          // For non-BOUND: show level-based slots
           const slotsRemaining = slot.current
 
           return (
             <YStack key={slot.level}>
-              {/* Level header */}
-              <YStack
-                borderTopWidth={1}
-                borderBottomWidth={1}
-                borderColor="$borderColor"
-                paddingVertical={10}
-                marginBottom={8}
-              >
-                <Text fontSize={12} color="$placeholderColor" fontWeight="600" textAlign="center">
-                  {levelLabel} ({slotsRemaining}/{slot.max} disponibles)
-                </Text>
-              </YStack>
+              <LevelHeader label={levelLabel} count={`${slotsRemaining}/${slot.max} disponibles`} />
 
-              {/* Generic cast button for level */}
               <XStack
                 alignItems="center"
                 justifyContent="center"
-                paddingVertical={12}
-                paddingHorizontal={16}
+                paddingVertical={10}
+                paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
               >
                 <Pressable
                   onPress={() => handleCastLevelSlot(slot.level)}
@@ -194,14 +186,14 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                 >
                   {({ pressed }) => (
                     <XStack
-                      paddingVertical={8}
-                      paddingHorizontal={16}
+                      paddingVertical={5}
+                      paddingHorizontal={12}
                       backgroundColor={slotsRemaining > 0 ? accentColor : themeColors.borderColor}
                       borderRadius={6}
                       opacity={pressed ? 0.7 : slotsRemaining > 0 ? 1 : 0.5}
                     >
                       <Text
-                        fontSize={13}
+                        fontSize={11}
                         fontWeight="600"
                         color={slotsRemaining > 0 ? '#FFFFFF' : '$placeholderColor'}
                       >
@@ -219,89 +211,33 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
   )
 }
 
-type GroupedEntityRowProps = {
-  entityId: string
-  available: number
-  total: number
-  slots: CalculatedBoundSlot[]
-  compendium: ReturnType<typeof useCompendiumContext>
+type CastButtonProps = {
+  canCast: boolean
   accentColor: string
   disabledColor: string
-  isLast: boolean
-  onCast: (slots: CalculatedBoundSlot[]) => void
+  onPress: () => void
 }
 
-function GroupedEntityRow({
-  entityId,
-  available,
-  total,
-  slots,
-  compendium,
-  accentColor,
-  disabledColor,
-  isLast,
-  onCast,
-}: GroupedEntityRowProps) {
-  const entity = compendium.getEntityById(entityId)
-  const displayName = entity?.name ?? entityId
-    .replace(/-/g, ' ')
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (l: string) => l.toUpperCase())
-
-  const canCast = available > 0
-  const showCount = total > 1
-
+function CastButton({ canCast, accentColor, disabledColor, onPress }: CastButtonProps) {
   return (
-    <XStack
-      alignItems="center"
-      paddingVertical={10}
-      paddingHorizontal={16}
-      gap={12}
-      borderBottomWidth={isLast ? 0 : 1}
-      borderBottomColor="$borderColor"
-      opacity={canCast ? 1 : 0.5}
-    >
-      <EntityImage image={entity?.image} fallbackText={displayName} />
-
-      <YStack flex={1} gap={2}>
-        <Text fontSize={14} color="$color">
-          {displayName}
-        </Text>
-        {showCount && (
-          <Text fontSize={11} color="$placeholderColor">
-            {available}/{total} disponibles
-          </Text>
-        )}
-        {!canCast && !showCount && (
-          <Text fontSize={11} color="$placeholderColor">
-            Usado
-          </Text>
-        )}
-      </YStack>
-
-      <Pressable
-        onPress={() => onCast(slots)}
-        disabled={!canCast}
-        hitSlop={8}
-      >
-        {({ pressed }) => (
-          <XStack
-            paddingVertical={6}
-            paddingHorizontal={12}
-            backgroundColor={canCast ? accentColor : disabledColor}
-            borderRadius={6}
-            opacity={pressed ? 0.7 : canCast ? 1 : 0.5}
+    <Pressable onPress={onPress} disabled={!canCast} hitSlop={8}>
+      {({ pressed }) => (
+        <XStack
+          paddingVertical={5}
+          paddingHorizontal={10}
+          backgroundColor={canCast ? accentColor : disabledColor}
+          borderRadius={6}
+          opacity={pressed ? 0.7 : canCast ? 1 : 0.5}
+        >
+          <Text
+            fontSize={11}
+            fontWeight="600"
+            color={canCast ? '#FFFFFF' : '$placeholderColor'}
           >
-            <Text
-              fontSize={12}
-              fontWeight="600"
-              color={canCast ? '#FFFFFF' : '$placeholderColor'}
-            >
-              Lanzar
-            </Text>
-          </XStack>
-        )}
-      </Pressable>
-    </XStack>
+            Lanzar
+          </Text>
+        </XStack>
+      )}
+    </Pressable>
   )
 }
