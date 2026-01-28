@@ -81,6 +81,38 @@ export type { EntitySchemaDefinition } from "./core/domain/entities/types/schema
 // Types - Filtering
 export type { FilterResult, EntityFilter, SubstitutionIndex as FilterSubstitutionIndex } from "./core/domain/levels/filtering/types";
 
+// Entity Filter Configuration
+export type {
+  FilterOption,
+  FilterUIConfig,
+  FacetFilterDef,
+  RelationFilterDef,
+  FilterGroupDef,
+  FilterDef,
+  EntityFilterConfig,
+  FilterValue,
+  FilterState,
+} from "./core/domain/entities";
+
+export {
+  isFacetFilter,
+  isRelationFilter,
+  isFilterGroup,
+  getNestedValue,
+  getRelationSecondaryOptions,
+  applyRelationFilter,
+  getRelationFilterChipLabel,
+  getAllFilterIds,
+  createInitialFilterState,
+  spellFilterConfig,
+  createSpellFilterConfig,
+  classLevelFilter,
+  SPELLCASTING_CLASS_OPTIONS,
+  registerFilterConfig,
+  getFilterConfig,
+  hasFilterConfig,
+} from "./core/domain/entities";
+
 // Types - Updater
 export type { ProviderLocation } from "./core/domain/levels/updater/types";
 

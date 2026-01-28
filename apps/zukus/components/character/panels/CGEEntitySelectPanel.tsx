@@ -1,224 +1,429 @@
 import { View, Pressable, TextInput, StyleSheet, Platform } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { FlashList } from '@shopify/flash-list'
 import { YStack, XStack, Text } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
-import { useState } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { useRouter } from 'expo-router'
-import { usePrimaryCGE, useTheme, useCharacterStore, useCompendiumContext } from '../../../ui'
+import {
+  usePrimaryCGE,
+  useTheme,
+  useCharacterStore,
+  useCompendiumContext,
+} from '../../../ui'
 import { usePanelNavigation } from '../../../hooks'
-import type { StandardEntity } from '@zukus/core'
+import type { StandardEntity, FilterState, FilterValue, FacetFilterDef } from '@zukus/core'
+import {
+  spellFilterConfig,
+  createInitialFilterState,
+  applyRelationFilter,
+  isRelationFilter,
+  isFacetFilter,
+  isFilterGroup,
+} from '@zukus/core'
+import { SpellListItem } from './SpellListItem'
+import { EntityFilterView, ActiveFilterChips } from '../../filters'
 
-/**
- * Returns a label for entity level.
- */
-function getLevelLabel(level: number): string {
-  if (level === 0) return 'Nivel 0'
-  return `Nivel ${level}`
-}
-
-/**
- * Mapping from class IDs to Spanish class names used in compendium.
- */
-const CLASS_ID_TO_NAME: Record<string, string[]> = {
-  wizard: ['Mago', 'Wizard'],
-  sorcerer: ['Hechicero', 'Sorcerer'],
-  cleric: ['Clérigo', 'Cleric'],
-  druid: ['Druida', 'Druid'],
-  bard: ['Bardo', 'Bard'],
-  paladin: ['Paladín', 'Paladin'],
-  ranger: ['Explorador', 'Ranger'],
-  fighter: ['Guerrero', 'Fighter'],
-  rogue: ['Pícaro', 'Rogue'],
-}
-
-/**
- * Get the level of an entity for a specific class.
- * Supports multiple formats:
- * - classLevels array: { className, level } (SRD format)
- * - level + classes: single level with array of class names (compendium format)
- */
-function getEntityLevelForClass(entity: StandardEntity, classId: string): number | null {
-  // Format 1: classLevels array (detailed SRD format)
-  const classLevels = (entity as { classLevels?: { className: string; level: number }[] }).classLevels
-  if (classLevels) {
-    // Normalize classId for matching (e.g., "wizard" -> "Wizard")
-    const normalizedClassId = classId.charAt(0).toUpperCase() + classId.slice(1).toLowerCase()
-    const classLevel = classLevels.find(cl => cl.className === normalizedClassId)
-    if (classLevel) {
-      return classLevel.level
-    }
-    return null
-  }
-
-  // Format 2: single level with classes array (compendium format)
-  const level = (entity as { level?: number }).level
-  const classes = (entity as { classes?: string[] }).classes
-  if (typeof level === 'number' && classes) {
-    // Check if the entity's classes include this character's class
-    const classNames = CLASS_ID_TO_NAME[classId.toLowerCase()] ?? [classId]
-    const hasClass = classes.some(cls =>
-      classNames.some(name => cls.toLowerCase() === name.toLowerCase())
-    )
-    if (hasClass) {
-      return level
-    }
-    return null
-  }
-
-  // Fallback: just return the level if present (for entities without class restrictions)
-  if (typeof level === 'number') {
-    return level
-  }
-
-  return null
-}
+// ============================================================================
+// Types
+// ============================================================================
 
 type CGEEntitySelectPanelProps = {
-  /** Format: "level:slotIndex:cgeId" */
+  /** Format: "level:slotIndex:cgeId:trackId" */
   selectionId: string
 }
 
-/**
- * CGE Entity Select Panel - Content for selecting an entity to prepare.
- * Uses real compendium data filtered by level and class.
- * Used in both desktop SidePanel and mobile detail screen.
- */
+type EnrichedSpell = StandardEntity & {
+  classData?: {
+    classLevelKeys: string[]
+    classLevels: Record<string, number>
+  }
+}
+
+// ============================================================================
+// Component
+// ============================================================================
+
 export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps) {
-  "use no memo"
-  const { themeColors } = useTheme()
+  'use no memo'
+
+  // ============================================================================
+  // Helper functions (inside component to avoid React Compiler issues)
+  // ============================================================================
+
+  function getNestedValue(obj: unknown, path: string): unknown {
+    const parts = path.split('.')
+    let current: unknown = obj
+
+    for (const part of parts) {
+      if (current === null || current === undefined) return undefined
+      if (typeof current !== 'object') return undefined
+      current = (current as Record<string, unknown>)[part]
+    }
+
+    return current
+  }
+
+  function matchesFacetFilter(
+    entity: unknown,
+    filter: FacetFilterDef,
+    filterValue: FilterValue
+  ): boolean {
+    if (filterValue === null || filterValue === undefined) return true
+
+    const fieldValue = getNestedValue(entity, filter.facetField)
+
+    // Multi-select: filterValue is an array, match if ANY selected value matches
+    if (Array.isArray(filterValue)) {
+      if (filterValue.length === 0) return true
+
+      // Entity field is also an array (e.g., components)
+      if (Array.isArray(fieldValue)) {
+        return filterValue.some((fv) => fieldValue.includes(fv))
+      }
+
+      // Entity field is a single value
+      return filterValue.includes(fieldValue as string)
+    }
+
+    // Single select
+    if (filterValue === '') return true
+
+    if (Array.isArray(fieldValue)) {
+      return fieldValue.includes(filterValue)
+    }
+
+    return fieldValue === filterValue
+  }
+
+  function applyFilters(
+    entities: EnrichedSpell[],
+    filterState: FilterState,
+    config: typeof spellFilterConfig
+  ): EnrichedSpell[] {
+    const start = performance.now()
+
+    let result = entities
+
+    // Process each filter in the config
+    for (const filter of config.filters) {
+      if (isRelationFilter(filter)) {
+        const primaryValue = filterState[filter.primary.id] as string | null
+        const secondaryValue = filterState[filter.secondary.id] as string | number | null
+
+        if (primaryValue !== null) {
+          result = result.filter((entity) =>
+            applyRelationFilter(entity, filter, primaryValue, secondaryValue)
+          )
+        }
+      } else if (isFacetFilter(filter)) {
+        const value = filterState[filter.id]
+        result = result.filter((entity) => matchesFacetFilter(entity, filter, value))
+      } else if (isFilterGroup(filter)) {
+        // Process group children
+        for (const child of filter.children) {
+          if (isRelationFilter(child)) {
+            const primaryValue = filterState[child.primary.id] as string | null
+            const secondaryValue = filterState[child.secondary.id] as string | number | null
+
+            if (primaryValue !== null) {
+              result = result.filter((entity) =>
+                applyRelationFilter(entity, child, primaryValue, secondaryValue)
+              )
+            }
+          } else if (isFacetFilter(child)) {
+            const value = filterState[child.id]
+            result = result.filter((entity) => matchesFacetFilter(entity, child, value))
+          }
+        }
+      }
+    }
+
+    const elapsed = performance.now() - start
+    console.log(
+      `[Perf] applyFilters: ${elapsed.toFixed(2)}ms (${entities.length} -> ${result.length})`
+    )
+
+    return result
+  }
+
+  function filterBySearch(entities: EnrichedSpell[], query: string): EnrichedSpell[] {
+    if (!query.trim()) return entities
+
+    const start = performance.now()
+    const q = query.toLowerCase().trim()
+    const result = entities.filter((entity) => {
+      const nameMatch = entity.name.toLowerCase().includes(q)
+      const descMatch = entity.description?.toLowerCase().includes(q)
+      return nameMatch || descMatch
+    })
+
+    const elapsed = performance.now() - start
+    console.log(
+      `[Perf] filterBySearch("${q}"): ${elapsed.toFixed(2)}ms (${entities.length} -> ${result.length})`
+    )
+
+    return result
+  }
+
+  function hasActiveFilters(filterState: FilterState): boolean {
+    return Object.values(filterState).some((value) => {
+      if (value === null || value === undefined || value === '') return false
+      if (Array.isArray(value)) return value.length > 0
+      return true
+    })
+  }
+
+  const { themeColors, themeInfo } = useTheme()
   const primaryCGE = usePrimaryCGE()
   const compendium = useCompendiumContext()
   const prepareEntityForCGE = useCharacterStore((state) => state.prepareEntityForCGE)
   const panelNav = usePanelNavigation('character')
   const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState('')
 
   // Parse selectionId: "level:slotIndex:cgeId:trackId"
   const [levelStr, slotIndexStr, cgeIdFromParams, trackIdFromParams] = selectionId.split(':')
-  const level = parseInt(levelStr ?? '0', 10)
+  const slotLevel = parseInt(levelStr ?? '0', 10)
   const slotIndex = parseInt(slotIndexStr ?? '0', 10)
   const cgeId = cgeIdFromParams ?? primaryCGE?.id ?? ''
   const trackId = trackIdFromParams ?? 'base'
 
-  // Get the CGE config to determine entity type and class
   const entityType = primaryCGE?.entityType ?? 'spell'
-  const classId = primaryCGE?.classId ?? 'wizard'
+  const defaultClassId = primaryCGE?.classId ?? 'wizard'
 
-  // Get all entities of the right type from compendium
-  const allEntities = compendium.getAllEntities(entityType)
+  // Get filter configuration (hardcoded for now, but could come from registry)
+  const filterConfig = spellFilterConfig
 
-  // Filter entities by level for the character's class
-  const entitiesForLevel = allEntities.filter(entity => {
-    const entityLevel = getEntityLevelForClass(entity, classId)
-    return entityLevel === level
-  })
+  // Initialize filter state with defaults from CGE context
+  const initialFilterState = useMemo(() => {
+    const state = createInitialFilterState(filterConfig)
+    // Override defaults with CGE context
+    state['class'] = defaultClassId
+    state['level'] = slotLevel
+    return state
+  }, [filterConfig, defaultClassId, slotLevel])
 
-  // Apply search filter
-  const filteredEntities = searchQuery.trim()
-    ? entitiesForLevel.filter(entity => {
-        const query = searchQuery.toLowerCase().trim()
-        const nameMatch = entity.name.toLowerCase().includes(query)
-        const descMatch = entity.description?.toLowerCase().includes(query)
-        return nameMatch || descMatch
-      })
-    : entitiesForLevel
+  // View state
+  const [showFilters, setShowFilters] = useState(false)
 
-  const levelLabel = getLevelLabel(level)
+  // Filter state (applied filters)
+  const [appliedFilterState, setAppliedFilterState] = useState<FilterState>(initialFilterState)
 
-  const handleSelectEntity = (entityId: string) => {
-    const result = prepareEntityForCGE(cgeId, level, slotIndex, entityId, trackId)
-    if (!result.success) {
-      console.warn('Failed to prepare entity:', result.error)
-      return
-    }
+  // Pending filter state (while editing in filter view)
+  const [pendingFilterState, setPendingFilterState] = useState<FilterState>(initialFilterState)
 
-    // Mobile nativo: usar router.back(), Web: usar panel navigation
-    if (Platform.OS !== 'web') {
-      router.back()
-    } else {
-      panelNav.goBack()
-    }
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // Primitive colors extracted for FlashList items
+  const textColor = themeColors.color
+  const placeholderColor = themeColors.placeholderColor
+  const accentColor = themeInfo.colors.accent
+
+  // Data pipeline
+  const allEntities = compendium.getAllEntities(entityType) as EnrichedSpell[]
+  const filteredByConfig = applyFilters(allEntities, appliedFilterState, filterConfig)
+  const filteredEntities = filterBySearch(filteredByConfig, searchQuery)
+
+  const handleSelectEntity = useCallback(
+    (entityId: string) => {
+      const result = prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId, trackId)
+      if (!result.success) {
+        console.warn('Failed to prepare entity:', result.error)
+        return
+      }
+
+      if (Platform.OS !== 'web') {
+        router.back()
+      } else {
+        panelNav.goBack()
+      }
+    },
+    [prepareEntityForCGE, cgeId, slotLevel, slotIndex, trackId, router, panelNav]
+  )
+
+  const handleOpenFilters = () => {
+    setPendingFilterState({ ...appliedFilterState })
+    setShowFilters(true)
   }
 
-  const placeholderColor = themeColors.placeholderColor
+  const handleApplyFilters = () => {
+    setAppliedFilterState({ ...pendingFilterState })
+    setShowFilters(false)
+  }
+
+  const handleCancelFilters = () => {
+    setShowFilters(false)
+  }
+
+  const handlePendingFilterChange = (filterId: string, value: FilterValue) => {
+    setPendingFilterState((prev) => ({ ...prev, [filterId]: value }))
+  }
+
+  const handleClearFilter = (filterId: string) => {
+    setAppliedFilterState((prev) => ({ ...prev, [filterId]: null }))
+  }
+
+  const handleClearAllFilters = () => {
+    const clearedState: FilterState = {}
+    for (const key of Object.keys(appliedFilterState)) {
+      clearedState[key] = null
+    }
+    setAppliedFilterState(clearedState)
+  }
+
+  // Pre-compute level label for the selected class
+  const selectedClassId = appliedFilterState['class'] as string | null
+  const levelLabelForClass = selectedClassId
+    ? (spell: EnrichedSpell) => {
+        const lvl = spell.classData?.classLevels[selectedClassId]
+        return lvl !== undefined ? `Nv ${lvl}` : null
+      }
+    : () => null
+
+  const hasFilters = hasActiveFilters(appliedFilterState)
+
+  // ============================================================================
+  // Filter View
+  // ============================================================================
+
+  if (showFilters) {
+    return (
+      <EntityFilterView
+        config={filterConfig}
+        entities={allEntities}
+        filterState={pendingFilterState}
+        onFilterChange={handlePendingFilterChange}
+        onApply={handleApplyFilters}
+        onCancel={handleCancelFilters}
+        contextContent={
+          slotLevel > 0 ? (
+            <XStack
+              backgroundColor="$uiBackgroundColor"
+              padding={12}
+              borderRadius={8}
+              borderWidth={1}
+              borderColor="$borderColor"
+              gap={8}
+              alignItems="center"
+            >
+              <FontAwesome6 name="circle-info" size={14} color={placeholderColor} />
+              <Text fontSize={13} color="$placeholderColor" flex={1}>
+                Preparando para slot de nivel {slotLevel}
+              </Text>
+            </XStack>
+          ) : undefined
+        }
+      />
+    )
+  }
+
+  // ============================================================================
+  // List View
+  // ============================================================================
 
   return (
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ padding: 16, gap: 12 }}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* Search bar */}
-      <XStack
-        backgroundColor="$background"
-        borderRadius={10}
-        borderWidth={1}
-        borderColor="$borderColor"
-        paddingHorizontal={12}
-        paddingVertical={8}
-        alignItems="center"
-        gap={8}
-      >
-        <FontAwesome6 name="magnifying-glass" size={14} color={placeholderColor} />
-        <TextInput
-          style={[styles.searchInput, { color: themeColors.color }]}
-          placeholder="Buscar..."
-          placeholderTextColor={placeholderColor}
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        {searchQuery.length > 0 && (
-          <Pressable onPress={() => setSearchQuery('')} hitSlop={8}>
-            <FontAwesome6 name="xmark" size={14} color={placeholderColor} />
-          </Pressable>
+    <View style={{ flex: 1 }}>
+      <FlashList
+        data={filteredEntities}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <SpellListItem
+            id={item.id}
+            name={item.name}
+            description={item.description}
+            levelLabel={levelLabelForClass(item)}
+            color={textColor}
+            placeholderColor={placeholderColor}
+            onPress={handleSelectEntity}
+          />
         )}
-      </XStack>
-
-      {/* Results count */}
-      <Text fontSize={13} color="$placeholderColor">
-        {filteredEntities.length} {filteredEntities.length === 1 ? 'resultado' : 'resultados'} para {levelLabel}
-      </Text>
-
-      {/* Entity list */}
-      {filteredEntities.length === 0 ? (
-        <Text color="$placeholderColor" textAlign="center" paddingVertical={32}>
-          {searchQuery
-            ? 'No se encontraron resultados'
-            : 'No hay entidades disponibles para este nivel.'}
-        </Text>
-      ) : (
-        filteredEntities.map((entity) => (
-          <Pressable key={entity.id} onPress={() => handleSelectEntity(entity.id)}>
-            {({ pressed }) => (
-              <YStack
-                paddingVertical={12}
-                paddingHorizontal={16}
-                backgroundColor="$uiBackgroundColor"
-                borderRadius={8}
-                opacity={pressed ? 0.6 : 1}
-                gap={4}
+        ListHeaderComponent={
+          <YStack padding={16} gap={12}>
+            {/* Search bar + Filter button */}
+            <XStack gap={8} alignItems="center">
+              <XStack
+                flex={1}
+                backgroundColor="$background"
+                borderRadius={10}
+                borderWidth={1}
+                borderColor="$borderColor"
+                paddingHorizontal={12}
+                paddingVertical={8}
+                alignItems="center"
+                gap={8}
               >
-                <XStack alignItems="center" justifyContent="space-between">
-                  <Text fontSize={15} color="$color" fontWeight="500">
-                    {entity.name}
-                  </Text>
-                  <Text fontSize={12} color="$placeholderColor">
-                    {levelLabel}
-                  </Text>
-                </XStack>
-                {entity.description && (
-                  <Text fontSize={12} color="$placeholderColor" numberOfLines={2}>
-                    {entity.description}
-                  </Text>
+                <FontAwesome6 name="magnifying-glass" size={14} color={placeholderColor} />
+                <TextInput
+                  style={[styles.searchInput, { color: textColor }]}
+                  placeholder="Buscar por nombre..."
+                  placeholderTextColor={placeholderColor}
+                  value={searchQuery}
+                  onChangeText={setSearchQuery}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+                {searchQuery.length > 0 && (
+                  <Pressable onPress={() => setSearchQuery('')} hitSlop={8}>
+                    <FontAwesome6 name="xmark" size={14} color={placeholderColor} />
+                  </Pressable>
                 )}
-              </YStack>
-            )}
-          </Pressable>
-        ))
-      )}
-    </ScrollView>
+              </XStack>
+
+              {/* Filter button */}
+              <Pressable onPress={handleOpenFilters}>
+                {({ pressed }) => (
+                  <XStack
+                    backgroundColor={hasFilters ? accentColor : '$uiBackgroundColor'}
+                    paddingHorizontal={14}
+                    paddingVertical={10}
+                    borderRadius={10}
+                    borderWidth={1}
+                    borderColor={hasFilters ? accentColor : '$borderColor'}
+                    alignItems="center"
+                    gap={6}
+                    opacity={pressed ? 0.7 : 1}
+                  >
+                    <FontAwesome6
+                      name="sliders"
+                      size={14}
+                      color={hasFilters ? '#FFFFFF' : placeholderColor}
+                    />
+                    <Text
+                      fontSize={14}
+                      fontWeight="500"
+                      color={hasFilters ? '#FFFFFF' : '$placeholderColor'}
+                    >
+                      Filtros
+                    </Text>
+                  </XStack>
+                )}
+              </Pressable>
+            </XStack>
+
+            {/* Applied filter chips */}
+            <ActiveFilterChips
+              config={filterConfig}
+              filterState={appliedFilterState}
+              onClearFilter={handleClearFilter}
+              onClearAll={handleClearAllFilters}
+            />
+
+            {/* Results count */}
+            <Text fontSize={13} color="$placeholderColor">
+              {filteredEntities.length}{' '}
+              {filteredEntities.length === 1 ? 'resultado' : 'resultados'}
+            </Text>
+          </YStack>
+        }
+        ListEmptyComponent={
+          <Text color="$placeholderColor" textAlign="center" paddingVertical={32}>
+            {searchQuery
+              ? 'No se encontraron resultados'
+              : 'No hay conjuros disponibles para esta combinacion.'}
+          </Text>
+        }
+      />
+    </View>
   )
 }
 

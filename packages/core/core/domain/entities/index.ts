@@ -73,6 +73,48 @@ export {
   filterEntities
 } from './filtering/filters';
 
+// Filter Configuration
+export type {
+  FilterOption,
+  FilterUIConfig,
+  FacetFilterDef,
+  RelationFilterDef,
+  FilterGroupDef,
+  FilterDef,
+  EntityFilterConfig,
+  FilterValue,
+  FilterState,
+} from './filtering/filterConfig';
+
+export {
+  isFacetFilter,
+  isRelationFilter,
+  isFilterGroup,
+  getNestedValue,
+  getRelationSecondaryOptions,
+  applyRelationFilter,
+  getRelationFilterChipLabel,
+  getAllFilterIds,
+  createInitialFilterState,
+} from './filtering/filterConfig';
+
+// Filter Configurations (pre-built)
+export {
+  spellFilterConfig,
+  createSpellFilterConfig,
+  classLevelFilter,
+  SPELLCASTING_CLASS_OPTIONS,
+} from './filtering/configs';
+
+// Filter Configuration Registry
+export {
+  registerFilterConfig,
+  getFilterConfig,
+  hasFilterConfig,
+  getRegisteredEntityTypes,
+  clearFilterConfigRegistry,
+} from './filtering/filterConfigRegistry';
+
 // Forms (new functionality)
 export type {
   FormFieldType,
