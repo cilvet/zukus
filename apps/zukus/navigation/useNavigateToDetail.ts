@@ -31,6 +31,9 @@ export function useNavigateToDetail(scope: string = 'character') {
   const isDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 
   const navigateToDetail = (type: DetailType, id: string, customName?: string) => {
+    const startTime = performance.now()
+    console.log('[PERF] navigateToDetail called', { type, id })
+
     if (!isValidDetailType(type)) {
       console.warn(`Invalid detail type: ${type}`)
       return
@@ -45,10 +48,12 @@ export function useNavigateToDetail(scope: string = 'character') {
     }
 
     // Mobile (nativo + web): usar stack navigation
+    console.log('[PERF] calling router.push', performance.now() - startTime, 'ms since start')
     router.push({
       pathname: '/characters/detail/[...slug]',
       params: { slug: [type, id] },
     })
+    console.log('[PERF] router.push returned', performance.now() - startTime, 'ms since start')
   }
 
   return navigateToDetail

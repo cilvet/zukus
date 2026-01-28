@@ -1,0 +1,41 @@
+# Sistema de Relaciones entre Entidades
+
+Sistema para modelar relaciones extensibles entre entidades con metadatos, compilándolas en estructuras directamente filtrables.
+
+## Cuándo Consultar
+
+- Cuando trabajes con campos que relacionan entidades (spell-class, feat-prerequisite, etc.)
+- Cuando necesites filtrar por combinaciones de entidad + metadata (ej: "Wizard nivel 3")
+- Cuando añadas nuevos tipos de relaciones al sistema
+- Cuando necesites entender cómo se enriquecen las entidades al cargar
+
+## Ubicación
+
+Documentación completa: `packages/core/core/domain/entities/relations/README.md`
+
+## Resumen Rápido
+
+```typescript
+// 1. Las relaciones son entidades separadas con metadata
+{
+  entityType: 'spell-class-relation',
+  fromEntityId: 'fireball',
+  toEntityId: 'wizard',
+  metadata: { level: 3 }
+}
+
+// 2. Se compilan a estructuras filtrables
+classLevelKeys: ['wizard:3', 'sorcerer:3']  // Filtrable con 'contains'
+
+// 3. Se filtran con el sistema existente
+{ field: 'classLevels.classLevelKeys', operator: 'contains', value: 'wizard:3' }
+```
+
+## Archivos Clave
+
+| Archivo | Propósito |
+|---------|-----------|
+| `relations/README.md` | Documentación completa |
+| `relations/compiler.ts` | Construcción de índices y enriquecimiento |
+| `relations/filterHelpers.ts` | Helpers para UI y generación de filtros |
+| `types/base.ts` | Tipos: `RelationFieldConfig`, `RelationCompileConfig` |

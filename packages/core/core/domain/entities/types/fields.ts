@@ -1,4 +1,4 @@
-import { EntityFieldType, DataTableRowKeyConfig, DataTableColumn, EnumOption } from './base';
+import { EntityFieldType, DataTableRowKeyConfig, DataTableColumn, EnumOption, RelationFieldConfig } from './base';
 
 // Field definition for dynamic entity properties
 export type EntityFieldDefinition = {
@@ -10,17 +10,20 @@ export type EntityFieldDefinition = {
   referenceType?: string; // Only applies to reference fields - specifies the type of entities that can be referenced
   allowedValues?: string[] | number[]; // Simple predefined values (deprecated in favor of 'enum' type)
   objectFields?: EntityFieldDefinition[]; // Only applies to 'object' and 'object_array' types - defines nested structure
-  
+
   // Formula flag - only applies when type='string'
   // Indicates that this field contains a formula expression for UI autocompletion
   isFormula?: boolean;
-  
+
   // Enum configuration - only applies when type='enum'
   options?: EnumOption[];
-  
+
   // DataTable configuration - only applies when type='dataTable'
   rowKey?: DataTableRowKeyConfig;
   columns?: DataTableColumn[];
+
+  // Relation configuration - only applies when type='relation'
+  relationConfig?: RelationFieldConfig;
 };
 
 
@@ -126,4 +129,25 @@ export function hasValidEnumConfig(field: EntityFieldDefinition): boolean {
 // Type guard for formula fields
 export function isFormulaField(field: EntityFieldDefinition): boolean {
   return field.type === 'string' && field.isFormula === true;
+}
+
+// Type guards for relation fields
+export function isRelationField(field: EntityFieldDefinition): boolean {
+  return field.type === 'relation';
+}
+
+export function hasValidRelationConfig(field: EntityFieldDefinition): boolean {
+  if (field.type !== 'relation') {
+    return false;
+  }
+  if (!field.relationConfig) {
+    return false;
+  }
+  if (!field.relationConfig.relationType) {
+    return false;
+  }
+  if (!field.relationConfig.targetEntityType) {
+    return false;
+  }
+  return true;
 }

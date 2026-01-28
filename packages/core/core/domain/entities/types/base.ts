@@ -198,9 +198,9 @@ export type ComputedEntity = StandardEntity & {
 /**
  * Field types supported in the entity composition system.
  */
-export type EntityFieldType = 
+export type EntityFieldType =
   | 'string'
-  | 'integer' 
+  | 'integer'
   | 'boolean'
   | 'string_array'
   | 'integer_array'
@@ -209,7 +209,8 @@ export type EntityFieldType =
   | 'object_array'
   | 'image'  // URL or library asset ID (e.g., "icons/SkillsIcons/Skillicons/fire.png")
   | 'dataTable'  // Tabular data with numeric row keys and typed columns
-  | 'enum';  // Predefined options with metadata (name, description)
+  | 'enum'  // Predefined options with metadata (name, description)
+  | 'relation';  // Populated from relation entities with metadata
 
 // =============================================================================
 // DataTable Types
@@ -309,3 +310,120 @@ export type DataTableFieldConfig = {
  * Keys are row numbers (as strings in JSON), values are objects with column data.
  */
 export type DataTableValue = Record<string, Record<string, unknown>>;
+
+// =============================================================================
+// Relation Field Types
+// =============================================================================
+
+/**
+ * A metadata field in a relation.
+ * Defines what data the relation carries between two entities.
+ */
+export type RelationMetadataField = {
+  /** Name of the metadata field */
+  name: string;
+
+  /** Type of the metadata value */
+  type: 'string' | 'integer' | 'boolean';
+
+  /** Human-readable description */
+  description?: string;
+
+  /** Whether this field is required */
+  required?: boolean;
+
+  /** Allowed values (for validation) */
+  allowedValues?: (string | number)[];
+};
+
+/**
+ * Configuration for how to compile a relation field into a filterable structure.
+ *
+ * For D&D 3.5 spell-class relations, this generates:
+ * - classLevelKeys: ['wizard:1', 'sorcerer:1'] (filterable with 'contains')
+ * - classLevels: { wizard: 1, sorcerer: 1 } (direct access)
+ */
+export type RelationCompileConfig = {
+  /**
+   * Format for generating filterable keys.
+   * Uses placeholders: {targetId}, {metadata.fieldName}
+   * Example: "{targetId}:{metadata.level}" -> "wizard:1"
+   */
+  keyFormat: string;
+
+  /**
+   * Name of the generated array field containing filterable keys.
+   * Example: "classLevelKeys"
+   */
+  keysFieldName: string;
+
+  /**
+   * Optional: Name of the generated map field for direct access.
+   * Maps targetId -> metadata value (when there's a single key metadata).
+   * Example: "classLevels" -> { wizard: 1, sorcerer: 1 }
+   */
+  mapFieldName?: string;
+
+  /**
+   * When mapFieldName is set, which metadata field to use as the value.
+   * Example: "level"
+   */
+  mapValueField?: string;
+};
+
+/**
+ * Configuration for a relation field.
+ */
+export type RelationFieldConfig = {
+  /**
+   * The type of relation this field uses.
+   * Must match a RelationTypeDefinition.id
+   * Example: "spell-class"
+   */
+  relationType: string;
+
+  /**
+   * The entity type that this relation points to.
+   * Example: "class" (for spell-class relations)
+   */
+  targetEntityType: string;
+
+  /**
+   * Metadata fields that each relation instance carries.
+   * Example: [{ name: 'level', type: 'integer', required: true }]
+   */
+  metadataFields: RelationMetadataField[];
+
+  /**
+   * How to compile relations into a filterable structure.
+   * If not provided, the raw relation data is stored.
+   */
+  compile?: RelationCompileConfig;
+};
+
+/**
+ * A single relation instance as stored in an entity.
+ * This is the raw data before compilation.
+ */
+export type RelationValue = {
+  /** ID of the target entity */
+  targetId: string;
+
+  /** Metadata for this specific relation */
+  metadata: Record<string, unknown>;
+};
+
+/**
+ * The compiled value of a relation field.
+ * Contains both the raw relations and the compiled filterable data.
+ */
+export type CompiledRelationValue = {
+  /** Raw relation data */
+  relations: RelationValue[];
+
+  /**
+   * Compiled filterable keys (if compile.keysFieldName is configured).
+   * Example: ['wizard:1', 'sorcerer:1']
+   */
+  [key: string]: unknown;
+};

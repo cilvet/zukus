@@ -38,6 +38,7 @@ import { SafeAreaBottomSpacer } from '../../components/layout'
  * Usa selectores de Zustand para re-renders granulares.
  */
 function Header() {
+  console.log('[PERF] Header render', Date.now())
   const { themeColors } = useTheme()
   const name = useCharacterName()
   const level = useCharacterLevel()
@@ -195,6 +196,7 @@ const PAGE_COMPONENTS: Record<string, React.ComponentType> = {
 }
 
 export function CharacterScreenMobile() {
+  console.log('[PERF] CharacterScreenMobile render', Date.now())
   const { themeColors } = useTheme()
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<CharacterPagerRef>(null)

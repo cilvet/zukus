@@ -780,6 +780,7 @@ function InvalidRoute() {
  * - /detail/equipment/[itemId] - Detalle de equipment (pendiente)
  */
 export function DetailScreen() {
+  console.log('[PERF] DetailScreen render', Date.now())
   const { slug } = useLocalSearchParams<SlugParams>()
   const { themeColors } = useTheme()
   
