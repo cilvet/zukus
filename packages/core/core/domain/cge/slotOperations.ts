@@ -26,10 +26,13 @@ export type SlotWarning = {
     | 'no_slots_remaining'
     | 'cge_state_not_found'
     | 'invalid_level'
-    | 'slots_already_full';
+    | 'slots_already_full'
+    | 'slot_already_used'
+    | 'slot_not_prepared';
   message: string;
   cgeId?: string;
   level?: number;
+  slotId?: string;
   currentValue?: number;
 };
 
@@ -104,6 +107,77 @@ export function useSlot(
 }
 
 // =============================================================================
+// Use Bound Slot (for BOUND preparation)
+// =============================================================================
+
+/**
+ * Uses a specific bound slot by its slotId.
+ *
+ * This is for BOUND preparation systems (like Cleric/Wizard in D&D 3.5)
+ * where each slot is tied to a specific prepared entity.
+ *
+ * @param character - The character data to update
+ * @param cgeId - The CGE to use the slot from
+ * @param slotId - The specific slot ID (e.g., "base:1-0")
+ * @returns Updated character data with warnings
+ */
+export function useBoundSlot(
+  character: CharacterBaseData,
+  cgeId: string,
+  slotId: string
+): SlotUpdateResult {
+  const warnings: SlotWarning[] = [];
+
+  // Get or initialize CGE state
+  const cgeState = character.cgeState ?? {};
+  const thisCGEState = cgeState[cgeId] ?? {};
+  const usedBoundSlots = thisCGEState.usedBoundSlots ?? {};
+
+  // Check if slot is already used
+  if (usedBoundSlots[slotId]) {
+    warnings.push({
+      type: 'slot_already_used',
+      message: `Slot "${slotId}" in CGE "${cgeId}" has already been used.`,
+      cgeId,
+      slotId,
+    });
+    return { character, warnings };
+  }
+
+  // Check if slot has a prepared entity
+  const boundPreparations = thisCGEState.boundPreparations ?? {};
+  if (!boundPreparations[slotId]) {
+    warnings.push({
+      type: 'slot_not_prepared',
+      message: `Slot "${slotId}" in CGE "${cgeId}" has no prepared entity.`,
+      cgeId,
+      slotId,
+    });
+    return { character, warnings };
+  }
+
+  // Mark the slot as used
+  const updatedCGEState: CGEState = {
+    ...thisCGEState,
+    usedBoundSlots: {
+      ...usedBoundSlots,
+      [slotId]: true,
+    },
+  };
+
+  return {
+    character: {
+      ...character,
+      cgeState: {
+        ...cgeState,
+        [cgeId]: updatedCGEState,
+      },
+    },
+    warnings,
+  };
+}
+
+// =============================================================================
 // Refresh Slots (Long Rest)
 // =============================================================================
 
@@ -135,8 +209,11 @@ export function refreshSlots(
 
   const thisCGEState = cgeState[cgeId];
 
-  // If no slotCurrentValues exist, slots are already at max
-  if (!thisCGEState.slotCurrentValues) {
+  // Check if there's anything to refresh
+  const hasSlotValues = !!thisCGEState.slotCurrentValues;
+  const hasUsedBoundSlots = !!thisCGEState.usedBoundSlots;
+
+  if (!hasSlotValues && !hasUsedBoundSlots) {
     warnings.push({
       type: 'slots_already_full',
       message: `All slots in CGE "${cgeId}" are already at maximum.`,
@@ -145,8 +222,9 @@ export function refreshSlots(
     return { character, warnings };
   }
 
-  // Remove slotCurrentValues to reset to max (system defaults to max when undefined)
-  const { slotCurrentValues: _, ...restOfCGEState } = thisCGEState;
+  // Remove slotCurrentValues and usedBoundSlots to reset
+  // (system defaults to max when undefined, and no slots used)
+  const { slotCurrentValues: _, usedBoundSlots: __, ...restOfCGEState } = thisCGEState;
 
   const updatedCGEState: CGEState = restOfCGEState;
 

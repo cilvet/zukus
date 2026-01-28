@@ -335,6 +335,7 @@ describe("CGE Preparation Operations (Vancian)", () => {
         level: 1,
         index: 0,
         preparedEntityId: "magic-missile",
+        used: false,
       });
     });
 

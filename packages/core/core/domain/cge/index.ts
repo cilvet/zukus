@@ -72,6 +72,7 @@ export type { SlotUpdateResult, SlotWarning } from './slotOperations';
 
 export {
   useSlot,
+  useBoundSlot,
   refreshSlots,
   getSlotCurrentValue,
   getAllSlotCurrentValues,

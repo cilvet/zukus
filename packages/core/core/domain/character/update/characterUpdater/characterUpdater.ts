@@ -11,7 +11,7 @@ import * as ops from "../../updater/operations";
 import { ClassFeature } from "../../../class/classFeatures";
 import { Feat } from "../../baseData/features/feats/feat";
 import type { StandardEntity } from "../../../entities/types/base";
-import { useSlot, refreshSlots } from "../../../cge/slotOperations";
+import { useSlot, useBoundSlot, refreshSlots } from "../../../cge/slotOperations";
 import { prepareEntityInSlot, unprepareSlot } from "../../../cge/preparationOperations";
 
 /**
@@ -1106,6 +1106,26 @@ export class CharacterUpdater implements ICharacterUpdater {
     if (!this.character) return this.characterNotSet;
 
     const result = useSlot(this.character, cgeId, level);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Use a specific bound slot (for BOUND preparation systems like Cleric/Wizard).
+   * This marks a specific prepared slot as used, disabling that spell until rest.
+   * @param cgeId The CGE identifier (e.g., "cleric-spells")
+   * @param slotId The specific slot ID (e.g., "base:1-0")
+   */
+  useBoundSlotForCGE(cgeId: string, slotId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = useBoundSlot(this.character, cgeId, slotId);
 
     if (result.warnings.length > 0) {
       return { success: false, error: result.warnings[0].message };

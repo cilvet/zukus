@@ -3,11 +3,13 @@ import { calculateCharacterSheet } from "../../calculateCharacterSheet";
 import { createBaseSorcerer, createBaseWizard } from "./fixtures";
 import {
   useSlot,
+  useBoundSlot,
   refreshSlots,
   getSlotCurrentValue,
   getAllSlotCurrentValues,
   hasUsedSlots,
   addKnownEntity,
+  prepareEntityInSlot,
 } from "../../../../cge";
 import type { StandardEntity } from "../../../../entities/types/base";
 
@@ -275,6 +277,95 @@ describe("CGE Slot Operations", () => {
       expect(level1Slots?.max).toBe(1);
       // slotCurrentValues stores -1 (delta), calculateCGE interprets as max + (-1) = 1 - 1 = 0
       expect(level1Slots?.current).toBe(0);
+    });
+  });
+
+  describe("useBoundSlot (BOUND preparation)", () => {
+    it("should mark a specific bound slot as used", () => {
+      let character = createBaseWizard(1).build();
+
+      // Prepare a spell in slot base:1-0
+      let result = prepareEntityInSlot(character, "wizard-spells", 1, 0, "magic-missile");
+      character = result.character;
+
+      // Use that specific slot
+      const useResult = useBoundSlot(character, "wizard-spells", "base:1-0");
+
+      expect(useResult.warnings).toHaveLength(0);
+      expect(useResult.character.cgeState?.["wizard-spells"]?.usedBoundSlots?.["base:1-0"]).toBe(true);
+    });
+
+    it("should reflect used status in calculated character sheet", () => {
+      let character = createBaseWizard(1).build();
+
+      // Prepare a spell
+      let result = prepareEntityInSlot(character, "wizard-spells", 1, 0, "magic-missile");
+      character = result.character;
+
+      // Use the slot
+      const useResult = useBoundSlot(character, "wizard-spells", "base:1-0");
+
+      // Calculate sheet
+      const sheet = calculateCharacterSheet(useResult.character);
+      const cge = sheet.cge["wizard-spells"];
+      const track = cge.tracks[0];
+      const level1Slots = track.slots?.find((s) => s.level === 1);
+
+      expect(level1Slots?.boundSlots?.[0].used).toBe(true);
+    });
+
+    it("should warn if trying to use an already used slot", () => {
+      let character = createBaseWizard(1).build();
+
+      // Prepare a spell
+      let result = prepareEntityInSlot(character, "wizard-spells", 1, 0, "magic-missile");
+      character = result.character;
+
+      // Use the slot
+      let useResult = useBoundSlot(character, "wizard-spells", "base:1-0");
+
+      // Try to use again
+      const secondUse = useBoundSlot(useResult.character, "wizard-spells", "base:1-0");
+
+      expect(secondUse.warnings).toHaveLength(1);
+      expect(secondUse.warnings[0].type).toBe("slot_already_used");
+    });
+
+    it("should warn if slot has no prepared entity", () => {
+      let character = createBaseWizard(1).build();
+
+      // Try to use an empty slot
+      const useResult = useBoundSlot(character, "wizard-spells", "base:1-0");
+
+      expect(useResult.warnings).toHaveLength(1);
+      expect(useResult.warnings[0].type).toBe("slot_not_prepared");
+    });
+
+    it("should clear usedBoundSlots on refreshSlots", () => {
+      let character = createBaseWizard(1).build();
+
+      // Prepare and use a spell
+      let result = prepareEntityInSlot(character, "wizard-spells", 1, 0, "magic-missile");
+      character = result.character;
+
+      let useResult = useBoundSlot(character, "wizard-spells", "base:1-0");
+
+      // Verify it's used
+      expect(useResult.character.cgeState?.["wizard-spells"]?.usedBoundSlots?.["base:1-0"]).toBe(true);
+
+      // Refresh (rest)
+      const refreshResult = refreshSlots(useResult.character, "wizard-spells");
+
+      // usedBoundSlots should be cleared
+      expect(refreshResult.character.cgeState?.["wizard-spells"]?.usedBoundSlots).toBeUndefined();
+
+      // Verify in character sheet
+      const sheet = calculateCharacterSheet(refreshResult.character);
+      const cge = sheet.cge["wizard-spells"];
+      const track = cge.tracks[0];
+      const level1Slots = track.slots?.find((s) => s.level === 1);
+
+      expect(level1Slots?.boundSlots?.[0].used).toBe(false);
     });
   });
 

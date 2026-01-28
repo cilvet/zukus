@@ -326,6 +326,7 @@ function calculateSlots(
   const cgeState = baseData.cgeState?.[cgeId];
   const boundPreparations = cgeState?.boundPreparations ?? {};
   const knownSelections = cgeState?.knownSelections ?? {};
+  const usedBoundSlots = cgeState?.usedBoundSlots ?? {};
   const isBoundPreparation = track.preparation.type === 'BOUND';
 
   for (let level = 0; level < row.length; level++) {
@@ -366,12 +367,14 @@ function calculateSlots(
         for (let index = 0; index < max; index++) {
           const slotId = `${trackId}:${level}-${index}`;
           const preparedEntityId = boundPreparations[slotId];
+          const used = usedBoundSlots[slotId] === true;
 
           boundSlots.push({
             slotId,
             level,
             index,
             preparedEntityId,
+            used,
           });
 
           // Validar que la entidad preparada esta en los conocidos

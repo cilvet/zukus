@@ -93,6 +93,7 @@ type CharacterActions = {
 
   // CGE (Spellcasting) Management
   useSlotForCGE: (cgeId: string, level: number) => UpdateResult
+  useBoundSlotForCGE: (cgeId: string, slotId: string) => UpdateResult
   refreshSlotsForCGE: (cgeId: string) => UpdateResult
   prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string, trackId?: string) => UpdateResult
   unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number, trackId?: string) => UpdateResult
@@ -364,6 +365,12 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     return updater.useSlotForCGE(cgeId, level)
   },
 
+  useBoundSlotForCGE: (cgeId: string, slotId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.useBoundSlotForCGE(cgeId, slotId)
+  },
+
   refreshSlotsForCGE: (cgeId: string) => {
     const { updater } = get()
     if (!updater) return notSetResult
@@ -539,6 +546,7 @@ export function useCharacterActions() {
     rest: state.rest,
     // CGE
     useSlotForCGE: state.useSlotForCGE,
+    useBoundSlotForCGE: state.useBoundSlotForCGE,
     refreshSlotsForCGE: state.refreshSlotsForCGE,
     prepareEntityForCGE: state.prepareEntityForCGE,
     unprepareSlotForCGE: state.unprepareSlotForCGE,

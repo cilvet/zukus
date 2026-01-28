@@ -269,6 +269,13 @@ export type CGEState = {
    * Similar a knownSelections pero para preparados.
    */
   listPreparations?: Record<string, string[]>
+
+  /**
+   * Para preparacion BOUND: slots que ya han sido usados (lanzados).
+   * { "base:1-0": true } significa que el slot 0 de nivel 1 del track base ya se uso.
+   * Se limpia con refreshSlots (descanso).
+   */
+  usedBoundSlots?: Record<string, boolean>
 }
 
 // ============================================================================
@@ -280,10 +287,11 @@ export type CGEState = {
  * Representa un slot especifico en el que se puede preparar una entidad.
  */
 export type CalculatedBoundSlot = {
-  slotId: string // "1-0", "1-1", "2-0", etc.
+  slotId: string // "base:1-0", "base:1-1", "domain:2-0", etc.
   level: number
   index: number
   preparedEntityId?: string // ID de la entidad preparada, si hay
+  used?: boolean // true si el slot ya fue usado (lanzado)
 }
 
 /**
