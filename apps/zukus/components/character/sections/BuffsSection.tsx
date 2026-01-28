@@ -2,7 +2,7 @@ import { View, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { Checkbox, useCharacterBuffs, useCharacterStore } from '../../../ui'
-import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SectionHeader } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 
 /**
@@ -20,9 +20,9 @@ export function BuffsSection() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <YStack padding={16}>
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="*" title="Sin buffs disponibles" />
-          </SectionCard>
+          </YStack>
         </YStack>
       </View>
     )
@@ -36,7 +36,7 @@ export function BuffsSection() {
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled
       >
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="*" title="Buffs" />
           <YStack gap={4}>
             {buffs.map((buff) => {
@@ -67,14 +67,14 @@ export function BuffsSection() {
               )
             })}
           </YStack>
-        </SectionCard>
+        </YStack>
 
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="?" title="Info" />
           <Text fontSize={12} color="$placeholderColor" lineHeight={18}>
             Toca un buff para ver sus detalles. Usa el checkbox para activar/desactivar.
           </Text>
-        </SectionCard>
+        </YStack>
       </ScrollView>
     </View>
   )

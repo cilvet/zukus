@@ -339,7 +339,7 @@ export function EquipmentDetailPanel({ item, onToggleEquipped }: EquipmentDetail
   const stats = getDetailStats(item)
 
   return (
-    <YStack gap={16} padding={4}>
+    <YStack gap={16}>
       <XStack justifyContent="flex-end">
         <DetailLayoutToggle layout={layout} onChange={setLayout} />
       </XStack>

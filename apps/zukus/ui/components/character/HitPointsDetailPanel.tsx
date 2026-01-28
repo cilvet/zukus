@@ -1,4 +1,4 @@
-import { Button, Card, Input, Text, XStack, YStack } from 'tamagui'
+import { Button, Input, Text, XStack, YStack } from 'tamagui'
 
 export type HitPointsDetailPanelProps = {
   currentHp: number
@@ -42,18 +42,12 @@ export function HitPointsDetailPanel({
   const formattedConMod = constitutionModifier >= 0 ? `+${constitutionModifier}` : String(constitutionModifier)
 
   return (
-    <YStack gap={16} padding={4}>
+    <YStack gap={16}>
       <Text fontSize={22} fontWeight="700" color="$color" textAlign="center">
         Hit Points
       </Text>
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <YStack gap={12}>
           <XStack justifyContent="space-between" alignItems="center">
             <XStack alignItems="baseline" gap={6}>
@@ -113,15 +107,9 @@ export function HitPointsDetailPanel({
             Full Rest
           </Button>
         </YStack>
-      </Card>
+      </YStack>
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <YStack gap={8}>
           <Text fontSize={14} fontWeight="700" color="$color">
             TEMPORARY EFFECTS
@@ -130,7 +118,7 @@ export function HitPointsDetailPanel({
             No temporary effects
           </Text>
         </YStack>
-      </Card>
+      </YStack>
     </YStack>
   )
 }

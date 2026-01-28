@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
-import { Text, YStack, XStack, Card } from 'tamagui'
+import { Text, YStack, XStack } from 'tamagui'
 import type { SourceValue } from '@zukus/core'
 import { SourceValuesTable } from './SourceValuesTable'
 import { useTheme } from '../../contexts/ThemeContext'
@@ -80,15 +80,9 @@ export function ArmorClassDetailPanel({
   const info = AC_TYPE_INFO[selectedType]
 
   return (
-    <YStack gap={16} padding={4}>
+    <YStack gap={16}>
       {/* Summary Card - muestra los 3 valores */}
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <Text fontSize={18} fontWeight="700" color="$color" marginBottom={12}>
           Armor Class
         </Text>
@@ -118,17 +112,10 @@ export function ArmorClassDetailPanel({
             </Text>
           </YStack>
         </XStack>
-      </Card>
+      </YStack>
 
       {/* Tabs para seleccionar tipo de AC */}
-      <Card
-        padding={0}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-        overflow="hidden"
-      >
+      <YStack overflow="hidden">
         <XStack borderBottomWidth={1} borderBottomColor="$borderColor">
           <TabButton
             isSelected={selectedType === 'total'}
@@ -148,7 +135,7 @@ export function ArmorClassDetailPanel({
         </XStack>
 
         {/* Contenido del tab seleccionado */}
-        <YStack padding={16}>
+        <YStack>
           <YStack alignItems="center" gap={8} marginBottom={16}>
             <Text fontSize={20} fontWeight="700" color="$color">
               {info.fullName}
@@ -163,23 +150,17 @@ export function ArmorClassDetailPanel({
           </Text>
           <SourceValuesTable sourceValues={currentData.sourceValues} />
         </YStack>
-      </Card>
+      </YStack>
 
-      {/* Description Card */}
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      {/* Description */}
+      <YStack>
         <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
           DESCRIPCION
         </Text>
         <Text fontSize={14} color="$placeholderColor" lineHeight={22}>
           {info.description}
         </Text>
-      </Card>
+      </YStack>
     </YStack>
   )
 }

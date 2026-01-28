@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ScrollView, StyleSheet, Pressable } from 'react-native'
+import { View, ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
 import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions } from '../../ui'
@@ -785,7 +785,7 @@ export function DetailScreen() {
   const { themeColors } = useTheme()
   
   const { type, id, extra } = parseSlug(slug)
-  const isChatDetail = type === 'chat'
+  const needsOwnScroll = type === 'chat' || type === 'cgeEntitySelect' || type === 'cgeManagement'
   
   // Determinar el título para el header
   const getTitle = (): string => {
@@ -859,8 +859,10 @@ export function DetailScreen() {
           title: getTitle(),
         }} 
       />
-      {isChatDetail ? (
-        <ChatScreen />
+      {needsOwnScroll ? (
+        <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+          {renderContent()}
+        </View>
       ) : (
         <ScrollView
           style={[styles.container, { backgroundColor: themeColors.background }]}
@@ -878,6 +880,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingVertical: 16,
+    padding: 16,
   },
 })

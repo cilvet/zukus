@@ -1,4 +1,4 @@
-import { Text, YStack, XStack, Card } from 'tamagui'
+import { Text, YStack, XStack } from 'tamagui'
 import type { SourceValue } from '@zukus/core'
 import { SourceValuesTable } from './SourceValuesTable'
 
@@ -30,14 +30,8 @@ export function BABDetailPanel({
   const hasMultipleAttacks = multipleAttacks && multipleAttacks.length > 1
 
   return (
-    <YStack gap={16} padding={4}>
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+    <YStack gap={16}>
+      <YStack>
         <YStack alignItems="center" gap={8}>
           <Text fontSize={24} fontWeight="700" color="$color">
             Base Attack Bonus
@@ -51,16 +45,10 @@ export function BABDetailPanel({
             </Text>
           )}
         </YStack>
-      </Card>
+      </YStack>
 
       {hasMultipleAttacks && (
-        <Card
-          padding={16}
-          backgroundColor="$background"
-          borderWidth={1}
-          borderColor="$borderColor"
-          borderRadius={4}
-        >
+        <YStack>
           <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
             ATAQUES POR RONDA
           </Text>
@@ -76,36 +64,24 @@ export function BABDetailPanel({
               </XStack>
             ))}
           </YStack>
-        </Card>
+        </YStack>
       )}
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
           MODIFICADORES
         </Text>
         <SourceValuesTable sourceValues={sourceValues} />
-      </Card>
+      </YStack>
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
           DESCRIPCION
         </Text>
         <Text fontSize={14} color="$placeholderColor" lineHeight={22}>
           {BAB_DESCRIPTION}
         </Text>
-      </Card>
+      </YStack>
     </YStack>
   )
 }

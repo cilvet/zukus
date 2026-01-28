@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
 import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection, useIsPageVisible } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
-import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SectionHeader } from '../CharacterComponents'
 import type { CalculatedAttack } from '@zukus/core'
 
 /**
@@ -48,7 +48,7 @@ export function CombatSection() {
         nestedScrollEnabled
       >
         {armorClass && (
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="AC" title="Armor Class" />
             <ArmorClassCard
               totalAC={armorClass.totalAc.totalValue}
@@ -57,10 +57,10 @@ export function CombatSection() {
               onPress={handleArmorClassPress}
               glowEnabled={glowEnabled}
             />
-          </SectionCard>
+          </YStack>
         )}
 
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="CMBT" title="Combat Stats" />
           <YStack gap={8}>
             {initiative && (
@@ -79,10 +79,10 @@ export function CombatSection() {
               />
             )}
           </YStack>
-        </SectionCard>
+        </YStack>
 
         {savingThrows && (
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="SAVE" title="Saving Throws" />
             <XStack gap={8}>
               <SavingThrowCard
@@ -104,18 +104,18 @@ export function CombatSection() {
                 glowEnabled={glowEnabled}
               />
             </XStack>
-          </SectionCard>
+          </YStack>
         )}
 
         {attackData && attackData.attacks.length > 0 && (
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="ATK" title="Attacks" />
             <AttacksSection
               attacks={attackData.attacks}
               onAttackPress={handleAttackPress}
               glowEnabled={glowEnabled}
             />
-          </SectionCard>
+          </YStack>
         )}
       </ScrollView>
     </View>

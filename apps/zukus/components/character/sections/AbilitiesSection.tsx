@@ -4,7 +4,7 @@ import { FlashList } from '@shopify/flash-list'
 import { YStack, XStack, Text } from 'tamagui'
 import type { CalculatedSingleSkill, CalculatedSkills } from '@zukus/core'
 import { useCharacterAbilities, useCharacterSkills, AbilityCard, AbilityCardCompact, useIsPageVisible } from '../../../ui'
-import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SectionHeader } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 import { useBookmarkedSkills } from '../../../hooks'
 import { useTheme } from '../../../ui/contexts/ThemeContext'
@@ -203,9 +203,9 @@ export function AbilitiesSection() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <YStack padding={16}>
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="*" title="Cargando..." />
-          </SectionCard>
+          </YStack>
         </YStack>
       </View>
     )

@@ -2,7 +2,7 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, Text } from 'tamagui'
 import { useComputedEntities, EntityTypeGroup } from '../../../ui'
-import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SectionHeader } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 import type { ComputedEntity } from '@zukus/core'
 
@@ -35,12 +35,12 @@ export function EntitiesSection() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <YStack padding={16}>
-          <SectionCard>
+          <YStack gap={12}>
             <SectionHeader icon="E" title="Sin entidades" />
             <Text fontSize={12} color="$placeholderColor" padding={8}>
               No hay entidades computadas para este personaje.
             </Text>
-          </SectionCard>
+          </YStack>
         </YStack>
       </View>
     )

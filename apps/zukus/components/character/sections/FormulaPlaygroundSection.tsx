@@ -3,7 +3,7 @@ import { View, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { useCharacterSheet } from '../../../ui'
-import { SectionHeader, SectionCard } from '../CharacterComponents'
+import { SectionHeader } from '../CharacterComponents'
 import { FormulaEditorModal } from './FormulaEditorModal'
 import {
   substituteExpression,
@@ -70,7 +70,7 @@ export function FormulaPlaygroundSection() {
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled
       >
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="f" title="Formula Playground" />
 
           <YStack gap={12}>
@@ -160,10 +160,10 @@ export function FormulaPlaygroundSection() {
               </YStack>
             </YStack>
           </YStack>
-        </SectionCard>
+        </YStack>
 
         {/* Referencia de variables */}
-        <SectionCard>
+        <YStack gap={12}>
           <SectionHeader icon="?" title="Variables Disponibles" />
           <YStack gap={8}>
             <VariableGroup
@@ -205,7 +205,7 @@ export function FormulaPlaygroundSection() {
               substitutionValues={substitutionValues}
             />
           </YStack>
-        </SectionCard>
+        </YStack>
       </ScrollView>
     </View>
   )

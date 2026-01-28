@@ -1,4 +1,4 @@
-import { Text, YStack, Card } from 'tamagui'
+import { Text, YStack } from 'tamagui'
 import type { SourceValue } from '@zukus/core'
 import { SourceValuesTable } from './SourceValuesTable'
 
@@ -36,14 +36,8 @@ export function SavingThrowDetailPanel({
   const info = SAVING_THROW_INFO[savingThrowKey]
 
   return (
-    <YStack gap={16} padding={4}>
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+    <YStack gap={16}>
+      <YStack>
         <YStack alignItems="center" gap={8}>
           <Text fontSize={24} fontWeight="700" color="$color">
             {info?.name ?? savingThrowKey}
@@ -52,35 +46,23 @@ export function SavingThrowDetailPanel({
             {totalValue >= 0 ? '+' : ''}{totalValue}
           </Text>
         </YStack>
-      </Card>
+      </YStack>
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
           MODIFICADORES
         </Text>
         <SourceValuesTable sourceValues={sourceValues} />
-      </Card>
+      </YStack>
 
-      <Card
-        padding={16}
-        backgroundColor="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        borderRadius={4}
-      >
+      <YStack>
         <Text fontSize={14} fontWeight="700" marginBottom={12} color="$color">
           DESCRIPCION
         </Text>
         <Text fontSize={14} color="$placeholderColor" lineHeight={22}>
           {info?.description ?? ''}
         </Text>
-      </Card>
+      </YStack>
     </YStack>
   )
 }
