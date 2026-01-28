@@ -60,6 +60,7 @@ import {
   CGETabView,
 } from '../../components/character'
 import { ChatScreenWeb } from '../chat/ChatScreenWeb'
+import { CompendiumEntityDetail } from '../../components/compendiums'
 import { SavingThrowDetailPanel } from '../../ui'
 import { SkillsSection } from '../../ui/components/character/SkillsSection'
 import type { Ability } from '../../components/character/data'
@@ -743,7 +744,7 @@ function CharacterScreenDesktopContent() {
         onBack={goBack}
         canGoBack={canGoBack}
         title={getPanelTitle()}
-        disableScroll={panelInfo?.type === 'chat' || panelInfo?.type === 'cgeEntitySelect'}
+        disableScroll={panelInfo?.type === 'chat' || panelInfo?.type === 'cgeEntitySelect' || panelInfo?.type === 'compendiumEntity'}
       >
         {panelInfo?.type === 'ability' && panelInfo?.id && getAbilityForPanel(panelInfo.id) && (
           <AbilityDetailPanel
@@ -843,6 +844,9 @@ function CharacterScreenDesktopContent() {
         )}
         {panelInfo?.type === 'cgeEntitySelect' && panelInfo?.id && (
           <CGEEntitySelectPanel selectionId={panelInfo.id} />
+        )}
+        {panelInfo?.type === 'compendiumEntity' && panelInfo?.id && (
+          <CompendiumEntityDetail entityId={panelInfo.id} />
         )}
       </SidePanel>
     </SidePanelContainer>

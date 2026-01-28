@@ -11,6 +11,7 @@ import {
   useCompendiumContext,
 } from '../../../ui'
 import { usePanelNavigation } from '../../../hooks'
+import { useNavigateToDetail } from '../../../navigation'
 import type { StandardEntity, FilterState, FilterValue, FacetFilterDef } from '@zukus/core'
 import {
   spellFilterConfig,
@@ -180,6 +181,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const prepareEntityForCGE = useCharacterStore((state) => state.prepareEntityForCGE)
   const panelNav = usePanelNavigation('character')
   const router = useRouter()
+  const navigateToDetail = useNavigateToDetail()
 
   // Parse selectionId: "level:slotIndex:cgeId:trackId"
   const [levelStr, slotIndexStr, cgeIdFromParams, trackIdFromParams] = selectionId.split(':')
@@ -240,6 +242,16 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
       }
     },
     [prepareEntityForCGE, cgeId, slotLevel, slotIndex, trackId, router, panelNav]
+  )
+
+  const handleViewEntityDetail = useCallback(
+    (entityId: string) => {
+      // Find entity name from the already-filtered list to avoid context issues
+      const entity = filteredEntities.find(e => e.id === entityId)
+      const entityName = entity?.name ?? entityId
+      navigateToDetail('compendiumEntity', entityId, entityName)
+    },
+    [filteredEntities, navigateToDetail]
   )
 
   const handleOpenFilters = () => {
@@ -337,6 +349,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
             color={textColor}
             placeholderColor={placeholderColor}
             onPress={handleSelectEntity}
+            onInfoPress={handleViewEntityDetail}
           />
         )}
         ListHeaderComponent={

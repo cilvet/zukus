@@ -14,7 +14,9 @@ type EntityRowProps = {
   subtitle?: string
   isLast?: boolean
   opacity?: number
+  /** Called when the row is pressed (for navigation to entity detail) */
   onPress?: () => void
+  /** Element shown on the right side of the row */
   rightElement?: React.ReactNode
 }
 

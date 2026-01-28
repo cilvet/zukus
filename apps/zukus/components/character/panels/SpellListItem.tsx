@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet } from 'react-native'
+import { Pressable, TouchableOpacity, StyleSheet } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
+import { FontAwesome6 } from '@expo/vector-icons'
 import { EntityImage } from '../../../ui'
 
 /**
@@ -15,7 +16,10 @@ export type SpellListItemProps = {
   image: string | undefined
   color: string
   placeholderColor: string
+  /** Called when the item is pressed (for selection) */
   onPress: (id: string) => void
+  /** Called when info icon is pressed (for navigation to detail) */
+  onInfoPress?: (id: string) => void
 }
 
 /**
@@ -35,6 +39,7 @@ export function SpellListItem({
   color,
   placeholderColor,
   onPress,
+  onInfoPress,
 }: SpellListItemProps) {
   return (
     <Pressable onPress={() => onPress(id)} style={styles.container}>
@@ -73,6 +78,21 @@ export function SpellListItem({
               </Text>
             )}
           </YStack>
+
+          {onInfoPress && (
+            <TouchableOpacity
+              onPress={() => onInfoPress(id)}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              activeOpacity={0.5}
+            >
+              <FontAwesome6
+                name="circle-info"
+                size={18}
+                color={placeholderColor}
+                style={{ opacity: 0.7 }}
+              />
+            </TouchableOpacity>
+          )}
         </XStack>
       )}
     </Pressable>

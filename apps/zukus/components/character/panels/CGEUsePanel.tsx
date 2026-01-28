@@ -2,6 +2,7 @@ import { Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme } from '../../../ui'
+import { useNavigateToDetail } from '../../../navigation'
 import type { CalculatedCGE, CalculatedBoundSlot } from '@zukus/core'
 import { EntityRow, LevelHeader, ENTITY_ROW_PADDING_HORIZONTAL } from './EntityRow'
 
@@ -60,6 +61,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
   const useSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
   const useBoundSlotForCGE = useCharacterStore((state) => state.useBoundSlotForCGE)
   const compendium = useCompendiumContext()
+  const navigateToDetail = useNavigateToDetail()
   const { themeInfo, themeColors } = useTheme()
   const accentColor = themeInfo.colors.accent
 
@@ -150,6 +152,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                         subtitle={subtitle}
                         isLast={index === entityEntries.length - 1}
                         opacity={canCast ? 1 : 0.5}
+                        onPress={() => navigateToDetail('compendiumEntity', entityId, displayName)}
                         rightElement={
                           <CastButton
                             canCast={canCast}

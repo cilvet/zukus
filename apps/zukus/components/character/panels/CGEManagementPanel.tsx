@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
 import { usePrimaryCGE, useCharacterStore, useCompendiumContext } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
-import type { CalculatedSlot, CalculatedCGE } from '@zukus/core'
+import type { CalculatedSlot, CalculatedCGE, StandardEntity } from '@zukus/core'
 import { EntityRow, EmptySlotRow, LevelHeader } from './EntityRow'
 
 type CGEManagementPanelProps = {
@@ -145,6 +145,7 @@ export function CGEManagementPanel({ cge: propsCge }: CGEManagementPanelProps) {
                     name={displayName}
                     image={entity?.image}
                     isLast={isLastItem}
+                    onPress={() => navigateToDetail('compendiumEntity', prep.entityId, displayName)}
                     rightElement={
                       <Pressable
                         onPress={() => handleRemovePreparation(slot.level, prep.slotIndex, primaryTrack.id)}
