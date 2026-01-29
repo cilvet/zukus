@@ -5,7 +5,7 @@ import type { StandardEntity } from '../../entities/types/base';
 describe('Example Compendium Validation', () => {
   it('should validate all entities in the example compendium', () => {
     const context = dnd35ExampleCalculationContext.compendiumContext;
-    
+
     if (!context) {
       throw new Error('Compendium context not resolved');
     }

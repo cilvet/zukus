@@ -30,6 +30,7 @@ export type DetailType =
   | 'buff'
   | 'buffEdit'
   | 'changeEdit'
+  | 'allBuffs'
   | 'equipment'
   | 'item'
   | 'hitPoints'
@@ -95,6 +96,9 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   changeEdit: {
     getTitle: (id) => id.includes(':new') ? 'New Change' : 'Edit Change',
+  },
+  allBuffs: {
+    getTitle: () => 'Todos los Buffs',
   },
   equipment: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

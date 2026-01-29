@@ -44,6 +44,8 @@ import {
   BuffDetailPanel,
   BuffEditScreen,
   ChangeEditScreen,
+  BuffsCompact,
+  AllBuffsDetailPanel,
 } from '../../ui'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
@@ -618,6 +620,10 @@ function CharacterScreenDesktopContent() {
                 </XStack>
               </SectionCard>
             )}
+            <SectionCard>
+              <SectionHeader icon="*" title="Buffs" />
+              <BuffsCompact />
+            </SectionCard>
             {attackData && attackData.attacks.length > 0 && (
               <SectionCard>
                 <SectionHeader icon="*" title="Attacks" />
@@ -641,45 +647,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 3: Buffs */}
-        <VerticalSection>
-          <YStack width="100%" gap={16}>
-            <SectionCard>
-              <SectionHeader icon="*" title="Buffs" />
-              <YStack gap={4}>
-                {buffs.map((buff) => {
-                  return (
-                    <Pressable
-                      key={buff.uniqueId}
-                      onPress={() => navigateToDetail('buff', buff.uniqueId, buff.name)}
-                    >
-                      {({ pressed }) => (
-                        <XStack
-                          alignItems="center"
-                          gap={8}
-                          paddingVertical={4}
-                          opacity={pressed ? 0.6 : 1}
-                        >
-                          <Checkbox
-                            checked={buff.active}
-                            onCheckedChange={() => toggleBuff(buff.uniqueId)}
-                            size="small"
-                            variant="diamond"
-                          />
-                          <Text fontSize={14} color="$color" flex={1}>
-                            {buff.name}
-                          </Text>
-                        </XStack>
-                      )}
-                    </Pressable>
-                  )
-                })}
-              </YStack>
-            </SectionCard>
-          </YStack>
-        </VerticalSection>
-
-        {/* Columna 4: Equipment */}
+        {/* Columna 3: Equipment */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
@@ -704,7 +672,7 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 5: CGE (Spells/Abilities) */}
+        {/* Columna 4: CGE (Spells/Abilities) */}
         {primaryCGE && (
           <VerticalSection>
             <YStack width="100%" gap={16}>
@@ -716,7 +684,7 @@ function CharacterScreenDesktopContent() {
           </VerticalSection>
         )}
 
-        {/* Columna 6: Entities */}
+        {/* Columna 5: Entities */}
         {computedEntities.length > 0 && (
           <VerticalSection>
             <YStack width="100%" gap={16}>
@@ -820,6 +788,9 @@ function CharacterScreenDesktopContent() {
         )}
         {panelInfo?.type === 'changeEdit' && panelInfo?.id && (
           <ChangeEditPanelContainer changeId={panelInfo.id} />
+        )}
+        {panelInfo?.type === 'allBuffs' && (
+          <AllBuffsDetailPanel />
         )}
         {panelInfo?.type === 'item' && currentPanel?.title && (
           <GenericDetailPanel title={currentPanel.title} />

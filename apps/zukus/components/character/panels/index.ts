@@ -1,4 +1,5 @@
 export { CGEManagementPanel } from './CGEManagementPanel'
 export { CGEEntitySelectPanel } from './CGEEntitySelectPanel'
 export { CGEUsePanel } from './CGEUsePanel'
+export { CGEKnownPanel } from './CGEKnownPanel'
 export { CGETabView } from './CGETabView'

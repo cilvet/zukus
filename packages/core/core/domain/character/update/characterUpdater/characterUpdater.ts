@@ -11,8 +11,9 @@ import * as ops from "../../updater/operations";
 import { ClassFeature } from "../../../class/classFeatures";
 import { Feat } from "../../baseData/features/feats/feat";
 import type { StandardEntity } from "../../../entities/types/base";
-import { useSlot, useBoundSlot, refreshSlots } from "../../../cge/slotOperations";
+import { useSlot, useBoundSlot, refreshSlots, setSlotValue } from "../../../cge/slotOperations";
 import { prepareEntityInSlot, unprepareSlot } from "../../../cge/preparationOperations";
+import { addKnownEntity, removeKnownEntity } from "../../../cge/knownOperations";
 
 /**
  * Character Updater - Wrapper con estado sobre funciones puras.
@@ -1155,6 +1156,33 @@ export class CharacterUpdater implements ICharacterUpdater {
   }
 
   /**
+   * Set the current value of a slot level directly.
+   * Allows manual adjustment of slot counts from UI.
+   * @param cgeId The CGE identifier
+   * @param level The slot level
+   * @param currentValue The desired current value
+   * @param maxValue The maximum value (needed to calculate delta)
+   */
+  setSlotValueForCGE(
+    cgeId: string,
+    level: number,
+    currentValue: number,
+    maxValue: number
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = setSlotValue(this.character, cgeId, level, currentValue, maxValue);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
    * Prepare an entity in a specific slot (Vancian-style).
    * @param cgeId The CGE identifier
    * @param slotLevel The level of the slot
@@ -1205,6 +1233,49 @@ export class CharacterUpdater implements ICharacterUpdater {
     if (!this.character) return this.characterNotSet;
 
     const result = unprepareSlot(this.character, cgeId, slotLevel, slotIndex, trackId);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Add an entity to the known pool of a CGE (e.g., learn a spell for Sorcerer).
+   * @param cgeId The CGE identifier (e.g., "sorcerer-spells")
+   * @param entity The entity to add (from compendium)
+   * @param entityLevel The level of the entity (e.g., 1 for a level 1 spell)
+   */
+  addKnownEntityForCGE(
+    cgeId: string,
+    entity: StandardEntity,
+    entityLevel: number
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = addKnownEntity(this.character, cgeId, entity, entityLevel);
+
+    if (result.warnings.length > 0) {
+      return { success: false, error: result.warnings[0].message };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Remove an entity from the known pool of a CGE (e.g., forget a spell).
+   * @param cgeId The CGE identifier
+   * @param entityId The entity ID to remove
+   */
+  removeKnownEntityForCGE(cgeId: string, entityId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = removeKnownEntity(this.character, cgeId, entityId);
 
     if (result.warnings.length > 0) {
       return { success: false, error: result.warnings[0].message };

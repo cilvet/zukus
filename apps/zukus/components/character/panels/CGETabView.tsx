@@ -1,16 +1,22 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Pressable } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import { useTheme } from '../../../ui'
 import { CGEUsePanel } from './CGEUsePanel'
 import { CGEManagementPanel } from './CGEManagementPanel'
+import { CGEKnownPanel } from './CGEKnownPanel'
 import type { CalculatedCGE } from '@zukus/core'
 
 type CGETabViewProps = {
   cge?: CalculatedCGE | null
 }
 
-type TabId = 'use' | 'manage'
+type TabId = 'known' | 'prepare' | 'use'
+
+type TabConfig = {
+  id: TabId
+  label: string
+}
 
 type TabButtonProps = {
   label: string
@@ -44,38 +50,81 @@ function TabButton({ label, isActive, onPress, accentColor }: TabButtonProps) {
 }
 
 /**
- * CGE Tab View - Container with tabs for Use and Manage panels.
- * Used in both desktop SidePanel and mobile character screen.
+ * Determines which tabs to show based on CGE configuration.
+ *
+ * - "Known" tab: shown if config.known exists (Sorcerer, Wizard)
+ * - "Prepare" tab: shown if any track has preparationType === 'BOUND' (Cleric, Wizard)
+ * - "Use" tab: always shown
+ */
+function getAvailableTabs(cge: CalculatedCGE | null | undefined): TabConfig[] {
+  const tabs: TabConfig[] = []
+
+  // Always show "Use" tab first
+  tabs.push({ id: 'use', label: 'Usar' })
+
+  if (!cge) {
+    return tabs
+  }
+
+  // Show "Known" tab if CGE has known configuration
+  if (cge.config.known) {
+    const knownLabel =
+      cge.config.known.type === 'UNLIMITED' ? 'Libro' : 'Conocidos'
+    tabs.push({ id: 'known', label: knownLabel })
+  }
+
+  // Show "Prepare" tab if any track uses BOUND preparation
+  const hasBoundPreparation = cge.tracks.some(
+    (track) => track.preparationType === 'BOUND'
+  )
+  if (hasBoundPreparation) {
+    tabs.push({ id: 'prepare', label: 'Preparar' })
+  }
+
+  return tabs
+}
+
+/**
+ * CGE Tab View - Container with dynamic tabs based on CGE configuration.
+ *
+ * Shows different tabs depending on the CGE type:
+ * - Sorcerer (spontaneous): Known, Use
+ * - Cleric (prepared divine): Prepare, Use
+ * - Wizard (prepared arcane): Known, Prepare, Use
  */
 export function CGETabView({ cge }: CGETabViewProps) {
-  const [activeTab, setActiveTab] = useState<TabId>('use')
   const { themeInfo } = useTheme()
   const accentColor = themeInfo.colors.accent
+
+  const availableTabs = useMemo(() => getAvailableTabs(cge), [cge])
+
+  // Initialize with first available tab
+  const [activeTab, setActiveTab] = useState<TabId>(() => availableTabs[0]?.id ?? 'use')
+
+  // If active tab is no longer available, switch to first available
+  const validActiveTab = availableTabs.some((t) => t.id === activeTab)
+    ? activeTab
+    : availableTabs[0]?.id ?? 'use'
 
   return (
     <YStack flex={1}>
       {/* Tab bar */}
       <XStack borderBottomWidth={1} borderBottomColor="$borderColor">
-        <TabButton
-          label="Usar"
-          isActive={activeTab === 'use'}
-          onPress={() => setActiveTab('use')}
-          accentColor={accentColor}
-        />
-        <TabButton
-          label="Gestionar"
-          isActive={activeTab === 'manage'}
-          onPress={() => setActiveTab('manage')}
-          accentColor={accentColor}
-        />
+        {availableTabs.map((tab) => (
+          <TabButton
+            key={tab.id}
+            label={tab.label}
+            isActive={validActiveTab === tab.id}
+            onPress={() => setActiveTab(tab.id)}
+            accentColor={accentColor}
+          />
+        ))}
       </XStack>
 
       {/* Tab content */}
-      {activeTab === 'use' ? (
-        <CGEUsePanel cge={cge} />
-      ) : (
-        <CGEManagementPanel cge={cge} />
-      )}
+      {validActiveTab === 'known' && <CGEKnownPanel cge={cge} />}
+      {validActiveTab === 'prepare' && <CGEManagementPanel cge={cge} />}
+      {validActiveTab === 'use' && <CGEUsePanel cge={cge} />}
     </YStack>
   )
 }

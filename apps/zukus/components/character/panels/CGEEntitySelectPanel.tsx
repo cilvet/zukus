@@ -29,8 +29,48 @@ import { EntityFilterView, ActiveFilterChips } from '../../filters'
 // ============================================================================
 
 type CGEEntitySelectPanelProps = {
-  /** Format: "level:slotIndex:cgeId:trackId" */
+  /**
+   * Format depends on mode:
+   * - Prepare mode: "level:slotIndex:cgeId:trackId"
+   * - Known mode: "known:level:cgeId"
+   */
   selectionId: string
+}
+
+type SelectionMode = 'prepare' | 'known'
+
+type ParsedSelection = {
+  mode: SelectionMode
+  level: number
+  cgeId: string
+  // Only for prepare mode
+  slotIndex?: number
+  trackId?: string
+}
+
+/**
+ * Parse selectionId to determine mode and extract params.
+ */
+function parseSelectionId(selectionId: string, fallbackCgeId: string): ParsedSelection {
+  const parts = selectionId.split(':')
+
+  // Known mode: "known:level:cgeId"
+  if (parts[0] === 'known') {
+    return {
+      mode: 'known',
+      level: parseInt(parts[1] ?? '0', 10),
+      cgeId: parts[2] ?? fallbackCgeId,
+    }
+  }
+
+  // Prepare mode: "level:slotIndex:cgeId:trackId"
+  return {
+    mode: 'prepare',
+    level: parseInt(parts[0] ?? '0', 10),
+    slotIndex: parseInt(parts[1] ?? '0', 10),
+    cgeId: parts[2] ?? fallbackCgeId,
+    trackId: parts[3] ?? 'base',
+  }
 }
 
 type EnrichedSpell = StandardEntity & {
@@ -179,16 +219,14 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const primaryCGE = usePrimaryCGE()
   const compendium = useCompendiumContext()
   const prepareEntityForCGE = useCharacterStore((state) => state.prepareEntityForCGE)
+  const addKnownForCGE = useCharacterStore((state) => state.addKnownForCGE)
   const panelNav = usePanelNavigation('character')
   const router = useRouter()
   const navigateToDetail = useNavigateToDetail()
 
-  // Parse selectionId: "level:slotIndex:cgeId:trackId"
-  const [levelStr, slotIndexStr, cgeIdFromParams, trackIdFromParams] = selectionId.split(':')
-  const slotLevel = parseInt(levelStr ?? '0', 10)
-  const slotIndex = parseInt(slotIndexStr ?? '0', 10)
-  const cgeId = cgeIdFromParams ?? primaryCGE?.id ?? ''
-  const trackId = trackIdFromParams ?? 'base'
+  // Parse selectionId to determine mode (known vs prepare)
+  const selection = parseSelectionId(selectionId, primaryCGE?.id ?? '')
+  const { mode, level: slotLevel, cgeId } = selection
 
   const entityType = primaryCGE?.entityType ?? 'spell'
   const defaultClassId = primaryCGE?.classId ?? 'wizard'
@@ -229,10 +267,28 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
   const handleSelectEntity = useCallback(
     (entityId: string) => {
-      const result = prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId, trackId)
-      if (!result.success) {
-        console.warn('Failed to prepare entity:', result.error)
-        return
+      let result
+
+      if (mode === 'known') {
+        // Add to known entities - find entity from the already-loaded list
+        const entity = allEntities.find((e) => e.id === entityId)
+        if (!entity) {
+          console.warn('Entity not found:', entityId)
+          return
+        }
+        result = addKnownForCGE(cgeId, entity, slotLevel)
+        if (!result.success) {
+          console.warn('Failed to add known entity:', result.error)
+          return
+        }
+      } else {
+        // Prepare in slot
+        const { slotIndex = 0, trackId = 'base' } = selection
+        result = prepareEntityForCGE(cgeId, slotLevel, slotIndex, entityId, trackId)
+        if (!result.success) {
+          console.warn('Failed to prepare entity:', result.error)
+          return
+        }
       }
 
       if (Platform.OS !== 'web') {
@@ -241,7 +297,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
         panelNav.goBack()
       }
     },
-    [prepareEntityForCGE, cgeId, slotLevel, slotIndex, trackId, router, panelNav]
+    [mode, selection, allEntities, addKnownForCGE, prepareEntityForCGE, cgeId, slotLevel, router, panelNav]
   )
 
   const handleViewEntityDetail = useCallback(
@@ -321,7 +377,9 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
             >
               <FontAwesome6 name="circle-info" size={14} color={placeholderColor} />
               <Text fontSize={13} color="$placeholderColor" flex={1}>
-                Preparando para slot de nivel {slotLevel}
+                {mode === 'known'
+                  ? `Aprendiendo conjuro de nivel ${slotLevel}`
+                  : `Preparando para slot de nivel ${slotLevel}`}
               </Text>
             </XStack>
           ) : undefined

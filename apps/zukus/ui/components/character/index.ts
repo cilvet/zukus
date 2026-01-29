@@ -14,6 +14,8 @@ export { SkillRowContent, type SkillRowColors } from './SkillRowContent'
 export { SkillDetailPanel } from './SkillDetailPanel'
 export { BuffDetailPanel } from './BuffDetailPanel'
 export { BuffEditScreen } from './BuffEditScreen'
+export { BuffsCompact } from './BuffsCompact'
+export { AllBuffsDetailPanel } from './AllBuffsDetailPanel'
 export { ChangeCard, ChangeEditScreen, ChangesSection, type AnyChange } from './changes'
 export {
   AttackCard,

@@ -74,6 +74,7 @@ export {
   useSlot,
   useBoundSlot,
   refreshSlots,
+  setSlotValue,
   getSlotCurrentValue,
   getAllSlotCurrentValues,
   hasUsedSlots,

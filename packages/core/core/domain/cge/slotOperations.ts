@@ -241,6 +241,90 @@ export function refreshSlots(
 }
 
 // =============================================================================
+// Set Slot Value
+// =============================================================================
+
+/**
+ * Sets the current value of a slot level directly.
+ *
+ * This allows users to manually adjust slot counts (e.g., from the UI).
+ * The value is stored as a delta from max.
+ *
+ * @param character - The character data to update
+ * @param cgeId - The CGE to set the slot value for
+ * @param level - The level of the slot
+ * @param currentValue - The desired current value
+ * @param maxValue - The maximum value (needed to calculate delta)
+ * @returns Updated character data with warnings
+ */
+export function setSlotValue(
+  character: CharacterBaseData,
+  cgeId: string,
+  level: number,
+  currentValue: number,
+  maxValue: number
+): SlotUpdateResult {
+  const warnings: SlotWarning[] = [];
+
+  if (level < 0) {
+    warnings.push({
+      type: 'invalid_level',
+      message: `Invalid slot level: ${level}. Must be >= 0.`,
+      cgeId,
+      level,
+    });
+    return { character, warnings };
+  }
+
+  const levelKey = String(level);
+
+  // Get or initialize CGE state
+  const cgeState = character.cgeState ?? {};
+  const thisCGEState = cgeState[cgeId] ?? {};
+  const slotCurrentValues = thisCGEState.slotCurrentValues ?? {};
+
+  // Calculate delta from max
+  // If currentValue equals max, we can remove the entry (default behavior)
+  const delta = currentValue - maxValue;
+
+  let newSlotCurrentValues: Record<string, number>;
+  if (delta === 0) {
+    // Remove the entry - system defaults to max
+    const { [levelKey]: _, ...rest } = slotCurrentValues;
+    newSlotCurrentValues = rest;
+  } else {
+    newSlotCurrentValues = {
+      ...slotCurrentValues,
+      [levelKey]: delta,
+    };
+  }
+
+  // Clean up empty slotCurrentValues
+  const hasValues = Object.keys(newSlotCurrentValues).length > 0;
+
+  const updatedCGEState: CGEState = {
+    ...thisCGEState,
+    ...(hasValues ? { slotCurrentValues: newSlotCurrentValues } : {}),
+  };
+
+  // If slotCurrentValues is now empty, remove it from state
+  if (!hasValues) {
+    delete updatedCGEState.slotCurrentValues;
+  }
+
+  return {
+    character: {
+      ...character,
+      cgeState: {
+        ...cgeState,
+        [cgeId]: updatedCGEState,
+      },
+    },
+    warnings,
+  };
+}
+
+// =============================================================================
 // Query Functions
 // =============================================================================
 

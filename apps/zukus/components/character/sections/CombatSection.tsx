@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack } from 'tamagui'
-import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection, useIsPageVisible } from '../../../ui'
+import { useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterAttacks, SavingThrowCard, ArmorClassCard, InitiativeCard, BABCard, AttacksSection, useIsPageVisible, BuffsCompact } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import { SectionHeader } from '../CharacterComponents'
 import type { CalculatedAttack } from '@zukus/core'
@@ -106,6 +106,11 @@ export function CombatSection() {
             </XStack>
           </YStack>
         )}
+
+        <YStack gap={12}>
+          <SectionHeader icon="BUF" title="Buffs" />
+          <BuffsCompact />
+        </YStack>
 
         {attackData && attackData.attacks.length > 0 && (
           <YStack gap={12}>

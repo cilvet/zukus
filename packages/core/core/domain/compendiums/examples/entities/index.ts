@@ -4,8 +4,17 @@
  * Exports all entities for the D&D 3.5 compendium.
  */
 
-// Spells
+// Spells (legacy example spells)
 export { exampleSpells } from './spells';
+
+// Spells (full database with relation enrichment)
+export {
+  allSpells,
+  getSpellcastingClasses,
+  getSpellLevelsForClass,
+  filterSpells,
+  type EnrichedSpell,
+} from './spells/index';
 
 // Feats
 export {

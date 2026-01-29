@@ -1,10 +1,25 @@
-import { Pressable } from 'react-native'
+import { useState, useEffect } from 'react'
+import { Pressable, TextInput, StyleSheet, Platform, ToastAndroid } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { YStack, XStack, Text } from 'tamagui'
+import * as Haptics from 'expo-haptics'
 import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
 import type { CalculatedCGE, CalculatedBoundSlot } from '@zukus/core'
 import { EntityRow, LevelHeader, ENTITY_ROW_PADDING_HORIZONTAL } from './EntityRow'
+
+function showCastToast(entityName: string) {
+  "use no memo"
+  if (Platform.OS === 'android') {
+    ToastAndroid.show(`Lanzado ${entityName}`, ToastAndroid.SHORT)
+  }
+}
+
+type KnownEntityDisplay = {
+  id: string
+  name: string
+  image?: string
+}
 
 type CGEUsePanelProps = {
   cge?: CalculatedCGE | null
@@ -60,10 +75,12 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
   const primaryCGE = propsCge ?? hookCge
   const useSlotForCGE = useCharacterStore((state) => state.useSlotForCGE)
   const useBoundSlotForCGE = useCharacterStore((state) => state.useBoundSlotForCGE)
+  const setSlotValueForCGE = useCharacterStore((state) => state.setSlotValueForCGE)
   const compendium = useCompendiumContext()
   const navigateToDetail = useNavigateToDetail()
   const { themeInfo, themeColors } = useTheme()
   const accentColor = themeInfo.colors.accent
+  const textColor = themeColors.color
 
   if (!primaryCGE) {
     return (
@@ -73,9 +90,32 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
     )
   }
 
+  const baseData = useCharacterStore((state) => state.baseData)
+  const cgeId = primaryCGE.id
+
   const primaryTrack = primaryCGE.tracks[0]
   const slots = primaryTrack?.slots ?? []
   const isBoundPreparation = primaryTrack?.preparationType === 'BOUND'
+
+  // Get known entities for spontaneous casters
+  const knownSelections = baseData?.cgeState?.[cgeId]?.knownSelections ?? {}
+
+  // Build a map of level -> known entities for display
+  const getKnownEntitiesForLevel = (level: number): KnownEntityDisplay[] => {
+    const entityIds = knownSelections[String(level)] ?? []
+    return entityIds.map((entityId) => {
+      const entity = compendium.getEntityById(entityId)
+      const displayName = entity?.name ?? entityId
+        .replace(/-/g, ' ')
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, (l: string) => l.toUpperCase())
+      return {
+        id: entityId,
+        name: displayName,
+        image: entity?.image,
+      }
+    })
+  }
 
   // For BOUND: use the first available slot of that entity
   const handleCastBoundEntity = (entitySlots: CalculatedBoundSlot[]) => {
@@ -120,7 +160,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
 
             return (
               <YStack key={slot.level}>
-                <LevelHeader label={levelLabel} count={`${totalAvailable}/${totalPrepared} disponibles`} />
+                <LevelHeader label={levelLabel} count={`${totalAvailable}/${totalPrepared}`} />
 
                 {entityEntries.length === 0 ? (
                   <Text
@@ -158,6 +198,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                             canCast={canCast}
                             accentColor={accentColor}
                             disabledColor={themeColors.borderColor}
+                            entityName={displayName}
                             onPress={() => handleCastBoundEntity(data.slots)}
                           />
                         }
@@ -169,43 +210,56 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
             )
           }
 
-          // For non-BOUND: show level-based slots
+          // For non-BOUND (spontaneous): show known entities with slot consumption
           const slotsRemaining = slot.current
+          const knownEntities = getKnownEntitiesForLevel(slot.level)
+          const canCast = slotsRemaining > 0
+
+          const handleSlotValueChange = (value: number) => {
+            setSlotValueForCGE(primaryCGE.id, slot.level, value, slot.max)
+          }
 
           return (
             <YStack key={slot.level}>
-              <LevelHeader label={levelLabel} count={`${slotsRemaining}/${slot.max} disponibles`} />
+              <SlotLevelHeader
+                label={levelLabel}
+                current={slotsRemaining}
+                max={slot.max}
+                textColor={textColor}
+                onValueChange={handleSlotValueChange}
+              />
 
-              <XStack
-                alignItems="center"
-                justifyContent="center"
-                paddingVertical={10}
-                paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
-              >
-                <Pressable
-                  onPress={() => handleCastLevelSlot(slot.level)}
-                  disabled={slotsRemaining <= 0}
-                  hitSlop={8}
+              {knownEntities.length === 0 ? (
+                <Text
+                  fontSize={11}
+                  color="$placeholderColor"
+                  textAlign="center"
+                  paddingVertical={10}
+                  paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
                 >
-                  {({ pressed }) => (
-                    <XStack
-                      paddingVertical={5}
-                      paddingHorizontal={12}
-                      backgroundColor={slotsRemaining > 0 ? accentColor : themeColors.borderColor}
-                      borderRadius={6}
-                      opacity={pressed ? 0.7 : slotsRemaining > 0 ? 1 : 0.5}
-                    >
-                      <Text
-                        fontSize={11}
-                        fontWeight="600"
-                        color={slotsRemaining > 0 ? '#FFFFFF' : '$placeholderColor'}
-                      >
-                        Usar slot de {levelLabel}
-                      </Text>
-                    </XStack>
-                  )}
-                </Pressable>
-              </XStack>
+                  Sin conjuros conocidos
+                </Text>
+              ) : (
+                knownEntities.map((entity, index) => (
+                  <EntityRow
+                    key={entity.id}
+                    name={entity.name}
+                    image={entity.image}
+                    isLast={index === knownEntities.length - 1}
+                    opacity={canCast ? 1 : 0.5}
+                    onPress={() => navigateToDetail('compendiumEntity', entity.id, entity.name)}
+                    rightElement={
+                      <CastButton
+                        canCast={canCast}
+                        accentColor={accentColor}
+                        disabledColor={themeColors.borderColor}
+                        entityName={entity.name}
+                        onPress={() => handleCastLevelSlot(slot.level)}
+                      />
+                    }
+                  />
+                ))
+              )}
             </YStack>
           )
         })}
@@ -218,24 +272,33 @@ type CastButtonProps = {
   canCast: boolean
   accentColor: string
   disabledColor: string
+  entityName: string
   onPress: () => void
 }
 
-function CastButton({ canCast, accentColor, disabledColor, onPress }: CastButtonProps) {
+function CastButton({ canCast, accentColor, disabledColor, entityName, onPress }: CastButtonProps) {
+  const handlePress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+    showCastToast(entityName)
+    onPress()
+  }
+
   return (
-    <Pressable onPress={onPress} disabled={!canCast} hitSlop={8}>
+    <Pressable onPress={handlePress} disabled={!canCast} hitSlop={8}>
       {({ pressed }) => (
         <XStack
-          paddingVertical={5}
+          paddingVertical={4}
           paddingHorizontal={10}
-          backgroundColor={canCast ? accentColor : disabledColor}
+          backgroundColor="transparent"
+          borderWidth={1}
+          borderColor={canCast ? accentColor : disabledColor}
           borderRadius={6}
           opacity={pressed ? 0.7 : canCast ? 1 : 0.5}
         >
           <Text
             fontSize={11}
             fontWeight="600"
-            color={canCast ? '#FFFFFF' : '$placeholderColor'}
+            color={canCast ? accentColor : '$placeholderColor'}
           >
             Lanzar
           </Text>
@@ -244,3 +307,90 @@ function CastButton({ canCast, accentColor, disabledColor, onPress }: CastButton
     </Pressable>
   )
 }
+
+type SlotLevelHeaderProps = {
+  label: string
+  current: number
+  max: number
+  textColor: string
+  onValueChange: (value: number) => void
+}
+
+function SlotLevelHeader({ label, current, max, textColor, onValueChange }: SlotLevelHeaderProps) {
+  const [inputValue, setInputValue] = useState(String(current))
+  const [isFocused, setIsFocused] = useState(false)
+
+  // Sync from props when not focused
+  useEffect(() => {
+    if (!isFocused) {
+      setInputValue(String(current))
+    }
+  }, [current, isFocused])
+
+  const handleBlur = () => {
+    setIsFocused(false)
+    const parsed = parseInt(inputValue, 10)
+    if (!isNaN(parsed) && parsed !== current) {
+      onValueChange(parsed)
+    } else {
+      setInputValue(String(current))
+    }
+  }
+
+  const handleFocus = () => {
+    setIsFocused(true)
+  }
+
+  const handleChangeText = (text: string) => {
+    // Allow empty string or numbers (including negative)
+    if (text === '' || text === '-' || /^-?\d+$/.test(text)) {
+      setInputValue(text)
+    }
+  }
+
+  return (
+    <XStack
+      borderBottomWidth={2}
+      borderColor="$borderColor"
+      paddingTop={10}
+      paddingBottom={6}
+      paddingHorizontal={16}
+      marginTop={16}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Text fontSize={18} color="$color" fontWeight="700">
+        {label}
+      </Text>
+      <XStack alignItems="center" gap={4}>
+        <TextInput
+          style={[styles.slotInput, { color: textColor }]}
+          value={inputValue}
+          onChangeText={handleChangeText}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          keyboardType="number-pad"
+          selectTextOnFocus
+          underlineColorAndroid="transparent"
+        />
+        <Text fontSize={18} color="$color" fontWeight="600">
+          / {max}
+        </Text>
+      </XStack>
+    </XStack>
+  )
+}
+
+const styles = StyleSheet.create({
+  slotInput: {
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+    width: 36,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(128, 128, 128, 0.3)',
+    borderRadius: 4,
+  },
+})

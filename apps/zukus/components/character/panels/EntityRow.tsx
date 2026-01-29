@@ -73,13 +73,14 @@ export function EntityRow({
 
 type EmptySlotRowProps = {
   isLast?: boolean
+  label?: string
   onPress: () => void
 }
 
 /**
- * Empty slot placeholder for preparation panels.
+ * Empty slot placeholder for preparation/known panels.
  */
-export function EmptySlotRow({ isLast = false, onPress }: EmptySlotRowProps) {
+export function EmptySlotRow({ isLast = false, label = 'Preparar...', onPress }: EmptySlotRowProps) {
   return (
     <Pressable onPress={onPress}>
       {({ pressed }) => (
@@ -106,7 +107,7 @@ export function EmptySlotRow({ isLast = false, onPress }: EmptySlotRowProps) {
           </YStack>
 
           <Text fontSize={13} color="$placeholderColor" flex={1}>
-            Preparar...
+            {label}
           </Text>
         </XStack>
       )}
@@ -124,15 +125,22 @@ type LevelHeaderProps = {
  */
 export function LevelHeader({ label, count }: LevelHeaderProps) {
   return (
-    <YStack
-      borderTopWidth={1}
-      borderBottomWidth={1}
+    <XStack
+      borderBottomWidth={2}
       borderColor="$borderColor"
-      paddingVertical={8}
+      paddingTop={10}
+      paddingBottom={6}
+      paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
+      marginTop={16}
+      alignItems="center"
+      justifyContent="space-between"
     >
-      <Text fontSize={11} color="$placeholderColor" fontWeight="600" textAlign="center">
-        {label} ({count})
+      <Text fontSize={18} color="$color" fontWeight="700">
+        {label}
       </Text>
-    </YStack>
+      <Text fontSize={18} color="$color" fontWeight="600">
+        {count}
+      </Text>
+    </XStack>
   )
 }

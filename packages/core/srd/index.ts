@@ -7,4 +7,5 @@ export * from "./feats";
 export * from "./fighter";
 export * from "./cleric";
 export * from "./druid";
+export * from "./sorcerer";
 

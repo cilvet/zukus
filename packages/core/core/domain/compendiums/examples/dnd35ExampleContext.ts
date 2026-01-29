@@ -30,13 +30,14 @@ import {
 } from '../../levels/classSchemas/systemLevelsSchemas';
 
 // Entities
-import { exampleSpells, allFeats, allBuffs } from './entities';
+import { allSpells, allFeats, allBuffs } from './entities';
 
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
 import { rogueClass, rogueClassFeatures } from '../../../../srd/rogue';
 import { clericClass, clericClassFeatures } from '../../../../srd/cleric';
 import { druidClass, druidClassFeatures } from '../../../../srd/druid';
+import { sorcererClass, sorcererClassFeatures } from '../../../../srd/sorcerer';
 
 // System levels from SRD
 import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLevels';
@@ -49,10 +50,10 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
  * D&D 3.5 Example Compendium
  *
  * Contains:
- * - Spells: 10 example spells
+ * - Spells: 2,789 spells with class-level relations
  * - Feats: ~40 fighter bonus feats
- * - Classes: Fighter, Rogue, Cleric, Druid
- * - Class Features: Rogue, Cleric, and Druid abilities
+ * - Classes: Fighter, Rogue, Cleric, Druid, Sorcerer
+ * - Class Features: Rogue, Cleric, Druid, and Sorcerer abilities
  * - Buffs: ~15 classic buff spells
  * - System Levels: D&D 3.5 feat/ability progression
  * - Ability Increases: 6 entities for +1 to each ability
@@ -73,11 +74,11 @@ const dnd35ExampleCompendium: Compendium = {
     characterAbilityIncreaseSchemaDefinition,
   ],
   entities: {
-    spell: exampleSpells,
+    spell: allSpells,
     feat: allFeats,
     buff: allBuffs,
-    class: [fighterClass, rogueClass, clericClass, druidClass],
-    classFeature: [...rogueClassFeatures, ...clericClassFeatures, ...druidClassFeatures],
+    class: [fighterClass, rogueClass, clericClass, druidClass, sorcererClass],
+    classFeature: [...rogueClassFeatures, ...clericClassFeatures, ...druidClassFeatures, ...sorcererClassFeatures],
     system_levels: [dnd35SystemLevels],
     character_ability_increase: allAbilityIncreases,
   },
@@ -135,7 +136,10 @@ export { spellSchema, featSchema, classSchema, classFeatureSchema, buffSchema };
 /**
  * Re-export entities for convenience
  */
-export { exampleSpells, allFeats, allBuffs };
+export { allSpells, allFeats, allBuffs };
+
+// Keep legacy export for backwards compatibility
+export { exampleSpells } from './entities';
 
 /**
  * Re-export classes for convenience
@@ -143,6 +147,7 @@ export { exampleSpells, allFeats, allBuffs };
 export { fighterClass, rogueClass, rogueClassFeatures };
 export { clericClass, clericClassFeatures };
 export { druidClass, druidClassFeatures };
+export { sorcererClass, sorcererClassFeatures };
 
 /**
  * Re-export system levels for convenience

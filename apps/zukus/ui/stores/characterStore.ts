@@ -11,6 +11,7 @@ import type {
   SpecialFeature,
   ComputedEntity,
   Alignment,
+  StandardEntity,
 } from '@zukus/core'
 
 /**
@@ -95,8 +96,11 @@ type CharacterActions = {
   useSlotForCGE: (cgeId: string, level: number) => UpdateResult
   useBoundSlotForCGE: (cgeId: string, slotId: string) => UpdateResult
   refreshSlotsForCGE: (cgeId: string) => UpdateResult
+  setSlotValueForCGE: (cgeId: string, level: number, currentValue: number, maxValue: number) => UpdateResult
   prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string, trackId?: string) => UpdateResult
   unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number, trackId?: string) => UpdateResult
+  addKnownForCGE: (cgeId: string, entity: StandardEntity, entityLevel: number) => UpdateResult
+  removeKnownForCGE: (cgeId: string, entityId: string) => UpdateResult
 }
 
 type CharacterStore = CharacterState & CharacterActions
@@ -377,6 +381,12 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     return updater.refreshSlotsForCGE(cgeId)
   },
 
+  setSlotValueForCGE: (cgeId: string, level: number, currentValue: number, maxValue: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.setSlotValueForCGE(cgeId, level, currentValue, maxValue)
+  },
+
   prepareEntityForCGE: (cgeId: string, slotLevel: number, slotIndex: number, entityId: string, trackId?: string) => {
     const { updater } = get()
     if (!updater) return notSetResult
@@ -387,6 +397,18 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     const { updater } = get()
     if (!updater) return notSetResult
     return updater.unprepareSlotForCGE(cgeId, slotLevel, slotIndex, trackId)
+  },
+
+  addKnownForCGE: (cgeId: string, entity: StandardEntity, entityLevel: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.addKnownEntityForCGE(cgeId, entity, entityLevel)
+  },
+
+  removeKnownForCGE: (cgeId: string, entityId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.removeKnownEntityForCGE(cgeId, entityId)
   },
 }))
 
@@ -550,6 +572,8 @@ export function useCharacterActions() {
     refreshSlotsForCGE: state.refreshSlotsForCGE,
     prepareEntityForCGE: state.prepareEntityForCGE,
     unprepareSlotForCGE: state.unprepareSlotForCGE,
+    addKnownForCGE: state.addKnownForCGE,
+    removeKnownForCGE: state.removeKnownForCGE,
   }))
 }
 
