@@ -15,11 +15,13 @@ import { useNavigateToDetail } from '../../../navigation'
 import type { StandardEntity, FilterState, FilterValue, FacetFilterDef } from '@zukus/core'
 import {
   spellFilterConfig,
+  getFilterConfig,
   createInitialFilterState,
   applyRelationFilter,
   isRelationFilter,
   isFacetFilter,
   isFilterGroup,
+  type EntityFilterConfig,
 } from '@zukus/core'
 import { SpellListItem } from './SpellListItem'
 import { EntityFilterView, ActiveFilterChips } from '../../filters'
@@ -231,15 +233,16 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const entityType = primaryCGE?.entityType ?? 'spell'
   const defaultClassId = primaryCGE?.classId ?? 'wizard'
 
-  // Get filter configuration (hardcoded for now, but could come from registry)
-  const filterConfig = spellFilterConfig
+  // Get filter configuration from registry based on entity type
+  const filterConfig: EntityFilterConfig = getFilterConfig(entityType) ?? spellFilterConfig
 
   // Initialize filter state with defaults from CGE context
   const initialFilterState = useMemo(() => {
     const state = createInitialFilterState(filterConfig)
     // Override defaults with CGE context
     state['class'] = defaultClassId
-    state['level'] = slotLevel
+    // For LIMITED_TOTAL (level -1), don't set a level filter - allow any level
+    state['level'] = slotLevel >= 0 ? slotLevel : null
     return state
   }, [filterConfig, defaultClassId, slotLevel])
 
@@ -365,7 +368,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
         onApply={handleApplyFilters}
         onCancel={handleCancelFilters}
         contextContent={
-          slotLevel > 0 ? (
+          slotLevel >= 0 ? (
             <XStack
               backgroundColor="$uiBackgroundColor"
               padding={12}
@@ -378,7 +381,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
               <FontAwesome6 name="circle-info" size={14} color={placeholderColor} />
               <Text fontSize={13} color="$placeholderColor" flex={1}>
                 {mode === 'known'
-                  ? `Aprendiendo conjuro de nivel ${slotLevel}`
+                  ? `Aprendiendo ${entityType} de nivel ${slotLevel}`
                   : `Preparando para slot de nivel ${slotLevel}`}
               </Text>
             </XStack>
@@ -492,7 +495,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
           <Text color="$placeholderColor" textAlign="center" paddingVertical={32}>
             {searchQuery
               ? 'No se encontraron resultados'
-              : 'No hay conjuros disponibles para esta combinacion.'}
+              : `No hay ${entityType === 'spell' ? 'conjuros' : entityType === 'maneuver' ? 'maniobras' : 'entidades'} disponibles para esta combinacion.`}
           </Text>
         }
       />

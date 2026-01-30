@@ -183,6 +183,11 @@ export {
   getSlotCurrentValue,
   getAllSlotCurrentValues,
   hasUsedSlots,
+  useBoundSlot,
+  setSlotValue,
   // Validation
   validateCGEConfig,
 } from "./core/domain/cge";
+
+// Test Classes (for CGE visual testing - NOT D&D 3.5 SRD)
+export * from "./testClasses";

@@ -1,0 +1,191 @@
+[
+  {
+    "id": "sapphire-nightmare-blade--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "sapphire-nightmare-blade",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "moment-of-perfect-mind--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "moment-of-perfect-mind",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "mind-over-body--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "mind-over-body",
+    "toEntityId": "warblade",
+    "metadata": { "level": 3 }
+  },
+  {
+    "id": "ruby-nightmare-blade--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "ruby-nightmare-blade",
+    "toEntityId": "warblade",
+    "metadata": { "level": 4 }
+  },
+  {
+    "id": "diamond-defense--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "diamond-defense",
+    "toEntityId": "warblade",
+    "metadata": { "level": 8 }
+  },
+  {
+    "id": "steel-wind--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "steel-wind",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "punishing-stance--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "punishing-stance",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "wall-of-blades--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "wall-of-blades",
+    "toEntityId": "warblade",
+    "metadata": { "level": 2 }
+  },
+  {
+    "id": "iron-heart-surge--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "iron-heart-surge",
+    "toEntityId": "warblade",
+    "metadata": { "level": 3 }
+  },
+  {
+    "id": "lightning-recovery--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "lightning-recovery",
+    "toEntityId": "warblade",
+    "metadata": { "level": 4 }
+  },
+  {
+    "id": "adamantine-hurricane--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "adamantine-hurricane",
+    "toEntityId": "warblade",
+    "metadata": { "level": 8 }
+  },
+  {
+    "id": "stone-bones--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "stone-bones",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "stonefoot-stance--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "stonefoot-stance",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "mountain-hammer--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "mountain-hammer",
+    "toEntityId": "warblade",
+    "metadata": { "level": 2 }
+  },
+  {
+    "id": "bonesplitting-strike--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "bonesplitting-strike",
+    "toEntityId": "warblade",
+    "metadata": { "level": 4 }
+  },
+  {
+    "id": "earthstrike-quake--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "earthstrike-quake",
+    "toEntityId": "warblade",
+    "metadata": { "level": 8 }
+  },
+  {
+    "id": "sudden-leap--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "sudden-leap",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "hunters-sense--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "hunters-sense",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "claw-at-the-moon--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "claw-at-the-moon",
+    "toEntityId": "warblade",
+    "metadata": { "level": 2 }
+  },
+  {
+    "id": "rabid-wolf-strike--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "rabid-wolf-strike",
+    "toEntityId": "warblade",
+    "metadata": { "level": 4 }
+  },
+  {
+    "id": "wolfpack-tactics--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "wolfpack-tactics",
+    "toEntityId": "warblade",
+    "metadata": { "level": 7 }
+  },
+  {
+    "id": "leading-the-attack--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "leading-the-attack",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "bolstering-voice--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "bolstering-voice",
+    "toEntityId": "warblade",
+    "metadata": { "level": 1 }
+  },
+  {
+    "id": "battle-leader-charge--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "battle-leader-charge",
+    "toEntityId": "warblade",
+    "metadata": { "level": 2 }
+  },
+  {
+    "id": "tactical-strike--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "tactical-strike",
+    "toEntityId": "warblade",
+    "metadata": { "level": 2 }
+  },
+  {
+    "id": "white-raven-tactics--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "white-raven-tactics",
+    "toEntityId": "warblade",
+    "metadata": { "level": 3 }
+  },
+  {
+    "id": "war-masters-charge--warblade",
+    "entityType": "maneuver-class-relation",
+    "fromEntityId": "war-masters-charge",
+    "toEntityId": "warblade",
+    "metadata": { "level": 9 }
+  }
+]

@@ -23,6 +23,7 @@ import {
   classFeatureSchema,
   classSchema,
   buffSchema,
+  maneuverSchema,
 } from './schemas';
 import { 
   systemLevelsSchemaDefinition, 
@@ -30,7 +31,7 @@ import {
 } from '../../levels/classSchemas/systemLevelsSchemas';
 
 // Entities
-import { allSpells, allFeats, allBuffs } from './entities';
+import { allSpells, allFeats, allBuffs, allManeuvers } from './entities';
 
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
@@ -38,6 +39,15 @@ import { rogueClass, rogueClassFeatures } from '../../../../srd/rogue';
 import { clericClass, clericClassFeatures } from '../../../../srd/cleric';
 import { druidClass, druidClassFeatures } from '../../../../srd/druid';
 import { sorcererClass, sorcererClassFeatures } from '../../../../srd/sorcerer';
+import { wizardClass, wizardClassFeatures } from '../../../../srd/wizard';
+
+// Test Classes (for CGE visual testing - NOT D&D 3.5 SRD)
+import { warbladeClass, warbladeClassFeatures } from '../../../../testClasses/warblade';
+import { psionClass, psionClassFeatures } from '../../../../testClasses/psion';
+import { warlockClass, warlockClassFeatures } from '../../../../testClasses/warlock';
+import { spiritShamanClass, spiritShamanClassFeatures } from '../../../../testClasses/spiritShaman';
+import { arcanistClass, arcanistClassFeatures } from '../../../../testClasses/arcanist';
+import { wizard5eClass, wizard5eClassFeatures } from '../../../../testClasses/wizard5e';
 
 // System levels from SRD
 import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLevels';
@@ -52,11 +62,19 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
  * Contains:
  * - Spells: 2,789 spells with class-level relations
  * - Feats: ~40 fighter bonus feats
- * - Classes: Fighter, Rogue, Cleric, Druid, Sorcerer
- * - Class Features: Rogue, Cleric, Druid, and Sorcerer abilities
+ * - Classes: Fighter, Rogue, Cleric, Druid, Sorcerer, Wizard + Test Classes
+ * - Class Features: Various class abilities
  * - Buffs: ~15 classic buff spells
  * - System Levels: D&D 3.5 feat/ability progression
  * - Ability Increases: 6 entities for +1 to each ability
+ *
+ * Test Classes (for CGE visual testing):
+ * - Warblade: maneuvers with LIST GLOBAL + consumeOnUse
+ * - Psion: powers with POOL resource
+ * - Warlock: invocations at-will (NONE + NONE)
+ * - Spirit Shaman: LIST PER_LEVEL preparation
+ * - Arcanist: UNLIMITED + LIST PER_LEVEL
+ * - Wizard5e: UNLIMITED + LIST GLOBAL
  */
 const dnd35ExampleCompendium: Compendium = {
   id: 'dnd35-example',
@@ -70,6 +88,7 @@ const dnd35ExampleCompendium: Compendium = {
     classSchema,
     classFeatureSchema,
     buffSchema,
+    maneuverSchema,
     systemLevelsSchemaDefinition,
     characterAbilityIncreaseSchemaDefinition,
   ],
@@ -77,8 +96,37 @@ const dnd35ExampleCompendium: Compendium = {
     spell: allSpells,
     feat: allFeats,
     buff: allBuffs,
-    class: [fighterClass, rogueClass, clericClass, druidClass, sorcererClass],
-    classFeature: [...rogueClassFeatures, ...clericClassFeatures, ...druidClassFeatures, ...sorcererClassFeatures],
+    maneuver: allManeuvers,
+    class: [
+      // D&D 3.5 SRD Classes
+      fighterClass,
+      rogueClass,
+      clericClass,
+      druidClass,
+      sorcererClass,
+      wizardClass,
+      // Test Classes (for CGE visual testing)
+      warbladeClass,
+      psionClass,
+      warlockClass,
+      spiritShamanClass,
+      arcanistClass,
+      wizard5eClass,
+    ],
+    classFeature: [
+      ...rogueClassFeatures,
+      ...clericClassFeatures,
+      ...druidClassFeatures,
+      ...sorcererClassFeatures,
+      ...wizardClassFeatures,
+      // Test class features
+      ...warbladeClassFeatures,
+      ...psionClassFeatures,
+      ...warlockClassFeatures,
+      ...spiritShamanClassFeatures,
+      ...arcanistClassFeatures,
+      ...wizard5eClassFeatures,
+    ],
     system_levels: [dnd35SystemLevels],
     character_ability_increase: allAbilityIncreases,
   },
@@ -148,6 +196,17 @@ export { fighterClass, rogueClass, rogueClassFeatures };
 export { clericClass, clericClassFeatures };
 export { druidClass, druidClassFeatures };
 export { sorcererClass, sorcererClassFeatures };
+export { wizardClass, wizardClassFeatures };
+
+/**
+ * Re-export test classes for CGE visual testing
+ */
+export { warbladeClass, warbladeClassFeatures };
+export { psionClass, psionClassFeatures };
+export { warlockClass, warlockClassFeatures };
+export { spiritShamanClass, spiritShamanClassFeatures };
+export { arcanistClass, arcanistClassFeatures };
+export { wizard5eClass, wizard5eClassFeatures };
 
 /**
  * Re-export system levels for convenience

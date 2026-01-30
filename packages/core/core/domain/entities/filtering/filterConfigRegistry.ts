@@ -19,6 +19,7 @@
 
 import type { EntityFilterConfig } from './filterConfig'
 import { spellFilterConfig } from './configs/spellFilterConfig'
+import { maneuverFilterConfig } from './configs/maneuverFilterConfig'
 
 // ============================================================================
 // Registry
@@ -83,3 +84,4 @@ export function clearFilterConfigRegistry(): void {
 
 // Register built-in configurations
 registerFilterConfig(spellFilterConfig)
+registerFilterConfig(maneuverFilterConfig)

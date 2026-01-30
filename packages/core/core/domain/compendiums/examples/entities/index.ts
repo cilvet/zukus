@@ -39,6 +39,16 @@ export {
   saveBuffs,
 } from './buffs';
 
+// Maneuvers (Tome of Battle - for Warblade CGE testing)
+export {
+  allManeuvers,
+  getManeuverClasses,
+  getManeuverLevelsForClass,
+  filterManeuvers,
+  type EnrichedManeuver,
+  MANEUVER_CLASS_FIELD_CONFIG,
+} from './maneuvers';
+
 // Classes are imported from srd/
 // - Fighter: srd/fighter/fighterClass.ts
 // - Rogue: srd/rogue/rogueClass.ts
