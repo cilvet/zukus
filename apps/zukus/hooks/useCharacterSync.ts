@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { InteractionManager } from 'react-native'
 import { calculateCharacterSheet, type CharacterBaseData } from '@zukus/core'
 import { useAuth } from '../contexts'
-import { useCharacterStore, setSyncHandler } from '../ui/stores/characterStore'
+import { useCharacterStore, setSyncHandler, clearSyncHandlerIfMatch } from '../ui/stores/characterStore'
 import { characterRepository } from '../services/characterRepository'
 
 type CharacterSyncState = {
@@ -82,9 +82,11 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
     
     // Establecer el handler (función global, no en el store state)
     setSyncHandler(handler)
-    
+
     return () => {
-      setSyncHandler(null)
+      // Solo limpiar si el handler actual sigue siendo el nuestro
+      // (evita que el cleanup de A borre el handler de B al navegar rápido)
+      clearSyncHandlerIfMatch(handler)
     }
   }, [characterId])
 

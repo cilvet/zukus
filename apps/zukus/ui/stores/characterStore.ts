@@ -26,8 +26,14 @@ import type {
  */
 let syncHandler: ((data: CharacterBaseData) => void) | null = null
 
-export function setSyncHandler(handler: ((data: CharacterBaseData) => void) | null) {
+export function setSyncHandler(handler: (data: CharacterBaseData) => void) {
   syncHandler = handler
+}
+
+export function clearSyncHandlerIfMatch(handler: (data: CharacterBaseData) => void) {
+  if (syncHandler === handler) {
+    syncHandler = null
+  }
 }
 
 type CharacterState = {
