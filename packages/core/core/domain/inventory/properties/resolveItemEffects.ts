@@ -45,6 +45,8 @@ export type ItemEffectContext = {
  * Resultado de aplicar efectos de propiedades a un item.
  */
 export type ResolvedItem<T extends StandardEntity = StandardEntity> = T & {
+  /** Propiedades resueltas (entidades completas para auto-contenido) */
+  _resolvedProperties?: StandardEntity[];
   /** Efectos aplicados desde propiedades */
   _appliedEffects?: AppliedPropertyEffect[];
   /** Valores modificados por propiedades */
@@ -126,12 +128,12 @@ export function applyPropertyEffectsToItem<T extends StandardEntity>(
   properties: StandardEntity[],
   evaluateFormula?: (formula: string, context: Record<string, unknown>) => unknown
 ): ResolvedItem<T> {
-  const collectedEffects = collectPropertyEffects(properties);
-
-  if (collectedEffects.length === 0) {
+  // Si no hay propiedades, retornar el item sin cambios
+  if (properties.length === 0) {
     return item;
   }
 
+  const collectedEffects = collectPropertyEffects(properties);
   const appliedEffects: AppliedPropertyEffect[] = [];
   const modifiedFields: Record<string, unknown> = {};
 
@@ -187,8 +189,9 @@ export function applyPropertyEffectsToItem<T extends StandardEntity>(
 
   return {
     ...resolvedItem,
-    _appliedEffects: appliedEffects,
-    _modifiedFields: modifiedFields,
+    _resolvedProperties: properties,  // Guardar entidades completas para auto-contenido
+    _appliedEffects: appliedEffects.length > 0 ? appliedEffects : undefined,
+    _modifiedFields: Object.keys(modifiedFields).length > 0 ? modifiedFields : undefined,
   } as ResolvedItem<T>;
 }
 

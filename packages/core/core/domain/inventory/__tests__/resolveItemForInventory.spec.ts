@@ -189,6 +189,34 @@ describe('resolveItemForInventory', () => {
       expect(result.entity._appliedEffects![0].originalValue).toBe(19);
       expect(result.entity._appliedEffects![0].modifiedValue).toBe(17);
     });
+
+    it('should store _resolvedProperties with full property entities', () => {
+      const mockEntities = {
+        keen: keenProperty,
+        flaming: flamingProperty,
+      };
+
+      const result = resolveItemForInventory(flamingKeenLongsword, {
+        resolver: createMockResolver(mockEntities),
+        evaluateFormula: createKeenEvaluator(),
+      });
+
+      // Las propiedades completas deben guardarse en la entidad
+      expect(result.entity._resolvedProperties).toBeDefined();
+      expect(result.entity._resolvedProperties).toHaveLength(2);
+
+      // Verificar que son las entidades completas, no solo IDs
+      const keenResolved = result.entity._resolvedProperties!.find(p => p.id === 'keen');
+      expect(keenResolved).toBeDefined();
+      expect(keenResolved!.name).toBe('Keen');
+      expect(keenResolved!.description).toBe('Doubles threat range');
+      expect(keenResolved!.effects).toBeDefined();
+
+      const flamingResolved = result.entity._resolvedProperties!.find(p => p.id === 'flaming');
+      expect(flamingResolved).toBeDefined();
+      expect(flamingResolved!.name).toBe('Flaming');
+      expect(flamingResolved!.description).toBe('Deals +1d6 fire damage');
+    });
   });
 
   describe('formula evaluation', () => {
@@ -258,8 +286,7 @@ describe('Self-Contained Character Principle', () => {
       itemId: 'longsword-keen',
       entityType: 'weapon',
       quantity: 1,
-      instanceValues: { equipped: true, wielded: true },
-      entity: resolvedEntity, // <-- Stored with properties already applied
+      entity: resolvedEntity,
     };
 
     // STEP 3: Use at calculation time WITHOUT needing compendium
@@ -268,6 +295,15 @@ describe('Self-Contained Character Principle', () => {
     expect(inventoryItem.entity.name).toBe('Keen Longsword');
     expect(inventoryItem.entity._appliedEffects).toHaveLength(1);
 
-    // No compendium needed to get the correct critRange!
+    // STEP 4: Can also display property details without compendium
+    // The property entities are stored in _resolvedProperties
+    expect(inventoryItem.entity._resolvedProperties).toBeDefined();
+    expect(inventoryItem.entity._resolvedProperties).toHaveLength(1);
+
+    const storedKeenProperty = inventoryItem.entity._resolvedProperties![0];
+    expect(storedKeenProperty.name).toBe('Keen');
+    expect(storedKeenProperty.description).toBe('Doubles threat range');
+
+    // No compendium needed for ANYTHING - values, properties, descriptions!
   });
 });
