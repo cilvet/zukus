@@ -1,5 +1,7 @@
 # Principios Arquitectonicos
 
+> **Contexto**: Esta regla cubre los principios fundamentales. Para la documentacion completa del sistema de entidades (incluyendo almacenamiento, CGE, inventario), consulta la skill `entities`.
+
 Directrices fundamentales de la arquitectura de Zukus.
 
 ## Personaje Auto-Contenido

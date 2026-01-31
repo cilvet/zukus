@@ -6,6 +6,8 @@ alwaysApply: false
 
 # Sistema de Entidades
 
+> **Documentacion completa**: Para una vision holistia del sistema de entidades, incluyendo filosofia, almacenamiento en personaje, CGE, inventario, relaciones y filtros, consulta la skill `entities` (`.claude/skills/entities/SKILL.md`).
+
 Sistema genérico y reutilizable para definir tipos de datos mediante schemas y crear instancias validadas.
 
 **Ubicación**: `core/domain/entities/`

@@ -1,7 +1,7 @@
 /**
- * CGE - Character Generation Engine
+ * CGE - Configuracion de Gestion de Entidades
  *
- * Sistema que gestiona como los personajes interactuan con entidades
+ * Sistema que configura como los personajes interactuan con entidades
  * accionables (conjuros, maniobras, poderes, invocaciones, etc.)
  */
 

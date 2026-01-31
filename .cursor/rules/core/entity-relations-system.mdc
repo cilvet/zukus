@@ -1,5 +1,7 @@
 # Sistema de Relaciones entre Entidades
 
+> **Contexto**: Esta regla es un resumen rapido. Para documentacion completa, consulta la skill `entities` (`docs/06-relations.md`).
+
 Sistema para modelar relaciones extensibles entre entidades con metadatos, compilándolas en estructuras directamente filtrables.
 
 ## Cuándo Consultar

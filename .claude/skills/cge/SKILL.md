@@ -1,14 +1,16 @@
 ---
 name: cge
-description: Sistema CGE (Class Granted Entities) para gestionar conjuros, maniobras, poderes e invocaciones. Consultar cuando se trabaje con clases que otorgan entidades, filtros de entidades, relaciones entity-class, o UI de seleccion de entidades.
+description: Sistema CGE (Configuracion de Gestion de Entidades) para gestionar conjuros, maniobras, poderes e invocaciones. Consultar cuando se trabaje con clases que otorgan entidades, filtros de entidades, relaciones entity-class, o UI de seleccion de entidades.
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: Read, Grep, Glob
 ---
 
-# Sistema CGE (Class Granted Entities)
+# Sistema CGE (Configuracion de Gestion de Entidades)
 
-CGE gestiona entidades que las clases otorgan a los personajes: conjuros, maniobras, poderes, invocaciones, etc.
+> **Contexto**: CGE es parte del Sistema de Entidades general. Para entender la arquitectura base, el patron de almacenamiento en `character.entities`, y los principios de diseno, consulta primero la skill `entities` (`docs/01-philosophy.md` y `docs/03-storage.md`).
+
+CGE configura como los personajes interactuan con entidades accionables: conjuros, maniobras, poderes, invocaciones, etc. Cada clase define un CGEConfig que combina varias dimensiones ortogonales (known, resource, preparation, tracks) para describir sus reglas de uso.
 
 ## Arquitectura General
 

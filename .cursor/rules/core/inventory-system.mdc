@@ -1,5 +1,7 @@
 # Sistema de Inventario
 
+> **Contexto**: Esta regla cubre la API del inventario. Para la arquitectura general del sistema de entidades y como el inventario se integra, consulta la skill `entities` (especialmente `docs/03-storage.md` y `docs/05-inventory.md`).
+
 Sistema de inventario que coexiste con el sistema `equipment` legacy. Usa entidades del compendium con instancias unicas.
 
 > **Importante**: Ver `architectural-principles.mdc` para la directriz de "Personaje Auto-Contenido". Las entidades deben resolverse al adquirir el item, no al calcular.
