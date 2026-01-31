@@ -90,33 +90,15 @@ export type ResolvedCompendiumContext = {
 };
 
 /**
- * Synchronous resolver for inventory item entities.
- * Returns the full entity data for an inventory item reference.
- *
- * This is used during character calculation to resolve inventory items
- * to their full entity data (with effects, stats, etc.).
- *
- * The resolver is expected to be pre-populated with the necessary entities
- * before calculation begins (async loading happens before, sync resolution during).
- */
-export type InventoryEntityResolver = (
-  entityType: string,
-  entityId: string
-) => StandardEntity | undefined;
-
-/**
  * Context for character calculation.
  * Contains the resolved compendium context if available.
+ *
+ * NOTE: Inventory items are self-contained - their entities are stored
+ * directly on the item when acquired. No external resolution is needed
+ * at calculation time.
  */
 export type CalculationContext = {
   /** Resolved compendium context with entityTypes and validators */
   compendiumContext?: ResolvedCompendiumContext;
-
-  /**
-   * Synchronous resolver for inventory item entities.
-   * Used to get full entity data for items in inventoryState.
-   * Must be pre-populated before calculation.
-   */
-  resolveInventoryEntity?: InventoryEntityResolver;
 };
 

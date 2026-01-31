@@ -13,7 +13,7 @@ import {
 } from "./sources/compileCharacterChanges";
 import { CompiledEffects, compileCharacterEffects } from "./effects/compileEffects";
 import { compileCGEVariableDefinitions } from "./cge/compileCGEChanges";
-import type { ResolvedCompendiumContext, InventoryEntityResolver } from "../../compendiums/types";
+import type { ResolvedCompendiumContext } from "../../compendiums/types";
 import type { ComputedEntity } from "../../entities/types/base";
 
 // =============================================================================
@@ -82,14 +82,13 @@ export function resolveLevelSystemEntities(
  */
 export type CompileChangesOptions = {
   compendiumContext?: ResolvedCompendiumContext;
-  inventoryEntityResolver?: InventoryEntityResolver;
 };
 
 /**
  * Compiles and merges all character changes from different sources:
  * - Legacy changes (feats, buffs, items, etc.)
  * - Entity changes (customEntities + level system entities)
- * - Inventory item effects (when inventoryEntityResolver is provided)
+ * - Inventory item effects (from stored entities on items)
  *
  * Also validates custom entities and compiles effects.
  */
@@ -103,7 +102,7 @@ export function compileAndMergeChanges(
       ? { compendiumContext: options }
       : (options as CompileChangesOptions) ?? {};
 
-  const { compendiumContext, inventoryEntityResolver } = opts;
+  const { compendiumContext } = opts;
   const warnings: CharacterWarning[] = [];
   
   // Validate custom entities if they exist
@@ -159,9 +158,9 @@ export function compileAndMergeChanges(
   ];
 
   // Compile effects from all sources (buffs + custom entities + inventory items)
+  // Inventory item entities are stored directly on items (self-contained character)
   const effects = compileCharacterEffects(characterData, {
     computedEntities: entitiesResult.computedEntities,
-    inventoryEntityResolver,
   });
   
   return {

@@ -87,7 +87,6 @@ export function calculateCharacterSheet(
   // Compile all changes from all sources
   const compiledChanges = compileAndMergeChanges(resolvedCharacterData, {
     compendiumContext: context?.compendiumContext,
-    inventoryEntityResolver: context?.resolveInventoryEntity,
   });
   warnings.push(...compiledChanges.warnings);
 
@@ -133,8 +132,7 @@ export function calculateCharacterSheet(
   // Resolve inventory weapons and calculate attacks
   const inventoryWeapons = resolveInventoryWeapons(
     resolvedCharacterData,
-    characterSheet,
-    context?.resolveInventoryEntity
+    characterSheet
   );
 
   characterSheet.attackData = getCalculatedAttackData(

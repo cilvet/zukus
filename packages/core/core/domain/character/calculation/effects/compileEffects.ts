@@ -6,14 +6,10 @@ import {
 } from "../../baseData/effects";
 import type { Condition, SimpleCondition } from "../../baseData/conditions";
 import type { ComputedEntity, StandardEntity } from "../../../entities/types/base";
-import type { InventoryEntityResolver } from "../../../compendiums/types";
-import { applyPropertyEffectsToItem } from "../../../inventory/properties/resolveItemEffects";
 import {
   isItemEquipped,
   isItemActive,
   isItemWielded,
-  getItemInstanceValue,
-  type InstanceFieldDefinition,
 } from "../../../inventory/instanceFields";
 import type { InventoryItemInstance } from "../../../inventory/types";
 
@@ -84,8 +80,6 @@ function toSourcedEffect(
 export type CompileEffectsOptions = {
   /** Optional array of computed entities with effects */
   computedEntities?: ComputedEntity[];
-  /** Optional resolver for inventory item entities */
-  inventoryEntityResolver?: InventoryEntityResolver;
 };
 
 /**
@@ -94,7 +88,10 @@ export type CompileEffectsOptions = {
  * Supports effects from:
  * - Buffs (buff.effects)
  * - Custom Entities (entity.effects) - via computedEntities parameter
- * - Equipped Inventory Items (item.effects) - via inventoryEntityResolver
+ * - Equipped Inventory Items (item.effects) - via stored entity on item
+ *
+ * Inventory items are self-contained: their entities are stored directly
+ * on the item when acquired, so no external resolver is needed.
  *
  * @param characterBaseData Character base data containing buffs and inventory
  * @param options Optional configuration for effect compilation
@@ -122,13 +119,9 @@ export function compileCharacterEffects(
     compileEntityEffects(opts.computedEntities, compiled);
   }
 
-  // Compile effects from equipped inventory items
-  if (opts.inventoryEntityResolver && characterBaseData.inventoryState) {
-    compileInventoryItemEffects(
-      characterBaseData,
-      opts.inventoryEntityResolver,
-      compiled
-    );
+  // Compile effects from equipped inventory items (entities stored on items)
+  if (characterBaseData.inventoryState) {
+    compileInventoryItemEffects(characterBaseData, compiled);
   }
 
   return compiled;
@@ -242,62 +235,25 @@ export function getEffectsByTarget(
  */
 function compileInventoryItemEffects(
   characterBaseData: CharacterBaseData,
-  resolver: InventoryEntityResolver,
   compiled: CompiledEffects
 ): void {
   const items = characterBaseData.inventoryState?.items ?? [];
 
   for (const item of items) {
-    // Only process equipped items
-    if (!isItemEquipped(item)) {
+    // Only process equipped items with stored entity
+    if (!isItemEquipped(item) || !item.entity) {
       continue;
     }
 
-    // Use stored entity if available, otherwise fall back to resolver
-    // The stored entity already has properties applied (self-contained character principle)
-    const entity = item.entity ?? resolver(item.entityType, item.itemId);
-    if (!entity) {
-      continue;
-    }
+    const entity = item.entity;
 
-    // Get effects from the entity
+    // Get effects from the entity (properties already applied at acquisition time)
     const entityWithEffects = entity as StandardEntity & {
       effects?: Effect[];
-      properties?: string[];
     };
 
-    // Collect all effects from the entity
-    const effects: Effect[] = [];
-
-    // Direct effects from the entity
-    if (entityWithEffects.effects) {
-      effects.push(...entityWithEffects.effects);
-    }
-
-    // If using resolver (no stored entity) and item has properties, resolve them
-    // Note: When item.entity is set, properties should already be applied
-    if (!item.entity && entityWithEffects.properties && entityWithEffects.properties.length > 0) {
-      const propertyEntities: StandardEntity[] = [];
-      for (const propId of entityWithEffects.properties) {
-        // Determine property entity type based on item type
-        const propertyType = getPropertyTypeForItem(item.entityType);
-        const propEntity = resolver(propertyType, propId);
-        if (propEntity) {
-          propertyEntities.push(propEntity);
-        }
-      }
-
-      // Collect effects from properties that target character (not @item)
-      for (const prop of propertyEntities) {
-        const propEffects = (prop as StandardEntity & { effects?: Effect[] }).effects ?? [];
-        for (const effect of propEffects) {
-          // Skip @item effects - those are for modifying the item
-          if (!effect.target.startsWith("@item.")) {
-            effects.push(effect);
-          }
-        }
-      }
-    }
+    // Collect effects from the entity
+    const effects = entityWithEffects.effects ?? [];
 
     // Add character-targeting effects to compiled
     for (const effect of effects) {
@@ -319,14 +275,6 @@ function compileInventoryItemEffects(
       addEffect(compiled, sourcedEffect);
     }
   }
-}
-
-/**
- * Gets the property entity type for a given item entity type.
- * E.g., 'weapon' -> 'weaponProperty', 'armor' -> 'armorProperty'
- */
-function getPropertyTypeForItem(itemEntityType: string): string {
-  return `${itemEntityType}Property`;
 }
 
 // =============================================================================

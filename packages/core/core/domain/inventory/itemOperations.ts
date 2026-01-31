@@ -27,12 +27,13 @@ import {
 /**
  * Añade un item al inventario.
  *
- * IMPORTANTE: La entidad debe pasarse ya resuelta (con propiedades aplicadas).
- * El personaje almacena la entidad completa para funcionar sin el compendium.
+ * IMPORTANTE: La entidad debe pasarse ya resuelta (con propiedades aplicadas
+ * y valores de instancia fusionados). El personaje almacena la entidad completa
+ * para funcionar sin el compendium.
  *
  * @param state - Estado actual del inventario
  * @param params - Parámetros del item a añadir
- * @param params.entity - Entidad resuelta del compendium (recomendado)
+ * @param params.entity - Entidad resuelta del compendium (con propiedades y valores de instancia)
  * @returns Resultado con el nuevo estado y la instancia creada
  */
 export function addItem(
@@ -43,19 +44,22 @@ export function addItem(
     quantity?: number;
     equipped?: boolean;
     customName?: string;
-    /** Entidad resuelta del compendium (con propiedades aplicadas) */
+    /** Entidad resuelta del compendium (con propiedades y valores de instancia aplicados) */
     entity?: ResolvedInventoryEntity;
   }
 ): InventoryUpdateResult<InventoryState> & { instance: InventoryItemInstance } {
-  // Build instanceValues if equipped is specified
-  const instanceValues: Record<string, boolean> | undefined = params.equipped
-    ? { equipped: true }
-    : undefined;
+  // Si se especifica equipped=true y hay entity, fusionar en la entidad
+  let entityWithEquipped = params.entity;
+  if (params.equipped && params.entity) {
+    entityWithEquipped = {
+      ...params.entity,
+      equipped: true,
+    };
+  }
 
   const instance = createItemInstance({
     ...params,
-    instanceValues,
-    entity: params.entity,
+    entity: entityWithEquipped,
   });
 
   return {
@@ -132,7 +136,7 @@ export function removeItem(
 export function updateItem(
   state: InventoryState,
   instanceId: string,
-  updates: Partial<Pick<InventoryItemInstance, 'quantity' | 'customName' | 'notes' | 'containerId' | 'instanceValues'>>
+  updates: Partial<Pick<InventoryItemInstance, 'quantity' | 'customName' | 'notes' | 'containerId'>>
 ): InventoryUpdateResult<InventoryState> {
   const itemExists = state.items.some((i) => i.instanceId === instanceId);
 

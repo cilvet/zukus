@@ -10,7 +10,6 @@
 import { describe, expect, it } from 'bun:test';
 import { buildCharacter } from '../../../tests/character/buildCharacter';
 import { calculateCharacterSheet } from '../../character/calculation/calculateCharacterSheet';
-import type { CalculationContext, InventoryEntityResolver } from '../../compendiums/types';
 import type { InventoryItemInstance, InventoryState } from '../types';
 import type { StandardEntity } from '../../entities/types/base';
 import type { Effect } from '../../character/baseData/effects';
@@ -134,28 +133,33 @@ const ringOfProtectionEntity: StandardEntity & Record<string, unknown> = {
 // =============================================================================
 
 /**
- * Creates an inventory item with optional equipped/wielded state.
- * Uses instanceValues for state storage.
+ * Creates an inventory item with entity and optional equipped/wielded state.
+ * Los valores equipped/wielded se almacenan directamente en entity.
  */
 function createInventoryItem(
   itemId: string,
   entityType: string,
-  options: { equipped?: boolean; wielded?: boolean } = {}
+  options: {
+    equipped?: boolean;
+    wielded?: boolean;
+    entity?: StandardEntity & Record<string, unknown>;
+  } = {}
 ): InventoryItemInstance {
-  const instanceValues: Record<string, boolean> = {};
-  if (options.equipped) {
-    instanceValues.equipped = true;
-  }
-  if (options.wielded) {
-    instanceValues.wielded = true;
-  }
+  // Fusionar equipped/wielded directamente en la entidad
+  const entity = options.entity
+    ? {
+        ...options.entity,
+        equipped: options.equipped ?? false,
+        wielded: options.wielded ?? false,
+      }
+    : undefined;
 
   return {
     instanceId: `instance-${itemId}-${Date.now()}`,
     itemId,
     entityType,
     quantity: 1,
-    instanceValues: Object.keys(instanceValues).length > 0 ? instanceValues : undefined,
+    entity,
   };
 }
 
@@ -234,26 +238,13 @@ describe('Weapon Property Effects', () => {
 // =============================================================================
 
 describe('Attack Generation from Inventory Weapons', () => {
-  // Create a mock entity resolver for tests
-  function createMockResolver(
-    entities: Record<string, StandardEntity>
-  ): InventoryEntityResolver {
-    return (entityType: string, entityId: string) => {
-      return entities[entityId];
-    };
-  }
-
   describe('wielded weapons generate attacks', () => {
     it('should generate an attack from an equipped weapon in inventory', () => {
-      // Create mock entities
-      const mockEntities: Record<string, StandardEntity> = {
-        longsword: longswordEntity,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('longsword', 'weapon', {
           equipped: true,
           wielded: true,
+          entity: longswordEntity,
         }),
       ]);
 
@@ -263,11 +254,7 @@ describe('Attack Generation from Inventory Weapons', () => {
 
       character.inventoryState = inventoryState;
 
-      const context: CalculationContext = {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      };
-
-      const sheet = calculateCharacterSheet(character, context);
+      const sheet = calculateCharacterSheet(character, {});
       const attacks = sheet.attackData.attacks;
 
       // Should have one attack from the longsword
@@ -277,14 +264,15 @@ describe('Attack Generation from Inventory Weapons', () => {
     });
 
     it('should apply weapon properties to the generated attack', () => {
-      // Create Keen longsword with properties resolved
-      const keenLongsword: StandardEntity & Record<string, unknown> = {
+      // Create Keen longsword with properties ALREADY APPLIED
+      // (as would happen when acquiring the item)
+      const keenLongswordResolved: StandardEntity & Record<string, unknown> = {
         id: 'longsword-keen',
         entityType: 'weapon',
         name: 'Keen Longsword +1',
         damageDice: '1d8',
         damageType: 'slashing',
-        critRange: 19, // Base crit, will be modified by Keen
+        critRange: 17, // Already modified by Keen (was 19, now 17)
         critMultiplier: 2,
         weaponCategory: 'martial',
         weaponType: 'melee',
@@ -294,15 +282,11 @@ describe('Attack Generation from Inventory Weapons', () => {
         properties: ['keen'],
       };
 
-      const mockEntities: Record<string, StandardEntity> = {
-        'longsword-keen': keenLongsword,
-        keen: keenProperty,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('longsword-keen', 'weapon', {
           equipped: true,
           wielded: true,
+          entity: keenLongswordResolved,
         }),
       ]);
 
@@ -312,11 +296,7 @@ describe('Attack Generation from Inventory Weapons', () => {
 
       character.inventoryState = inventoryState;
 
-      const context: CalculationContext = {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      };
-
-      const sheet = calculateCharacterSheet(character, context);
+      const sheet = calculateCharacterSheet(character, {});
       const attacks = sheet.attackData.attacks;
 
       expect(attacks).toHaveLength(1);
@@ -328,23 +308,18 @@ describe('Attack Generation from Inventory Weapons', () => {
     });
 
     it('should NOT generate attack from non-equipped weapon', () => {
-      const mockEntities: Record<string, StandardEntity> = {
-        longsword: longswordEntity,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('longsword', 'weapon', {
           equipped: false, // Not equipped
           wielded: false,
+          entity: longswordEntity,
         }),
       ]);
 
       const character = buildCharacter().build();
       character.inventoryState = inventoryState;
 
-      const sheet = calculateCharacterSheet(character, {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      });
+      const sheet = calculateCharacterSheet(character, {});
 
       // No attacks from unequipped weapon
       expect(sheet.attackData.attacks).toHaveLength(0);
@@ -357,51 +332,29 @@ describe('Attack Generation from Inventory Weapons', () => {
 // =============================================================================
 
 describe('Equipped Item Effects on Character Stats', () => {
-  // Create a mock entity resolver for tests
-  function createMockResolver(
-    entities: Record<string, StandardEntity>
-  ): InventoryEntityResolver {
-    return (entityType: string, entityId: string) => {
-      return entities[entityId];
-    };
-  }
-
   describe('effects from equipped items', () => {
     it('should compile effects from equipped items', () => {
-      // Create mock entities
-      const mockEntities: Record<string, StandardEntity> = {
-        'ring-of-protection-2': ringOfProtectionEntity,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('ring-of-protection-2', 'item', {
           equipped: true,
+          entity: ringOfProtectionEntity,
         }),
       ]);
 
       const character = buildCharacter().build();
       character.inventoryState = inventoryState;
 
-      const context: CalculationContext = {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      };
-
-      const sheet = calculateCharacterSheet(character, context);
+      const sheet = calculateCharacterSheet(character, {});
 
       // The effect should be compiled and available
-      // Note: The actual application to AC depends on the effect system integration
-      // For now, we verify the effect is in the compiled effects
       expect(sheet).toBeDefined();
     });
 
     it('should NOT apply effects when item is not equipped', () => {
-      const mockEntities: Record<string, StandardEntity> = {
-        'ring-of-protection-2': ringOfProtectionEntity,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('ring-of-protection-2', 'item', {
           equipped: false, // Not equipped!
+          entity: ringOfProtectionEntity,
         }),
       ]);
 
@@ -409,15 +362,11 @@ describe('Equipped Item Effects on Character Stats', () => {
       character.inventoryState = inventoryState;
 
       // Calculate without the ring equipped
-      const sheetWithoutRing = calculateCharacterSheet(character, {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      });
+      const sheetWithoutRing = calculateCharacterSheet(character, {});
 
       // Now equip the ring by updating instanceValues
       character.inventoryState!.items[0].instanceValues = { equipped: true };
-      const sheetWithRing = calculateCharacterSheet(character, {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      });
+      const sheetWithRing = calculateCharacterSheet(character, {});
 
       // Both should calculate, the effect system handles the actual application
       expect(sheetWithoutRing).toBeDefined();
@@ -426,20 +375,17 @@ describe('Equipped Item Effects on Character Stats', () => {
 
     it('should handle items without effects gracefully', () => {
       // An item with no effects should not cause errors
-      const plainSwordEntity: StandardEntity = {
+      const plainSwordEntity: StandardEntity & Record<string, unknown> = {
         id: 'plain-sword',
         entityType: 'weapon',
         name: 'Plain Sword',
         // No effects field
       };
 
-      const mockEntities: Record<string, StandardEntity> = {
-        'plain-sword': plainSwordEntity,
-      };
-
       const inventoryState = createInventoryState([
         createInventoryItem('plain-sword', 'weapon', {
           equipped: true,
+          entity: plainSwordEntity,
         }),
       ]);
 
@@ -447,31 +393,25 @@ describe('Equipped Item Effects on Character Stats', () => {
       character.inventoryState = inventoryState;
 
       // Should not throw
-      const sheet = calculateCharacterSheet(character, {
-        resolveInventoryEntity: createMockResolver(mockEntities),
-      });
+      const sheet = calculateCharacterSheet(character, {});
 
       expect(sheet).toBeDefined();
     });
 
-    it('should handle unresolvable items gracefully', () => {
-      // If an item can't be resolved, it should be skipped
+    it('should skip items without stored entity', () => {
+      // Items without stored entity are simply skipped (no resolver fallback)
       const inventoryState = createInventoryState([
-        createInventoryItem('nonexistent-item', 'item', {
+        createInventoryItem('item-without-entity', 'item', {
           equipped: true,
+          // No entity stored
         }),
       ]);
 
       const character = buildCharacter().build();
       character.inventoryState = inventoryState;
 
-      // Resolver that returns nothing
-      const emptyResolver: InventoryEntityResolver = () => undefined;
-
-      // Should not throw
-      const sheet = calculateCharacterSheet(character, {
-        resolveInventoryEntity: emptyResolver,
-      });
+      // Should not throw - items without entity are ignored
+      const sheet = calculateCharacterSheet(character, {});
 
       expect(sheet).toBeDefined();
     });
@@ -492,8 +432,8 @@ describe('Self-Contained Character with Stored Entities', () => {
           itemId: 'longsword',
           entityType: 'weapon',
           quantity: 1,
-          instanceValues: { equipped: true, wielded: true },
           // Entity stored directly - no need for resolver
+          // equipped/wielded stored directly in entity
           entity: {
             id: 'longsword',
             entityType: 'weapon',
@@ -506,6 +446,8 @@ describe('Self-Contained Character with Stored Entities', () => {
             weaponType: 'melee',
             weightClass: 'one-handed',
             weight: 4,
+            equipped: true,
+            wielded: true,
           },
         },
       ],
@@ -537,8 +479,8 @@ describe('Self-Contained Character with Stored Entities', () => {
           itemId: 'longsword-keen-plus1',
           entityType: 'weapon',
           quantity: 1,
-          instanceValues: { equipped: true, wielded: true },
           // Entity with keen already applied (critRange 17 instead of 19)
+          // equipped/wielded stored directly in entity
           entity: {
             id: 'longsword-keen-plus1',
             entityType: 'weapon',
@@ -554,6 +496,8 @@ describe('Self-Contained Character with Stored Entities', () => {
             enhancementBonus: 1,
             // Properties list is kept for reference but effects are already applied
             properties: ['keen'],
+            equipped: true,
+            wielded: true,
           },
         },
       ],
@@ -575,8 +519,8 @@ describe('Self-Contained Character with Stored Entities', () => {
     // The critical range should reflect the pre-applied keen property
   });
 
-  it('should prefer stored entity over resolver', () => {
-    // Item has stored entity with different name than resolver would return
+  it('should only use stored entity (no external resolution)', () => {
+    // Character is self-contained - only uses stored entity
     const inventoryState: InventoryState = {
       items: [
         {
@@ -584,17 +528,18 @@ describe('Self-Contained Character with Stored Entities', () => {
           itemId: 'longsword',
           entityType: 'weapon',
           quantity: 1,
-          instanceValues: { equipped: true, wielded: true },
           entity: {
             id: 'longsword',
             entityType: 'weapon',
-            name: 'My Custom Longsword',  // Different from resolver
+            name: 'My Custom Longsword',
             damageDice: '1d8',
             damageType: 'slashing',
             critRange: 19,
             critMultiplier: 2,
             weaponCategory: 'martial',
             weaponType: 'melee',
+            equipped: true,
+            wielded: true,
           },
         },
       ],
@@ -604,24 +549,12 @@ describe('Self-Contained Character with Stored Entities', () => {
     const character = buildCharacter().build();
     character.inventoryState = inventoryState;
 
-    // Resolver would return a different entity
-    const differentResolver: InventoryEntityResolver = () => ({
-      id: 'longsword',
-      entityType: 'weapon',
-      name: 'Resolver Longsword',  // Different name
-      damageDice: '1d8',
-      damageType: 'slashing',
-      critRange: 19,
-      critMultiplier: 2,
-    });
-
-    const sheet = calculateCharacterSheet(character, {
-      resolveInventoryEntity: differentResolver,
-    });
+    // Calculate without any external context
+    const sheet = calculateCharacterSheet(character);
 
     const attacks = sheet.attackData.attacks;
 
-    // Should use the stored entity name, not the resolver
+    // Uses the stored entity
     expect(attacks).toHaveLength(1);
     expect(attacks[0].name).toBe('My Custom Longsword');
   });
@@ -632,34 +565,30 @@ describe('Self-Contained Character with Stored Entities', () => {
 // =============================================================================
 
 describe('Inventory Integration Summary', () => {
-  it('documents the required integration points', () => {
+  it('documents the self-contained character principle', () => {
     /**
-     * To fully integrate the inventory system with attack generation and
-     * character calculation, we need:
+     * The inventory system follows the SELF-CONTAINED CHARACTER principle:
      *
-     * 1. SELF-CONTAINED CHARACTER (PREFERRED)
+     * 1. SELF-CONTAINED CHARACTER
      *    - Entities are resolved and stored when item is acquired
-     *    - Character works without compendium access
+     *    - Character works without compendium access at calculation time
      *    - item.entity contains the full entity with properties applied
+     *    - Properties (keen, flaming, etc.) are resolved at acquisition
      *
-     * 2. LEGACY COMPENDIUM INTEGRATION (FALLBACK)
-     *    - If item.entity is not set, resolver is used
-     *    - calculateCharacterSheet needs access to a compendium
-     *    - Compendium resolves itemId -> full entity with stats
+     * 2. ATTACK GENERATION FROM INVENTORY
+     *    - In getCalculatedAttackData, check inventoryState.items
+     *    - For each weapon with wielded=true and stored entity:
+     *      a. Convert stored entity to legacy weapon format
+     *      b. Generate CalculatedAttack
+     *    - Items without entity are skipped
      *
-     * 3. ATTACK GENERATION FROM INVENTORY
-     *    - In getCalculatedAttackData, also check inventoryState.items
-     *    - For each weapon with wielded=true:
-     *      a. Use stored entity OR resolve from compendium
-     *      b. Convert to attack format
-     *      c. Generate CalculatedAttack
-     *
-     * 4. EQUIPPED ITEM EFFECTS
-     *    - In compileCharacterChanges (or similar):
+     * 3. EQUIPPED ITEM EFFECTS
+     *    - In compileCharacterChanges:
      *      a. Iterate inventoryState.items where equipped=true
-     *      b. Use stored entity OR resolve from compendium
+     *      b. Use stored entity (item.entity)
      *      c. Extract effects from entity
      *      d. Add to character changes (similar to buffs)
+     *    - Items without entity are skipped
      */
     expect(true).toBe(true);
   });

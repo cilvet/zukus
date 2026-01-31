@@ -12,8 +12,21 @@ import {
   getRootItems,
   addOrStackItem,
 } from '../itemOperations';
-import { createEmptyInventoryState, type InventoryState } from '../types';
+import { createEmptyInventoryState, type InventoryState, type ResolvedInventoryEntity } from '../types';
 import { isItemEquipped, isItemWielded } from '../instanceFields';
+
+// Helper para crear entidades de test con valores de instancia
+function createTestEntity(overrides: Partial<ResolvedInventoryEntity> = {}): ResolvedInventoryEntity {
+  return {
+    id: 'test',
+    entityType: 'item',
+    name: 'Test Item',
+    equipped: false,
+    wielded: false,
+    active: false,
+    ...overrides,
+  };
+}
 
 function createStateWithItems(): InventoryState {
   return {
@@ -23,21 +36,21 @@ function createStateWithItems(): InventoryState {
         itemId: 'longsword',
         entityType: 'weapon',
         quantity: 1,
-        // Not equipped (no instanceValues)
+        entity: createTestEntity({ id: 'longsword', entityType: 'weapon', name: 'Longsword', equipped: false }),
       },
       {
         instanceId: 'inst-2',
         itemId: 'chainmail',
         entityType: 'armor',
         quantity: 1,
-        instanceValues: { equipped: true },
+        entity: createTestEntity({ id: 'chainmail', entityType: 'armor', name: 'Chainmail', equipped: true }),
       },
       {
         instanceId: 'inst-3',
         itemId: 'health-potion',
         entityType: 'item',
         quantity: 5,
-        // Not equipped (no instanceValues)
+        entity: createTestEntity({ id: 'health-potion', entityType: 'item', name: 'Health Potion', equipped: false }),
       },
     ],
     currencies: {},
@@ -50,6 +63,7 @@ describe('addItem', () => {
     const result = addItem(state, {
       itemId: 'longsword',
       entityType: 'weapon',
+      entity: createTestEntity({ id: 'longsword', entityType: 'weapon', name: 'Longsword' }),
     });
 
     expect(result.warnings).toHaveLength(0);
@@ -68,6 +82,7 @@ describe('addItem', () => {
       entityType: 'item',
       quantity: 20,
       customName: 'Silver Arrows',
+      entity: createTestEntity({ id: 'arrow', entityType: 'item', name: 'Arrow' }),
     });
 
     expect(result.instance.quantity).toBe(20);
@@ -80,9 +95,11 @@ describe('addItem', () => {
       itemId: 'shield',
       entityType: 'shield',
       equipped: true,
+      entity: createTestEntity({ id: 'shield', entityType: 'shield', name: 'Shield', equipped: false }),
     });
 
     expect(isItemEquipped(result.instance)).toBe(true);
+    expect(result.instance.entity?.equipped).toBe(true);
   });
 
   it('preserves existing items when adding new one', () => {
@@ -90,6 +107,7 @@ describe('addItem', () => {
     const result = addItem(state, {
       itemId: 'dagger',
       entityType: 'weapon',
+      entity: createTestEntity({ id: 'dagger', entityType: 'weapon', name: 'Dagger' }),
     });
 
     expect(result.state.items).toHaveLength(4);
@@ -247,7 +265,7 @@ describe('setWeaponWielded', () => {
           itemId: 'longsword',
           entityType: 'weapon',
           quantity: 1,
-          instanceValues: { equipped: true, wielded: true },
+          entity: createTestEntity({ id: 'longsword', entityType: 'weapon', name: 'Longsword', equipped: true, wielded: true }),
         },
       ],
       currencies: {},
@@ -282,9 +300,9 @@ describe('getItemsByType', () => {
   it('returns all items of a type', () => {
     const state: InventoryState = {
       items: [
-        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1 },
-        { instanceId: '2', itemId: 'armor', entityType: 'armor', quantity: 1 },
-        { instanceId: '3', itemId: 'dagger', entityType: 'weapon', quantity: 1 },
+        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1, entity: createTestEntity({ id: 'sword', entityType: 'weapon' }) },
+        { instanceId: '2', itemId: 'armor', entityType: 'armor', quantity: 1, entity: createTestEntity({ id: 'armor', entityType: 'armor' }) },
+        { instanceId: '3', itemId: 'dagger', entityType: 'weapon', quantity: 1, entity: createTestEntity({ id: 'dagger', entityType: 'weapon' }) },
       ],
       currencies: {},
     };
@@ -323,15 +341,16 @@ describe('getRootItems', () => {
   it('returns items without containerId', () => {
     const state: InventoryState = {
       items: [
-        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1 },
+        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1, entity: createTestEntity() },
         {
           instanceId: '2',
           itemId: 'potion',
           entityType: 'item',
           quantity: 1,
           containerId: 'backpack-1',
+          entity: createTestEntity(),
         },
-        { instanceId: '3', itemId: 'shield', entityType: 'shield', quantity: 1 },
+        { instanceId: '3', itemId: 'shield', entityType: 'shield', quantity: 1, entity: createTestEntity() },
       ],
       currencies: {},
     };
@@ -351,7 +370,7 @@ describe('addOrStackItem', () => {
           itemId: 'arrow',
           entityType: 'item',
           quantity: 10,
-          // Not equipped (no instanceValues)
+          entity: createTestEntity({ id: 'arrow', entityType: 'item', name: 'Arrow', equipped: false }),
         },
       ],
       currencies: {},
@@ -382,7 +401,7 @@ describe('addOrStackItem', () => {
           itemId: 'ring',
           entityType: 'item',
           quantity: 1,
-          instanceValues: { equipped: true },
+          entity: createTestEntity({ id: 'ring', entityType: 'item', name: 'Ring', equipped: true }),
         },
       ],
       currencies: {},
@@ -401,6 +420,7 @@ describe('addOrStackItem', () => {
           entityType: 'item',
           quantity: 5,
           containerId: 'backpack',
+          entity: createTestEntity({ id: 'potion', entityType: 'item', name: 'Potion', equipped: false }),
         },
       ],
       currencies: {},
@@ -419,6 +439,7 @@ describe('addOrStackItem', () => {
           entityType: 'item',
           quantity: 5,
           customName: 'Special Potion',
+          entity: createTestEntity({ id: 'potion', entityType: 'item', name: 'Potion', equipped: false }),
         },
       ],
       currencies: {},

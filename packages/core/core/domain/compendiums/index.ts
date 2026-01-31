@@ -8,7 +8,6 @@ export type {
   CompendiumWarningType,
   ResolvedCompendiumContext,
   CalculationContext,
-  InventoryEntityResolver,
 } from './types';
 
 // Ports (arquitectura hexagonal)

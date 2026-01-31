@@ -3,38 +3,35 @@
  *
  * This module handles the conversion of inventory weapon items to the
  * legacy Weapon format used by the attack calculation system.
+ *
+ * Items must have their entity stored (self-contained character principle).
+ * Properties should already be applied to the entity at acquisition time.
  */
 
 import type { CharacterBaseData } from '../../character/baseData/character';
 import type { CharacterSheet } from '../../character/calculatedSheet/sheet';
-import type { InventoryEntityResolver } from '../../compendiums/types';
-import type { StandardEntity } from '../../entities/types/base';
 import type { Weapon } from '../../weapons/weapon';
 import {
   convertToLegacyWeapon,
   isWeaponEntity,
   type WeaponEntity,
 } from './convertToLegacyWeapon';
-import { applyPropertyEffectsToItem } from '../properties/resolveItemEffects';
 import { isItemEquipped } from '../instanceFields';
 
 /**
  * Converts inventory weapons to legacy Weapon format for attack calculation.
  *
  * For each weapon in inventoryState with entityType 'weapon' and equipped=true:
- * 1. Use stored entity (preferred) or resolve from compendium
- * 2. Apply property effects if using resolver (stored entities already have them)
- * 3. Convert to legacy Weapon format
+ * 1. Use stored entity (entity field must be set)
+ * 2. Convert to legacy Weapon format
  *
  * @param characterData - The character's base data
  * @param characterSheet - The calculated character sheet (for size info)
- * @param resolver - Function to resolve entity references (optional if entities are stored)
  * @returns Array of weapons in legacy format
  */
 export function resolveInventoryWeapons(
   characterData: CharacterBaseData,
-  characterSheet: CharacterSheet,
-  resolver?: InventoryEntityResolver
+  characterSheet: CharacterSheet
 ): Weapon[] {
   if (!characterData.inventoryState) {
     return [];
@@ -45,72 +42,24 @@ export function resolveInventoryWeapons(
   const characterSize = characterSheet.size.currentSize;
 
   for (const item of items) {
-    // Only process equipped weapons
-    if (item.entityType !== 'weapon' || !isItemEquipped(item)) {
+    // Only process equipped weapons with stored entity
+    if (item.entityType !== 'weapon' || !isItemEquipped(item) || !item.entity) {
       continue;
     }
 
-    // Use stored entity if available (self-contained character principle)
-    // Fall back to resolver for backwards compatibility
-    let entity: StandardEntity | undefined;
-
-    if (item.entity) {
-      // Entity is already stored and resolved (with properties applied)
-      entity = item.entity;
-    } else if (resolver) {
-      // Legacy path: resolve from compendium
-      entity = resolver(item.entityType, item.itemId);
-    }
-
-    if (!entity || !isWeaponEntity(entity)) {
+    if (!isWeaponEntity(item.entity)) {
       continue;
     }
 
-    // Apply property effects only if we used the resolver (not stored entity)
-    // Stored entities should already have properties applied
-    const resolvedWeapon = item.entity
-      ? entity as WeaponEntity
-      : (resolver ? resolveWeaponProperties(entity, resolver) : entity);
-
-    // Convert to legacy format
-    const { weapon } = convertToLegacyWeapon(resolvedWeapon, item, characterSize);
+    // Entity already has properties applied (keen, etc.)
+    const { weapon } = convertToLegacyWeapon(
+      item.entity as WeaponEntity,
+      item,
+      characterSize
+    );
 
     weapons.push(weapon);
   }
 
   return weapons;
-}
-
-/**
- * Resolves and applies property effects to a weapon entity.
- *
- * @param weapon - The weapon entity
- * @param resolver - Function to resolve property references
- * @returns Weapon with property effects applied
- */
-function resolveWeaponProperties(
-  weapon: WeaponEntity,
-  resolver: InventoryEntityResolver
-): WeaponEntity {
-  const propertyIds = weapon.properties ?? [];
-
-  if (propertyIds.length === 0) {
-    return weapon;
-  }
-
-  // Resolve property entities
-  const propertyEntities: StandardEntity[] = [];
-  for (const propId of propertyIds) {
-    const propEntity = resolver('weaponProperty', propId);
-    if (propEntity) {
-      propertyEntities.push(propEntity);
-    }
-  }
-
-  if (propertyEntities.length === 0) {
-    return weapon;
-  }
-
-  // Apply property effects to weapon
-  return applyPropertyEffectsToItem(weapon, propertyEntities) as WeaponEntity;
 }

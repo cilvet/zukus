@@ -16,6 +16,8 @@ CharacterBaseData
 
 ## InventoryItemInstance
 
+Los valores de instancia (equipped, wielded, active) son campos **normales de la entidad**, no un campo separado. Esto permite que las formulas accedan directamente a `@item.equipped`.
+
 ```typescript
 type InventoryItemInstance = {
   instanceId: string;        // UUID unico
@@ -26,15 +28,19 @@ type InventoryItemInstance = {
   customName?: string;       // Nombre personalizado
   notes?: string;            // Notas del usuario
 
-  instanceValues?: {         // Campos editables
-    equipped?: boolean;
-    wielded?: boolean;
-    active?: boolean;
-    [key: string]: boolean | number | string | undefined;
-  };
-
-  entity?: ResolvedInventoryEntity;  // Entidad resuelta (opcional)
+  entity?: ResolvedInventoryEntity;  // Entidad resuelta con valores de instancia
 };
+
+// La entidad contiene TODO, incluyendo valores de instancia:
+entity: {
+  id: 'longsword',
+  name: 'Longsword',
+  damage: '1d8',
+  equipped: false,   // Valor de instancia
+  wielded: false,    // Valor de instancia
+  active: false,     // Valor de instancia
+  // ... otros campos
+}
 ```
 
 ## Propiedades de Items con @item Effects
@@ -104,9 +110,9 @@ item.critRange = valorCalculado
 item._appliedEffects = [{ propertyId: 'keen', originalValue: 19, modifiedValue: 17 }]
 ```
 
-## Instance Fields
+## Instance Fields (equipped, wielded, active)
 
-Campos editables por usuario usando helpers:
+Los valores de instancia son campos **normales** de la entidad. Usar helpers para leer/escribir:
 
 ```typescript
 import {
@@ -118,12 +124,14 @@ import {
   setItemActive,
 } from '@zukus/core';
 
-// Leer
+// Leer - accede a entity.equipped
 if (isItemEquipped(item)) { ... }
 
-// Modificar (retorna nuevo item)
+// Modificar - retorna nuevo item con entity.equipped actualizado
 const equipped = setItemEquipped(item, true);
 ```
+
+Los schemas/addons definen estos campos con valores por defecto. Al crear la entidad en el compendium, ya viene con `equipped: false`, `wielded: false`, etc.
 
 ### Effects Condicionales con @instance
 
@@ -142,10 +150,10 @@ Los Effects pueden depender del estado de la instancia:
 }
 ```
 
-Las referencias `@instance.X` se resuelven automaticamente:
-- `@instance.equipped` -> 0 o 1
-- `@instance.wielded` -> 0 o 1
-- `@instance.active` -> 0 o 1
+Las referencias `@instance.X` se resuelven desde `entity.X`:
+- `@instance.equipped` -> entity.equipped (0 o 1)
+- `@instance.wielded` -> entity.wielded (0 o 1)
+- `@instance.active` -> entity.active (0 o 1)
 
 ## Operaciones
 
@@ -154,7 +162,7 @@ Las referencias `@instance.X` se resuelven automaticamente:
 ```typescript
 import { inventoryOps } from '@zukus/core';
 
-// Anadir
+// Anadir (entity debe tener equipped/wielded/active)
 const result = inventoryOps.addItem(state, {
   itemId: 'longsword',
   entityType: 'weapon',
@@ -164,10 +172,10 @@ const result = inventoryOps.addItem(state, {
 // Eliminar
 inventoryOps.removeItem(state, instanceId, quantity?);
 
-// Actualizar
-inventoryOps.updateItem(state, instanceId, { equipped: true });
+// Actualizar metadata (quantity, notes, etc.)
+inventoryOps.updateItem(state, instanceId, { quantity: 5 });
 
-// Toggle equipado
+// Toggle equipado (modifica entity.equipped)
 inventoryOps.toggleItemEquipped(state, instanceId);
 ```
 
@@ -222,7 +230,10 @@ fields: [
 
 ### equippable, wieldable, activable
 
-Anaden instanceFields: `equipped`, `wielded`, `active`.
+Definen campos normales con valores por defecto:
+- `equipped: false`
+- `wielded: false`
+- `active: false`
 
 ## Schemas de Entidades
 

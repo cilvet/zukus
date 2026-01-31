@@ -46,16 +46,23 @@ type InventoryItemInstance = {
   containerId?: string;      // ID del container que lo contiene
   customName?: string;       // Nombre personalizado
   notes?: string;            // Notas del usuario
-  instanceValues?: {         // Campos editables por usuario
-    equipped?: boolean;      // Si está equipado
-    wielded?: boolean;       // Si está empuñado (armas)
-    active?: boolean;        // Si está activo (items activables)
-    [key: string]: boolean | number | string | undefined;
-  };
+
+  entity?: ResolvedInventoryEntity;  // Entidad resuelta con valores de instancia
 };
+
+// La entidad contiene TODO, incluyendo valores de instancia:
+entity: {
+  id: 'longsword',
+  name: 'Longsword',
+  damage: '1d8',
+  equipped: false,   // Valor de instancia
+  wielded: false,    // Valor de instancia
+  active: false,     // Valor de instancia
+  // ... otros campos de la entidad
+}
 ```
 
-> **Nota**: `equipped`, `wielded`, y `active` se almacenan en `instanceValues`, no como campos directos. Usar helpers como `isItemEquipped(item)` para accederlos.
+> **Importante**: Los valores de instancia (`equipped`, `wielded`, `active`) son campos **normales** de la entidad, no un campo separado. Esto permite que las fórmulas accedan directamente a `@item.equipped`. Usar helpers como `isItemEquipped(item)` para leer/escribir estos valores.
 
 ### CurrencyState
 
@@ -179,7 +186,7 @@ updater.convertCurrency(fromId, toId, amount, currencyDefs);
 
 ## Instance Fields
 
-Los campos editables por usuario (equipped, wielded, active) se almacenan en `instanceValues`:
+Los valores de instancia (`equipped`, `wielded`, `active`) son campos **normales** de la entidad. Usar helpers para leer/escribir:
 
 ```typescript
 import {
@@ -191,14 +198,16 @@ import {
   setItemActive,
 } from '@zukus/core';
 
-// Leer estado
+// Leer - accede a entity.equipped
 if (isItemEquipped(item)) { ... }
 if (isItemWielded(item)) { ... }
 
-// Modificar estado (retorna nuevo item)
+// Modificar - retorna nuevo item con entity.equipped actualizado
 const equippedItem = setItemEquipped(item, true);
 const wieldedWeapon = setItemWielded(item, true);
 ```
+
+Los schemas/addons definen estos campos con valores por defecto. Al crear la entidad en el compendium, ya viene con `equipped: false`, `wielded: false`, etc.
 
 ### Effects Condicionales con @instance
 
@@ -211,17 +220,17 @@ Los effects pueden tener condiciones que dependen del estado de la instancia:
   formula: '30',
   conditions: [{
     type: 'simple',
-    firstFormula: '@instance.active',  // Referencia a instanceValues
+    firstFormula: '@instance.active',
     operator: '==',
     secondFormula: '1'
   }]
 }
 ```
 
-Las referencias `@instance.X` se resuelven automaticamente durante la compilacion de effects:
-- `@instance.equipped` -> 0 o 1
-- `@instance.wielded` -> 0 o 1
-- `@instance.active` -> 0 o 1
+Las referencias `@instance.X` se resuelven desde `entity.X`:
+- `@instance.equipped` -> entity.equipped (0 o 1)
+- `@instance.wielded` -> entity.wielded (0 o 1)
+- `@instance.active` -> entity.active (0 o 1)
 
 ## Addons para Items
 
@@ -249,35 +258,28 @@ fields: [
 ]
 ```
 
-### equippable
+### equippable, wieldable, activable
 
-Permite equipar/desequipar el item. Añade instanceField `equipped`.
+Estos addons definen campos normales con valores por defecto:
 
 ```typescript
-instanceFields: [
+// equippable
+fields: [
   { name: 'equipped', type: 'boolean', default: false }
 ]
-```
 
-### wieldable
-
-Permite empuñar armas. Añade instanceField `wielded`.
-
-```typescript
-instanceFields: [
+// wieldable
+fields: [
   { name: 'wielded', type: 'boolean', default: false }
 ]
-```
 
-### activable
-
-Items con efecto activable (boots of speed, etc). Añade instanceField `active`.
-
-```typescript
-instanceFields: [
+// activable
+fields: [
   { name: 'active', type: 'boolean', default: false }
 ]
 ```
+
+Cuando se crea la entidad en el compendium, ya viene con estos valores por defecto.
 
 ## Propiedades de Items con Effects
 
