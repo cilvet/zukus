@@ -13,7 +13,7 @@ import {
 } from "./sources/compileCharacterChanges";
 import { CompiledEffects, compileCharacterEffects } from "./effects/compileEffects";
 import { compileCGEVariableDefinitions } from "./cge/compileCGEChanges";
-import type { ResolvedCompendiumContext } from "../../compendiums/types";
+import type { ResolvedCompendiumContext, InventoryEntityResolver } from "../../compendiums/types";
 import type { ComputedEntity } from "../../entities/types/base";
 
 // =============================================================================
@@ -78,16 +78,32 @@ export function resolveLevelSystemEntities(
 // =============================================================================
 
 /**
+ * Options for compileAndMergeChanges.
+ */
+export type CompileChangesOptions = {
+  compendiumContext?: ResolvedCompendiumContext;
+  inventoryEntityResolver?: InventoryEntityResolver;
+};
+
+/**
  * Compiles and merges all character changes from different sources:
  * - Legacy changes (feats, buffs, items, etc.)
  * - Entity changes (customEntities + level system entities)
- * 
+ * - Inventory item effects (when inventoryEntityResolver is provided)
+ *
  * Also validates custom entities and compiles effects.
  */
 export function compileAndMergeChanges(
   characterData: CharacterBaseData,
-  compendiumContext?: ResolvedCompendiumContext
+  options?: CompileChangesOptions | ResolvedCompendiumContext
 ): CompiledChangesResult {
+  // Handle legacy signature (compendiumContext as second param)
+  const opts: CompileChangesOptions =
+    options && "entityTypes" in options
+      ? { compendiumContext: options }
+      : (options as CompileChangesOptions) ?? {};
+
+  const { compendiumContext, inventoryEntityResolver } = opts;
   const warnings: CharacterWarning[] = [];
   
   // Validate custom entities if they exist
@@ -142,8 +158,11 @@ export function compileAndMergeChanges(
     ...cgeVariableDefinitions,
   ];
 
-  // Compile effects from all sources (buffs + custom entities)
-  const effects = compileCharacterEffects(characterData, entitiesResult.computedEntities);
+  // Compile effects from all sources (buffs + custom entities + inventory items)
+  const effects = compileCharacterEffects(characterData, {
+    computedEntities: entitiesResult.computedEntities,
+    inventoryEntityResolver,
+  });
   
   return {
     characterChanges,

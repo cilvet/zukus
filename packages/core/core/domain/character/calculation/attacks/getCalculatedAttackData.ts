@@ -133,17 +133,32 @@ const allDefaultAttackContextChanges: AttackContextualChange[] = [
   prone
 ];
 
+/**
+ * Options for attack data calculation.
+ */
+export type GetAttackDataOptions = {
+  /** Additional weapons from inventory (already converted to legacy format) */
+  inventoryWeapons?: Weapon[];
+};
+
 export const getCalculatedAttackData = function (
   character: CharacterSheet,
   attackChanges: ContextualizedChange<AttackChange>[],
   attackContextChanges: ContextualChange[],
-  substitutionValues: Record<string, number>
+  substitutionValues: Record<string, number>,
+  options?: GetAttackDataOptions
 ) {
-  const characterWeapons = character.equipment.items.filter(
+  const equipmentWeapons = character.equipment.items.filter(
     (item): item is Weapon => item.itemType === "WEAPON"
   );
 
-  const attacks = characterWeapons.filter(weapon => weapon.equipped).map((weapon) =>
+  // Combine legacy equipment weapons with inventory weapons
+  const allWeapons = [
+    ...equipmentWeapons,
+    ...(options?.inventoryWeapons ?? []),
+  ];
+
+  const attacks = allWeapons.filter(weapon => weapon.equipped).map((weapon) =>
     getAttackFromWeapon(weapon, character, attackChanges, attackContextChanges, substitutionValues)
   );
 

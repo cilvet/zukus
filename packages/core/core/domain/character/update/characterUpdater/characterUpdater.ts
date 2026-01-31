@@ -14,6 +14,8 @@ import type { StandardEntity } from "../../../entities/types/base";
 import { useSlot, useBoundSlot, refreshSlots, setSlotValue } from "../../../cge/slotOperations";
 import { prepareEntityInSlot, unprepareSlot } from "../../../cge/preparationOperations";
 import { addKnownEntity, removeKnownEntity } from "../../../cge/knownOperations";
+import type { InventoryItemInstance } from "../../../inventory/types";
+import type { CurrencyDefinition } from "../../../inventory/currencies/types";
 
 /**
  * Character Updater - Wrapper con estado sobre funciones puras.
@@ -197,13 +199,206 @@ export class CharacterUpdater implements ICharacterUpdater {
 
   toggleItemEquipped(itemUniqueId: string): UpdateResult {
     if (!this.character) return this.characterNotSet;
-    
+
     const result = ops.toggleItemEquipped(this.character, itemUniqueId);
-    
+
     if (result.warnings.length > 0) {
       return this.toUpdateResult(result);
     }
-    
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  // =============================================================================
+  // New Inventory Management (coexists with legacy equipment)
+  // =============================================================================
+
+  /**
+   * Adds an item to the new inventory system.
+   * @returns The created instance ID on success
+   */
+  addToInventory(params: {
+    itemId: string;
+    entityType: string;
+    quantity?: number;
+    equipped?: boolean;
+    customName?: string;
+  }): UpdateResult & { instanceId?: string } {
+    if (!this.character) return { ...this.characterNotSet, instanceId: undefined };
+
+    const result = ops.addInventoryItem(this.character, params);
+
+    if (result.warnings.length > 0) {
+      return { ...this.toUpdateResult(result), instanceId: undefined };
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true, instanceId: result.instance?.instanceId };
+  }
+
+  /**
+   * Removes an item from the new inventory (or reduces quantity).
+   */
+  removeFromInventory(instanceId: string, quantity?: number): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.removeInventoryItem(this.character, instanceId, quantity);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Updates an inventory item's properties.
+   */
+  updateInventoryItem(
+    instanceId: string,
+    updates: Partial<Pick<InventoryItemInstance, 'quantity' | 'equipped' | 'wielded' | 'customName' | 'notes'>>
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.updateInventoryItem(this.character, instanceId, updates);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Toggles the equipped state of an inventory item.
+   */
+  toggleInventoryEquipped(instanceId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.toggleInventoryItemEquipped(this.character, instanceId);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Sets a weapon as wielded or not wielded.
+   */
+  setWeaponWielded(instanceId: string, wielded: boolean): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.setInventoryWeaponWielded(this.character, instanceId, wielded);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Moves an item into a container.
+   */
+  moveToContainer(instanceId: string, containerId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.moveInventoryItemToContainer(this.character, instanceId, containerId);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Removes an item from its container.
+   */
+  removeFromContainer(instanceId: string): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.removeInventoryItemFromContainer(this.character, instanceId);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  // =============================================================================
+  // Currency Management (new inventory system)
+  // =============================================================================
+
+  /**
+   * Adds currency to the character.
+   */
+  addCurrency(currencyId: string, amount: number): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.addCurrency(this.character, currencyId, amount);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Spends (removes) currency from the character.
+   */
+  spendCurrency(currencyId: string, amount: number): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.spendCurrency(this.character, currencyId, amount);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Converts currency from one type to another.
+   */
+  convertCurrency(
+    fromId: string,
+    toId: string,
+    amount: number,
+    currencyDefs: CurrencyDefinition[]
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    const result = ops.convertCurrency(this.character, fromId, toId, amount, currencyDefs);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
     this.character = result.character;
     this.notifyUpdate();
     return { success: true };

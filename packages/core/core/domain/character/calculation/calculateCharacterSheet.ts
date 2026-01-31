@@ -29,6 +29,7 @@ import {
   compileAndMergeChanges,
   getSpecialFeaturesFromSheet,
 } from "./calculateCharacterSheet.helpers";
+import { resolveInventoryWeapons } from "../../inventory/weapons/resolveInventoryWeapons";
 
 export type getSheetWithUpdatedField = (
   baseData: CharacterBaseData,
@@ -64,7 +65,7 @@ const calculationFunctions: getSheetWithUpdatedField[] = [
 
 /**
  * Calculates a complete character sheet from base character data.
- * 
+ *
  * @param characterBaseData - Base character data (abilities, classes, equipment, etc.)
  * @param context - Optional calculation context. Only used for validating customEntities
  *                  against compendium schemas. The calculation works perfectly fine without it.
@@ -77,19 +78,19 @@ export function calculateCharacterSheet(
 ): CharacterSheet {
   const startTime = performance.now();
   const warnings: CharacterWarning[] = [];
-  
+
   // Resolve level system entities
   const resolvedResult = resolveLevelSystemEntities(characterBaseData);
   const resolvedCharacterData = resolvedResult.characterData;
   warnings.push(...resolvedResult.warnings);
-  
+
   // Compile all changes from all sources
-  const compiledChanges = compileAndMergeChanges(
-    resolvedCharacterData,
-    context?.compendiumContext
-  );
+  const compiledChanges = compileAndMergeChanges(resolvedCharacterData, {
+    compendiumContext: context?.compendiumContext,
+    inventoryEntityResolver: context?.resolveInventoryEntity,
+  });
   warnings.push(...compiledChanges.warnings);
-  
+
   // Run calculation pipeline
   const { characterSheet, valuesIndex } = runCalculationPipeline(
     resolvedCharacterData,
@@ -128,20 +129,28 @@ export function calculateCharacterSheet(
     resolvedCharacterData,
     characterSheet
   );
-  
+
+  // Resolve inventory weapons and calculate attacks
+  const inventoryWeapons = resolveInventoryWeapons(
+    resolvedCharacterData,
+    characterSheet,
+    context?.resolveInventoryEntity
+  );
+
   characterSheet.attackData = getCalculatedAttackData(
     characterSheet,
     compiledChanges.characterChanges.attackChanges,
     compiledChanges.contextualChanges,
-    valuesIndex
+    valuesIndex,
+    { inventoryWeapons }
   );
 
   characterSheet.substitutionValues = valuesIndex;
   characterSheet.warnings = warnings;
   characterSheet.computedEntities = compiledChanges.computedEntities;
-  
+
   logCalculationTime(startTime);
-  
+
   return characterSheet;
 }
 

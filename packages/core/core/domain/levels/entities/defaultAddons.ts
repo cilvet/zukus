@@ -152,6 +152,62 @@ export const providableAddon: AddonDefinition = {
 };
 
 // =============================================================================
+// D&D 3.5 Item Addon
+// =============================================================================
+
+/**
+ * Addon for D&D 3.5 items with standard item properties.
+ * Provides: weight, cost, itemSlot, aura, casterLevel
+ *
+ * This addon is specific to D&D 3.5 and provides the common fields
+ * needed for items in that system.
+ */
+export const dnd35itemAddon: AddonDefinition = {
+  id: 'dnd35item',
+  name: 'D&D 3.5 Item',
+  fields: [
+    { name: 'weight', type: 'number', description: 'Weight of the item in pounds' },
+    {
+      name: 'cost',
+      type: 'object',
+      optional: true,
+      description: 'Cost of the item',
+      objectFields: [
+        { name: 'amount', type: 'number', description: 'Numeric cost value' },
+        { name: 'currency', type: 'string', description: 'Currency type (gp, sp, cp)' },
+      ],
+    },
+    { name: 'itemSlot', type: 'string', optional: true, description: 'Body slot this item occupies' },
+    { name: 'aura', type: 'string', optional: true, description: 'Magic aura school and strength' },
+    { name: 'casterLevel', type: 'integer', optional: true, description: 'Caster level for magic items' },
+  ],
+};
+
+// =============================================================================
+// Container Addon
+// =============================================================================
+
+/**
+ * Addon for items that can contain other items.
+ * Provides: capacity, ignoresContentWeight
+ *
+ * This addon is generic and can be used with any item system.
+ * Examples: backpacks, bags of holding, quivers.
+ */
+export const containerAddon: AddonDefinition = {
+  id: 'container',
+  name: 'Container',
+  fields: [
+    { name: 'capacity', type: 'number', description: 'Maximum weight capacity in pounds' },
+    {
+      name: 'ignoresContentWeight',
+      type: 'boolean',
+      description: 'If true, contents do not count toward carried weight (e.g., bag of holding)',
+    },
+  ],
+};
+
+// =============================================================================
 // Default Registry
 // =============================================================================
 
@@ -166,5 +222,7 @@ export const defaultAddonRegistry: AddonRegistry = {
   effectful: effectfulAddon,
   suppressing: suppressingAddon,
   providable: providableAddon,
+  dnd35item: dnd35itemAddon,
+  container: containerAddon,
 };
 

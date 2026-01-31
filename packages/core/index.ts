@@ -28,8 +28,33 @@ export type { BonusTypes } from "./core/domain/character/baseData/changes";
 // Types - Buffs
 export type { Buff } from "./core/domain/character/baseData/buffs";
 
-// Types - Equipment
+// Types - Equipment (legacy)
 export type { Equipment, Item } from "./core/domain/character/baseData/equipment";
+
+// Inventory System (new)
+export type {
+  InventoryState,
+  InventoryItemInstance,
+  CurrencyState,
+  InventoryWarning,
+  InventoryUpdateResult,
+} from "./core/domain/inventory";
+export type {
+  CurrencyDefinition,
+  CurrencyWarning,
+} from "./core/domain/inventory/currencies/types";
+export type {
+  WeightBreakdown,
+  ItemEntityInfo,
+  ItemEntityResolver,
+} from "./core/domain/inventory/weightCalculations";
+export {
+  createEmptyInventoryState,
+  createItemInstance,
+  inventorySuccess,
+  inventoryWithWarning,
+} from "./core/domain/inventory";
+export * as inventoryOps from "./core/domain/inventory";
 
 // Types - Attacks
 export type {

@@ -15,6 +15,7 @@ import { Resource } from "../../spells/resources";
 import type { StandardEntity } from "../../entities/types/base";
 import type { EntityInstance, LevelSlot, ClassEntity, SystemLevelsEntity } from "../../levels/storage/types";
 import type { CGEState } from "../../cge/types";
+import type { InventoryState } from "../../inventory/types";
 
 /**
  * Alineamiento del personaje en D&D 3.5.
@@ -55,6 +56,13 @@ export type CharacterBaseData = {
   level: CharacterLevel; // Extracted from classes and saved separately. Also, levels can be edited without editing the classes.
   race?: Race;
   equipment: Equipment;
+
+  /**
+   * Nuevo sistema de inventario (coexiste con equipment).
+   * Usa entidades del compendium con instancias únicas.
+   */
+  inventoryState?: InventoryState;
+
   feats: Feat[];
   buffs: Buff[];
   sharedBuffs: Buff[];

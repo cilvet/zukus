@@ -65,6 +65,23 @@ export {
   setBackground,
 } from './characterPropertyOperations';
 
+// Inventory operations (new system)
+export {
+  addInventoryItem,
+  removeInventoryItem,
+  updateInventoryItem,
+  setInventoryItemEquipped,
+  toggleInventoryItemEquipped,
+  setInventoryWeaponWielded,
+  addOrStackInventoryItem,
+  moveInventoryItemToContainer,
+  removeInventoryItemFromContainer,
+  addCurrency,
+  spendCurrency,
+  convertCurrency,
+  setCurrency,
+} from './inventoryOperations';
+
 // Re-export operations from levels updater
 export {
   // Types

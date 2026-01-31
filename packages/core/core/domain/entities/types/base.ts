@@ -201,10 +201,12 @@ export type ComputedEntity = StandardEntity & {
 export type EntityFieldType =
   | 'string'
   | 'integer'
+  | 'number'  // Decimal numbers (e.g., weight: 2.5)
   | 'boolean'
   | 'string_array'
   | 'integer_array'
   | 'reference'
+  | 'reference_array'  // Array of references to other entities
   | 'object'
   | 'object_array'
   | 'image'  // URL or library asset ID (e.g., "icons/SkillsIcons/Skillicons/fire.png")

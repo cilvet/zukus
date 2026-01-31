@@ -4,7 +4,9 @@ import {
   Effect,
   SourcedEffect,
 } from "../../baseData/effects";
-import type { ComputedEntity } from "../../../entities/types/base";
+import type { ComputedEntity, StandardEntity } from "../../../entities/types/base";
+import type { InventoryEntityResolver } from "../../../compendiums/types";
+import { applyPropertyEffectsToItem } from "../../../inventory/properties/resolveItemEffects";
 
 // =============================================================================
 // COMPILED EFFECTS - Effects organized by target prefix
@@ -68,31 +70,56 @@ function toSourcedEffect(
 // =============================================================================
 
 /**
+ * Options for compiling character effects.
+ */
+export type CompileEffectsOptions = {
+  /** Optional array of computed entities with effects */
+  computedEntities?: ComputedEntity[];
+  /** Optional resolver for inventory item entities */
+  inventoryEntityResolver?: InventoryEntityResolver;
+};
+
+/**
  * Compiles all effects from character base data and computed entities.
- * 
+ *
  * Supports effects from:
  * - Buffs (buff.effects)
  * - Custom Entities (entity.effects) - via computedEntities parameter
+ * - Equipped Inventory Items (item.effects) - via inventoryEntityResolver
  *
- * @param characterBaseData Character base data containing buffs
- * @param computedEntities Optional array of computed entities with effects
+ * @param characterBaseData Character base data containing buffs and inventory
+ * @param options Optional configuration for effect compilation
  * @returns Compiled effects organized by target prefix
  */
 export function compileCharacterEffects(
   characterBaseData: CharacterBaseData,
-  computedEntities?: ComputedEntity[]
+  options?: CompileEffectsOptions | ComputedEntity[]
 ): CompiledEffects {
   const compiled: CompiledEffects = {
     all: [],
     byPrefix: new Map(),
   };
 
+  // Handle legacy signature (computedEntities as second param)
+  const opts: CompileEffectsOptions = Array.isArray(options)
+    ? { computedEntities: options }
+    : options ?? {};
+
   // Compile effects from buffs
   compileBuffEffects(characterBaseData, compiled);
 
   // Compile effects from custom entities
-  if (computedEntities) {
-    compileEntityEffects(computedEntities, compiled);
+  if (opts.computedEntities) {
+    compileEntityEffects(opts.computedEntities, compiled);
+  }
+
+  // Compile effects from equipped inventory items
+  if (opts.inventoryEntityResolver && characterBaseData.inventoryState) {
+    compileInventoryItemEffects(
+      characterBaseData,
+      opts.inventoryEntityResolver,
+      compiled
+    );
   }
 
   return compiled;
@@ -186,6 +213,110 @@ export function getEffectsByTarget(
   const prefix = getTargetPrefix(target);
   const prefixEffects = compiled.byPrefix.get(prefix) ?? [];
   return prefixEffects.filter((effect) => effect.target === target);
+}
+
+// =============================================================================
+// INVENTORY ITEM EFFECTS
+// =============================================================================
+
+/**
+ * Compiles effects from equipped inventory items.
+ *
+ * For each equipped item:
+ * 1. Resolve the entity from the compendium
+ * 2. If the entity has properties with effects, apply them to get resolved item
+ * 3. Extract effects that DON'T target @item (those are for the item itself)
+ * 4. Add character-targeting effects to compiled
+ *
+ * Effects with target starting with "@item." are NOT included here - those
+ * modify the item itself and are handled during attack/item resolution.
+ */
+function compileInventoryItemEffects(
+  characterBaseData: CharacterBaseData,
+  resolver: InventoryEntityResolver,
+  compiled: CompiledEffects
+): void {
+  const items = characterBaseData.inventoryState?.items ?? [];
+
+  for (const item of items) {
+    // Only process equipped items
+    if (!item.equipped) {
+      continue;
+    }
+
+    // Resolve the entity
+    const entity = resolver(item.entityType, item.itemId);
+    if (!entity) {
+      continue;
+    }
+
+    // Get effects from the entity
+    const entityWithEffects = entity as StandardEntity & {
+      effects?: Effect[];
+      properties?: string[];
+    };
+
+    // Collect all effects from the entity
+    const effects: Effect[] = [];
+
+    // Direct effects from the entity
+    if (entityWithEffects.effects) {
+      effects.push(...entityWithEffects.effects);
+    }
+
+    // If the item has properties, resolve them and collect their effects
+    // But only non-@item effects (property effects that target character stats)
+    if (entityWithEffects.properties && entityWithEffects.properties.length > 0) {
+      const propertyEntities: StandardEntity[] = [];
+      for (const propId of entityWithEffects.properties) {
+        // Determine property entity type based on item type
+        const propertyType = getPropertyTypeForItem(item.entityType);
+        const propEntity = resolver(propertyType, propId);
+        if (propEntity) {
+          propertyEntities.push(propEntity);
+        }
+      }
+
+      // Collect effects from properties that target character (not @item)
+      for (const prop of propertyEntities) {
+        const propEffects = (prop as StandardEntity & { effects?: Effect[] }).effects ?? [];
+        for (const effect of propEffects) {
+          // Skip @item effects - those are for modifying the item
+          if (!effect.target.startsWith("@item.")) {
+            effects.push(effect);
+          }
+        }
+      }
+    }
+
+    // Add character-targeting effects to compiled
+    for (const effect of effects) {
+      // Skip @item effects
+      if (effect.target.startsWith("@item.")) {
+        continue;
+      }
+
+      // Determine if this effect should only apply when wielded
+      // For now, all effects from equipped items apply
+      // TODO: Add support for wielded-only effects via conditions
+
+      const sourcedEffect = toSourcedEffect(
+        effect,
+        "item",
+        item.instanceId,
+        entity.name || item.itemId
+      );
+      addEffect(compiled, sourcedEffect);
+    }
+  }
+}
+
+/**
+ * Gets the property entity type for a given item entity type.
+ * E.g., 'weapon' -> 'weaponProperty', 'armor' -> 'armorProperty'
+ */
+function getPropertyTypeForItem(itemEntityType: string): string {
+  return `${itemEntityType}Property`;
 }
 
 

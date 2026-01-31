@@ -1,0 +1,278 @@
+# Sistema de Inventario
+
+Sistema de inventario que coexiste con el sistema `equipment` legacy. Usa entidades del compendium con instancias únicas.
+
+## Arquitectura
+
+```
+CharacterBaseData
+├── equipment (legacy)          # Sistema antiguo con Item[]
+└── inventoryState (nuevo)      # Sistema basado en entidades
+    ├── items: InventoryItemInstance[]
+    └── currencies: CurrencyState
+```
+
+## Ubicación de Archivos
+
+```
+packages/core/core/domain/inventory/
+├── types.ts                    # Tipos base del inventario
+├── itemOperations.ts           # CRUD de items
+├── containerOperations.ts      # Operaciones de containers
+├── weightCalculations.ts       # Cálculo de peso
+├── currencies/
+│   ├── types.ts               # Tipos de currency
+│   └── currencyOperations.ts  # Operaciones de currency
+└── properties/
+    └── resolveItemEffects.ts  # Resolución de Effects @item
+```
+
+## Tipos Principales
+
+### InventoryItemInstance
+
+Instancia de un item en el inventario:
+
+```typescript
+type InventoryItemInstance = {
+  instanceId: string;        // UUID único de esta instancia
+  itemId: string;            // ID de la entidad en el compendium
+  entityType: string;        // 'weapon', 'armor', 'item', etc.
+  quantity: number;          // Cantidad (default 1)
+  equipped: boolean;         // Si está equipado
+  wielded?: boolean;         // Si está empuñado (solo armas)
+  containerId?: string;      // ID del container que lo contiene
+  customName?: string;       // Nombre personalizado
+  notes?: string;            // Notas del usuario
+};
+```
+
+### CurrencyState
+
+Estado de currencies del personaje:
+
+```typescript
+type CurrencyState = { [currencyId: string]: number };
+// Ejemplo: { gold: 150, silver: 30, copper: 5 }
+```
+
+## Operaciones de Items
+
+Importar desde `@zukus/core`:
+
+```typescript
+import { inventoryOps } from '@zukus/core';
+
+// Añadir item
+const result = inventoryOps.addItem(state, {
+  itemId: 'longsword',
+  entityType: 'weapon',
+  quantity: 1,
+});
+
+// Eliminar item (o reducir cantidad)
+inventoryOps.removeItem(state, instanceId, quantity?);
+
+// Actualizar item
+inventoryOps.updateItem(state, instanceId, { equipped: true });
+
+// Toggle equipado
+inventoryOps.toggleItemEquipped(state, instanceId);
+
+// Añadir o apilar (stackear con item existente)
+inventoryOps.addOrStackItem(state, itemId, entityType, quantity);
+```
+
+## Operaciones de Containers
+
+Los containers son items con el addon `container`:
+
+```typescript
+// Mover item a container
+inventoryOps.moveToContainer(state, instanceId, containerId);
+
+// Sacar item del container
+inventoryOps.removeFromContainer(state, instanceId);
+
+// Obtener contenido de un container
+inventoryOps.getContainerContents(state, containerId);
+
+// Verificar si item está en container (directo o anidado)
+inventoryOps.isItemInContainer(state, itemId, containerId);
+```
+
+## Operaciones de Currencies
+
+```typescript
+import { inventoryOps } from '@zukus/core';
+
+// Añadir currency
+inventoryOps.addCurrency(currencies, 'gold', 100);
+
+// Gastar currency
+inventoryOps.removeCurrency(currencies, 'gold', 50);
+
+// Convertir currencies
+inventoryOps.convertCurrency(currencies, 'gold', 'silver', 10, currencyDefs);
+
+// Calcular riqueza total (en moneda base)
+inventoryOps.getTotalWealth(currencies, currencyDefs);
+
+// Calcular peso de monedas
+inventoryOps.getCurrencyWeight(currencies, currencyDefs);
+```
+
+## Cálculo de Peso
+
+```typescript
+import { calculateWeightBreakdown, type ItemEntityResolver } from '@zukus/core';
+
+// Resolver que obtiene datos de entidades del compendium
+const resolver: ItemEntityResolver = (itemId, entityType) => {
+  return compendium.getEntity(entityType, itemId);
+};
+
+const breakdown = calculateWeightBreakdown(state, resolver, currencyDefs);
+// {
+//   equippedWeight: 44,   // Items equipados
+//   carriedWeight: 15,    // Items no equipados
+//   currencyWeight: 2,    // Peso de monedas
+//   totalWeight: 61       // Total
+// }
+```
+
+### Reglas de Peso
+
+- Items en containers con `ignoresContentWeight: true` no suman peso
+- Items dentro de containers se cuentan a través del container padre
+- Currencies tienen peso según `weightPerUnit` de su definición
+
+## CharacterUpdater
+
+Métodos disponibles en el CharacterUpdater:
+
+```typescript
+// Items
+updater.addToInventory({ itemId, entityType, quantity?, equipped? });
+updater.removeFromInventory(instanceId, quantity?);
+updater.updateInventoryItem(instanceId, { quantity?, notes? });
+updater.toggleInventoryEquipped(instanceId);
+updater.setWeaponWielded(instanceId, wielded);
+updater.moveToContainer(instanceId, containerId);
+updater.removeFromContainer(instanceId);
+
+// Currencies
+updater.addCurrency(currencyId, amount);
+updater.spendCurrency(currencyId, amount);
+updater.convertCurrency(fromId, toId, amount, currencyDefs);
+```
+
+## Addons para Items
+
+### dnd35item (D&D 3.5 específico)
+
+```typescript
+fields: [
+  { name: 'weight', type: 'number' },
+  { name: 'cost', type: 'object', objectFields: [
+    { name: 'amount', type: 'number' },
+    { name: 'currency', type: 'string' }
+  ]},
+  { name: 'itemSlot', type: 'string', optional: true },
+  { name: 'aura', type: 'string', optional: true },
+  { name: 'casterLevel', type: 'integer', optional: true },
+]
+```
+
+### container (genérico)
+
+```typescript
+fields: [
+  { name: 'capacity', type: 'number' },        // Capacidad máxima en libras
+  { name: 'ignoresContentWeight', type: 'boolean' }, // Ej: Bag of Holding
+]
+```
+
+## Propiedades de Items con Effects
+
+Las propiedades (como Keen, Flaming) son entidades con Effects que modifican el item:
+
+```typescript
+// En el schema de weapon:
+{
+  name: 'properties',
+  type: 'reference_array',
+  referenceType: 'weaponProperty',
+  applyEffectsToParent: true,  // <-- Clave: Effects van al item
+}
+
+// Ejemplo de propiedad Keen:
+const keenProperty = {
+  id: 'keen',
+  entityType: 'weaponProperty',
+  name: 'Keen',
+  effects: [{
+    target: '@item.critRange',    // Target especial: @item.X
+    formula: '...',               // Fórmula para duplicar rango
+    bonusType: 'untyped',
+  }],
+};
+```
+
+### Resolver Effects de Propiedades
+
+```typescript
+import { applyPropertyEffectsToItem } from '@zukus/core';
+
+// Aplicar propiedades a un item
+const resolvedWeapon = applyPropertyEffectsToItem(
+  weapon,
+  properties,
+  evaluateFormula  // Opcional: evaluador de fórmulas
+);
+
+// El resultado incluye:
+// - Valores modificados en el item
+// - _appliedEffects: registro de qué se aplicó
+// - _modifiedFields: campos que cambiaron
+```
+
+## Schemas de Entidades
+
+### weaponSchema
+
+Campos principales: damageDice, damageType, critRange, critMultiplier, weaponCategory, weaponType, enhancementBonus, properties
+
+### armorSchema
+
+Campos principales: armorBonus, maxDexBonus, armorCheckPenalty, arcaneSpellFailure, speed30, speed20, armorType, properties
+
+### shieldSchema
+
+Campos principales: shieldBonus, armorCheckPenalty, arcaneSpellFailure, shieldType, bashDamage, properties
+
+### currencySchema
+
+Campos: abbreviation, conversionToBase, weightPerUnit
+
+## Coexistencia con Equipment Legacy
+
+El sistema de inventario nuevo coexiste con `equipment`:
+
+- `equipment.items`: Sistema legacy con tipos hardcodeados (Armor, Weapon, etc.)
+- `inventoryState.items`: Sistema nuevo con referencias a entidades
+
+Ambos pueden usarse simultáneamente durante la migración.
+
+## Patrón de Operaciones
+
+Todas las operaciones son puras y retornan:
+
+```typescript
+type InventoryUpdateResult<T> = {
+  state: T;
+  warnings: InventoryWarning[];
+};
+```
+
+Los warnings permiten feedback sin interrumpir la operación.

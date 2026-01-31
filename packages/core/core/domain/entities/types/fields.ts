@@ -24,6 +24,11 @@ export type EntityFieldDefinition = {
 
   // Relation configuration - only applies when type='relation'
   relationConfig?: RelationFieldConfig;
+
+  // Item property configuration - only applies when type='reference' or 'reference_array'
+  // When true, Effects from the referenced entities are applied to the parent item (container)
+  // Example: A weapon with a "keen" property - the keen's effects modify the weapon's critRange
+  applyEffectsToParent?: boolean;
 };
 
 
