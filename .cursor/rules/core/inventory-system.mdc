@@ -1,6 +1,8 @@
 # Sistema de Inventario
 
-Sistema de inventario que coexiste con el sistema `equipment` legacy. Usa entidades del compendium con instancias únicas.
+Sistema de inventario que coexiste con el sistema `equipment` legacy. Usa entidades del compendium con instancias unicas.
+
+> **Importante**: Ver `architectural-principles.mdc` para la directriz de "Personaje Auto-Contenido". Las entidades deben resolverse al adquirir el item, no al calcular.
 
 ## Arquitectura
 
@@ -39,13 +41,19 @@ type InventoryItemInstance = {
   itemId: string;            // ID de la entidad en el compendium
   entityType: string;        // 'weapon', 'armor', 'item', etc.
   quantity: number;          // Cantidad (default 1)
-  equipped: boolean;         // Si está equipado
-  wielded?: boolean;         // Si está empuñado (solo armas)
   containerId?: string;      // ID del container que lo contiene
   customName?: string;       // Nombre personalizado
   notes?: string;            // Notas del usuario
+  instanceValues?: {         // Campos editables por usuario
+    equipped?: boolean;      // Si está equipado
+    wielded?: boolean;       // Si está empuñado (armas)
+    active?: boolean;        // Si está activo (items activables)
+    [key: string]: boolean | number | string | undefined;
+  };
 };
 ```
+
+> **Nota**: `equipped`, `wielded`, y `active` se almacenan en `instanceValues`, no como campos directos. Usar helpers como `isItemEquipped(item)` para accederlos.
 
 ### CurrencyState
 
@@ -167,9 +175,55 @@ updater.spendCurrency(currencyId, amount);
 updater.convertCurrency(fromId, toId, amount, currencyDefs);
 ```
 
+## Instance Fields
+
+Los campos editables por usuario (equipped, wielded, active) se almacenan en `instanceValues`:
+
+```typescript
+import {
+  isItemEquipped,
+  setItemEquipped,
+  isItemWielded,
+  setItemWielded,
+  isItemActive,
+  setItemActive,
+} from '@zukus/core';
+
+// Leer estado
+if (isItemEquipped(item)) { ... }
+if (isItemWielded(item)) { ... }
+
+// Modificar estado (retorna nuevo item)
+const equippedItem = setItemEquipped(item, true);
+const wieldedWeapon = setItemWielded(item, true);
+```
+
+### Effects Condicionales con @instance
+
+Los effects pueden tener condiciones que dependen del estado de la instancia:
+
+```typescript
+// Propiedad que solo aplica cuando el item esta activo
+{
+  target: 'speed.base',
+  formula: '30',
+  conditions: [{
+    type: 'simple',
+    firstFormula: '@instance.active',  // Referencia a instanceValues
+    operator: '==',
+    secondFormula: '1'
+  }]
+}
+```
+
+Las referencias `@instance.X` se resuelven automaticamente durante la compilacion de effects:
+- `@instance.equipped` -> 0 o 1
+- `@instance.wielded` -> 0 o 1
+- `@instance.active` -> 0 o 1
+
 ## Addons para Items
 
-### dnd35item (D&D 3.5 específico)
+### dnd35item (D&D 3.5 especifico)
 
 ```typescript
 fields: [
@@ -184,12 +238,42 @@ fields: [
 ]
 ```
 
-### container (genérico)
+### container (generico)
 
 ```typescript
 fields: [
-  { name: 'capacity', type: 'number' },        // Capacidad máxima en libras
+  { name: 'capacity', type: 'number' },        // Capacidad maxima en libras
   { name: 'ignoresContentWeight', type: 'boolean' }, // Ej: Bag of Holding
+]
+```
+
+### equippable
+
+Permite equipar/desequipar el item. Añade instanceField `equipped`.
+
+```typescript
+instanceFields: [
+  { name: 'equipped', type: 'boolean', default: false }
+]
+```
+
+### wieldable
+
+Permite empuñar armas. Añade instanceField `wielded`.
+
+```typescript
+instanceFields: [
+  { name: 'wielded', type: 'boolean', default: false }
+]
+```
+
+### activable
+
+Items con efecto activable (boots of speed, etc). Añade instanceField `active`.
+
+```typescript
+instanceFields: [
+  { name: 'active', type: 'boolean', default: false }
 ]
 ```
 

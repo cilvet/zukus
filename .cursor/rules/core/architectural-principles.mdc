@@ -1,0 +1,91 @@
+# Principios Arquitectonicos
+
+Directrices fundamentales de la arquitectura de Zukus.
+
+## Personaje Auto-Contenido
+
+**El personaje debe funcionar sin dependencia del compendium en runtime.**
+
+### Regla
+
+Cuando un personaje obtiene una entidad (spell, item, feat, etc.), la entidad se resuelve y almacena en el personaje. El compendium solo se necesita en el momento de adquisicion, no durante el calculo.
+
+### Razon
+
+- **Portabilidad**: El personaje puede exportarse/importarse y seguir funcionando
+- **Offline**: No requiere acceso al compendium para calcular stats
+- **Versionado**: Si la entidad cambia en el compendium, el personaje mantiene su version
+
+### Ejemplos
+
+```typescript
+// CGE (Class Granted Entities)
+// Al preparar un spell, se guarda la entidad completa
+character.entities = [
+  { id: 'fireball', entityType: 'spell', name: 'Fireball', ... }  // Resuelto
+];
+
+// Inventory (correcto - pendiente de implementar)
+inventoryState.items = [
+  {
+    instanceId: 'uuid-123',
+    entity: { id: 'keen-longsword', critRange: 17, ... }  // Resuelto
+  }
+];
+
+// Inventory (actual - a cambiar)
+inventoryState.items = [
+  { instanceId: 'uuid-123', itemId: 'keen-longsword' }  // Solo referencia
+];
+```
+
+### Flujo Correcto
+
+```
+Usuario adquiere item
+  -> Resolver entidad del compendium
+  -> Resolver propiedades (keen, flaming, etc.)
+  -> Guardar entidad resuelta en character.inventoryState
+  -> Persistir
+
+Calcular CharacterSheet
+  -> Leer entidades ya resueltas del personaje
+  -> NO acceder al compendium
+```
+
+### Trade-offs Aceptados
+
+- **Mas datos persistidos**: La entidad completa se guarda, no solo la referencia
+- **Entidades no se actualizan**: Si "Keen" cambia en el compendium, items existentes mantienen la version anterior. Esto es intencional.
+- **Duplicacion controlada**: El mismo "Longsword" aparece en cada personaje que lo tenga. Es el precio de la portabilidad.
+
+## Separacion Estatico vs Dinamico
+
+### Estatico (Compendium)
+
+Definiciones de entidades: spells, feats, items, classes. Solo se consultan al adquirir.
+
+### Dinamico (Character)
+
+Estado del personaje: entidades resueltas, buffs activos, HP actual. Se usa durante el calculo.
+
+```
+Compendium (estatico)          Character (dinamico)
++------------------+           +------------------+
+| spell: Fireball  |  ---->    | entities: [      |
+| feat: PowerAttack|  adquirir |   { ...fireball }|
+| item: Longsword  |           | ]                |
++------------------+           +------------------+
+```
+
+## Calculo Puro
+
+El calculo de CharacterSheet es una funcion pura:
+
+```typescript
+calculateCharacterSheet(characterBaseData) -> CharacterSheet
+```
+
+- No accede a estado global
+- No necesita compendium (entidades ya resueltas)
+- Determinista: misma entrada = misma salida
