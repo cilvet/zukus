@@ -15,6 +15,7 @@ import type { SimpleDiceExpression } from '../../rolls/dice';
 import type { WeaponProficiencyType } from '../../weapons/weaponTypes';
 import type { Effect } from '../../character/baseData/effects';
 import type { Change } from '../../character/baseData/changes';
+import { isItemEquipped, isItemWielded } from '../instanceFields';
 
 /**
  * Weapon entity from compendium (matches weaponSchema).
@@ -116,8 +117,8 @@ export function convertToLegacyWeapon(
     itemType: 'WEAPON' as const,
     uniqueId: instance.instanceId,
     name: instance.customName || entity.name,
-    equipped: instance.equipped,
-    wielded: instance.wielded ?? false,
+    equipped: isItemEquipped(instance),
+    wielded: isItemWielded(instance),
     damageDice: entity.damageDice as SimpleDiceExpression,
     size: characterSize, // Weapons use character size by default
     isMasterwork: entity.isMasterwork ?? false,

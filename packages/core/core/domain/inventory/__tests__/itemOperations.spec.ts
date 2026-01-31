@@ -13,6 +13,7 @@ import {
   addOrStackItem,
 } from '../itemOperations';
 import { createEmptyInventoryState, type InventoryState } from '../types';
+import { isItemEquipped, isItemWielded } from '../instanceFields';
 
 function createStateWithItems(): InventoryState {
   return {
@@ -22,21 +23,21 @@ function createStateWithItems(): InventoryState {
         itemId: 'longsword',
         entityType: 'weapon',
         quantity: 1,
-        equipped: false,
+        // Not equipped (no instanceValues)
       },
       {
         instanceId: 'inst-2',
         itemId: 'chainmail',
         entityType: 'armor',
         quantity: 1,
-        equipped: true,
+        instanceValues: { equipped: true },
       },
       {
         instanceId: 'inst-3',
         itemId: 'health-potion',
         entityType: 'item',
         quantity: 5,
-        equipped: false,
+        // Not equipped (no instanceValues)
       },
     ],
     currencies: {},
@@ -56,7 +57,7 @@ describe('addItem', () => {
     expect(result.instance.itemId).toBe('longsword');
     expect(result.instance.entityType).toBe('weapon');
     expect(result.instance.quantity).toBe(1);
-    expect(result.instance.equipped).toBe(false);
+    expect(isItemEquipped(result.instance)).toBe(false);
     expect(result.instance.instanceId).toBeDefined();
   });
 
@@ -81,7 +82,7 @@ describe('addItem', () => {
       equipped: true,
     });
 
-    expect(result.instance.equipped).toBe(true);
+    expect(isItemEquipped(result.instance)).toBe(true);
   });
 
   it('preserves existing items when adding new one', () => {
@@ -182,7 +183,8 @@ describe('setItemEquipped', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-1');
-    expect(item?.equipped).toBe(true);
+    expect(item).toBeDefined();
+    expect(isItemEquipped(item!)).toBe(true);
   });
 
   it('unequips an equipped item', () => {
@@ -191,7 +193,8 @@ describe('setItemEquipped', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-2');
-    expect(item?.equipped).toBe(false);
+    expect(item).toBeDefined();
+    expect(isItemEquipped(item!)).toBe(false);
   });
 });
 
@@ -202,7 +205,8 @@ describe('toggleItemEquipped', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-1');
-    expect(item?.equipped).toBe(true);
+    expect(item).toBeDefined();
+    expect(isItemEquipped(item!)).toBe(true);
   });
 
   it('toggles equipped to unequipped', () => {
@@ -211,7 +215,8 @@ describe('toggleItemEquipped', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-2');
-    expect(item?.equipped).toBe(false);
+    expect(item).toBeDefined();
+    expect(isItemEquipped(item!)).toBe(false);
   });
 
   it('returns warning for non-existent item', () => {
@@ -230,7 +235,8 @@ describe('setWeaponWielded', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-1');
-    expect(item?.wielded).toBe(true);
+    expect(item).toBeDefined();
+    expect(isItemWielded(item!)).toBe(true);
   });
 
   it('sets weapon as not wielded', () => {
@@ -241,8 +247,7 @@ describe('setWeaponWielded', () => {
           itemId: 'longsword',
           entityType: 'weapon',
           quantity: 1,
-          equipped: true,
-          wielded: true,
+          instanceValues: { equipped: true, wielded: true },
         },
       ],
       currencies: {},
@@ -251,7 +256,8 @@ describe('setWeaponWielded', () => {
 
     expect(result.warnings).toHaveLength(0);
     const item = result.state.items.find((i) => i.instanceId === 'inst-1');
-    expect(item?.wielded).toBe(false);
+    expect(item).toBeDefined();
+    expect(isItemWielded(item!)).toBe(false);
   });
 });
 
@@ -276,9 +282,9 @@ describe('getItemsByType', () => {
   it('returns all items of a type', () => {
     const state: InventoryState = {
       items: [
-        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1, equipped: false },
-        { instanceId: '2', itemId: 'armor', entityType: 'armor', quantity: 1, equipped: false },
-        { instanceId: '3', itemId: 'dagger', entityType: 'weapon', quantity: 1, equipped: false },
+        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1 },
+        { instanceId: '2', itemId: 'armor', entityType: 'armor', quantity: 1 },
+        { instanceId: '3', itemId: 'dagger', entityType: 'weapon', quantity: 1 },
       ],
       currencies: {},
     };
@@ -317,16 +323,15 @@ describe('getRootItems', () => {
   it('returns items without containerId', () => {
     const state: InventoryState = {
       items: [
-        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1, equipped: false },
+        { instanceId: '1', itemId: 'sword', entityType: 'weapon', quantity: 1 },
         {
           instanceId: '2',
           itemId: 'potion',
           entityType: 'item',
           quantity: 1,
-          equipped: false,
           containerId: 'backpack-1',
         },
-        { instanceId: '3', itemId: 'shield', entityType: 'shield', quantity: 1, equipped: false },
+        { instanceId: '3', itemId: 'shield', entityType: 'shield', quantity: 1 },
       ],
       currencies: {},
     };
@@ -346,7 +351,7 @@ describe('addOrStackItem', () => {
           itemId: 'arrow',
           entityType: 'item',
           quantity: 10,
-          equipped: false,
+          // Not equipped (no instanceValues)
         },
       ],
       currencies: {},
@@ -377,7 +382,7 @@ describe('addOrStackItem', () => {
           itemId: 'ring',
           entityType: 'item',
           quantity: 1,
-          equipped: true,
+          instanceValues: { equipped: true },
         },
       ],
       currencies: {},
@@ -395,7 +400,6 @@ describe('addOrStackItem', () => {
           itemId: 'potion',
           entityType: 'item',
           quantity: 5,
-          equipped: false,
           containerId: 'backpack',
         },
       ],
@@ -414,7 +418,6 @@ describe('addOrStackItem', () => {
           itemId: 'potion',
           entityType: 'item',
           quantity: 5,
-          equipped: false,
           customName: 'Special Potion',
         },
       ],

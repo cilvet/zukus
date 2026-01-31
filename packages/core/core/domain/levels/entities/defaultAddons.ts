@@ -239,6 +239,66 @@ export const activableAddon: AddonDefinition = {
 };
 
 // =============================================================================
+// Equippable Addon
+// =============================================================================
+
+/**
+ * Addon for items that can be equipped by a character.
+ *
+ * Provides an 'equipped' instance field (boolean, default false).
+ * When equipped, the item's effects apply to the character.
+ *
+ * Use cases:
+ * - Armor, shields, rings, amulets, etc.
+ * - Any item that needs to be "worn" to grant its benefits
+ */
+export const equippableAddon: AddonDefinition = {
+  id: 'equippable',
+  name: 'Equippable',
+  fields: [],
+  instanceFields: [
+    {
+      name: 'equipped',
+      type: 'boolean',
+      default: false,
+      label: 'Equipped',
+      description: 'Whether this item is currently equipped',
+    },
+  ],
+};
+
+// =============================================================================
+// Wieldable Addon
+// =============================================================================
+
+/**
+ * Addon for weapons that can be wielded by a character.
+ *
+ * Provides a 'wielded' instance field (boolean, default false).
+ * A wielded weapon generates attacks and applies wielded-only effects.
+ *
+ * Note: A weapon can be equipped (on belt) but not wielded (in hand).
+ * Wielded implies equipped for effect purposes.
+ *
+ * Use cases:
+ * - All weapons that can be used for attacks
+ */
+export const wieldableAddon: AddonDefinition = {
+  id: 'wieldable',
+  name: 'Wieldable',
+  fields: [],
+  instanceFields: [
+    {
+      name: 'wielded',
+      type: 'boolean',
+      default: false,
+      label: 'Wielded',
+      description: 'Whether this weapon is currently wielded (in hand)',
+    },
+  ],
+};
+
+// =============================================================================
 // Default Registry
 // =============================================================================
 
@@ -256,5 +316,7 @@ export const defaultAddonRegistry: AddonRegistry = {
   dnd35item: dnd35itemAddon,
   container: containerAddon,
   activable: activableAddon,
+  equippable: equippableAddon,
+  wieldable: wieldableAddon,
 };
 

@@ -15,6 +15,13 @@ import {
   inventoryWithWarning,
   createItemInstance,
 } from './types';
+import {
+  isItemEquipped,
+  setItemEquipped as setItemEquippedHelper,
+  toggleItemEquipped as toggleItemEquippedHelper,
+  isItemWielded,
+  setItemWielded as setItemWieldedHelper,
+} from './instanceFields';
 
 /**
  * Añade un item al inventario.
@@ -33,7 +40,15 @@ export function addItem(
     customName?: string;
   }
 ): InventoryUpdateResult<InventoryState> & { instance: InventoryItemInstance } {
-  const instance = createItemInstance(params);
+  // Build instanceValues if equipped is specified
+  const instanceValues: Record<string, boolean> | undefined = params.equipped
+    ? { equipped: true }
+    : undefined;
+
+  const instance = createItemInstance({
+    ...params,
+    instanceValues,
+  });
 
   return {
     state: {
@@ -109,12 +124,7 @@ export function removeItem(
 export function updateItem(
   state: InventoryState,
   instanceId: string,
-  updates: Partial<
-    Pick<
-      InventoryItemInstance,
-      'quantity' | 'equipped' | 'wielded' | 'customName' | 'notes' | 'containerId'
-    >
-  >
+  updates: Partial<Pick<InventoryItemInstance, 'quantity' | 'customName' | 'notes' | 'containerId' | 'instanceValues'>>
 ): InventoryUpdateResult<InventoryState> {
   const itemExists = state.items.some((i) => i.instanceId === instanceId);
 
@@ -150,7 +160,24 @@ export function setItemEquipped(
   instanceId: string,
   equipped: boolean
 ): InventoryUpdateResult<InventoryState> {
-  return updateItem(state, instanceId, { equipped });
+  const item = state.items.find((i) => i.instanceId === instanceId);
+
+  if (!item) {
+    return inventoryWithWarning(state, {
+      type: 'item_not_found',
+      message: `Item with instanceId "${instanceId}" not found`,
+      instanceId,
+    });
+  }
+
+  const updatedItem = setItemEquippedHelper(item, equipped);
+
+  return inventorySuccess({
+    ...state,
+    items: state.items.map((i) =>
+      i.instanceId === instanceId ? updatedItem : i
+    ),
+  });
 }
 
 /**
@@ -174,7 +201,14 @@ export function toggleItemEquipped(
     });
   }
 
-  return updateItem(state, instanceId, { equipped: !item.equipped });
+  const updatedItem = toggleItemEquippedHelper(item);
+
+  return inventorySuccess({
+    ...state,
+    items: state.items.map((i) =>
+      i.instanceId === instanceId ? updatedItem : i
+    ),
+  });
 }
 
 /**
@@ -190,7 +224,24 @@ export function setWeaponWielded(
   instanceId: string,
   wielded: boolean
 ): InventoryUpdateResult<InventoryState> {
-  return updateItem(state, instanceId, { wielded });
+  const item = state.items.find((i) => i.instanceId === instanceId);
+
+  if (!item) {
+    return inventoryWithWarning(state, {
+      type: 'item_not_found',
+      message: `Item with instanceId "${instanceId}" not found`,
+      instanceId,
+    });
+  }
+
+  const updatedItem = setItemWieldedHelper(item, wielded);
+
+  return inventorySuccess({
+    ...state,
+    items: state.items.map((i) =>
+      i.instanceId === instanceId ? updatedItem : i
+    ),
+  });
 }
 
 /**
@@ -230,7 +281,7 @@ export function getItemsByType(
 export function getEquippedItems(
   state: InventoryState
 ): InventoryItemInstance[] {
-  return state.items.filter((i) => i.equipped);
+  return state.items.filter((i) => isItemEquipped(i));
 }
 
 /**
@@ -263,7 +314,7 @@ export function addOrStackItem(
     (i) =>
       i.itemId === itemId &&
       i.entityType === entityType &&
-      !i.equipped &&
+      !isItemEquipped(i) &&
       !i.containerId &&
       !i.customName // No stackear items con nombre personalizado
   );

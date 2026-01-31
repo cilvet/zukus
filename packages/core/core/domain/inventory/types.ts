@@ -10,6 +10,9 @@ import type { InstanceValues } from '../entities/types/instanceFields';
 /**
  * Instancia de un item en el inventario.
  * Referencia una entidad del compendium con datos de instancia específicos.
+ *
+ * Note: equipped/wielded state is stored in instanceValues, not as direct fields.
+ * Use the helpers isItemEquipped() and isItemWielded() to check these states.
  */
 export type InventoryItemInstance = {
   /** UUID único de esta instancia */
@@ -20,10 +23,6 @@ export type InventoryItemInstance = {
   entityType: string;
   /** Cantidad de este item (default 1) */
   quantity: number;
-  /** Si el item está equipado */
-  equipped: boolean;
-  /** Si el arma está empuñada (solo para weapons) */
-  wielded?: boolean;
   /** ID del container que contiene este item */
   containerId?: string;
   /** Nombre personalizado para este item */
@@ -35,6 +34,11 @@ export type InventoryItemInstance = {
    * Keys are field names defined in the entity's schema/addons.
    * Values are the user-set values (boolean, number, or string).
    * If undefined or missing a key, the default value from the field definition is used.
+   *
+   * Common fields (depending on addons):
+   * - equipped: boolean (from equippable addon)
+   * - wielded: boolean (from wieldable addon)
+   * - active: boolean (from activable addon)
    */
   instanceValues?: InstanceValues;
 };
@@ -119,20 +123,23 @@ export function createEmptyInventoryState(): InventoryState {
 
 /**
  * Crea una nueva instancia de item.
+ *
+ * Note: To set equipped/wielded state, use the setItemEquipped/setItemWielded
+ * helpers after creation, or pass them in instanceValues.
  */
 export function createItemInstance(params: {
   itemId: string;
   entityType: string;
   quantity?: number;
-  equipped?: boolean;
   customName?: string;
+  instanceValues?: InstanceValues;
 }): InventoryItemInstance {
   return {
     instanceId: crypto.randomUUID(),
     itemId: params.itemId,
     entityType: params.entityType,
     quantity: params.quantity ?? 1,
-    equipped: params.equipped ?? false,
     customName: params.customName,
+    instanceValues: params.instanceValues,
   };
 }

@@ -16,6 +16,7 @@ import {
   type WeaponEntity,
 } from './convertToLegacyWeapon';
 import { applyPropertyEffectsToItem } from '../properties/resolveItemEffects';
+import { isItemEquipped } from '../instanceFields';
 
 /**
  * Converts inventory weapons to legacy Weapon format for attack calculation.
@@ -45,7 +46,7 @@ export function resolveInventoryWeapons(
 
   for (const item of items) {
     // Only process equipped weapons
-    if (item.entityType !== 'weapon' || !item.equipped) {
+    if (item.entityType !== 'weapon' || !isItemEquipped(item)) {
       continue;
     }
 

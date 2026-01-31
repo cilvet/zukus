@@ -19,9 +19,17 @@ import {
   isItemActive,
   setItemActive,
   toggleItemActive,
+  isItemEquipped,
+  setItemEquipped,
+  toggleItemEquipped,
+  isItemWielded,
+  setItemWielded,
+  toggleItemWielded,
   ACTIVE_FIELD,
+  EQUIPPED_FIELD,
+  WIELDED_FIELD,
 } from '../instanceFields';
-import { activableAddon } from '../../levels/entities/defaultAddons';
+import { activableAddon, equippableAddon, wieldableAddon } from '../../levels/entities/defaultAddons';
 import type { InventoryItemInstance } from '../types';
 import type { EntitySchemaDefinition } from '../../entities/types/schema';
 import type { AddonRegistry } from '../../levels/entities/types';
@@ -381,6 +389,102 @@ describe('Schema Instance Field Resolution', () => {
 });
 
 // =============================================================================
+// Tests: Equipped State Helpers
+// =============================================================================
+
+describe('Equipped State Helpers', () => {
+  describe('EQUIPPED_FIELD', () => {
+    it('should have correct default configuration', () => {
+      expect(EQUIPPED_FIELD.name).toBe('equipped');
+      expect(EQUIPPED_FIELD.type).toBe('boolean');
+      expect(EQUIPPED_FIELD.default).toBe(false);
+    });
+  });
+
+  describe('isItemEquipped', () => {
+    it('should return false for item without instanceValues', () => {
+      const item = createTestItem();
+      expect(isItemEquipped(item)).toBe(false);
+    });
+
+    it('should return true when equipped is true', () => {
+      const item = createTestItem({ equipped: true });
+      expect(isItemEquipped(item)).toBe(true);
+    });
+  });
+
+  describe('setItemEquipped', () => {
+    it('should set item to equipped', () => {
+      const item = createTestItem();
+      const equippedItem = setItemEquipped(item, true);
+      expect(isItemEquipped(equippedItem)).toBe(true);
+    });
+
+    it('should set item to unequipped', () => {
+      const item = createTestItem({ equipped: true });
+      const unequippedItem = setItemEquipped(item, false);
+      expect(isItemEquipped(unequippedItem)).toBe(false);
+    });
+  });
+
+  describe('toggleItemEquipped', () => {
+    it('should toggle unequipped to equipped', () => {
+      const item = createTestItem();
+      const toggled = toggleItemEquipped(item);
+      expect(isItemEquipped(toggled)).toBe(true);
+    });
+
+    it('should toggle equipped to unequipped', () => {
+      const item = createTestItem({ equipped: true });
+      const toggled = toggleItemEquipped(item);
+      expect(isItemEquipped(toggled)).toBe(false);
+    });
+  });
+});
+
+// =============================================================================
+// Tests: Wielded State Helpers
+// =============================================================================
+
+describe('Wielded State Helpers', () => {
+  describe('WIELDED_FIELD', () => {
+    it('should have correct default configuration', () => {
+      expect(WIELDED_FIELD.name).toBe('wielded');
+      expect(WIELDED_FIELD.type).toBe('boolean');
+      expect(WIELDED_FIELD.default).toBe(false);
+    });
+  });
+
+  describe('isItemWielded', () => {
+    it('should return false for item without instanceValues', () => {
+      const item = createTestItem();
+      expect(isItemWielded(item)).toBe(false);
+    });
+
+    it('should return true when wielded is true', () => {
+      const item = createTestItem({ wielded: true });
+      expect(isItemWielded(item)).toBe(true);
+    });
+  });
+
+  describe('setItemWielded', () => {
+    it('should set item to wielded', () => {
+      const item = createTestItem();
+      const wieldedItem = setItemWielded(item, true);
+      expect(isItemWielded(wieldedItem)).toBe(true);
+    });
+  });
+
+  describe('toggleItemWielded', () => {
+    it('should toggle unwielded to wielded', () => {
+      const item = createTestItem();
+      const toggled = toggleItemWielded(item);
+      expect(isItemWielded(toggled)).toBe(true);
+    });
+  });
+});
+
+// =============================================================================
 // Tests: Integration with activable addon
 // =============================================================================
 
@@ -395,5 +499,37 @@ describe('Activable Addon Integration', () => {
     expect(activeField.name).toBe(ACTIVE_FIELD.name);
     expect(activeField.type).toBe(ACTIVE_FIELD.type);
     expect(activeField.default).toBe(ACTIVE_FIELD.default);
+  });
+});
+
+// =============================================================================
+// Tests: Integration with equippable/wieldable addons
+// =============================================================================
+
+describe('Equippable Addon Integration', () => {
+  it('should have instanceFields defined', () => {
+    expect(equippableAddon.instanceFields).toBeDefined();
+    expect(equippableAddon.instanceFields).toHaveLength(1);
+  });
+
+  it('equipped field should match EQUIPPED_FIELD constant', () => {
+    const equippedField = equippableAddon.instanceFields![0];
+    expect(equippedField.name).toBe(EQUIPPED_FIELD.name);
+    expect(equippedField.type).toBe(EQUIPPED_FIELD.type);
+    expect(equippedField.default).toBe(EQUIPPED_FIELD.default);
+  });
+});
+
+describe('Wieldable Addon Integration', () => {
+  it('should have instanceFields defined', () => {
+    expect(wieldableAddon.instanceFields).toBeDefined();
+    expect(wieldableAddon.instanceFields).toHaveLength(1);
+  });
+
+  it('wielded field should match WIELDED_FIELD constant', () => {
+    const wieldedField = wieldableAddon.instanceFields![0];
+    expect(wieldedField.name).toBe(WIELDED_FIELD.name);
+    expect(wieldedField.type).toBe(WIELDED_FIELD.type);
+    expect(wieldedField.default).toBe(WIELDED_FIELD.default);
   });
 });

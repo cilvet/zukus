@@ -176,3 +176,134 @@ export function toggleItemActive(
 ): InventoryItemInstance {
   return setItemActive(item, !isItemActive(item));
 }
+
+// =============================================================================
+// Equipped State Helpers (for equippable addon)
+// =============================================================================
+
+/**
+ * The 'equipped' field definition from the equippable addon.
+ */
+export const EQUIPPED_FIELD: InstanceFieldDefinition = {
+  name: 'equipped',
+  type: 'boolean',
+  default: false,
+  label: 'Equipped',
+  description: 'Whether this item is currently equipped',
+};
+
+/**
+ * Checks if an item is equipped.
+ *
+ * @param item - The inventory item instance
+ * @returns true if the item is equipped, false otherwise
+ */
+export function isItemEquipped(item: InventoryItemInstance): boolean {
+  return getItemInstanceValue(item, EQUIPPED_FIELD) === true;
+}
+
+/**
+ * Sets the equipped state of an item.
+ *
+ * @param item - The inventory item instance
+ * @param equipped - The new equipped state
+ * @returns New item with updated equipped state
+ */
+export function setItemEquipped(
+  item: InventoryItemInstance,
+  equipped: boolean
+): InventoryItemInstance {
+  return setItemInstanceValue(item, EQUIPPED_FIELD, equipped);
+}
+
+/**
+ * Toggles the equipped state of an item.
+ *
+ * @param item - The inventory item instance
+ * @returns New item with toggled equipped state
+ */
+export function toggleItemEquipped(
+  item: InventoryItemInstance
+): InventoryItemInstance {
+  return setItemEquipped(item, !isItemEquipped(item));
+}
+
+// =============================================================================
+// Wielded State Helpers (for wieldable addon)
+// =============================================================================
+
+/**
+ * The 'wielded' field definition from the wieldable addon.
+ */
+export const WIELDED_FIELD: InstanceFieldDefinition = {
+  name: 'wielded',
+  type: 'boolean',
+  default: false,
+  label: 'Wielded',
+  description: 'Whether this weapon is currently wielded (in hand)',
+};
+
+/**
+ * Checks if a weapon is wielded.
+ *
+ * @param item - The inventory item instance
+ * @returns true if the weapon is wielded, false otherwise
+ */
+export function isItemWielded(item: InventoryItemInstance): boolean {
+  return getItemInstanceValue(item, WIELDED_FIELD) === true;
+}
+
+/**
+ * Sets the wielded state of a weapon.
+ *
+ * @param item - The inventory item instance
+ * @param wielded - The new wielded state
+ * @returns New item with updated wielded state
+ */
+export function setItemWielded(
+  item: InventoryItemInstance,
+  wielded: boolean
+): InventoryItemInstance {
+  return setItemInstanceValue(item, WIELDED_FIELD, wielded);
+}
+
+/**
+ * Toggles the wielded state of a weapon.
+ *
+ * @param item - The inventory item instance
+ * @returns New item with toggled wielded state
+ */
+export function toggleItemWielded(
+  item: InventoryItemInstance
+): InventoryItemInstance {
+  return setItemWielded(item, !isItemWielded(item));
+}
+
+// =============================================================================
+// Instance Values to Substitution Index
+// =============================================================================
+
+/**
+ * Converts item instance values to a substitution index format.
+ * This allows effects with conditions like @instance.equipped to be evaluated.
+ *
+ * @param item - The inventory item instance
+ * @param fields - The instance field definitions for this item type
+ * @returns Record with instance values keyed by "instance.{fieldName}"
+ */
+export function instanceValuesToSubstitutionIndex(
+  item: InventoryItemInstance,
+  fields: InstanceFieldDefinition[]
+): Record<string, number> {
+  const result: Record<string, number> = {};
+
+  for (const field of fields) {
+    const value = getItemInstanceValue(item, field);
+    // Convert to number for substitution (boolean -> 0/1)
+    const numericValue =
+      typeof value === 'boolean' ? (value ? 1 : 0) : typeof value === 'number' ? value : 0;
+    result[`instance.${field.name}`] = numericValue;
+  }
+
+  return result;
+}

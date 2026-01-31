@@ -133,18 +133,29 @@ const ringOfProtectionEntity: StandardEntity & Record<string, unknown> = {
 // HELPER FUNCTIONS
 // =============================================================================
 
+/**
+ * Creates an inventory item with optional equipped/wielded state.
+ * Uses instanceValues for state storage.
+ */
 function createInventoryItem(
   itemId: string,
   entityType: string,
-  options: Partial<InventoryItemInstance> = {}
+  options: { equipped?: boolean; wielded?: boolean } = {}
 ): InventoryItemInstance {
+  const instanceValues: Record<string, boolean> = {};
+  if (options.equipped) {
+    instanceValues.equipped = true;
+  }
+  if (options.wielded) {
+    instanceValues.wielded = true;
+  }
+
   return {
     instanceId: `instance-${itemId}-${Date.now()}`,
     itemId,
     entityType,
     quantity: 1,
-    equipped: false,
-    ...options,
+    instanceValues: Object.keys(instanceValues).length > 0 ? instanceValues : undefined,
   };
 }
 
@@ -402,8 +413,8 @@ describe('Equipped Item Effects on Character Stats', () => {
         resolveInventoryEntity: createMockResolver(mockEntities),
       });
 
-      // Now equip the ring
-      character.inventoryState!.items[0].equipped = true;
+      // Now equip the ring by updating instanceValues
+      character.inventoryState!.items[0].instanceValues = { equipped: true };
       const sheetWithRing = calculateCharacterSheet(character, {
         resolveInventoryEntity: createMockResolver(mockEntities),
       });

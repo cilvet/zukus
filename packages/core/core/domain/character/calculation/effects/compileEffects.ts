@@ -4,9 +4,18 @@ import {
   Effect,
   SourcedEffect,
 } from "../../baseData/effects";
+import type { Condition, SimpleCondition } from "../../baseData/conditions";
 import type { ComputedEntity, StandardEntity } from "../../../entities/types/base";
 import type { InventoryEntityResolver } from "../../../compendiums/types";
 import { applyPropertyEffectsToItem } from "../../../inventory/properties/resolveItemEffects";
+import {
+  isItemEquipped,
+  isItemActive,
+  isItemWielded,
+  getItemInstanceValue,
+  type InstanceFieldDefinition,
+} from "../../../inventory/instanceFields";
+import type { InventoryItemInstance } from "../../../inventory/types";
 
 // =============================================================================
 // COMPILED EFFECTS - Effects organized by target prefix
@@ -240,7 +249,7 @@ function compileInventoryItemEffects(
 
   for (const item of items) {
     // Only process equipped items
-    if (!item.equipped) {
+    if (!isItemEquipped(item)) {
       continue;
     }
 
@@ -296,12 +305,12 @@ function compileInventoryItemEffects(
         continue;
       }
 
-      // Determine if this effect should only apply when wielded
-      // For now, all effects from equipped items apply
-      // TODO: Add support for wielded-only effects via conditions
+      // Resolve @instance.X conditions with actual item instance values
+      // This allows effects to have conditions like @instance.active == 1
+      const resolvedEffect = resolveInstanceConditions(effect, item);
 
       const sourcedEffect = toSourcedEffect(
-        effect,
+        resolvedEffect,
         "item",
         item.instanceId,
         entity.name || item.itemId
@@ -317,6 +326,109 @@ function compileInventoryItemEffects(
  */
 function getPropertyTypeForItem(itemEntityType: string): string {
   return `${itemEntityType}Property`;
+}
+
+// =============================================================================
+// INSTANCE FIELD CONDITION RESOLUTION
+// =============================================================================
+
+/**
+ * Resolves @instance.X references in effect conditions using the item's instance values.
+ *
+ * This allows effects to have conditions like:
+ * - @instance.equipped == 1 (check if item is equipped)
+ * - @instance.active == 1 (check if item is active)
+ * - @instance.wielded == 1 (check if weapon is wielded)
+ *
+ * The @instance.X references are replaced with the actual numeric values (0 or 1 for booleans).
+ */
+function resolveInstanceConditions(
+  effect: Effect,
+  item: InventoryItemInstance
+): Effect {
+  if (!effect.conditions || effect.conditions.length === 0) {
+    return effect;
+  }
+
+  const resolvedConditions = effect.conditions.map((condition) =>
+    resolveInstanceCondition(condition, item)
+  );
+
+  return {
+    ...effect,
+    conditions: resolvedConditions,
+  };
+}
+
+/**
+ * Resolves a single condition, replacing @instance.X with actual values.
+ */
+function resolveInstanceCondition(
+  condition: Condition,
+  item: InventoryItemInstance
+): Condition {
+  if (condition.type !== "simple") {
+    return condition;
+  }
+
+  const simpleCondition = condition as SimpleCondition;
+
+  // Check if either formula references @instance
+  const hasInstanceRef =
+    simpleCondition.firstFormula.includes("@instance.") ||
+    simpleCondition.secondFormula.includes("@instance.");
+
+  if (!hasInstanceRef) {
+    return condition;
+  }
+
+  return {
+    ...simpleCondition,
+    firstFormula: resolveInstanceFormula(simpleCondition.firstFormula, item),
+    secondFormula: resolveInstanceFormula(simpleCondition.secondFormula, item),
+  };
+}
+
+/**
+ * Replaces @instance.X references in a formula with actual values.
+ */
+function resolveInstanceFormula(
+  formula: string,
+  item: InventoryItemInstance
+): string {
+  return formula.replace(/@instance\.(\w+)/g, (match, fieldName) => {
+    const value = getInstanceFieldValueByName(item, fieldName);
+    // Convert to numeric: booleans become 0/1, numbers stay as-is
+    if (typeof value === "boolean") {
+      return value ? "1" : "0";
+    }
+    if (typeof value === "number") {
+      return value.toString();
+    }
+    // String values - return 0 as we can't use strings in numeric conditions
+    return "0";
+  });
+}
+
+/**
+ * Gets an instance field value by name from the item.
+ */
+function getInstanceFieldValueByName(
+  item: InventoryItemInstance,
+  fieldName: string
+): boolean | number | string {
+  // Handle common fields with dedicated helpers for type safety
+  switch (fieldName) {
+    case "equipped":
+      return isItemEquipped(item);
+    case "wielded":
+      return isItemWielded(item);
+    case "active":
+      return isItemActive(item);
+    default:
+      // For custom fields, read directly from instanceValues with a default of 0/false
+      return item.instanceValues?.[fieldName] ?? false;
+  }
 }
 
 
