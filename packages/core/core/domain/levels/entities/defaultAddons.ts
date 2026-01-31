@@ -208,6 +208,37 @@ export const containerAddon: AddonDefinition = {
 };
 
 // =============================================================================
+// Activable Addon
+// =============================================================================
+
+/**
+ * Addon for entities that can be activated/deactivated by the user.
+ *
+ * Provides an 'active' instance field (boolean, default false).
+ * When active is true, the entity's effects apply to the character.
+ * When active is false, the entity's effects are suppressed.
+ *
+ * Use cases:
+ * - Toggle items (Ring of Invisibility, Boots of Speed)
+ * - Class features that can be turned on/off
+ * - Conditional abilities
+ */
+export const activableAddon: AddonDefinition = {
+  id: 'activable',
+  name: 'Activable',
+  fields: [],
+  instanceFields: [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: false,
+      label: 'Active',
+      description: 'Whether this entity is currently active',
+    },
+  ],
+};
+
+// =============================================================================
 // Default Registry
 // =============================================================================
 
@@ -224,5 +255,6 @@ export const defaultAddonRegistry: AddonRegistry = {
   providable: providableAddon,
   dnd35item: dnd35itemAddon,
   container: containerAddon,
+  activable: activableAddon,
 };
 

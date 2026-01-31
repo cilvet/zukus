@@ -5,3 +5,4 @@ export * from './containerOperations';
 export * from './weightCalculations';
 export * from './properties';
 export * from './weapons';
+export * from './instanceFields';

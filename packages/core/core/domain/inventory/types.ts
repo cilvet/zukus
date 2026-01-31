@@ -1,3 +1,5 @@
+import type { InstanceValues } from '../entities/types/instanceFields';
+
 /**
  * Sistema de Inventario
  *
@@ -28,6 +30,13 @@ export type InventoryItemInstance = {
   customName?: string;
   /** Notas del usuario sobre este item */
   notes?: string;
+  /**
+   * User-editable instance field values.
+   * Keys are field names defined in the entity's schema/addons.
+   * Values are the user-set values (boolean, number, or string).
+   * If undefined or missing a key, the default value from the field definition is used.
+   */
+  instanceValues?: InstanceValues;
 };
 
 /**
