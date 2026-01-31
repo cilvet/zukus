@@ -9,6 +9,7 @@ import type {
   InventoryState,
   InventoryItemInstance,
   InventoryUpdateResult,
+  ResolvedInventoryEntity,
 } from './types';
 import {
   inventorySuccess,
@@ -26,8 +27,12 @@ import {
 /**
  * Añade un item al inventario.
  *
+ * IMPORTANTE: La entidad debe pasarse ya resuelta (con propiedades aplicadas).
+ * El personaje almacena la entidad completa para funcionar sin el compendium.
+ *
  * @param state - Estado actual del inventario
  * @param params - Parámetros del item a añadir
+ * @param params.entity - Entidad resuelta del compendium (recomendado)
  * @returns Resultado con el nuevo estado y la instancia creada
  */
 export function addItem(
@@ -38,6 +43,8 @@ export function addItem(
     quantity?: number;
     equipped?: boolean;
     customName?: string;
+    /** Entidad resuelta del compendium (con propiedades aplicadas) */
+    entity?: ResolvedInventoryEntity;
   }
 ): InventoryUpdateResult<InventoryState> & { instance: InventoryItemInstance } {
   // Build instanceValues if equipped is specified
@@ -48,6 +55,7 @@ export function addItem(
   const instance = createItemInstance({
     ...params,
     instanceValues,
+    entity: params.entity,
   });
 
   return {

@@ -479,6 +479,155 @@ describe('Equipped Item Effects on Character Stats', () => {
 });
 
 // =============================================================================
+// TESTS - Self-Contained Character (Stored Entities)
+// =============================================================================
+
+describe('Self-Contained Character with Stored Entities', () => {
+  it('should generate attacks from stored entity without resolver', () => {
+    // Create an item with the entity stored directly
+    const inventoryState: InventoryState = {
+      items: [
+        {
+          instanceId: 'stored-weapon-1',
+          itemId: 'longsword',
+          entityType: 'weapon',
+          quantity: 1,
+          instanceValues: { equipped: true, wielded: true },
+          // Entity stored directly - no need for resolver
+          entity: {
+            id: 'longsword',
+            entityType: 'weapon',
+            name: 'Longsword',
+            damageDice: '1d8',
+            damageType: 'slashing',
+            critRange: 19,
+            critMultiplier: 2,
+            weaponCategory: 'martial',
+            weaponType: 'melee',
+            weightClass: 'one-handed',
+            weight: 4,
+          },
+        },
+      ],
+      currencies: {},
+    };
+
+    const character = buildCharacter()
+      .withBaseAbilityScore('strength', 14)
+      .build();
+
+    character.inventoryState = inventoryState;
+
+    // Calculate WITHOUT a resolver - should still work
+    const sheet = calculateCharacterSheet(character, {});
+    const attacks = sheet.attackData.attacks;
+
+    // Should have one attack from the stored longsword entity
+    expect(attacks).toHaveLength(1);
+    expect(attacks[0].name).toBe('Longsword');
+    expect(attacks[0].type).toBe('melee');
+  });
+
+  it('should use stored entity with already-applied properties', () => {
+    // Keen longsword with properties already applied at acquisition time
+    const inventoryState: InventoryState = {
+      items: [
+        {
+          instanceId: 'stored-keen-weapon',
+          itemId: 'longsword-keen-plus1',
+          entityType: 'weapon',
+          quantity: 1,
+          instanceValues: { equipped: true, wielded: true },
+          // Entity with keen already applied (critRange 17 instead of 19)
+          entity: {
+            id: 'longsword-keen-plus1',
+            entityType: 'weapon',
+            name: 'Longsword +1 Keen',
+            damageDice: '1d8',
+            damageType: 'slashing',
+            critRange: 17, // Already doubled by keen
+            critMultiplier: 2,
+            weaponCategory: 'martial',
+            weaponType: 'melee',
+            weightClass: 'one-handed',
+            weight: 4,
+            enhancementBonus: 1,
+            // Properties list is kept for reference but effects are already applied
+            properties: ['keen'],
+          },
+        },
+      ],
+      currencies: {},
+    };
+
+    const character = buildCharacter()
+      .withBaseAbilityScore('strength', 16)
+      .build();
+
+    character.inventoryState = inventoryState;
+
+    // Calculate without resolver
+    const sheet = calculateCharacterSheet(character, {});
+    const attacks = sheet.attackData.attacks;
+
+    expect(attacks).toHaveLength(1);
+    expect(attacks[0].name).toBe('Longsword +1 Keen');
+    // The critical range should reflect the pre-applied keen property
+  });
+
+  it('should prefer stored entity over resolver', () => {
+    // Item has stored entity with different name than resolver would return
+    const inventoryState: InventoryState = {
+      items: [
+        {
+          instanceId: 'custom-sword',
+          itemId: 'longsword',
+          entityType: 'weapon',
+          quantity: 1,
+          instanceValues: { equipped: true, wielded: true },
+          entity: {
+            id: 'longsword',
+            entityType: 'weapon',
+            name: 'My Custom Longsword',  // Different from resolver
+            damageDice: '1d8',
+            damageType: 'slashing',
+            critRange: 19,
+            critMultiplier: 2,
+            weaponCategory: 'martial',
+            weaponType: 'melee',
+          },
+        },
+      ],
+      currencies: {},
+    };
+
+    const character = buildCharacter().build();
+    character.inventoryState = inventoryState;
+
+    // Resolver would return a different entity
+    const differentResolver: InventoryEntityResolver = () => ({
+      id: 'longsword',
+      entityType: 'weapon',
+      name: 'Resolver Longsword',  // Different name
+      damageDice: '1d8',
+      damageType: 'slashing',
+      critRange: 19,
+      critMultiplier: 2,
+    });
+
+    const sheet = calculateCharacterSheet(character, {
+      resolveInventoryEntity: differentResolver,
+    });
+
+    const attacks = sheet.attackData.attacks;
+
+    // Should use the stored entity name, not the resolver
+    expect(attacks).toHaveLength(1);
+    expect(attacks[0].name).toBe('My Custom Longsword');
+  });
+});
+
+// =============================================================================
 // TESTS - Integration Summary
 // =============================================================================
 
@@ -488,33 +637,29 @@ describe('Inventory Integration Summary', () => {
      * To fully integrate the inventory system with attack generation and
      * character calculation, we need:
      *
-     * 1. COMPENDIUM INTEGRATION
+     * 1. SELF-CONTAINED CHARACTER (PREFERRED)
+     *    - Entities are resolved and stored when item is acquired
+     *    - Character works without compendium access
+     *    - item.entity contains the full entity with properties applied
+     *
+     * 2. LEGACY COMPENDIUM INTEGRATION (FALLBACK)
+     *    - If item.entity is not set, resolver is used
      *    - calculateCharacterSheet needs access to a compendium
      *    - Compendium resolves itemId -> full entity with stats
      *
-     * 2. ATTACK GENERATION FROM INVENTORY
+     * 3. ATTACK GENERATION FROM INVENTORY
      *    - In getCalculatedAttackData, also check inventoryState.items
      *    - For each weapon with wielded=true:
-     *      a. Resolve entity from compendium
-     *      b. Apply property effects (via applyPropertyEffectsToItem)
-     *      c. Convert to attack format
-     *      d. Generate CalculatedAttack
+     *      a. Use stored entity OR resolve from compendium
+     *      b. Convert to attack format
+     *      c. Generate CalculatedAttack
      *
-     * 3. EQUIPPED ITEM EFFECTS
+     * 4. EQUIPPED ITEM EFFECTS
      *    - In compileCharacterChanges (or similar):
      *      a. Iterate inventoryState.items where equipped=true
-     *      b. Resolve each entity from compendium
+     *      b. Use stored entity OR resolve from compendium
      *      c. Extract effects from entity
      *      d. Add to character changes (similar to buffs)
-     *
-     * 4. WIELDED-ONLY EFFECTS
-     *    - Some effects should only apply when wielded (not just equipped)
-     *    - Need a condition system or separate wieldedEffects field
-     *
-     * 5. EFFECT TARGET RESOLUTION
-     *    - Current effect targets: 'ac.total', 'speed.base', etc.
-     *    - Need to map these to the calculation system
-     *    - Similar to how buffs apply their changes
      */
     expect(true).toBe(true);
   });

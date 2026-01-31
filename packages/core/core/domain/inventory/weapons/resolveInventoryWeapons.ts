@@ -22,13 +22,13 @@ import { isItemEquipped } from '../instanceFields';
  * Converts inventory weapons to legacy Weapon format for attack calculation.
  *
  * For each weapon in inventoryState with entityType 'weapon' and equipped=true:
- * 1. Resolve the weapon entity from compendium
- * 2. Apply property effects to the weapon (e.g., Keen modifying critRange)
+ * 1. Use stored entity (preferred) or resolve from compendium
+ * 2. Apply property effects if using resolver (stored entities already have them)
  * 3. Convert to legacy Weapon format
  *
  * @param characterData - The character's base data
  * @param characterSheet - The calculated character sheet (for size info)
- * @param resolver - Function to resolve entity references to full entities
+ * @param resolver - Function to resolve entity references (optional if entities are stored)
  * @returns Array of weapons in legacy format
  */
 export function resolveInventoryWeapons(
@@ -36,7 +36,7 @@ export function resolveInventoryWeapons(
   characterSheet: CharacterSheet,
   resolver?: InventoryEntityResolver
 ): Weapon[] {
-  if (!resolver || !characterData.inventoryState) {
+  if (!characterData.inventoryState) {
     return [];
   }
 
@@ -50,14 +50,27 @@ export function resolveInventoryWeapons(
       continue;
     }
 
-    // Resolve the weapon entity
-    const entity = resolver(item.entityType, item.itemId);
+    // Use stored entity if available (self-contained character principle)
+    // Fall back to resolver for backwards compatibility
+    let entity: StandardEntity | undefined;
+
+    if (item.entity) {
+      // Entity is already stored and resolved (with properties applied)
+      entity = item.entity;
+    } else if (resolver) {
+      // Legacy path: resolve from compendium
+      entity = resolver(item.entityType, item.itemId);
+    }
+
     if (!entity || !isWeaponEntity(entity)) {
       continue;
     }
 
-    // Apply property effects to the weapon
-    const resolvedWeapon = resolveWeaponProperties(entity, resolver);
+    // Apply property effects only if we used the resolver (not stored entity)
+    // Stored entities should already have properties applied
+    const resolvedWeapon = item.entity
+      ? entity as WeaponEntity
+      : (resolver ? resolveWeaponProperties(entity, resolver) : entity);
 
     // Convert to legacy format
     const { weapon } = convertToLegacyWeapon(resolvedWeapon, item, characterSize);

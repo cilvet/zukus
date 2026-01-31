@@ -1,15 +1,29 @@
 import type { InstanceValues } from '../entities/types/instanceFields';
+import type { StandardEntity } from '../entities/types/base';
 
 /**
  * Sistema de Inventario
  *
  * Sistema paralelo al equipment actual que usa entidades del compendium.
  * Permite gestionar items como referencias a entidades con instancias únicas.
+ *
+ * PRINCIPIO ARQUITECTONICO: Las entidades se resuelven al adquirir el item,
+ * no al calcular. Esto permite que el personaje funcione sin el compendium.
+ * Ver: .cursor/rules/core/architectural-principles.mdc
  */
 
 /**
+ * Entidad resuelta de un item de inventario.
+ * Contiene la entidad del compendium con propiedades ya aplicadas.
+ */
+export type ResolvedInventoryEntity = StandardEntity & {
+  /** Campos adicionales especificos del tipo de item */
+  [key: string]: unknown;
+};
+
+/**
  * Instancia de un item en el inventario.
- * Referencia una entidad del compendium con datos de instancia específicos.
+ * Contiene la entidad resuelta (no solo una referencia).
  *
  * Note: equipped/wielded state is stored in instanceValues, not as direct fields.
  * Use the helpers isItemEquipped() and isItemWielded() to check these states.
@@ -17,7 +31,7 @@ import type { InstanceValues } from '../entities/types/instanceFields';
 export type InventoryItemInstance = {
   /** UUID único de esta instancia */
   instanceId: string;
-  /** ID de la entidad en el compendium */
+  /** ID de la entidad original (para referencia) */
   itemId: string;
   /** Tipo de entidad ('weapon', 'armor', 'item', etc.) */
   entityType: string;
@@ -41,6 +55,12 @@ export type InventoryItemInstance = {
    * - active: boolean (from activable addon)
    */
   instanceValues?: InstanceValues;
+  /**
+   * Entidad resuelta del compendium.
+   * Incluye propiedades (keen, flaming, etc.) ya aplicadas.
+   * Se almacena al adquirir el item, no se resuelve al calcular.
+   */
+  entity?: ResolvedInventoryEntity;
 };
 
 /**
@@ -126,6 +146,8 @@ export function createEmptyInventoryState(): InventoryState {
  *
  * Note: To set equipped/wielded state, use the setItemEquipped/setItemWielded
  * helpers after creation, or pass them in instanceValues.
+ *
+ * @param params.entity - La entidad resuelta del compendium (con propiedades aplicadas)
  */
 export function createItemInstance(params: {
   itemId: string;
@@ -133,6 +155,7 @@ export function createItemInstance(params: {
   quantity?: number;
   customName?: string;
   instanceValues?: InstanceValues;
+  entity?: ResolvedInventoryEntity;
 }): InventoryItemInstance {
   return {
     instanceId: crypto.randomUUID(),
@@ -141,5 +164,6 @@ export function createItemInstance(params: {
     quantity: params.quantity ?? 1,
     customName: params.customName,
     instanceValues: params.instanceValues,
+    entity: params.entity,
   };
 }

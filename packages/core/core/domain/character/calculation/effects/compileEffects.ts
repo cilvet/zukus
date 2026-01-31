@@ -253,8 +253,9 @@ function compileInventoryItemEffects(
       continue;
     }
 
-    // Resolve the entity
-    const entity = resolver(item.entityType, item.itemId);
+    // Use stored entity if available, otherwise fall back to resolver
+    // The stored entity already has properties applied (self-contained character principle)
+    const entity = item.entity ?? resolver(item.entityType, item.itemId);
     if (!entity) {
       continue;
     }
@@ -273,9 +274,9 @@ function compileInventoryItemEffects(
       effects.push(...entityWithEffects.effects);
     }
 
-    // If the item has properties, resolve them and collect their effects
-    // But only non-@item effects (property effects that target character stats)
-    if (entityWithEffects.properties && entityWithEffects.properties.length > 0) {
+    // If using resolver (no stored entity) and item has properties, resolve them
+    // Note: When item.entity is set, properties should already be applied
+    if (!item.entity && entityWithEffects.properties && entityWithEffects.properties.length > 0) {
       const propertyEntities: StandardEntity[] = [];
       for (const propId of entityWithEffects.properties) {
         // Determine property entity type based on item type
