@@ -528,6 +528,17 @@ export const psionCGEConfig: CGEConfig = {
 
   // TODO: accessFilter para disciplinas
 
+  // Define el recurso de Power Points
+  resources: [
+    {
+      resourceId: 'psion-power-points',
+      name: 'Power Points',
+      // PP base (de custom variable) + bonus INT * nivel
+      maxValueFormula: { expression: '@customVariable.psion.powerPoints.base + @ability.intelligence.modifier * @class.psion.level' },
+      rechargeFormula: { expression: '@resources.psion-power-points.max' },
+    },
+  ],
+
   known: {
     type: 'LIMITED_PER_ENTITY_LEVEL',
     table: PSION_KNOWN_TABLE,
@@ -536,11 +547,10 @@ export const psionCGEConfig: CGEConfig = {
   tracks: [
     {
       id: 'base',
-      // Recurso POOL: power points
+      // Recurso POOL: referencia al recurso definido arriba
       resource: {
         type: 'POOL',
-        // La formula referencia la variable de PP base + bonus por atributo
-        maxFormula: { expression: '@psion.powerPoints.base + @ability.intelligence.modifier * @class.psion.level' },
+        resourceId: 'psion-power-points',
         costPath: '@entity.level', // Coste = nivel del poder
         refresh: 'daily',
       },

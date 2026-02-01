@@ -9,16 +9,13 @@
 import type { EntityFilter as EntityFilterType } from '../levels/filtering/types';
 export type { EntityFilter } from '../levels/filtering/types';
 
+// Reutilizar tipos del sistema existente
+import type { Formula } from '../formulae/formula';
+import type { ResourceDefinitionChange } from '../character/baseData/specialChanges';
+export type { Formula } from '../formulae/formula';
+
 // Alias for internal use
 type EntityFilter = EntityFilterType;
-
-// ============================================================================
-// TIPOS BASE
-// ============================================================================
-
-export type Formula = {
-  expression: string
-}
 
 /**
  * Tabla de progresion por nivel de clase.
@@ -73,7 +70,7 @@ export type ResourceConfigSlots = {
 
 export type ResourceConfigPool = {
   type: 'POOL'
-  maxFormula: Formula
+  resourceId: string // ID del recurso definido en CGEConfig.resources
   costPath?: string // "@entity.level" (default) - como calcular coste
   refresh: RefreshType
 }
@@ -211,6 +208,14 @@ export type CGEConfig = {
    * Es no estricto y editable por el usuario (filosofia de la app).
    */
   accessFilter?: EntityFilter
+
+  // --- Recursos ---
+  /**
+   * Recursos definidos por este CGE.
+   * Usa el mismo sistema de RESOURCE_DEFINITION existente.
+   * Los tracks con resource.type === 'POOL' referencian estos recursos por resourceId.
+   */
+  resources?: Omit<ResourceDefinitionChange, 'type'>[]
 
   // --- Conocidos ---
   /**

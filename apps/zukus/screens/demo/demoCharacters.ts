@@ -14,6 +14,8 @@ import {
   type LevelTable,
   type SpecialFeature,
   type CGEDefinitionChange,
+  type CustomVariableDefinitionChange,
+  type Change,
 } from '@zukus/core'
 
 // =============================================================================
@@ -327,9 +329,17 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
       entityType: 'power',
       levelPath: '@entity.level',
       known: { type: 'LIMITED_TOTAL', table: PSION_KNOWN },
+      resources: [
+        {
+          resourceId: 'psion-power-points',
+          name: 'Power Points',
+          maxValueFormula: { expression: '@customVariable.psion.powerPoints.base + @ability.intelligence.modifier * @class.psion.level' },
+          rechargeFormula: { expression: '@resources.psion-power-points.max' },
+        },
+      ],
       tracks: [{
         id: 'base',
-        resource: { type: 'POOL', maxFormula: { expression: '25' }, refresh: 'daily' },
+        resource: { type: 'POOL', resourceId: 'psion-power-points', refresh: 'daily' },
         preparation: { type: 'NONE' },
       }],
       variables: { classPrefix: 'psion.power', genericPrefix: 'power', casterLevelVar: 'manifesterLevel.psion' },
@@ -337,7 +347,6 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
     },
     initialCgeState: {
       knownSelections: { '-1': PSION_POWERS },
-      poolCurrentValue: 18,
     },
   },
 
@@ -379,11 +388,33 @@ function createDemoCharacterBaseData(def: DemoCharacterDef): CharacterBaseData {
     config: def.cgeConfig,
   }
 
+  // Special handling for Psion - needs custom variable for power points base
+  const specialChanges: (CGEDefinitionChange | CustomVariableDefinitionChange)[] = [cgeDefinition]
+  const changes: Change[] = []
+
+  if (def.classId === 'psion') {
+    const ppBaseDefinition: CustomVariableDefinitionChange = {
+      type: 'CUSTOM_VARIABLE_DEFINITION',
+      variableId: 'psion.powerPoints.base',
+      name: 'Base Power Points',
+      baseSources: [],
+    }
+    specialChanges.push(ppBaseDefinition)
+
+    changes.push({
+      type: 'CUSTOM_VARIABLE',
+      uniqueId: 'psion.powerPoints.base',
+      formula: { expression: '@class.psion.level * 2' },
+      bonusTypeId: 'BASE',
+    })
+  }
+
   const spellcastingFeature: SpecialFeature = {
     uniqueId: `${def.classId}-spellcasting`,
     title: `${def.name} Spellcasting`,
     description: def.description,
-    specialChanges: [cgeDefinition],
+    specialChanges,
+    changes: changes.length > 0 ? changes : undefined,
   }
 
   const minimalBaseData = {

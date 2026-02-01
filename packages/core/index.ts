@@ -23,7 +23,7 @@ export type { CalculatedSingleSkill, CalculatedParentSkill, CalculatedSkill, Cal
 // Types - Sources
 export type { SourceValue } from "./core/domain/character/calculatedSheet/sources";
 export { BonusTypesValues } from "./core/domain/character/baseData/changes";
-export type { BonusTypes } from "./core/domain/character/baseData/changes";
+export type { BonusTypes, Change } from "./core/domain/character/baseData/changes";
 
 // Types - Buffs
 export type { Buff } from "./core/domain/character/baseData/buffs";
@@ -191,6 +191,8 @@ export type {
   CalculatedSlot,
   CalculatedBoundSlot,
   CalculatedKnownLimit,
+  CalculatedPool,
+  ResourceConfigPool,
   CGEUpdateResult,
   CGEWarning,
   PreparationUpdateResult,
@@ -200,8 +202,8 @@ export type {
   LevelTable,
 } from "./core/domain/cge";
 
-// CGE Definition Change (for specialFeatures)
-export type { CGEDefinitionChange } from "./core/domain/character/baseData/specialChanges";
+// Special Changes (for specialFeatures)
+export type { CGEDefinitionChange, CustomVariableDefinitionChange } from "./core/domain/character/baseData/specialChanges";
 
 export {
   // Known entity operations
@@ -231,6 +233,8 @@ export {
   hasUsedSlots,
   useBoundSlot,
   setSlotValue,
+  // Pool operations
+  calculatePoolCost,
   // Validation
   validateCGEConfig,
 } from "./core/domain/cge";

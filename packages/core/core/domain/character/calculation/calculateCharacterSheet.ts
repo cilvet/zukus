@@ -58,8 +58,8 @@ const calculationFunctions: getSheetWithUpdatedField[] = [
   getCalculatedArmorClass,
   getCalculatedSkills,
   getCalculatedCustomVariables, // Procesa CGE variable definitions (generadas en compilacion)
-  getCalculatedCGE, // Lee valores finales de substitutionIndex
-  getCalculatedResources,
+  getCalculatedResources, // Procesa recursos (incluyendo los definidos en CGE)
+  getCalculatedCGE, // Lee valores finales de substitutionIndex (incluyendo recursos)
   getResourceCustomVariables, // Crea custom variables de resources (despues de calcularse)
 ];
 

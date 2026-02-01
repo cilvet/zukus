@@ -320,11 +320,22 @@ export const psionCGE: CGEConfig = {
   entityType: 'power',
   levelPath: '@entity.level',
 
-  accessFilter: {
-    field: 'lists',
-    operator: 'contains',
-    value: 'psion',
-  },
+  // TODO: actualizar accessFilter al tipo correcto de EntityFilter
+  // accessFilter: {
+  //   field: 'lists',
+  //   operator: 'contains',
+  //   value: 'psion',
+  // },
+
+  // Define el recurso de Power Points
+  resources: [
+    {
+      resourceId: 'psion-power-points',
+      name: 'Power Points',
+      maxValueFormula: { expression: '@customVariable.psion.powerPoints.base' },
+      rechargeFormula: { expression: '@resources.psion-power-points.max' },
+    },
+  ],
 
   known: {
     type: 'LIMITED_TOTAL', // Total de poderes conocidos (de cualquier nivel)
@@ -357,7 +368,7 @@ export const psionCGE: CGEConfig = {
       id: 'base',
       resource: {
         type: 'POOL',
-        maxFormula: { expression: '@psion.powerPoints.max' },
+        resourceId: 'psion-power-points',
         costPath: '@entity.level', // Coste = nivel del poder
         refresh: 'daily',
       },

@@ -57,6 +57,16 @@ const psionCGEConfig: CGEConfig = {
   entityType: 'power',
   levelPath: '@entity.level',
 
+  // Define el recurso de Power Points usando el sistema de RESOURCE_DEFINITION
+  resources: [
+    {
+      resourceId: 'psion-power-points',
+      name: 'Power Points',
+      maxValueFormula: { expression: '@customVariable.psion.powerPoints.base' },
+      rechargeFormula: { expression: '@resources.psion-power-points.max' },
+    },
+  ],
+
   // Psion has limited total powers known
   known: {
     type: 'LIMITED_TOTAL',
@@ -67,10 +77,10 @@ const psionCGEConfig: CGEConfig = {
     {
       id: 'base',
       label: 'power_points',
-      // Pool resource with cost based on power level
+      // Pool resource referencing the defined resource
       resource: {
         type: 'POOL',
-        maxFormula: { expression: '@psion.powerPoints.max' },
+        resourceId: 'psion-power-points',
         costPath: '@entity.level', // Cost = power level
         refresh: 'daily',
       },

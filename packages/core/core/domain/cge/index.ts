@@ -79,3 +79,6 @@ export {
   getAllSlotCurrentValues,
   hasUsedSlots,
 } from './slotOperations';
+
+// Pool Operations
+export { calculatePoolCost } from './poolOperations';

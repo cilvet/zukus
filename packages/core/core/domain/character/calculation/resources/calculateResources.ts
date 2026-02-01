@@ -4,24 +4,46 @@ import { CharacterChanges } from "../sources/compileCharacterChanges";
 import { SubstitutionIndex, calculateSource } from "../sources/calculateSources";
 import { getSheetWithUpdatedField } from "../calculateCharacterSheet";
 import { ContextualChange } from "../../baseData/contextualChange";
-import { ResourceDefinitionChange, SpecialChange } from "../../baseData/specialChanges";
+import { ResourceDefinitionChange, SpecialChange, CGEDefinitionChange } from "../../baseData/specialChanges";
 import { getCalculatedSourceValues } from "../sources/sumSources";
 import { SourceValue } from "../../calculatedSheet/sources";
 import { CustomVariableChange, ContextualizedChange } from "../../baseData/changes";
 import { Formula } from "../../../formulae/formula";
 
 /**
- * Extracts all RESOURCE_DEFINITION special changes from compiled special changes
+ * Extracts all RESOURCE_DEFINITION special changes from compiled special changes,
+ * including resources defined inside CGE_DEFINITION configs.
  */
 function extractResourceDefinitions(specialChanges?: SpecialChange[]): ResourceDefinitionChange[] {
   if (!specialChanges) {
     return [];
   }
 
-  return specialChanges.filter(
+  const directDefinitions = specialChanges.filter(
     (specialChange): specialChange is ResourceDefinitionChange =>
       specialChange.type === 'RESOURCE_DEFINITION'
   );
+
+  // Also extract resources defined inside CGE configs
+  const cgeDefinitions = specialChanges.filter(
+    (specialChange): specialChange is CGEDefinitionChange =>
+      specialChange.type === 'CGE_DEFINITION'
+  );
+
+  const cgeResources: ResourceDefinitionChange[] = [];
+  for (const cgeDef of cgeDefinitions) {
+    if (cgeDef.config.resources) {
+      for (const resource of cgeDef.config.resources) {
+        // Convert CGE resource to ResourceDefinitionChange
+        cgeResources.push({
+          type: 'RESOURCE_DEFINITION',
+          ...resource,
+        });
+      }
+    }
+  }
+
+  return [...directDefinitions, ...cgeResources];
 }
 
 /**

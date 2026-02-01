@@ -285,8 +285,11 @@ function calculateTracks(
     }
 
     if (track.resource.type === 'POOL') {
-      // TODO: Implementar pool
-      calculatedTrack.pool = { max: 0, current: 0 };
+      const resourceId = track.resource.resourceId;
+      // Read from substitutionIndex (resources are calculated before CGE)
+      const max = (substitutionIndex[`resources.${resourceId}.max`] as number) ?? 0;
+      const current = (substitutionIndex[`resources.${resourceId}.current`] as number) ?? max;
+      calculatedTrack.pool = { max, current };
     }
 
     return calculatedTrack;

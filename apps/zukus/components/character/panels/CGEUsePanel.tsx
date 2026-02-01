@@ -5,7 +5,7 @@ import { YStack, XStack, Text } from 'tamagui'
 import * as Haptics from 'expo-haptics'
 import { usePrimaryCGE, useCharacterStore, useCompendiumContext, useTheme } from '../../../ui'
 import { useNavigateToDetail } from '../../../navigation'
-import type { CalculatedCGE, CalculatedBoundSlot } from '@zukus/core'
+import { calculatePoolCost, type CalculatedCGE, type CalculatedBoundSlot, type ResourceConfigPool } from '@zukus/core'
 import { EntityRow, LevelHeader, ENTITY_ROW_PADDING_HORIZONTAL } from './EntityRow'
 
 function showCastToast(entityName: string) {
@@ -96,6 +96,15 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
   const primaryTrack = primaryCGE.tracks[0]
   const slots = primaryTrack?.slots ?? []
   const isBoundPreparation = primaryTrack?.preparationType === 'BOUND'
+  const isPoolResource = primaryTrack?.resourceType === 'POOL'
+  const pool = primaryTrack?.pool
+
+  // Get resourceId from config for POOL type
+  const trackConfig = primaryCGE.config.tracks[0]
+  const poolResourceId = trackConfig?.resource.type === 'POOL'
+    ? (trackConfig.resource as ResourceConfigPool).resourceId
+    : undefined
+  const consumeResource = useCharacterStore((state) => state.consumeResource)
 
   // Get known entities for spontaneous casters
   const knownSelections = baseData?.cgeState?.[cgeId]?.knownSelections ?? {}
@@ -135,6 +144,103 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
     if (!result.success) {
       console.warn('Failed to use slot:', result.error)
     }
+  }
+
+  // For POOL: consume resource points
+  const handleManifestPower = (cost: number) => {
+    if (!poolResourceId) return
+    const result = consumeResource(poolResourceId, cost)
+    if (!result.success) {
+      console.warn('Failed to consume pool:', result.error)
+    }
+  }
+
+  // Render POOL-based system (Psion)
+  if (isPoolResource && pool) {
+    // For LIMITED_TOTAL, known powers are in knownSelections['-1']
+    const knownPowerIds = knownSelections['-1'] ?? []
+
+    // Get costPath from track config
+    const costPath = trackConfig?.resource.type === 'POOL'
+      ? (trackConfig.resource as ResourceConfigPool).costPath
+      : undefined
+
+    type KnownPowerDisplay = KnownEntityDisplay & { cost: number }
+    const knownPowers: KnownPowerDisplay[] = knownPowerIds.map((powerId) => {
+      const entity = compendium.getEntityById(powerId)
+      const displayName = entity?.name ?? powerId
+        .replace(/-/g, ' ')
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, (l: string) => l.toUpperCase())
+
+      // Calculate cost using the CGE's costPath formula
+      const cost = entity ? calculatePoolCost(costPath, entity as Record<string, unknown>) : 1
+
+      return {
+        id: powerId,
+        name: displayName,
+        image: entity?.image,
+        cost,
+      }
+    })
+
+    return (
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingVertical: 12 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <YStack>
+          {/* Pool Header */}
+          <PoolHeader
+            label={primaryCGE.config.labels?.pool ?? 'Pool'}
+            current={pool.current}
+            max={pool.max}
+            accentColor={accentColor}
+          />
+
+          {/* Known Powers */}
+          <YStack marginTop={16}>
+            <LevelHeader label="Poderes Conocidos" count={String(knownPowers.length)} />
+            {knownPowers.length === 0 ? (
+              <Text
+                fontSize={11}
+                color="$placeholderColor"
+                textAlign="center"
+                paddingVertical={10}
+                paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
+              >
+                Sin poderes conocidos
+              </Text>
+            ) : (
+              knownPowers.map((power, index) => {
+                const canManifest = pool.current >= power.cost
+                return (
+                  <EntityRow
+                    key={power.id}
+                    name={power.name}
+                    image={power.image}
+                    subtitle={`Coste: ${power.cost} PP`}
+                    isLast={index === knownPowers.length - 1}
+                    opacity={canManifest ? 1 : 0.5}
+                    onPress={() => navigateToDetail('compendiumEntity', power.id, power.name)}
+                    rightElement={
+                      <ManifestButton
+                        canManifest={canManifest}
+                        accentColor={accentColor}
+                        disabledColor={themeColors.borderColor}
+                        entityName={power.name}
+                        onPress={() => handleManifestPower(power.cost)}
+                      />
+                    }
+                  />
+                )
+              })
+            )}
+          </YStack>
+        </YStack>
+      </ScrollView>
+    )
   }
 
   return (
@@ -378,6 +484,84 @@ function SlotLevelHeader({ label, current, max, textColor, onValueChange }: Slot
         </Text>
       </XStack>
     </XStack>
+  )
+}
+
+type PoolHeaderProps = {
+  label: string
+  current: number
+  max: number
+  accentColor: string
+}
+
+function PoolHeader({ label, current, max, accentColor }: PoolHeaderProps) {
+  const percentage = max > 0 ? (current / max) * 100 : 0
+
+  return (
+    <YStack paddingHorizontal={16} gap={8}>
+      <XStack justifyContent="space-between" alignItems="center">
+        <Text fontSize={14} color="$placeholderColor" fontWeight="600" textTransform="uppercase">
+          {label}
+        </Text>
+        <Text fontSize={24} color="$color" fontWeight="700">
+          {current} / {max}
+        </Text>
+      </XStack>
+      {/* Progress bar */}
+      <YStack
+        height={8}
+        backgroundColor="$borderColor"
+        borderRadius={4}
+        overflow="hidden"
+      >
+        <YStack
+          height="100%"
+          width={`${percentage}%`}
+          backgroundColor={accentColor}
+          borderRadius={4}
+        />
+      </YStack>
+    </YStack>
+  )
+}
+
+type ManifestButtonProps = {
+  canManifest: boolean
+  accentColor: string
+  disabledColor: string
+  entityName: string
+  onPress: () => void
+}
+
+function ManifestButton({ canManifest, accentColor, disabledColor, entityName, onPress }: ManifestButtonProps) {
+  const handlePress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+    showCastToast(entityName)
+    onPress()
+  }
+
+  return (
+    <Pressable onPress={handlePress} disabled={!canManifest} hitSlop={8}>
+      {({ pressed }) => (
+        <XStack
+          paddingVertical={4}
+          paddingHorizontal={10}
+          backgroundColor="transparent"
+          borderWidth={1}
+          borderColor={canManifest ? accentColor : disabledColor}
+          borderRadius={6}
+          opacity={pressed ? 0.7 : canManifest ? 1 : 0.5}
+        >
+          <Text
+            fontSize={11}
+            fontWeight="600"
+            color={canManifest ? accentColor : '$placeholderColor'}
+          >
+            Manifestar
+          </Text>
+        </XStack>
+      )}
+    </Pressable>
   )
 }
 

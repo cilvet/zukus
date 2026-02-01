@@ -47,16 +47,12 @@ CGE configura como los personajes usan entidades accionables (conjuros, maniobra
 
 ### FUNCIONA (tests pasan)
 - Known: UNLIMITED, LIMITED_PER_ENTITY_LEVEL, LIMITED_TOTAL
-- Resource: SLOTS, NONE
+- Resource: SLOTS, POOL, NONE
 - Preparation: BOUND, NONE
 - Multiple tracks (Cleric base + domain)
-- Operaciones: addKnownEntity, prepareEntityInSlot, useSlot, useBoundSlot, refreshSlots
+- Operaciones: addKnownEntity, prepareEntityInSlot, useSlot, useBoundSlot, refreshSlots, calculatePoolCost
 
 ### PENDIENTE
-1. **POOL resource** - `calculateCGE.ts:287-289`
-   - Retorna `{ max: 0, current: 0 }` placeholder
-   - Falta: evaluar `maxFormula` con substitutionIndex
-   - Afecta: Psion
 
 2. **LIST preparation operations** - NO EXISTE archivo
    - Falta: addToListPreparation, removeFromListPreparation
@@ -72,20 +68,79 @@ CGE configura como los personajes usan entidades accionables (conjuros, maniobra
 - Truenamer (DC incrementante, no consumible)
 - Binder (binding checks, no preparacion)
 
-### SOLUCION PROPUESTA: Pool Externo (Factotum)
+### POOL Resource (IMPLEMENTADO)
 
-Factotum tiene IP compartidos entre CGE y no-CGE. Solucion:
+El CGE puede definir recursos usando el sistema generico `RESOURCE_DEFINITION`:
 
 ```typescript
+// En CGEConfig
+resources: [
+  {
+    resourceId: 'psion-power-points',
+    name: 'Power Points',
+    maxValueFormula: { expression: '@customVariable.psion.powerPoints.base + @ability.intelligence.modifier * @class.psion.level' },
+    rechargeFormula: { expression: '@resources.psion-power-points.max' },
+  },
+],
+
+tracks: [
+  {
+    id: 'base',
+    resource: {
+      type: 'POOL',
+      resourceId: 'psion-power-points', // Referencia al recurso definido
+      costPath: '@entity.level',         // Formula para calcular coste
+      refresh: 'daily',
+    },
+    preparation: { type: 'NONE' },
+  },
+],
+```
+
+**Flujo de calculo** (pipeline actualizado):
+1. CustomVariables → se calcula `psion.powerPoints.base`
+2. Resources → procesa `RESOURCE_DEFINITION` de CGE, expone `@resources.psion-power-points.max`
+3. CGE → lee `@resources.psion-power-points.max` y `current` del substitutionIndex
+
+**Para recursos externos (Factotum)**: El CGE no define el recurso, solo lo referencia:
+```typescript
+// El Inspiration Points se define en otra feature con RESOURCE_DEFINITION
 resource: {
   type: 'POOL',
-  poolPath: '@factotum.inspirationPoints',  // Lee/escribe variable externa
-  costFormula: { expression: '1' },
+  resourceId: 'factotum-inspiration-points', // Recurso definido externamente
+  costPath: '@entity.level',
   refresh: 'encounter'
 }
 ```
 
-Con `poolPath`, el CGE no usa `CGEState.poolCurrentValue` - lee/escribe directamente a una variable del personaje compartida.
+#### costPath - Calculo de coste por entidad
+
+El `costPath` define una formula que se evalua contra las propiedades de la entidad para calcular el coste de uso. Usa el prefijo `@entity.*` para acceder a campos de la entidad.
+
+| costPath | Descripcion | Ejemplo |
+|----------|-------------|---------|
+| `@entity.level` | Nivel de la entidad (default) | Poder nivel 3 = 3 PP |
+| `@entity.powerPoints` | Campo powerPoints directo | Si la entidad define su coste |
+| `@entity.level * 2` | Formula personalizada | Nivel 3 = 6 PP |
+
+**Funcion**: `calculatePoolCost(costPath, entity)` en `cge/poolOperations.ts`
+
+```typescript
+import { calculatePoolCost } from '@zukus/core';
+
+// Calcula el coste basandose en el costPath y la entidad
+const cost = calculatePoolCost('@entity.level', { level: 3, name: 'Mind Thrust' });
+// cost = 3
+
+// Con formula compleja
+const cost2 = calculatePoolCost('@entity.level + @entity.bonus', { level: 2, bonus: 1 });
+// cost2 = 3
+```
+
+**Notas:**
+- El coste minimo siempre es 1
+- Si la propiedad no existe en la entidad, se sustituye por 0
+- Soporta operaciones matematicas (`+`, `-`, `*`, `/`, `floor`, `ceil`)
 
 ---
 
@@ -111,7 +166,36 @@ El sistema actual es **primitivo**. Los "contextos" permitiran modificar uso/pre
 | `cge/knownOperations.ts` | Add/remove known |
 | `cge/preparationOperations.ts` | BOUND preparation only |
 | `cge/slotOperations.ts` | useSlot, refreshSlots |
+| `cge/poolOperations.ts` | calculatePoolCost (coste por entidad) |
 | `calculation/cge/calculateCGE.ts` | Calculo en sheet |
+
+---
+
+## Pagina de Demo
+
+**Ruta:** `/demo-cge` (`apps/zukus/app/demo-cge.tsx`)
+
+**Archivos:**
+- `apps/zukus/screens/demo/DemoCGEScreen.tsx` - Pantalla principal
+- `apps/zukus/screens/demo/demoCharacters.ts` - Definiciones de personajes demo
+
+La demo permite probar interactivamente todos los tipos de CGE con personajes reales. Usa entidades del compendium real (conjuros en espanol, maniobras, poderes).
+
+### Personajes Demo
+
+| Demo | Configuracion | Funciona |
+|------|---------------|:--------:|
+| Wizard | UNLIMITED + SLOTS + BOUND | Si |
+| Sorcerer | LIMITED_PER_LEVEL + SLOTS + NONE | Si |
+| Cleric | UNLIMITED + SLOTS + BOUND | Si |
+| Warblade | LIMITED_TOTAL + NONE + LIST | Parcial |
+| Psion | LIMITED_TOTAL + POOL + NONE | Si |
+| Warlock | LIMITED_TOTAL + NONE + NONE | Si |
+
+**Al implementar nuevas features (POOL, LIST):**
+1. Verificar que funciona en la demo correspondiente
+2. Los datos de `demoCharacters.ts` usan IDs reales del compendium
+3. El estado inicial (`initialCgeState`) debe ser coherente con la config
 
 ---
 
@@ -154,6 +238,6 @@ Ver [casesToCover/NOMENCLATURE.md](./casesToCover/NOMENCLATURE.md) para la tabla
 | sorcerer | LIMITED_PER_ENTITY_LEVEL | SLOTS | NONE | Implementado |
 | cleric | undefined | SLOTS | BOUND | Implementado |
 | warlock | LIMITED_TOTAL | NONE | NONE | Implementado |
-| psion | LIMITED_TOTAL | POOL | NONE | Pendiente POOL |
+| psion | LIMITED_PER_ENTITY_LEVEL | POOL | NONE | Implementado |
 | warblade | LIMITED_TOTAL | NONE | LIST GLOBAL | Pendiente LIST |
 | wizard5e | UNLIMITED | SLOTS | LIST GLOBAL | Pendiente LIST |

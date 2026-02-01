@@ -59,11 +59,13 @@ describe("Psion CGE", () => {
       expect(psionCGEConfig.tracks[0].preparation.type).toBe('NONE');
     });
 
-    it("should have maxFormula for pool", () => {
+    it("should have resourceId for pool referencing defined resource", () => {
       const resource = psionCGEConfig.tracks[0].resource;
       if (resource.type === 'POOL') {
-        expect(resource.maxFormula).toBeDefined();
-        expect(resource.maxFormula.expression).toContain('@psion.powerPoints.base');
+        expect(resource.resourceId).toBeDefined();
+        // El resourceId debe referenciar un recurso definido en resources
+        const definedResource = psionCGEConfig.resources?.find(r => r.resourceId === resource.resourceId);
+        expect(definedResource).toBeDefined();
       }
     });
   });
