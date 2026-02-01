@@ -12,6 +12,7 @@ allowed-tools: Read, Grep, Glob
 > - [docs/architecture.md](./docs/architecture.md) - Arquitectura y razonamiento
 > - [docs/design.md](./docs/design.md) - Decisiones de diseno, pool externo, contextos
 > - [docs/cases.md](./docs/cases.md) - Analisis detallado por clase
+> - [casesToCover/](./casesToCover/) - READMEs por clase (wizard, sorcerer, psion, etc.)
 
 CGE configura como los personajes usan entidades accionables (conjuros, maniobras, poderes).
 
@@ -143,17 +144,16 @@ El sistema actual es **primitivo**. Los "contextos" permitiran modificar uso/pre
 
 ---
 
-## Nomenclatura INCORRECTA en casesToCover
+## Matriz de Casos
 
-Los READMEs usan terminos inventados. Mapeo correcto:
+Ver [casesToCover/NOMENCLATURE.md](./casesToCover/NOMENCLATURE.md) para la tabla completa.
 
-| Termino en README | Tipo Real |
-|-------------------|-----------|
-| GROWING_COLLECTION | Known: UNLIMITED |
-| CURATED_SELECTION | Known: LIMITED_* |
-| FULL_LIST_ACCESS | Known: undefined |
-| SLOTS_PER_ENTITY_LEVEL | Resource: SLOTS |
-| UNIFIED_POOL | Resource: POOL |
-| DAILY_SLOTS | Preparation: BOUND |
-| DAILY_LIST | Preparation: LIST |
-| PER_PREPARED_ENTITY | NO EXISTE |
+| Clase | Known | Resource | Preparation | Estado |
+|-------|-------|----------|-------------|--------|
+| wizard | UNLIMITED | SLOTS | BOUND | Implementado |
+| sorcerer | LIMITED_PER_ENTITY_LEVEL | SLOTS | NONE | Implementado |
+| cleric | undefined | SLOTS | BOUND | Implementado |
+| warlock | LIMITED_TOTAL | NONE | NONE | Implementado |
+| psion | LIMITED_TOTAL | POOL | NONE | Pendiente POOL |
+| warblade | LIMITED_TOTAL | NONE | LIST GLOBAL | Pendiente LIST |
+| wizard5e | UNLIMITED | SLOTS | LIST GLOBAL | Pendiente LIST |

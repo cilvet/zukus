@@ -42,6 +42,7 @@ Los READMEs en esta carpeta han sido **actualizados** para usar la nomenclatura 
 | tome-of-battle | LIMITED_TOTAL | NONE | LIST GLOBAL | Pendiente LIST ops |
 | spirit-shaman | undefined | SLOTS | LIST PER_LEVEL | Pendiente LIST ops |
 | arcanist | UNLIMITED | SLOTS | LIST PER_LEVEL | Pendiente LIST ops |
+| wizard5e | UNLIMITED | SLOTS | LIST GLOBAL | Pendiente LIST ops |
 | shadowcaster | - | - | - | Fuera del modelo |
 | truenamer | - | - | - | Fuera del modelo |
 | factotum | - | POOL externo | - | Fuera del modelo |
