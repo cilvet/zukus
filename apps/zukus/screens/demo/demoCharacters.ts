@@ -193,7 +193,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
         preparation: { type: 'BOUND' },
       }],
       variables: { classPrefix: 'wizard.spell', genericPrefix: 'spell', casterLevelVar: 'castingClassLevel.wizard' },
-      labels: { known: 'spellbook', prepared: 'prepared_spells', slot: 'spell_slot', action: 'cast', pool: '' },
+      labels: { known: 'Libro de Conjuros', prepared: 'Preparados', slot: 'Slot', action: 'Lanzar', pool: '' },
     },
     initialCgeState: {
       knownSelections: {
@@ -237,7 +237,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
         preparation: { type: 'NONE' },
       }],
       variables: { classPrefix: 'sorcerer.spell', genericPrefix: 'spell', casterLevelVar: 'castingClassLevel.sorcerer' },
-      labels: { known: 'known_spells', prepared: '', slot: 'spell_slot', action: 'cast', pool: '' },
+      labels: { known: 'Conjuros Conocidos', prepared: '', slot: 'Slot', action: 'Lanzar', pool: '' },
     },
     initialCgeState: {
       knownSelections: {
@@ -268,7 +268,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
         preparation: { type: 'BOUND' },
       }],
       variables: { classPrefix: 'cleric.spell', genericPrefix: 'spell', casterLevelVar: 'castingClassLevel.cleric' },
-      labels: { known: 'prayers', prepared: 'prepared_spells', slot: 'spell_slot', action: 'cast', pool: '' },
+      labels: { known: 'Oraciones', prepared: 'Preparados', slot: 'Slot', action: 'Lanzar', pool: '' },
     },
     initialCgeState: {
       knownSelections: {
@@ -306,7 +306,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
         preparation: { type: 'LIST', structure: 'GLOBAL', maxFormula: { expression: '4' }, consumeOnUse: true, recovery: 'manual' },
       }],
       variables: { classPrefix: 'warblade.maneuver', genericPrefix: 'maneuver', casterLevelVar: 'initiatorLevel.warblade' },
-      labels: { known: 'known_maneuvers', prepared: 'readied_maneuvers', slot: '', action: 'initiate', pool: '' },
+      labels: { known: 'Maniobras Conocidas', prepared: 'Maniobras Preparadas', slot: '', action: 'Iniciar', pool: '' },
     },
     initialCgeState: {
       knownSelections: {
@@ -339,11 +339,11 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
       ],
       tracks: [{
         id: 'base',
-        resource: { type: 'POOL', resourceId: 'psion-power-points', refresh: 'daily' },
+        resource: { type: 'POOL', resourceId: 'psion-power-points', costPath: '@entity.powerPoints', refresh: 'daily' },
         preparation: { type: 'NONE' },
       }],
       variables: { classPrefix: 'psion.power', genericPrefix: 'power', casterLevelVar: 'manifesterLevel.psion' },
-      labels: { known: 'known_powers', prepared: '', slot: '', action: 'manifest', pool: 'power_points' },
+      labels: { known: 'Poderes Conocidos', prepared: '', slot: '', action: 'Manifestar', pool: 'PP' },
     },
     initialCgeState: {
       knownSelections: { '-1': PSION_POWERS },
@@ -370,7 +370,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
         preparation: { type: 'NONE' },
       }],
       variables: { classPrefix: 'warlock.invocation', genericPrefix: 'invocation', casterLevelVar: 'invocationLevel.warlock' },
-      labels: { known: 'known_invocations', prepared: '', slot: '', action: 'invoke', pool: '' },
+      labels: { known: 'Invocaciones Conocidas', prepared: '', slot: '', action: 'Invocar', pool: '' },
     },
     initialCgeState: {
       knownSelections: { '-1': [] },
