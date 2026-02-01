@@ -165,6 +165,19 @@ export type {
   GetEntitiesOptions,
 } from "./core/domain/compendiums";
 
+// Spell and Maneuver utilities
+export {
+  allSpells,
+  filterSpells,
+  getSpellcastingClasses,
+  getSpellLevelsForClass,
+  allManeuvers,
+  filterManeuvers,
+  getManeuverClasses,
+  getManeuverLevelsForClass,
+} from "./core/domain/compendiums";
+export type { EnrichedSpell, EnrichedManeuver } from "./core/domain/compendiums";
+
 // CGE (Character Generation Engine)
 export type {
   CGEConfig,
@@ -180,7 +193,11 @@ export type {
   PreparationWarning,
   SlotUpdateResult,
   SlotWarning,
+  LevelTable,
 } from "./core/domain/cge";
+
+// CGE Definition Change (for specialFeatures)
+export type { CGEDefinitionChange } from "./core/domain/character/baseData/specialChanges";
 
 export {
   // Known entity operations

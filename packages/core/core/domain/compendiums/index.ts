@@ -35,3 +35,20 @@ export {
   allBuffs,
 } from './examples/dnd35ExampleContext';
 
+// Spell and Maneuver utilities for filtering
+export {
+  allSpells,
+  filterSpells,
+  getSpellcastingClasses,
+  getSpellLevelsForClass,
+  type EnrichedSpell,
+} from './examples/entities/spells/index';
+
+export {
+  allManeuvers,
+  filterManeuvers,
+  getManeuverClasses,
+  getManeuverLevelsForClass,
+  type EnrichedManeuver,
+} from './examples/entities/maneuvers';
+
