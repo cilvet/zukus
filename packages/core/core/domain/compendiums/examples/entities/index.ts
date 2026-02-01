@@ -49,6 +49,16 @@ export {
   MANEUVER_CLASS_FIELD_CONFIG,
 } from './maneuvers';
 
+// Powers (Expanded Psionics Handbook - for Psion CGE testing)
+export {
+  allPowers,
+  getPowerClasses,
+  getPowerLevelsForClass,
+  filterPowers,
+  type EnrichedPower,
+  POWER_CLASS_FIELD_CONFIG,
+} from './powers';
+
 // Classes are imported from srd/
 // - Fighter: srd/fighter/fighterClass.ts
 // - Rogue: srd/rogue/rogueClass.ts

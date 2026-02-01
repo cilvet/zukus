@@ -9,6 +9,7 @@ export { featSchema } from './featSchema';
 export { classFeatureSchema } from './classFeatureSchema';
 export { buffSchema } from './buffSchema';
 export { maneuverSchema } from './maneuverSchema';
+export { powerSchema } from './powerSchema';
 
 // Class schema is defined in srd/fighter/fighterClass.ts
 // and re-exported here for convenience

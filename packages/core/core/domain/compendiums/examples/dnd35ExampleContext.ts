@@ -24,6 +24,7 @@ import {
   classSchema,
   buffSchema,
   maneuverSchema,
+  powerSchema,
 } from './schemas';
 import { 
   systemLevelsSchemaDefinition, 
@@ -31,7 +32,7 @@ import {
 } from '../../levels/classSchemas/systemLevelsSchemas';
 
 // Entities
-import { allSpells, allFeats, allBuffs, allManeuvers } from './entities';
+import { allSpells, allFeats, allBuffs, allManeuvers, allPowers } from './entities';
 
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
@@ -89,6 +90,7 @@ const dnd35ExampleCompendium: Compendium = {
     classFeatureSchema,
     buffSchema,
     maneuverSchema,
+    powerSchema,
     systemLevelsSchemaDefinition,
     characterAbilityIncreaseSchemaDefinition,
   ],
@@ -97,6 +99,7 @@ const dnd35ExampleCompendium: Compendium = {
     feat: allFeats,
     buff: allBuffs,
     maneuver: allManeuvers,
+    power: allPowers,
     class: [
       // D&D 3.5 SRD Classes
       fighterClass,

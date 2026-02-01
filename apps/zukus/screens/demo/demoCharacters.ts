@@ -145,21 +145,30 @@ export type DemoCharacterDef = {
   initialCgeState: CGEState
 }
 
-// Static spell IDs (these exist in the compendium)
-const WIZARD_SPELLS_0 = ['detect-magic', 'light', 'mage-hand', 'prestidigitation', 'read-magic', 'arcane-mark']
-const WIZARD_SPELLS_1 = ['magic-missile', 'shield', 'mage-armor', 'sleep', 'identify']
-const WIZARD_SPELLS_2 = ['scorching-ray', 'invisibility', 'mirror-image', 'web']
-const WIZARD_SPELLS_3 = ['fireball', 'fly', 'haste']
+// =============================================================================
+// Real Compendium Entity IDs (Spanish - from the actual compendium)
+// =============================================================================
 
-const SORCERER_SPELLS_0 = ['detect-magic', 'light', 'mage-hand', 'prestidigitation', 'read-magic']
-const SORCERER_SPELLS_1 = ['magic-missile', 'shield', 'charm-person']
-const SORCERER_SPELLS_2 = ['scorching-ray']
+// Wizard spells (Spanish IDs from compendium)
+const WIZARD_SPELLS_0 = ['amanuense', 'luces-danzantes', 'lanzar-virote', 'mano-del-mago', 'sonido-fantasma', 'perturbar-muertos-vivientes']
+const WIZARD_SPELLS_1 = ['ventriloquia', 'muro-de-humo', 'sensibilidad-arcana', 'impacto-verdadero', 'retirada-expeditiva', 'borrar']
+const WIZARD_SPELLS_2 = ['objeto-marcado', 'racha-de-suerte', 'huesos-de-piedra', 'fauces-de-la-anguila']
+const WIZARD_SPELLS_3 = ['abotargamiento-necrotico', 'escritura-ilusoria', 'intermitencia', 'bola-de-fuego']
 
-const CLERIC_SPELLS_0 = ['guidance', 'resistance', 'virtue', 'detect-magic', 'light']
-const CLERIC_SPELLS_1 = ['bless', 'cure-light-wounds', 'shield-of-faith']
-const CLERIC_SPELLS_2 = ['hold-person', 'spiritual-weapon']
+// Sorcerer spells (Spanish IDs from compendium)
+const SORCERER_SPELLS_1 = ['alas-de-vuelo-rapido', 'cola-fantasmal', 'fuerza-de-la-verdadera-forma', 'alas-de-salto']
+const SORCERER_SPELLS_2 = ['magia-del-corazon-draconico', 'cazador-primario', 'golpe-con-la-cola']
 
+// Cleric spells (Spanish IDs from compendium)
+const CLERIC_SPELLS_0 = ['amanuense', 'remendar', 'luz', 'leer-magia', 'infligir-heridas-menores', 'resistencia']
+const CLERIC_SPELLS_1 = ['santuario', 'esconderse-de-los-muertos-vivientes', 'perdicion', 'punteria-bendita']
+const CLERIC_SPELLS_2 = ['explosion-de-sonido', 'encontrar-trampas', 'huesos-de-piedra', 'augurio']
+
+// Warblade maneuvers (English IDs from test entities)
 const WARBLADE_MANEUVERS = ['steel-wind', 'moment-of-perfect-mind', 'iron-heart-surge', 'punishing-stance']
+
+// Psion powers (English IDs from new power compendium)
+const PSION_POWERS = ['mind-thrust', 'energy-ray', 'vigor', 'precognition', 'astral-construct', 'mind-link', 'charm-psionic']
 
 export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
   // Wizard: UNLIMITED + SLOTS + BOUND
@@ -230,7 +239,6 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
     },
     initialCgeState: {
       knownSelections: {
-        '0': SORCERER_SPELLS_0,
         '1': SORCERER_SPELLS_1,
         '2': SORCERER_SPELLS_2,
       },
@@ -328,7 +336,7 @@ export const DEMO_CHARACTER_DEFS: DemoCharacterDef[] = [
       labels: { known: 'known_powers', prepared: '', slot: '', action: 'manifest', pool: 'power_points' },
     },
     initialCgeState: {
-      knownSelections: { '-1': [] },
+      knownSelections: { '-1': PSION_POWERS },
       poolCurrentValue: 18,
     },
   },

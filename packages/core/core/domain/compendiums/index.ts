@@ -52,3 +52,10 @@ export {
   type EnrichedManeuver,
 } from './examples/entities/maneuvers';
 
+export {
+  allPowers,
+  filterPowers,
+  getPowerClasses,
+  getPowerLevelsForClass,
+  type EnrichedPower,
+} from './examples/entities/powers';

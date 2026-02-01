@@ -165,7 +165,7 @@ export type {
   GetEntitiesOptions,
 } from "./core/domain/compendiums";
 
-// Spell and Maneuver utilities
+// Spell, Maneuver, and Power utilities
 export {
   allSpells,
   filterSpells,
@@ -175,8 +175,12 @@ export {
   filterManeuvers,
   getManeuverClasses,
   getManeuverLevelsForClass,
+  allPowers,
+  filterPowers,
+  getPowerClasses,
+  getPowerLevelsForClass,
 } from "./core/domain/compendiums";
-export type { EnrichedSpell, EnrichedManeuver } from "./core/domain/compendiums";
+export type { EnrichedSpell, EnrichedManeuver, EnrichedPower } from "./core/domain/compendiums";
 
 // CGE (Character Generation Engine)
 export type {
