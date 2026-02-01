@@ -199,9 +199,9 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
             accentColor={accentColor}
           />
 
-          {/* Known Powers */}
+          {/* Known Entities */}
           <YStack marginTop={16}>
-            <LevelHeader label="Poderes Conocidos" count={String(knownPowers.length)} />
+            <LevelHeader label={primaryCGE.config.labels?.known ?? 'Conocidos'} count={String(knownPowers.length)} />
             {knownPowers.length === 0 ? (
               <Text
                 fontSize={11}
@@ -210,17 +210,18 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                 paddingVertical={10}
                 paddingHorizontal={ENTITY_ROW_PADDING_HORIZONTAL}
               >
-                Sin poderes conocidos
+                Sin entidades conocidas
               </Text>
             ) : (
               knownPowers.map((power, index) => {
                 const canManifest = pool.current >= power.cost
+                const poolLabel = primaryCGE.config.labels?.pool ?? 'pool'
                 return (
                   <EntityRow
                     key={power.id}
                     name={power.name}
                     image={power.image}
-                    subtitle={`Coste: ${power.cost} PP`}
+                    subtitle={`Coste: ${power.cost} ${poolLabel}`}
                     isLast={index === knownPowers.length - 1}
                     opacity={canManifest ? 1 : 0.5}
                     onPress={() => navigateToDetail('compendiumEntity', power.id, power.name)}
@@ -230,6 +231,7 @@ export function CGEUsePanel({ cge: propsCge }: CGEUsePanelProps) {
                         accentColor={accentColor}
                         disabledColor={themeColors.borderColor}
                         entityName={power.name}
+                        actionLabel={primaryCGE.config.labels?.action ?? 'Usar'}
                         onPress={() => handleManifestPower(power.cost)}
                       />
                     }
@@ -530,10 +532,11 @@ type ManifestButtonProps = {
   accentColor: string
   disabledColor: string
   entityName: string
+  actionLabel: string
   onPress: () => void
 }
 
-function ManifestButton({ canManifest, accentColor, disabledColor, entityName, onPress }: ManifestButtonProps) {
+function ManifestButton({ canManifest, accentColor, disabledColor, entityName, actionLabel, onPress }: ManifestButtonProps) {
   const handlePress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
     showCastToast(entityName)
@@ -557,7 +560,7 @@ function ManifestButton({ canManifest, accentColor, disabledColor, entityName, o
             fontWeight="600"
             color={canManifest ? accentColor : '$placeholderColor'}
           >
-            Manifestar
+            {actionLabel}
           </Text>
         </XStack>
       )}
