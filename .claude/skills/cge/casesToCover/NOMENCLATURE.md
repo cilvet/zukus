@@ -1,45 +1,57 @@
 # Nota sobre Nomenclatura
 
-Los READMEs en esta carpeta usan nomenclatura de exploracion inicial que **NO corresponde** con los tipos finales implementados.
+Los READMEs en esta carpeta han sido **actualizados** para usar la nomenclatura correcta del sistema CGE.
 
-## Mapeo de terminos
+## Tipos Reales del Codigo
 
-| En estos READMEs | Tipo real en codigo |
-|------------------|---------------------|
-| GROWING_COLLECTION | `known: { type: 'UNLIMITED' }` |
-| CURATED_SELECTION | `known: { type: 'LIMITED_*' }` |
-| FULL_LIST_ACCESS | `known: undefined` |
-| PREPARED_VANCIAN | `preparation: { type: 'BOUND' }` |
-| SPONTANEOUS_KNOWN_LIMITED | `preparation: { type: 'NONE' }` + known limitado |
-| DAILY_SLOTS | `preparation: { type: 'BOUND' }` |
-| DAILY_LIST | `preparation: { type: 'LIST' }` |
-| SLOTS_PER_ENTITY_LEVEL | `resource: { type: 'SLOTS' }` |
-| UNIFIED_POOL | `resource: { type: 'POOL' }` |
-| PER_PREPARED_ENTITY | **NO EXISTE** - error conceptual |
+### Known (como accede a entidades)
+| Tipo | Descripcion |
+|------|-------------|
+| `UNLIMITED` | Sin limite (libro de conjuros) |
+| `LIMITED_PER_ENTITY_LEVEL` | X por nivel de entidad |
+| `LIMITED_TOTAL` | X totales de cualquier nivel |
+| `undefined` | Acceso directo a toda la lista |
 
-## Referencia correcta
+### Resource (que consume al usar)
+| Tipo | Descripcion |
+|------|-------------|
+| `SLOTS` | Slots por nivel de entidad |
+| `POOL` | Pool de puntos compartido |
+| `NONE` | Sin coste (at-will) |
 
-Para la documentacion actualizada, consultar:
+### Preparation (como prepara)
+| Tipo | Descripcion |
+|------|-------------|
+| `NONE` | Sin preparacion (espontaneo) |
+| `BOUND` | Cada slot ligado a una entidad |
+| `LIST GLOBAL` | Lista unica de preparados |
+| `LIST PER_LEVEL` | Preparados separados por nivel |
+
+---
+
+## Estado de cada caso
+
+| Caso | Known | Resource | Preparation | Estado |
+|------|-------|----------|-------------|--------|
+| wizard | UNLIMITED | SLOTS | BOUND | Implementado |
+| sorcerer | LIMITED_PER_ENTITY_LEVEL | SLOTS | NONE | Implementado |
+| cleric | undefined | SLOTS | BOUND | Implementado (2 tracks) |
+| warlock | LIMITED_TOTAL | NONE | NONE | Implementado |
+| dread-necromancer | LIMITED_PER_ENTITY_LEVEL | SLOTS | NONE | Config lista |
+| psion | LIMITED_TOTAL | POOL | NONE | Pendiente POOL |
+| tome-of-battle | LIMITED_TOTAL | NONE | LIST GLOBAL | Pendiente LIST ops |
+| spirit-shaman | undefined | SLOTS | LIST PER_LEVEL | Pendiente LIST ops |
+| arcanist | UNLIMITED | SLOTS | LIST PER_LEVEL | Pendiente LIST ops |
+| shadowcaster | - | - | - | Fuera del modelo |
+| truenamer | - | - | - | Fuera del modelo |
+| factotum | - | POOL externo | - | Fuera del modelo |
+| binder | - | - | - | Fuera del modelo |
+
+---
+
+## Referencia
+
 - `../SKILL.md` - Resumen ejecutivo
 - `../docs/design.md` - Decisiones de diseno
 - `../docs/architecture.md` - Arquitectura detallada
 - `packages/core/core/domain/cge/types.ts` - Tipos definitivos (codigo)
-
-## Estado de cada caso
-
-| Caso | Estado |
-|------|--------|
-| wizard | RESUELTO - testClass existe |
-| sorcerer | RESUELTO - fixture existe |
-| cleric | RESUELTO - fixture existe |
-| psion | CONFIG OK - falta POOL calculation |
-| warlock | RESUELTO - testClass existe |
-| tome-of-battle | CONFIG OK - falta LIST operations |
-| spirit-shaman | CONFIG OK - falta LIST operations |
-| arcanist | CONFIG OK - falta LIST operations |
-| wizard5e | CONFIG OK - falta LIST operations |
-| shadowcaster | FUERA DEL MODELO |
-| truenamer | FUERA DEL MODELO |
-| factotum | FUERA DEL MODELO |
-| binder | FUERA DEL MODELO |
-| dread-necromancer | RESUELTO |
