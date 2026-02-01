@@ -1,54 +1,81 @@
-# Wizard - Spellcasting
+# Wizard - Spellcasting (D&D 3.5)
 
-## CGE Generico: PREPARED_VANCIAN
+## Configuracion CGE
 
-## Estado: Resuelto
+| Propiedad | Valor |
+|-----------|-------|
+| known | `UNLIMITED` |
+| resource | `SLOTS` |
+| preparation | `BOUND` |
+
+## Estado: Implementado
+
+La configuracion del Wizard esta implementada en:
+- `/packages/core/srd/wizard/wizardClassFeatures.ts` - CGE config real
+- `/packages/core/core/domain/character/calculation/__tests__/cge/fixtures.ts` - Fixtures de test
 
 ---
 
 ## Resumen Mecanico
 
-El Wizard es el lanzador Vanciano clasico:
-- Libro de conjuros con conjuros aprendidos (sin limite)
-- Prepara conjuros especificos en slots cada dia
-- Cada slot preparado se consume al lanzar
+El Wizard es el lanzador Vanciano clasico de D&D 3.5:
+
+1. **Libro de conjuros** (`known: UNLIMITED`): El mago tiene un spellbook donde registra conjuros. No hay limite de cuantos puede aprender (puede copiar de scrolls, otros libros, etc.)
+
+2. **Slots por nivel** (`resource: SLOTS`): Cada dia tiene un numero de slots determinado por su nivel de clase + bonus por Inteligencia
+
+3. **Preparacion vinculada** (`preparation: BOUND`): Cada manana prepara un conjuro especifico en cada slot. Cuando lanza ese conjuro, gasta ese slot especifico.
 
 ---
 
-## Pool Source
+## Configuracion Real
 
-**Tipo**: Libro de conjuros (GROWING_COLLECTION)
+```typescript
+const wizardCGEConfig: CGEConfig = {
+  id: 'wizard-spells',
+  classId: 'wizard',
+  entityType: 'spell',
+  levelPath: '@entity.levels.wizard',
 
-- Empieza con conjuros iniciales
-- Puede anadir conjuros copiandolos de scrolls/otros libros
-- Sin limite maximo de conjuros en el libro
-- NO genera recursos de "max conocidos por nivel"
+  // Libro sin limite
+  known: { type: 'UNLIMITED' },
 
-**Label**: "Libro de conjuros"
+  tracks: [
+    {
+      id: 'base',
+      label: 'spell_slots',
+      resource: {
+        type: 'SLOTS',
+        table: WIZARD_SLOTS_TABLE,
+        bonusVariable: '@bonusSpells',
+        refresh: 'daily',
+      },
+      // Vancian: cada slot tiene un conjuro especifico asignado
+      preparation: { type: 'BOUND' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'wizard.spell',
+    genericPrefix: 'spell',
+    casterLevelVar: 'castingClassLevel.wizard',
+  },
+
+  labels: {
+    known: 'spellbook',
+    prepared: 'prepared_spells',
+    slot: 'spell_slot',
+    action: 'cast',
+  },
+};
+```
 
 ---
 
-## Selection Stage
+## Tabla de Slots por Dia
 
-**Tipo**: DAILY_SLOTS
+La tabla define slots base (sin bonus por INT):
 
-- Cada manana, prepara conjuros especificos en slots
-- Cada slot contiene exactamente un conjuro
-- Metamagia se aplica al preparar (ocupa slot superior)
-
-**Label**: "Conjuros preparados"
-
----
-
-## Resources
-
-**Estrategia**: SLOTS_PER_ENTITY_LEVEL
-
-- Genera: `@spell.slots.level.0` a `@spell.slots.level.9`
-- Max value: tabla de progresion + bonus por INT
-- Refresh: daily
-
-**Tabla de slots por dia** (nivel de clase x nivel de conjuro):
 ```
 Nivel | 0  1  2  3  4  5  6  7  8  9
 ------+-----------------------------
@@ -58,40 +85,112 @@ Nivel | 0  1  2  3  4  5  6  7  8  9
   4   | 4  3  2  -  -  -  -  -  -  -
   5   | 4  3  2  1  -  -  -  -  -  -
   ...
+ 20   | 4  4  4  4  4  4  4  4  4  4
 ```
 
 ---
 
-## Preparation Tracks
+## Flujo de Uso
 
-### Track 1: Base
-- Filter: lista "wizard"
-- Resources: tabla principal
+### 1. Gestion del Libro (known)
+- El jugador selecciona conjuros para su spellbook
+- Como `known.type = 'UNLIMITED'`, no hay limite
+- La UI muestra todos los conjuros accesibles (filtrados por lista "wizard")
 
-### Track 2: Especialista (opcional)
-- Filter: lista "wizard" AND school = @character.specialistSchool
-- Resources: +1 slot por nivel accesible
-- Solo si el wizard es especialista
+### 2. Preparacion Diaria (preparation: BOUND)
+- Cada slot se vincula a UN conjuro especifico
+- Ejemplo nivel 3: 4 cantrips + 2 nivel-1 + 1 nivel-2
+- El jugador asigna: slot-1-0 = Magic Missile, slot-1-1 = Shield, etc.
+
+### 3. Lanzamiento
+- Al lanzar, se marca el slot especifico como usado
+- Si preparo Magic Missile 2 veces, puede lanzarlo 2 veces
+- Los slots usados se registran en `usedBoundSlots`
+
+### 4. Descanso
+- `refresh: 'daily'` restaura todos los slots
+- El jugador puede cambiar las preparaciones
 
 ---
 
-## Variables Expuestas
+## Estado Persistido (CGEState)
 
-- `@castingClassLevel.wizard` - Nivel de clase wizard (para PrCs)
-- `@effectiveCasterLevel` - Nivel de lanzador efectivo (para UI)
+```typescript
+{
+  // Conjuros en el spellbook
+  knownSelections: {
+    "0": ["detect-magic", "light", "read-magic", "prestidigitation"],
+    "1": ["magic-missile", "shield", "mage-armor", "sleep"],
+    "2": ["invisibility", "mirror-image", "scorching-ray"],
+    // ...
+  },
 
----
+  // Preparaciones vinculadas (slot -> conjuro)
+  boundPreparations: {
+    "base:0-0": "detect-magic",
+    "base:0-1": "light",
+    "base:1-0": "magic-missile",
+    "base:1-1": "magic-missile",  // Mismo conjuro 2 veces
+    "base:1-2": "shield",
+    "base:2-0": "invisibility",
+  },
 
-## Preparation Context
+  // Slots ya lanzados
+  usedBoundSlots: {
+    "base:1-0": true,  // Lanzo 1 Magic Missile
+  },
 
-```
-inputEntityType: 'spell'
-effectiveSlotLevel: {
-  baseSources: [{ formula: '@entity.level' }]
+  // Valor actual de slots (para UI rapida)
+  slotCurrentValues: {
+    "0": 4,  // Todos disponibles
+    "1": 2,  // 1 de 3 usado
+    "2": 1,  // Todos disponibles
+  },
 }
 ```
 
-Los efectos metamagicos modifican `effectiveSlotLevel`.
+---
+
+## Comparacion con Otras Clases
+
+| Clase | known | resource | preparation | Diferencia clave |
+|-------|-------|----------|-------------|------------------|
+| **Wizard** | UNLIMITED | SLOTS | BOUND | Libro + prepara en slot |
+| Cleric | (ninguno) | SLOTS | BOUND | Sin libro, toda la lista |
+| Sorcerer | LIMITED_PER_ENTITY_LEVEL | SLOTS | NONE | Conocidos limitados, cast espontaneo |
+| Wizard 5e | UNLIMITED | SLOTS | LIST (GLOBAL) | Prepara lista, cast flexible |
+| Arcanist | UNLIMITED | SLOTS | LIST (PER_LEVEL) | Como 5e pero por nivel |
+
+---
+
+## Variante: Mago Especialista
+
+El especialista tiene:
+- +1 slot por nivel para conjuros de su escuela
+- 1-2 escuelas prohibidas
+
+Esto se podria modelar con un segundo track:
+
+```typescript
+tracks: [
+  { id: 'base', ... },
+  {
+    id: 'specialist',
+    label: 'specialist_slot',
+    filter: {
+      field: 'school',
+      operator: '==',
+      value: { expression: '@character.wizard.specialistSchool' },
+    },
+    resource: {
+      type: 'SLOTS',
+      table: SPECIALIST_BONUS_TABLE, // +1 por nivel accesible
+      refresh: 'daily',
+    },
+    preparation: { type: 'BOUND' },
+  },
+]
+```
 
 ---
 

@@ -1,102 +1,157 @@
 # Spirit Shaman - Spellcasting
 
-## CGE Generico: SPONTANEOUS_DAILY_LIST
+## CGE Pattern: Full List Access + SLOTS + LIST PER_LEVEL
 
-## Estado: Resuelto
+## Estado: Parcialmente implementado
+
+La configuracion CGE esta definida, pero las operaciones de preparacion LIST estan pendientes de implementacion.
 
 ---
 
 ## Resumen Mecanico
 
 El Spirit Shaman es un hibrido unico:
-- Accede a toda la lista de druida
-- Cada dia, "prepara" una lista de conjuros accesibles
-- Lanza espontaneamente de esa lista diaria
+- Accede a toda la lista de spirit shaman (via `accessFilter`)
+- Sin `known` definido = acceso completo a la lista filtrada
+- Cada dia, "recupera" (retrieves) una lista de conjuros accesibles por nivel
+- Lanza espontaneamente de esa lista diaria (no consume la preparacion)
 
 ---
 
-## Pool Source
+## Configuracion CGE Real
 
-**Tipo**: FULL_LIST_ACCESS
+Ubicacion: `packages/core/testClasses/spiritShaman/spiritShamanClassFeatures.ts`
 
-- Accede a toda la lista de druida
-- Sin libro ni conocidos permanentes
+```typescript
+const spiritShamanCGEConfig: CGEConfig = {
+  id: 'spirit-shaman-spells',
+  classId: 'spirit-shaman',
+  entityType: 'spell',
+  levelPath: '@entity.levels.spiritShaman',
 
-**Label**: "Lista de druida"
+  // No known config: full access to spirit shaman spell list
+  // (similar a Cleric/Druid)
 
----
+  tracks: [
+    {
+      id: 'base',
+      label: 'spell_slots',
+      resource: {
+        type: 'SLOTS',
+        table: SPIRIT_SHAMAN_SLOTS_TABLE,
+        bonusVariable: '@bonusSpells',
+        refresh: 'daily',
+      },
+      preparation: {
+        type: 'LIST',
+        structure: 'PER_LEVEL',
+        maxPerLevel: SPIRIT_SHAMAN_SLOTS_TABLE, // Same as slots
+        consumeOnUse: false, // Cast any retrieved spell with any slot of that level
+      },
+    },
+  ],
 
-## Selection Stage
+  variables: {
+    classPrefix: 'spiritShaman.spell',
+    genericPrefix: 'spell',
+    casterLevelVar: 'castingClassLevel.spiritShaman',
+  },
 
-**Tipo**: DAILY_LIST
-
-- Cada manana, elige X conjuros por nivel que estaran "disponibles"
-- Esta es su lista del dia
-- Metamagia se aplica aqui (al elegir la lista)
-
-**Label**: "Conjuros preparados"
-
----
-
-## Resources
-
-**Estrategia**: SLOTS_PER_ENTITY_LEVEL
-
-Genera DOS tipos de recursos:
-
-1. **Conjuros preparados por nivel** (lista diaria):
-   - `@spells.prepared.level.{X}.max` - Cuantos puede elegir por nivel
-
-2. **Slots de lanzamiento** (separados de la lista):
-   - `@spell.slots.level.{X}` - Cuantas veces puede lanzar por nivel
-
-**Tabla de conjuros preparados**:
-```
-Nivel | 0  1  2  3  4  5  6  7  8  9
-------+-----------------------------
-  1   | 3  1  -  -  -  -  -  -  -  -
-  ...
-```
-
-**Tabla de slots por dia** (igual que druida).
-
----
-
-## Preparation Tracks
-
-### Track 1: Lista diaria
-- Filter: lista "druid"
-- Resources: conjuros preparados por nivel
-
----
-
-## Variables Expuestas
-
-- `@castingClassLevel.spiritShaman`
-- `@effectiveCasterLevel`
-
----
-
-## Preparation Context
-
-```
-inputEntityType: 'spell'
-effectiveSlotLevel: {
-  baseSources: [{ formula: '@entity.level' }]
+  labels: {
+    prepared: 'retrieved_spells',
+    slot: 'spell_slot',
+    action: 'cast',
+  },
 }
 ```
 
-La metamagia se aplica al PREPARAR la lista diaria, no al lanzar.
-Esto significa que un Fireball+Maximize ocupa un "slot de preparacion" de nivel 6.
+---
+
+## Distincion Critica: Dos Recursos Separados
+
+El Spirit Shaman tiene DOS limites independientes que usan la MISMA tabla:
+
+### 1. Limite de Preparacion (`preparation.maxPerLevel`)
+- Cuantos conjuros puede PREPARAR (recuperar) por nivel cada dia
+- Definido en `preparation.maxPerLevel: SPIRIT_SHAMAN_SLOTS_TABLE`
+- Ejemplo: nivel 1 de clase puede preparar 3 conjuros de nivel 1
+
+### 2. Slots de Lanzamiento (`resource.table`)
+- Cuantas veces puede LANZAR por nivel de conjuro
+- Definido en `resource.table: SPIRIT_SHAMAN_SLOTS_TABLE`
+- Ejemplo: nivel 1 de clase tiene 3 slots de nivel 1
+
+En el Spirit Shaman, ambas tablas son identicas, pero conceptualmente son recursos diferentes:
+- Preparacion: "Que conjuros tengo disponibles hoy"
+- Slots: "Cuantas veces puedo lanzar conjuros de este nivel"
 
 ---
 
-## Casting (caso especial)
+## Comparacion con Otras Clases
 
-Al lanzar:
-- Elige cualquier conjuro de su lista preparada del dia
-- Consume un slot del nivel del conjuro (ya con metamagia aplicada)
-- Sin penalizacion de tiempo (metamagia ya fue aplicada)
+| Aspecto | Spirit Shaman | Cleric | Sorcerer |
+|---------|---------------|--------|----------|
+| known | undefined (lista completa) | undefined (lista completa) | LIMITED_PER_ENTITY_LEVEL |
+| resource.type | SLOTS | SLOTS | SLOTS |
+| preparation.type | LIST | BOUND | NONE |
+| preparation.structure | PER_LEVEL | - | - |
+| consumeOnUse | false | - | - |
+
+Spirit Shaman es similar a Cleric en acceso, pero difiere en preparacion:
+- Cleric: BOUND (cada slot = 1 conjuro fijo)
+- Spirit Shaman: LIST PER_LEVEL con consumeOnUse=false (lista de opciones por nivel)
+
+---
+
+## Flujo de Uso
+
+### Al Inicio del Dia (Preparacion)
+1. El Spirit Shaman medita 1 hora
+2. Para cada nivel de conjuro, selecciona X conjuros de la lista (X = maxPerLevel)
+3. Estos conjuros se guardan en `CGEState.listPreparations`
+
+### Durante el Dia (Lanzamiento)
+1. El Spirit Shaman puede lanzar CUALQUIER conjuro de su lista preparada de ese nivel
+2. Al lanzar, consume 1 slot del nivel apropiado
+3. El conjuro NO se consume de la lista (consumeOnUse: false)
+4. Puede lanzar el mismo conjuro multiples veces si tiene slots
+
+### Ejemplo Concreto
+- Spirit Shaman nivel 1: 3 slots de nivel 1, puede preparar 3 conjuros de nivel 1
+- Prepara: Cure Light Wounds, Entangle, Faerie Fire
+- Durante el dia puede lanzar:
+  - Cure Light Wounds (usa 1 slot) -> quedan 2 slots
+  - Cure Light Wounds (usa 1 slot) -> queda 1 slot
+  - Entangle (usa 1 slot) -> 0 slots
+- Siempre podia elegir cualquiera de los 3 preparados
+
+---
+
+## Estado de Implementacion
+
+### Implementado
+- [x] CGEConfig definido en `spiritShamanClassFeatures.ts`
+- [x] Tabla de slots definida
+- [x] Clase Spirit Shaman con spellcasting feature
+- [x] Calculo de slots (resourceType: SLOTS funciona)
+
+### Pendiente (LIST operations)
+- [ ] UI para seleccionar conjuros a preparar (listPreparations)
+- [ ] Logica para guardar/cargar listPreparations en CGEState
+- [ ] Validacion de maxPerLevel al preparar
+- [ ] UI que muestre lista preparada vs slots disponibles
+- [ ] Logica de lanzamiento que verifique el conjuro esta en listPreparations
+
+---
+
+## Archivos Relevantes
+
+| Archivo | Contenido |
+|---------|-----------|
+| `packages/core/testClasses/spiritShaman/spiritShamanClass.ts` | Entidad de clase |
+| `packages/core/testClasses/spiritShaman/spiritShamanClassFeatures.ts` | CGEConfig + class features |
+| `packages/core/core/domain/cge/types.ts` | Tipos CGE (PreparationConfigList) |
+| `packages/core/core/domain/cge/examples.ts` | Ejemplo alternativo de spiritShamanCGE |
 
 ---
 

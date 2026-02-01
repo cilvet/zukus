@@ -1,8 +1,8 @@
 # Shadowcaster - Shadow Magic
 
-## CGE Generico: Pendiente de disenar
+## Estado: FUERA DEL MODELO
 
-## Estado: NO RESUELTO
+El Shadowcaster no puede modelarse con el sistema CGE actual.
 
 ---
 
@@ -15,62 +15,60 @@ El Shadowcaster usa "mysteries" que evolucionan con el nivel:
 
 ---
 
-## Problema Principal
+## Por que no encaja en CGE
 
-El mismo mystery cambia de sistema de recursos segun el nivel del personaje:
-- Nivel 1-X: consume slot de su nivel
-- Nivel X-Y: 2 usos por dia (recurso dedicado)
-- Nivel Y+: at-will (sin recurso)
+El problema fundamental es que **el tipo de recurso evoluciona por entidad individual**.
 
-Esto no encaja en ningun CGE generico actual.
+En CGE, un track define un tipo de recurso (slots, usos diarios, puntos, etc.) y todas las entidades de ese track consumen ese recurso. El Shadowcaster rompe esta asuncion:
 
----
-
-## Pool Source
-
-**Tipo**: CURATED_SELECTION
-
-- Conoce mysteries limitados
-- Tres categorias: Apprentice, Initiate, Master
-- Cada categoria tiene "paths" (grupos tematicos)
-
----
-
-## Selection Stage
-
-Dependiente del tipo de mystery en ese momento:
-- Como spell: NONE (espontaneo de conocidos)
-- Como SLA: NONE
-- Como Supernatural: NONE
-
----
-
-## Resources
-
-**Problema**: El recurso cambia por mystery individual, no globalmente.
-
-Un shadowcaster de nivel 10 podria tener:
+Un shadowcaster de nivel 10 podria tener simultaneamente:
 - Mystery A: at-will (ya evoluciono completamente)
 - Mystery B: 2/day (en fase SLA)
 - Mystery C: consume slots (recien aprendido)
 
----
-
-## Posibles Soluciones
-
-### Opcion A: Multiples CGEs por "fase"
-Cada mystery tiene su propia "fase" actual, y el sistema determina que CGE aplica.
-
-### Opcion B: Recurso dinamico por entidad
-El CGE define que el recurso de cada entidad depende de una formula que considera el nivel.
-
-### Opcion C: Sistema especial fuera de CGE
-Shadowcaster es suficientemente unico para tener su propio sistema.
+Cada mystery tiene su **propia progresion de recursos**, independiente de los demas. El CGE actual no tiene forma de expresar "esta entidad usa slots AHORA, pero usara usos diarios en 3 niveles".
 
 ---
 
-## Texto Original (Tome of Magic)
+## Informacion del Juego
+
+### Fuente
+Tome of Magic (D&D 3.5)
+
+### Categorias de Mysteries
+- **Apprentice**: Mysteries de nivel bajo
+- **Initiate**: Mysteries de nivel medio
+- **Master**: Mysteries de nivel alto
+
+Cada categoria tiene "paths" (grupos tematicos de mysteries relacionados).
+
+### Progresion de Evolucion
+Cada mystery pasa por tres fases segun cuantas veces se ha usado o el nivel del caster:
+1. **Spell**: Usa slots de misterio de su nivel
+2. **Spell-Like Ability**: 2 usos por dia (recurso dedicado)
+3. **Supernatural Ability**: A voluntad (sin limite)
+
+### Texto Original
 
 > **Mysteries**: A shadowcaster's primary abilities take the form of mysteries, which function similarly to spells. Unlike spells, mysteries do not require verbal, somatic, or material components unless noted in the mystery's description.
 >
 > **Evolving Mysteries**: As a shadowcaster gains levels, his mysteries become more powerful. When a mystery reaches a certain threshold, it transforms from a spell into a spell-like ability, and finally into a supernatural ability.
+
+---
+
+## Posibles Soluciones Futuras
+
+### Recurso dinamico por entidad
+Extender CGE para que el tipo de recurso de cada entidad pueda determinarse por una formula o condicion. Cada mystery tendria metadata indicando en que "fase" esta basado en el nivel del personaje.
+
+### Sistema de fases en el track
+Un track podria definir multiples "fases de recursos" y cada entidad indicaria en que fase esta. Las fases serian: slot -> daily_uses -> at_will.
+
+### Sistema especial fuera de CGE
+Dado que el Shadowcaster es unico en su progresion de recursos, podria justificarse un sistema dedicado que no intente encajar en la abstraccion generica.
+
+---
+
+## Complejidad Estimada
+
+Alta. Requiere cambios fundamentales en como CGE asocia recursos a entidades, o un sistema paralelo especializado.

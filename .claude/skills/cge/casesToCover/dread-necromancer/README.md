@@ -1,8 +1,12 @@
 # Dread Necromancer - Spellcasting
 
-## CGE Generico: SPONTANEOUS_KNOWN_LIMITED (con conocidos automaticos)
+## Patron CGE: Sorcerer-like (espontaneo con conocidos limitados)
 
-## Estado: Resuelto (con nota sobre conocidos automaticos)
+## Estado: Soportado por el sistema (sin implementacion especifica)
+
+El sistema CGE actual soporta completamente este patron. No existe una implementacion
+`dreadNecromancerCGE` en `examples.ts`, pero seria identico al `sorcererCGE` con
+su propia tabla de conocidos y slots.
 
 ---
 
@@ -15,76 +19,127 @@ El Dread Necromancer es un lanzador espontaneo con lista fija que crece:
 
 ---
 
-## Pool Source
+## Configuracion CGE
 
-**Tipo**: CURATED_SELECTION (con adiciones automaticas)
+### known
 
-- Gana conjuros especificos automaticamente por nivel (lista fija)
-- Puede elegir conjuros adicionales con Advanced Learning
-- Sin libro
+**Tipo**: `LIMITED_PER_ENTITY_LEVEL`
 
-**Conocidos automaticos por nivel**:
+Similar al Sorcerer: tabla de conocidos por nivel de clase y nivel de conjuro.
+La diferencia es que los conocidos vienen automaticamente (no los elige el jugador).
+
+```typescript
+known: {
+  type: 'LIMITED_PER_ENTITY_LEVEL',
+  table: DREAD_NECROMANCER_KNOWN_TABLE, // Conocidos por nivel
+}
 ```
-Nivel 1: Bane, Cause Fear, Chill Touch, Detect Magic, Detect Undead, Doom, Inflict Minor Wounds, Ray of Enfeeblement, Undetectable Alignment
-Nivel 2: +Blindness/Deafness, Command Undead, Darkness, Death Knell, False Life, Ghoul Touch, Inflict Light Wounds, Scare, Spectral Hand, Summon Swarm
-...
-```
 
-**Label**: "Conjuros conocidos"
-
----
-
-## Selection Stage
-
-**Tipo**: NONE (espontaneo)
-
-- No prepara conjuros
-- Lanza cualquier conocido con slot disponible
-
----
-
-## Resources
-
-**Estrategia**: SLOTS_PER_ENTITY_LEVEL
-
-- Slots por nivel basados en tabla de progresion
-- Bonus por CHA
-
----
-
-## Conocidos Automaticos (caso especial)
-
-La mayoria de los conocidos vienen automaticamente por nivel.
+**Nota sobre conocidos automaticos**:
+La mayoria de los conocidos vienen automaticamente por nivel (lista fija del manual).
 Esto se podria modelar como:
 - Una "lista de conocidos base" que se anade al personaje segun nivel
-- El concepto de "Listas de Entidades" mencionado en el README principal
+- El campo `knownSelections` del CGEState podria pre-popularse automaticamente
 
-**Advanced Learning** permite elegir conjuros adicionales de la lista de wizard/cleric que tengan descriptor necromancy.
+**Advanced Learning** permite elegir conjuros adicionales de la lista de wizard/cleric
+que tengan descriptor necromancy.
 
 ---
 
-## Charnel Touch (caso especial)
+### resource
+
+**Tipo**: `SLOTS`
+
+Slots por nivel basados en tabla de progresion, con bonus por CHA.
+
+```typescript
+resource: {
+  type: 'SLOTS',
+  table: DREAD_NECROMANCER_SLOTS_TABLE,
+  bonusVariable: '@bonusSpells',
+  refresh: 'daily',
+}
+```
+
+---
+
+### preparation
+
+**Tipo**: `NONE` (espontaneo)
+
+No prepara conjuros. Lanza cualquier conocido con slot disponible.
+
+```typescript
+preparation: { type: 'NONE' }
+```
+
+---
+
+## Configuracion CGE Completa (ejemplo)
+
+```typescript
+const dreadNecromancerCGE: CGEConfig = {
+  id: 'dread-necromancer-spells',
+  classId: 'dread-necromancer',
+  entityType: 'spell',
+  levelPath: '@entity.levels.dreadNecromancer',
+
+  accessFilter: {
+    field: 'lists',
+    operator: 'contains',
+    value: 'dread-necromancer',
+  },
+
+  known: {
+    type: 'LIMITED_PER_ENTITY_LEVEL',
+    table: DREAD_NECROMANCER_KNOWN_TABLE,
+  },
+
+  tracks: [
+    {
+      id: 'base',
+      resource: {
+        type: 'SLOTS',
+        table: DREAD_NECROMANCER_SLOTS_TABLE,
+        bonusVariable: '@bonusSpells',
+        refresh: 'daily',
+      },
+      preparation: { type: 'NONE' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'dreadNecromancer.spell',
+    genericPrefix: 'spell',
+    casterLevelVar: 'castingClassLevel.dreadNecromancer',
+  },
+
+  labels: {
+    known: 'known_spells',
+    action: 'cast',
+  },
+}
+```
+
+---
+
+## Casos Especiales (fuera de CGE)
+
+### Charnel Touch
 
 Habilidad at-will de dano/curacion a undead. No es un conjuro, es class feature.
 
----
-
-## Undead Minions (caso especial)
+### Undead Minions
 
 A nivel 8+, puede controlar undead. Esto es un sistema separado del CGE.
-
----
-
-## Preparation Tracks
-
-Track unico (conocidos).
 
 ---
 
 ## Variables Expuestas
 
 - `@castingClassLevel.dreadNecromancer`
-- `@effectiveCasterLevel`
+- `@dreadNecromancer.spell.slot.{level}.max`
+- `@dreadNecromancer.spell.slot.{level}.current`
 
 ---
 

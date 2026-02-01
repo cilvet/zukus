@@ -1,95 +1,101 @@
 # Binder - Pact Magic
 
-## CGE Generico: Pendiente de disenar (posiblemente sistema propio)
+## Estado: FUERA DEL MODELO CGE
 
-## Estado: NO RESUELTO
-
----
-
-## Resumen Mecanico
-
-El Binder no lanza conjuros. En su lugar:
-- Vincula "vestiges" (entidades extraplanares)
-- Cada vestige da poderes especificos
-- La vinculacion es diaria
+El Binder no encaja en el sistema CGE actual. Requiere un sistema propio de "Binding" o "Vinculos Activos".
 
 ---
 
-## Diferencia Fundamental
+## Por que no encaja en CGE
 
-No hay "entidades conocidas" ni "preparadas" en el sentido tradicional:
-- Todos los vestiges estan disponibles (si cumples nivel)
-- Cada dia, NEGOCIAS con un vestige para vincularte
-- La negociacion puede fallar (pact check)
-- Si fallas, el vestige te influencia (roleplay)
+El CGE modela clases que:
+1. **Conocen** entidades (spells, maneuvers, invocations)
+2. **Preparan** un subconjunto para el dia
+3. **Gastan recursos** al usar (slots, uses)
 
----
-
-## Pool Source
-
-**Tipo**: FULL_LIST_ACCESS (con restriccion de nivel)
-
-- Accede a todos los vestiges
-- Cada vestige tiene nivel minimo requerido
-- Binding check determina calidad del vinculo
+El Binder funciona diferente:
+1. **Acceso total**: Todos los vestiges estan disponibles (solo requiere nivel)
+2. **Binding, no preparacion**: Negocias un pacto, no "preparas" una entidad
+3. **Check con consecuencias**: La vinculacion puede fallar, afectando al personaje
+4. **Poderes otorgados**: El vestige da habilidades, no son "entidades usables"
 
 ---
 
-## Selection Stage
+## Mecanica del Binder
 
-**Tipo**: DAILY_BINDING (nuevo?)
+### Soul Binding
 
-- Cada dia, intentas vincular vestige(s)
-- El numero de vestiges simultaneos depende del nivel
-- Cada vinculo requiere ritual + check
+Cada dia, el Binder puede intentar vincular uno o mas vestiges:
 
----
+1. **Eleccion**: Elige un vestige de nivel apropiado
+2. **Ritual**: 1 minuto de ceremonial
+3. **Binding Check**: 1d20 + nivel de binder + CHA vs DC del vestige
+4. **Resultado**:
+   - Exito = buen pacto, control total
+   - Fallo = influencia del vestige (restricciones de roleplay)
+5. **Duracion**: 24 horas
 
-## Resources
+### Capacidad de Vinculacion
 
-**Estrategia**: No aplica directamente
+| Nivel Binder | Vestiges Simultaneos |
+|--------------|---------------------|
+| 1-4          | 1                   |
+| 5-9          | 2                   |
+| 10-14        | 3                   |
+| 15-19        | 4                   |
+| 20           | 5                   |
 
-- No hay "usos" de poderes de vestige (son at-will o 1/round)
-- El "recurso" es cuantos vestiges puedes tener vinculados
-- Algunos poderes tienen cooldown (5 rounds)
+### Poderes de Vestige
 
----
-
-## Problema Principal
-
-El flujo es completamente diferente:
-1. Eliges vestige a vincular
-2. Haces ritual de 1 minuto
-3. Haces binding check vs DC del vestige
-4. Exito = buen pacto, fallo = influencia
-5. Obtienes poderes del vestige por 24 horas
-
-Esto no encaja en "preparar entidades para usar despues".
-
----
-
-## Poderes de Vestige
-
-Cada vestige otorga:
-- Habilidades especiales (algunas at-will, algunas con cooldown)
-- Influencia de personalidad (si fallaste el check)
-- Signo fisico visible
+Cada vestige vinculado otorga:
+- **Habilidades especiales**: Algunas at-will, otras con cooldown (tipicamente 5 rounds)
+- **Signo fisico**: Marca visible del pacto
+- **Influencia**: Si fallaste el binding check, restricciones de comportamiento
 
 ---
 
-## Posible Modelado
+## Diferencias clave con CGE
 
-Quizas Binder no es un CGE sino un sistema de "estados activos" o "vinculos".
-
-O un CGE muy especial donde:
-- "Known" = todos los vestiges (pool completo)
-- "Prepared" = vestiges vinculados hoy
-- "Resources" = los poderes de los vestiges (at-will/cooldown)
+| Aspecto | CGE (Spells/Maneuvers) | Binder |
+|---------|------------------------|--------|
+| Pool | Lista conocida o preparable | Todos los vestiges disponibles |
+| Seleccion | Preparar entidades | Negociar vinculo |
+| Fallo | No aplica | Influencia del vestige |
+| Uso | Gastar recurso | At-will o cooldown |
+| Resultado | Efecto de la entidad | Obtener poderes |
 
 ---
 
-## Texto Original (Tome of Magic)
+## Posibles soluciones futuras
 
-> **Soul Binding**: A binder's power comes from binding vestiges—the remnants of dead or banished entities that exist outside the normal planes. Each day, a binder can attempt to contact and bind one or more vestiges.
+### Opcion A: Sistema de Vinculos separado
+
+Crear un sistema "BindingSystem" independiente:
+- Gestiona vestiges vinculados actualmente
+- Maneja binding checks y sus consecuencias
+- Trackea influencias activas
+- Registra poderes otorgados como Effects temporales
+
+### Opcion B: CGE adaptado
+
+Forzar el modelo CGE con interpretacion liberal:
+- `knownSource`: "FULL_LIST" (todos los vestiges)
+- `preparationStyle`: "BINDING" (nuevo tipo)
+- `resources`: No slots, sino "capacidad de vinculacion"
+
+Esta opcion es menos elegante porque binding no es realmente "preparacion".
+
+### Opcion C: Vestiges como Buffs/Addons
+
+Tratar cada vestige vinculado como un Addon temporal que:
+- Otorga poderes via Effects
+- Tiene metadata de "influencia" si fallo el check
+- Se remueve automaticamente a las 24 horas
+
+---
+
+## Referencia: Tome of Magic
+
+> **Soul Binding**: A binder's power comes from binding vestiges - the remnants of dead or banished entities that exist outside the normal planes. Each day, a binder can attempt to contact and bind one or more vestiges.
 >
 > **Binding Check**: When you attempt to bind a vestige, you must make a binding check (1d20 + your effective binder level + your Charisma modifier) against the vestige's binding DC.

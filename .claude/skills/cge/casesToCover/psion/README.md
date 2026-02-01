@@ -1,50 +1,110 @@
 # Psion - Manifesting
 
-## CGE Generico: POWER_POOL
+## Estado: Parcialmente implementado
 
-## Estado: Resuelto
+El Psion tiene la configuracion CGE definida, pero el recurso POOL esta pendiente de implementacion real.
 
 ---
 
 ## Resumen Mecanico
 
 El Psion usa un sistema de puntos en lugar de slots:
-- Conoce poderes limitados (similar a sorcerer)
+- Conoce poderes limitados (total, no por nivel de poder)
 - Gasta power points de un pool unico
-- Puede "augmentar" poderes gastando mas puntos
+- Puede "augmentar" poderes gastando mas puntos (futuro)
 
 ---
 
-## Pool Source
+## Implementacion Actual
 
-**Tipo**: CURATED_SELECTION
+### Archivos
 
-- Conoce poderes limitados por tabla
-- Elige al subir de nivel
-- Puede elegir de su disciplina o lista general
+- **Clase**: `packages/core/testClasses/psion/psionClass.ts`
+- **Features**: `packages/core/testClasses/psion/psionClassFeatures.ts`
+- **Tests**: `packages/core/core/domain/character/calculation/__tests__/cge/psion.spec.ts`
+- **Fixtures de test**: `packages/core/core/domain/character/calculation/__tests__/cge/fixtures.ts`
 
-**Label**: "Poderes conocidos"
+### Configuracion CGE Real
+
+```typescript
+const psionCGEConfig: CGEConfig = {
+  id: 'psion-powers',
+  classId: 'psion',
+  entityType: 'power',
+  levelPath: '@entity.level',
+
+  known: {
+    type: 'LIMITED_TOTAL',
+    table: PSION_KNOWN_TABLE, // [3], [5], [7]... total por nivel de clase
+  },
+
+  tracks: [
+    {
+      id: 'base',
+      label: 'power_points',
+      resource: {
+        type: 'POOL',
+        maxFormula: { expression: '@psion.powerPoints.max' },
+        costPath: '@entity.level', // Coste = nivel del poder
+        refresh: 'daily',
+      },
+      preparation: { type: 'NONE' },
+    },
+  ],
+
+  variables: {
+    classPrefix: 'psion.power',
+    genericPrefix: 'power',
+    casterLevelVar: 'manifesterLevel.psion',
+  },
+
+  labels: {
+    known: 'known_powers',
+    pool: 'power_points',
+    action: 'manifest',
+  },
+};
+```
 
 ---
 
-## Selection Stage
+## Tipos CGE
 
-**Tipo**: NONE (espontaneo)
+### Known: LIMITED_TOTAL
 
-- No prepara poderes
-- Manifiesta cualquier conocido gastando puntos
+**Tipo real**: `LIMITED_TOTAL`
 
----
+El Psion conoce un numero total de poderes, sin dividir por nivel de poder:
+- Nivel 1: 3 poderes totales
+- Nivel 2: 5 poderes totales
+- Nivel 3: 7 poderes totales
+- etc.
 
-## Resources
+La tabla usa un solo valor por nivel de clase: `{ 1: [3], 2: [5], 3: [7], ... }`
 
-**Estrategia**: UNIFIED_POOL
+**Nota**: Los fixtures de test usan incorrectamente `LIMITED_PER_ENTITY_LEVEL`. Esto deberia corregirse.
 
-- Genera: `@psionic.powerPoints.max`, `@psionic.powerPoints.current`
-- Max value: tabla de progresion + bonus por INT
-- Refresh: daily
+### Resource: POOL (PENDIENTE)
 
-**Tabla de power points**:
+**Tipo real**: `POOL`
+
+**Estado de implementacion**: PLACEHOLDER
+
+El calculo en `calculateCGE.ts:287-289` retorna un valor fijo:
+
+```typescript
+if (track.resource.type === 'POOL') {
+  // TODO: Implementar pool
+  calculatedTrack.pool = { max: 0, current: 0 };
+}
+```
+
+**Lo que deberia hacer**:
+- Evaluar `maxFormula` para obtener max (tabla de PP + bonus INT)
+- Leer `poolCurrentValue` del estado CGE
+- Si no hay estado, current = max
+
+**Tabla de power points base (SRD)**:
 ```
 Nivel | PP Base
 ------+--------
@@ -53,25 +113,29 @@ Nivel | PP Base
   3   | 11
   4   | 17
   5   | 25
-  ...
+  6   | 35
+  7   | 46
+  8   | 58
+  9   | 72
+ 10   | 88
 ```
 
-Bonus por INT alta anade puntos adicionales.
+Bonus adicional: `INT modifier * nivel de clase`
 
----
+### Preparation: NONE
 
-## Preparation Tracks
+**Tipo real**: `NONE`
 
-No aplica - no hay preparacion.
+El Psion no prepara poderes. Puede manifestar cualquier poder conocido gastando puntos.
 
 ---
 
 ## Variables Expuestas
 
-- `@manifesterLevel.psion` (equivalente a casterLevel)
-- `@psionic.powerPoints.max`
-- `@psionic.powerPoints.current`
-- `@powers.known.max` (total, no por nivel)
+Segun la config:
+- `@psion.power.slot.{n}.max` (via classPrefix, aunque no aplica a POOL)
+- `@manifesterLevel.psion` (casterLevelVar)
+- `@psion.powerPoints.max` (referenciada en maxFormula)
 
 ---
 
@@ -80,17 +144,28 @@ No aplica - no hay preparacion.
 Los poderes psionicos pueden "augmentarse" gastando mas puntos:
 - Cada poder define opciones de augment
 - Limite: no puedes gastar mas puntos que tu manifester level en un solo poder
-- Esto se modelara en el sistema de acciones, no en el CGE
+- Esto se modelara en el sistema de acciones/uso, no en el CGE
 
 ---
 
-## Preparation Context
+## Discrepancias Encontradas
 
-No tiene contexto de preparacion.
+1. **Test fixtures vs clase real**: Los fixtures usan `LIMITED_PER_ENTITY_LEVEL` pero la clase real usa `LIMITED_TOTAL`. La clase real es correcta segun las reglas del juego.
 
-El "contexto de manifestacion" (futuro) manejara:
-- Cuantos puntos gastar
-- Que augments aplicar
+2. **POOL resource**: Solo existe como placeholder. Los tests pasan porque verifican que el pool existe (con max: 0), no que tenga valores correctos.
+
+---
+
+## Trabajo Pendiente
+
+1. **Implementar POOL resource** en `calculateCGE.ts`:
+   - Evaluar maxFormula
+   - Leer/escribir poolCurrentValue del CGEState
+   - Implementar costPath para calcular coste de manifestar
+
+2. **Corregir fixtures de test**: Cambiar `LIMITED_PER_ENTITY_LEVEL` a `LIMITED_TOTAL`
+
+3. **Variable @psion.powerPoints.max**: Debe calcularse desde la tabla + bonus INT
 
 ---
 

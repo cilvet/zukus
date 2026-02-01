@@ -1,98 +1,246 @@
 # Cleric - Spellcasting
 
-## CGE Generico: PREPARED_VANCIAN (con tracks multiples)
+## CGE Pattern: Prepared Vancian with Multiple Tracks
 
-## Estado: Resuelto
+## Implementation Status: COMPLETE
 
----
-
-## Resumen Mecanico
-
-El Cleric es un lanzador divino preparado con acceso a lista completa:
-- Accede a toda la lista de cleric (no tiene libro)
-- Prepara conjuros en slots cada dia
-- Tiene slots adicionales de dominio (solo para conjuros de sus dominios)
+The Cleric is fully implemented with tests in:
+- `packages/core/core/domain/cge/examples.ts` (clericCGE)
+- `packages/core/srd/cleric/clericClassFeatures.ts` (clericCGEConfig)
+- `packages/core/core/domain/character/calculation/__tests__/cge/cleric.spec.ts`
 
 ---
 
-## Pool Source
+## CGE Configuration
 
-**Tipo**: FULL_LIST_ACCESS
+```typescript
+const clericCGE: CGEConfig = {
+  id: 'cleric-spells',
+  classId: 'cleric',
+  entityType: 'spell',
+  levelPath: '@entity.levels.cleric',
 
-- Accede a toda la lista de cleric
-- Restricciones de alineamiento (no puede lanzar conjuros con descriptor opuesto)
-- Spontaneous casting de cure/inflict
+  accessFilter: {
+    field: 'lists',
+    operator: 'contains',
+    value: 'cleric',
+  },
 
-**Label**: "Lista de clerigo"
+  // NO known config = full list access (no spellbook)
 
----
+  tracks: [
+    {
+      id: 'base',
+      label: 'base_slots',
+      resource: {
+        type: 'SLOTS',
+        table: CLERIC_BASE_SLOTS_TABLE,
+        bonusVariable: '@bonusSpells',
+        refresh: 'daily',
+      },
+      preparation: { type: 'BOUND' },
+    },
+    {
+      id: 'domain',
+      label: 'domain_slots',
+      filter: {
+        field: 'domains',
+        operator: 'intersects',
+        value: { expression: '@character.clericDomains' },
+      },
+      resource: {
+        type: 'SLOTS',
+        table: CLERIC_DOMAIN_SLOTS_TABLE,
+        refresh: 'daily',
+      },
+      preparation: { type: 'BOUND' },
+    },
+  ],
 
-## Selection Stage
+  variables: {
+    classPrefix: 'cleric.spell',
+    genericPrefix: 'spell',
+    casterLevelVar: 'castingClassLevel.cleric',
+  },
 
-**Tipo**: DAILY_SLOTS
-
-- Prepara conjuros especificos en slots cada manana
-- Requiere 1 hora de oracion en momento especifico del dia
-
----
-
-## Resources
-
-**Estrategia**: SLOTS_PER_ENTITY_LEVEL (x2 tracks)
-
-Track base:
-- Genera: `@spell.slots.level.0` a `@spell.slots.level.9`
-- Max value: tabla de progresion + bonus por WIS
-
-Track dominios:
-- Genera: `@spell.slots.domain.level.1` a `@spell.slots.domain.level.9`
-- Max value: 1 por nivel (fijo)
-
----
-
-## Preparation Tracks
-
-### Track 1: Base
-- Filter: lista "cleric", excluyendo descriptores de alineamiento prohibido
-- Resources: tabla principal de slots
-
-### Track 2: Dominios
-- Filter: conjuros de los dominios elegidos (`domainId IN @character.clericDomains`)
-- Resources: 1 slot por nivel (1-9)
-- Label: "Conjuro de dominio"
-
----
-
-## Variables Expuestas
-
-- `@castingClassLevel.cleric`
-- `@effectiveCasterLevel`
-- `@character.clericDomains` - Array de domain IDs elegidos
-
----
-
-## Preparation Context
-
-```
-inputEntityType: 'spell'
-effectiveSlotLevel: {
-  baseSources: [{ formula: '@entity.level' }]
+  labels: {
+    known: 'divine_spells',
+    prepared: 'prepared_spells',
+    slot: 'spell_slot',
+    action: 'cast',
+  },
 }
 ```
 
 ---
 
-## Spontaneous Casting (caso especial)
+## Mechanical Summary
 
-El Cleric puede convertir cualquier slot preparado (no de dominio) en:
-- Cure wounds (si es bueno/neutral)
-- Inflict wounds (si es malvado)
+The Cleric is a divine prepared caster with full spell list access:
 
-Esto se modelara como una accion especial, no como parte del CGE directamente.
+- **Access**: Full access to the cleric spell list (no spellbook needed)
+- **Preparation**: BOUND - prepares specific spells in specific slots each day
+- **Two independent tracks**: Base slots + Domain slots
+- **Wisdom-based**: Bonus slots from high Wisdom
 
 ---
 
-## Texto Original (SRD)
+## Configuration Breakdown
+
+### known: undefined (Full List Access)
+
+The Cleric does NOT have a `known` configuration, meaning:
+- Accesses the entire filtered spell list directly
+- No spellbook to manage
+- Can prepare any cleric spell of appropriate level each day
+
+This differs from Wizard (known: UNLIMITED = has spellbook) and Sorcerer (known: LIMITED_PER_ENTITY_LEVEL = limited spells known).
+
+### resource: SLOTS
+
+Both tracks use SLOTS resource type with `LevelTable` progression:
+
+**Base Track Table** (indices 0-9 = spell levels 0-9):
+```typescript
+{
+  1: [3, 1, 0, 0, 0, 0, 0, 0, 0, 0],  // 3 orisons, 1 level-1
+  3: [4, 2, 1, 0, 0, 0, 0, 0, 0, 0],  // Gains level 2
+  5: [5, 3, 2, 1, 0, 0, 0, 0, 0, 0],  // Gains level 3
+  // ... continues to level 20
+}
+```
+
+**Domain Track Table** (1 slot per accessible spell level):
+```typescript
+{
+  1: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  // 1 domain slot level 1
+  3: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0],  // +1 domain slot level 2
+  5: [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],  // +1 domain slot level 3
+  // ... continues to level 20
+}
+```
+
+### preparation: BOUND
+
+Both tracks use BOUND preparation:
+- Spells are prepared in specific slots
+- Each slot holds one spell
+- Slots are identified by `{trackId}:{level}-{index}` (e.g., "base:1-0", "domain:2-0")
+- Same spell can be prepared in multiple slots
+
+---
+
+## Two Tracks System
+
+The Cleric is unique in having two separate spell tracks:
+
+### Track 1: Base (`id: 'base'`)
+- Standard cleric spell slots
+- Can prepare any spell from the cleric list
+- Receives bonus slots from Wisdom via `bonusVariable: '@bonusSpells'`
+
+### Track 2: Domain (`id: 'domain'`)
+- 1 extra slot per spell level (levels 1-9, no cantrips)
+- Filtered to only domain spells: `{ field: 'domains', operator: 'intersects', value: '@character.clericDomains' }`
+- No Wisdom bonus (fixed 1 slot per level)
+
+---
+
+## State Storage (CGEState)
+
+Cleric preparations are stored in `character.cgeStates['cleric-spells']`:
+
+```typescript
+{
+  boundPreparations: {
+    "base:0-0": "light",
+    "base:0-1": "guidance",
+    "base:1-0": "bless",
+    "domain:1-0": "magic-weapon",  // Domain spell
+    "domain:2-0": "spiritual-weapon",
+  },
+  usedBoundSlots: {
+    "base:1-0": true,  // Bless was cast
+  }
+}
+```
+
+---
+
+## Calculated Output (CalculatedCGE)
+
+The character sheet includes calculated CGE with resolved values:
+
+```typescript
+{
+  id: 'cleric-spells',
+  classId: 'cleric',
+  entityType: 'spell',
+  classLevel: 3,
+
+  knownLimits: undefined,  // No known config
+
+  tracks: [
+    {
+      id: 'base',
+      label: 'base_slots',
+      resourceType: 'SLOTS',
+      preparationType: 'BOUND',
+      slots: [
+        { level: 0, max: 4, current: 4, bonus: 0, boundSlots: [
+          { slotId: 'base:0-0', level: 0, index: 0, preparedEntityId: 'light' },
+          { slotId: 'base:0-1', level: 0, index: 1, preparedEntityId: 'guidance' },
+          // ...
+        ]},
+        { level: 1, max: 3, current: 2, bonus: 1, boundSlots: [
+          { slotId: 'base:1-0', level: 1, index: 0, preparedEntityId: 'bless', used: true },
+          { slotId: 'base:1-1', level: 1, index: 1, preparedEntityId: 'cure-light-wounds' },
+        ]},
+        { level: 2, max: 2, current: 2, bonus: 1, boundSlots: [...] },
+      ],
+    },
+    {
+      id: 'domain',
+      label: 'domain_slots',
+      resourceType: 'SLOTS',
+      preparationType: 'BOUND',
+      slots: [
+        { level: 1, max: 1, current: 1, bonus: 0, boundSlots: [
+          { slotId: 'domain:1-0', level: 1, index: 0, preparedEntityId: 'magic-weapon' },
+        ]},
+        { level: 2, max: 1, current: 1, bonus: 0, boundSlots: [...] },
+      ],
+    },
+  ],
+}
+```
+
+---
+
+## Variables Exposed
+
+- `@cleric.spell.slot.{level}.max` - Max slots per level (base track)
+- `@cleric.spell.slot.{level}.current` - Current available slots
+- `@spell.slot.{level}.max` - Generic variable (shared across casters)
+- `@castingClassLevel.cleric` - Effective caster level
+
+---
+
+## Special Cases (Not Yet Implemented)
+
+### Spontaneous Casting
+The Cleric can convert any prepared slot (not domain) into:
+- Cure Wounds (if good/neutral alignment)
+- Inflict Wounds (if evil alignment)
+
+This would be modeled as a special action, not part of CGE directly.
+
+### Alignment Restrictions
+Clerics cannot cast spells with alignment descriptors opposite to their deity's alignment. This would be handled via accessFilter enhancement.
+
+---
+
+## SRD Reference
 
 > **Spells**: A cleric casts divine spells, which are drawn from the cleric spell list. However, his alignment may restrict him from casting certain spells opposed to his moral or ethical beliefs.
 >

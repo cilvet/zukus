@@ -1,100 +1,235 @@
 # Sorcerer - Spellcasting
 
-## CGE Generico: SPONTANEOUS_KNOWN_LIMITED
+## Estado: Implementado
 
-## Estado: Resuelto
+El Sorcerer es el arquetipo del lanzador espontaneo arcano en D&D 3.5.
 
 ---
 
 ## Resumen Mecanico
 
-El Sorcerer es el lanzador espontaneo clasico:
-- Conoce un numero limitado de conjuros (fijo por nivel)
-- Puede lanzar cualquier conocido usando un slot disponible
+- Conoce un numero limitado de conjuros (fijo por nivel de clase)
+- Puede lanzar cualquier conocido usando un slot disponible del nivel correspondiente
 - No prepara, elige al momento de lanzar
+- Charisma como atributo de lanzamiento
 
 ---
 
-## Pool Source
+## Configuracion CGE
 
-**Tipo**: CURATED_SELECTION
+### Known
 
-- Conoce conjuros limitados por tabla de progresion
-- Elige al subir de nivel
-- Genera recursos de "max conocidos por nivel"
+**Tipo**: `LIMITED_PER_ENTITY_LEVEL`
 
-**Label**: "Conjuros conocidos"
+El Sorcerer conoce un numero fijo de conjuros por cada nivel de conjuro. Esta limitacion es la principal desventaja frente al Wizard.
 
-**Tabla de conjuros conocidos**:
+```typescript
+known: {
+  type: 'LIMITED_PER_ENTITY_LEVEL',
+  table: SORCERER_KNOWN_TABLE,  // [cantrips, nivel1, nivel2, ...]
+}
+```
+
+**Tabla de conjuros conocidos** (PHB pagina 54):
 ```
 Nivel | 0  1  2  3  4  5  6  7  8  9
 ------+-----------------------------
   1   | 4  2  -  -  -  -  -  -  -  -
-  2   | 5  2  -  -  -  -  -  -  -  -
-  3   | 5  3  -  -  -  -  -  -  -  -
   4   | 6  3  1  -  -  -  -  -  -  -
-  ...
+  7   | 7  5  3  2  -  -  -  -  -  -
+ 10   | 9  5  4  3  2  1  -  -  -  -
+ 20   | 9  5  5  4  4  4  3  3  3  3
 ```
 
----
+### Resource
 
-## Selection Stage
+**Tipo**: `SLOTS`
 
-**Tipo**: NONE (espontaneo)
+Slots por nivel de conjuro, mas que el Wizard pero con menos flexibilidad de conocidos.
 
-- No prepara conjuros
-- Al lanzar, elige de entre los conocidos
-- Metamagia se aplica al lanzar (full-round action en vez de standard)
+```typescript
+resource: {
+  type: 'SLOTS',
+  table: SORCERER_SLOTS_TABLE,
+  bonusVariable: '@bonusSpells',  // Bonus por CHA alto
+  refresh: 'daily',
+}
+```
 
----
-
-## Resources
-
-**Estrategia**: SLOTS_PER_ENTITY_LEVEL
-
-- Genera: `@spell.slots.level.0` a `@spell.slots.level.9`
-- Max value: tabla de progresion + bonus por CHA
-- Refresh: daily
-
-**Tabla de slots por dia**:
+**Tabla de slots por dia** (PHB pagina 54):
 ```
 Nivel | 0  1  2  3  4  5  6  7  8  9
 ------+-----------------------------
   1   | 5  3  -  -  -  -  -  -  -  -
-  2   | 6  4  -  -  -  -  -  -  -  -
-  3   | 6  5  -  -  -  -  -  -  -  -
   4   | 6  6  3  -  -  -  -  -  -  -
-  ...
+  7   | 6  6  6  4  -  -  -  -  -  -
+ 10   | 6  6  6  6  5  3  -  -  -  -
+ 20   | 6  6  6  6  6  6  6  6  6  6
+```
+
+### Preparation
+
+**Tipo**: `NONE`
+
+El Sorcerer es espontaneo: no prepara conjuros. Al lanzar, elige cualquiera de sus conocidos y gasta un slot del nivel correspondiente.
+
+```typescript
+preparation: { type: 'NONE' }
 ```
 
 ---
 
-## Preparation Tracks
+## Track Unico
 
-### Track 1: Base (unico)
-- Filter: lista "sorcerer/wizard"
-- Resources: tabla de slots
+El Sorcerer tiene un unico track de lanzamiento:
 
-No tiene tracks adicionales.
+```typescript
+tracks: [
+  {
+    id: 'base',
+    label: 'spell_slots',
+    resource: {
+      type: 'SLOTS',
+      table: SORCERER_SLOTS_TABLE,
+      bonusVariable: '@bonusSpells',
+      refresh: 'daily',
+    },
+    preparation: { type: 'NONE' },
+  },
+]
+```
 
 ---
 
 ## Variables Expuestas
 
-- `@castingClassLevel.sorcerer`
-- `@effectiveCasterLevel`
-- `@spells.known.level.{X}.max` - Generados por CURATED_SELECTION
-- `@spells.known.level.{X}.current`
+```typescript
+variables: {
+  classPrefix: 'sorcerer.spell',    // @sorcerer.spell.slot.1.max
+  genericPrefix: 'spell',           // @spell.slot.1.max (compartida)
+  casterLevelVar: 'castingClassLevel.sorcerer',
+}
+```
+
+Variables generadas:
+- `@sorcerer.spell.slot.{level}.max` - Slots maximos por nivel
+- `@sorcerer.spell.slot.{level}.current` - Slots disponibles
+- `@sorcerer.spell.known.{level}.max` - Conocidos maximos por nivel
+- `@sorcerer.spell.known.{level}.current` - Conocidos seleccionados
+- `@castingClassLevel.sorcerer` - Nivel de lanzador
 
 ---
 
-## Preparation Context
+## Estado del Personaje (CGEState)
 
-No tiene contexto de preparacion tradicional.
+```typescript
+// Sorcerer nivel 7 con CHA 18 (+4 bonus)
+{
+  knownSelections: {
+    "0": ["detect-magic", "light", "prestidigitation", ...],  // 7 cantrips
+    "1": ["magic-missile", "shield", "mage-armor", ...],      // 5 de nivel 1
+    "2": ["invisibility", "mirror-image", "scorching-ray"],   // 3 de nivel 2
+    "3": ["fireball", "haste"],                               // 2 de nivel 3
+  },
+  slotCurrentValues: {
+    "0": 6,  // 6 cantrips disponibles
+    "1": 4,  // 4 de 8 slots nivel 1 restantes
+    "2": 5,  // 5 de 7 slots nivel 2 restantes
+    "3": 4,  // 4 de 5 slots nivel 3 restantes
+  },
+}
+```
 
-Para metamagia al lanzar (futuro sistema de acciones):
-- Se aplicara en el contexto de USO, no de preparacion
-- Aumentara el tiempo de casting
+---
+
+## Flujo de Uso
+
+1. **Seleccion de conocidos** (al subir de nivel):
+   - El jugador elige conjuros hasta llenar su limite por nivel
+   - Puede cambiar 1 conjuro conocido al subir ciertos niveles
+
+2. **Descanso**:
+   - Se restauran todos los slots a su maximo
+
+3. **Lanzamiento**:
+   - Elige cualquier conjuro conocido
+   - Gasta 1 slot del nivel del conjuro
+   - Metamagia aumenta el nivel del slot (y tiempo de casting a full-round)
+
+---
+
+## Implementacion Real
+
+### Clase y Feature
+
+**Archivo**: `packages/core/srd/sorcerer/sorcererClass.ts`
+
+```typescript
+export const sorcererClass: StandardEntity = {
+  id: 'sorcerer',
+  entityType: 'class',
+  levels: {
+    '1': { providers: [grantFeature('sorcerer-spellcasting'), ...] },
+    // ...
+  },
+}
+```
+
+**Archivo**: `packages/core/srd/sorcerer/sorcererClassFeatures.ts`
+
+```typescript
+const sorcererCGEConfig: CGEConfig = {
+  id: 'sorcerer-spells',
+  classId: 'sorcerer',
+  entityType: 'spell',
+  levelPath: '@entity.levels.sorcerer',
+  known: { type: 'LIMITED_PER_ENTITY_LEVEL', table: SORCERER_KNOWN_TABLE },
+  tracks: [{
+    id: 'base',
+    resource: { type: 'SLOTS', table: SORCERER_SLOTS_TABLE, ... },
+    preparation: { type: 'NONE' },
+  }],
+  // ...
+}
+
+export const sorcererSpellcasting: StandardEntity = {
+  id: 'sorcerer-spellcasting',
+  entityType: 'classFeature',
+  legacy_specialChanges: [{ type: 'CGE_DEFINITION', config: sorcererCGEConfig }],
+}
+```
+
+### Ejemplo en CGE
+
+**Archivo**: `packages/core/core/domain/cge/examples.ts`
+
+```typescript
+export const sorcererCGE: CGEConfig = {
+  id: 'sorcerer-spells',
+  classId: 'sorcerer',
+  entityType: 'spell',
+  levelPath: '@entity.levels.sorcerer',
+  accessFilter: { field: 'lists', operator: 'contains', value: 'sorcerer' },
+  known: { type: 'LIMITED_PER_ENTITY_LEVEL', table: SORCERER_KNOWN_TABLE },
+  tracks: [{
+    id: 'base',
+    resource: { type: 'SLOTS', ... },
+    preparation: { type: 'NONE' },
+  }],
+  // ...
+}
+```
+
+---
+
+## Diferencias con otras clases
+
+| Aspecto | Sorcerer | Wizard | Cleric |
+|---------|----------|--------|--------|
+| known | LIMITED_PER_ENTITY_LEVEL | UNLIMITED | (sin known) |
+| resource | SLOTS | SLOTS | SLOTS |
+| preparation | NONE | BOUND | BOUND |
+| Flexibilidad | Al lanzar | Al preparar | Al preparar |
 
 ---
 
