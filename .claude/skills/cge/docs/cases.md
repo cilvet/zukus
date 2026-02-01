@@ -190,6 +190,6 @@ Sus maniobras readied son granted aleatoriamente cada round. Extension de LIST c
 ## Referencia Historica
 
 Los analisis detallados originales por clase estan en:
-`packages/core/core/domain/cge/casesToCover/`
+`../casesToCover/`
 
 **Nota**: Estos READMEs usan nomenclatura antigua (GROWING_COLLECTION, CURATED_SELECTION, etc). Ver el archivo NOMENCLATURE.md en esa carpeta para el mapeo a tipos reales.

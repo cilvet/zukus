@@ -20,10 +20,10 @@ Los READMEs en esta carpeta usan nomenclatura de exploracion inicial que **NO co
 ## Referencia correcta
 
 Para la documentacion actualizada, consultar:
-- `.claude/skills/cge/SKILL.md` - Resumen ejecutivo
-- `.claude/skills/cge/docs/design.md` - Decisiones de diseno
-- `.claude/skills/cge/docs/architecture.md` - Arquitectura detallada
-- `packages/core/core/domain/cge/types.ts` - Tipos definitivos
+- `../SKILL.md` - Resumen ejecutivo
+- `../docs/design.md` - Decisiones de diseno
+- `../docs/architecture.md` - Arquitectura detallada
+- `packages/core/core/domain/cge/types.ts` - Tipos definitivos (codigo)
 
 ## Estado de cada caso
 
