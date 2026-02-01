@@ -385,17 +385,24 @@ function createDemoCharacterBaseData(def: DemoCharacterDef): CharacterBaseData {
 }
 
 // =============================================================================
-// Demo Characters
+// Demo Characters - Lazy initialization to avoid module-level hook calls
 // =============================================================================
 
-const DEMO_CHARACTERS: DemoCharacterDef[] = [
-  createWizardDef(),
-  createSorcererDef(),
-  createClericDef(),
-  createWarbladeDef(),
-  createPsionDef(),
-  createWarlockDef(),
-]
+let _demoCharactersCache: DemoCharacterDef[] | null = null
+
+function getDemoCharacters(): DemoCharacterDef[] {
+  if (_demoCharactersCache === null) {
+    _demoCharactersCache = [
+      createWizardDef(),
+      createSorcererDef(),
+      createClericDef(),
+      createWarbladeDef(),
+      createPsionDef(),
+      createWarlockDef(),
+    ]
+  }
+  return _demoCharactersCache
+}
 
 // =============================================================================
 // Components
@@ -516,18 +523,22 @@ function DemoCGEContent() {
 }
 
 export function DemoCGEScreen() {
-  const [selectedCharId, setSelectedCharId] = useState(DEMO_CHARACTERS[0].id)
+  'use no memo'
+
+  // Lazy load demo characters to avoid module-level execution
+  const demoCharacters = useMemo(() => getDemoCharacters(), [])
+  const [selectedCharId, setSelectedCharId] = useState(() => getDemoCharacters()[0].id)
   const setCharacter = useCharacterStore((state) => state.setCharacter)
 
   // Load selected character into store
   useEffect(() => {
-    const def = DEMO_CHARACTERS.find((c) => c.id === selectedCharId)
+    const def = demoCharacters.find((c) => c.id === selectedCharId)
     if (!def) return
 
     const baseData = createDemoCharacterBaseData(def)
     const sheet = calculateCharacterSheet(baseData)
     setCharacter(sheet, baseData)
-  }, [selectedCharId, setCharacter])
+  }, [selectedCharId, setCharacter, demoCharacters])
 
   return (
     <YStack flex={1}>
@@ -549,7 +560,7 @@ export function DemoCGEScreen() {
 
       {/* Character Selector */}
       <CharacterSelector
-        characters={DEMO_CHARACTERS}
+        characters={demoCharacters}
         selectedId={selectedCharId}
         onSelect={setSelectedCharId}
       />
