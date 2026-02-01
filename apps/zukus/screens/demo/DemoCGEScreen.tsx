@@ -450,6 +450,8 @@ function CharacterSelector({ characters, selectedId, onSelect }: CharacterSelect
 }
 
 function DemoCGEContent() {
+  'use no memo'
+
   const characterSheet = useCharacterSheet()
   const primaryCGE = usePrimaryCGE()
   const { currentPanel, isPanelOpen, canGoBack, closePanel, goBack } = usePanelNavigation('character')
