@@ -25,6 +25,13 @@ import {
   buffSchema,
   maneuverSchema,
   powerSchema,
+  weaponSchema,
+  armorSchema,
+  shieldSchema,
+  itemSchema,
+  wondrousItemSchema,
+  weaponPropertySchema,
+  armorPropertySchema,
 } from './schemas';
 import { 
   systemLevelsSchemaDefinition, 
@@ -33,6 +40,17 @@ import {
 
 // Entities
 import { allSpells, allFeats, allBuffs, allManeuvers, allPowers } from './entities';
+
+// SRD Equipment from D35E Foundry data
+import {
+  srdWeapons,
+  srdArmors,
+  srdShields,
+  srdItems,
+  srdWondrousItems,
+  srdWeaponProperties,
+  srdArmorProperties,
+} from '../../../../srd/equipment/d35e';
 
 // Classes from SRD
 import { fighterClass } from '../../../../srd/fighter/fighterClass';
@@ -69,6 +87,15 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
  * - System Levels: D&D 3.5 feat/ability progression
  * - Ability Increases: 6 entities for +1 to each ability
  *
+ * Equipment (from D35E Foundry data):
+ * - Weapons: 80 weapons (simple, martial, exotic)
+ * - Armors: 12 armors (light, medium, heavy)
+ * - Shields: 6 shields (buckler, light, heavy, tower)
+ * - Items: 124 generic items (adventuring gear)
+ * - Wondrous Items: 581 magic items (rings, cloaks, belts, etc.)
+ * - Weapon Properties: 47 (Flaming, Keen, Vorpal, etc.)
+ * - Armor Properties: 31 (Fortification, Shadow, etc.)
+ *
  * Test Classes (for CGE visual testing):
  * - Warblade: maneuvers with LIST GLOBAL + consumeOnUse
  * - Psion: powers with POOL resource
@@ -91,6 +118,13 @@ const dnd35ExampleCompendium: Compendium = {
     buffSchema,
     maneuverSchema,
     powerSchema,
+    weaponSchema,
+    armorSchema,
+    shieldSchema,
+    itemSchema,
+    wondrousItemSchema,
+    weaponPropertySchema,
+    armorPropertySchema,
     systemLevelsSchemaDefinition,
     characterAbilityIncreaseSchemaDefinition,
   ],
@@ -100,6 +134,13 @@ const dnd35ExampleCompendium: Compendium = {
     buff: allBuffs,
     maneuver: allManeuvers,
     power: allPowers,
+    weapon: srdWeapons,
+    armor: srdArmors,
+    shield: srdShields,
+    item: srdItems,
+    wondrousItem: srdWondrousItems,
+    weaponProperty: srdWeaponProperties,
+    armorProperty: srdArmorProperties,
     class: [
       // D&D 3.5 SRD Classes
       fighterClass,

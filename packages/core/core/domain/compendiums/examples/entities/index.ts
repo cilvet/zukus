@@ -59,6 +59,9 @@ export {
   POWER_CLASS_FIELD_CONFIG,
 } from './powers';
 
+// Items (Equipment) - now imported from srd/equipment/d35e
+// See dnd35ExampleContext.ts for integration
+
 // Classes are imported from srd/
 // - Fighter: srd/fighter/fighterClass.ts
 // - Rogue: srd/rogue/rogueClass.ts
