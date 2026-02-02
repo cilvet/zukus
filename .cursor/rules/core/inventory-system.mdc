@@ -1,366 +1,102 @@
+---
+description: Sistema de Inventario - Items, containers, currencies y propiedades con Effects
+globs: packages/core/core/domain/inventory/**
+alwaysApply: false
+---
+
 # Sistema de Inventario
 
-> **Contexto**: Esta regla cubre la API del inventario. Para la arquitectura general del sistema de entidades y como el inventario se integra, consulta la skill `entities` (especialmente `docs/03-storage.md` y `docs/05-inventory.md`).
+> **Documentacion completa**: Consulta la skill `entities` (`.claude/skills/entities/docs/05-inventory.md`) para arquitectura, instance fields dinamicos, compilacion de effects, y ejemplos detallados.
 
-Sistema de inventario que coexiste con el sistema `equipment` legacy. Usa entidades del compendium con instancias unicas.
+Sistema de inventario basado en entidades que coexiste con el sistema legacy `equipment`.
 
-> **Importante**: Ver `architectural-principles.mdc` para la directriz de "Personaje Auto-Contenido". Las entidades deben resolverse al adquirir el item, no al calcular.
+## API Rapida
 
-## Arquitectura
-
-```
-CharacterBaseData
-├── equipment (legacy)          # Sistema antiguo con Item[]
-└── inventoryState (nuevo)      # Sistema basado en entidades
-    ├── items: InventoryItemInstance[]
-    └── currencies: CurrencyState
-```
-
-## Ubicación de Archivos
-
-```
-packages/core/core/domain/inventory/
-├── types.ts                    # Tipos base del inventario
-├── itemOperations.ts           # CRUD de items
-├── containerOperations.ts      # Operaciones de containers
-├── weightCalculations.ts       # Cálculo de peso
-├── currencies/
-│   ├── types.ts               # Tipos de currency
-│   └── currencyOperations.ts  # Operaciones de currency
-└── properties/
-    └── resolveItemEffects.ts  # Resolución de Effects @item
-```
-
-## Tipos Principales
-
-### InventoryItemInstance
-
-Instancia de un item en el inventario:
-
-```typescript
-type InventoryItemInstance = {
-  instanceId: string;        // UUID único de esta instancia
-  itemId: string;            // ID de la entidad en el compendium
-  entityType: string;        // 'weapon', 'armor', 'item', etc.
-  quantity: number;          // Cantidad (default 1)
-  containerId?: string;      // ID del container que lo contiene
-  customName?: string;       // Nombre personalizado
-  notes?: string;            // Notas del usuario
-
-  entity?: ResolvedInventoryEntity;  // Entidad resuelta con valores de instancia
-};
-
-// La entidad contiene TODO, incluyendo valores de instancia:
-entity: {
-  id: 'longsword',
-  name: 'Longsword',
-  damage: '1d8',
-  equipped: false,   // Valor de instancia
-  wielded: false,    // Valor de instancia
-  active: false,     // Valor de instancia
-  // ... otros campos de la entidad
-}
-```
-
-> **Importante**: Los valores de instancia (`equipped`, `wielded`, `active`) son campos **normales** de la entidad, no un campo separado. Esto permite que las fórmulas accedan directamente a `@item.equipped`. Usar helpers como `isItemEquipped(item)` para leer/escribir estos valores.
-
-### CurrencyState
-
-Estado de currencies del personaje:
-
-```typescript
-type CurrencyState = { [currencyId: string]: number };
-// Ejemplo: { gold: 150, silver: 30, copper: 5 }
-```
-
-## Operaciones de Items
-
-Importar desde `@zukus/core`:
+### Items
 
 ```typescript
 import { inventoryOps } from '@zukus/core';
 
 // Añadir item
-const result = inventoryOps.addItem(state, {
-  itemId: 'longsword',
-  entityType: 'weapon',
-  quantity: 1,
-});
+inventoryOps.addItem(state, { itemId, entityType, entity });
 
-// Eliminar item (o reducir cantidad)
+// Eliminar
 inventoryOps.removeItem(state, instanceId, quantity?);
 
-// Actualizar item
-inventoryOps.updateItem(state, instanceId, { equipped: true });
+// Actualizar
+inventoryOps.updateItem(state, instanceId, updates);
 
 // Toggle equipado
 inventoryOps.toggleItemEquipped(state, instanceId);
 
-// Añadir o apilar (stackear con item existente)
+// Apilar con existente
 inventoryOps.addOrStackItem(state, itemId, entityType, quantity);
 ```
 
-## Operaciones de Containers
-
-Los containers son items con el addon `container`:
-
-```typescript
-// Mover item a container
-inventoryOps.moveToContainer(state, instanceId, containerId);
-
-// Sacar item del container
-inventoryOps.removeFromContainer(state, instanceId);
-
-// Obtener contenido de un container
-inventoryOps.getContainerContents(state, containerId);
-
-// Verificar si item está en container (directo o anidado)
-inventoryOps.isItemInContainer(state, itemId, containerId);
-```
-
-## Operaciones de Currencies
-
-```typescript
-import { inventoryOps } from '@zukus/core';
-
-// Añadir currency
-inventoryOps.addCurrency(currencies, 'gold', 100);
-
-// Gastar currency
-inventoryOps.removeCurrency(currencies, 'gold', 50);
-
-// Convertir currencies
-inventoryOps.convertCurrency(currencies, 'gold', 'silver', 10, currencyDefs);
-
-// Calcular riqueza total (en moneda base)
-inventoryOps.getTotalWealth(currencies, currencyDefs);
-
-// Calcular peso de monedas
-inventoryOps.getCurrencyWeight(currencies, currencyDefs);
-```
-
-## Cálculo de Peso
-
-```typescript
-import { calculateWeightBreakdown, type ItemEntityResolver } from '@zukus/core';
-
-// Resolver que obtiene datos de entidades del compendium
-const resolver: ItemEntityResolver = (itemId, entityType) => {
-  return compendium.getEntity(entityType, itemId);
-};
-
-const breakdown = calculateWeightBreakdown(state, resolver, currencyDefs);
-// {
-//   equippedWeight: 44,   // Items equipados
-//   carriedWeight: 15,    // Items no equipados
-//   currencyWeight: 2,    // Peso de monedas
-//   totalWeight: 61       // Total
-// }
-```
-
-### Reglas de Peso
-
-- Items en containers con `ignoresContentWeight: true` no suman peso
-- Items dentro de containers se cuentan a través del container padre
-- Currencies tienen peso según `weightPerUnit` de su definición
-
-## CharacterUpdater
-
-Métodos disponibles en el CharacterUpdater:
-
-```typescript
-// Items
-updater.addToInventory({ itemId, entityType, quantity?, equipped? });
-updater.removeFromInventory(instanceId, quantity?);
-updater.updateInventoryItem(instanceId, { quantity?, notes? });
-updater.toggleInventoryEquipped(instanceId);
-updater.setWeaponWielded(instanceId, wielded);
-updater.moveToContainer(instanceId, containerId);
-updater.removeFromContainer(instanceId);
-
-// Currencies
-updater.addCurrency(currencyId, amount);
-updater.spendCurrency(currencyId, amount);
-updater.convertCurrency(fromId, toId, amount, currencyDefs);
-```
-
-## Instance Fields
-
-Los valores de instancia (`equipped`, `wielded`, `active`) son campos **normales** de la entidad. Usar helpers para leer/escribir:
+### Instance Fields
 
 ```typescript
 import {
-  isItemEquipped,
-  setItemEquipped,
-  isItemWielded,
-  setItemWielded,
-  isItemActive,
-  setItemActive,
+  isItemEquipped, setItemEquipped,
+  isItemWielded, setItemWielded,
+  isItemActive, setItemActive,
+  getInstanceFieldsFromCompendium,
+  hasInstanceField,
 } from '@zukus/core';
 
-// Leer - accede a entity.equipped
+// Helpers tipados
 if (isItemEquipped(item)) { ... }
-if (isItemWielded(item)) { ... }
+const updated = setItemEquipped(item, true);
 
-// Modificar - retorna nuevo item con entity.equipped actualizado
-const equippedItem = setItemEquipped(item, true);
-const wieldedWeapon = setItemWielded(item, true);
+// Descubrir campos dinamicamente
+const fields = getInstanceFieldsFromCompendium('armor', compendium);
 ```
 
-Los schemas/addons definen estos campos con valores por defecto. Al crear la entidad en el compendium, ya viene con `equipped: false`, `wielded: false`, etc.
-
-### Effects Condicionales con @instance
-
-Los effects pueden tener condiciones que dependen del estado de la instancia:
+### Containers
 
 ```typescript
-// Propiedad que solo aplica cuando el item esta activo
-{
-  target: 'speed.base',
-  formula: '30',
-  conditions: [{
-    type: 'simple',
-    firstFormula: '@instance.active',
-    operator: '==',
-    secondFormula: '1'
-  }]
-}
+inventoryOps.moveToContainer(state, instanceId, containerId);
+inventoryOps.removeFromContainer(state, instanceId);
+inventoryOps.getContainerContents(state, containerId);
 ```
 
-Las referencias `@instance.X` se resuelven desde `entity.X`:
-- `@instance.equipped` -> entity.equipped (0 o 1)
-- `@instance.wielded` -> entity.wielded (0 o 1)
-- `@instance.active` -> entity.active (0 o 1)
-
-## Addons para Items
-
-### dnd35item (D&D 3.5 especifico)
+### Currencies
 
 ```typescript
-fields: [
-  { name: 'weight', type: 'number' },
-  { name: 'cost', type: 'object', objectFields: [
-    { name: 'amount', type: 'number' },
-    { name: 'currency', type: 'string' }
-  ]},
-  { name: 'itemSlot', type: 'string', optional: true },
-  { name: 'aura', type: 'string', optional: true },
-  { name: 'casterLevel', type: 'integer', optional: true },
-]
+inventoryOps.addCurrency(currencies, 'gold', 100);
+inventoryOps.removeCurrency(currencies, 'gold', 50);
+inventoryOps.convertCurrency(currencies, 'gold', 'silver', 10, currencyDefs);
 ```
 
-### container (generico)
+### CharacterUpdater
 
 ```typescript
-fields: [
-  { name: 'capacity', type: 'number' },        // Capacidad maxima en libras
-  { name: 'ignoresContentWeight', type: 'boolean' }, // Ej: Bag of Holding
-]
+updater.addToInventory({ itemId, entityType, entity });
+updater.removeFromInventory(instanceId, quantity?);
+updater.updateInventoryItem(instanceId, updates);
+updater.toggleInventoryEquipped(instanceId);
+updater.setInventoryInstanceField(instanceId, fieldName, value);
+updater.addCurrency(currencyId, amount);
+updater.spendCurrency(currencyId, amount);
 ```
 
-### equippable, wieldable, activable
+## Addons Clave
 
-Estos addons definen campos normales con valores por defecto:
+| Addon | Tipo | Campos |
+|-------|------|--------|
+| `dnd35item` | fields | weight, cost, itemSlot, aura, casterLevel |
+| `container` | fields | capacity, ignoresContentWeight |
+| `equippable` | instanceField | equipped: boolean |
+| `wieldable` | instanceField | wielded: boolean |
+| `activable` | instanceField | active: boolean |
+| `stackable` | instanceField | quantity: number |
 
-```typescript
-// equippable
-fields: [
-  { name: 'equipped', type: 'boolean', default: false }
-]
+## Archivos
 
-// wieldable
-fields: [
-  { name: 'wielded', type: 'boolean', default: false }
-]
-
-// activable
-fields: [
-  { name: 'active', type: 'boolean', default: false }
-]
-```
-
-Cuando se crea la entidad en el compendium, ya viene con estos valores por defecto.
-
-## Propiedades de Items con Effects
-
-Las propiedades (como Keen, Flaming) son entidades con Effects que modifican el item:
-
-```typescript
-// En el schema de weapon:
-{
-  name: 'properties',
-  type: 'reference_array',
-  referenceType: 'weaponProperty',
-  applyEffectsToParent: true,  // <-- Clave: Effects van al item
-}
-
-// Ejemplo de propiedad Keen:
-const keenProperty = {
-  id: 'keen',
-  entityType: 'weaponProperty',
-  name: 'Keen',
-  effects: [{
-    target: '@item.critRange',    // Target especial: @item.X
-    formula: '...',               // Fórmula para duplicar rango
-    bonusType: 'untyped',
-  }],
-};
-```
-
-### Resolver Effects de Propiedades
-
-```typescript
-import { applyPropertyEffectsToItem } from '@zukus/core';
-
-// Aplicar propiedades a un item
-const resolvedWeapon = applyPropertyEffectsToItem(
-  weapon,
-  properties,
-  evaluateFormula  // Opcional: evaluador de fórmulas
-);
-
-// El resultado incluye:
-// - Valores modificados en el item
-// - _appliedEffects: registro de qué se aplicó
-// - _modifiedFields: campos que cambiaron
-```
-
-## Schemas de Entidades
-
-### weaponSchema
-
-Campos principales: damageDice, damageType, critRange, critMultiplier, weaponCategory, weaponType, enhancementBonus, properties
-
-### armorSchema
-
-Campos principales: armorBonus, maxDexBonus, armorCheckPenalty, arcaneSpellFailure, speed30, speed20, armorType, properties
-
-### shieldSchema
-
-Campos principales: shieldBonus, armorCheckPenalty, arcaneSpellFailure, shieldType, bashDamage, properties
-
-### currencySchema
-
-Campos: abbreviation, conversionToBase, weightPerUnit
-
-## Coexistencia con Equipment Legacy
-
-El sistema de inventario nuevo coexiste con `equipment`:
-
-- `equipment.items`: Sistema legacy con tipos hardcodeados (Armor, Weapon, etc.)
-- `inventoryState.items`: Sistema nuevo con referencias a entidades
-
-Ambos pueden usarse simultáneamente durante la migración.
-
-## Patrón de Operaciones
-
-Todas las operaciones son puras y retornan:
-
-```typescript
-type InventoryUpdateResult<T> = {
-  state: T;
-  warnings: InventoryWarning[];
-};
-```
-
-Los warnings permiten feedback sin interrumpir la operación.
+| Archivo | Proposito |
+|---------|-----------|
+| `inventory/types.ts` | Tipos base |
+| `inventory/itemOperations.ts` | CRUD de items |
+| `inventory/instanceFields.ts` | Helpers equipped/wielded/active |
+| `entities/instanceFields/getInstanceFields.ts` | Descubrimiento dinamico |
+| `character/calculation/effects/compileEffects.ts` | Compilacion de effects |

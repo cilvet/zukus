@@ -80,15 +80,23 @@ El sistema de entidades es la infraestructura central que permite definir tipos 
 
 ## 5. Sistema de Inventario
 
-**InventoryItemInstance**: Representa un item en el inventario del personaje. Contiene ID de instancia, tipo de entidad, cantidad, valores de instancia editables por el usuario, y la entidad resuelta.
+**InventoryItemInstance**: Representa un item en el inventario del personaje. Contiene ID de instancia, tipo de entidad, y la entidad resuelta con sus valores de instancia fusionados.
 
-**Instance fields**: Campos que el usuario puede modificar por instancia, como equipped o wielded. Se definen en el schema del item y permiten estado mutable sin modificar la entidad base.
+**Instance fields dinamicos**: Campos editables por usuario (equipped, wielded, active, quantity) definidos en addons del schema. Se descubren dinamicamente via `getInstanceFieldsFromCompendium()`. Los valores se almacenan directamente en la entidad resuelta.
+
+**Addons de instancia**:
+- `equippable`: campo `equipped` (boolean) - armaduras, anillos, amuletos
+- `wieldable`: campo `wielded` (boolean) - armas empunadas
+- `activable`: campo `active` (boolean) - items toggle (Ring of Invisibility)
+- `stackable`: campo `quantity` (number) - municion, consumibles, materiales
 
 **Propiedades con Effects**: Los items pueden tener propiedades (como "Keen" en una espada). Estas propiedades son entidades hijas que contienen Effects. Al resolver el item, los Effects de las propiedades se aplican al item padre, modificando sus campos.
 
-**Target @item.X**: Los Effects de propiedades usan un target especial que apunta a campos del item contenedor. Por ejemplo, un Effect con target `@item.critRange` modifica el rango de critico de la espada.
+**Placeholders en effects**:
+- `@entity.X`: Propiedades estaticas de la entidad (casterLevel, armorBonus)
+- `@instance.X`: Valores de instancia (equipped, wielded, active, quantity)
 
-**Resolucion en adquisicion**: Cuando se añade un item al inventario, se resuelve completamente: se obtiene la entidad base, se resuelven sus propiedades, se aplican los Effects de las propiedades, y se guarda el resultado.
+**Compilacion de effects**: Los items equipados contribuyen sus effects al personaje. Solo se incluyen effects con target distinto de `@item.X` y que pasen sus conditions `@instance.X`.
 
 > Profundizar: `docs/05-inventory.md`
 

@@ -159,13 +159,15 @@ Los addons inyectan campos predefinidos a las entidades.
 | `imageable` | `image?: string` | Icono o imagen |
 | `source` | `source?: SourceData` | Origen (compendio, pagina) |
 | `effectful` | `effects?`, `legacy_changes?` | Aplica efectos al personaje |
+| `autoEffectful` | `autoEffects?` | Effects con @entity.X placeholders |
 | `suppressing` | `suppression?: []` | Suprime otras entidades |
 | `providable` | `providers?: []` | Otorga otras entidades |
 | `dnd35item` | `weight`, `cost`, etc. | Propiedades D&D 3.5 |
 | `container` | `capacity`, `ignoresContentWeight` | Items contenedores |
-| `activable` | instanceField `active` | Items activables |
+| `activable` | instanceField `active` | Items toggle on/off |
 | `equippable` | instanceField `equipped` | Items equipables |
 | `wieldable` | instanceField `wielded` | Armas empunables |
+| `stackable` | instanceField `quantity` | Items apilables |
 
 ### AddonDefinition
 
@@ -180,11 +182,11 @@ type AddonDefinition = {
 
 ### Instance Fields
 
-Campos editables por usuario por cada instancia:
+Campos editables por usuario **por cada instancia** de una entidad. Se definen en addons con la propiedad `instanceFields`.
 
 ```typescript
 type InstanceFieldDefinition = {
-  name: string;          // "equipped", "active"
+  name: string;          // "equipped", "active", "quantity"
   type: InstanceFieldType;  // 'boolean' | 'number' | 'string'
   default: InstanceFieldValue;  // valor por defecto
   label?: string;        // Para UI
@@ -192,13 +194,54 @@ type InstanceFieldDefinition = {
 };
 ```
 
-Acceso:
+**Diferencia clave**: `fields` son estaticos (parte de la definicion), `instanceFields` son editables por usuario por instancia.
+
+```typescript
+// Addon que define un instanceField
+export const stackableAddon: AddonDefinition = {
+  id: 'stackable',
+  name: 'Stackable',
+  fields: [],  // Sin campos estaticos
+  instanceFields: [
+    {
+      name: 'quantity',
+      type: 'number',
+      default: 1,
+      label: 'Quantity',
+      description: 'Number of units in this stack',
+    },
+  ],
+};
+```
+
+**Descubrir instance fields dinamicamente**:
+
+```typescript
+import {
+  getInstanceFieldsFromCompendium,
+  hasInstanceField,
+} from '@zukus/core';
+
+// Obtener todos los instance fields de un entityType
+const fields = getInstanceFieldsFromCompendium('armor', compendium);
+// → [{ name: 'equipped', type: 'boolean', default: false }]
+
+// Verificar si tiene un campo especifico
+if (hasInstanceField('item', 'quantity', compendium)) {
+  // El schema incluye addon stackable
+}
+```
+
+**Helpers tipados para campos comunes**:
+
 ```typescript
 import { isItemEquipped, setItemEquipped } from '@zukus/core';
 
 if (isItemEquipped(item)) { ... }
 const updated = setItemEquipped(item, true);
 ```
+
+> Ver `docs/05-inventory.md` para mas detalles sobre instance fields en inventario.
 
 ## Validacion con Zod
 

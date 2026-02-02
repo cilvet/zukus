@@ -2,8 +2,6 @@
 
 Sistema de inventario basado en entidades que coexiste con el sistema legacy `equipment`.
 
-> Ver tambien: `.cursor/rules/core/inventory-system.mdc` para API detallada
-
 ## Arquitectura
 
 ```
@@ -15,8 +13,6 @@ CharacterBaseData
 ```
 
 ## InventoryItemInstance
-
-Los valores de instancia (equipped, wielded, active) son campos **normales de la entidad**, no un campo separado. Esto permite que las formulas accedan directamente a `@item.equipped`.
 
 ```typescript
 type InventoryItemInstance = {
@@ -36,12 +32,14 @@ entity: {
   id: 'longsword',
   name: 'Longsword',
   damage: '1d8',
-  equipped: false,   // Valor de instancia
-  wielded: false,    // Valor de instancia
-  active: false,     // Valor de instancia
+  equipped: false,   // Valor de instancia (del addon equippable)
+  wielded: false,    // Valor de instancia (del addon wieldable)
+  quantity: 1,       // Valor de instancia (del addon stackable)
   // ... otros campos
 }
 ```
+
+**Principio clave**: Los valores de instancia (equipped, wielded, active, quantity) son campos **normales de la entidad**, no un campo separado. Esto permite que las formulas accedan directamente a `@item.equipped`, `@item.quantity`, etc.
 
 ## Propiedades de Items con @item Effects
 
@@ -110,9 +108,51 @@ item.critRange = valorCalculado
 item._appliedEffects = [{ propertyId: 'keen', originalValue: 19, modifiedValue: 17 }]
 ```
 
-## Instance Fields (equipped, wielded, active)
+## Instance Fields (Sistema Dinamico)
 
-Los valores de instancia son campos **normales** de la entidad. Usar helpers para leer/escribir:
+Los instance fields son campos editables por usuario que existen **por instancia** de una entidad. Se definen en los **addons** del schema y se descubren dinamicamente.
+
+### Arquitectura
+
+```
+Schema (en compendium)
+├── addons: ['equippable', 'wieldable', 'stackable']
+│
+└── Addons definen instanceFields:
+    ├── equippable → equipped: boolean (default: false)
+    ├── wieldable → wielded: boolean (default: false)
+    ├── activable → active: boolean (default: false)
+    └── stackable → quantity: number (default: 1)
+```
+
+Los valores de instancia son campos **normales de la entidad**, fusionados al resolver el item.
+
+### Descubrir Instance Fields
+
+```typescript
+import {
+  getInstanceFieldsFromCompendium,
+  hasInstanceField,
+  getInstanceField,
+} from '@zukus/core';
+
+// Obtener todos los instance fields de un tipo de entidad
+const fields = getInstanceFieldsFromCompendium('armor', compendium);
+// → [{ name: 'equipped', type: 'boolean', default: false, label: 'Equipped' }]
+
+// Verificar si un tipo tiene un campo especifico
+if (hasInstanceField('weapon', 'wielded', compendium)) {
+  // El schema de weapon incluye el addon wieldable
+}
+
+// Obtener definicion de un campo
+const field = getInstanceField('item', 'quantity', compendium);
+// → { name: 'quantity', type: 'number', default: 1, label: 'Quantity' }
+```
+
+### Helpers para Campos Comunes
+
+Para los campos mas usados, existen helpers tipados:
 
 ```typescript
 import {
@@ -131,11 +171,19 @@ if (isItemEquipped(item)) { ... }
 const equipped = setItemEquipped(item, true);
 ```
 
-Los schemas/addons definen estos campos con valores por defecto. Al crear la entidad en el compendium, ya viene con `equipped: false`, `wielded: false`, etc.
+### Modificar Instance Fields Genericamente
 
-### Effects Condicionales con @instance
+Para campos arbitrarios (incluyendo quantity), usar el CharacterUpdater:
 
-Los Effects pueden depender del estado de la instancia:
+```typescript
+// En el store
+characterStore.setInventoryInstanceField(instanceId, 'quantity', 5);
+characterStore.setInventoryInstanceField(instanceId, 'equipped', true);
+```
+
+### Effects Condicionales con @instance.X
+
+Los Effects pueden depender del estado de la instancia. Las referencias `@instance.X` se resuelven en tiempo de compilacion de effects:
 
 ```typescript
 {
@@ -150,10 +198,38 @@ Los Effects pueden depender del estado de la instancia:
 }
 ```
 
-Las referencias `@instance.X` se resuelven desde `entity.X`:
-- `@instance.equipped` -> entity.equipped (0 o 1)
-- `@instance.wielded` -> entity.wielded (0 o 1)
-- `@instance.active` -> entity.active (0 o 1)
+Resolucion de `@instance.X`:
+- `@instance.equipped` → entity.equipped → 0 o 1
+- `@instance.wielded` → entity.wielded → 0 o 1
+- `@instance.active` → entity.active → 0 o 1
+- `@instance.quantity` → entity.quantity → numero
+
+### Diferencia: @entity.X vs @instance.X
+
+| Placeholder | Uso | Resolucion |
+|-------------|-----|------------|
+| `@entity.X` | En autoEffects | Propiedades estaticas de la entidad (casterLevel, enhancementBonus) |
+| `@instance.X` | En conditions de effects | Valores de instancia editables (equipped, wielded, active, quantity) |
+
+```typescript
+// @entity.X - para valores de la definicion de la entidad
+autoEffects: [{
+  target: 'ac.armor',
+  formula: '@entity.armorBonus + @entity.enhancementBonus'
+}]
+
+// @instance.X - para condiciones basadas en estado del usuario
+effects: [{
+  target: 'ac.armor',
+  formula: '@entity.armorBonus',
+  conditions: [{
+    type: 'simple',
+    firstFormula: '@instance.equipped',
+    operator: '==',
+    secondFormula: '1'
+  }]
+}]
+```
 
 ## Operaciones
 
@@ -207,33 +283,152 @@ inventoryOps.convertCurrency(currencies, 'gold', 'silver', 10, currencyDefs);
 
 ## Addons para Items
 
-### dnd35item
+Los addons inyectan campos al schema. Algunos definen `fields` (campos estaticos) y otros `instanceFields` (campos editables por instancia).
+
+### dnd35item (campos estaticos)
+
+Propiedades comunes de items D&D 3.5:
 
 ```typescript
 fields: [
   { name: 'weight', type: 'number' },
-  { name: 'cost', type: 'object' },
+  { name: 'cost', type: 'object', objectFields: [
+    { name: 'amount', type: 'number' },
+    { name: 'currency', type: 'string' }
+  ]},
   { name: 'itemSlot', type: 'string', optional: true },
   { name: 'aura', type: 'string', optional: true },
   { name: 'casterLevel', type: 'integer', optional: true },
 ]
 ```
 
-### container
+### container (campos estaticos)
+
+Para items que contienen otros items:
 
 ```typescript
 fields: [
-  { name: 'capacity', type: 'number' },
-  { name: 'ignoresContentWeight', type: 'boolean' },
+  { name: 'capacity', type: 'number' },        // Peso maximo en libras
+  { name: 'ignoresContentWeight', type: 'boolean' },  // Bag of Holding
 ]
 ```
 
-### equippable, wieldable, activable
+### equippable (instanceField)
 
-Definen campos normales con valores por defecto:
-- `equipped: false`
-- `wielded: false`
-- `active: false`
+Para armaduras, anillos, amuletos, etc.:
+
+```typescript
+instanceFields: [
+  { name: 'equipped', type: 'boolean', default: false, label: 'Equipped' }
+]
+```
+
+**Cuando usar**: Items que necesitan "ponerse" para dar beneficios.
+
+### wieldable (instanceField)
+
+Para armas que se empunan:
+
+```typescript
+instanceFields: [
+  { name: 'wielded', type: 'boolean', default: false, label: 'Wielded' }
+]
+```
+
+**Cuando usar**: Armas. Un arma puede estar equipped (en el cinturon) pero no wielded (en mano).
+
+### activable (instanceField)
+
+Para items con efecto toggle:
+
+```typescript
+instanceFields: [
+  { name: 'active', type: 'boolean', default: false, label: 'Active' }
+]
+```
+
+**Cuando usar**: Items como Ring of Invisibility, Boots of Speed que se activan/desactivan.
+
+### stackable (instanceField)
+
+Para items que se apilan (quantity > 1):
+
+```typescript
+instanceFields: [
+  { name: 'quantity', type: 'number', default: 1, label: 'Quantity' }
+]
+```
+
+**Cuando usar**: Municion (flechas, virotes), consumibles (pociones, scrolls), materiales.
+
+### Ejemplo de Schema con Addons
+
+```typescript
+// itemSchema.ts - Item generico stackable
+export const itemSchema: EntitySchemaDefinition = {
+  typeName: 'item',
+  description: 'D&D 3.5 General Item',
+  addons: ['searchable', 'imageable', 'taggable', 'dnd35item', 'stackable'],
+  fields: [],  // Solo usa campos de addons
+};
+
+// armorSchema.ts - Armadura equipable
+export const armorSchema: EntitySchemaDefinition = {
+  typeName: 'armor',
+  addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
+  fields: [
+    { name: 'armorBonus', type: 'integer' },
+    { name: 'maxDexBonus', type: 'integer' },
+    // ...
+  ],
+};
+```
+
+## Compilacion de Effects desde Inventario
+
+Los items equipados contribuyen effects al personaje durante el calculo.
+
+### Flujo de Compilacion
+
+```
+compileCharacterEffects(characterBaseData)
+├── compileBuffEffects()        # Buffs activos
+├── compileEntityEffects()      # Entidades custom (class features, etc.)
+└── compileInventoryItemEffects()  # Items equipados
+    │
+    ├── Para cada item en inventoryState.items:
+    │   ├── Verificar isItemEquipped(item)
+    │   ├── Obtener entity.effects
+    │   ├── Filtrar effects que NO son @item.X
+    │   ├── Resolver @instance.X en conditions
+    │   └── Añadir al pool de compiled effects
+```
+
+### Que Effects se Incluyen
+
+Solo los effects de items **equipados** que:
+- No tienen target `@item.X` (esos son para el item, no el personaje)
+- Pasan sus conditions (incluyendo `@instance.X`)
+
+```typescript
+// Effect que aplica al personaje (se incluye)
+{
+  target: 'ac.armor',
+  formula: '@entity.armorBonus',
+  conditions: [{ firstFormula: '@instance.equipped', operator: '==', secondFormula: '1' }]
+}
+
+// Effect que aplica al item (NO se incluye aqui)
+{
+  target: '@item.critRange',
+  formula: '...'
+}
+```
+
+### Ubicacion del Codigo
+
+- Compilacion: `character/calculation/effects/compileEffects.ts`
+- Funcion: `compileInventoryItemEffects()`
 
 ## Schemas de Entidades
 
@@ -250,12 +445,26 @@ Definen campos normales con valores por defecto:
 
 | Archivo | Proposito |
 |---------|-----------|
-| `inventory/types.ts` | InventoryItemInstance, CurrencyState |
+| **Tipos e instancias** | |
+| `inventory/types.ts` | InventoryItemInstance, CurrencyState, InventoryState |
+| `inventory/instanceFields.ts` | Helpers: isItemEquipped, setItemEquipped, etc. |
+| **Operaciones** | |
 | `inventory/itemOperations.ts` | CRUD de items |
 | `inventory/containerOperations.ts` | Operaciones de containers |
-| `inventory/instanceFields.ts` | Helpers para equipped/wielded/active |
+| `inventory/currencies/currencyOperations.ts` | Operaciones de currencies |
+| `character/updater/operations/inventoryOperations.ts` | Wrapper para CharacterUpdater |
+| **Propiedades y Effects** | |
 | `inventory/properties/resolveItemEffects.ts` | Aplica @item Effects |
-| `inventory/properties/resolveItemForInventory.ts` | Flujo completo |
+| `inventory/properties/resolveItemForInventory.ts` | Flujo completo de resolucion |
+| `character/calculation/effects/compileEffects.ts` | Compila effects de items equipados |
+| **Instance Fields dinamicos** | |
+| `entities/instanceFields/getInstanceFields.ts` | Descubre instance fields del schema |
+| `entities/types/instanceFields.ts` | Tipos: InstanceFieldDefinition |
+| `levels/entities/defaultAddons.ts` | Definiciones de addons con instanceFields |
+| **Schemas de ejemplo** | |
+| `compendiums/examples/schemas/itemSchema.ts` | Item generico (stackable) |
+| `compendiums/examples/schemas/armorSchema.ts` | Armadura (equippable) |
+| `compendiums/examples/schemas/weaponSchema.ts` | Arma (wieldable) |
 
 ## Siguiente
 
