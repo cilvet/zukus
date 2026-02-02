@@ -12,6 +12,7 @@ import {
   isItemWielded,
 } from "../../../inventory/instanceFields";
 import type { InventoryItemInstance } from "../../../inventory/types";
+import { resolveEffectEntityPlaceholders } from "../../../entities/autoEffects";
 
 // =============================================================================
 // COMPILED EFFECTS - Effects organized by target prefix
@@ -157,6 +158,13 @@ function compileBuffEffects(
 /**
  * Compiles effects from custom entities.
  * Uses the entityType directly as the source type.
+ *
+ * Effects can use @entity.X placeholders to reference entity properties.
+ * These placeholders are resolved using values from the entity itself.
+ *
+ * Note: AutoEffects defined at the schema level (EntitySchemaDefinition.autoEffects)
+ * are copied to the entity's `effects` field by the CMS when creating entities.
+ * By the time entities reach this function, all effects are in the `effects` field.
  */
 function compileEntityEffects(
   computedEntities: ComputedEntity[],
@@ -168,12 +176,14 @@ function compileEntityEffects(
       return;
     }
 
-    // Get effects from entity (if any)
     const effects = entity.effects ?? [];
 
     effects.forEach((effect) => {
+      // Resolve @entity.X placeholders with entity values
+      const resolvedEffect = resolveEffectEntityPlaceholders(effect, entity);
+
       const sourcedEffect = toSourcedEffect(
-        effect,
+        resolvedEffect,
         entity.entityType,
         entity.id,
         entity.name || entity.id

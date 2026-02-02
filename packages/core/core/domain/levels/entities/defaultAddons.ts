@@ -100,38 +100,6 @@ export const effectfulAddon: AddonDefinition = {
 };
 
 // =============================================================================
-// AutoEffectful Addon
-// =============================================================================
-
-/**
- * Addon for entities with effects that use @entity.X placeholders.
- *
- * AutoEffects are effects whose formulas can reference entity properties
- * using @entity.X syntax. These placeholders are resolved at calculation time.
- *
- * Use cases:
- * - Barkskin: "min(2 + floor(@entity.casterLevel / 3), 5)"
- * - Magic weapons with variable enhancement: "@entity.enhancement"
- * - Items/buffs whose effect scales with a property of the entity
- *
- * Note: Both `effects` (from effectful addon) and `autoEffects` support
- * @entity.X placeholders - the distinction is semantic to indicate intent.
- */
-export const autoEffectfulAddon: AddonDefinition = {
-  id: 'autoEffectful',
-  name: 'AutoEffectful',
-  fields: [
-    {
-      name: 'autoEffects',
-      type: 'object_array',
-      optional: true,
-      description: 'Effects that use @entity.X placeholders for dynamic values',
-      objectFields: [],
-    },
-  ],
-};
-
-// =============================================================================
 // Suppressing Addon
 // =============================================================================
 
@@ -373,7 +341,6 @@ export const defaultAddonRegistry: AddonRegistry = {
   taggable: taggableAddon,
   imageable: imageableAddon,
   effectful: effectfulAddon,
-  autoEffectful: autoEffectfulAddon,
   suppressing: suppressingAddon,
   providable: providableAddon,
   dnd35item: dnd35itemAddon,
