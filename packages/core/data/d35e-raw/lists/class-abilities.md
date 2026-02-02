@@ -1,0 +1,275 @@
+# Class Abilities
+
+**Total:** 129 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Changes] | Changes | 14 | Stat modifiers (ability, AC, attack, damage, saves, skills, speed) |
+| [Context Notes] | Context Notes | 13 | Situational bonuses or conditional notes |
+| [Attack Bonus] | Attack Bonus | 4 | Direct attack roll modifier |
+| [Attack Notes] | Attack Notes | 4 | Attack modifier notes |
+| [Effect Notes] | Effect Notes | 4 | Effect description text |
+| [Saving Throw] | Saving Throw | 2 | Requires a saving throw |
+| [Special Actions] | Special Actions | 8 | Activatable abilities with conditions/scripts |
+| [Activation] | Activation | 37 | Has activation cost/type |
+| [Uses] | Uses | 23 | Limited uses per day/encounter |
+| [Class Levels] | Class Levels | 7 | Available to specific classes at specific levels |
+| [Ability Modifiers] | Ability Modifiers | 6 | Uses ability modifier for attack/damage |
+
+---
+
+## Items
+
+- **Abundant Step** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: 1/day
+- **Animal Companion**
+- **Arcane Fire** [Class Levels]
+  - Class Levels: Wizard 9, Sorcerer 9
+- **Arcane Reach** [Class Levels]
+  - Class Levels: Wizard 7, Sorcerer 7
+- **Armor Proficiency (Heavy)**
+- **Armor Proficiency (Light)**
+- **Armor Proficiency (Medium)**
+- **Arrow of Death** [Special Actions] [Activation]
+  - Special Actions: Create Arrow of Death
+  - Activation: special (1)
+- **Aura of Courage** [Context Notes] [Activation]
+  - Context Notes: [[+4]] agains Fear effects
+  - Activation: passive (1)
+- **Aura of Despair** [Context Notes] [Activation]
+  - Context Notes: [[+4]] agains Fear effects
+  - Activation: passive (1)
+- **Bardic Knowledge** [Activation]
+  - Activation: free (1)
+- **Bardic Music** [Special Actions] [Activation] [Uses]
+  - Special Actions: Inspire Courage; Inspire Greatness; Inspire Heroics
+  - Activation: standard (1)
+  - Uses: @classes.bard.level/day
+- **Bladewind** [Activation]
+  - Activation: attack (1)
+- **Bonus Arcane Spellcaster Level** [Changes]
+  - Changes: 1 prestigeCl.arcaneCl (untyped)
+- **Bonus Divine Spellcaster Level** [Changes]
+  - Changes: 1 prestigeCl.divineCl (untyped)
+- **Bonus Feat (Fighter)**
+- **Bonus Feat (Monk)**
+- **Bonus Feat (Psion)**
+- **Bonus Feat (Psychic Warrior)**
+- **Bonus Feat (Rogue)**
+- **Bonus Feat (Wizard)**
+- **Camouflage** [Context Notes]
+  - Context Notes: You can use the Hide skill in any sort of natural terrain
+- **Channel Power**
+- **Combat Style**
+- **Combat Style Mastery**
+- **Crippling Strike**
+- **Dark Blessing** [Changes]
+  - Changes: @abilities.cha.mod savingThrows.allSavingThrows (sacred)
+- **Death Attack** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude negates
+  - Activation: special (1)
+- **Defensive Roll** [Activation] [Uses]
+  - Activation: immediate (1)
+  - Uses: 1/day
+- **Defensive Stance** [Special Actions] [Activation] [Uses]
+  - Special Actions: Defensive Stance
+  - Activation: free (1)
+  - Uses: min(5,max(1,ceil(@classes.dwarvenDefender.level / 2)))/day
+- **Deliver Touch Powers**
+- **Deliver Touch Spells**
+- **Detect Evil** [Activation]
+  - Activation: standard (1)
+- **Detect Good** [Activation]
+  - Activation: standard (1)
+- **Devotion** [Context Notes]
+  - Context Notes: [[+4]] morale bonus against enchantment spells and effects
+- **Diamond Body**
+- **Diamond Soul** [Changes]
+  - Changes: (10+@classes.monk.level) misc.spellResistance (inherent)
+- **Divine Grace** [Changes]
+  - Changes: @abilities.cha.mod savingThrows.allSavingThrows (sacred)
+- **Divine Health**
+- **Elude Touch** [Context Notes]
+  - Context Notes: +[[(@abilities.cha.mod)]] to Touch AC (but not more than base  total AC)
+- **Empathic Link**
+- **Empty Body** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Ethereal (as spell) for amount rounds equal to used charges.
+  - Activation: standard (1)
+  - Uses: @classes.monk.level/day
+- **Endurance** [Context Notes]
+  - Context Notes: [[+4]] to resist nonlethal damage; [[+4]] to continue running, avoid nonlethal damage from a forced march, hold your breath, avoid nonlethal damage from starvation or thirst; [[+4]] to avoid nonlethal damage from hot or cold environments and resist damage from suffocation
+- **Enhance Arrow**
+- **Evasion**
+- **Familiar Spell Resistance** [Changes]
+  - Changes: 5+@classes.wizardFamiliar.level misc.spellResistance (untyped)
+- **Fast Movement** [Changes]
+  - Changes: 10 speed.landSpeed (untyped)
+- **Favored Enemy (No Enemy Set, +2)** [Context Notes]
+  - Context Notes: +[[( 2 * @item.custom.level )]] against ${this.item.custom.favoredenemytype} (Favored Enemy); +[[( 2 * @item.custom.level )]] against ${this.item.custom.favoredenemytype} (Favored Enemy); +[[( 2 * @item.custom.level )]] against ${this.item.custom.favoredenemytype} (Favored Enemy); +[[( 2 * @item.custom.level )]] against ${this.item.custom.favoredenemytype} (Favored Enemy); +[[( 2 * @item.custom.level )]] against ${this.item.custom.favoredenemytype} (Favored Enemy)
+- **Flight** [Changes]
+  - Changes: 50 speed.flySpeed (untyped); 1 ability.str (replace); 15 ability.dex (replace)
+- **Flurry of Blows**
+- **Greater Weapon Focus (Mind Blade)**
+- **Hail of Arrows** [Activation] [Uses]
+  - Activation: attack (1)
+  - Uses: 1/day
+- **Hide in Plain Sight** [Context Notes]
+  - Context Notes: You can use the Hide skill even while being observed.
+- **High Arcana**
+- **Imbue Arrow**
+- **Impromptu Sneak Attack** [Activation] [Uses]
+  - Activation: attack (1)
+  - Uses: 1 + (@classes.arcaneTrickster.level > 6 ? 1 : 0)/day
+- **Improved Combat Style**
+- **Improved Evasion**
+- **Improved Uncanny Dodge**
+- **Indomitable Will** [Context Notes]
+  - Context Notes: +[[4]] to resist enchantment spells while in Rage
+- **Ki Strike**
+- **Knife to the Soul**
+- **Lay on Hands** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: (@classes.paladin.level*@abilities.cha.mod)/day
+- **Martial Weapon Proficiency (All)**
+- **Mastery of Counterspelling** [Class Levels]
+  - Class Levels: Wizard 7, Sorcerer 7
+- **Mastery of Elements** [Class Levels]
+  - Class Levels: Wizard 8, Sorcerer 8
+- **Mastery of Shaping** [Class Levels]
+  - Class Levels: Wizard 6, Sorcerer 6
+- **Mind Blade** [Special Actions] [Activation]
+  - Special Actions: Mind Blade (Sword, Melee); Mind Blade (Longsword, Melee); Mind Blade (Bastard Sword, Melee)
+  - Activation: move (1)
+- **Mind Blade (Bastard Sword, Melee)** [Attack Notes] [Ability Modifiers] [Attack Bonus]
+  - Attack Notes: Treat as a magic weapon with +[[floor(@classes.soulknife.level/4)]] enhancement.
+  - Ability Modifiers: atk: str, dmg: str
+  - Attack Bonus: floor(@classes.soulknife.level/4) + 1 + (@classes.soulknife.level > 8 ? 1 : 0)
+- **Mind Blade (Longsword, Melee)** [Attack Notes] [Ability Modifiers] [Attack Bonus]
+  - Attack Notes: Treat as a magic weapon with +[[floor(@classes.soulknife.level/4)]] enhancement.
+  - Ability Modifiers: atk: str, dmg: str
+  - Attack Bonus: floor(@classes.soulknife.level/4) + 1 + (@classes.soulknife.level > 8 ? 1 : 0)
+- **Mind Blade (Sword, Melee)** [Attack Notes] [Ability Modifiers] [Attack Bonus]
+  - Attack Notes: Treat as a magic weapon with +[[floor(@classes.soulknife.level/4)]] enhancement.
+  - Ability Modifiers: atk: str, dmg: str
+  - Attack Bonus: floor(@classes.soulknife.level/4) + 1 + (@classes.soulknife.level > 8 ? 1 : 0)
+- **Multiattack**
+- **Nature Sense** [Changes]
+  - Changes: 2 skill.skill.kna (untyped); 2 skill.skill.sur (untyped)
+- **Opportunist** [Activation]
+  - Activation: immediate (1)
+- **Paladin Mount Spell Resistance** [Changes]
+  - Changes: 5+@classes. paladinMount.level misc.spellResistance (untyped)
+- **Perfect Self**
+- **Phase Arrow** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: 1/day
+- **Poison Use**
+- **Psicrystal Power Resistance** [Changes]
+  - Changes: 5+@classes.psicrystal.level misc.spellResistance (untyped)
+- **Psychic Strike** [Attack Notes] [Activation]
+  - Attack Notes: Creatures immune to mind-affecting effects are immune to psychic strike damage.
+  - Activation: move (1)
+- **Purity of Body**
+- **Quivering Palm** [Effect Notes] [Saving Throw] [Ability Modifiers] [Activation] [Uses]
+  - Effect Notes: See description
+  - Saving Throw: Fortitude negates
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+  - Uses: 1/week
+- **Rage** [Special Actions] [Activation] [Uses]
+  - Special Actions: Rage!; Greater Rage!; Mighty Rage!
+  - Activation: swift (1)
+  - Uses: floor(@classes.barbarian.level/4)+1/day
+- **Ranged Legerdemain** [Activation] [Uses]
+  - Activation: free (1)
+  - Uses: 1 + (@classes.arcaneTrickster.level > 4 ? 1 : 0) + (@classes.arcaneTrickster.level > 8 ? 1 : 0)/day
+- **Remove Disease** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Remove Disease effect
+  - Activation: standard (1)
+  - Uses: floor((@classes.paladin.level - 3)/3)/week
+- **Resist Nature's Lure** [Context Notes]
+  - Context Notes: [[+4]] bonus on saving throws against the spell-like abilities of fey
+- **Rogue Special Ability**
+- **Save Bonus against Poison** [Context Notes]
+  - Context Notes: [[( floor(@classes.assassin.level / 2) ]] to all poisons
+- **Scribe Scroll**
+- **Seeker Arrow** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: 1/day
+- **Self Propulsion** [Changes]
+  - Changes: 30 speed.landSpeed (untyped); 20 speed.climbSpeed (untyped); 1 ability.str (replace); 15 ability.dex (replace)
+- **Share Powers**
+- **Share Spells**
+- **Shield Proficiency**
+- **Simple Weapon Proficiency**
+- **Skill Mastery**
+- **Slippery Mind**
+- **Slow Fall**
+- **Smite Evil** [Activation] [Uses]
+  - Activation: immediate (1)
+  - Uses: floor(@classes.paladin.level/5)+1/day
+- **Smite Good** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Add [[@abilities.cha.mod]] to next attack roll, and [[@classess.blackguard.level]] to damage if atta
+  - Activation: immediate (1)
+  - Uses: floor(@classes.blackguard.level/5)+1/day
+- **Sneak Attack**
+- **Sneak Attack (Attack)** [Uses]
+  - Uses: @attributes.sneakAttackDiceTotal
+- **Speak with Animals of Its Kind**
+- **Speak with Master**
+- **Special Mount** [Activation] [Uses]
+  - Activation: full (1)
+  - Uses: 1/day
+- **Speed of Thought** [Changes]
+  - Changes: 10 speed.allSpeeds (insight)
+- **Spell Power** [Class Levels]
+  - Class Levels: Wizard 5, Sorcerer 5
+- **Spell-Like Ability** [Class Levels]
+  - Class Levels: Wizard 5, Sorcerer 5
+- **Still Mind** [Context Notes]
+  - Context Notes: [[+2]] against spells and effects from the school of enchantment
+- **Summon Familiar**
+- **Surging Euphoria** [Special Actions] [Activation]
+  - Special Actions: Surging Euphoria!
+  - Activation: immediate (1)
+- **Telepathic Link**
+- **Thousand Faces** [Activation]
+  - Activation: standard (1)
+- **Tower Shield Proficiency**
+- **Track**
+- **Trackless Step**
+- **Trap Sense** [Context Notes]
+  - Context Notes: +[[floor(@attributes.hd.total/3.0)]] to avoid traps; +[[floor(@attributes.hd.total/3.0)]] to avoid traps
+- **Turn Earth/Rebuke Air** [Special Actions] [Activation] [Uses]
+  - Special Actions: Turn Undead
+  - Activation: standard (1)
+  - Uses: @turnUndeadUsesTotal/day
+- **Turn/Rebuke Undead** [Special Actions] [Activation] [Uses]
+  - Special Actions: Turn Undead
+  - Activation: standard (1)
+  - Uses: @attributes.turnUndeadUsesTotal/day
+- **Unarmed Strike (Monk)** [Ability Modifiers] [Activation]
+  - Ability Modifiers: atk: str, dmg: str
+  - Activation: attack (1)
+- **Uncanny Dodge**
+- **Weapon Focus (Mind Blade)**
+- **Wholeness of Body** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: 2*(@classes.monk.level)/day
+- **Wild Empathy** [Ability Modifiers] [Attack Bonus] [Activation]
+  - Ability Modifiers: atk: cha, dmg: cha
+  - Attack Bonus: max(@classes.ranger.level,@classes.druid.level)
+  - Activation: minute (1)
+- **Wild Shape** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: (@classes.druid.level > 4 ? 1 : 0) + (@classes.druid.level > 5 ? 1 : 0) + (@classes.druid.level > 6 ? 1 : 0) + (@classes.druid.level > 9 ? 1 : 0) + (@classes.druid.level > 13 ? 1 : 0) + (@classes.druid.level > 17 ? 1 : 0) /day
+- **Wild Shape (Elemental)** [Activation] [Uses]
+  - Activation: standard (1)
+  - Uses: (@classes.druid.level > 15 ? 1 : 0) + (@classes.druid.level > 17 ? 1 : 0) + (@classes.druid.level == 20 ? 1 : 0) /day
+- **Wild Surge**
+- **Wild Talent** [Changes]
+  - Changes: 2 psionic.powerPoints (untyped)
+- **Woodland Stride**

@@ -1,0 +1,658 @@
+# Bestiary
+
+**Total:** 645 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+
+---
+
+## Items
+
+- **Aboleth**
+- **Aboleth, Psionic**
+- **Abyssal Greater Basilisk**
+- **Achaierai**
+- **Adamantine Golem**
+- **Adult Arrowhawk**
+- **Adult Tojanida**
+- **Advanced Megaraptor Skeleton**
+- **Air Elemental, Elder**
+- **Air Elemental, Greater**
+- **Air Elemental, Huge**
+- **Air Elemental, Large**
+- **Air Elemental, Medium**
+- **Air Elemental, Primal**
+- **Air Elemental, Small**
+- **Air Mephit**
+- **Allip**
+- **Anaxim**
+- **Androsphinx**
+- **Angel, Astral Deva**
+- **Angel, Planetar**
+- **Angel, Solar**
+- **Animated Object, Colossal**
+- **Animated Object, Gargantuan**
+- **Animated Object, Huge**
+- **Animated Object, Large**
+- **Animated Object, Medium**
+- **Animated Object, Small**
+- **Animated Object, Tiny**
+- **Ankheg**
+- **Annis**
+- **Ape**
+- **Aranea**
+- **Assassin Vine**
+- **Athach**
+- **Atropal**
+- **Average Salamander**
+- **Average Xorn**
+- **Avoral**
+- **Azer**
+- **Babau**
+- **Baboon**
+- **Badger**
+- **Baleen Whale**
+- **Balor**
+- **Barbed Devil**
+- **Barghest**
+- **Basilisk**
+- **Bat**
+- **Bat Swarm**
+- **Bear, Black**
+- **Bear, Brown**
+- **Bear, Polar**
+- **Bearded Devil**
+- **Bebilith**
+- **Behemoth Eagle**
+- **Behemoth Gorilla**
+- **Behir**
+- **Belker**
+- **Bison**
+- **Black Dragon, Adult**
+- **Black Dragon, Ancient**
+- **Black Dragon, Great wyrm**
+- **Black Dragon, Juvenile**
+- **Black Dragon, Mature adult**
+- **Black Dragon, Old**
+- **Black Dragon, Very old**
+- **Black Dragon, Very young**
+- **Black Dragon, Wyrm**
+- **Black Dragon, Wyrmling**
+- **Black Dragon, Young**
+- **Black Dragon, Young adult**
+- **Black Pudding**
+- **Blink Dog**
+- **Blue Dragon, Adult**
+- **Blue Dragon, Ancient**
+- **Blue Dragon, Great wyrm**
+- **Blue Dragon, Juvenile**
+- **Blue Dragon, Mature adult**
+- **Blue Dragon, Old**
+- **Blue Dragon, Very old**
+- **Blue Dragon, Very young**
+- **Blue Dragon, Wyrm**
+- **Blue Dragon, Wyrmling**
+- **Blue Dragon, Young**
+- **Blue Dragon, Young adult**
+- **Boar**
+- **Bodak**
+- **Bone Devil**
+- **Brachyurus**
+- **Brain Mole**
+- **Bralani**
+- **Brass Dragon, Adult**
+- **Brass Dragon, Ancient**
+- **Brass Dragon, Great wyrm**
+- **Brass Dragon, Juvenile**
+- **Brass Dragon, Mature adult**
+- **Brass Dragon, Old**
+- **Brass Dragon, Very old**
+- **Brass Dragon, Very young**
+- **Brass Dragon, Wyrm**
+- **Brass Dragon, Wyrmling**
+- **Brass Dragon, Young**
+- **Brass Dragon, Young adult**
+- **Bronze Dragon, Adult**
+- **Bronze Dragon, Ancient**
+- **Bronze Dragon, Great wyrm**
+- **Bronze Dragon, Juvenile**
+- **Bronze Dragon, Mature adult**
+- **Bronze Dragon, Old**
+- **Bronze Dragon, Very old**
+- **Bronze Dragon, Very young**
+- **Bronze Dragon, Wyrm**
+- **Bronze Dragon, Wyrmling**
+- **Bronze Dragon, Young**
+- **Bronze Dragon, Young adult**
+- **Bugbear**
+- **Bugbear Zombie**
+- **Bulette**
+- **Cachalot Whale**
+- **Caller in Darkness**
+- **Camel**
+- **Cat**
+- **Centaur**
+- **Centipede Swarm**
+- **Cerebrilith**
+- **Chain Devil**
+- **Chaos Beast**
+- **Cheetah**
+- **Chichimec**
+- **Chimera**
+- **Chimera Skeleton**
+- **Choker**
+- **Chuul**
+- **Clay Golem**
+- **Cloaker**
+- **Cloud Giant**
+- **Cloud Giant Skeleton**
+- **Cockatrice**
+- **Constrictor Snake**
+- **Constrictor Snake, Giant**
+- **Copper Dragon, Adult**
+- **Copper Dragon, Ancient**
+- **Copper Dragon, Great wyrm**
+- **Copper Dragon, Juvenile**
+- **Copper Dragon, Mature adult**
+- **Copper Dragon, Old**
+- **Copper Dragon, Very old**
+- **Copper Dragon, Very young**
+- **Copper Dragon, Wyrm**
+- **Copper Dragon, Wyrmling**
+- **Copper Dragon, Young**
+- **Copper Dragon, Young adult**
+- **Couatl**
+- **Couatl, Psionic**
+- **Criosphinx**
+- **Crocodile**
+- **Crocodile, Giant**
+- **Crysmal**
+- **Dark Naga**
+- **Darkmantle**
+- **Deinonychus**
+- **Delver**
+- **Demilich**
+- **Derro**
+- **Destrachan**
+- **Devastation Beetle**
+- **Devastation Centipede**
+- **Devastation Scorpion**
+- **Devastation Spider**
+- **Devourer**
+- **Digester**
+- **Dire Ape**
+- **Dire Badger**
+- **Dire Bat**
+- **Dire Bear**
+- **Dire Boar**
+- **Dire Lion**
+- **Dire Rat**
+- **Dire Shark**
+- **Dire Tiger**
+- **Dire Weasel**
+- **Dire Wolf**
+- **Dire Wolverine**
+- **Djinni**
+- **Dog**
+- **Dog, Riding**
+- **Donkey**
+- **Doppelganger**
+- **Dragon Turtle**
+- **Dragonne**
+- **Dread Wraith**
+- **Dream Larva**
+- **Dretch**
+- **Drider**
+- **Dryad**
+- **Dust Mephit**
+- **Eagle**
+- **Eagle, Giant**
+- **Earth Elemental, Elder**
+- **Earth Elemental, Greater**
+- **Earth Elemental, Huge**
+- **Earth Elemental, Large**
+- **Earth Elemental, Medium**
+- **Earth Elemental, Primal**
+- **Earth Elemental, Small**
+- **Earth Mephit**
+- **Efreeti**
+- **Eight-Headed Hydra**
+- **Elasmosaurus**
+- **Elder Arrowhawk**
+- **Elder Black Pudding**
+- **Elder Tojanida**
+- **Elder Xorn**
+- **Elephant**
+- **Eleven-Headed Hydra**
+- **Erinyes**
+- **Ethereal Filcher**
+- **Ethereal Marauder**
+- **Ettercap**
+- **Ettin**
+- **Ettin Skeleton**
+- **Fire Elemental, Elder**
+- **Fire Elemental, Greater**
+- **Fire Elemental, Huge**
+- **Fire Elemental, Large**
+- **Fire Elemental, Medium**
+- **Fire Elemental, Primal**
+- **Fire Elemental, Small**
+- **Fire Giant**
+- **Fire Mephit**
+- **Five-Headed Hydra**
+- **Flamebrother Salamander**
+- **Flesh Colossus**
+- **Flesh Golem**
+- **Folugub**
+- **Force Dragon, Adult**
+- **Force Dragon, Ancient**
+- **Force Dragon, Great wyrm**
+- **Force Dragon, Juvenile**
+- **Force Dragon, Mature adult**
+- **Force Dragon, Old**
+- **Force Dragon, Very old**
+- **Force Dragon, Very young**
+- **Force Dragon, Wyrm**
+- **Force Dragon, Wyrmling**
+- **Force Dragon, Young**
+- **Force Dragon, Young adult**
+- **Formian Myrmarch**
+- **Formian Queen**
+- **Formian Taskmaster**
+- **Formian Warrior**
+- **Formian Worker**
+- **Frost Giant**
+- **Frost Worm**
+- **Gargoyle**
+- **Gelatinous Cube**
+- **Genius Loci**
+- **Ghaele**
+- **Ghast**
+- **Ghoul**
+- **Giant Ant, Queen**
+- **Giant Ant, Soldier**
+- **Giant Ant, Worker**
+- **Giant Bee**
+- **Giant Bombardier Beetle**
+- **Giant Fire Beetle**
+- **Giant Praying Mantis**
+- **Giant Stag Beetle**
+- **Giant Wasp**
+- **Gibbering Mouther**
+- **Gibbering Orb**
+- **Girallon**
+- **Glabrezu**
+- **Gloom**
+- **Gnoll**
+- **Gold Dragon, Adult**
+- **Gold Dragon, Ancient**
+- **Gold Dragon, Great wyrm**
+- **Gold Dragon, Juvenile**
+- **Gold Dragon, Mature adult**
+- **Gold Dragon, Old**
+- **Gold Dragon, Very old**
+- **Gold Dragon, Very young**
+- **Gold Dragon, Wyrm**
+- **Gold Dragon, Wyrmling**
+- **Gold Dragon, Young**
+- **Gold Dragon, Young adult**
+- **Golden Protector (Celestial Half-Dragon Lammasu)**
+- **Gorgon**
+- **Gray Glutton**
+- **Gray Ooze**
+- **Gray Render**
+- **Gray Render Zombie**
+- **Greater Barghest**
+- **Greater Shadow**
+- **Greater Stone Golem**
+- **Green Dragon, Adult**
+- **Green Dragon, Ancient**
+- **Green Dragon, Great wyrm**
+- **Green Dragon, Juvenile**
+- **Green Dragon, Mature adult**
+- **Green Dragon, Old**
+- **Green Dragon, Very old**
+- **Green Dragon, Very young**
+- **Green Dragon, Wyrm**
+- **Green Dragon, Wyrmling**
+- **Green Dragon, Young**
+- **Green Dragon, Young adult**
+- **Green Hag**
+- **Grick**
+- **Griffon**
+- **Grig**
+- **Grimlock**
+- **Guardian Naga**
+- **Gynosphinx**
+- **Ha-Naga**
+- **Hagunemnon**
+- **Harpy**
+- **Hawk**
+- **Hecatoncheires**
+- **Hellcat**
+- **Hellhound**
+- **Hellwasp Swarm**
+- **Hezrou**
+- **Hieracosphinx**
+- **Hill Giant**
+- **Hill Giant Dire Wereboar Dire Boar Form**
+- **Hill Giant Dire Wereboar Giant Form**
+- **Hill Giant Dire Wereboar Hybrid Boar Form**
+- **Hippogriff**
+- **Hoary Hunter**
+- **Hoary Steed**
+- **Homunculus**
+- **Horned Devil**
+- **Horse, Heavy**
+- **Horse, Light**
+- **Hound Archon**
+- **Howler**
+- **Human Commoner Zombie**
+- **Human Warrior Skeleton**
+- **Hunefer**
+- **Hyena**
+- **Ice Devil**
+- **Ice Mephit**
+- **Imp**
+- **Infernal**
+- **Intellect Devourer**
+- **Invisible Stalker**
+- **Iron Colossus**
+- **Iron Golem**
+- **Janni**
+- **Juvenile Arrowhawk**
+- **Juvenile Tojanida**
+- **Kobold Zombie**
+- **Kraken**
+- **Krenshar**
+- **Lacedon**
+- **Lamia**
+- **Lammasu**
+- **Lantern Archon**
+- **Lavawight**
+- **Legendary Bear**
+- **Legendary Tiger**
+- **Leonal**
+- **Leopard**
+- **Leshay**
+- **Lillend**
+- **Lion**
+- **Living Vault**
+- **Lizard**
+- **Lizard, Monitor**
+- **Lizardfolk**
+- **Locathah**
+- **Locust Swarm**
+- **Magma Mephit**
+- **Magmin**
+- **Manta Ray**
+- **Manticore**
+- **Marilith**
+- **Marut**
+- **Medusa**
+- **Megaraptor**
+- **Mercane**
+- **Mimic**
+- **Minor Xorn**
+- **Minotaur**
+- **Minotaur Zombie**
+- **Mithral Golem**
+- **Mohrg**
+- **Monkey**
+- **Monstrous Centipede, Colossal**
+- **Monstrous Centipede, Gargantuan**
+- **Monstrous Centipede, Huge**
+- **Monstrous Centipede, Large**
+- **Monstrous Centipede, Medium**
+- **Monstrous Centipede, Small**
+- **Monstrous Centipede, Tiny**
+- **Monstrous Scorpion, Colossal**
+- **Monstrous Scorpion, Gargantuan**
+- **Monstrous Scorpion, Huge**
+- **Monstrous Scorpion, Large**
+- **Monstrous Scorpion, Medium**
+- **Monstrous Scorpion, Small**
+- **Monstrous Scorpion, Tiny**
+- **Monstrous Spider, Colossal**
+- **Monstrous Spider, Gargantuan**
+- **Monstrous Spider, Huge**
+- **Monstrous Spider, Large**
+- **Monstrous Spider, Medium**
+- **Monstrous Spider, Small**
+- **Monstrous Spider, Tiny**
+- **Mu Spore**
+- **Mule**
+- **Mummy**
+- **Nalfeshnee**
+- **Neh-Thalggu**
+- **Neothelid**
+- **Nessian Warhound**
+- **Night Hag**
+- **Nightcrawler**
+- **Nightmare**
+- **Nightmare, Cauchemar**
+- **Nightwalker**
+- **Nightwing**
+- **Nine-Headed Hydra**
+- **Nixie**
+- **Noble Salamander**
+- **Nymph**
+- **Ochre Jelly**
+- **Octopus**
+- **Octopus, Giant**
+- **Ogre**
+- **Ogre Mage**
+- **Ogre Zombie**
+- **Ooze Mephit**
+- **Orca**
+- **Otyugh**
+- **Owl**
+- **Owl, Giant**
+- **Owlbear**
+- **Owlbear Skeleton**
+- **Pegasus**
+- **Phaethon**
+- **Phane**
+- **Phantom Fungus**
+- **Phase Spider**
+- **Phasm**
+- **Phthisic**
+- **Pit Fiend**
+- **Pixie**
+- **Pony**
+- **Pony, War**
+- **Porpoise**
+- **Prismasaurus**
+- **Prismatic Dragon, Adult**
+- **Prismatic Dragon, Ancient**
+- **Prismatic Dragon, Great wyrm**
+- **Prismatic Dragon, Juvenile**
+- **Prismatic Dragon, Mature adult**
+- **Prismatic Dragon, Old**
+- **Prismatic Dragon, Very old**
+- **Prismatic Dragon, Very young**
+- **Prismatic Dragon, Wyrm**
+- **Prismatic Dragon, Wyrmling**
+- **Prismatic Dragon, Young**
+- **Prismatic Dragon, Young adult**
+- **Pseudodragon**
+- **Pseudonatural Troll**
+- **Psicrystal**
+- **Psion-Killer**
+- **Puppeteer**
+- **Puppeteer, Flesh Harrower**
+- **Purple Worm**
+- **Quasit**
+- **Rakshasa**
+- **Rast**
+- **Rat**
+- **Rat Swarm**
+- **Raven**
+- **Ravid**
+- **Red Dragon, Adult**
+- **Red Dragon, Ancient**
+- **Red Dragon, Great wyrm**
+- **Red Dragon, Juvenile**
+- **Red Dragon, Mature adult**
+- **Red Dragon, Old**
+- **Red Dragon, Very old**
+- **Red Dragon, Very young**
+- **Red Dragon, Wyrm**
+- **Red Dragon, Wyrmling**
+- **Red Dragon, Young**
+- **Red Dragon, Young adult**
+- **Remorhaz**
+- **Retriever**
+- **Rhinoceros**
+- **Roc**
+- **Roper**
+- **Ruin Swarm**
+- **Rust Monster**
+- **Sahuagin**
+- **Salt Mephit**
+- **Satyr**
+- **Sea Cat**
+- **Sea Hag**
+- **Seven-Headed Hydra**
+- **Shadow**
+- **Shadow Mastiff**
+- **Shadow of the Void**
+- **Shambling Mound**
+- **Shape of Fire**
+- **Shark, Huge**
+- **Shark, Large**
+- **Shark, Medium**
+- **Shield Guardian**
+- **Shocker Lizard**
+- **Shrieker**
+- **Silver Dragon, Adult**
+- **Silver Dragon, Ancient**
+- **Silver Dragon, Great wyrm**
+- **Silver Dragon, Juvenile**
+- **Silver Dragon, Mature adult**
+- **Silver Dragon, Old**
+- **Silver Dragon, Very old**
+- **Silver Dragon, Very young**
+- **Silver Dragon, Wyrm**
+- **Silver Dragon, Wyrmling**
+- **Silver Dragon, Young**
+- **Silver Dragon, Young adult**
+- **Sirrush**
+- **Six-Headed Hydra**
+- **Skum**
+- **Snake, Huge Viper**
+- **Snake, Large Viper**
+- **Snake, Medium Viper**
+- **Snake, Small Viper**
+- **Snake, Tiny Viper**
+- **Spectre**
+- **Spider Eater**
+- **Spider Swarm**
+- **Spirit Naga**
+- **Squid**
+- **Squid, Giant**
+- **Steam Mephit**
+- **Stirge**
+- **Stone Colossus**
+- **Stone Giant**
+- **Stone Golem**
+- **Storm Giant**
+- **Succubus**
+- **Tarrasque**
+- **Tayellah**
+- **Temporal Filcher**
+- **Ten-Headed Hydra**
+- **Tendriculos**
+- **Thoqqua**
+- **Thorciasid**
+- **Thought Eater**
+- **Thought Slayer**
+- **Three-Headed Sirrush**
+- **Tiger**
+- **Titan**
+- **Titan, Elder**
+- **Toad**
+- **Treant**
+- **Treant, Elder**
+- **Triceratops**
+- **Triton**
+- **Troglodyte**
+- **Troglodyte Zombie**
+- **Troll**
+- **Troll Skeleton**
+- **Trumpet Archon**
+- **Twelve-Headed Hydra**
+- **Tyrannosaurus**
+- **Udoroot**
+- **Umbral Blot**
+- **Unbodied**
+- **Unicorn**
+- **Uvuudaum**
+- **Vampire Spawn**
+- **Vargouille**
+- **Vermiurge**
+- **Violet Fungus**
+- **Vrock**
+- **Warhorse, Heavy**
+- **Warhorse, Light**
+- **Water Elemental, Elder**
+- **Water Elemental, Greater**
+- **Water Elemental, Huge**
+- **Water Elemental, Large**
+- **Water Elemental, Medium**
+- **Water Elemental, Primal**
+- **Water Elemental, Small**
+- **Water Mephit**
+- **Water Naga**
+- **Weasel**
+- **Werebear, Bear Form**
+- **Werebear, Human Form**
+- **Werebear, Hybrid Form**
+- **Wereboar, Boar Form**
+- **Wereboar, Human Form**
+- **Wereboar, Hybrid Form**
+- **Wererat, Dire Rat Form**
+- **Wererat, Human Form**
+- **Wererat, Hybrid Form**
+- **Weretiger, Human Form**
+- **Weretiger, Hybrid Form**
+- **Weretiger, Tiger Form**
+- **Werewolf Lord, Dire Wolf Form**
+- **Werewolf Lord, Human Form**
+- **Werewolf Lord, Hybrid Form**
+- **Werewolf, Human Form**
+- **Werewolf, Hybrid Form**
+- **Werewolf, Wolf Form**
+- **White Dragon, Adult**
+- **White Dragon, Ancient**
+- **White Dragon, Great wyrm**
+- **White Dragon, Juvenile**
+- **White Dragon, Mature adult**
+- **White Dragon, Old**
+- **White Dragon, Very old**
+- **White Dragon, Very young**
+- **White Dragon, Wyrm**
+- **White Dragon, Wyrmling**
+- **White Dragon, Young**
+- **White Dragon, Young adult**
+- **Wight**
+- **Will-O'-Wisp**
+- **Winter Wolf**
+- **Winterwight**
+- **Wolf**
+- **Wolf Skeleton**
+- **Wolverine**
+- **Worg**
+- **Worm that Walks**
+- **Wraith**
+- **Wyvern**
+- **Wyvern Zombie**
+- **Xill**
+- **Xixecal**
+- **Yeth Hound**
+- **Young Adult Red Dragon Skeleton**
+- **Yrthak**
+- **Zelekhut**

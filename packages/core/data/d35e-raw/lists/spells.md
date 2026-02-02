@@ -1,0 +1,2682 @@
+# Spells
+
+**Total:** 673 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Attack Notes] | Attack Notes | 12 | Attack modifier notes |
+| [Effect Notes] | Effect Notes | 27 | Effect description text |
+| [Saving Throw] | Saving Throw | 604 | Requires a saving throw |
+| [Special Actions] | Special Actions | 27 | Activatable abilities with conditions/scripts |
+| [Activation] | Activation | 673 | Has activation cost/type |
+| [Class Levels] | Class Levels | 626 | Available to specific classes at specific levels |
+| [Ability Modifiers] | Ability Modifiers | 19 | Uses ability modifier for attack/damage |
+
+---
+
+## Items
+
+- **Acid Arrow** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: Acid lasts [[min(18,floor((@cl/3)))]] Rounds, dealing 2d4 acid damage each round
+  - Attack Notes: vs Touch AC
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Acid Fog** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Fog lasts for [[(@cl)]] Rounds
+  - Attack Notes: Acid Damage to all creatures and objects
+  - Saving Throw: None
+  - Class Levels: Wizard 6, Sorcerer 6, Water 7
+  - Activation: standard (1)
+- **Acid Splash** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: One missile that  deals 1d3 acid damage.
+  - Attack Notes: vs Touch AC
+  - Saving Throw: None
+  - Class Levels: Wizard 0, Sorcerer 0
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Aid** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Aid
+  - Saving Throw: None
+  - Class Levels: Cleric 2, Good 2, Luck 2
+  - Activation: standard (1)
+- **Air Walk** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 4, Druid 4, Air 4
+  - Activation: standard (1)
+- **Alarm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 1, Ranger 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Align Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Cleric 2
+  - Activation: standard (1)
+- **Alter Self** [Class Levels] [Activation]
+  - Class Levels: Assassin 2, Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Analyze Dweomer** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Animal Growth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Druid 5, Ranger 4, Wizard 5, Sorcerer 5, Scalykind 5
+  - Activation: standard (1)
+- **Animal Messenger** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Bard 2, Druid 2, Ranger 1
+  - Activation: standard (1)
+- **Animal Shapes** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Druid 8, Animal 7, Scalykind 8
+  - Activation: standard (1)
+- **Animal Trance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 2, Druid 2, Scalykind 2
+  - Activation: standard (1)
+- **Animate Dead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Wizard 4, Sorcerer 4, Death 3
+  - Activation: standard (1)
+- **Animate Objects** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 6, Cleric 6, Chaos 6
+  - Activation: standard (1)
+- **Animate Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 7, Plant 7
+  - Activation: standard (1)
+- **Animate Rope** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Artifice 1
+  - Activation: standard (1)
+- **Animus Blast** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Animus Blizzard** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Antilife Shell** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 6, Druid 6, Animal 6
+  - Activation: round (1)
+- **Antimagic Field** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 8, Wizard 6, Sorcerer 6, Magic 6, Protection 6
+  - Activation: standard (1)
+- **Antipathy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Druid 9, Wizard 8, Sorcerer 8
+  - Activation: hour (1)
+- **Antiplant Shell** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 4
+  - Activation: standard (1)
+- **Arcane Eye** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: minute (10)
+- **Arcane Lock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Arcane Mark** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Inscribes a personal rune (visible or invisible).
+  - Saving Throw: None
+  - Class Levels: Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Arcane Sight** [Class Levels] [Activation]
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Arcane Sight, Greater** [Class Levels] [Activation]
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Armor Of Darkness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Darkness 4
+  - Activation: round (1)
+- **Astral Projection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9, Travel 9
+  - Activation: minute (30)
+- **Atonement** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 5, Druid 5
+  - Activation: hour (1)
+- **Augury** [Class Levels] [Activation]
+  - Class Levels: Cleric 2
+  - Activation: minute (1)
+- **Awaken** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Druid 5
+  - Activation: hour (24)
+- **Baleful Polymorph** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates, Will partial; see text
+  - Class Levels: Druid 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Baleful Transportation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 2
+  - Activation: standard (1)
+- **Bane** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bane
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Banishment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 6, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Barkskin** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Barkskin
+  - Saving Throw: None
+  - Class Levels: Druid 2, Ranger 2, Plant 2
+  - Activation: standard (1)
+- **Bear's Endurance** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bear’s Endurance
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Druid 2, Ranger 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Bear's Endurance, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bear’s Endurance
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 6, Druid 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Bestow Curse** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 3, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Binding** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: minute (1)
+- **Black Tentacles** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Blade Barrier** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Reflex negates; see text
+  - Class Levels: Cleric 6, Good 6, War 6
+  - Activation: standard (1)
+- **Blasphemy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Cleric 7, Evil 7
+  - Activation: standard (1)
+- **Bless** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bless
+  - Saving Throw: None
+  - Class Levels: Cleric 1, Paladin 1, Community 1
+  - Activation: standard (1)
+- **Bless Water** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Cleric 1, Paladin 1
+  - Activation: minute (1)
+- **Bless Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Paladin 1, Glory 2
+  - Activation: standard (1)
+- **Blight** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half; see text
+  - Class Levels: Druid 4, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Blindness/Deafness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Bard 2, Cleric 3, Wizard 2, Sorcerer 2, Darkness 2
+  - Activation: standard (1)
+- **Blink** [Class Levels] [Activation]
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Blur** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Bolt Of Glory** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Glory 6
+  - Activation: round (1)
+- **Bolts of Bedevilment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Madness 5
+  - Activation: round (1)
+- **Brain Spider** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 8
+  - Activation: round (1)
+- **Break Enchantment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Bard 4, Cleric 5, Paladin 4, Wizard 5, Sorcerer 5, Liberation 5, Luck 5
+  - Activation: minute (1)
+- **Bull's Strength** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bull's Strength
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Blackguard 2, Cleric 2, Druid 2, Paladin 2, Wizard 2, Sorcerer 2, Strength 2
+  - Activation: standard (1)
+- **Bull's Strength, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Bull's Strength
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 6, Druid 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Burning Hands** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 1, Sorcerer 1, Fire 1
+  - Activation: standard (1)
+- **Call Lightning** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Call 1 bolt/round, up to [[min(10,(@cl))]] bolts
+  - Attack Notes: [[3d10]] Damage if in Stormy Area
+  - Saving Throw: Reflex half
+  - Class Levels: Druid 3, Weather 3
+  - Activation: round (1)
+- **Call Lightning Storm** [Effect Notes] [Attack Notes] [Class Levels] [Activation]
+  - Effect Notes: Call 1 bolt/round, up to [[min(15,(@cl))]] bolts
+  - Attack Notes: [[5d10]] Damage if in Stormy Area
+  - Class Levels: Druid 5, Weather 5
+  - Activation: round (1)
+- **Calm Animals** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Effects up too [[2d4+(@cl)]] Hit Dice of Animals
+Effect Lasts [[(@cl)]] Minutes
+  - Saving Throw: Will negates; see text
+  - Class Levels: Druid 1, Ranger 1, Animal 1
+  - Activation: standard (1)
+- **Calm Emotions** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 2, Cleric 2, Charm 2, Law 2
+  - Activation: standard (1)
+- **Cat's Grace** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Cat’s Grace
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 2, Bard 2, Druid 2, Ranger 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Cat's Grace, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Cat’s Grace
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 6, Druid 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Cause Fear** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Creature Frightened for [[1d4]] rounds on failed save
+  - Saving Throw: Will partial
+  - Class Levels: Blackguard 1, Bard 1, Cleric 1, Wizard 1, Sorcerer 1, Death 1
+  - Activation: standard (1)
+- **Chain Lightning** [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Attack Notes: Bolt deals full damage to primary target and half damage on up to [[@cl]] targets
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 6, Sorcerer 6, Air 6
+  - Activation: standard (1)
+- **Changestaff** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 7
+  - Activation: round (1)
+- **Chaos Hammer** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Full damage to Lawful, Half damage to Neutral
+  - Attack Notes: Lawful creatures slowed for [[1d6]] rounds
+  - Saving Throw: Will partial; see text
+  - Class Levels: Chaos 4
+  - Activation: standard (1)
+- **Charm Animal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Charm Monster** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Wizard 4, Sorcerer 4, Charm 5
+  - Activation: standard (1)
+- **Charm Monster, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 6, Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Charm Person** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Charm 1
+  - Activation: standard (1)
+- **Chill Metal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 2
+  - Activation: standard (1)
+- **Chill Touch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial or Will negates; see text
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Circle of Death** [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Attack Notes: Slays [[(@cl)d4]] Hit Dice of Creatures
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Clairaudience/Clairvoyance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 4, Bard 3, Wizard 3, Sorcerer 3, Knowledge 3
+  - Activation: minute (10)
+- **Clenched Fist** [Class Levels] [Activation]
+  - Class Levels: Wizard 8, Sorcerer 8, Strength 8
+  - Activation: round (1)
+- **Cloak of Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 8, Chaos 8
+  - Activation: standard (1)
+- **Clone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: minute (10)
+- **Cloudkill** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial; see text
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Color Spray** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Command** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Command Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Druid 4, Ranger 3, Plant 4
+  - Activation: standard (1)
+- **Command Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Command, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 5, Nobility 5
+  - Activation: standard (1)
+- **Commune** [Class Levels] [Activation]
+  - Class Levels: Cleric 5
+  - Activation: minute (10)
+- **Commune with Nature** [Class Levels] [Activation]
+  - Class Levels: Druid 5, Ranger 4, Animal 5
+  - Activation: minute (10)
+- **Comprehend Languages** [Class Levels] [Activation]
+  - Class Levels: Bard 1, Cleric 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Cone of Cold** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 5, Sorcerer 5, Water 6
+  - Activation: standard (1)
+- **Confusion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Wizard 4, Sorcerer 4, Madness 4, Trickery 4
+  - Activation: standard (1)
+- **Confusion, Lesser** [Class Levels] [Activation]
+  - Class Levels: Bard 1, Madness 1
+  - Activation: round (1)
+- **Consecrate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 2
+  - Activation: standard (1)
+- **Contact Other Plane** [Class Levels] [Activation]
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Contagion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Blackguard 3, Cleric 3, Druid 3, Wizard 4, Sorcerer 4, Destruction 3
+  - Activation: standard (1)
+- **Contingency** [Class Levels] [Activation]
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: minute (10)
+- **Contingent Resurrection** [Saving Throw] [Activation]
+  - Saving Throw: None (see text)
+  - Activation: round (1)
+- **Continual Flame** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Control Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Druid 8, Plant 8
+  - Activation: standard (1)
+- **Control Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Control Water** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Cleric 4, Druid 4, Wizard 6, Sorcerer 6, Water 4
+  - Activation: standard (1)
+- **Control Weather** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 7, Druid 7, Wizard 7, Sorcerer 7, Air 7, Weather 7
+  - Activation: minute (10)
+- **Control Winds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Druid 5, Air 5, Weather 6
+  - Activation: standard (1)
+- **Corrupt Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Blackguard 1
+  - Activation: standard (1)
+- **Create Food and Water** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Creation 3
+  - Activation: minute (10)
+- **Create Greater Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8, Death 8
+  - Activation: hour (1)
+- **Create Living Vault (Ritual)** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Create Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 6, Wizard 6, Sorcerer 6, Death 6, Evil 6
+  - Activation: hour (1)
+- **Create Water** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 0, Druid 0, Paladin 1, Creation 1
+  - Activation: standard (1)
+- **Creeping Doom** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 7, Scalykind 7
+  - Activation: round (1)
+- **Crown Of Glory** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Glory 8
+  - Activation: full (1)
+- **Crown of Vermin** [Saving Throw] [Activation]
+  - Saving Throw: None (see text)
+  - Activation: round (1)
+- **Crushing Despair** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Crushing Hand** [Class Levels] [Activation]
+  - Class Levels: Wizard 9, Sorcerer 9, Strength 9
+  - Activation: round (1)
+- **Cure Critical Wounds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless); see text
+  - Class Levels: Blackguard 4, Bard 4, Cleric 4, Druid 5, Healing 4
+  - Activation: standard (1)
+- **Cure Critical Wounds, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless) or Will half; see text
+  - Class Levels: Cleric 8, Druid 9, Healing 8
+  - Activation: standard (1)
+- **Cure Light Wounds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless); see text
+  - Class Levels: Blackguard 1, Bard 1, Cleric 1, Druid 1, Paladin 1, Ranger 2, Healing 1
+  - Activation: standard (1)
+- **Cure Light Wounds, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless) or Will half; see text
+  - Class Levels: Bard 5, Cleric 5, Druid 6, Healing 5
+  - Activation: standard (1)
+- **Cure Minor Wounds** [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: Cures 1 point of damage.
+  - Saving Throw: Will half (harmless); see text
+  - Class Levels: Cleric 0, Druid 0
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Cure Moderate Wounds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless); see text
+  - Class Levels: Blackguard 2, Bard 2, Cleric 2, Druid 3, Paladin 3, Ranger 3, Healing 2
+  - Activation: standard (1)
+- **Cure Moderate Wounds, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless) or Will half; see text
+  - Class Levels: Bard 6, Cleric 6, Druid 7
+  - Activation: standard (1)
+- **Cure Serious Wounds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless); see text
+  - Class Levels: Blackguard 3, Bard 3, Cleric 3, Druid 4, Paladin 4, Ranger 4, Healing 3
+  - Activation: standard (1)
+- **Cure Serious Wounds, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless) or Will half; see text
+  - Class Levels: Cleric 7, Druid 8
+  - Activation: standard (1)
+- **Curse Water** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Cleric 1
+  - Activation: minute (1)
+- **Damnation** [Saving Throw] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Activation: round (1)
+- **Dancing Lights** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Darkness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 2, Blackguard 2, Bard 2, Cleric 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Darkvision** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Ranger 3, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Daylight** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Cleric 3, Druid 3, Paladin 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Daze** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Humanoid creature of 4 HD or less loses next action.
+  - Saving Throw: Will negates
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Daze Monster** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Death Knell** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Blackguard 2, Cleric 2, Death 2
+  - Activation: standard (1)
+- **Death Ward** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 4, Druid 5, Paladin 4, Death 4, Repose 4
+  - Activation: standard (1)
+- **Deathwatch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1, Repose 1
+  - Activation: standard (1)
+- **Deep Slumber** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Assassin 3, Bard 3, Wizard 3, Sorcerer 3
+  - Activation: round (1)
+- **Deeper Darkness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 3, Blackguard 3, Cleric 3, Darkness 3
+  - Activation: standard (1)
+- **Delay Poison** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Bard 2, Cleric 2, Druid 2, Paladin 2, Ranger 1
+  - Activation: standard (1)
+- **Delayed Blast Fireball** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Demand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Wizard 8, Sorcerer 8, Charm 8, Nobility 8
+  - Activation: minute (10)
+- **Demise Unseen** [Saving Throw] [Activation]
+  - Saving Throw: Fort negates
+  - Activation: round (1)
+- **Desecrate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 2, Evil 2
+  - Activation: standard (1)
+- **Destruction** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial
+  - Class Levels: Cleric 7, Death 7, Repose 7
+  - Activation: standard (1)
+- **Detect Animals or Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Detect Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Detect Evil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Detect Good** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Detect Law** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Detect Magic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0, Cleric 0, Druid 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Detect Poison** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 1, Cleric 0, Druid 0, Paladin 1, Ranger 1, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Detect Scrying** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Detect Secret Doors** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Knowledge 1
+  - Activation: standard (1)
+- **Detect Snares and Pits** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Detect Thoughts** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2, Knowledge 2
+  - Activation: standard (1)
+- **Detect Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 1, Paladin 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Dictum** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Cleric 7, Law 7
+  - Activation: standard (1)
+- **Dimension Door** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Assassin 4, Bard 4, Wizard 4, Sorcerer 4, Travel 4
+  - Activation: standard (1)
+- **Dimensional Anchor** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Dimensional Lock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Diminish Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 3, Ranger 3
+  - Activation: standard (1)
+- **Dire Winter** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Discern Lies** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 4, Paladin 3, Nobility 4
+  - Activation: standard (1)
+- **Discern Location** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8, Knowledge 8
+  - Activation: minute (10)
+- **Disguise Self** [Class Levels] [Activation]
+  - Class Levels: Assassin 1, Bard 1, Wizard 1, Sorcerer 1, Trickery 1
+  - Activation: standard (1)
+- **Disintegrate** [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: If the creature is reduced to 0 it is completely disintegrated
+  - Saving Throw: Fortitude partial (object)
+  - Class Levels: Wizard 6, Sorcerer 6, Destruction 7
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Dismissal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Cleric 4, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Dispel Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Paladin 4, Law 5
+  - Activation: standard (1)
+- **Dispel Evil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Paladin 4, Good 5
+  - Activation: standard (1)
+- **Dispel Good** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Evil 5
+  - Activation: standard (1)
+- **Dispel Law** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Chaos 5
+  - Activation: standard (1)
+- **Dispel Magic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Cleric 3, Druid 4, Paladin 3, Wizard 3, Sorcerer 3, Magic 3
+  - Activation: standard (1)
+- **Dispel Magic, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 5, Cleric 6, Druid 6, Wizard 6, Sorcerer 6, Liberation 6
+  - Activation: standard (1)
+- **Displacement** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Disrupt Undead** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 0, Sorcerer 0, Glory 1
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Disrupting Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object); see text
+  - Class Levels: Cleric 5
+  - Activation: standard (1)
+- **Divination** [Class Levels] [Activation]
+  - Class Levels: Cleric 4, Knowledge 4
+  - Activation: minute (10)
+- **Divine Favor** [Special Actions] [Class Levels] [Activation]
+  - Special Actions: Divine Favor
+  - Class Levels: Cleric 1, Paladin 1, Nobility 1
+  - Activation: standard (1)
+- **Divine Power** [Class Levels] [Activation]
+  - Class Levels: Cleric 4, War 4
+  - Activation: standard (1)
+- **Dominate Animal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Druid 3, Animal 3
+  - Activation: round (1)
+- **Dominate Monster** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 9, Sorcerer 9, Charm 9
+  - Activation: round (1)
+- **Dominate Person** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 4, Wizard 5, Sorcerer 5
+  - Activation: round (1)
+- **Doom** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Blackguard 1, Cleric 1
+  - Activation: standard (1)
+- **Dragon Knight (Ritual)** [Saving Throw] [Activation]
+  - Saving Throw: None (see text)
+  - Activation: round (1)
+- **Dragon Strike (Ritual)** [Saving Throw] [Activation]
+  - Saving Throw: None (see text)
+  - Activation: round (1)
+- **Dream** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: minute (1)
+- **Dreamscape** [Saving Throw] [Activation]
+  - Saving Throw: Yes (harmless) (see text) Spell Resistance: Yes (h
+  - Activation: round (1)
+- **Dweomer of Transference** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 4, Wizard 4, Sorcerer 4
+  - Activation: minute (1)
+- **Eagle's Splendor** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Eagle's Splendor
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Blackguard 2, Bard 2, Cleric 2, Paladin 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Eagle's Splendor, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Eagle's Splendor
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 6, Cleric 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Earthquake** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 8, Druid 8, Destruction 8, Earth 7
+  - Activation: standard (1)
+- **Eclipse** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Eidolon** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Elemental Swarm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 9, Air 9, Earth 9, Fire 9, Water 9
+  - Activation: minute (10)
+- **Endure Elements** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1, Druid 1, Paladin 1, Ranger 1, Wizard 1, Sorcerer 1, Sun 1
+  - Activation: standard (1)
+- **Energy Drain** [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: Undead hit with the Ray gain [[2d4*5]] Temp Hit Points
+  - Saving Throw: Fortitude partial; see text for enervation
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Enervation** [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: Undead hit with the Ray gain [[1d4*5]] Temp Hit Points
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Enlarge Person** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 1, Sorcerer 1, Strength 1
+  - Activation: round (1)
+- **Enlarge Person, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: round (1)
+- **Enslave (Ritual)** [Saving Throw] [Activation]
+  - Saving Throw: Will negates
+  - Activation: round (1)
+- **Entangle** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex partial; see text
+  - Class Levels: Druid 1, Ranger 1, Plant 1
+  - Activation: standard (1)
+- **Enthrall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 2, Cleric 2, Nobility 2
+  - Activation: round (1)
+- **Entropic Shield** [Class Levels] [Activation]
+  - Class Levels: Cleric 1, Luck 1
+  - Activation: standard (1)
+- **Epic Counterspell** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Epic Mage Armor** [Saving Throw] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Activation: round (1)
+- **Epic Repulsion** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Epic Spell Reflection** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Erase** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Rune 1
+  - Activation: standard (1)
+- **Eternal Freedom** [Saving Throw] [Activation]
+  - Saving Throw: Will negates
+  - Activation: round (1)
+- **Ethereal Jaunt** [Class Levels] [Activation]
+  - Class Levels: Cleric 7, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Etherealness** [Class Levels] [Activation]
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9
+  - Activation: round (1)
+- **Expeditious Retreat** [Class Levels] [Activation]
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Explosive Runes** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 3, Sorcerer 3, Rune 4
+  - Activation: standard (1)
+- **Eyebite** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6, Scalykind 6
+  - Activation: standard (1)
+- **Fabricate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5, Artifice 5
+  - Activation: round (1)
+- **Faerie Fire** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1
+  - Activation: standard (1)
+- **False Life** [Class Levels] [Activation]
+  - Class Levels: Assassin 3, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **False Vision** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5, Trickery 5
+  - Activation: standard (1)
+- **Fear** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Bard 3, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Feather Fall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless) or Will negates (object)
+  - Class Levels: Assassin 1, Bard 1, Wizard 1, Sorcerer 1
+  - Activation: free (1)
+- **Feeblemind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Find the Path** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (harmless)
+  - Class Levels: Bard 6, Cleric 6, Druid 6, Knowledge 6, Travel 6
+  - Activation: round (3)
+- **Find Traps** [Class Levels] [Activation]
+  - Class Levels: Cleric 2
+  - Activation: standard (1)
+- **Finger of Death** [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Attack Notes: Instant Kill on Failed Save
+  - Saving Throw: Fortitude partial
+  - Class Levels: Druid 8, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Fire Seeds** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Reflex half; see text
+  - Class Levels: Druid 6, Fire 6, Sun 6
+  - Activation: standard (1)
+- **Fire Shield** [Class Levels] [Activation]
+  - Class Levels: Wizard 4, Sorcerer 4, Fire 5, Sun 4
+  - Activation: standard (1)
+- **Fire Storm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Cleric 8, Druid 7, Fire 7
+  - Activation: round (1)
+- **Fire Trap** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half; see text
+  - Class Levels: Druid 2, Wizard 4, Sorcerer 4
+  - Activation: minute (10)
+- **Fireball** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Flame Arrow** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Flame Blade** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 2
+  - Activation: standard (1)
+- **Flame Strike** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: 50% is Fire Damage, 50% is Divine
+  - Saving Throw: Reflex half
+  - Class Levels: Cleric 5, Druid 4, Sun 5, War 5
+  - Activation: standard (1)
+- **Flaming Sphere** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Druid 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Flare** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Dazzles one creature (-1 on attack rolls).
+  - Saving Throw: Fortitude negates
+  - Class Levels: Bard 0, Druid 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Flesh to Stone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Floating Disk** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Fly** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 3, Sorcerer 3, Travel 3
+  - Activation: standard (1)
+- **Fog Cloud** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 2, Wizard 2, Sorcerer 2, Water 2, Weather 2
+  - Activation: standard (1)
+- **Forbiddance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 6
+  - Activation: round (6)
+- **Forcecage** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Forceful Hand** [Class Levels] [Activation]
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: round (1)
+- **Foresight** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (harmless)
+  - Class Levels: Druid 9, Wizard 9, Sorcerer 9, Knowledge 9
+  - Activation: standard (1)
+- **Fox's Cunning** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Fox's Cunning
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 2, Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Fox's Cunning, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Fox's Cunning
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Freedom** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 9, Sorcerer 9, Liberation 9
+  - Activation: standard (1)
+- **Freedom of Movement** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 4, Blackguard 4, Bard 4, Cleric 4, Druid 4, Ranger 4, Liberation 4, Luck 4
+  - Activation: standard (1)
+- **Freezing Sphere** [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Attack Notes: Water Elementals take [[(min(@cl, 15)d8]] Damage
+  - Saving Throw: Reflex half; see text
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Gaseous Form** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3, Air 3
+  - Activation: standard (1)
+- **Gate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9, Glory 9
+  - Activation: standard (1)
+- **GATHERING OF MAGGOTS** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Activation: round (1)
+- **Geas, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Wizard 4, Sorcerer 4
+  - Activation: round (1)
+- **Geas/Quest** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 6, Cleric 6, Wizard 6, Sorcerer 6, Charm 6, Nobility 6
+  - Activation: minute (10)
+- **Genesis** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Creation 9
+  - Activation: hour (1)
+- **Gentle Repose** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Cleric 2, Wizard 3, Sorcerer 3, Repose 2
+  - Activation: standard (1)
+- **Ghost Sound** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Will disbelief.
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Assassin 1, Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Ghoul Touch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Giant Vermin** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 4, Druid 4
+  - Activation: standard (1)
+- **Glibness** [Class Levels] [Activation]
+  - Class Levels: Assassin 4, Bard 3
+  - Activation: standard (1)
+- **Glitterdust** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (blinding only)
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Globe of Invulnerability** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Globe of Invulnerability, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Glossolalia** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial; see text
+  - Class Levels: Bard 2
+  - Activation: standard (1)
+- **Glyph of Warding** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 3, Rune 3
+  - Activation: minute (10)
+- **Glyph of Warding, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 6, Rune 6
+  - Activation: minute (10)
+- **Good Hope** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 3
+  - Activation: standard (1)
+- **Goodberry** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1
+  - Activation: standard (1)
+- **Grasping Hand** [Class Levels] [Activation]
+  - Class Levels: Wizard 7, Sorcerer 7, Strength 7
+  - Activation: round (1)
+- **Grease** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Greater Ruin** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude half
+  - Activation: round (1)
+- **Greater Spell Resistance** [Saving Throw] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Activation: round (1)
+- **Guards and Wards** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: minute (30)
+- **Guidance** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Guidance - Attack Bonus; Guidance - Save Bonus; Guidance - Skill Bonus
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 0, Druid 0
+  - Activation: standard (1)
+- **Gust of Wind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Druid 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Hallow** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Druid 5
+  - Activation: hour (24)
+- **Hallucinatory Terrain** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: minute (10)
+- **Halt Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Hardening** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 6, Sorcerer 6, Artifice 7
+  - Activation: round (1)
+- **Harm** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half; see text
+  - Class Levels: Cleric 6, Destruction 6
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Haste** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Haste
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Heal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 6, Druid 7, Healing 6
+  - Activation: standard (1)
+- **Heal Mount** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Paladin 3
+  - Activation: standard (1)
+- **Heal, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 9, Community 9, Healing 9
+  - Activation: standard (1)
+- **Heat Metal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 2, Sun 2
+  - Activation: standard (1)
+- **Hellball** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Helping Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3
+  - Activation: standard (1)
+- **Heroes' Feast** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 6, Cleric 6, Community 6, Creation 6
+  - Activation: minute (10)
+- **Heroism** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Heroism
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 2, Wizard 3, Sorcerer 3, Charm 4
+  - Activation: standard (1)
+- **Heroism, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 5, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Hide from Animals** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Hide from Undead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless); see text
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Hideous Laughter** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 1, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Hold Animal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Druid 2, Ranger 2, Animal 2
+  - Activation: standard (1)
+- **Hold Monster** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 4, Wizard 5, Sorcerer 5, Law 6
+  - Activation: standard (1)
+- **Hold Monster, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Hold Person** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 2, Cleric 2, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Hold Person, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Hold Portal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Holy Aura** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 8, Good 8
+  - Activation: standard (1)
+- **Holy Smite** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial; see text
+  - Class Levels: Glory 4, Good 4
+  - Activation: standard (1)
+- **Holy Sword** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Paladin 4, Glory 5
+  - Activation: standard (1)
+- **Holy Word** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Cleric 7, Good 7
+  - Activation: standard (1)
+- **Horrid Wilting** [Attack Notes] [Saving Throw] [Class Levels] [Activation]
+  - Attack Notes: Water Elementals and Plant Creatures take [[(@cl)d8]] Damage
+  - Saving Throw: Fortitude half
+  - Class Levels: Wizard 8, Sorcerer 8, Water 8
+  - Activation: standard (1)
+- **Hypnotic Pattern** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Effects up to [[2d4+(@cl)]] Hit Die of Creatures.
+  - Saving Throw: Will negates
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Hypnotism** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: round (1)
+- **Ice Storm** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: -4 to Listen Check, Creatures Move Half Speed
+  - Saving Throw: None
+  - Class Levels: Druid 4, Wizard 4, Sorcerer 4, Water 5
+  - Activation: standard (1)
+- **Identify** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Magic 2
+  - Activation: hour (1)
+- **Illusory Script** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Assassin 2, Bard 3, Wizard 3, Sorcerer 3
+  - Activation: minute (1)
+- **Illusory Wall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Imbue with Spell Ability** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 4, Magic 4
+  - Activation: minute (10)
+- **Implosion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Cleric 9, Destruction 9
+  - Activation: standard (1)
+- **Imprisonment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Incendiary Cloud** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Cloud last [[(@cl)]] Rounds
+  - Saving Throw: Reflex half; see text
+  - Class Levels: Wizard 8, Sorcerer 8, Fire 8
+  - Activation: standard (1)
+- **Inflict Critical Wounds** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Blackguard 4, Cleric 4, Destruction 4
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Critical Wounds, Mass** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Cleric 8
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Light Wounds** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Blackguard 1, Cleric 1, Destruction 1
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Light Wounds, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Cleric 5, Destruction 5
+  - Activation: standard (1)
+- **Inflict Minor Wounds** [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: Touch attack, 1 point of negative energy damage.
+  - Saving Throw: Will half (negates)
+  - Class Levels: Cleric 0
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Moderate Wounds** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Blackguard 2, Cleric 2
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Moderate Wounds, Mass** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Cleric 6
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Inflict Serious Wounds** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Blackguard 3, Cleric 3
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Inflict Serious Wounds, Mass** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Cleric 7
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Insanity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 7, Sorcerer 7, Charm 7, Madness 7
+  - Activation: standard (1)
+- **Insect Plague** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 5, Druid 5
+  - Activation: round (1)
+- **Instant Summons** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7, Rune 7
+  - Activation: standard (1)
+- **Interposing Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Invisibility** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless) or Will negates (harmless,
+  - Class Levels: Assassin 2, Bard 2, Wizard 2, Sorcerer 2, Trickery 2
+  - Activation: standard (1)
+- **Invisibility Purge** [Class Levels] [Activation]
+  - Class Levels: Cleric 3
+  - Activation: standard (1)
+- **Invisibility Sphere** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless) or Will negates (harmless,
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Invisibility, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 4, Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Invisibility, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless) or Will negates (harmless,
+  - Class Levels: Wizard 7
+  - Activation: standard (1)
+- **Iron Body** [Class Levels] [Activation]
+  - Class Levels: Wizard 8, Sorcerer 8, Earth 8
+  - Activation: standard (1)
+- **Ironwood** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6
+  - Activation: minute (1)
+- **Irresistible Dance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 6, Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Jump** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 1, Druid 1, Ranger 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Keen Edge** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Kinetic Control** [Activation]
+  - Activation: round (1)
+- **Knock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2
+  - Activation: standard (1)
+- **Know Direction** [Class Levels] [Activation]
+  - Class Levels: Bard 0, Druid 0
+  - Activation: standard (1)
+- **Legend Lore** [Class Levels] [Activation]
+  - Class Levels: Bard 4, Wizard 6, Sorcerer 6, Knowledge 7
+  - Activation: round (1)
+- **Let Go of Me** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude half
+  - Activation: round (1)
+- **Levitate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Light** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0, Cleric 0, Druid 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Lightning Bolt** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Limited Wish** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Liveoak** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6
+  - Activation: minute (10)
+- **Living Lightning** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Locate Creature** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 4, Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Locate Object** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 2, Cleric 3, Wizard 2, Sorcerer 2, Travel 2
+  - Activation: standard (1)
+- **Longstrider** [Class Levels] [Activation]
+  - Class Levels: Druid 1, Ranger 1, Travel 1
+  - Activation: standard (1)
+- **Lord of Nightmares** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Lullaby** [Special Actions] [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Lullaby Debuff
+  - Effect Notes: Makes subject drowsy; -5 on Spot and Listen checks, -2 on Will saves against sleep.
+  - Saving Throw: Will negates
+  - Class Levels: Bard 0
+  - Activation: standard (1)
+- **Maddening Scream** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8, Madness 8
+  - Activation: round (1)
+- **Mage Armor** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Mage Armor
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Mage Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Mage's Disjunction** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Wizard 9, Sorcerer 9, Magic 9
+  - Activation: standard (1)
+- **Mage's Faithful Hound** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Mage's Lucubration** [Class Levels] [Activation]
+  - Class Levels: Wizard 6
+  - Activation: standard (1)
+- **Mage's Magnificent Mansion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Mage's Private Sanctum** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Mage's Sword** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Magic Aura** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1, Magic 1
+  - Activation: standard (1)
+- **Magic Circle against Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 3, Paladin 3, Wizard 3, Sorcerer 3, Law 3
+  - Activation: standard (1)
+- **Magic Circle against Evil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 3, Paladin 3, Wizard 3, Sorcerer 3, Good 3
+  - Activation: standard (1)
+- **Magic Circle against Good** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 3, Cleric 3, Wizard 3, Sorcerer 3, Evil 3
+  - Activation: standard (1)
+- **Magic Circle against Law** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 3, Wizard 3, Sorcerer 3, Chaos 3
+  - Activation: standard (1)
+- **Magic Fang** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Druid 1, Ranger 1, Scalykind 1
+  - Activation: standard (1)
+- **Magic Fang, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Druid 3, Ranger 3, Scalykind 3
+  - Activation: standard (1)
+- **Magic Jar** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Magic Missile** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1
+  - Activation: standard (1)
+- **Magic Mouth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Bard 1, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Magic Stone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Cleric 1, Druid 1, Earth 1
+  - Activation: standard (1)
+- **Magic Vestment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Cleric 3, Nobility 3, Strength 3, War 3
+  - Activation: standard (1)
+- **Magic Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Blackguard 1, Cleric 1, Paladin 1, Wizard 1, Sorcerer 1, War 1
+  - Activation: standard (1)
+- **Magic Weapon, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Cleric 4, Paladin 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Major Creation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5, Creation 5, Artifice 6
+  - Activation: minute (10)
+- **Major Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Make Whole** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Cleric 2
+  - Activation: standard (1)
+- **Mark of Justice** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 5, Paladin 4
+  - Activation: minute (10)
+- **Mass Frog** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude negates
+  - Activation: round (1)
+- **Maze** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Meld into Stone** [Class Levels] [Activation]
+  - Class Levels: Cleric 3, Druid 3
+  - Activation: standard (1)
+- **Mending** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Bard 0, Cleric 0, Druid 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Mental Pinnacle** [Class Levels] [Activation]
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Message** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Meteor Swarm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Reflex half; see text
+  - Class Levels: Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Mind Blank** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 8, Sorcerer 8, Liberation 8, Protection 8
+  - Activation: standard (1)
+- **Mind Fog** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Minor Creation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4, Artifice 4, Creation 4
+  - Activation: minute (1)
+- **Minor Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2, Creation 2
+  - Activation: standard (1)
+- **Miracle** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 9, Luck 9
+  - Activation: standard (1)
+- **Mirage Arcana** [Class Levels] [Activation]
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Mirror Image** [Effect Notes] [Class Levels] [Activation]
+  - Effect Notes: Number of images [[/r min(8, 1d4+floor((@cl)/3))]]
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Misdirection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Assassin 3, Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Mislead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will disbelief (if interacted with); see t
+  - Class Levels: Bard 5, Wizard 6, Sorcerer 6, Luck 6, Trickery 6
+  - Activation: standard (1)
+- **Mnemonic Enhancer** [Class Levels] [Activation]
+  - Class Levels: Wizard 4
+  - Activation: minute (10)
+- **Modify Memory** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Assassin 4, Bard 4
+  - Activation: round (1)
+- **Moment of Prescience** [Class Levels] [Activation]
+  - Class Levels: Wizard 8, Sorcerer 8, Luck 8
+  - Activation: standard (1)
+- **Momento Mori** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude partial (see text)
+  - Activation: round (1)
+- **Mount** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: round (1)
+- **Move Earth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6, Wizard 6, Sorcerer 6
+  - Activation: round (1)
+- **Mummy Dust** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Nailed to the Sky** [Saving Throw] [Activation]
+  - Saving Throw: Will negates
+  - Activation: round (1)
+- **Neutralize Poison** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Bard 4, Cleric 4, Druid 3, Paladin 4, Ranger 3
+  - Activation: standard (1)
+- **Nightmare** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5, Darkness 7
+  - Activation: minute (10)
+- **Nondetection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Assassin 3, Ranger 4, Wizard 3, Sorcerer 3, Trickery 3
+  - Activation: standard (1)
+- **Obscure Object** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Bard 1, Cleric 3, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Obscuring Mist** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Assassin 1, Cleric 1, Druid 1, Wizard 1, Sorcerer 1, Air 1, Darkness 1, Water 1, Weather 1
+  - Activation: standard (1)
+- **Open/Close** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Order’s Wrath** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial; see text
+  - Class Levels: Law 4
+  - Activation: standard (1)
+- **Origin of Species: Achaierai** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Overland Flight** [Class Levels] [Activation]
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: round (1)
+- **Owl's Wisdom** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Owl's Wisdom
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Druid 2, Paladin 2, Ranger 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Owl's Wisdom, Mass** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Owl's Wisdom
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 6, Druid 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Pass without Trace** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 2, Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Passwall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Peripety** [Activation]
+  - Activation: round (1)
+- **Permanency** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: round (2)
+- **Permanent Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6, Creation 7
+  - Activation: standard (1)
+- **Persistent Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Pestilence** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude negates
+  - Activation: round (1)
+- **Phantasmal Killer** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with), then Fortitud
+  - Class Levels: Wizard 4, Sorcerer 4, Madness 6
+  - Activation: standard (1)
+- **Phantom Steed** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: minute (10)
+- **Phantom Trap** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Phase Door** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7, Travel 8
+  - Activation: standard (1)
+- **Planar Ally** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 6
+  - Activation: minute (10)
+- **Planar Ally, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 8
+  - Activation: minute (10)
+- **Planar Ally, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 4
+  - Activation: minute (10)
+- **Planar Binding** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: minute (10)
+- **Planar Binding, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: minute (10)
+- **Planar Binding, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 5, Sorcerer 5, Rune 5
+  - Activation: minute (10)
+- **Plane Shift** [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Effect Notes: Target appears [[/r 5d100]] miles from intended destination.
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 5, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Plant Growth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 3, Ranger 3, Plant 3
+  - Activation: standard (1)
+- **Poison** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates; see text
+  - Class Levels: Assassin 4, Blackguard 4, Cleric 4, Druid 3, Scalykind 4
+  - Activation: standard (1)
+- **Polar Ray** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Polymorph** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Polymorph Any Object** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (object); see text
+  - Class Levels: Wizard 8, Sorcerer 8, Trickery 8
+  - Activation: standard (1)
+- **Power Word Blind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7, Darkness 8, War 7
+  - Activation: standard (1)
+- **Power Word Kill** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 9, Sorcerer 9, Darkness 9, War 9
+  - Activation: standard (1)
+- **Power Word Stun** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8, War 8
+  - Activation: standard (1)
+- **Prayer** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Prayer (Allies); Prayer (Enemies)
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Paladin 3, Community 3
+  - Activation: standard (1)
+- **Prestidigitation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Bard 0, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Prismatic Sphere** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 9, Sorcerer 9, Artifice 9, Protection 9, Sun 9
+  - Activation: standard (1)
+- **Prismatic Spray** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Prismatic Wall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Probe Thoughts** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates; see text
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: minute (1)
+- **Produce Flame** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1, Fire 2
+  - Activation: standard (1)
+- **Programmed Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Project Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 6, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Protection from Arrows** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Protection from Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1, Paladin 1, Wizard 1, Sorcerer 1, Law 1
+  - Activation: standard (1)
+- **Protection from Energy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Blackguard 3, Cleric 3, Druid 3, Ranger 2, Wizard 3, Sorcerer 3, Luck 3, Protection 3
+  - Activation: standard (1)
+- **Protection from Evil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1, Paladin 1, Wizard 1, Sorcerer 1, Good 1
+  - Activation: standard (1)
+- **Protection from Good** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1, Wizard 1, Sorcerer 1, Evil 1
+  - Activation: standard (1)
+- **Protection from Law** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1, Wizard 1, Sorcerer 1, Chaos 1
+  - Activation: standard (1)
+- **Protection from Spells** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 8, Sorcerer 8, Magic 8
+  - Activation: standard (1)
+- **Prying Eyes** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5, Darkness 6
+  - Activation: minute (1)
+- **Prying Eyes, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8
+  - Activation: minute (1)
+- **Psychic Turmoil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial; see text
+  - Class Levels: Cleric 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Psychic Turmoil, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial; see text
+  - Class Levels: Cleric 7, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Purify Food and Drink** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Cleric 0, Druid 0
+  - Activation: standard (1)
+- **Pyrotechnics** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates or Fortitude negates; see text
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Quench** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (object)
+  - Class Levels: Druid 3
+  - Activation: standard (1)
+- **Rage** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 2, Wizard 3, Sorcerer 3, Madness 3
+  - Activation: standard (1)
+- **Rain of Fire** [Saving Throw] [Activation]
+  - Saving Throw: Reflex negates (see text)
+  - Activation: round (1)
+- **Rainbow Pattern** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Raise Dead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Cleric 5
+  - Activation: minute (1)
+- **Raise Island** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Ray of Enfeeblement** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Ray of Exhaustion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial; see text
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Ray of Frost** [Effect Notes] [Attack Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Effect Notes: One missile that  deals 1d3 cold damage.
+  - Attack Notes: vs Touch AC
+  - Saving Throw: None
+  - Class Levels: Wizard 0, Sorcerer 0
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Read Magic** [Class Levels] [Activation]
+  - Class Levels: Bard 0, Cleric 0, Druid 0, Paladin 1, Ranger 1, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Reduce Animal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 2, Ranger 3
+  - Activation: standard (1)
+- **Reduce Person** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: round (1)
+- **Reduce Person, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 4
+  - Activation: round (1)
+- **Refuge** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 7, Wizard 9, Sorcerer 9, Community 7, Liberation 7
+  - Activation: standard (1)
+- **Regenerate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Cleric 7, Druid 9, Healing 7
+  - Activation: full (3)
+- **Reincarnate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Druid 4
+  - Activation: minute (10)
+- **Remove Blindness/Deafness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Cleric 3, Paladin 3
+  - Activation: standard (1)
+- **Remove Curse** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 3, Cleric 3, Paladin 3, Wizard 4, Sorcerer 4, Liberation 3
+  - Activation: standard (1)
+- **Remove Disease** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Cleric 3, Druid 3, Ranger 3
+  - Activation: standard (1)
+- **Remove Fear** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 1, Cleric 1, Liberation 1
+  - Activation: standard (1)
+- **Remove Paralysis** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Paladin 2, Liberation 2
+  - Activation: standard (1)
+- **Repel Metal or Stone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 8
+  - Activation: standard (1)
+- **Repel Vermin** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Bard 4, Cleric 4, Druid 4, Ranger 3
+  - Activation: standard (1)
+- **Repel Wood** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6, Plant 6
+  - Activation: standard (1)
+- **Repulsion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 7, Wizard 6, Sorcerer 6, Nobility 7, Protection 7
+  - Activation: standard (1)
+- **Resilient Sphere** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Resist Energy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Cleric 2, Druid 2, Paladin 2, Ranger 1, Wizard 2, Sorcerer 2, Fire 3
+  - Activation: standard (1)
+- **Resistance** [Special Actions] [Effect Notes] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Resistance
+  - Effect Notes: Subject gains +1 on saving throws.
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 0, Cleric 0, Druid 0, Paladin 1, Wizard 0, Sorcerer 0
+  - Activation: standard (1)
+- **Restoration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 4, Paladin 4
+  - Activation: round (3)
+- **Restoration, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 7
+  - Activation: minute (10)
+- **Restoration, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Druid 2, Paladin 1
+  - Activation: round (3)
+- **Resurrection** [Class Levels] [Activation]
+  - Class Levels: Cleric 7
+  - Activation: minute (10)
+- **Reverse Gravity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Druid 8, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Righteous Might** [Class Levels] [Activation]
+  - Class Levels: Cleric 5, Strength 5
+  - Activation: standard (1)
+- **Rope Trick** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Ruin** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude half
+  - Activation: round (1)
+- **Rusting Grasp** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 4
+  - Activation: standard (1)
+- **Safe Time** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Sanctuary** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 1, Protection 1
+  - Activation: standard (1)
+- **Scare** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Scintillating Pattern** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Scorching Ray** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Screen** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will disbelief (if interacted with); see t
+  - Class Levels: Wizard 8, Sorcerer 8, Trickery 7
+  - Activation: minute (10)
+- **Scrying** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Cleric 5, Druid 4, Wizard 4, Sorcerer 4
+  - Activation: hour (1)
+- **Scrying, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 6, Cleric 7, Druid 7, Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Sculpt Sound** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Bard 3
+  - Activation: standard (1)
+- **Searing Light** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Glory 3, Sun 3
+  - Activation: standard (1)
+- **Secret Chest** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Secret Page** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3, Rune 2
+  - Activation: minute (10)
+- **Secure Shelter** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: minute (10)
+- **See Invisibility** [Class Levels] [Activation]
+  - Class Levels: Bard 3, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Seeming** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates or Will disbelief (if interacted with
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Sending** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 4, Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Sepia Snake Sigil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: minute (10)
+- **Sequester** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (object)
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Shades** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with); varies; see t
+  - Class Levels: Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Shadow Conjuration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with); varies; see t
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Shadow Conjuration, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with); varies; see t
+  - Class Levels: Wizard 7
+  - Activation: standard (1)
+- **Shadow Evocation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Shadow Evocation, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Wizard 8
+  - Activation: standard (1)
+- **Shadow Walk** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 5, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Shambler** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 9, Plant 9
+  - Activation: standard (1)
+- **Shapechange** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 9, Wizard 9, Sorcerer 9, Animal 9, Scalykind 9
+  - Activation: standard (1)
+- **Shatter** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object); Will negates (object) or Fo
+  - Class Levels: Blackguard 2, Bard 2, Cleric 2, Wizard 2, Sorcerer 2, Chaos 2, Destruction 2
+  - Activation: standard (1)
+- **Shield** [Special Actions] [Class Levels] [Activation]
+  - Special Actions: Shield
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Shield of Faith** [Special Actions] [Saving Throw] [Class Levels] [Activation]
+  - Special Actions: Shield of Faith
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 1
+  - Activation: standard (1)
+- **Shield of Law** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 8, Law 8
+  - Activation: standard (1)
+- **Shield Other** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Paladin 2, Protection 2
+  - Activation: standard (1)
+- **Shillelagh** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 1
+  - Activation: standard (1)
+- **Shocking Grasp** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Shout** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial or Reflex negates (object); see 
+  - Class Levels: Bard 4, Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Shout, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial or Reflex negates (object); see 
+  - Class Levels: Bard 6, Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Shrink Item** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Silence** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text or none (object)
+  - Class Levels: Bard 2, Cleric 2
+  - Activation: standard (1)
+- **Silent Image** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Simulacrum** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: hour (12)
+- **Slay Living** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial
+  - Class Levels: Cleric 5, Death 5, Repose 5
+  - Activation: standard (1)
+- **Sleep** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Assassin 1, Bard 1, Wizard 1, Sorcerer 1
+  - Activation: round (1)
+- **Sleet Storm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 3, Wizard 3, Sorcerer 3, Weather 4
+  - Activation: standard (1)
+- **Slow** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Snare** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Ranger 2, Druid 3
+  - Activation: round (3)
+- **Soften Earth and Stone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 2, Earth 2
+  - Activation: standard (1)
+- **Solid Fog** [Class Levels] [Activation]
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: round (1)
+- **Song of Discord** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 5
+  - Activation: standard (1)
+- **Soul Bind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Soul Dominion** [Saving Throw] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Activation: round (1)
+- **Soul Scry** [Saving Throw] [Activation]
+  - Saving Throw: Will negates
+  - Activation: round (1)
+- **Sound Burst** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial
+  - Class Levels: Bard 2, Cleric 2
+  - Activation: standard (1)
+- **Speak with Animals** [Class Levels] [Activation]
+  - Class Levels: Bard 3, Druid 1, Ranger 1
+  - Activation: standard (1)
+- **Speak with Dead** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Cleric 3, Repose 3
+  - Activation: minute (10)
+- **Speak with Plants** [Class Levels] [Activation]
+  - Class Levels: Bard 4, Druid 3, Ranger 2
+  - Activation: standard (1)
+- **Spectral Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Spell Immunity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 4, Protection 4, Strength 4
+  - Activation: standard (1)
+- **Spell Immunity, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 8
+  - Activation: standard (1)
+- **Spell Resistance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 5, Magic 5, Protection 5
+  - Activation: standard (1)
+- **Spell Turning** [Class Levels] [Activation]
+  - Class Levels: Wizard 7, Sorcerer 7, Luck 7, Magic 7
+  - Activation: standard (1)
+- **Spell Worm** [Saving Throw] [Activation]
+  - Saving Throw: Will negates
+  - Activation: round (1)
+- **Spellstaff** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 6
+  - Activation: minute (10)
+- **Spider Climb** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Assassin 2, Druid 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Spike Growth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex partial
+  - Class Levels: Druid 3, Ranger 2
+  - Activation: standard (1)
+- **Spike Stones** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex partial
+  - Class Levels: Druid 4, Earth 4
+  - Activation: standard (1)
+- **Spiritual Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 2, War 2
+  - Activation: standard (1)
+- **Statue** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: round (1)
+- **Status** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 2, Community 2
+  - Activation: standard (1)
+- **Status, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Community 4
+  - Activation: standard (1)
+- **Stinking Cloud** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates; see text
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Stone Shape** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Druid 3, Wizard 4, Sorcerer 4, Artifice 3, Earth 3
+  - Activation: standard (1)
+- **Stone Tell** [Class Levels] [Activation]
+  - Class Levels: Druid 6
+  - Activation: minute (10)
+- **Stone to Flesh** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (object); see text
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Stoneskin** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Druid 5, Wizard 4, Sorcerer 4, Earth 6, Strength 6
+  - Activation: standard (1)
+- **Storm of Vengeance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Druid 9, Cleric 9, Nobility 9, Weather 9
+  - Activation: round (1)
+- **Suggestion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 2, Wizard 3, Sorcerer 3, Charm 3
+  - Activation: standard (1)
+- **Suggestion, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Bard 5, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Summon Behemoth** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Summon Instrument** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 0
+  - Activation: round (1)
+- **Summon Monster I** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Blackguard 1, Bard 1, Cleric 1, Wizard 1, Sorcerer 1
+  - Activation: round (1)
+- **Summon Monster II** [Class Levels] [Activation]
+  - Class Levels: Blackguard 2, Bard 2, Cleric 2, Wizard 2, Sorcerer 2
+  - Activation: round (1)
+- **Summon Monster III** [Class Levels] [Activation]
+  - Class Levels: Blackguard 3, Bard 3, Cleric 3, Wizard 3, Sorcerer 3
+  - Activation: round (1)
+- **Summon Monster IV** [Class Levels] [Activation]
+  - Class Levels: Blackguard 4, Bard 4, Cleric 4, Wizard 4, Sorcerer 4
+  - Activation: round (1)
+- **Summon Monster IX** [Class Levels] [Activation]
+  - Class Levels: Cleric 9, Wizard 9, Sorcerer 9, Chaos 9, Evil 9, Good 9, Law 9
+  - Activation: round (1)
+- **Summon Monster V** [Class Levels] [Activation]
+  - Class Levels: Bard 5, Cleric 5, Wizard 5, Sorcerer 5, Darkness 5
+  - Activation: round (1)
+- **Summon Monster VI** [Class Levels] [Activation]
+  - Class Levels: Bard 6, Cleric 6, Wizard 6, Sorcerer 6
+  - Activation: round (1)
+- **Summon Monster VII** [Class Levels] [Activation]
+  - Class Levels: Cleric 7, Wizard 7, Sorcerer 7
+  - Activation: round (1)
+- **Summon Monster VIII** [Class Levels] [Activation]
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8
+  - Activation: round (1)
+- **Summon Nature's Ally I** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 1, Ranger 1
+  - Activation: round (1)
+- **Summon Nature's Ally II** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 2, Ranger 2
+  - Activation: round (1)
+- **Summon Nature's Ally III** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 3, Ranger 3
+  - Activation: round (1)
+- **Summon Nature's Ally IV** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 4, Ranger 4, Animal 4
+  - Activation: round (1)
+- **Summon Nature's Ally IX** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 9
+  - Activation: round (1)
+- **Summon Nature's Ally V** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 5
+  - Activation: round (1)
+- **Summon Nature's Ally VI** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6
+  - Activation: round (1)
+- **Summon Nature's Ally VII** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 7
+  - Activation: round (1)
+- **Summon Nature's Ally VIII** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 8, Animal 8
+  - Activation: round (1)
+- **Summon Swarm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 2, Druid 2, Wizard 2, Sorcerer 2
+  - Activation: round (1)
+- **Sunbeam** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates and Reflex half; see text
+  - Class Levels: Druid 7, Glory 7, Sun 7
+  - Activation: standard (1)
+- **Sunburst** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex partial; see text
+  - Class Levels: Druid 8, Wizard 8, Sorcerer 8, Sun 8
+  - Activation: standard (1)
+- **Superb Dispelling** [Saving Throw] [Activation]
+  - Saving Throw: none
+  - Activation: round (1)
+- **Surelife** [Class Levels] [Activation]
+  - Class Levels: Repose 8
+  - Activation: round (1)
+- **Symbol of Death** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8, Rune 8
+  - Activation: minute (10)
+- **Symbol of Fear** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 6, Wizard 6, Sorcerer 6
+  - Activation: minute (10)
+- **Symbol of Insanity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 8, Wizard 8, Sorcerer 8
+  - Activation: minute (10)
+- **Symbol of Pain** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Cleric 5, Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Symbol of Persuasion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 6, Wizard 6, Sorcerer 6
+  - Activation: minute (10)
+- **Symbol of Sleep** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 5, Wizard 5, Sorcerer 5
+  - Activation: minute (10)
+- **Symbol of Stunning** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 7, Wizard 7, Sorcerer 7
+  - Activation: minute (10)
+- **Symbol of Weakness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Cleric 7, Wizard 7, Sorcerer 7
+  - Activation: minute (10)
+- **Sympathetic Vibration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Bard 6
+  - Activation: minute (10)
+- **Sympathy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Druid 9, Wizard 8, Sorcerer 8, Community 8
+  - Activation: hour (1)
+- **Telekinesis** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object) or None; see text
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Telekinetic Sphere** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates (object)
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Telepathic Bond** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5, Community 5
+  - Activation: standard (1)
+- **Telepathic Bond, Lesser** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Cleric 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Teleport** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Wizard 5, Sorcerer 5, Travel 5
+  - Activation: standard (1)
+- **Teleport Object** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Teleport, Greater** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Wizard 7, Sorcerer 7, Travel 7
+  - Activation: standard (1)
+- **Teleportation Circle** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 9, Sorcerer 9, Rune 9
+  - Activation: minute (10)
+- **Temporal Stasis** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Time Duplicate** [Saving Throw] [Activation]
+  - Saving Throw: None (harmless)
+  - Activation: round (1)
+- **Time Stop** [Class Levels] [Activation]
+  - Class Levels: Wizard 9, Sorcerer 9, Trickery 9
+  - Activation: standard (1)
+- **Tiny Hut** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 3, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Tongues** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Bard 2, Cleric 4, Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Touch of Fatigue** [Special Actions] [Effect Notes] [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Special Actions: Fatigue
+  - Effect Notes: Touch attack fatigues target.
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 0, Sorcerer 0
+  - Ability Modifiers: atk: str
+  - Activation: standard (1)
+- **Touch of Idiocy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Touch Of Madness** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Madness 2
+  - Activation: round (1)
+- **Transformation** [Class Levels] [Activation]
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Transmute Metal to Wood** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 7
+  - Activation: standard (1)
+- **Transmute Mud to Rock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Druid 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Transmute Rock to Mud** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Druid 5, Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Transport via Plants** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 6
+  - Activation: standard (1)
+- **Trap the Soul** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 8, Sorcerer 8
+  - Activation: standard (1)
+- **Tree Shape** [Class Levels] [Activation]
+  - Class Levels: Druid 2, Ranger 3
+  - Activation: standard (1)
+- **Tree Stride** [Class Levels] [Activation]
+  - Class Levels: Druid 5, Ranger 4
+  - Activation: standard (1)
+- **True Creation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Creation 8, Artifice 8
+  - Activation: minute (10)
+- **True Resurrection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Cleric 9
+  - Activation: minute (1)
+- **True Seeing** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 5, Druid 7, Wizard 6, Sorcerer 6, Knowledge 5
+  - Activation: standard (1)
+- **True Strike** [Class Levels] [Activation]
+  - Class Levels: Assassin 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Undeath to Death** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wizard 6, Sorcerer 6, Cleric 6, Repose 6
+  - Activation: round (1)
+- **Undetectable Alignment** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Assassin 2, Bard 1, Cleric 2, Paladin 2
+  - Activation: standard (1)
+- **Unhallow** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Druid 5
+  - Activation: hour (24)
+- **Unholy Aura** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 8, Evil 8
+  - Activation: standard (1)
+- **Unholy Blight** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Evil 4
+  - Activation: standard (1)
+- **Unseen Servant** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Vampiric Touch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 3, Sorcerer 3
+  - Activation: standard (1)
+- **Veil** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Bard 6, Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Vengeful Gaze of God** [Saving Throw] [Activation]
+  - Saving Throw: Fortitude half
+  - Activation: round (1)
+- **Ventriloquism** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with)
+  - Class Levels: Bard 1, Wizard 1, Sorcerer 1
+  - Activation: standard (1)
+- **Verdigris** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Verdigris Tsunami** [Saving Throw] [Activation]
+  - Saving Throw: Reflex half
+  - Activation: round (1)
+- **Virtue** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (harmless)
+  - Class Levels: Cleric 0, Druid 0, Paladin 1
+  - Activation: standard (1)
+- **Vision** [Class Levels] [Activation]
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Wail of the Banshee** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wizard 9, Sorcerer 9, Death 9, Repose 9
+  - Activation: standard (1)
+- **Wall of Fire** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 5, Wizard 4, Sorcerer 4, Fire 4
+  - Activation: standard (1)
+- **Wall of Force** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Wall of Ice** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates; see text
+  - Class Levels: Wizard 4, Sorcerer 4
+  - Activation: standard (1)
+- **Wall of Iron** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 6, Sorcerer 6
+  - Activation: standard (1)
+- **Wall of Stone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Cleric 5, Druid 6, Wizard 5, Sorcerer 5, Earth 5
+  - Activation: standard (1)
+- **Wall of Thorns** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Druid 5, Plant 5
+  - Activation: standard (1)
+- **Warp Wood** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 2
+  - Activation: standard (1)
+- **Water Breathing** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 3, Druid 3, Wizard 3, Sorcerer 3, Water 3
+  - Activation: standard (1)
+- **Water Walk** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Cleric 3, Ranger 3
+  - Activation: standard (1)
+- **Waves of Exhaustion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Wizard 7, Sorcerer 7
+  - Activation: standard (1)
+- **Waves of Fatigue** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Wizard 5, Sorcerer 5
+  - Activation: standard (1)
+- **Web** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates; see text
+  - Class Levels: Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Weird** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will disbelief (if interacted with), then Fortitud
+  - Class Levels: Wizard 9, Sorcerer 9, Madness 9
+  - Activation: standard (1)
+- **Whirlwind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates; see text
+  - Class Levels: Druid 8, Air 8, Weather 8
+  - Activation: standard (1)
+- **Whispering Wind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Bard 2, Wizard 2, Sorcerer 2
+  - Activation: standard (1)
+- **Wind Walk** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No and Will negates (harmless)
+  - Class Levels: Cleric 6, Druid 7
+  - Activation: standard (1)
+- **Wind Wall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Cleric 3, Druid 3, Ranger 2, Wizard 3, Sorcerer 3, Air 2
+  - Activation: standard (1)
+- **Wish** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Wizard 9, Sorcerer 9
+  - Activation: standard (1)
+- **Wood Shape** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Druid 2, Artifice 2
+  - Activation: standard (1)
+- **Word of Chaos** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates; see text
+  - Class Levels: Cleric 7, Chaos 7
+  - Activation: standard (1)
+- **Word of Recall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (harmless, object)
+  - Class Levels: Cleric 6, Druid 8
+  - Activation: standard (1)
+- **Zone of Silence** [Class Levels] [Activation]
+  - Class Levels: Bard 4
+  - Activation: round (1)
+- **Zone of Truth** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Cleric 2, Paladin 2
+  - Activation: standard (1)

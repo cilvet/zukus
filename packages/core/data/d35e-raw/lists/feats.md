@@ -1,0 +1,444 @@
+# Feats
+
+**Total:** 388 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Changes] | Changes | 32 | Stat modifiers (ability, AC, attack, damage, saves, skills, speed) |
+| [Context Notes] | Context Notes | 6 | Situational bonuses or conditional notes |
+| [Damage Reduction] | Damage Reduction | 2 | DR X/type |
+
+---
+
+## Items
+
+- **Ability Focus**
+- **Acrobatic** [Changes]
+  - Changes: 2 skill.skill.jmp (untyped); 2 skill.skill.tmb (untyped)
+- **Additional Magic Item Space**
+- **Agile** [Changes]
+  - Changes: 2 skill.skill.blc (untyped); 2 skill.skill.esc (untyped)
+- **Alertness** [Changes]
+  - Changes: 2 skill.skill.lis (untyped); 2 skill.skill.spt (untyped)
+- **Aligned Attack**
+- **Animal Affinity** [Changes]
+  - Changes: 2 skill.skill.han (untyped); 2 skill.skill.rid (untyped)
+- **Antipsionic Magic**
+- **Armor Proficiency (Heavy)**
+- **Armor Proficiency (Light)**
+- **Armor Proficiency (Medium)**
+- **Armor Skin** [Changes]
+  - Changes: 1 ac.nac (untyped)
+- **Athletic** [Changes]
+  - Changes: 2 skill.skill.clm (untyped); 2 skill.skill.swm (untyped)
+- **Augment Summoning**
+- **Augmented Alchemy**
+- **Automatic Quicken Spell**
+- **Automatic Silent Spell**
+- **Automatic Still Spell**
+- **Autonomous** [Changes]
+  - Changes: 2 skill.skill.kps (untyped); 2 skill.skill.aut (untyped)
+- **Awesome Blow**
+- **Bane of Enemies** [Context Notes]
+  - Context Notes: [[2d6]] against favored enemies; [[+2]] against favored enemies
+- **Blind-Fight**
+- **Blinding Speed**
+- **Blindsight, 5-ft. Radius**
+- **Body Fuel**
+- **Bonus Domain**
+- **Boost Construct**
+- **Brew Potion**
+- **Bulwark of Defense**
+- **Burrowing Power**
+- **Chain Power**
+- **Chaotic Mind**
+- **Chaotic Rage**
+- **Cleave**
+- **Cloak Dance**
+- **Closed Mind**
+- **Colossal Wild Shape**
+- **Combat Archery**
+- **Combat Casting** [Context Notes]
+  - Context Notes: [[+4]] while on the defensive or while when grappling or pinned
+- **Combat Expertise**
+- **Combat Manifestation**
+- **Combat Reflexes**
+- **Craft Cognizance Crystal**
+- **Craft Construct**
+- **Craft Dorje**
+- **Craft Epic Magic Arms and Armor**
+- **Craft Epic Rod**
+- **Craft Epic Staff**
+- **Craft Epic Wondrous Item**
+- **Craft Magic Arms and Armor**
+- **Craft Psicrown**
+- **Craft Psionic Arms and Armor**
+- **Craft Psionic Construct**
+- **Craft Rod**
+- **Craft Staff**
+- **Craft Universal Item**
+- **Craft Wand**
+- **Craft Wondrous Item**
+- **Damage Reduction** [Damage Reduction]
+  - Damage Reduction: 3/any
+- **Deadly Precision**
+- **Deafening Song**
+- **Death of Enemies**
+- **Deceitful** [Changes]
+  - Changes: 2 skill.skill.dis (untyped); 2 skill.skill.fog (untyped)
+- **Deep Impact**
+- **Deflect Arrows**
+- **Deft Hands**
+- **Delay Power**
+- **Devastating Critical**
+- **Dexterous Fortitude**
+- **Dexterous Will**
+- **Diehard**
+- **Diligent**
+- **Diminutive Wild Shape**
+- **Dire Charge**
+- **Disguise Spell**
+- **Distant Shot**
+- **Divine Might**
+- **Divine Vengeance**
+- **Dodge**
+- **Dragon Wild Shape**
+- **Efficient Item Creation**
+- **Empower Power**
+- **Empower Spell**
+- **Empower Spell-Like Ability**
+- **Endurance** [Context Notes]
+  - Context Notes: [[+4]] to resist nonlethal damage; [[+4]] to continue running, avoid nonlethal damage from a forced march, hold your breath, avoid nonlethal damage from starvation or thirst; [[+4]] to avoid nonlethal damage from hot or cold environments and resist damage from suffocation
+- **Energy Resistance**
+- **Energy Substitution**
+- **Enhance Spell**
+- **Enlarge Power**
+- **Enlarge Spell**
+- **Epic Dodge**
+- **Epic Endurance**
+- **Epic Expanded Knowledge**
+- **Epic Fortitude** [Changes]
+  - Changes: 4 savingThrows.fort (untyped)
+- **Epic Inspiration**
+- **Epic Leadership**
+- **Epic Manifestation**
+- **Epic Prowess** [Changes]
+  - Changes: 1 attack.attack (untyped)
+- **Epic Psionic Focus**
+- **Epic Reflexes** [Changes]
+  - Changes: 4 savingThrows.ref (untyped)
+- **Epic Reputation**
+- **Epic Skill Focus (Not Set)** [Changes]
+  - Changes: 10 skill. (untyped)
+- **Epic Speed**
+- **Epic Spell Focus (No Spell School Selected)**
+- **Epic Spell Penetration**
+- **Epic Spellcasting**
+- **Epic Toughness** [Changes]
+  - Changes: 30 misc.mhp (untyped)
+- **Epic Weapon Focus (No Weapon Selected)**
+- **Epic Weapon Specialization**
+- **Epic Will** [Changes]
+  - Changes: 4 savingThrows.will (untyped)
+- **Eschew Materials**
+- **Exceptional Deflection**
+- **Exotic Weapon Proficiency**
+- **Expanded Knowledge**
+- **Extend Power**
+- **Extend Spell**
+- **Extended Life Span**
+- **Extra Music**
+- **Extra Turning** [Changes]
+  - Changes: 4 misc.turnUndead (untyped)
+- **Eyes in the Back of Your Head**
+- **Familiar Spell**
+- **Far Shot**
+- **Fast Healing** [Changes]
+  - Changes: 3 misc.fastHeal (untyped)
+- **Fell Shot**
+- **Fine Wild Shape**
+- **Fleet of Foot**
+- **Flyby Attack**
+- **Focused Sunder**
+- **Force of Will**
+- **Forge Epic Ring**
+- **Forge Ring**
+- **Gargantuan Wild Shape**
+- **Ghost Attack**
+- **Great Charisma**
+- **Great Cleave**
+- **Great Constitution**
+- **Great Dexterity** [Changes]
+  - Changes: 1 ability.dex (untyped)
+- **Great Fortitude** [Changes]
+  - Changes: 2 savingThrows.fort (untyped)
+- **Great Intelligence**
+- **Great Smiting**
+- **Great Strength**
+- **Great Wisdom**
+- **Greater Manyshot**
+- **Greater Multiweapon Fighting**
+- **Greater Power Penetration**
+- **Greater Power Specialization**
+- **Greater Psionic Endowment**
+- **Greater Psionic Fist**
+- **Greater Psionic Shot**
+- **Greater Psionic Weapon**
+- **Greater Spell Focus (No Spell School Selected)**
+- **Greater Spell Penetration**
+- **Greater Two-Weapon Fighting**
+- **Greater Weapon Focus (No Weapon Selected)**
+- **Greater Weapon Specialization (No Weapon Selected)**
+- **Group Inspiration**
+- **Heighten Spell**
+- **Hindering Song**
+- **Hold the Line**
+- **Holy Strike**
+- **Hostile Mind**
+- **Hover**
+- **Ignore Material Components**
+- **Imprint Stone**
+- **Improved Alignment-Based Casting**
+- **Improved Arrow of Death**
+- **Improved Aura of Courage**
+- **Improved Aura of Despair**
+- **Improved Bull Rush**
+- **Improved Combat Casting**
+- **Improved Combat Reflexes**
+- **Improved Counterspell**
+- **Improved Critical (No Weapon Selected)**
+- **Improved Darkvision**
+- **Improved Death Attack**
+- **Improved Disarm**
+- **Improved Elemental Wild Shape**
+- **Improved Familiar**
+- **Improved Favored Enemy**
+- **Improved Feint**
+- **Improved Flyby Attack**
+- **Improved Grapple** [Changes]
+  - Changes: 4 misc.cmb (untyped)
+- **Improved Heighten Spell**
+- **Improved Initiative** [Changes]
+  - Changes: 4 misc.init (untyped)
+- **Improved Ki Strike**
+- **Improved Low-Light Vision**
+- **Improved Manifestation**
+- **Improved Manyshot**
+- **Improved Metamagic**
+- **Improved Metapsionics**
+- **Improved Multiattack**
+- **Improved Multiweapon Fighting**
+- **Improved Natural Armor** [Changes]
+  - Changes: 1 ac.nac (untyped)
+- **Improved Natural Attack (No Weapon Set)**
+- **Improved Overrun**
+- **Improved Precise Shot**
+- **Improved Psicrystal**
+- **Improved Shield Bash**
+- **Improved Sneak Attack**
+- **Improved Spell Capacity**
+- **Improved Spell Resistance** [Changes]
+  - Changes: 2 misc.spellResistance (untyped)
+- **Improved Stunning Fist**
+- **Improved Sunder** [Context Notes]
+  - Context Notes: [[+4]] to attack an object held or carried by another character
+- **Improved Trip**
+- **Improved Turning**
+- **Improved Two-Weapon Fighting**
+- **Improved Unarmed Strike**
+- **Improved Whirlwind Attack**
+- **Incite Rage**
+- **Infinite Deflection**
+- **Inquisitor**
+- **Inspire Excellence**
+- **Instant Reload**
+- **Intensify Spell**
+- **Intuitive Trapfinding**
+- **Investigator**
+- **Iron Will** [Changes]
+  - Changes: 2 savingThrows.will (untyped)
+- **Jack of All Trades**
+- **Keen Strike**
+- **Knock-Down**
+- **Lasting Inspiration**
+- **Leadership**
+- **Legendary Climber**
+- **Legendary Commander**
+- **Legendary Leaper**
+- **Legendary Rider**
+- **Legendary Tracker**
+- **Legendary Wrestler**
+- **Lightning Reflexes** [Changes]
+  - Changes: 2 savingThrows.ref (untyped)
+- **Lingering Damage**
+- **Magical Aptitude**
+- **Magical Beast Companion**
+- **Magical Beast Wild Shape**
+- **Manyshot**
+- **Martial Weapon Proficiency (All)**
+- **Master Staff**
+- **Master Wand**
+- **Maximize Power**
+- **Maximize Spell**
+- **Mental Leap**
+- **Mental Resistance**
+- **Metamorphic Transfer**
+- **Mighty Rage**
+- **Mind Over Body**
+- **Mobile Defense**
+- **Mobility** [Damage Reduction]
+  - Damage Reduction: /
+- **Mounted Archery**
+- **Mounted Combat**
+- **Multiattack**
+- **Multispell**
+- **Multiweapon Fighting**
+- **Multiweapon Rend**
+- **Music of the Gods**
+- **Narrow Mind**
+- **Natural Spell**
+- **Negative Energy Burst**
+- **Negotiator** [Changes]
+  - Changes: 2 skill.skill.dip (untyped); 2 skill.skill.sen (untyped)
+- **Nimble Fingers**
+- **Open Minded**
+- **Opportunity Power**
+- **Overchannel**
+- **Overwhelming Critical**
+- **Penetrate Damage Reduction**
+- **Perfect Health**
+- **Perfect Multiweapon Fighting**
+- **Perfect Two-Weapon Fighting**
+- **Permanent Emanation**
+- **Persistent Spell**
+- **Persuasive** [Changes]
+  - Changes: 2 skill.skill.int (untyped); 2 skill.skill.blf (untyped)
+- **Planar Turning**
+- **Plant Control**
+- **Plant Defiance**
+- **Plant Wild Shape**
+- **Point Blank Shot**
+- **Polyglot**
+- **Positive Energy Aura**
+- **Power Attack**
+- **Power Critical**
+- **Power Knowledge**
+- **Power Penetration**
+- **Power Specialization**
+- **Precise Shot**
+- **Psicrystal Affinity**
+- **Psicrystal Containment**
+- **Psicrystal Power**
+- **Psionic Affinity**
+- **Psionic Body**
+- **Psionic Charge**
+- **Psionic Dodge**
+- **Psionic Endowment**
+- **Psionic Fist**
+- **Psionic Hole**
+- **Psionic Meditation**
+- **Psionic Shot**
+- **Psionic Talent**
+- **Psionic Weapon**
+- **Quick Draw**
+- **Quicken Power**
+- **Quicken Spell**
+- **Quicken Spell-Like Ability**
+- **Ranged Inspiration**
+- **Rapid Inspiration**
+- **Rapid Metabolism**
+- **Rapid Reload (None)**
+- **Rapid Shot**
+- **Reach Spell**
+- **Reactive Countersong**
+- **Reckless Offense**
+- **Reflect Arrows**
+- **Repeat Spell**
+- **Return Shot**
+- **Ride-By Attack**
+- **Righteous Strike**
+- **Ruinous Rage**
+- **Run** [Context Notes]
+  - Context Notes: [[+4]] when making a jump after a running start (see the Jump skill description)
+- **Sacred Spell**
+- **Scribe Epic Scroll**
+- **Scribe Scroll**
+- **Scribe Tattoo**
+- **Self-Concealment**
+- **Self-Sufficient**
+- **Sharp-Shooting**
+- **Shattering Strike**
+- **Shield Proficiency**
+- **Shot on the Run**
+- **Sidestep Charge**
+- **Silent Spell**
+- **Simple Weapon Proficiency**
+- **Skill Focus (Not Set)** [Changes]
+  - Changes: 3 skill. (untyped)
+- **Snatch**
+- **Snatch Arrows**
+- **Sneak Attack of Opportunity**
+- **Spectral Strike**
+- **Speed of Thought** [Changes]
+  - Changes: 10 speed.allSpeeds (insight)
+- **Spell Focus (No Spell School Selected)**
+- **Spell Knowledge**
+- **Spell Mastery**
+- **Spell Opportunity**
+- **Spell Penetration**
+- **Spell Stowaway (No Spell Set)**
+- **Spellcasting Harrier** [Context Notes]
+  - Context Notes: [[+4]] on attack roll agains devensife casters
+- **Spirited Charge**
+- **Split Psionic Ray**
+- **Spontaneous Domain Access**
+- **Spontaneous Spell**
+- **Spring Attack**
+- **Stand Still**
+- **Stealthy** [Changes]
+  - Changes: 2 skill.skill.hid (untyped); 2 skill.skill.mos (untyped)
+- **Still Spell**
+- **Storm of Throws**
+- **Stunning Fist**
+- **Subdual Substitution**
+- **Superior Expertise**
+- **Superior Initiative** [Changes]
+  - Changes: 4 misc.init (untyped)
+- **Swarm of Arrows**
+- **Talented**
+- **Tenacious Magic (No Spell Set)**
+- **Terrifying Rage**
+- **Thundering Rage**
+- **Toughness** [Changes]
+  - Changes: 3 misc.mhp (untyped)
+- **Tower Shield Proficiency**
+- **Track**
+- **Trample**
+- **Twin Power**
+- **Two-Weapon Defense**
+- **Two-Weapon Fighting**
+- **Two-Weapon Rend**
+- **Unavoidable Strike**
+- **Uncanny Accuracy**
+- **Unconditional Power**
+- **Undead Mastery**
+- **Unholy Strike**
+- **Up the Walls**
+- **Vermin Wild Shape**
+- **Vorpal Strike**
+- **Weapon Finesse**
+- **Weapon Focus (No Weapon Selected)**
+- **Weapon Proficiency (No Weapon Selected)**
+- **Weapon Specialization (No Weapon Selected)**
+- **Whirlwind Attack**
+- **Widen Aura of Courage**
+- **Widen Aura of Despair**
+- **Widen Power**
+- **Widen Spell**
+- **Wild Talent** [Changes]
+  - Changes: 2 psionic.powerPoints (untyped)
+- **Wingover**
+- **Wounding Attack**
+- **Zone of Animation**

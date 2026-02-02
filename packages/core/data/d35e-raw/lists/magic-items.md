@@ -1,0 +1,788 @@
+# Magic Items
+
+**Total:** 636 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Changes] | Changes | 42 | Stat modifiers (ability, AC, attack, damage, saves, skills, speed) |
+| [Context Notes] | Context Notes | 6 | Situational bonuses or conditional notes |
+| [Attack Bonus] | Attack Bonus | 1 | Direct attack roll modifier |
+| [Attack Notes] | Attack Notes | 14 | Attack modifier notes |
+| [Effect Notes] | Effect Notes | 5 | Effect description text |
+| [Damage Reduction] | Damage Reduction | 2 | DR X/type |
+| [Saving Throw] | Saving Throw | 1 | Requires a saving throw |
+| [Special Actions] | Special Actions | 5 | Activatable abilities with conditions/scripts |
+| [Activation] | Activation | 40 | Has activation cost/type |
+| [Uses] | Uses | 9 | Limited uses per day/encounter |
+
+---
+
+## Items
+
+- **Absorbing Shield** [Attack Notes] [Activation] [Uses]
+  - Attack Notes: @Compendium[D35E.spells.dbzLkfBfQHCpcuao]{Disintegrate} object it touches,as the spell.
+  - Activation: standard
+  - Uses: 3/week
+- **Adamantine Battleaxe**
+- **Adamantine Breastplate** [Activation]
+  - Activation: minute (4)
+- **Adamantine Dagger**
+- **Amulet of Catapsi**
+- **Amulet of Epic Natural Armor +10**
+- **Amulet of Epic Natural Armor +6**
+- **Amulet of Epic Natural Armor +7**
+- **Amulet of Epic Natural Armor +8**
+- **Amulet of Epic Natural Armor +9**
+- **Amulet of Health +2**
+- **Amulet of Health +4**
+- **Amulet of Health +6**
+- **Amulet of Inescapable Location**
+- **Amulet of Mighty Fists +1**
+- **Amulet of Mighty Fists +2**
+- **Amulet of Mighty Fists +3**
+- **Amulet of Mighty Fists +4**
+- **Amulet of Mighty Fists +5**
+- **Amulet of Natural Armor +1**
+- **Amulet of Natural Armor +2**
+- **Amulet of Natural Armor +3**
+- **Amulet of Natural Armor +4**
+- **Amulet of Natural Armor +5**
+- **Amulet of Proof Against Detection and Location**
+- **Amulet of the Planes** [Effect Notes]
+  - Effect Notes: Make a DC 15 Intelligence check.
+- **Annulus**
+- **Antimagic Armor** [Damage Reduction] [Activation]
+  - Damage Reduction: 3/any
+  - Activation: minute (4)
+- **Apparatus of the Crab**
+- **Armor of Arrow Attraction** [Activation]
+  - Activation: minute (4)
+- **Armor of Rage** [Activation]
+  - Activation: minute (4)
+- **Armor of the Abyssal Horde** [Activation]
+  - Activation: minute (4)
+- **Armor of the Celestial Battalion** [Activation]
+  - Activation: minute (4)
+- **Arrow of Death**
+- **Assassin's Dagger** [Attack Notes]
+  - Attack Notes: [[+1]] do DC of Assassins Death Attack
+- **Astral Legion**
+- **Axe of the Dwarvish Lords** [Changes]
+  - Changes: 10 skill.skill.crf (untyped)
+- **Backstabber** [Changes]
+  - Changes: 2 misc.sneakAttack (enh)
+- **Bag of Devouring**
+- **Bag of Holding (Type I)**
+- **Bag of Holding (Type II)**
+- **Bag of Holding (Type III)**
+- **Bag of Holding (Type IV)**
+- **Bag of Tricks, Gray** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Summons an animal 20 ft. from the user.
+  - Activation: standard
+  - Uses: 10/week
+- **Bag of Tricks, Rust** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Summons an animal 20 ft. from the user.
+  - Activation: standard
+  - Uses: 10/week
+- **Bag of Tricks, Tan** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Summons an animal 20 ft. from the user.
+  - Activation: standard
+  - Uses: 10/week
+- **Banded Mail of Luck** [Activation]
+  - Activation: minute (4)
+- **Bead of Force**
+- **Beast**
+- **Belt of Dwarvenkind**
+- **Belt of Epic Strength +10**
+- **Belt of Epic Strength +12**
+- **Belt of Epic Strength +8**
+- **Belt of Giant Strength +4**
+- **Belt of Giant Strength +6**
+- **Belt, Monk's**
+- **Blessed Book**
+- **Boat, Folding**
+- **Book of Infinite Spells**
+- **Boots of Dancing**
+- **Boots of Elvenkind** [Changes]
+  - Changes: 5 skill.skill.mos (competence)
+- **Boots of Landing** [Effect Notes] [Activation] [Uses]
+  - Effect Notes: Take 2 fewer dice of damage from the fall than normal.
+  - Activation: free (1)
+  - Uses: 1/day
+- **Boots of Levitation**
+- **Boots of Skating**
+- **Boots of Speed**
+- **Boots of Stomping**
+- **Boots of Striding and Springing** [Changes]
+  - Changes: 5 skill.skill.jmp (untyped); 10 speed.landSpeed (untyped)
+- **Boots of Swiftness**
+- **Boots of Teleportation**
+- **Boots of Temporal Acceleration**
+- **Boots of the Winterlands**
+- **Boots, Winged**
+- **Bottle of Air**
+- **Bowl of Commanding Water Elementals**
+- **Bracelet of Friends**
+- **Bracers of Archery, Greater**
+- **Bracers of Archery, Lesser**
+- **Bracers of Armor +1** [Changes]
+  - Changes: 1 ac.aac (base)
+- **Bracers of Armor +2** [Changes]
+  - Changes: 2 ac.aac (untyped)
+- **Bracers of Armor +3** [Changes]
+  - Changes: 3 ac.aac (base)
+- **Bracers of Armor +4** [Changes]
+  - Changes: 4 ac.aac (base)
+- **Bracers of Armor +5** [Changes]
+  - Changes: 5 ac.aac (base)
+- **Bracers of Armor +6** [Changes]
+  - Changes: 6 ac.aac (base)
+- **Bracers of Armor +7** [Changes]
+  - Changes: 7 ac.aac (base)
+- **Bracers of Armor +8** [Changes]
+  - Changes: 8 ac.aac (base)
+- **Bracers of Defenselessness** [Changes]
+  - Changes: -5 ac.aac (penalty)
+- **Bracers of Epic Armor +11** [Changes]
+  - Changes: 11 ac.aac (base)
+- **Bracers of Epic Armor +12** [Changes]
+  - Changes: 12 ac.aac (base)
+- **Bracers of Epic Armor +13** [Changes]
+  - Changes: 13 ac.aac (base)
+- **Bracers of Epic Armor +14** [Changes]
+  - Changes: 14 ac.aac (base)
+- **Bracers of Epic Armor +15** [Changes]
+  - Changes: 15 ac.aac (base)
+- **Bracers of Epic Health +10**
+- **Bracers of Epic Health +12**
+- **Bracers of Epic Health +8**
+- **Bracers of Relentless Might**
+- **Brazier of Commanding Fire Elementals**
+- **Breastplate of Command** [Activation]
+  - Activation: minute (4)
+- **Brooch of Shielding**
+- **Broom of Animated Attack**
+- **Broom of Flying**
+- **Bulwark of the Great Dragon** [Saving Throw] [Activation] [Uses]
+  - Saving Throw: Reflex half
+  - Activation: standard (1)
+  - Uses: 3/day
+- **Cabinet of Feasting**
+- **Candle of Invocation**
+- **Candle of Truth**
+- **Cape of the Mountebank**
+- **Carpet of Flying**
+- **Caster's Shield** [Activation]
+  - Activation: move (1)
+- **Cautious Warrior**
+- **Celestial Armor** [Activation]
+  - Activation: minute (4)
+- **Censer of Controlling Air Elementals**
+- **Chaos Diamond**
+- **Chaosbringer**
+- **Chime of Interruption**
+- **Chime of Opening**
+- **Circlet of Blasting, Major**
+- **Circlet of Blasting, Minor**
+- **Circlet of Persuasion**
+- **Cloak of Arachnida**
+- **Cloak of Charisma +2**
+- **Cloak of Charisma +4**
+- **Cloak of Charisma +6**
+- **Cloak of Displacement, Major**
+- **Cloak of Displacement, Minor**
+- **Cloak of Elvenkind**
+- **Cloak of Epic Charisma +10**
+- **Cloak of Epic Charisma +12**
+- **Cloak of Epic Charisma +8**
+- **Cloak of Epic Resistance +10** [Changes]
+  - Changes: 10 savingThrows.allSavingThrows (enh)
+- **Cloak of Epic Resistance +6** [Changes]
+  - Changes: 6 savingThrows.allSavingThrows (enh)
+- **Cloak of Epic Resistance +7** [Changes]
+  - Changes: 7 savingThrows.allSavingThrows (enh)
+- **Cloak of Epic Resistance +8** [Changes]
+  - Changes: 8 savingThrows.allSavingThrows (enh)
+- **Cloak of Epic Resistance +9** [Changes]
+  - Changes: 9 savingThrows.allSavingThrows (enh)
+- **Cloak of Etherealness**
+- **Cloak of Poisonousness**
+- **Cloak of Resistance +1** [Changes]
+  - Changes: 1 savingThrows.allSavingThrows (enh)
+- **Cloak of Resistance +2** [Changes]
+  - Changes: 2 savingThrows.allSavingThrows (enh)
+- **Cloak of Resistance +3** [Changes]
+  - Changes: 3 savingThrows.allSavingThrows (enh)
+- **Cloak of Resistance +4** [Changes]
+  - Changes: 4 savingThrows.allSavingThrows (enh)
+- **Cloak of Resistance +5** [Changes]
+  - Changes: 5 savingThrows.allSavingThrows (enh)
+- **Cloak of the Bat**
+- **Cloak of the Manta Ray**
+- **Codex of the Infinite Planes**
+- **Crawling Tattoos**
+- **Crystal Anchor**
+- **Crystal Ball**
+- **Crystal Hypnosis Ball**
+- **Crystal Masks**
+- **Cube of Force**
+- **Cube of Frost Resistance**
+- **Cubic Gate**
+- **Cup and Talisman of the Demigod**
+- **Dagger of Venom**
+- **Darkskull**
+- **Darkwood Buckler** [Activation]
+  - Activation: move (1)
+- **Darkwood Shield** [Activation]
+  - Activation: move (1)
+- **Decanter of Endless Water**
+- **Deck of Illusions**
+- **Deck of Many Things**
+- **Demon Armor** [Activation]
+  - Activation: minute (4)
+- **Dimensional Shackles**
+- **Discerning Watcher**
+- **Dominator**
+- **Dragonhide Plate** [Activation]
+  - Activation: minute (4)
+- **Dragonskin Armor** [Activation]
+  - Activation: minute (4)
+- **Drums of Panic**
+- **Dust of Appearance**
+- **Dust of Disappearance**
+- **Dust of Dryness**
+- **Dust of Illusion**
+- **Dust of Sneezing and Choking**
+- **Dust of Tracelessness**
+- **Dwarven Plate** [Activation]
+  - Activation: minute (4)
+- **Dwarven Thrower** [Attack Notes]
+  - Attack Notes: [[+1]] Attack and Damage in hands of a Dwarf
+[[/r 1d8 #Bonus Damage against Giants]] bonus Damage a
+- **Efficient Quiver**
+- **Efreeti Bottle**
+- **Elemental Gem**
+- **Elixir of Fire Breath**
+- **Elixir of Hiding**
+- **Elixir of Love**
+- **Elixir of Sneaking**
+- **Elixir of Swimming**
+- **Elixir of Truth**
+- **Elixir of Vision**
+- **Elven Chain** [Activation]
+  - Activation: minute (4)
+- **Elven Greatbow**
+- **Evader**
+- **Eversmoking Bottle**
+- **Everwhirling Chain**
+- **Eye of the Orc**
+- **Eyes of Charming**
+- **Eyes of Doom**
+- **Eyes of Expanded Vision**
+- **Eyes of Petrification**
+- **Eyes of Power Leech**
+- **Eyes of Power Leech, Vampiric**
+- **Eyes of the Eagle**
+- **Feather Token, Anchor**
+- **Feather Token, Bird**
+- **Feather Token, Fan**
+- **Feather Token, Swan Boat**
+- **Feather Token, Tree**
+- **Feather Token, Whip**
+- **Fiery Ruin**
+- **Figurines of Wondrous Power**
+- **Finaldeath**
+- **Flame Tongue**
+- **Flask of Curses**
+- **Frost Brand**
+- **Gate Key**
+- **Gauntlet of Rust**
+- **Gauntlets of Fumbling** [Changes]
+  - Changes: -2 ability.dex (penalty)
+- **Gauntlets of Ogre Power**
+- **Gem of Brightness**
+- **Gem of Seeing**
+- **Glove of Storing**
+- **Gloves of Arrow Snaring**
+- **Gloves of Dexterity +2**
+- **Gloves of Dexterity +4**
+- **Gloves of Dexterity +6**
+- **Gloves of Epic Dexterity +10**
+- **Gloves of Epic Dexterity +12**
+- **Gloves of Epic Dexterity +8**
+- **Gloves of Object Reading**
+- **Gloves of Swimming and Climbing**
+- **Gloves of Titan's Grip**
+- **Goggles of Minute Seeing**
+- **Goggles of Night**
+- **Golem Armor** [Activation]
+  - Activation: minute (4)
+- **Golem Manual**
+- **Great Dominator**
+- **Gripsoul** [Attack Notes]
+  - Attack Notes: On critical hit imprison the victim in a gem set in the pommel of the sword as per a binding spell h
+- **Hammer of Thunderbolts**
+- **Hand of Glory**
+- **Hand of the Mage**
+- **Handy Haversack**
+- **Harp of Charming**
+- **Hat of Disguise**
+- **Headband of Epic Intellect +10**
+- **Headband of Epic Intellect +12**
+- **Headband of Epic Intellect +8**
+- **Headband of Intellect +2**
+- **Headband of Intellect +4**
+- **Headband of Intellect +6**
+- **Helm of Brilliance**
+- **Helm of Comprehend Languages and Read Magic**
+- **Helm of Opposite Alignment**
+- **Helm of Telepathy**
+- **Helm of Teleportation**
+- **Helm of Underwater Action**
+- **Holy Avenger** [Changes] [Context Notes]
+  - Changes: 5 + @classes.paladin.level misc.spellResistance (untyped)
+  - Context Notes: [[5 + @classes.paladin.level]] to adjacent Characters
+- **Holy Devastator** [Context Notes]
+  - Context Notes: [[+5]] sacred bonus on the wielder's saving throws against spells with the evil descriptor or spells cast by evil characters if in hands of a Paladin
+- **Horn of Blasting**
+- **Horn of Blasting, Greater**
+- **Horn of Fog**
+- **Horn of Goodness/Evil**
+- **Horn of the Tritons**
+- **Horn of Valhalla**
+- **Horseshoes of A Zephyr**
+- **Horseshoes of Speed**
+- **Horseshoes of the Peerless Steed**
+- **Immovable Rod**
+- **Incense of Meditation**
+- **Incense of Obsession**
+- **Instant Fortress**
+- **Invulnerable Coat** [Activation]
+  - Activation: minute (1)
+- **Ioun Stones**
+- **Iron Bands of Binding**
+- **Iron Flask**
+- **Iron Gauntlet of War**
+- **Javelin of Lightning** [Attack Notes]
+  - Attack Notes: Reflex DC [[14]] half
+- **Lantern of Revealing**
+- **Lens of Detection**
+- **Life-Drinker** [Attack Notes]
+  - Attack Notes: Bestow two negative levels on its target whenever dealt damage
+- **Lion's Shield** [Attack Notes] [Activation] [Uses]
+  - Attack Notes: Roll extra attacks if wearer has ability to make multiple attacks
+  - Activation: free (1)
+  - Uses: 3/day
+- **Luck Blade** [Changes]
+  - Changes: 1 savingThrows.allSavingThrows (luck)
+- **Lyre of Building**
+- **Mace of Blood**
+- **Mace of Ruin**
+- **Mace of Smiting** [Attack Notes]
+  - Attack Notes: [[+5]] enhancement bonus against constructs
+Critical hit against Construct destroys it
+Critical hit 
+- **Mace of Terror**
+- **Mantle of Epic Spell Resistance**
+- **Mantle of Faith**
+- **Mantle of Great Stealth**
+- **Mantle of Spell Resistance**
+- **Manual of Bodily Health +1**
+- **Manual of Bodily Health +2**
+- **Manual of Bodily Health +3**
+- **Manual of Bodily Health +4**
+- **Manual of Bodily Health +5**
+- **Manual of Gainful Exercise +1**
+- **Manual of Gainful Exercise +2**
+- **Manual of Gainful Exercise +3**
+- **Manual of Gainful Exercise +4**
+- **Manual of Gainful Exercise +5**
+- **Manual of Quickness of Action +1**
+- **Manual of Quickness of Action +2**
+- **Manual of Quickness of Action +3**
+- **Manual of Quickness of Action +4**
+- **Manual of Quickness of Action +5**
+- **Marvelous Pigments**
+- **Mask of the Skull**
+- **Masterwork Cold Iron Longsword**
+- **Mattock of the Titans**
+- **Maul of the Titans** [Attack Notes]
+  - Attack Notes: Triple damage against inanimate objects
+- **Medallion of Thought Projection**
+- **Medallion of Thoughts**
+- **Mirror of Life Trapping**
+- **Mirror of Mental Prowess**
+- **Mirror of Mind Switch**
+- **Mirror of Opposition**
+- **Mirror of Suggestion**
+- **Mirror of Time Hop**
+- **Mithral Full Plate of Speed** [Activation]
+  - Activation: minute (4)
+- **Mithral Heavy Shield** [Activation]
+  - Activation: move (1)
+- **Mithral Shirt** [Activation]
+  - Activation: minute (1)
+- **Necklace of Adaptation**
+- **Necklace of Fireballs**
+- **Necklace of Strangulation**
+- **Net of Snaring**
+- **Nine Lives Stealer**
+- **Oathbow**
+- **Orb of Storms**
+- **Pearl of Power (1st)**
+- **Pearl of Power (2nd)**
+- **Pearl of Power (3rd)**
+- **Pearl of Power (4th)**
+- **Pearl of Power (5th)**
+- **Pearl of Power (6th)**
+- **Pearl of Power (7th)**
+- **Pearl of Power (8th)**
+- **Pearl of Power (9th)**
+- **Pearl of Power, Two Spells**
+- **Pearl of the Sirines**
+- **Pearl, Brain Lock**
+- **Pearl, Breath Crisis**
+- **Pearl, Mind Seed**
+- **Pearl, Personality Parasite**
+- **Periapt of Epic Wisdom +10**
+- **Periapt of Epic Wisdom +12**
+- **Periapt of Epic Wisdom +8**
+- **Periapt of Foul Rotting**
+- **Periapt of Health**
+- **Periapt of Proof Against Poison**
+- **Periapt of Wisdom +2**
+- **Periapt of Wisdom +4**
+- **Periapt of Wisdom +6**
+- **Periapt of Wound Closure**
+- **Philosopher's Stone**
+- **Phylactery of Faithfulness**
+- **Phylactery of Undead Turning**
+- **Pipes of Haunting**
+- **Pipes of Pain**
+- **Pipes of Sounding**
+- **Pipes of the Sewers**
+- **Plate Armor of the Deep** [Activation]
+  - Activation: minute (4)
+- **Portable Hole**
+- **Potion of Poison**
+- **Psicrown of the Crystal Mind**
+- **Psionatrix**
+- **Psionic Restraints**
+- **Psychoactive Skins**
+- **Quarterstaff of Alacrity** [Changes]
+  - Changes: 5 savingThrows.ref (resist)
+- **Rapier of Puncturing**
+- **Restorative Ointment**
+- **Reverse Capacitor**
+- **Rhino Hide** [Activation]
+  - Activation: minute (1)
+- **Ring Gates**
+- **Ring of Adamant Law**
+- **Ring of Animal Friendship**
+- **Ring of Blinking**
+- **Ring of Chameleon Power**
+- **Ring of Chaotic Fury**
+- **Ring of Climbing**
+- **Ring of Climbing, Improved**
+- **Ring of Clumsiness**
+- **Ring of Counterspells**
+- **Ring of Djinni Calling**
+- **Ring of Energy Immunity**
+- **Ring of Energy Resistance, Greater**
+- **Ring of Energy Resistance, Major**
+- **Ring of Energy Resistance, Minor**
+- **Ring of Epic Psionics IX** [Changes]
+  - Changes: 147 psionic.powerPoints (untyped)
+- **Ring of Epic Psionics V** [Changes]
+  - Changes: 43 psionic.powerPoints (untyped)
+- **Ring of Epic Psionics VI** [Changes]
+  - Changes: 63 psionic. (untyped)
+- **Ring of Epic Psionics VII** [Changes]
+  - Changes: 87 psionic. (untyped)
+- **Ring of Epic Psionics VIII** [Changes]
+  - Changes: 115 psionic. (untyped)
+- **Ring of Epic Wizardry IX** [Changes]
+  - Changes: @attributes.spells.spellbooks.primary.spells.spell9.classBase spells.spells.spellbooks.primary.spells.spell9.bonus (enh)
+- **Ring of Epic Wizardry V** [Changes]
+  - Changes: @attributes.spells.spellbooks.primary.spells.spell5.classBase spells.spells.spellbooks.primary.spells.spell5.bonus (enh)
+- **Ring of Epic Wizardry VI** [Changes]
+  - Changes: @attributes.spells.spellbooks.primary.spells.spell9.classBase spells.spells.spellbooks.primary.spells.spell6.bonus (enh)
+- **Ring of Epic Wizardry VII** [Changes]
+  - Changes: @attributes.spells.spellbooks.primary.spells.spell7.classBase spells.spells.spellbooks.primary.spells.spell6.bonus (enh)
+- **Ring of Epic Wizardry VIII** [Changes]
+  - Changes: @attributes.spells.spellbooks.primary.spells.spell8.classBase spells.spells.spellbooks.primary.spells.spell8.bonus (enh)
+- **Ring of Evasion**
+- **Ring of Feather Falling**
+- **Ring of Force Shield**
+- **Ring of Freedom of Movement**
+- **Ring of Friend Shield**
+- **Ring of Ineffable Evil**
+- **Ring of Invisibility**
+- **Ring of Ironskin** [Damage Reduction]
+  - Damage Reduction: 15/adamantine
+- **Ring of Jumping**
+- **Ring of Jumping, Improved**
+- **Ring of Mind Shielding**
+- **Ring of Nine Facets**
+- **Ring of Protection +1**
+- **Ring of Protection +10**
+- **Ring of Protection +2**
+- **Ring of Protection +3**
+- **Ring of Protection +4**
+- **Ring of Protection +5**
+- **Ring of Protection +6**
+- **Ring of Protection +7**
+- **Ring of Protection +8**
+- **Ring of Protection +9**
+- **Ring of Ram**
+- **Ring of Rapid Healing**
+- **Ring of Regeneration**
+- **Ring of Ring of Elemental Command (Water)**
+- **Ring of Sequestering**
+- **Ring of Shooting Stars**
+- **Ring of Spell Storing**
+- **Ring of Spell Storing, Major**
+- **Ring of Spell Storing, Minor**
+- **Ring of Spell Turning**
+- **Ring of Sustenance**
+- **Ring of Swimming**
+- **Ring of Swimming, Improved**
+- **Ring of Telekinesis**
+- **Ring of Three Wishes**
+- **Ring of Universal Energy Immunity**
+- **Ring of Universal Energy Resistance, Greater**
+- **Ring of Universal Energy Resistance, Minor**
+- **Ring of Virtuous Good**
+- **Ring of Water Walking**
+- **Ring of Weaponbreaking**
+- **Ring of Wizardry I**
+- **Ring of Wizardry II**
+- **Ring of Wizardry III**
+- **Ring of Wizardry IV**
+- **Ring of X-Ray Vision**
+- **Robe of Blending**
+- **Robe of Bones**
+- **Robe of Eyes**
+- **Robe of Powerlessness**
+- **Robe of Scintillating Colors**
+- **Robe of Stars**
+- **Robe of the Archmagi**
+- **Robe of Useful Items**
+- **Robe of Vermin**
+- **Rod of Absorption**
+- **Rod of Alertness**
+- **Rod of Besiegement**
+- **Rod of Cancellation**
+- **Rod of Enemy Detection**
+- **Rod of Epic Absorption**
+- **Rod of Epic Cancellation**
+- **Rod of Epic Might**
+- **Rod of Epic Negation**
+- **Rod of Epic Rulership**
+- **Rod of Epic Spellcaster**
+- **Rod of Epic Splendor**
+- **Rod of Excellent Magic**
+- **Rod of Flailing**
+- **Rod of Flame Extinguishing**
+- **Rod of Fortification**
+- **Rod of Invulnerability**
+- **Rod of Lordly Might**
+- **Rod of Metal and Mineral Detection**
+- **Rod of Metamagic, Empower, Greater**
+- **Rod of Metamagic, Empower, Lesser**
+- **Rod of Metamagic, Empower, Normal**
+- **Rod of Metamagic, Enlarge, Greater**
+- **Rod of Metamagic, Enlarge, Lesser**
+- **Rod of Metamagic, Enlarge, Normal**
+- **Rod of Metamagic, Extend, Greater**
+- **Rod of Metamagic, Extend, Lesser**
+- **Rod of Metamagic, Extend, Normal**
+- **Rod of Metamagic, Maximize, Greater**
+- **Rod of Metamagic, Maximize, Lesser**
+- **Rod of Metamagic, Maximize, Normal**
+- **Rod of Metamagic, Quicken, Greater**
+- **Rod of Metamagic, Quicken, Lesser**
+- **Rod of Metamagic, Quicken, Normal**
+- **Rod of Metamagic, Silent, Greater**
+- **Rod of Metamagic, Silent, Lesser**
+- **Rod of Metamagic, Silent, Normal**
+- **Rod of Negation**
+- **Rod of Nightmares**
+- **Rod of Paradise**
+- **Rod of Python**
+- **Rod of Restless Death**
+- **Rod of Rulership**
+- **Rod of Security**
+- **Rod of Splendor**
+- **Rod of The Path**
+- **Rod of Thunder and Lightning**
+- **Rod of Viper**
+- **Rod of Withering**
+- **Rod of Wonder**
+- **Rod of Wyrm, Black**
+- **Rod of Wyrm, Blue**
+- **Rod of Wyrm, Brass**
+- **Rod of Wyrm, Bronze**
+- **Rod of Wyrm, Copper**
+- **Rod of Wyrm, Gold**
+- **Rod of Wyrm, Green**
+- **Rod of Wyrm, Red**
+- **Rod of Wyrm, Silver**
+- **Rod of Wyrm, White**
+- **Rope of Climbing**
+- **Rope of Entanglement**
+- **Salve of Slipperiness**
+- **Scabbard of Keen Edges**
+- **Scarab of Death**
+- **Scarab of Protection**
+- **Scarab, Golembane**
+- **Screaming Bolt**
+- **Shapeshifter's Armor** [Activation]
+  - Activation: minute (1)
+- **Shards +1**
+- **Shards +10**
+- **Shards +2**
+- **Shards +3**
+- **Shards +4**
+- **Shards +5**
+- **Shards +6**
+- **Shards +7**
+- **Shards +8**
+- **Shards +9**
+- **Shatterspike**
+- **Shifter's Sorrow** [Context Notes]
+  - Context Notes: [[/r 2d6]] points of damage against any creature with the shapechanger subtype; Shapechanger or a creature in an alternate form (such as a druid using wild shape) struck by the weapon must make a DC 15 Will save or return to its natural form
+- **Shrouds of Disintegration**
+- **Silver Dagger, Masterwork**
+- **Silversheen**
+- **Slaying Arrow, Greater**
+- **Sleep Arrow**
+- **Slippers of Spider Climbing**
+- **Souldrinker** [Attack Notes]
+  - Attack Notes: [[/r 2d4]] negative levels on its target whenever it deals damage, adds [[5]] temporary hit points
+- **Sovereign Glue**
+- **Spear, Cursed Backbiter** [Attack Notes]
+  - Attack Notes: On natural 1 on Attack Roll, damage wielder
+- **Sphere of Annihilation**
+- **Spined Shield** [Attack Bonus] [Activation] [Uses]
+  - Attack Bonus: 1
+  - Activation: move (1)
+  - Uses: 3/day
+- **Staff of Abjuration**
+- **Staff of Charming**
+- **Staff of Conjuration**
+- **Staff of Cosmos**
+- **Staff of Defense**
+- **Staff of Divination**
+- **Staff of Domination**
+- **Staff of Earth and Stone**
+- **Staff of Enchantment**
+- **Staff of Evocation**
+- **Staff of Fiery Power**
+- **Staff of Fire**
+- **Staff of Frost**
+- **Staff of Healing**
+- **Staff of Illumination**
+- **Staff of Illusion**
+- **Staff of Life**
+- **Staff of Mighty Force**
+- **Staff of Nature's Fury**
+- **Staff of Necromancy**
+- **Staff of Necromancy**
+- **Staff of Passage**
+- **Staff of Planar Might**
+- **Staff of Power**
+- **Staff of Prism**
+- **Staff of Rapid Barrage**
+- **Staff of Size Alteration**
+- **Staff of Spheres**
+- **Staff of Swarming Insects**
+- **Staff of The Hierophants**
+- **Staff of the Magi**
+- **Staff of Transmutation**
+- **Staff of Walls**
+- **Staff of Winter**
+- **Staff of Woodlands**
+- **Stone Horse, Courser**
+- **Stone Horse, Destrier**
+- **Stone of Alarm**
+- **Stone of Controlling Earth Elementals**
+- **Stone of Good Luck (Luckstone)**
+- **Stone of Weight (Loadstone)**
+- **Stone Salve**
+- **Stormbrand**
+- **Strand of Prayer Beads, Greater**
+- **Strand of Prayer Beads, Lesser**
+- **Strand of Prayer Beads, Standard**
+- **Sun Blade** [Attack Notes]
+  - Attack Notes: [[+4]] enhancement bonus against evil creatures
+Good Aligned
+Increase Critical Hit damage to x3 ag
+- **Sustaining Spoon**
+- **Sutra of Tranquil Thought**
+- **Sword of Life Stealing** [Attack Notes]
+  - Attack Notes: Bestow a negative level when it deals a critical hit, gain [[/r 1d6]] temporary hit points
+- **Sword of Subtlety** [Context Notes]
+  - Context Notes: [[+4]] when used to make Sneak Attack with; [[+4]] when used to make Sneak Attack with
+- **Sword of the Planes** [Attack Notes]
+  - Attack Notes: Functions as [[+3]] longsword on the Astral Plane or the Ethereal Plane or when used against opponen
+- **Sword, Berserking**
+- **Sylvan Scimitar** [Context Notes]
+- **Talisman of Pure Good**
+- **Talisman of Reluctant Wishes**
+- **Talisman of the Sphere**
+- **Talisman of Ultimate Evil**
+- **Temporal Juggler**
+- **The Moaning Diamond**
+- **The Orbs of Dragonkind**
+- **The Saint's Mace**
+- **The Shadowstaff**
+- **Third Eyes**
+- **Tome of Clear Thought +1**
+- **Tome of Clear Thought +2**
+- **Tome of Clear Thought +3**
+- **Tome of Clear Thought +4**
+- **Tome of Clear Thought +5**
+- **Tome of Leadership and Influence +1**
+- **Tome of Leadership and Influence +2**
+- **Tome of Leadership and Influence +3**
+- **Tome of Leadership and Influence +4**
+- **Tome of Leadership and Influence +5**
+- **Tome of Understanding +1** [Special Actions] [Activation]
+  - Special Actions: Eureka!
+  - Activation: special
+- **Tome of Understanding +2** [Special Actions] [Activation]
+  - Special Actions: Eureka!
+  - Activation: special
+- **Tome of Understanding +3** [Special Actions] [Activation]
+  - Special Actions: Eureka!
+  - Activation: special
+- **Tome of Understanding +4** [Special Actions] [Activation]
+  - Special Actions: Eureka!
+  - Activation: special
+- **Tome of Understanding +5** [Special Actions] [Activation]
+  - Special Actions: Eureka!
+  - Activation: special
+- **Torc of Free Will**
+- **Torc of Leech Freedom**
+- **Torc of Power Preservation**
+- **Traveler**
+- **Trident of Fish Command**
+- **Trident of Warning**
+- **Unguent of Timelessness**
+- **Unholy Despoiler** [Context Notes]
+  - Context Notes: [[+5]] profane bonus on the wielder's saving throws against spells with the good descriptor or spells cast by good characters if used by Blackguard
+- **Universal Solvent**
+- **Vacuous Grimoire**
+- **Vest of Escape**
+- **Vestment, Druid's**
+- **Warlord's Breastplate** [Activation]
+  - Activation: minute (4)
+- **Well of Many Worlds**
+- **Wind Fan**
+- **Winged Shield** [Activation] [Uses]
+  - Activation: move (1)
+  - Uses: 1
+- **Wings of Flying**

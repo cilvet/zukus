@@ -1,0 +1,1786 @@
+# Powers
+
+**Total:** 441 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Saving Throw] | Saving Throw | 293 | Requires a saving throw |
+| [Special Actions] | Special Actions | 2 | Activatable abilities with conditions/scripts |
+| [Activation] | Activation | 441 | Has activation cost/type |
+| [Class Levels] | Class Levels | 436 | Available to specific classes at specific levels |
+| [Ability Modifiers] | Ability Modifiers | 1 | Uses ability modifier for attack/damage |
+
+---
+
+## Items
+
+- **Ablating
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Adamant Grasp
+** [Activation]
+  - Activation: round (1)
+- **Adapt Body** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 5, Psychic Warrior 5
+  - Activation: standard (1)
+- **Affinity Field** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Amplified Invisibility
+** [Class Levels] [Activation]
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Anchored Navigation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Animal Affinity** [Class Levels] [Activation]
+  - Class Levels: Psion 2, Psychic Warrior 2
+  - Activation: round (1)
+- **Apopsi** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Assimilate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Wilder 9
+  - Activation: standard (1)
+- **Astral Caravan** [Class Levels] [Activation]
+  - Class Levels: Nomad 3
+  - Activation: hour (1)
+- **Astral Construct** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Shaper 1
+  - Activation: round (1)
+- **Astral Construct I
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Astral Construct II
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Astral Construct III
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Astral Construct IV
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Astral Construct IX
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Astral Construct V
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Astral Construct VI
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Astral Construct VII
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Astral Construct VIII
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Astral Projection
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Astral Seed** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Shaper 8
+  - Activation: minute (1)
+- **Astral Steed
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Astral Traveler** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: hour (1)
+- **Attraction** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Augury
+** [Class Levels] [Activation]
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Aura Alteration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Aura Sight** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Aversion** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 2
+  - Activation: standard (1)
+- **Baleful Teleport** [Class Levels] [Activation]
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Banishment
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Banishment, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Nomad 6
+  - Activation: standard (1)
+- **Bend Reality** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Wilder 8
+  - Activation: standard (1)
+- **Bestow Power** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Biocurrent
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Biofeedback** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 1
+  - Activation: standard (1)
+- **Bite of the Tiger
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Bite of the Wolf** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: standard (1)
+- **Body Adjustment** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 2
+  - Activation: round (1)
+- **Body Equilibrium** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Body Purification** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 2
+  - Activation: round (1)
+- **Bolt** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Brain Lock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 2
+  - Activation: standard (1)
+- **Breath of the Black Dragon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion/Wilder 6, Psychic Warrior 6
+  - Activation: standard (1)
+- **Breath of the Dragon
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Brilliant Blast
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Burning Ray
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Burst** [Class Levels] [Activation]
+  - Class Levels: Psion 0, Psychic Warrior 1
+  - Activation: round (1)
+- **Call Cohort
+** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Call to Mind** [Class Levels] [Activation]
+  - Class Levels: Wilder 1
+  - Activation: minute (1)
+- **Call Weaponry** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Catapsi** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Class Levels: Psion 5, Psychic Warrior 5
+  - Activation: round (1)
+- **Catfall** [Class Levels] [Activation]
+  - Class Levels: Psion 0, Psychic Warrior 1
+  - Activation: round (1)
+- **Chameleon** [Class Levels] [Activation]
+  - Class Levels: Psion 2, Psychic Warrior 1
+  - Activation: round (1)
+- **Charm Monster
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Charm Person
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Charm, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 1
+  - Activation: standard (1)
+- **Clairaudience/Clairvoyance
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Clairtangency
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Clairtangent Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Seer 5
+  - Activation: standard (1)
+- **Clairvoyant Sense** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Seer 2
+  - Activation: standard (1)
+- **Claw of Energy** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 4
+  - Activation: standard (1)
+- **Claws of the Bear
+** [Class Levels] [Activation]
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Claws of the Beast** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: swift (1)
+- **Claws of the Vampire** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Cloud Mind** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Cloud Mind, Mass** [Class Levels] [Activation]
+  - Class Levels: Wilder 6
+  - Activation: round (1)
+- **Co-Opt Concentration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 6
+  - Activation: standard (1)
+- **Combat Precognition
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Combat Prescience
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Compression** [Class Levels] [Activation]
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Conceal Thoughts** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Concealing Amorpha** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Concealing Amorpha, Greater** [Class Levels] [Activation]
+  - Class Levels: Shaper 3, Psychic Warrior 3
+  - Activation: round (1)
+- **Concussion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Concussion Blast** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Cone of Sound
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Confidante
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Contingency
+** [Class Levels] [Activation]
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Contingency, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 6
+  - Activation: minute (1)
+- **Control Air** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Control Body** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Control Flames** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Control Light** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Control Object** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Kineticist 1
+  - Activation: standard (1)
+- **Control Shadow
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Control Sound** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Correspond** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 4
+  - Activation: minute (1)
+- **Create Food and Water
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Create Sound** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Crisis of Breath** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates, Fortitude partial; see text
+  - Class Levels: Telepath 3
+  - Activation: standard (1)
+- **Crisis of Life** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial; see text
+  - Class Levels: Telepath 7
+  - Activation: standard (1)
+- **Crystal Shard** [Saving Throw] [Class Levels] [Ability Modifiers] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Ability Modifiers: atk: dex
+  - Activation: standard (1)
+- **Crystallize** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Shaper 6
+  - Activation: standard (1)
+- **Danger Sense** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 3
+  - Activation: standard (1)
+- **Darkvision
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Darkvision, Psionic** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 2
+  - Activation: standard (1)
+- **Daze
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Daze, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Death Urge** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Deceleration** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Decerebrate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Déjà Vu** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Demoralize** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Destiny Dissonance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Detect Hostile Intent** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Detect Poison
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Detect Psionics** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0, Psychic Warrior 1
+  - Activation: round (1)
+- **Detect Remote Viewing** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Detect Teleportation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Nomad 1
+  - Activation: standard (1)
+- **Detect Thoughts
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Detonation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Dimension Door
+** [Class Levels] [Activation]
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Dimension Door, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Psion/Wilder 4, Psychic Warrior 4
+  - Activation: standard (1)
+- **Dimension Slide** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Dimension Swap** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Nomad 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Dimensional Anchor
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Dimensional Anchor, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Nomad 4
+  - Activation: standard (1)
+- **Disable** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Disintegrate
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Disintegrate, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude partial (object)
+  - Class Levels: Wilder 6
+  - Activation: standard (1)
+- **Dismiss Ectoplasm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Dismissal
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Dismissal, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Nomad 4
+  - Activation: standard (1)
+- **Dispel Psionics** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Dispelling Buffer** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Kineticist 6, Psychic Warrior 6
+  - Activation: standard (1)
+- **Displacement
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Dissipating Touch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Dissolution
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None (see text)
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Dissolving Touch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4, Psychic Warrior 2
+  - Activation: round (1)
+- **Dissolving Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psychic Warrior 2
+  - Activation: standard (1)
+- **Distract** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Divert Teleport** [Activation]
+  - Activation: round (1)
+- **Divination
+** [Class Levels] [Activation]
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Divination, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 4
+  - Activation: minute (1)
+- **Dominate, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 4
+  - Activation: round (1)
+- **Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Dream Travel** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Duodimensional Claw** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Duodimensional Hand
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Ecto Protection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Ecto Puppet
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Ectoplasmic Armor
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Ectoplasmic Cocoon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Shaper 3
+  - Activation: standard (1)
+- **Ectoplasmic Cocoon, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Shaper 7
+  - Activation: round (1)
+- **Ectoplasmic Form** [Class Levels] [Activation]
+  - Class Levels: Egoist 3, Psychic Warrior 3
+  - Activation: standard (1)
+- **Ectoplasmic Shambler** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 5
+  - Activation: round (1)
+- **Ego Whip** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half; see text
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Elfsight** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 1
+  - Activation: standard (1)
+- **Empathic Feedback** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 4, Psychic Warrior 3
+  - Activation: standard (1)
+- **Empathic Transfer** [Class Levels] [Activation]
+  - Class Levels: Egoist 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Empathic Transfer, Hostile** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Telepath 3, Psychic Warrior 3
+  - Activation: standard (1)
+- **Empathy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Empty Mind** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: immediate (1)
+- **Emulate Power
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Energy Adaptation** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 4, Psychic Warrior 4
+  - Activation: standard (1)
+- **Energy Adaptation, Specified** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: round (1)
+- **Energy Ball** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Kineticist 4
+  - Activation: standard (1)
+- **Energy Barrier
+** [Class Levels] [Activation]
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Energy Bolt** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Energy Burst** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Energy Cone** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Kineticist 3
+  - Activation: standard (1)
+- **Energy Conversion** [Class Levels] [Activation]
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Energy Current** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Kineticist 5
+  - Activation: standard (1)
+- **Energy Missile** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Kineticist 2
+  - Activation: standard (1)
+- **Energy Push** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Energy Ray** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Energy Retort** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Energy Stun** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Energy Wall** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Energy Wave** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half or Fortitude half; see text
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Entangling Ectoplasm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Eradicate Invisibility** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Escape Detection** [Class Levels] [Activation]
+  - Class Levels: seer 3, Psychic Warrior 3
+  - Activation: standard (1)
+- **Ethereal Jaunt
+** [Class Levels] [Activation]
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Ethereal Jaunt, Psionic** [Class Levels] [Activation]
+  - Class Levels: Nomad 7
+  - Activation: standard (1)
+- **Etherealness
+** [Class Levels] [Activation]
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Etherealness, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 9
+  - Activation: standard (1)
+- **Evade Burst** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 7, Psychic Warrior 3
+  - Activation: immediate (1)
+- **Exhalation of the Black Dragon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Expanded Vision
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Expansion** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: standard (1)
+- **Fabricate
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Fabricate, Greater Psionic** [Class Levels] [Activation]
+  - Class Levels: Shaper 6
+  - Activation: round (1)
+- **Fabricate, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Shaper 4
+  - Activation: round (1)
+- **False Sensory Input** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Far Hand** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Far Punch
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Fatal Attraction
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Fate Link** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Seer 3
+  - Activation: standard (1)
+- **Fate of One** [Class Levels] [Activation]
+  - Class Levels: Seer 7
+  - Activation: immediate (1)
+- **Feat Leech** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Feather Fall
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Feel Light
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Feel Sound
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Fiery Discorporation** [Class Levels] [Activation]
+  - Class Levels: Kineticist 5
+  - Activation: immediate (1)
+- **Finger of Fire
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Firefall
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Fission** [Class Levels] [Activation]
+  - Class Levels: Egoist 7
+  - Activation: standard (1)
+- **Flaming Shroud
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Float** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Fly
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Fly, Psionic** [Class Levels] [Activation]
+  - Class Levels: Nomad 4
+  - Activation: standard (1)
+- **Force Screen** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Forced Mindlink
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Foresight
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (see text)
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Form of Doom** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 6
+  - Activation: standard (1)
+- **Freedom of Movement
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Freedom of Movement, Psionic** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 4, Psychic Warrior 4
+  - Activation: standard (1)
+- **Fuse Flesh** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates and Fortitude partial; see text
+  - Class Levels: Wilder 6
+  - Activation: standard (1)
+- **Fusion** [Class Levels] [Activation]
+  - Class Levels: Egoist 8
+  - Activation: round (1)
+- **Genesis** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Glide
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Graft Weapon** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Grease
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Grease, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See spell text
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Greater Biocurrent
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Greater Concussion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Greater Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Greater Emulation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Grip of Iron** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: immediate (1)
+- **Hail of Crystals** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Shaper 5
+  - Activation: standard (1)
+- **Hammer** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Hear Light
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Hustle** [Class Levels] [Activation]
+  - Class Levels: Egoist 3, Psychic Warrior 2
+  - Activation: swift (1)
+- **Hypercognition** [Class Levels] [Activation]
+  - Class Levels: Seer 8
+  - Activation: immediate (1)
+- **Id Insinuation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Identify
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Identify, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: round (1)
+- **Immovability** [Class Levels] [Activation]
+  - Class Levels: Psion 4, Psychic Warrior 4
+  - Activation: round (1)
+- **Improved Anchored Navigation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Improved Biofeedback
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Improved Clairtangency
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Improved Etherealness
+** [Class Levels] [Activation]
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Improved Fabricate
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Improved Fly
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Improved Telekinesis
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object) (see text)
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Improved Vigor
+** [Class Levels] [Activation]
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Incarnate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Inertial Armor** [Special Actions] [Class Levels] [Activation]
+  - Special Actions: Inertial Armor
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Inertial Barrier** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 4, Psychic Warrior 4
+  - Activation: round (1)
+- **Inflict Pain** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Inkling
+** [Class Levels] [Activation]
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Insanity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Intellect Fortress** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 4
+  - Activation: immediate (1)
+- **Intrusive Sense Link
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Invisibility
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Invisibility Purge
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Iron Body
+** [Class Levels] [Activation]
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Iron Body, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 8
+  - Activation: standard (1)
+- **Keen Edge, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 3
+  - Activation: standard (1)
+- **Knock
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Knock, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Know Direction
+** [Class Levels] [Activation]
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Know Direction and Location** [Class Levels] [Activation]
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Know Location
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Leech Field** [Class Levels] [Activation]
+  - Class Levels: Wilder 5
+  - Activation: standard (1)
+- **Lesser Body Adjustment
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Lesser Concussion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Lesser Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Lesser Metaphysical Weapon
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Lesser Mindlink
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Lesser Natural Armor
+** [Class Levels] [Activation]
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Levitate
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Levitate, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Nomad 2, Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Major Creation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Major Creation, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 5
+  - Activation: minute (1)
+- **Mass Cocoon
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Mass Concussion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Mass Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Mass Suggestion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Matter Agitation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Matter Manipulation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Matter Rearrangement
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Mental Barrier** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 3, Psychic Warrior 3
+  - Activation: immediate (1)
+- **Mental Disruption** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Metaconcert** [Class Levels] [Activation]
+  - Class Levels: telepath 5, Psychic Warrior 5
+  - Activation: minute (1)
+- **Metafaculty** [Class Levels] [Activation]
+  - Class Levels: Seer 9
+  - Activation: hour (1)
+- **Metamorphosis** [Class Levels] [Activation]
+  - Class Levels: Egoist 4
+  - Activation: standard (1)
+- **Metamorphosis, Greater** [Class Levels] [Activation]
+  - Class Levels: Egoist 9
+  - Activation: standard (1)
+- **Metaphysical Claw** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: standard (1)
+- **Metaphysical Weapon** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Psychic Warrior 1
+  - Activation: standard (1)
+- **Microcosm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 9
+  - Activation: standard (1)
+- **Mind Blank
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Mind Blank, Personal** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 7, Psychic Warrior 6
+  - Activation: standard (1)
+- **Mind Blank, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wilder 8
+  - Activation: standard (1)
+- **Mind Probe** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Mind Seed** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Mind Store
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Mind Switch** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Mind Switch, True** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Telepath 9
+  - Activation: minute (1)
+- **Mind Thrust** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Mind Trap** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 3
+  - Activation: immediate (1)
+- **Mindlink** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None; see text
+  - Class Levels: Telepath 1
+  - Activation: standard (1)
+- **Mindlink, Thieving** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 4
+  - Activation: round (1)
+- **Mindwipe** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Minor Creation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1, Psion (Shaper) 1
+  - Activation: round (1)
+- **Minor Creation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Missive** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Missive, Mass** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Modify Memory, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 4
+  - Activation: standard (1)
+- **Moment of Prescience, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Monster Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **My Light** [Class Levels] [Activation]
+  - Class Levels: Psion 0, Psychic Warrior 1
+  - Activation: round (1)
+- **Natural Armor
+** [Class Levels] [Activation]
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Negate Psionics
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Nondetection
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless, object)
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Null Psionics Field** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Oak Body** [Class Levels] [Activation]
+  - Class Levels: Psion 7, Psychic Warrior 5
+  - Activation: round (1)
+- **Object Reading** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Overland Flight, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 6
+  - Activation: standard (1)
+- **Painful Strike** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: standard (1)
+- **Painful Touch
+** [Class Levels] [Activation]
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Personality Parasite** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Phase Door
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Phase Door, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Plane Shift
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Plane Shift, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 5
+  - Activation: standard (1)
+- **Poison Sense
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Polymorph Self
+** [Class Levels] [Activation]
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Power Leech** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Power Resistance** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Power Turning
+** [Class Levels] [Activation]
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Precognition** [Class Levels] [Activation]
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Precognition, Defensive** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Precognition, Greater** [Class Levels] [Activation]
+  - Class Levels: Seer 6
+  - Activation: minute (1)
+- **Precognition, Offensive** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Prescience, Offensive** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Prevenom** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: standard (1)
+- **Prevenom Weapon** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 1
+  - Activation: round (1)
+- **Probability Travel
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Prowess** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: immediate (1)
+- **Psionic Blast** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Psionic Lion’s Charge** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: swift (1)
+- **Psionic Lock** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Psionic Repair Damage** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Shaper 2
+  - Activation: standard (1)
+- **Psionic Revivify** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Egoist 5
+  - Activation: standard (1)
+- **Psionic Scent** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: standard (1)
+- **Psychic Chirurgery** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 9
+  - Activation: minute (1)
+- **Psychic Crush** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial; see text
+  - Class Levels: Wilder 5
+  - Activation: standard (1)
+- **Psychic Reformation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 4
+  - Activation: minute (1)
+- **Psychic Vampire** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Egoist 4, Psychic Warrior 4
+  - Activation: standard (1)
+- **Psychofeedback** [Class Levels] [Activation]
+  - Class Levels: Egoist 5, Psychic Warrior 5
+  - Activation: standard (1)
+- **Psycholuminescence
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Quintessence** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Shaper 4
+  - Activation: round (1)
+- **Read Thoughts** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates; see text
+  - Class Levels: Telepath 2
+  - Activation: standard (1)
+- **Reality Revision** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: See text
+  - Class Levels: Psion/Wilder 9, Seer 9
+  - Activation: round (1)
+- **Recall Agony** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Recall Death** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will partial
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Recall Pain
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Reddopsi** [Class Levels] [Activation]
+  - Class Levels: Kineticist 7
+  - Activation: standard (1)
+- **Rejuvenation
+** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Remote View Trap** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Remote Viewing** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Restoration, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Egoist 6
+  - Activation: round (1)
+- **Restore Extremity** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half (harmless)
+  - Class Levels: Egoist 5
+  - Activation: standard (1)
+- **Retrieve** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None (see text)
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Schism** [Class Levels] [Activation]
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Second Chance** [Class Levels] [Activation]
+  - Class Levels: Seer 5
+  - Activation: standard (1)
+- **See Invisibility
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **See Sound
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Sending
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Sense Link** [Class Levels] [Activation]
+  - Class Levels: Wilder 1
+  - Activation: standard (1)
+- **Sense Link, Forced** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 2
+  - Activation: round (1)
+- **Sense Psionics
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Sense Psychoportation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Sensitivity to Psychic Impressions** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Seer 2
+  - Activation: hour (1)
+- **Sequester
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object)
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Sequester, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (object)
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Sever the Tie
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Shadow Body** [Class Levels] [Activation]
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Shapechange
+** [Class Levels] [Activation]
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Share Pain** [Class Levels] [Activation]
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Share Pain, Forced** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates
+  - Class Levels: Wilder 3
+  - Activation: round (1)
+- **Shatter Mind Blank** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Wilder 5
+  - Activation: standard (1)
+- **Shield of Prudence
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 6
+  - Activation: round (1)
+- **Skate** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Solicit Psicrystal** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: No
+  - Class Levels: Wilder 3
+  - Activation: swift (1)
+- **Spider Climb
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Steadfast Gaze
+** [Class Levels] [Activation]
+  - Class Levels: Psion 1
+  - Activation: round (1)
+- **Steadfast Perception** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 4
+  - Activation: round (1)
+- **Stomp** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates
+  - Class Levels: Psion 1, Psychic Warrior 1
+  - Activation: round (1)
+- **Strength of My Enemy** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: standard (1)
+- **Sudden Minor Creation
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Suggestion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 2
+  - Activation: round (1)
+- **Suggestion, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Telepath 2
+  - Activation: standard (1)
+- **Suspend Life** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 6, Psychic Warrior 6
+  - Activation: standard (1)
+- **Sustenance** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: standard (1)
+- **Swarm of Crystals** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Synesthete** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Tailor Memory
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (see text)
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Talons
+** [Class Levels] [Activation]
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Telekinesis
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object) (see text)
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Telekinetic Force** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object); see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Telekinetic Maneuver** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Telekinetic Sphere
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates (object)
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Telekinetic Sphere, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex negates (object)
+  - Class Levels: Kineticist 8
+  - Activation: standard (1)
+- **Telekinetic Thrust** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates or Will negates (object); see text
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Telempathic Projection** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Teleport
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Teleport Trigger** [Class Levels] [Activation]
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **Teleport without Error
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Will negates (object)
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **Teleport, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None or Will negates (object)
+  - Class Levels: Nomad 5
+  - Activation: standard (1)
+- **Teleport, Psionic Greater** [Class Levels] [Activation]
+  - Class Levels: Wilder 8
+  - Activation: round (1)
+- **Teleportation Circle, Psionic** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Nomad 9
+  - Activation: minute (1)
+- **Temporal Acceleration** [Class Levels] [Activation]
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **Temporal Velocity
+** [Class Levels] [Activation]
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Thicken Skin** [Class Levels] [Activation]
+  - Class Levels: Egoist 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Thought Shield** [Class Levels] [Activation]
+  - Class Levels: Psion/Wilder 2, Psychic Warrior 2
+  - Activation: immediate (1)
+- **Thrall
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Time Hop** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Time Hop, Mass** [Class Levels] [Activation]
+  - Class Levels: Nomad 8
+  - Activation: standard (1)
+- **Time Regression** [Class Levels] [Activation]
+  - Class Levels: Nomad 9
+  - Activation: standard (1)
+- **Timeless Body** [Class Levels] [Activation]
+  - Class Levels: Wilder 9
+  - Activation: standard (1)
+- **Tongues, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 2
+  - Activation: standard (1)
+- **Tornado Blast** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half; see text
+  - Class Levels: Kineticist 9
+  - Activation: round (1)
+- **Touchsight** [Class Levels] [Activation]
+  - Class Levels: Wilder 3
+  - Activation: standard (1)
+- **Tower of Iron Will** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None (harmless)
+  - Class Levels: Wilder 5
+  - Activation: immediate (1)
+- **Trace Teleport** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Wilder 4
+  - Activation: standard (1)
+- **Trinket
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **True Concussion
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude half
+  - Class Levels: Psion 7
+  - Activation: round (1)
+- **True Creation** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **True Domination
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates
+  - Class Levels: Psion 8
+  - Activation: round (1)
+- **True Metabolism** [Class Levels] [Activation]
+  - Class Levels: Wilder 8
+  - Activation: round (1)
+- **True Seeing
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (harmless)
+  - Class Levels: Psion 5
+  - Activation: round (1)
+- **True Seeing, Psionic** [Class Levels] [Activation]
+  - Class Levels: Wilder 5
+  - Activation: standard (1)
+- **True Telekinesis
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will negates (object) (see text)
+  - Class Levels: Psion 9
+  - Activation: round (1)
+- **Truevenom** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None and Fortitude negates; see text
+  - Class Levels: Psychic Warrior 4
+  - Activation: swift (1)
+- **Truevenom Weapon** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 4
+  - Activation: round (1)
+- **Ubiquitous Vision** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3, Psychic Warrior 3
+  - Activation: round (1)
+- **Ultrablast** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Will half
+  - Class Levels: Wilder 7
+  - Activation: standard (1)
+- **Undead Sense
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 3
+  - Activation: round (1)
+- **Valor
+** [Activation]
+  - Activation: round (1)
+- **Vampiric Blade** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 3
+  - Activation: standard (1)
+- **Verve
+** [Class Levels] [Activation]
+  - Class Levels: Psion 0
+  - Activation: round (1)
+- **Vigilance
+** [Saving Throw] [Activation]
+  - Saving Throw: None
+  - Activation: round (1)
+- **Vigor** [Special Actions] [Class Levels] [Activation]
+  - Special Actions: Give Temporary HP
+  - Class Levels: Psion/Wilder 1, Psychic Warrior 1
+  - Activation: standard (1)
+- **Wall of Ectoplasm** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: None
+  - Class Levels: Psion 4
+  - Activation: round (1)
+- **Wall Walker** [Class Levels] [Activation]
+  - Class Levels: Psychic Warrior 2
+  - Activation: standard (1)
+- **Weapon of Energy** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Fortitude negates (object, harmless)
+  - Class Levels: Psychic Warrior 4
+  - Activation: round (1)
+- **Whitefire
+** [Saving Throw] [Class Levels] [Activation]
+  - Saving Throw: Reflex half
+  - Class Levels: Psion 3
+  - Activation: round (1)

@@ -1,0 +1,334 @@
+# Enhancements
+
+**Total:** 89 items
+
+## Legend
+
+| Icon | Name | Count | Description |
+|------|------|-------|-------------|
+| [Changes] | Changes | 15 | Stat modifiers (ability, AC, attack, damage, saves, skills, speed) |
+| [Context Notes] | Context Notes | 1 | Situational bonuses or conditional notes |
+| [Attack Notes] | Attack Notes | 9 | Attack modifier notes |
+| [Effect Notes] | Effect Notes | 5 | Effect description text |
+| [Resistances] | Resistances | 15 | Energy resistances (fire, cold, acid, electric) |
+| [Damage Reduction] | Damage Reduction | 1 | DR X/type |
+| [Saving Throw] | Saving Throw | 4 | Requires a saving throw |
+| [Activation] | Activation | 6 | Has activation cost/type |
+| [Uses] | Uses | 10 | Limited uses per day/encounter |
+| [Requirements] | Requirements | 74 | Prerequisites or crafting requirements |
+| [Enhancement] | Enhancement | 79 | Enhancement bonus formula/cost |
+
+---
+
+## Items
+
+- **+1 Armor Enhancement** [Enhancement]
+  - Enhancement: +@enhancement
+- **+1 Weapon Enhancement** [Enhancement]
+  - Enhancement: +@enhancement
+- **Ability Bonus (Cha)** [Changes]
+  - Changes: @enhancement ability.cha (enh)
+- **Ability Bonus (Cha)** [Changes]
+  - Changes: @enhancement ability.cha (enh)
+- **Ability Bonus (Con)** [Changes]
+  - Changes: @enhancement ability.con (enh)
+- **Ability Bonus (Dex)** [Changes]
+  - Changes: @enhancement ability.dex (enh)
+- **Ability Bonus (Int)** [Changes]
+  - Changes: @enhancement ability.int (enh)
+- **Ability Bonus (Str)** [Changes]
+  - Changes: @enhancement ability.str (enh)
+- **Ability Bonus (Wis)** [Changes]
+  - Changes: @enhancement ability.wis (enh)
+- **Acid Resistance** [Resistances] [Requirements] [Enhancement]
+  - Resistances: acid 10
+  - Requirements: CL 3rd; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Acid Resistance, Greater** [Resistances] [Requirements] [Enhancement]
+  - Resistances: acid 30
+  - Requirements: CL 11th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Acid Resistance, Improved** [Resistances] [Requirements] [Enhancement]
+  - Resistances: acid 20
+  - Requirements: CL 7th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Anarchic** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, chaos hammer, creator must be chaotic
+  - Enhancement: +2
+- **Animated** [Requirements] [Enhancement]
+  - Requirements: CL 12th; Craft Magic Arms and Armor, animate objects
+  - Enhancement: +2
+- **Armor Class (Deflection)** [Changes]
+  - Changes: @enhancement ac.ac (deflection)
+- **Armor Class (Other)** [Changes]
+  - Changes: @enhancement ac.ac (profane)
+- **Arrow Catching** [Context Notes] [Requirements] [Enhancement]
+  - Context Notes: [[+1]] against ranged weapons
+  - Requirements: CL 8th; Craft Magic Arms and Armor, entropic shield
+  - Enhancement: +1
+- **Arrow Deflection** [Effect Notes] [Requirements] [Enhancement] [Saving Throw] [Activation]
+  - Effect Notes: Add Weapon Enhancement to roll DC
+  - Requirements: CL 5th; Craft Magic Arms and Armor, shield
+  - Enhancement: +2
+  - Saving Throw: Reflex to Deflect projectile
+  - Activation: passive (1)
+- **Axiomatic** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, order’s wrath, creator must be lawful;
+  - Enhancement: +2
+- **Bane of Aberrations** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Animals** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Constructs** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Dragons** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Elementals** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Fey** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Giants** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Humanoids** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Magical Beasts** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Monstrous Humanoids** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Oozes** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Outsiders** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Plants** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Undead** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bane of Vermin** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, summon monster I
+  - Enhancement: +1
+- **Bashing** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, bull’s strength;
+  - Enhancement: +1
+- **Blinding** [Effect Notes] [Requirements] [Enhancement] [Saving Throw] [Activation] [Uses]
+  - Effect Notes: Blinded on saving throw fail for [[/r 1d4]] rounds.
+  - Requirements: CL 7th; Craft Magic Arms and Armor, searing light;
+  - Enhancement: +1
+  - Saving Throw: Reflex negates
+  - Activation: standard (1)
+  - Uses: 2/day
+- **Brilliant Energy** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: Ignore Armor and shield bonuses to AC
+  - Requirements: CL 16th; Craft Magic Arms and Armor, gaseous form, continual flame
+  - Enhancement: +4
+- **Cold Resistance** [Resistances] [Requirements] [Enhancement]
+  - Resistances: cold 10
+  - Requirements: CL 3rd; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Cold Resistance, Greater** [Resistances] [Requirements] [Enhancement]
+  - Resistances: cold 30
+  - Requirements: CL 11th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Cold Resistance, Improved** [Resistances] [Requirements] [Enhancement]
+  - Resistances: cold 20
+  - Requirements: CL 7th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Dancing** [Requirements] [Enhancement]
+  - Requirements: CL 15th; Craft Magic Arms and Armor, animate objects
+  - Enhancement: +4
+- **Defending** [Requirements] [Enhancement] [Activation]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, shield or shield of faith
+  - Enhancement: +1
+  - Activation: free (1)
+- **Disruption** [Attack Notes] [Requirements] [Enhancement] [Saving Throw]
+  - Attack Notes: Undead must take DC 14 Will save or be destroyed.
+  - Requirements: CL 14th; Craft Magic Arms and Armor, heal
+  - Enhancement: +2
+  - Saving Throw: willnegates
+- **Distance** [Requirements] [Enhancement]
+  - Requirements: CL 6th; Craft Magic Arms and Armor, clairaudience/clairvoyance
+  - Enhancement: +1
+- **Dread of Undead** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: [[/r 4d6 #Dread Damage]] Damage against Undead
+[[+4]] Attack against Undead
+DC [[27]] Fortitude or
+  - Requirements: Caster Level: 22nd; Prerequisites: Craft Magic Arms and Armor, Craft Epic Magic Arms and Armor, summ
+  - Enhancement: +7
+- **Electricity Resistance** [Resistances] [Requirements] [Enhancement]
+  - Resistances: electric 10
+  - Requirements: CL 3rd; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Electricity Resistance, Greater** [Resistances] [Requirements] [Enhancement]
+  - Resistances: electric 30
+  - Requirements: CL 11th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Electricity Resistance, Improved** [Resistances] [Requirements] [Enhancement]
+  - Resistances: electric 20
+  - Requirements: CL 7th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Etherealness** [Enhancement]
+  - Enhancement: +0
+- **Everdancing** [Requirements] [Enhancement]
+  - Requirements: Caster Level: 23rd; Prerequisites: Craft Magic Arms and Armor, Craft Epic Magic Arms and Armor, anim
+  - Enhancement: +8
+- **Fire Resistance** [Resistances] [Requirements] [Enhancement]
+  - Resistances: fire 10
+  - Requirements: CL 3rd; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Fire Resistance, Greater** [Resistances] [Requirements] [Enhancement]
+  - Resistances: fire 30
+  - Requirements: CL 11th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Fire Resistance, Improved** [Resistances] [Requirements] [Enhancement]
+  - Resistances: fire 20
+  - Requirements: CL 7th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Flaming** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 10th; Craft Magic Arms and Armor and flame blade, flame strike, or fireball;
+  - Enhancement: +1
+  - Uses: 3
+- **Flaming Burst** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 12th; Craft Magic Arms and Armor and flame blade, flame strike, or fireball
+  - Enhancement: +2
+  - Uses: 3
+- **Fortification** [Changes] [Effect Notes] [Requirements] [Enhancement] [Activation]
+  - Changes: @enhancement === 1 ? 25 : (@enhancement  === 2 ? 75 : 100) misc.fortification (enh)
+  - Effect Notes: [[/r 1d100 #Fortification Enhancement Check]], if less than [[@item.enh == 1 ? 25 : 25 + (@item.enh)
+  - Requirements: CL 13th; Craft Magic Arms and Armor, limited wish or miracle
+  - Enhancement: +@enhancement*2-1
+  - Activation: free (1)
+- **Frost** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 10th; Craft Magic Arms and Armor and chill metal or ice storm;
+  - Enhancement: +1
+  - Uses: 3
+- **Ghost Touch, Weapon** [Enhancement]
+  - Enhancement: +1
+- **Glamered** [Requirements] [Enhancement]
+  - Requirements: CL 10th; Craft Magic Arms and Armor, disguise self;
+  - Enhancement: +0
+- **Holy** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, holy smite, creator must be good
+  - Enhancement: +2
+- **Icy Burst** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 10th; Craft Magic Arms and Armor, chill metal or ice storm
+  - Enhancement: +2
+  - Uses: 3
+- **Invulnerability** [Damage Reduction] [Requirements] [Enhancement]
+  - Damage Reduction: 5/magic
+  - Requirements: CL 18th; Craft Magic Arms and Armor, stoneskin, wish or miracle
+  - Enhancement: +3
+- **Keen** [Requirements] [Enhancement]
+  - Requirements: CL 10th; Craft Magical Arms and Armor, keen edge
+  - Enhancement: +1
+- **Ki Focus** [Requirements] [Enhancement]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, creator must be a monk
+  - Enhancement: +1
+- **Merciful** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: All damage is nonlethal, unless otherwise specified.
+  - Requirements: CL 5th; Craft Magic Arms and Armor, cure light wounds
+  - Enhancement: +1
+- **Mighty Cleaving** [Effect Notes] [Requirements] [Enhancement]
+  - Effect Notes: One additioal @Compendium[D35E.feats.5P0ltUi6tPBuBW4m]{Cleave} attempt per round.
+  - Requirements: CL 8th; Craft Magic Arms and Armor, divine power
+  - Enhancement: +1
+- **Natural Armor Bonus** [Changes]
+  - Changes: @enhancement ac.nac (enh)
+- **Reflecting** [Requirements] [Enhancement] [Activation] [Uses]
+  - Requirements: CL 14th; Craft Magic Arms and Armor, spell turning
+  - Enhancement: +5
+  - Activation: standard (1)
+  - Uses: 1/day
+- **Returning** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, telekinesis
+  - Enhancement: +1
+- **Seeking** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: Negates any miss chances from concealment etc.
+  - Requirements: CL 12th; Craft Magic Arms and Armor, true seeing
+  - Enhancement: +1
+- **Shadow** [Changes] [Requirements] [Enhancement]
+  - Changes: 5*@enhancement skill.skill.hid (competence)
+  - Requirements: CL 5th/10th/15th; Craft Magic Arms and Armor, invisibility
+  - Enhancement: +0
+- **Shock** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 8th; Craft Magic Arms and Armor, call lightning or lightning bolt
+  - Enhancement: +1
+  - Uses: 3
+- **Shocking Burst** [Requirements] [Enhancement] [Uses]
+  - Requirements: CL 10th; Craft Magic Arms and Armor, call lightning or lightning bolt
+  - Enhancement: +2
+  - Uses: 3
+- **Silent Moves** [Changes] [Requirements] [Enhancement]
+  - Changes: 5*@enhancement skill.skill.mos (competence)
+  - Requirements: CL 5th/10th/15th; Craft Magic Arms and Armor, silence
+  - Enhancement: +0
+- **Slick** [Changes] [Requirements] [Enhancement]
+  - Changes: 5*@enhancement skill.skill.esc (competence)
+  - Requirements: CL 5th/10th/15th; Craft Magic Arms and Armor, silence
+  - Enhancement: +0
+- **Sonic Resistance** [Resistances] [Requirements] [Enhancement]
+  - Resistances: sonic 10
+  - Requirements: CL 3rd; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Sonic Resistance, Greater** [Resistances] [Requirements] [Enhancement]
+  - Resistances: sonic 30
+  - Requirements: CL 11th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Sonic Resistance, Improved** [Resistances] [Requirements] [Enhancement]
+  - Resistances: sonic 20
+  - Requirements: CL 7th; Craft Magic Arms and Armor, resist energy
+  - Enhancement: +0
+- **Speed** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, haste
+  - Enhancement: +3
+- **Spell Resistance** [Changes] [Enhancement]
+  - Changes: 11+2*@enhancement misc.spellResistance (enh)
+  - Enhancement: +@enhancement+1
+- **Spell Storing** [Requirements] [Enhancement]
+  - Requirements: CL 12th; Craft Magic Arms and Armor, creator must be a caster of at least 12th level;
+  - Enhancement: +1
+- **Throwing** [Requirements] [Enhancement]
+  - Requirements: CL 5th; Craft Magic Arms and Armor, magic stone
+  - Enhancement: +1
+- **Thundering** [Attack Notes] [Requirements] [Enhancement] [Uses]
+  - Attack Notes: DC 14 Fortitude save or deafened permanently on Critical Hit.
+  - Requirements: CL 5th; Craft Magic Arms and Armor, blindness/deafness
+  - Enhancement: +1
+  - Uses: 3
+- **Undead Controlling** [Effect Notes] [Requirements] [Enhancement] [Saving Throw] [Activation] [Uses]
+  - Effect Notes: The wearer of a suit of armor or a shield with this property may control up to 26 HD of undead per d
+  - Requirements: CL 13th; Craft Magic Arms and Armor, control undead
+  - Enhancement: +0
+  - Saving Throw: Will negates
+  - Activation: standard (1)
+  - Uses: 1/day
+- **Unholy** [Requirements] [Enhancement]
+  - Requirements: CL 7th; Craft Magic Arms and Armor, unholy blight, creator must be evil
+  - Enhancement: +2
+- **Vicious** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: [[/r 1d6 #Self damage]] Damage to wielder
+  - Requirements: CL 9th; Craft Magic Arms and Armor, enervation
+  - Enhancement: +1
+- **Vorpal** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: Upon a roll of natural 20 (followed by a successful roll to confirm the critical hit), the weapon se
+  - Requirements: CL 18th; Craft Magic Arms and Armor, circle of death, keen edge
+  - Enhancement: +5
+- **Wild** [Requirements] [Enhancement]
+  - Requirements: CL 9th; Craft Magic Arms and Armor, baleful polymorph;
+  - Enhancement: +3
+- **Wounding** [Attack Notes] [Requirements] [Enhancement]
+  - Attack Notes: [[1]] point of Constitution damage unless immune to Critical Hits
+  - Requirements: CL 10th; Craft Magic Arms and Armor, mage’s sword
+  - Enhancement: +2
