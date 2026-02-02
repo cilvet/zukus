@@ -1,0 +1,3923 @@
+# D35E Compendium Item List
+
+**Total entries:** 3672
+
+**Generated:** 2026-02-02
+
+---
+
+## Armors And Shields (18)
+
+- Banded Mail
+- Breastplate
+- Buckler
+- Chain Shirt
+- Chainmail
+- Full Plate
+- Half-Plate
+- Heavy Steel Shield
+- Heavy Wooden Shield
+- Hide Armor
+- Leather Armor
+- Light Steel Shield
+- Light Wooden Shield
+- Padded Armor
+- Scale Mail
+- Splint Mail
+- Studded Leather Armor
+- Tower Shield
+
+## Bestiary (645)
+
+- Aboleth
+- Aboleth, Psionic
+- Abyssal Greater Basilisk
+- Achaierai
+- Adamantine Golem
+- Adult Arrowhawk
+- Adult Tojanida
+- Advanced Megaraptor Skeleton
+- Air Elemental, Elder
+- Air Elemental, Greater
+- Air Elemental, Huge
+- Air Elemental, Large
+- Air Elemental, Medium
+- Air Elemental, Primal
+- Air Elemental, Small
+- Air Mephit
+- Allip
+- Anaxim
+- Androsphinx
+- Angel, Astral Deva
+- Angel, Planetar
+- Angel, Solar
+- Animated Object, Colossal
+- Animated Object, Gargantuan
+- Animated Object, Huge
+- Animated Object, Large
+- Animated Object, Medium
+- Animated Object, Small
+- Animated Object, Tiny
+- Ankheg
+- Annis
+- Ape
+- Aranea
+- Assassin Vine
+- Athach
+- Atropal
+- Average Salamander
+- Average Xorn
+- Avoral
+- Azer
+- Babau
+- Baboon
+- Badger
+- Baleen Whale
+- Balor
+- Barbed Devil
+- Barghest
+- Basilisk
+- Bat
+- Bat Swarm
+- Bear, Black
+- Bear, Brown
+- Bear, Polar
+- Bearded Devil
+- Bebilith
+- Behemoth Eagle
+- Behemoth Gorilla
+- Behir
+- Belker
+- Bison
+- Black Dragon, Adult
+- Black Dragon, Ancient
+- Black Dragon, Great wyrm
+- Black Dragon, Juvenile
+- Black Dragon, Mature adult
+- Black Dragon, Old
+- Black Dragon, Very old
+- Black Dragon, Very young
+- Black Dragon, Wyrm
+- Black Dragon, Wyrmling
+- Black Dragon, Young
+- Black Dragon, Young adult
+- Black Pudding
+- Blink Dog
+- Blue Dragon, Adult
+- Blue Dragon, Ancient
+- Blue Dragon, Great wyrm
+- Blue Dragon, Juvenile
+- Blue Dragon, Mature adult
+- Blue Dragon, Old
+- Blue Dragon, Very old
+- Blue Dragon, Very young
+- Blue Dragon, Wyrm
+- Blue Dragon, Wyrmling
+- Blue Dragon, Young
+- Blue Dragon, Young adult
+- Boar
+- Bodak
+- Bone Devil
+- Brachyurus
+- Brain Mole
+- Bralani
+- Brass Dragon, Adult
+- Brass Dragon, Ancient
+- Brass Dragon, Great wyrm
+- Brass Dragon, Juvenile
+- Brass Dragon, Mature adult
+- Brass Dragon, Old
+- Brass Dragon, Very old
+- Brass Dragon, Very young
+- Brass Dragon, Wyrm
+- Brass Dragon, Wyrmling
+- Brass Dragon, Young
+- Brass Dragon, Young adult
+- Bronze Dragon, Adult
+- Bronze Dragon, Ancient
+- Bronze Dragon, Great wyrm
+- Bronze Dragon, Juvenile
+- Bronze Dragon, Mature adult
+- Bronze Dragon, Old
+- Bronze Dragon, Very old
+- Bronze Dragon, Very young
+- Bronze Dragon, Wyrm
+- Bronze Dragon, Wyrmling
+- Bronze Dragon, Young
+- Bronze Dragon, Young adult
+- Bugbear
+- Bugbear Zombie
+- Bulette
+- Cachalot Whale
+- Caller in Darkness
+- Camel
+- Cat
+- Centaur
+- Centipede Swarm
+- Cerebrilith
+- Chain Devil
+- Chaos Beast
+- Cheetah
+- Chichimec
+- Chimera
+- Chimera Skeleton
+- Choker
+- Chuul
+- Clay Golem
+- Cloaker
+- Cloud Giant
+- Cloud Giant Skeleton
+- Cockatrice
+- Constrictor Snake
+- Constrictor Snake, Giant
+- Copper Dragon, Adult
+- Copper Dragon, Ancient
+- Copper Dragon, Great wyrm
+- Copper Dragon, Juvenile
+- Copper Dragon, Mature adult
+- Copper Dragon, Old
+- Copper Dragon, Very old
+- Copper Dragon, Very young
+- Copper Dragon, Wyrm
+- Copper Dragon, Wyrmling
+- Copper Dragon, Young
+- Copper Dragon, Young adult
+- Couatl
+- Couatl, Psionic
+- Criosphinx
+- Crocodile
+- Crocodile, Giant
+- Crysmal
+- Dark Naga
+- Darkmantle
+- Deinonychus
+- Delver
+- Demilich
+- Derro
+- Destrachan
+- Devastation Beetle
+- Devastation Centipede
+- Devastation Scorpion
+- Devastation Spider
+- Devourer
+- Digester
+- Dire Ape
+- Dire Badger
+- Dire Bat
+- Dire Bear
+- Dire Boar
+- Dire Lion
+- Dire Rat
+- Dire Shark
+- Dire Tiger
+- Dire Weasel
+- Dire Wolf
+- Dire Wolverine
+- Djinni
+- Dog
+- Dog, Riding
+- Donkey
+- Doppelganger
+- Dragon Turtle
+- Dragonne
+- Dread Wraith
+- Dream Larva
+- Dretch
+- Drider
+- Dryad
+- Dust Mephit
+- Eagle
+- Eagle, Giant
+- Earth Elemental, Elder
+- Earth Elemental, Greater
+- Earth Elemental, Huge
+- Earth Elemental, Large
+- Earth Elemental, Medium
+- Earth Elemental, Primal
+- Earth Elemental, Small
+- Earth Mephit
+- Efreeti
+- Eight-Headed Hydra
+- Elasmosaurus
+- Elder Arrowhawk
+- Elder Black Pudding
+- Elder Tojanida
+- Elder Xorn
+- Elephant
+- Eleven-Headed Hydra
+- Erinyes
+- Ethereal Filcher
+- Ethereal Marauder
+- Ettercap
+- Ettin
+- Ettin Skeleton
+- Fire Elemental, Elder
+- Fire Elemental, Greater
+- Fire Elemental, Huge
+- Fire Elemental, Large
+- Fire Elemental, Medium
+- Fire Elemental, Primal
+- Fire Elemental, Small
+- Fire Giant
+- Fire Mephit
+- Five-Headed Hydra
+- Flamebrother Salamander
+- Flesh Colossus
+- Flesh Golem
+- Folugub
+- Force Dragon, Adult
+- Force Dragon, Ancient
+- Force Dragon, Great wyrm
+- Force Dragon, Juvenile
+- Force Dragon, Mature adult
+- Force Dragon, Old
+- Force Dragon, Very old
+- Force Dragon, Very young
+- Force Dragon, Wyrm
+- Force Dragon, Wyrmling
+- Force Dragon, Young
+- Force Dragon, Young adult
+- Formian Myrmarch
+- Formian Queen
+- Formian Taskmaster
+- Formian Warrior
+- Formian Worker
+- Frost Giant
+- Frost Worm
+- Gargoyle
+- Gelatinous Cube
+- Genius Loci
+- Ghaele
+- Ghast
+- Ghoul
+- Giant Ant, Queen
+- Giant Ant, Soldier
+- Giant Ant, Worker
+- Giant Bee
+- Giant Bombardier Beetle
+- Giant Fire Beetle
+- Giant Praying Mantis
+- Giant Stag Beetle
+- Giant Wasp
+- Gibbering Mouther
+- Gibbering Orb
+- Girallon
+- Glabrezu
+- Gloom
+- Gnoll
+- Gold Dragon, Adult
+- Gold Dragon, Ancient
+- Gold Dragon, Great wyrm
+- Gold Dragon, Juvenile
+- Gold Dragon, Mature adult
+- Gold Dragon, Old
+- Gold Dragon, Very old
+- Gold Dragon, Very young
+- Gold Dragon, Wyrm
+- Gold Dragon, Wyrmling
+- Gold Dragon, Young
+- Gold Dragon, Young adult
+- Golden Protector (Celestial Half-Dragon Lammasu)
+- Gorgon
+- Gray Glutton
+- Gray Ooze
+- Gray Render
+- Gray Render Zombie
+- Greater Barghest
+- Greater Shadow
+- Greater Stone Golem
+- Green Dragon, Adult
+- Green Dragon, Ancient
+- Green Dragon, Great wyrm
+- Green Dragon, Juvenile
+- Green Dragon, Mature adult
+- Green Dragon, Old
+- Green Dragon, Very old
+- Green Dragon, Very young
+- Green Dragon, Wyrm
+- Green Dragon, Wyrmling
+- Green Dragon, Young
+- Green Dragon, Young adult
+- Green Hag
+- Grick
+- Griffon
+- Grig
+- Grimlock
+- Guardian Naga
+- Gynosphinx
+- Ha-Naga
+- Hagunemnon
+- Harpy
+- Hawk
+- Hecatoncheires
+- Hellcat
+- Hellhound
+- Hellwasp Swarm
+- Hezrou
+- Hieracosphinx
+- Hill Giant
+- Hill Giant Dire Wereboar Dire Boar Form
+- Hill Giant Dire Wereboar Giant Form
+- Hill Giant Dire Wereboar Hybrid Boar Form
+- Hippogriff
+- Hoary Hunter
+- Hoary Steed
+- Homunculus
+- Horned Devil
+- Horse, Heavy
+- Horse, Light
+- Hound Archon
+- Howler
+- Human Commoner Zombie
+- Human Warrior Skeleton
+- Hunefer
+- Hyena
+- Ice Devil
+- Ice Mephit
+- Imp
+- Infernal
+- Intellect Devourer
+- Invisible Stalker
+- Iron Colossus
+- Iron Golem
+- Janni
+- Juvenile Arrowhawk
+- Juvenile Tojanida
+- Kobold Zombie
+- Kraken
+- Krenshar
+- Lacedon
+- Lamia
+- Lammasu
+- Lantern Archon
+- Lavawight
+- Legendary Bear
+- Legendary Tiger
+- Leonal
+- Leopard
+- Leshay
+- Lillend
+- Lion
+- Living Vault
+- Lizard
+- Lizard, Monitor
+- Lizardfolk
+- Locathah
+- Locust Swarm
+- Magma Mephit
+- Magmin
+- Manta Ray
+- Manticore
+- Marilith
+- Marut
+- Medusa
+- Megaraptor
+- Mercane
+- Mimic
+- Minor Xorn
+- Minotaur
+- Minotaur Zombie
+- Mithral Golem
+- Mohrg
+- Monkey
+- Monstrous Centipede, Colossal
+- Monstrous Centipede, Gargantuan
+- Monstrous Centipede, Huge
+- Monstrous Centipede, Large
+- Monstrous Centipede, Medium
+- Monstrous Centipede, Small
+- Monstrous Centipede, Tiny
+- Monstrous Scorpion, Colossal
+- Monstrous Scorpion, Gargantuan
+- Monstrous Scorpion, Huge
+- Monstrous Scorpion, Large
+- Monstrous Scorpion, Medium
+- Monstrous Scorpion, Small
+- Monstrous Scorpion, Tiny
+- Monstrous Spider, Colossal
+- Monstrous Spider, Gargantuan
+- Monstrous Spider, Huge
+- Monstrous Spider, Large
+- Monstrous Spider, Medium
+- Monstrous Spider, Small
+- Monstrous Spider, Tiny
+- Mu Spore
+- Mule
+- Mummy
+- Nalfeshnee
+- Neh-Thalggu
+- Neothelid
+- Nessian Warhound
+- Night Hag
+- Nightcrawler
+- Nightmare
+- Nightmare, Cauchemar
+- Nightwalker
+- Nightwing
+- Nine-Headed Hydra
+- Nixie
+- Noble Salamander
+- Nymph
+- Ochre Jelly
+- Octopus
+- Octopus, Giant
+- Ogre
+- Ogre Mage
+- Ogre Zombie
+- Ooze Mephit
+- Orca
+- Otyugh
+- Owl
+- Owl, Giant
+- Owlbear
+- Owlbear Skeleton
+- Pegasus
+- Phaethon
+- Phane
+- Phantom Fungus
+- Phase Spider
+- Phasm
+- Phthisic
+- Pit Fiend
+- Pixie
+- Pony
+- Pony, War
+- Porpoise
+- Prismasaurus
+- Prismatic Dragon, Adult
+- Prismatic Dragon, Ancient
+- Prismatic Dragon, Great wyrm
+- Prismatic Dragon, Juvenile
+- Prismatic Dragon, Mature adult
+- Prismatic Dragon, Old
+- Prismatic Dragon, Very old
+- Prismatic Dragon, Very young
+- Prismatic Dragon, Wyrm
+- Prismatic Dragon, Wyrmling
+- Prismatic Dragon, Young
+- Prismatic Dragon, Young adult
+- Pseudodragon
+- Pseudonatural Troll
+- Psicrystal
+- Psion-Killer
+- Puppeteer
+- Puppeteer, Flesh Harrower
+- Purple Worm
+- Quasit
+- Rakshasa
+- Rast
+- Rat
+- Rat Swarm
+- Raven
+- Ravid
+- Red Dragon, Adult
+- Red Dragon, Ancient
+- Red Dragon, Great wyrm
+- Red Dragon, Juvenile
+- Red Dragon, Mature adult
+- Red Dragon, Old
+- Red Dragon, Very old
+- Red Dragon, Very young
+- Red Dragon, Wyrm
+- Red Dragon, Wyrmling
+- Red Dragon, Young
+- Red Dragon, Young adult
+- Remorhaz
+- Retriever
+- Rhinoceros
+- Roc
+- Roper
+- Ruin Swarm
+- Rust Monster
+- Sahuagin
+- Salt Mephit
+- Satyr
+- Sea Cat
+- Sea Hag
+- Seven-Headed Hydra
+- Shadow
+- Shadow Mastiff
+- Shadow of the Void
+- Shambling Mound
+- Shape of Fire
+- Shark, Huge
+- Shark, Large
+- Shark, Medium
+- Shield Guardian
+- Shocker Lizard
+- Shrieker
+- Silver Dragon, Adult
+- Silver Dragon, Ancient
+- Silver Dragon, Great wyrm
+- Silver Dragon, Juvenile
+- Silver Dragon, Mature adult
+- Silver Dragon, Old
+- Silver Dragon, Very old
+- Silver Dragon, Very young
+- Silver Dragon, Wyrm
+- Silver Dragon, Wyrmling
+- Silver Dragon, Young
+- Silver Dragon, Young adult
+- Sirrush
+- Six-Headed Hydra
+- Skum
+- Snake, Huge Viper
+- Snake, Large Viper
+- Snake, Medium Viper
+- Snake, Small Viper
+- Snake, Tiny Viper
+- Spectre
+- Spider Eater
+- Spider Swarm
+- Spirit Naga
+- Squid
+- Squid, Giant
+- Steam Mephit
+- Stirge
+- Stone Colossus
+- Stone Giant
+- Stone Golem
+- Storm Giant
+- Succubus
+- Tarrasque
+- Tayellah
+- Temporal Filcher
+- Ten-Headed Hydra
+- Tendriculos
+- Thoqqua
+- Thorciasid
+- Thought Eater
+- Thought Slayer
+- Three-Headed Sirrush
+- Tiger
+- Titan
+- Titan, Elder
+- Toad
+- Treant
+- Treant, Elder
+- Triceratops
+- Triton
+- Troglodyte
+- Troglodyte Zombie
+- Troll
+- Troll Skeleton
+- Trumpet Archon
+- Twelve-Headed Hydra
+- Tyrannosaurus
+- Udoroot
+- Umbral Blot
+- Unbodied
+- Unicorn
+- Uvuudaum
+- Vampire Spawn
+- Vargouille
+- Vermiurge
+- Violet Fungus
+- Vrock
+- Warhorse, Heavy
+- Warhorse, Light
+- Water Elemental, Elder
+- Water Elemental, Greater
+- Water Elemental, Huge
+- Water Elemental, Large
+- Water Elemental, Medium
+- Water Elemental, Primal
+- Water Elemental, Small
+- Water Mephit
+- Water Naga
+- Weasel
+- Werebear, Bear Form
+- Werebear, Human Form
+- Werebear, Hybrid Form
+- Wereboar, Boar Form
+- Wereboar, Human Form
+- Wereboar, Hybrid Form
+- Wererat, Dire Rat Form
+- Wererat, Human Form
+- Wererat, Hybrid Form
+- Weretiger, Human Form
+- Weretiger, Hybrid Form
+- Weretiger, Tiger Form
+- Werewolf Lord, Dire Wolf Form
+- Werewolf Lord, Human Form
+- Werewolf Lord, Hybrid Form
+- Werewolf, Human Form
+- Werewolf, Hybrid Form
+- Werewolf, Wolf Form
+- White Dragon, Adult
+- White Dragon, Ancient
+- White Dragon, Great wyrm
+- White Dragon, Juvenile
+- White Dragon, Mature adult
+- White Dragon, Old
+- White Dragon, Very old
+- White Dragon, Very young
+- White Dragon, Wyrm
+- White Dragon, Wyrmling
+- White Dragon, Young
+- White Dragon, Young adult
+- Wight
+- Will-O'-Wisp
+- Winter Wolf
+- Winterwight
+- Wolf
+- Wolf Skeleton
+- Wolverine
+- Worg
+- Worm that Walks
+- Wraith
+- Wyvern
+- Wyvern Zombie
+- Xill
+- Xixecal
+- Yeth Hound
+- Young Adult Red Dragon Skeleton
+- Yrthak
+- Zelekhut
+
+## Class Abilities (129)
+
+- Abundant Step
+- Animal Companion
+- Arcane Fire
+- Arcane Reach
+- Armor Proficiency (Heavy)
+- Armor Proficiency (Light)
+- Armor Proficiency (Medium)
+- Arrow of Death
+- Aura of Courage
+- Aura of Despair
+- Bardic Knowledge
+- Bardic Music
+- Bladewind
+- Bonus Arcane Spellcaster Level
+- Bonus Divine Spellcaster Level
+- Bonus Feat (Fighter)
+- Bonus Feat (Monk)
+- Bonus Feat (Psion)
+- Bonus Feat (Psychic Warrior)
+- Bonus Feat (Rogue)
+- Bonus Feat (Wizard)
+- Camouflage
+- Channel Power
+- Combat Style
+- Combat Style Mastery
+- Crippling Strike
+- Dark Blessing
+- Death Attack
+- Defensive Roll
+- Defensive Stance
+- Deliver Touch Powers
+- Deliver Touch Spells
+- Detect Evil
+- Detect Good
+- Devotion
+- Diamond Body
+- Diamond Soul
+- Divine Grace
+- Divine Health
+- Elude Touch
+- Empathic Link
+- Empty Body
+- Endurance
+- Enhance Arrow
+- Evasion
+- Familiar Spell Resistance
+- Fast Movement
+- Favored Enemy (No Enemy Set, +2)
+- Flight
+- Flurry of Blows
+- Greater Weapon Focus (Mind Blade)
+- Hail of Arrows
+- Hide in Plain Sight
+- High Arcana
+- Imbue Arrow
+- Impromptu Sneak Attack
+- Improved Combat Style
+- Improved Evasion
+- Improved Uncanny Dodge
+- Indomitable Will
+- Ki Strike
+- Knife to the Soul
+- Lay on Hands
+- Martial Weapon Proficiency (All)
+- Mastery of Counterspelling
+- Mastery of Elements
+- Mastery of Shaping
+- Mind Blade
+- Mind Blade (Bastard Sword, Melee)
+- Mind Blade (Longsword, Melee)
+- Mind Blade (Sword, Melee)
+- Multiattack
+- Nature Sense
+- Opportunist
+- Paladin Mount Spell Resistance
+- Perfect Self
+- Phase Arrow
+- Poison Use
+- Psicrystal Power Resistance
+- Psychic Strike
+- Purity of Body
+- Quivering Palm
+- Rage
+- Ranged Legerdemain
+- Remove Disease
+- Resist Nature's Lure
+- Rogue Special Ability
+- Save Bonus against Poison
+- Scribe Scroll
+- Seeker Arrow
+- Self Propulsion
+- Share Powers
+- Share Spells
+- Shield Proficiency
+- Simple Weapon Proficiency
+- Skill Mastery
+- Slippery Mind
+- Slow Fall
+- Smite Evil
+- Smite Good
+- Sneak Attack
+- Sneak Attack (Attack)
+- Speak with Animals of Its Kind
+- Speak with Master
+- Special Mount
+- Speed of Thought
+- Spell Power
+- Spell-Like Ability
+- Still Mind
+- Summon Familiar
+- Surging Euphoria
+- Telepathic Link
+- Thousand Faces
+- Tower Shield Proficiency
+- Track
+- Trackless Step
+- Trap Sense
+- Turn Earth/Rebuke Air
+- Turn/Rebuke Undead
+- Unarmed Strike (Monk)
+- Uncanny Dodge
+- Weapon Focus (Mind Blade)
+- Wholeness of Body
+- Wild Empathy
+- Wild Shape
+- Wild Shape (Elemental)
+- Wild Surge
+- Wild Talent
+- Woodland Stride
+
+## Classes (33)
+
+- Adept (NPC)
+- Arcane Archer
+- Arcane Trickster
+- Archmage
+- Aristocrat (NPC)
+- Assassin
+- Barbarian
+- Bard
+- Blackguard
+- Cleric
+- Commoner (NPC)
+- Druid
+- Dwarven Defender
+- Eldritch Knight
+- Expert (NPC)
+- Fighter
+- Monk
+- Mystic Theurge
+- Paladin
+- Psion (Egoist)
+- Psion (Kineticist)
+- Psion (Nomad)
+- Psion (Seer)
+- Psion (Shaper)
+- Psion (Telepath)
+- Psychic Warrior
+- Ranger
+- Rogue
+- Sorcerer
+- Soulknife
+- Warrior (NPC)
+- Wilder
+- Wizard
+
+## Commonauras (1)
+
+- Aura of Courage
+
+## Commonbuffs (37)
+
+- Aid
+- Augmented Summon
+- Bane
+- Barkskin
+- Bear's Endurance
+- Bless
+- Bull's Strength
+- Burst
+- Cat's Grace
+- Defensive Stance
+- Defensive Stance Winded
+- Divine Favor
+- Eagle's Splendor
+- Enraged
+- Fatigue
+- Fox's Cunning
+- Guidance - Attack Bonus
+- Guidance - Save Bonus
+- Guidance - Skill Bonus
+- Haste
+- Heroism
+- Inertial Armor
+- Inspire Courage
+- Inspire Greatness
+- Inspire Heroics
+- Lullaby
+- Mage Armor
+- Outburst
+- Owl's Wisdom
+- Prayer (Negative)
+- Prayer (Positive)
+- Resistance
+- Shield
+- Shield of Faith
+- Slow
+- Surging Euhporia
+- Virtue
+
+## Conditions (38)
+
+- Ability Damaged
+- Ability Drained
+- Blinded
+- Blown Away
+- Checked
+- Confused
+- Cowering
+- Dazed
+- Dazzled
+- Dead
+- Deafened
+- Disabled
+- Dying
+- Energy Drained
+- Entangled
+- Exhausted
+- Fascinated
+- Fatigued
+- Flat-Footed
+- Frightened
+- Grappling
+- Helpless
+- Incorporeal
+- Invisible
+- Knocked Down
+- Nauseated
+- Panicked
+- Paralyzed
+- Petrified
+- Pinned
+- Prone
+- Shaken
+- Sickened
+- Stable
+- Staggered
+- Stunned
+- Turned
+- Unconscious
+
+## Damage Types (21)
+
+- Acid
+- Bludgeoning
+- Cold
+- Divine
+- Electricity
+- Fire
+- Force
+- Healing
+- Negative Energy
+- Non-lethal
+- Piercing
+- Piercing or Bludgeoning
+- Piercing or Slashing
+- Piercing, Bludgeoning and Slashing
+- Positive Energy
+- Precision
+- Repair
+- Slashing
+- Slashing or Bludgeoning
+- Sonic
+- Untyped
+
+## Enhancements (89)
+
+- +1 Armor Enhancement
+- +1 Weapon Enhancement
+- Ability Bonus (Cha)
+- Ability Bonus (Cha)
+- Ability Bonus (Con)
+- Ability Bonus (Dex)
+- Ability Bonus (Int)
+- Ability Bonus (Str)
+- Ability Bonus (Wis)
+- Acid Resistance
+- Acid Resistance, Greater
+- Acid Resistance, Improved
+- Anarchic
+- Animated
+- Armor Class (Deflection)
+- Armor Class (Other)
+- Arrow Catching
+- Arrow Deflection
+- Axiomatic
+- Bane of Aberrations
+- Bane of Animals
+- Bane of Constructs
+- Bane of Dragons
+- Bane of Elementals
+- Bane of Fey
+- Bane of Giants
+- Bane of Humanoids
+- Bane of Magical Beasts
+- Bane of Monstrous Humanoids
+- Bane of Oozes
+- Bane of Outsiders
+- Bane of Plants
+- Bane of Undead
+- Bane of Vermin
+- Bashing
+- Blinding
+- Brilliant Energy
+- Cold Resistance
+- Cold Resistance, Greater
+- Cold Resistance, Improved
+- Dancing
+- Defending
+- Disruption
+- Distance
+- Dread of Undead
+- Electricity Resistance
+- Electricity Resistance, Greater
+- Electricity Resistance, Improved
+- Etherealness
+- Everdancing
+- Fire Resistance
+- Fire Resistance, Greater
+- Fire Resistance, Improved
+- Flaming
+- Flaming Burst
+- Fortification
+- Frost
+- Ghost Touch, Weapon
+- Glamered
+- Holy
+- Icy Burst
+- Invulnerability
+- Keen
+- Ki Focus
+- Merciful
+- Mighty Cleaving
+- Natural Armor Bonus
+- Reflecting
+- Returning
+- Seeking
+- Shadow
+- Shock
+- Shocking Burst
+- Silent Moves
+- Slick
+- Sonic Resistance
+- Sonic Resistance, Greater
+- Sonic Resistance, Improved
+- Speed
+- Spell Resistance
+- Spell Storing
+- Throwing
+- Thundering
+- Undead Controlling
+- Unholy
+- Vicious
+- Vorpal
+- Wild
+- Wounding
+
+## Feats (388)
+
+- Ability Focus
+- Acrobatic
+- Additional Magic Item Space
+- Agile
+- Alertness
+- Aligned Attack
+- Animal Affinity
+- Antipsionic Magic
+- Armor Proficiency (Heavy)
+- Armor Proficiency (Light)
+- Armor Proficiency (Medium)
+- Armor Skin
+- Athletic
+- Augment Summoning
+- Augmented Alchemy
+- Automatic Quicken Spell
+- Automatic Silent Spell
+- Automatic Still Spell
+- Autonomous
+- Awesome Blow
+- Bane of Enemies
+- Blind-Fight
+- Blinding Speed
+- Blindsight, 5-ft. Radius
+- Body Fuel
+- Bonus Domain
+- Boost Construct
+- Brew Potion
+- Bulwark of Defense
+- Burrowing Power
+- Chain Power
+- Chaotic Mind
+- Chaotic Rage
+- Cleave
+- Cloak Dance
+- Closed Mind
+- Colossal Wild Shape
+- Combat Archery
+- Combat Casting
+- Combat Expertise
+- Combat Manifestation
+- Combat Reflexes
+- Craft Cognizance Crystal
+- Craft Construct
+- Craft Dorje
+- Craft Epic Magic Arms and Armor
+- Craft Epic Rod
+- Craft Epic Staff
+- Craft Epic Wondrous Item
+- Craft Magic Arms and Armor
+- Craft Psicrown
+- Craft Psionic Arms and Armor
+- Craft Psionic Construct
+- Craft Rod
+- Craft Staff
+- Craft Universal Item
+- Craft Wand
+- Craft Wondrous Item
+- Damage Reduction
+- Deadly Precision
+- Deafening Song
+- Death of Enemies
+- Deceitful
+- Deep Impact
+- Deflect Arrows
+- Deft Hands
+- Delay Power
+- Devastating Critical
+- Dexterous Fortitude
+- Dexterous Will
+- Diehard
+- Diligent
+- Diminutive Wild Shape
+- Dire Charge
+- Disguise Spell
+- Distant Shot
+- Divine Might
+- Divine Vengeance
+- Dodge
+- Dragon Wild Shape
+- Efficient Item Creation
+- Empower Power
+- Empower Spell
+- Empower Spell-Like Ability
+- Endurance
+- Energy Resistance
+- Energy Substitution
+- Enhance Spell
+- Enlarge Power
+- Enlarge Spell
+- Epic Dodge
+- Epic Endurance
+- Epic Expanded Knowledge
+- Epic Fortitude
+- Epic Inspiration
+- Epic Leadership
+- Epic Manifestation
+- Epic Prowess
+- Epic Psionic Focus
+- Epic Reflexes
+- Epic Reputation
+- Epic Skill Focus (Not Set)
+- Epic Speed
+- Epic Spell Focus (No Spell School Selected)
+- Epic Spell Penetration
+- Epic Spellcasting
+- Epic Toughness
+- Epic Weapon Focus (No Weapon Selected)
+- Epic Weapon Specialization
+- Epic Will
+- Eschew Materials
+- Exceptional Deflection
+- Exotic Weapon Proficiency
+- Expanded Knowledge
+- Extend Power
+- Extend Spell
+- Extended Life Span
+- Extra Music
+- Extra Turning
+- Eyes in the Back of Your Head
+- Familiar Spell
+- Far Shot
+- Fast Healing
+- Fell Shot
+- Fine Wild Shape
+- Fleet of Foot
+- Flyby Attack
+- Focused Sunder
+- Force of Will
+- Forge Epic Ring
+- Forge Ring
+- Gargantuan Wild Shape
+- Ghost Attack
+- Great Charisma
+- Great Cleave
+- Great Constitution
+- Great Dexterity
+- Great Fortitude
+- Great Intelligence
+- Great Smiting
+- Great Strength
+- Great Wisdom
+- Greater Manyshot
+- Greater Multiweapon Fighting
+- Greater Power Penetration
+- Greater Power Specialization
+- Greater Psionic Endowment
+- Greater Psionic Fist
+- Greater Psionic Shot
+- Greater Psionic Weapon
+- Greater Spell Focus (No Spell School Selected)
+- Greater Spell Penetration
+- Greater Two-Weapon Fighting
+- Greater Weapon Focus (No Weapon Selected)
+- Greater Weapon Specialization (No Weapon Selected)
+- Group Inspiration
+- Heighten Spell
+- Hindering Song
+- Hold the Line
+- Holy Strike
+- Hostile Mind
+- Hover
+- Ignore Material Components
+- Imprint Stone
+- Improved Alignment-Based Casting
+- Improved Arrow of Death
+- Improved Aura of Courage
+- Improved Aura of Despair
+- Improved Bull Rush
+- Improved Combat Casting
+- Improved Combat Reflexes
+- Improved Counterspell
+- Improved Critical (No Weapon Selected)
+- Improved Darkvision
+- Improved Death Attack
+- Improved Disarm
+- Improved Elemental Wild Shape
+- Improved Familiar
+- Improved Favored Enemy
+- Improved Feint
+- Improved Flyby Attack
+- Improved Grapple
+- Improved Heighten Spell
+- Improved Initiative
+- Improved Ki Strike
+- Improved Low-Light Vision
+- Improved Manifestation
+- Improved Manyshot
+- Improved Metamagic
+- Improved Metapsionics
+- Improved Multiattack
+- Improved Multiweapon Fighting
+- Improved Natural Armor
+- Improved Natural Attack (No Weapon Set)
+- Improved Overrun
+- Improved Precise Shot
+- Improved Psicrystal
+- Improved Shield Bash
+- Improved Sneak Attack
+- Improved Spell Capacity
+- Improved Spell Resistance
+- Improved Stunning Fist
+- Improved Sunder
+- Improved Trip
+- Improved Turning
+- Improved Two-Weapon Fighting
+- Improved Unarmed Strike
+- Improved Whirlwind Attack
+- Incite Rage
+- Infinite Deflection
+- Inquisitor
+- Inspire Excellence
+- Instant Reload
+- Intensify Spell
+- Intuitive Trapfinding
+- Investigator
+- Iron Will
+- Jack of All Trades
+- Keen Strike
+- Knock-Down
+- Lasting Inspiration
+- Leadership
+- Legendary Climber
+- Legendary Commander
+- Legendary Leaper
+- Legendary Rider
+- Legendary Tracker
+- Legendary Wrestler
+- Lightning Reflexes
+- Lingering Damage
+- Magical Aptitude
+- Magical Beast Companion
+- Magical Beast Wild Shape
+- Manyshot
+- Martial Weapon Proficiency (All)
+- Master Staff
+- Master Wand
+- Maximize Power
+- Maximize Spell
+- Mental Leap
+- Mental Resistance
+- Metamorphic Transfer
+- Mighty Rage
+- Mind Over Body
+- Mobile Defense
+- Mobility
+- Mounted Archery
+- Mounted Combat
+- Multiattack
+- Multispell
+- Multiweapon Fighting
+- Multiweapon Rend
+- Music of the Gods
+- Narrow Mind
+- Natural Spell
+- Negative Energy Burst
+- Negotiator
+- Nimble Fingers
+- Open Minded
+- Opportunity Power
+- Overchannel
+- Overwhelming Critical
+- Penetrate Damage Reduction
+- Perfect Health
+- Perfect Multiweapon Fighting
+- Perfect Two-Weapon Fighting
+- Permanent Emanation
+- Persistent Spell
+- Persuasive
+- Planar Turning
+- Plant Control
+- Plant Defiance
+- Plant Wild Shape
+- Point Blank Shot
+- Polyglot
+- Positive Energy Aura
+- Power Attack
+- Power Critical
+- Power Knowledge
+- Power Penetration
+- Power Specialization
+- Precise Shot
+- Psicrystal Affinity
+- Psicrystal Containment
+- Psicrystal Power
+- Psionic Affinity
+- Psionic Body
+- Psionic Charge
+- Psionic Dodge
+- Psionic Endowment
+- Psionic Fist
+- Psionic Hole
+- Psionic Meditation
+- Psionic Shot
+- Psionic Talent
+- Psionic Weapon
+- Quick Draw
+- Quicken Power
+- Quicken Spell
+- Quicken Spell-Like Ability
+- Ranged Inspiration
+- Rapid Inspiration
+- Rapid Metabolism
+- Rapid Reload (None)
+- Rapid Shot
+- Reach Spell
+- Reactive Countersong
+- Reckless Offense
+- Reflect Arrows
+- Repeat Spell
+- Return Shot
+- Ride-By Attack
+- Righteous Strike
+- Ruinous Rage
+- Run
+- Sacred Spell
+- Scribe Epic Scroll
+- Scribe Scroll
+- Scribe Tattoo
+- Self-Concealment
+- Self-Sufficient
+- Sharp-Shooting
+- Shattering Strike
+- Shield Proficiency
+- Shot on the Run
+- Sidestep Charge
+- Silent Spell
+- Simple Weapon Proficiency
+- Skill Focus (Not Set)
+- Snatch
+- Snatch Arrows
+- Sneak Attack of Opportunity
+- Spectral Strike
+- Speed of Thought
+- Spell Focus (No Spell School Selected)
+- Spell Knowledge
+- Spell Mastery
+- Spell Opportunity
+- Spell Penetration
+- Spell Stowaway (No Spell Set)
+- Spellcasting Harrier
+- Spirited Charge
+- Split Psionic Ray
+- Spontaneous Domain Access
+- Spontaneous Spell
+- Spring Attack
+- Stand Still
+- Stealthy
+- Still Spell
+- Storm of Throws
+- Stunning Fist
+- Subdual Substitution
+- Superior Expertise
+- Superior Initiative
+- Swarm of Arrows
+- Talented
+- Tenacious Magic (No Spell Set)
+- Terrifying Rage
+- Thundering Rage
+- Toughness
+- Tower Shield Proficiency
+- Track
+- Trample
+- Twin Power
+- Two-Weapon Defense
+- Two-Weapon Fighting
+- Two-Weapon Rend
+- Unavoidable Strike
+- Uncanny Accuracy
+- Unconditional Power
+- Undead Mastery
+- Unholy Strike
+- Up the Walls
+- Vermin Wild Shape
+- Vorpal Strike
+- Weapon Finesse
+- Weapon Focus (No Weapon Selected)
+- Weapon Proficiency (No Weapon Selected)
+- Weapon Specialization (No Weapon Selected)
+- Whirlwind Attack
+- Widen Aura of Courage
+- Widen Aura of Despair
+- Widen Power
+- Widen Spell
+- Wild Talent
+- Wingover
+- Wounding Attack
+- Zone of Animation
+
+## Item Roll Tables (4)
+
+- Amulet of the Planes
+- Bag of Tricks, Gray
+- Bag of Tricks, Rust
+- Bag of Tricks, Tan
+
+## Itembuffs (1)
+
+- Tome of Undestanding Bonus
+
+## Items (130)
+
+- Acid
+- Alchemist’s fire
+- Alchemist’s lab
+- Antitoxin
+- Artisan’s outfit
+- Artisan’s tools
+- Artisan’s tools, masterworked
+- Backpack, Common
+- Backpack, Masterwork
+- Barding, Large creature
+- Barding, Medium creature
+- Barrel
+- Basket
+- Bedroll
+- Bell
+- Bit and bridle
+- Blanket, winter
+- Block and tackle
+- Bottle, wine, glass
+- Bucket
+- Caltrops
+- Candle
+- Canvas
+- Case, map or scroll
+- Chain, 10 ft.
+- Chalk
+- Chest
+- Cleric’s vestments
+- Climber’s kit
+- Cold weather outfit
+- Courtier’s outfit
+- Crowbar
+- Disguise kit
+- Dog, guard
+- Dog, riding
+- Donkey or mule
+- Entertainer’s outfit
+- Exotic Saddle, Military
+- Exotic Saddle, Pack
+- Exotic Saddle, Riding
+- Explorer’s outfit
+- Feed
+- Firewood
+- Fishhook
+- Fishing net, 25 sq. ft.
+- Flask
+- Flint and steel
+- Hammer
+- Healer’s kit
+- Holly and mistletoe
+- Holy symbol, silver
+- Holy symbol, wooden
+- Holy water
+- Hooded Lantern
+- Horse, heavy
+- Horse, light
+- Hourglass
+- Ink, 1 oz. vial
+- Inkpen
+- Jug, clay
+- Ladder, 10-foot
+- Lamp, common
+- Lantern, bullseye
+- Lock, Amazing
+- Lock, Average
+- Lock, Good
+- Lock, Very simple
+- Magnifying glass
+- Manacles
+- Manacles, Masterworked
+- Mirror, small steel
+- Monk’s outfit
+- Mug/Tankard, clay
+- Musical instrument, common
+- Musical instrument, masterworked
+- Noble’s outfit
+- Oil, 1-pint flask
+- Paper
+- Parchment
+- Peasant’s outfit
+- Pick, miner’s
+- Pitcher, clay
+- Piton
+- Pole, 10-foot
+- Pony
+- Pot, iron
+- Pouch, belt
+- Pouch, Spell Component
+- Ram, portable
+- Rations, Trail
+- Rope, hempen, 1m.
+- Rope, silk, 1m.
+- Royal outfit
+- Sack
+- Saddle, Military 
+- Saddle, Pack
+- Saddle, Riding
+- Saddlebags
+- Scale, merchant’s
+- Scholar’s outfit
+- Sealing wax
+- Sewing needle
+- Signal whistle
+- Signet ring
+- Sledge
+- Smokestick
+- Soap
+- Spade or shovel
+- Spellbook
+- Spellbook, Traveling
+- Spyglass
+- Stabling
+- Sunrod
+- Tanglefoot Bag
+- Tent
+- Thieves’ tools
+- Thieves’ tools masterworked
+- Thunderstone
+- Tindertwig
+- Tools, masterworked
+- Torch
+- Torch, Everburning
+- Traveler’s outfit
+- Vial, ink or potion
+- Warhorse, heavy
+- Warhorse, light
+- Warpony
+- Water clock
+- Waterskin
+- Whetstone
+
+## Magic Items (636)
+
+- Absorbing Shield
+- Adamantine Battleaxe
+- Adamantine Breastplate
+- Adamantine Dagger
+- Amulet of Catapsi
+- Amulet of Epic Natural Armor +10
+- Amulet of Epic Natural Armor +6
+- Amulet of Epic Natural Armor +7
+- Amulet of Epic Natural Armor +8
+- Amulet of Epic Natural Armor +9
+- Amulet of Health +2
+- Amulet of Health +4
+- Amulet of Health +6
+- Amulet of Inescapable Location
+- Amulet of Mighty Fists +1
+- Amulet of Mighty Fists +2
+- Amulet of Mighty Fists +3
+- Amulet of Mighty Fists +4
+- Amulet of Mighty Fists +5
+- Amulet of Natural Armor +1
+- Amulet of Natural Armor +2
+- Amulet of Natural Armor +3
+- Amulet of Natural Armor +4
+- Amulet of Natural Armor +5
+- Amulet of Proof Against Detection and Location
+- Amulet of the Planes
+- Annulus
+- Antimagic Armor
+- Apparatus of the Crab
+- Armor of Arrow Attraction
+- Armor of Rage
+- Armor of the Abyssal Horde
+- Armor of the Celestial Battalion
+- Arrow of Death
+- Assassin's Dagger
+- Astral Legion
+- Axe of the Dwarvish Lords
+- Backstabber
+- Bag of Devouring
+- Bag of Holding (Type I)
+- Bag of Holding (Type II)
+- Bag of Holding (Type III)
+- Bag of Holding (Type IV)
+- Bag of Tricks, Gray
+- Bag of Tricks, Rust
+- Bag of Tricks, Tan
+- Banded Mail of Luck
+- Bead of Force
+- Beast
+- Belt of Dwarvenkind
+- Belt of Epic Strength +10
+- Belt of Epic Strength +12
+- Belt of Epic Strength +8
+- Belt of Giant Strength +4
+- Belt of Giant Strength +6
+- Belt, Monk's
+- Blessed Book
+- Boat, Folding
+- Book of Infinite Spells
+- Boots of Dancing
+- Boots of Elvenkind
+- Boots of Landing
+- Boots of Levitation
+- Boots of Skating
+- Boots of Speed
+- Boots of Stomping
+- Boots of Striding and Springing
+- Boots of Swiftness
+- Boots of Teleportation
+- Boots of Temporal Acceleration
+- Boots of the Winterlands
+- Boots, Winged
+- Bottle of Air
+- Bowl of Commanding Water Elementals
+- Bracelet of Friends
+- Bracers of Archery, Greater
+- Bracers of Archery, Lesser
+- Bracers of Armor +1
+- Bracers of Armor +2
+- Bracers of Armor +3
+- Bracers of Armor +4
+- Bracers of Armor +5
+- Bracers of Armor +6
+- Bracers of Armor +7
+- Bracers of Armor +8
+- Bracers of Defenselessness
+- Bracers of Epic Armor +11
+- Bracers of Epic Armor +12
+- Bracers of Epic Armor +13
+- Bracers of Epic Armor +14
+- Bracers of Epic Armor +15
+- Bracers of Epic Health +10
+- Bracers of Epic Health +12
+- Bracers of Epic Health +8
+- Bracers of Relentless Might
+- Brazier of Commanding Fire Elementals
+- Breastplate of Command
+- Brooch of Shielding
+- Broom of Animated Attack
+- Broom of Flying
+- Bulwark of the Great Dragon
+- Cabinet of Feasting
+- Candle of Invocation
+- Candle of Truth
+- Cape of the Mountebank
+- Carpet of Flying
+- Caster's Shield
+- Cautious Warrior
+- Celestial Armor
+- Censer of Controlling Air Elementals
+- Chaos Diamond
+- Chaosbringer
+- Chime of Interruption
+- Chime of Opening
+- Circlet of Blasting, Major
+- Circlet of Blasting, Minor
+- Circlet of Persuasion
+- Cloak of Arachnida
+- Cloak of Charisma +2
+- Cloak of Charisma +4
+- Cloak of Charisma +6
+- Cloak of Displacement, Major
+- Cloak of Displacement, Minor
+- Cloak of Elvenkind
+- Cloak of Epic Charisma +10
+- Cloak of Epic Charisma +12
+- Cloak of Epic Charisma +8
+- Cloak of Epic Resistance +10
+- Cloak of Epic Resistance +6
+- Cloak of Epic Resistance +7
+- Cloak of Epic Resistance +8
+- Cloak of Epic Resistance +9
+- Cloak of Etherealness
+- Cloak of Poisonousness
+- Cloak of Resistance +1
+- Cloak of Resistance +2
+- Cloak of Resistance +3
+- Cloak of Resistance +4
+- Cloak of Resistance +5
+- Cloak of the Bat
+- Cloak of the Manta Ray
+- Codex of the Infinite Planes
+- Crawling Tattoos
+- Crystal Anchor
+- Crystal Ball
+- Crystal Hypnosis Ball
+- Crystal Masks
+- Cube of Force
+- Cube of Frost Resistance
+- Cubic Gate
+- Cup and Talisman of the Demigod
+- Dagger of Venom
+- Darkskull
+- Darkwood Buckler
+- Darkwood Shield
+- Decanter of Endless Water
+- Deck of Illusions
+- Deck of Many Things
+- Demon Armor
+- Dimensional Shackles
+- Discerning Watcher
+- Dominator
+- Dragonhide Plate
+- Dragonskin Armor
+- Drums of Panic
+- Dust of Appearance
+- Dust of Disappearance
+- Dust of Dryness
+- Dust of Illusion
+- Dust of Sneezing and Choking
+- Dust of Tracelessness
+- Dwarven Plate
+- Dwarven Thrower
+- Efficient Quiver
+- Efreeti Bottle
+- Elemental Gem
+- Elixir of Fire Breath
+- Elixir of Hiding
+- Elixir of Love
+- Elixir of Sneaking
+- Elixir of Swimming
+- Elixir of Truth
+- Elixir of Vision
+- Elven Chain
+- Elven Greatbow
+- Evader
+- Eversmoking Bottle
+- Everwhirling Chain
+- Eye of the Orc
+- Eyes of Charming
+- Eyes of Doom
+- Eyes of Expanded Vision
+- Eyes of Petrification
+- Eyes of Power Leech
+- Eyes of Power Leech, Vampiric
+- Eyes of the Eagle
+- Feather Token, Anchor
+- Feather Token, Bird
+- Feather Token, Fan
+- Feather Token, Swan Boat
+- Feather Token, Tree
+- Feather Token, Whip
+- Fiery Ruin
+- Figurines of Wondrous Power
+- Finaldeath
+- Flame Tongue
+- Flask of Curses
+- Frost Brand
+- Gate Key
+- Gauntlet of Rust
+- Gauntlets of Fumbling
+- Gauntlets of Ogre Power
+- Gem of Brightness
+- Gem of Seeing
+- Glove of Storing
+- Gloves of Arrow Snaring
+- Gloves of Dexterity +2
+- Gloves of Dexterity +4
+- Gloves of Dexterity +6
+- Gloves of Epic Dexterity +10
+- Gloves of Epic Dexterity +12
+- Gloves of Epic Dexterity +8
+- Gloves of Object Reading
+- Gloves of Swimming and Climbing
+- Gloves of Titan's Grip
+- Goggles of Minute Seeing
+- Goggles of Night
+- Golem Armor
+- Golem Manual
+- Great Dominator
+- Gripsoul
+- Hammer of Thunderbolts
+- Hand of Glory
+- Hand of the Mage
+- Handy Haversack
+- Harp of Charming
+- Hat of Disguise
+- Headband of Epic Intellect +10
+- Headband of Epic Intellect +12
+- Headband of Epic Intellect +8
+- Headband of Intellect +2
+- Headband of Intellect +4
+- Headband of Intellect +6
+- Helm of Brilliance
+- Helm of Comprehend Languages and Read Magic
+- Helm of Opposite Alignment
+- Helm of Telepathy
+- Helm of Teleportation
+- Helm of Underwater Action
+- Holy Avenger
+- Holy Devastator
+- Horn of Blasting
+- Horn of Blasting, Greater
+- Horn of Fog
+- Horn of Goodness/Evil
+- Horn of the Tritons
+- Horn of Valhalla
+- Horseshoes of A Zephyr
+- Horseshoes of Speed
+- Horseshoes of the Peerless Steed
+- Immovable Rod
+- Incense of Meditation
+- Incense of Obsession
+- Instant Fortress
+- Invulnerable Coat
+- Ioun Stones
+- Iron Bands of Binding
+- Iron Flask
+- Iron Gauntlet of War
+- Javelin of Lightning
+- Lantern of Revealing
+- Lens of Detection
+- Life-Drinker
+- Lion's Shield
+- Luck Blade
+- Lyre of Building
+- Mace of Blood
+- Mace of Ruin
+- Mace of Smiting
+- Mace of Terror
+- Mantle of Epic Spell Resistance
+- Mantle of Faith
+- Mantle of Great Stealth
+- Mantle of Spell Resistance
+- Manual of Bodily Health +1
+- Manual of Bodily Health +2
+- Manual of Bodily Health +3
+- Manual of Bodily Health +4
+- Manual of Bodily Health +5
+- Manual of Gainful Exercise +1
+- Manual of Gainful Exercise +2
+- Manual of Gainful Exercise +3
+- Manual of Gainful Exercise +4
+- Manual of Gainful Exercise +5
+- Manual of Quickness of Action +1
+- Manual of Quickness of Action +2
+- Manual of Quickness of Action +3
+- Manual of Quickness of Action +4
+- Manual of Quickness of Action +5
+- Marvelous Pigments
+- Mask of the Skull
+- Masterwork Cold Iron Longsword
+- Mattock of the Titans
+- Maul of the Titans
+- Medallion of Thought Projection
+- Medallion of Thoughts
+- Mirror of Life Trapping
+- Mirror of Mental Prowess
+- Mirror of Mind Switch
+- Mirror of Opposition
+- Mirror of Suggestion
+- Mirror of Time Hop
+- Mithral Full Plate of Speed
+- Mithral Heavy Shield
+- Mithral Shirt
+- Necklace of Adaptation
+- Necklace of Fireballs
+- Necklace of Strangulation
+- Net of Snaring
+- Nine Lives Stealer
+- Oathbow
+- Orb of Storms
+- Pearl of Power (1st)
+- Pearl of Power (2nd)
+- Pearl of Power (3rd)
+- Pearl of Power (4th)
+- Pearl of Power (5th)
+- Pearl of Power (6th)
+- Pearl of Power (7th)
+- Pearl of Power (8th)
+- Pearl of Power (9th)
+- Pearl of Power, Two Spells
+- Pearl of the Sirines
+- Pearl, Brain Lock
+- Pearl, Breath Crisis
+- Pearl, Mind Seed
+- Pearl, Personality Parasite
+- Periapt of Epic Wisdom +10
+- Periapt of Epic Wisdom +12
+- Periapt of Epic Wisdom +8
+- Periapt of Foul Rotting
+- Periapt of Health
+- Periapt of Proof Against Poison
+- Periapt of Wisdom +2
+- Periapt of Wisdom +4
+- Periapt of Wisdom +6
+- Periapt of Wound Closure
+- Philosopher's Stone
+- Phylactery of Faithfulness
+- Phylactery of Undead Turning
+- Pipes of Haunting
+- Pipes of Pain
+- Pipes of Sounding
+- Pipes of the Sewers
+- Plate Armor of the Deep
+- Portable Hole
+- Potion of Poison
+- Psicrown of the Crystal Mind
+- Psionatrix
+- Psionic Restraints
+- Psychoactive Skins
+- Quarterstaff of Alacrity
+- Rapier of Puncturing
+- Restorative Ointment
+- Reverse Capacitor
+- Rhino Hide
+- Ring Gates
+- Ring of Adamant Law
+- Ring of Animal Friendship
+- Ring of Blinking
+- Ring of Chameleon Power
+- Ring of Chaotic Fury
+- Ring of Climbing
+- Ring of Climbing, Improved
+- Ring of Clumsiness
+- Ring of Counterspells
+- Ring of Djinni Calling
+- Ring of Energy Immunity
+- Ring of Energy Resistance, Greater
+- Ring of Energy Resistance, Major
+- Ring of Energy Resistance, Minor
+- Ring of Epic Psionics IX
+- Ring of Epic Psionics V
+- Ring of Epic Psionics VI
+- Ring of Epic Psionics VII
+- Ring of Epic Psionics VIII
+- Ring of Epic Wizardry IX
+- Ring of Epic Wizardry V
+- Ring of Epic Wizardry VI
+- Ring of Epic Wizardry VII
+- Ring of Epic Wizardry VIII
+- Ring of Evasion
+- Ring of Feather Falling
+- Ring of Force Shield
+- Ring of Freedom of Movement
+- Ring of Friend Shield
+- Ring of Ineffable Evil
+- Ring of Invisibility
+- Ring of Ironskin
+- Ring of Jumping
+- Ring of Jumping, Improved
+- Ring of Mind Shielding
+- Ring of Nine Facets
+- Ring of Protection +1
+- Ring of Protection +10
+- Ring of Protection +2
+- Ring of Protection +3
+- Ring of Protection +4
+- Ring of Protection +5
+- Ring of Protection +6
+- Ring of Protection +7
+- Ring of Protection +8
+- Ring of Protection +9
+- Ring of Ram
+- Ring of Rapid Healing
+- Ring of Regeneration
+- Ring of Ring of Elemental Command (Water)
+- Ring of Sequestering
+- Ring of Shooting Stars
+- Ring of Spell Storing
+- Ring of Spell Storing, Major
+- Ring of Spell Storing, Minor
+- Ring of Spell Turning
+- Ring of Sustenance
+- Ring of Swimming
+- Ring of Swimming, Improved
+- Ring of Telekinesis
+- Ring of Three Wishes
+- Ring of Universal Energy Immunity
+- Ring of Universal Energy Resistance, Greater
+- Ring of Universal Energy Resistance, Minor
+- Ring of Virtuous Good
+- Ring of Water Walking
+- Ring of Weaponbreaking
+- Ring of Wizardry I
+- Ring of Wizardry II
+- Ring of Wizardry III
+- Ring of Wizardry IV
+- Ring of X-Ray Vision
+- Robe of Blending
+- Robe of Bones
+- Robe of Eyes
+- Robe of Powerlessness
+- Robe of Scintillating Colors
+- Robe of Stars
+- Robe of the Archmagi
+- Robe of Useful Items
+- Robe of Vermin
+- Rod of Absorption
+- Rod of Alertness
+- Rod of Besiegement
+- Rod of Cancellation
+- Rod of Enemy Detection
+- Rod of Epic Absorption
+- Rod of Epic Cancellation
+- Rod of Epic Might
+- Rod of Epic Negation
+- Rod of Epic Rulership
+- Rod of Epic Spellcaster
+- Rod of Epic Splendor
+- Rod of Excellent Magic
+- Rod of Flailing
+- Rod of Flame Extinguishing
+- Rod of Fortification
+- Rod of Invulnerability
+- Rod of Lordly Might
+- Rod of Metal and Mineral Detection
+- Rod of Metamagic, Empower, Greater
+- Rod of Metamagic, Empower, Lesser
+- Rod of Metamagic, Empower, Normal
+- Rod of Metamagic, Enlarge, Greater
+- Rod of Metamagic, Enlarge, Lesser
+- Rod of Metamagic, Enlarge, Normal
+- Rod of Metamagic, Extend, Greater
+- Rod of Metamagic, Extend, Lesser
+- Rod of Metamagic, Extend, Normal
+- Rod of Metamagic, Maximize, Greater
+- Rod of Metamagic, Maximize, Lesser
+- Rod of Metamagic, Maximize, Normal
+- Rod of Metamagic, Quicken, Greater
+- Rod of Metamagic, Quicken, Lesser
+- Rod of Metamagic, Quicken, Normal
+- Rod of Metamagic, Silent, Greater
+- Rod of Metamagic, Silent, Lesser
+- Rod of Metamagic, Silent, Normal
+- Rod of Negation
+- Rod of Nightmares
+- Rod of Paradise
+- Rod of Python
+- Rod of Restless Death
+- Rod of Rulership
+- Rod of Security
+- Rod of Splendor
+- Rod of The Path
+- Rod of Thunder and Lightning
+- Rod of Viper
+- Rod of Withering
+- Rod of Wonder
+- Rod of Wyrm, Black
+- Rod of Wyrm, Blue
+- Rod of Wyrm, Brass
+- Rod of Wyrm, Bronze
+- Rod of Wyrm, Copper
+- Rod of Wyrm, Gold
+- Rod of Wyrm, Green
+- Rod of Wyrm, Red
+- Rod of Wyrm, Silver
+- Rod of Wyrm, White
+- Rope of Climbing
+- Rope of Entanglement
+- Salve of Slipperiness
+- Scabbard of Keen Edges
+- Scarab of Death
+- Scarab of Protection
+- Scarab, Golembane
+- Screaming Bolt
+- Shapeshifter's Armor
+- Shards +1
+- Shards +10
+- Shards +2
+- Shards +3
+- Shards +4
+- Shards +5
+- Shards +6
+- Shards +7
+- Shards +8
+- Shards +9
+- Shatterspike
+- Shifter's Sorrow
+- Shrouds of Disintegration
+- Silver Dagger, Masterwork
+- Silversheen
+- Slaying Arrow, Greater
+- Sleep Arrow
+- Slippers of Spider Climbing
+- Souldrinker
+- Sovereign Glue
+- Spear, Cursed Backbiter
+- Sphere of Annihilation
+- Spined Shield
+- Staff of Abjuration
+- Staff of Charming
+- Staff of Conjuration
+- Staff of Cosmos
+- Staff of Defense
+- Staff of Divination
+- Staff of Domination
+- Staff of Earth and Stone
+- Staff of Enchantment
+- Staff of Evocation
+- Staff of Fiery Power
+- Staff of Fire
+- Staff of Frost
+- Staff of Healing
+- Staff of Illumination
+- Staff of Illusion
+- Staff of Life
+- Staff of Mighty Force
+- Staff of Nature's Fury
+- Staff of Necromancy
+- Staff of Necromancy
+- Staff of Passage
+- Staff of Planar Might
+- Staff of Power
+- Staff of Prism
+- Staff of Rapid Barrage
+- Staff of Size Alteration
+- Staff of Spheres
+- Staff of Swarming Insects
+- Staff of The Hierophants
+- Staff of the Magi
+- Staff of Transmutation
+- Staff of Walls
+- Staff of Winter
+- Staff of Woodlands
+- Stone Horse, Courser
+- Stone Horse, Destrier
+- Stone of Alarm
+- Stone of Controlling Earth Elementals
+- Stone of Good Luck (Luckstone)
+- Stone of Weight (Loadstone)
+- Stone Salve
+- Stormbrand
+- Strand of Prayer Beads, Greater
+- Strand of Prayer Beads, Lesser
+- Strand of Prayer Beads, Standard
+- Sun Blade
+- Sustaining Spoon
+- Sutra of Tranquil Thought
+- Sword of Life Stealing
+- Sword of Subtlety
+- Sword of the Planes
+- Sword, Berserking
+- Sylvan Scimitar
+- Talisman of Pure Good
+- Talisman of Reluctant Wishes
+- Talisman of the Sphere
+- Talisman of Ultimate Evil
+- Temporal Juggler
+- The Moaning Diamond
+- The Orbs of Dragonkind
+- The Saint's Mace
+- The Shadowstaff
+- Third Eyes
+- Tome of Clear Thought +1
+- Tome of Clear Thought +2
+- Tome of Clear Thought +3
+- Tome of Clear Thought +4
+- Tome of Clear Thought +5
+- Tome of Leadership and Influence +1
+- Tome of Leadership and Influence +2
+- Tome of Leadership and Influence +3
+- Tome of Leadership and Influence +4
+- Tome of Leadership and Influence +5
+- Tome of Understanding +1
+- Tome of Understanding +2
+- Tome of Understanding +3
+- Tome of Understanding +4
+- Tome of Understanding +5
+- Torc of Free Will
+- Torc of Leech Freedom
+- Torc of Power Preservation
+- Traveler
+- Trident of Fish Command
+- Trident of Warning
+- Unguent of Timelessness
+- Unholy Despoiler
+- Universal Solvent
+- Vacuous Grimoire
+- Vest of Escape
+- Vestment, Druid's
+- Warlord's Breastplate
+- Well of Many Worlds
+- Wind Fan
+- Winged Shield
+- Wings of Flying
+
+## Materials (17)
+
+- Adamantine
+- Alchemical Silver
+- Cloth
+- Crystal, Deep
+- Crystal, Mundane
+- Darkwood
+- Dragonhide
+- Glass
+- Hide
+- Ice
+- Iron
+- Iron, Cold
+- Leather
+- Mithral
+- Paper
+- Stone
+- Wood
+
+## Minion Classes (4)
+
+- Animal Companion
+- Paladin Mount
+- Psicrystal
+- Wizard Familiar
+
+## Minions (12)
+
+- Bat
+- Cat
+- Hawk
+- Lizard
+- Owl
+- Paladin Mount, Heavy War Horse
+- Psicrystal
+- Rat
+- Raven
+- Snake, Tiny Viper
+- Toad
+- Weasel
+
+## Natural Attacks (14)
+
+- Bite
+- Breath Weapon (Cone)
+- Breath Weapon (Ray)
+- Claw
+- Gore
+- Hoof
+- Incorporeal Touch
+- Slam
+- Slap
+- Sting
+- Tail
+- Talon
+- Tentacle
+- Wing
+
+## Powers (441)
+
+- Ablating
+
+- Adamant Grasp
+
+- Adapt Body
+- Affinity Field
+- Amplified Invisibility
+
+- Anchored Navigation
+- Animal Affinity
+- Apopsi
+- Assimilate
+- Astral Caravan
+- Astral Construct
+- Astral Construct I
+
+- Astral Construct II
+
+- Astral Construct III
+
+- Astral Construct IV
+
+- Astral Construct IX
+
+- Astral Construct V
+
+- Astral Construct VI
+
+- Astral Construct VII
+
+- Astral Construct VIII
+
+- Astral Projection
+
+- Astral Seed
+- Astral Steed
+
+- Astral Traveler
+- Attraction
+- Augury
+
+- Aura Alteration
+- Aura Sight
+- Aversion
+- Baleful Teleport
+- Banishment
+
+- Banishment, Psionic
+- Bend Reality
+- Bestow Power
+- Biocurrent
+
+- Biofeedback
+- Bite of the Tiger
+
+- Bite of the Wolf
+- Body Adjustment
+- Body Equilibrium
+- Body Purification
+- Bolt
+- Brain Lock
+- Breath of the Black Dragon
+- Breath of the Dragon
+
+- Brilliant Blast
+
+- Burning Ray
+
+- Burst
+- Call Cohort
+
+- Call to Mind
+- Call Weaponry
+- Catapsi
+- Catfall
+- Chameleon
+- Charm Monster
+
+- Charm Person
+
+- Charm, Psionic
+- Clairaudience/Clairvoyance
+
+- Clairtangency
+
+- Clairtangent Hand
+- Clairvoyant Sense
+- Claw of Energy
+- Claws of the Bear
+
+- Claws of the Beast
+- Claws of the Vampire
+- Cloud Mind
+- Cloud Mind, Mass
+- Co-Opt Concentration
+- Combat Precognition
+
+- Combat Prescience
+
+- Compression
+- Conceal Thoughts
+- Concealing Amorpha
+- Concealing Amorpha, Greater
+- Concussion
+
+- Concussion Blast
+- Cone of Sound
+
+- Confidante
+
+- Contingency
+
+- Contingency, Psionic
+- Control Air
+- Control Body
+- Control Flames
+- Control Light
+- Control Object
+- Control Shadow
+
+- Control Sound
+- Correspond
+- Create Food and Water
+
+- Create Sound
+- Crisis of Breath
+- Crisis of Life
+- Crystal Shard
+- Crystallize
+- Danger Sense
+- Darkvision
+
+- Darkvision, Psionic
+- Daze
+
+- Daze, Psionic
+- Death Urge
+- Deceleration
+- Decerebrate
+- Déjà Vu
+- Demoralize
+- Destiny Dissonance
+- Detect Hostile Intent
+- Detect Poison
+
+- Detect Psionics
+- Detect Remote Viewing
+- Detect Teleportation
+- Detect Thoughts
+
+- Detonation
+
+- Dimension Door
+
+- Dimension Door, Psionic
+- Dimension Slide
+- Dimension Swap
+- Dimensional Anchor
+
+- Dimensional Anchor, Psionic
+- Disable
+- Disintegrate
+
+- Disintegrate, Psionic
+- Dismiss Ectoplasm
+- Dismissal
+
+- Dismissal, Psionic
+- Dispel Psionics
+- Dispelling Buffer
+- Displacement
+
+- Dissipating Touch
+- Dissolution
+
+- Dissolving Touch
+- Dissolving Weapon
+- Distract
+- Divert Teleport
+- Divination
+
+- Divination, Psionic
+- Dominate, Psionic
+- Domination
+
+- Dream Travel
+- Duodimensional Claw
+- Duodimensional Hand
+
+- Ecto Protection
+- Ecto Puppet
+
+- Ectoplasmic Armor
+
+- Ectoplasmic Cocoon
+- Ectoplasmic Cocoon, Mass
+- Ectoplasmic Form
+- Ectoplasmic Shambler
+- Ego Whip
+- Elfsight
+- Empathic Feedback
+- Empathic Transfer
+- Empathic Transfer, Hostile
+- Empathy
+- Empty Mind
+- Emulate Power
+
+- Energy Adaptation
+- Energy Adaptation, Specified
+- Energy Ball
+- Energy Barrier
+
+- Energy Bolt
+- Energy Burst
+- Energy Cone
+- Energy Conversion
+- Energy Current
+- Energy Missile
+- Energy Push
+- Energy Ray
+- Energy Retort
+- Energy Stun
+- Energy Wall
+- Energy Wave
+- Entangling Ectoplasm
+- Eradicate Invisibility
+- Escape Detection
+- Ethereal Jaunt
+
+- Ethereal Jaunt, Psionic
+- Etherealness
+
+- Etherealness, Psionic
+- Evade Burst
+- Exhalation of the Black Dragon
+- Expanded Vision
+
+- Expansion
+- Fabricate
+
+- Fabricate, Greater Psionic
+- Fabricate, Psionic
+- False Sensory Input
+- Far Hand
+- Far Punch
+
+- Fatal Attraction
+
+- Fate Link
+- Fate of One
+- Feat Leech
+- Feather Fall
+
+- Feel Light
+
+- Feel Sound
+
+- Fiery Discorporation
+- Finger of Fire
+
+- Firefall
+
+- Fission
+- Flaming Shroud
+
+- Float
+- Fly
+
+- Fly, Psionic
+- Force Screen
+- Forced Mindlink
+
+- Foresight
+
+- Form of Doom
+- Freedom of Movement
+
+- Freedom of Movement, Psionic
+- Fuse Flesh
+- Fusion
+- Genesis
+- Glide
+
+- Graft Weapon
+- Grease
+
+- Grease, Psionic
+- Greater Biocurrent
+
+- Greater Concussion
+
+- Greater Domination
+
+- Greater Emulation
+
+- Grip of Iron
+- Hail of Crystals
+- Hammer
+- Hear Light
+
+- Hustle
+- Hypercognition
+- Id Insinuation
+- Identify
+
+- Identify, Psionic
+- Immovability
+- Improved Anchored Navigation
+
+- Improved Biofeedback
+
+- Improved Clairtangency
+
+- Improved Etherealness
+
+- Improved Fabricate
+
+- Improved Fly
+
+- Improved Telekinesis
+
+- Improved Vigor
+
+- Incarnate
+- Inertial Armor
+- Inertial Barrier
+- Inflict Pain
+- Inkling
+
+- Insanity
+- Intellect Fortress
+- Intrusive Sense Link
+
+- Invisibility
+
+- Invisibility Purge
+
+- Iron Body
+
+- Iron Body, Psionic
+- Keen Edge, Psionic
+- Knock
+
+- Knock, Psionic
+- Know Direction
+
+- Know Direction and Location
+- Know Location
+
+- Leech Field
+- Lesser Body Adjustment
+
+- Lesser Concussion
+
+- Lesser Domination
+
+- Lesser Metaphysical Weapon
+
+- Lesser Mindlink
+
+- Lesser Natural Armor
+
+- Levitate
+
+- Levitate, Psionic
+- Major Creation
+
+- Major Creation, Psionic
+- Mass Cocoon
+
+- Mass Concussion
+
+- Mass Domination
+
+- Mass Suggestion
+
+- Matter Agitation
+- Matter Manipulation
+- Matter Rearrangement
+
+- Mental Barrier
+- Mental Disruption
+- Metaconcert
+- Metafaculty
+- Metamorphosis
+- Metamorphosis, Greater
+- Metaphysical Claw
+- Metaphysical Weapon
+- Microcosm
+- Mind Blank
+
+- Mind Blank, Personal
+- Mind Blank, Psionic
+- Mind Probe
+- Mind Seed
+- Mind Store
+
+- Mind Switch
+- Mind Switch, True
+- Mind Thrust
+- Mind Trap
+- Mindlink
+- Mindlink, Thieving
+- Mindwipe
+- Minor Creation
+- Minor Creation
+
+- Missive
+- Missive, Mass
+- Modify Memory, Psionic
+- Moment of Prescience, Psionic
+- Monster Domination
+
+- My Light
+- Natural Armor
+
+- Negate Psionics
+
+- Nondetection
+
+- Null Psionics Field
+- Oak Body
+- Object Reading
+- Overland Flight, Psionic
+- Painful Strike
+- Painful Touch
+
+- Personality Parasite
+- Phase Door
+
+- Phase Door, Psionic
+- Plane Shift
+
+- Plane Shift, Psionic
+- Poison Sense
+
+- Polymorph Self
+
+- Power Leech
+- Power Resistance
+- Power Turning
+
+- Precognition
+- Precognition, Defensive
+- Precognition, Greater
+- Precognition, Offensive
+- Prescience, Offensive
+- Prevenom
+- Prevenom Weapon
+- Probability Travel
+
+- Prowess
+- Psionic Blast
+- Psionic Lion’s Charge
+- Psionic Lock
+- Psionic Repair Damage
+- Psionic Revivify
+- Psionic Scent
+- Psychic Chirurgery
+- Psychic Crush
+- Psychic Reformation
+- Psychic Vampire
+- Psychofeedback
+- Psycholuminescence
+
+- Quintessence
+- Read Thoughts
+- Reality Revision
+- Recall Agony
+- Recall Death
+- Recall Pain
+
+- Reddopsi
+- Rejuvenation
+
+- Remote View Trap
+- Remote Viewing
+- Restoration, Psionic
+- Restore Extremity
+- Retrieve
+- Schism
+- Second Chance
+- See Invisibility
+
+- See Sound
+
+- Sending
+
+- Sense Link
+- Sense Link, Forced
+- Sense Psionics
+
+- Sense Psychoportation
+
+- Sensitivity to Psychic Impressions
+- Sequester
+
+- Sequester, Psionic
+- Sever the Tie
+
+- Shadow Body
+- Shapechange
+
+- Share Pain
+- Share Pain, Forced
+- Shatter Mind Blank
+- Shield of Prudence
+
+- Skate
+- Solicit Psicrystal
+- Spider Climb
+
+- Steadfast Gaze
+
+- Steadfast Perception
+- Stomp
+- Strength of My Enemy
+- Sudden Minor Creation
+
+- Suggestion
+
+- Suggestion, Psionic
+- Suspend Life
+- Sustenance
+- Swarm of Crystals
+- Synesthete
+- Tailor Memory
+
+- Talons
+
+- Telekinesis
+
+- Telekinetic Force
+- Telekinetic Maneuver
+- Telekinetic Sphere
+
+- Telekinetic Sphere, Psionic
+- Telekinetic Thrust
+- Telempathic Projection
+- Teleport
+
+- Teleport Trigger
+- Teleport without Error
+
+- Teleport, Psionic
+- Teleport, Psionic Greater
+- Teleportation Circle, Psionic
+- Temporal Acceleration
+- Temporal Velocity
+
+- Thicken Skin
+- Thought Shield
+- Thrall
+
+- Time Hop
+- Time Hop, Mass
+- Time Regression
+- Timeless Body
+- Tongues, Psionic
+- Tornado Blast
+- Touchsight
+- Tower of Iron Will
+- Trace Teleport
+- Trinket
+
+- True Concussion
+
+- True Creation
+- True Domination
+
+- True Metabolism
+- True Seeing
+
+- True Seeing, Psionic
+- True Telekinesis
+
+- Truevenom
+- Truevenom Weapon
+- Ubiquitous Vision
+- Ultrablast
+- Undead Sense
+
+- Valor
+
+- Vampiric Blade
+- Verve
+
+- Vigilance
+
+- Vigor
+- Wall of Ectoplasm
+- Wall Walker
+- Weapon of Energy
+- Whitefire
+
+
+## Racial Abilities (41)
+
+- Alternate Form
+- Blood Drain
+- Burst
+- Children of the Night
+- Chitin (No Type)
+- Corrupting Gaze
+- Corrupting Touch
+- Daylight
+- Dodge
+- Dominate
+- Draining Touch
+- Elven Blood
+- Fear Aura
+- Fearless
+- Frighful Moan
+- Gaseous Form
+- Gnomish Alchemist
+- Goblinslayer
+- Greater Invisibility
+- Horrific Appearance
+- Illusionist
+- Innate Resistance
+- Keen Eye
+- Lich Touch Attack
+- Light Blindness
+- Light Sensitivity
+- Malevolence
+- Nondetection
+- Outburst
+- Paralyzing Touch
+- Pass without a trace
+- Scent
+- Small Hunter
+- Small Hunter (Forest Gnome)
+- Smite Evil
+- Smite Good
+- Stability
+- Stand Against Giants
+- Stonecunning
+- Svirfneblin Illusionist
+- Telekinesis
+
+## Racial Hd (15)
+
+- Aberration*
+- Animal*
+- Construct*
+- Dragon*
+- Elemental*
+- Fey*
+- Giant*
+- Humanoid*
+- Magical Beast*
+- Monstrous Humanoid*
+- Ooze*
+- Outsider*
+- Plant*
+- Undead*
+- Vermin*
+
+## Racialfeatures (32)
+
+- Aasimar
+- Dromite
+- Duergar
+- Dwarf, Deep
+- Dwarf, Hill
+- Dwarf, Mountain
+- Elan
+- Elf, Aquatic
+- Elf, Drow
+- Elf, Grey
+- Elf, High
+- Elf, Wild
+- Elf, Wood
+- Gnome, Forest
+- Gnome, Rock
+- Gnome, Svirfneblin
+- Goblin
+- Goblin, Blue
+- Half-Elf
+- Half-Giant
+- Half-Orc
+- Halfling, Deep
+- Halfling, Lightfoot
+- Halfling, Tallfellow
+- Human
+- Kobold
+- Maenad
+- Merfolk
+- Orc
+- Sprite, Pixie
+- Tiefling
+- Xeph
+
+## Roll Tables (47)
+
+- Aberration - Epic CR (21+)
+- Aberration - High CR (14-20)
+- Aberration - Low CR (0-7)
+- Aberration - Medium CR (8-14)
+- Animal - Low CR (0-7)
+- Animal - Medium CR (8-14)
+- Bardic Knowledge
+- Construct - Epic CR (21+)
+- Construct - High CR (14-20)
+- Construct - Low CR (0-7)
+- Construct - Medium CR (8-14)
+- Dragon - Epic CR (21+)
+- Dragon - High CR (14-20)
+- Dragon - Low CR (0-7)
+- Dragon - Medium CR (8-14)
+- Elemental - Epic CR (21+)
+- Elemental - Low CR (0-7)
+- Elemental - Medium CR (8-14)
+- Fey - Epic CR (21+)
+- Fey - Low CR (0-7)
+- Giant - Low CR (0-7)
+- Giant - Medium CR (8-14)
+- Humanoid - Low CR (0-7)
+- Humanoid - Medium CR (8-14)
+- MagicalBeast - Epic CR (21+)
+- MagicalBeast - High CR (14-20)
+- MagicalBeast - Low CR (0-7)
+- MagicalBeast - Medium CR (8-14)
+- MonstrousHumanoid - Epic CR (21+)
+- MonstrousHumanoid - Low CR (0-7)
+- Ooze - Epic CR (21+)
+- Ooze - Low CR (0-7)
+- Ooze - Medium CR (8-14)
+- Outsider - Epic CR (21+)
+- Outsider - High CR (14-20)
+- Outsider - Low CR (0-7)
+- Outsider - Medium CR (8-14)
+- Plant - Epic CR (21+)
+- Plant - Low CR (0-7)
+- Plant - Medium CR (8-14)
+- Undead - Epic CR (21+)
+- Undead - High CR (14-20)
+- Undead - Low CR (0-7)
+- Undead - Medium CR (8-14)
+- Vermin - Epic CR (21+)
+- Vermin - Low CR (0-7)
+- Vermin - Medium CR (8-14)
+
+## Spell Like Abilities (62)
+
+- Aid
+- Aversion
+- Blasphemy
+- Bless
+- Blindness/Deafness
+- Blur
+- Body Adjustment
+- Brain Lock
+- Charm Monster, Mass
+- Confusion, Lesser
+- Contagion
+- Cure Serious Wounds
+- Dancing Lights
+- Dancing Lights
+- Darkness
+- Darkness
+- Daylight
+- Desecrate
+- Destruction
+- Detect Chaos
+- Detect Evil
+- Detect Evil
+- Detect Good
+- Detect Law
+- Detect Thoughts
+- Disguise Self
+- Dispel Evil
+- Dispel Magic
+- Dominate, Psionic
+- Empty Mind
+- Energy Current
+- Energy Ray
+- Entangle
+- Faerie Fire
+- Fission
+- Force Screen
+- Ghost Sound
+- Hallow
+- Holy Aura
+- Holy Smite
+- Holy Word
+- Horrid Wilting
+- Intellect Fortress
+- Mind Thrust
+- Neutralize Poison
+- Permanent Image
+- Poison
+- Precognition, Defensive
+- Prestidigitation
+- Protection from Evil
+- Psionic Blast
+- Psychic Crush
+- Remove Disease
+- Resurrection
+- Speak With Animals
+- Summon Monster IX
+- Teleport, Psionic
+- Tower of Iron Will
+- Ultrablast
+- Unhallow
+- Unholy Aura
+- Unholy Blight
+
+## Spell School Domain (43)
+
+- Abjuration Spell School
+- Air Domain
+- Animal Domain
+- Artifice Domain
+- Chaos Domain
+- Charm Domain
+- Community Domain
+- Conjuration Spell School
+- Creation Domain
+- Darkness Domain
+- Death Domain
+- Destruction Domain
+- Divination Spell School
+- Earth Domain
+- Enchantment Spell School
+- Evil Domain
+- Evocation Spell School
+- Fire Domain
+- Glory Domain
+- Good Domain
+- Healing Domain
+- Illusion Spell School
+- Knowledge Domain
+- Law Domain
+- Liberation Domain
+- Luck Domain
+- Madness Domain
+- Magic Domain
+- Necromancy Spell School
+- Nobility Domain
+- Plant Domain
+- Protection Domain
+- Repose Domain
+- Rune Domain
+- Scalykind Domain
+- Strength Domain
+- Sun Domain
+- Transmutation Spell School
+- Travel Domain
+- Trickery Domain
+- War Domain
+- Water Domain
+- Weather Domain
+
+## Spells (673)
+
+- Acid Arrow
+- Acid Fog
+- Acid Splash
+- Aid
+- Air Walk
+- Alarm
+- Align Weapon
+- Alter Self
+- Analyze Dweomer
+- Animal Growth
+- Animal Messenger
+- Animal Shapes
+- Animal Trance
+- Animate Dead
+- Animate Objects
+- Animate Plants
+- Animate Rope
+- Animus Blast
+- Animus Blizzard
+- Antilife Shell
+- Antimagic Field
+- Antipathy
+- Antiplant Shell
+- Arcane Eye
+- Arcane Lock
+- Arcane Mark
+- Arcane Sight
+- Arcane Sight, Greater
+- Armor Of Darkness
+- Astral Projection
+- Atonement
+- Augury
+- Awaken
+- Baleful Polymorph
+- Baleful Transportation
+- Bane
+- Banishment
+- Barkskin
+- Bear's Endurance
+- Bear's Endurance, Mass
+- Bestow Curse
+- Binding
+- Black Tentacles
+- Blade Barrier
+- Blasphemy
+- Bless
+- Bless Water
+- Bless Weapon
+- Blight
+- Blindness/Deafness
+- Blink
+- Blur
+- Bolt Of Glory
+- Bolts of Bedevilment
+- Brain Spider
+- Break Enchantment
+- Bull's Strength
+- Bull's Strength, Mass
+- Burning Hands
+- Call Lightning
+- Call Lightning Storm
+- Calm Animals
+- Calm Emotions
+- Cat's Grace
+- Cat's Grace, Mass
+- Cause Fear
+- Chain Lightning
+- Changestaff
+- Chaos Hammer
+- Charm Animal
+- Charm Monster
+- Charm Monster, Mass
+- Charm Person
+- Chill Metal
+- Chill Touch
+- Circle of Death
+- Clairaudience/Clairvoyance
+- Clenched Fist
+- Cloak of Chaos
+- Clone
+- Cloudkill
+- Color Spray
+- Command
+- Command Plants
+- Command Undead
+- Command, Greater
+- Commune
+- Commune with Nature
+- Comprehend Languages
+- Cone of Cold
+- Confusion
+- Confusion, Lesser
+- Consecrate
+- Contact Other Plane
+- Contagion
+- Contingency
+- Contingent Resurrection
+- Continual Flame
+- Control Plants
+- Control Undead
+- Control Water
+- Control Weather
+- Control Winds
+- Corrupt Weapon
+- Create Food and Water
+- Create Greater Undead
+- Create Living Vault (Ritual)
+- Create Undead
+- Create Water
+- Creeping Doom
+- Crown Of Glory
+- Crown of Vermin
+- Crushing Despair
+- Crushing Hand
+- Cure Critical Wounds
+- Cure Critical Wounds, Mass
+- Cure Light Wounds
+- Cure Light Wounds, Mass
+- Cure Minor Wounds
+- Cure Moderate Wounds
+- Cure Moderate Wounds, Mass
+- Cure Serious Wounds
+- Cure Serious Wounds, Mass
+- Curse Water
+- Damnation
+- Dancing Lights
+- Darkness
+- Darkvision
+- Daylight
+- Daze
+- Daze Monster
+- Death Knell
+- Death Ward
+- Deathwatch
+- Deep Slumber
+- Deeper Darkness
+- Delay Poison
+- Delayed Blast Fireball
+- Demand
+- Demise Unseen
+- Desecrate
+- Destruction
+- Detect Animals or Plants
+- Detect Chaos
+- Detect Evil
+- Detect Good
+- Detect Law
+- Detect Magic
+- Detect Poison
+- Detect Scrying
+- Detect Secret Doors
+- Detect Snares and Pits
+- Detect Thoughts
+- Detect Undead
+- Dictum
+- Dimension Door
+- Dimensional Anchor
+- Dimensional Lock
+- Diminish Plants
+- Dire Winter
+- Discern Lies
+- Discern Location
+- Disguise Self
+- Disintegrate
+- Dismissal
+- Dispel Chaos
+- Dispel Evil
+- Dispel Good
+- Dispel Law
+- Dispel Magic
+- Dispel Magic, Greater
+- Displacement
+- Disrupt Undead
+- Disrupting Weapon
+- Divination
+- Divine Favor
+- Divine Power
+- Dominate Animal
+- Dominate Monster
+- Dominate Person
+- Doom
+- Dragon Knight (Ritual)
+- Dragon Strike (Ritual)
+- Dream
+- Dreamscape
+- Dweomer of Transference
+- Eagle's Splendor
+- Eagle's Splendor, Mass
+- Earthquake
+- Eclipse
+- Eidolon
+- Elemental Swarm
+- Endure Elements
+- Energy Drain
+- Enervation
+- Enlarge Person
+- Enlarge Person, Mass
+- Enslave (Ritual)
+- Entangle
+- Enthrall
+- Entropic Shield
+- Epic Counterspell
+- Epic Mage Armor
+- Epic Repulsion
+- Epic Spell Reflection
+- Erase
+- Eternal Freedom
+- Ethereal Jaunt
+- Etherealness
+- Expeditious Retreat
+- Explosive Runes
+- Eyebite
+- Fabricate
+- Faerie Fire
+- False Life
+- False Vision
+- Fear
+- Feather Fall
+- Feeblemind
+- Find the Path
+- Find Traps
+- Finger of Death
+- Fire Seeds
+- Fire Shield
+- Fire Storm
+- Fire Trap
+- Fireball
+- Flame Arrow
+- Flame Blade
+- Flame Strike
+- Flaming Sphere
+- Flare
+- Flesh to Stone
+- Floating Disk
+- Fly
+- Fog Cloud
+- Forbiddance
+- Forcecage
+- Forceful Hand
+- Foresight
+- Fox's Cunning
+- Fox's Cunning, Mass
+- Freedom
+- Freedom of Movement
+- Freezing Sphere
+- Gaseous Form
+- Gate
+- GATHERING OF MAGGOTS
+- Geas, Lesser
+- Geas/Quest
+- Genesis
+- Gentle Repose
+- Ghost Sound
+- Ghoul Touch
+- Giant Vermin
+- Glibness
+- Glitterdust
+- Globe of Invulnerability
+- Globe of Invulnerability, Lesser
+- Glossolalia
+- Glyph of Warding
+- Glyph of Warding, Greater
+- Good Hope
+- Goodberry
+- Grasping Hand
+- Grease
+- Greater Ruin
+- Greater Spell Resistance
+- Guards and Wards
+- Guidance
+- Gust of Wind
+- Hallow
+- Hallucinatory Terrain
+- Halt Undead
+- Hardening
+- Harm
+- Haste
+- Heal
+- Heal Mount
+- Heal, Mass
+- Heat Metal
+- Hellball
+- Helping Hand
+- Heroes' Feast
+- Heroism
+- Heroism, Greater
+- Hide from Animals
+- Hide from Undead
+- Hideous Laughter
+- Hold Animal
+- Hold Monster
+- Hold Monster, Mass
+- Hold Person
+- Hold Person, Mass
+- Hold Portal
+- Holy Aura
+- Holy Smite
+- Holy Sword
+- Holy Word
+- Horrid Wilting
+- Hypnotic Pattern
+- Hypnotism
+- Ice Storm
+- Identify
+- Illusory Script
+- Illusory Wall
+- Imbue with Spell Ability
+- Implosion
+- Imprisonment
+- Incendiary Cloud
+- Inflict Critical Wounds
+- Inflict Critical Wounds, Mass
+- Inflict Light Wounds
+- Inflict Light Wounds, Mass
+- Inflict Minor Wounds
+- Inflict Moderate Wounds
+- Inflict Moderate Wounds, Mass
+- Inflict Serious Wounds
+- Inflict Serious Wounds, Mass
+- Insanity
+- Insect Plague
+- Instant Summons
+- Interposing Hand
+- Invisibility
+- Invisibility Purge
+- Invisibility Sphere
+- Invisibility, Greater
+- Invisibility, Mass
+- Iron Body
+- Ironwood
+- Irresistible Dance
+- Jump
+- Keen Edge
+- Kinetic Control
+- Knock
+- Know Direction
+- Legend Lore
+- Let Go of Me
+- Levitate
+- Light
+- Lightning Bolt
+- Limited Wish
+- Liveoak
+- Living Lightning
+- Locate Creature
+- Locate Object
+- Longstrider
+- Lord of Nightmares
+- Lullaby
+- Maddening Scream
+- Mage Armor
+- Mage Hand
+- Mage's Disjunction
+- Mage's Faithful Hound
+- Mage's Lucubration
+- Mage's Magnificent Mansion
+- Mage's Private Sanctum
+- Mage's Sword
+- Magic Aura
+- Magic Circle against Chaos
+- Magic Circle against Evil
+- Magic Circle against Good
+- Magic Circle against Law
+- Magic Fang
+- Magic Fang, Greater
+- Magic Jar
+- Magic Missile
+- Magic Mouth
+- Magic Stone
+- Magic Vestment
+- Magic Weapon
+- Magic Weapon, Greater
+- Major Creation
+- Major Image
+- Make Whole
+- Mark of Justice
+- Mass Frog
+- Maze
+- Meld into Stone
+- Mending
+- Mental Pinnacle
+- Message
+- Meteor Swarm
+- Mind Blank
+- Mind Fog
+- Minor Creation
+- Minor Image
+- Miracle
+- Mirage Arcana
+- Mirror Image
+- Misdirection
+- Mislead
+- Mnemonic Enhancer
+- Modify Memory
+- Moment of Prescience
+- Momento Mori
+- Mount
+- Move Earth
+- Mummy Dust
+- Nailed to the Sky
+- Neutralize Poison
+- Nightmare
+- Nondetection
+- Obscure Object
+- Obscuring Mist
+- Open/Close
+- Order’s Wrath
+- Origin of Species: Achaierai
+- Overland Flight
+- Owl's Wisdom
+- Owl's Wisdom, Mass
+- Pass without Trace
+- Passwall
+- Peripety
+- Permanency
+- Permanent Image
+- Persistent Image
+- Pestilence
+- Phantasmal Killer
+- Phantom Steed
+- Phantom Trap
+- Phase Door
+- Planar Ally
+- Planar Ally, Greater
+- Planar Ally, Lesser
+- Planar Binding
+- Planar Binding, Greater
+- Planar Binding, Lesser
+- Plane Shift
+- Plant Growth
+- Poison
+- Polar Ray
+- Polymorph
+- Polymorph Any Object
+- Power Word Blind
+- Power Word Kill
+- Power Word Stun
+- Prayer
+- Prestidigitation
+- Prismatic Sphere
+- Prismatic Spray
+- Prismatic Wall
+- Probe Thoughts
+- Produce Flame
+- Programmed Image
+- Project Image
+- Protection from Arrows
+- Protection from Chaos
+- Protection from Energy
+- Protection from Evil
+- Protection from Good
+- Protection from Law
+- Protection from Spells
+- Prying Eyes
+- Prying Eyes, Greater
+- Psychic Turmoil
+- Psychic Turmoil, Greater
+- Purify Food and Drink
+- Pyrotechnics
+- Quench
+- Rage
+- Rain of Fire
+- Rainbow Pattern
+- Raise Dead
+- Raise Island
+- Ray of Enfeeblement
+- Ray of Exhaustion
+- Ray of Frost
+- Read Magic
+- Reduce Animal
+- Reduce Person
+- Reduce Person, Mass
+- Refuge
+- Regenerate
+- Reincarnate
+- Remove Blindness/Deafness
+- Remove Curse
+- Remove Disease
+- Remove Fear
+- Remove Paralysis
+- Repel Metal or Stone
+- Repel Vermin
+- Repel Wood
+- Repulsion
+- Resilient Sphere
+- Resist Energy
+- Resistance
+- Restoration
+- Restoration, Greater
+- Restoration, Lesser
+- Resurrection
+- Reverse Gravity
+- Righteous Might
+- Rope Trick
+- Ruin
+- Rusting Grasp
+- Safe Time
+- Sanctuary
+- Scare
+- Scintillating Pattern
+- Scorching Ray
+- Screen
+- Scrying
+- Scrying, Greater
+- Sculpt Sound
+- Searing Light
+- Secret Chest
+- Secret Page
+- Secure Shelter
+- See Invisibility
+- Seeming
+- Sending
+- Sepia Snake Sigil
+- Sequester
+- Shades
+- Shadow Conjuration
+- Shadow Conjuration, Greater
+- Shadow Evocation
+- Shadow Evocation, Greater
+- Shadow Walk
+- Shambler
+- Shapechange
+- Shatter
+- Shield
+- Shield of Faith
+- Shield of Law
+- Shield Other
+- Shillelagh
+- Shocking Grasp
+- Shout
+- Shout, Greater
+- Shrink Item
+- Silence
+- Silent Image
+- Simulacrum
+- Slay Living
+- Sleep
+- Sleet Storm
+- Slow
+- Snare
+- Soften Earth and Stone
+- Solid Fog
+- Song of Discord
+- Soul Bind
+- Soul Dominion
+- Soul Scry
+- Sound Burst
+- Speak with Animals
+- Speak with Dead
+- Speak with Plants
+- Spectral Hand
+- Spell Immunity
+- Spell Immunity, Greater
+- Spell Resistance
+- Spell Turning
+- Spell Worm
+- Spellstaff
+- Spider Climb
+- Spike Growth
+- Spike Stones
+- Spiritual Weapon
+- Statue
+- Status
+- Status, Greater
+- Stinking Cloud
+- Stone Shape
+- Stone Tell
+- Stone to Flesh
+- Stoneskin
+- Storm of Vengeance
+- Suggestion
+- Suggestion, Mass
+- Summon Behemoth
+- Summon Instrument
+- Summon Monster I
+- Summon Monster II
+- Summon Monster III
+- Summon Monster IV
+- Summon Monster IX
+- Summon Monster V
+- Summon Monster VI
+- Summon Monster VII
+- Summon Monster VIII
+- Summon Nature's Ally I
+- Summon Nature's Ally II
+- Summon Nature's Ally III
+- Summon Nature's Ally IV
+- Summon Nature's Ally IX
+- Summon Nature's Ally V
+- Summon Nature's Ally VI
+- Summon Nature's Ally VII
+- Summon Nature's Ally VIII
+- Summon Swarm
+- Sunbeam
+- Sunburst
+- Superb Dispelling
+- Surelife
+- Symbol of Death
+- Symbol of Fear
+- Symbol of Insanity
+- Symbol of Pain
+- Symbol of Persuasion
+- Symbol of Sleep
+- Symbol of Stunning
+- Symbol of Weakness
+- Sympathetic Vibration
+- Sympathy
+- Telekinesis
+- Telekinetic Sphere
+- Telepathic Bond
+- Telepathic Bond, Lesser
+- Teleport
+- Teleport Object
+- Teleport, Greater
+- Teleportation Circle
+- Temporal Stasis
+- Time Duplicate
+- Time Stop
+- Tiny Hut
+- Tongues
+- Touch of Fatigue
+- Touch of Idiocy
+- Touch Of Madness
+- Transformation
+- Transmute Metal to Wood
+- Transmute Mud to Rock
+- Transmute Rock to Mud
+- Transport via Plants
+- Trap the Soul
+- Tree Shape
+- Tree Stride
+- True Creation
+- True Resurrection
+- True Seeing
+- True Strike
+- Undeath to Death
+- Undetectable Alignment
+- Unhallow
+- Unholy Aura
+- Unholy Blight
+- Unseen Servant
+- Vampiric Touch
+- Veil
+- Vengeful Gaze of God
+- Ventriloquism
+- Verdigris
+- Verdigris Tsunami
+- Virtue
+- Vision
+- Wail of the Banshee
+- Wall of Fire
+- Wall of Force
+- Wall of Ice
+- Wall of Iron
+- Wall of Stone
+- Wall of Thorns
+- Warp Wood
+- Water Breathing
+- Water Walk
+- Waves of Exhaustion
+- Waves of Fatigue
+- Web
+- Weird
+- Whirlwind
+- Whispering Wind
+- Wind Walk
+- Wind Wall
+- Wish
+- Wood Shape
+- Word of Chaos
+- Word of Recall
+- Zone of Silence
+- Zone of Truth
+
+## Srd Rules (4)
+
+- Arcane spells and armor
+- Familiars
+- Psionic Disciplines
+- Turn or Rebuke Undead
+
+## Templates (11)
+
+- Celestial Creature
+- Fiendish Creature
+- Ghost
+- Half-Celestial
+- Half-Dragon
+- Half-Fiend
+- Lich
+- Phrenic
+- Skeleton
+- Vampire
+- Zombie
+
+## Traps (1)
+
+- Camouflaged Pit Trap
+
+## Weapons And Ammo (85)
+
+- Armor Spikes
+- Arrow
+- Bastard Sword
+- Battleaxe
+- Bayonet
+- Blowgun
+- Blowgun Darts (10)
+- Bolas
+- Club
+- Composite Longbow (+1)
+- Composite Longbow (+2)
+- Composite Longbow (+3)
+- Composite Longbow (+4)
+- Composite Shortbow (+1)
+- Composite Shortbow (+2)
+- Composite Shortbow (+3)
+- Composite Shortbow (+4)
+- Crossbow Bolt
+- Dagger
+- Dart
+- Dire Flail
+- Dwarven Urgrosh
+- Dwarven Waraxe
+- Falchion
+- Flail
+- Gauntlet
+- Glaive
+- Gnome Hooked Hammer
+- Grappling Hook
+- Greataxe
+- Greatclub
+- Greatsword
+- Guisarme
+- Halberd
+- Hand Crossbow
+- Handaxe
+- Heavy Crossbow
+- Heavy Flail
+- Heavy Mace
+- Heavy Pick
+- Heavy Repeating Crossbow
+- Javelin
+- Kama
+- Kukri
+- Lance
+- Light Crossbow
+- Light Hammer
+- Light Mace
+- Light Pick
+- Light Repeating Crossbow
+- Longbow
+- Longspear
+- Longsword
+- Morningstar
+- Net
+- Nunchaku
+- Orc Double Axe
+- Punching Dagger
+- Quarterstaff
+- Ranseur
+- Rapier
+- Repeating Crossbow Bolt
+- Sai
+- Sap
+- Scimitar
+- Scythe
+- Shield Spikes (Heavy)
+- Shield Spikes (Light)
+- Shortbow
+- Shortspear
+- Shortsword
+- Shuriken
+- Siangham
+- Sickle
+- Sling
+- Sling Bullet
+- Spear
+- Spiked Chain
+- Spiked Gauntlet
+- Throwing Axe
+- Trident
+- Two-Bladed Sword
+- Unarmed Strike
+- Warhammer
+- Whip
