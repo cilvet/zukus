@@ -1,4 +1,5 @@
 import type { StandardEntity } from '../entities/types/base';
+import { generateUniqueId } from '../../utils/generateId';
 
 /**
  * Sistema de Inventario
@@ -149,7 +150,7 @@ export function createItemInstance(params: {
   entity?: ResolvedInventoryEntity;
 }): InventoryItemInstance {
   return {
-    instanceId: crypto.randomUUID(),
+    instanceId: generateUniqueId(),
     itemId: params.itemId,
     entityType: params.entityType,
     quantity: params.quantity ?? 1,

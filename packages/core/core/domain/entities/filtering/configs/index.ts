@@ -15,3 +15,14 @@ export {
   spellResistanceFilter,
   SPELLCASTING_CLASS_OPTIONS,
 } from './spellFilterConfig'
+
+export {
+  itemFilterConfig,
+  createItemFilterConfig,
+  itemTypeFilter,
+  itemSlotFilter,
+  itemTagsFilter,
+  ITEM_ENTITY_TYPES,
+  ITEM_TYPE_LABELS,
+  type ItemEntityType,
+} from './itemFilterConfig'

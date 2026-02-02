@@ -166,9 +166,34 @@ export type FilterGroupDef = FilterDefBase & {
 }
 
 /**
+ * Entity Type Filter
+ *
+ * Special filter for selecting which entity types to show.
+ * Used for multi-type browsers (e.g., inventory items: weapon, armor, item, etc.)
+ */
+export type EntityTypeFilterDef = FilterDefBase & {
+  kind: 'entityType'
+  /**
+   * Entity types that this filter can select.
+   * Example: ['weapon', 'armor', 'shield', 'item']
+   */
+  entityTypes: string[]
+  /**
+   * Allow selecting multiple types (OR logic).
+   * @default true
+   */
+  multiSelect?: boolean
+  /**
+   * Labels for each entity type.
+   * If not provided, the entity type ID is used.
+   */
+  typeLabels?: Record<string, string>
+}
+
+/**
  * Union of all filter definition types
  */
-export type FilterDef = FacetFilterDef | RelationFilterDef | FilterGroupDef
+export type FilterDef = FacetFilterDef | RelationFilterDef | FilterGroupDef | EntityTypeFilterDef
 
 // ============================================================================
 // Entity Filter Configuration
@@ -226,6 +251,10 @@ export function isRelationFilter(filter: FilterDef): filter is RelationFilterDef
 
 export function isFilterGroup(filter: FilterDef): filter is FilterGroupDef {
   return filter.kind === 'group'
+}
+
+export function isEntityTypeFilter(filter: FilterDef): filter is EntityTypeFilterDef {
+  return filter.kind === 'entityType'
 }
 
 // ============================================================================
@@ -382,6 +411,8 @@ export function getAllFilterIds(config: EntityFilterConfig): string[] {
     } else if (isRelationFilter(filter)) {
       ids.push(filter.primary.id)
       ids.push(filter.secondary.id)
+    } else if (isEntityTypeFilter(filter)) {
+      ids.push(filter.id)
     } else {
       ids.push(filter.id)
     }

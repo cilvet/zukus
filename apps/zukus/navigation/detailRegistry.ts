@@ -34,6 +34,8 @@ export type DetailType =
   | 'equipment'
   | 'item'
   | 'inventoryItem'
+  | 'itemBrowser'
+  | 'currencyEdit'
   | 'hitPoints'
   | 'attack'
   | 'levelDetail'
@@ -109,6 +111,12 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   inventoryItem: {
     getTitle: (id) => id, // El nombre real se pasa como customName
+  },
+  itemBrowser: {
+    getTitle: () => 'Buscar Items',
+  },
+  currencyEdit: {
+    getTitle: () => 'Monedas',
   },
   attack: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

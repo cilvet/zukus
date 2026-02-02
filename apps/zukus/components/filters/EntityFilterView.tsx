@@ -11,11 +11,13 @@ import type {
   FilterValue,
   RelationFilterDef,
   FacetFilterDef,
+  EntityTypeFilterDef,
 } from '@zukus/core'
 import {
   isFacetFilter,
   isRelationFilter,
   isFilterGroup,
+  isEntityTypeFilter,
   getRelationSecondaryOptions,
 } from '@zukus/core'
 
@@ -300,7 +302,85 @@ function FacetFilterControl({
   )
 }
 
+function EntityTypeFilterControl({
+  filter,
+  filterState,
+  onFilterChange,
+}: {
+  filter: EntityTypeFilterDef
+  filterState: FilterState
+  onFilterChange: (filterId: string, value: FilterValue) => void
+}) {
+  const { themeColors, themeInfo } = useTheme()
+  const backgroundColor = themeColors.uiBackgroundColor
+  const borderColor = themeColors.borderColor
+  const accentColor = themeInfo.colors.accent
+
+  const currentValue = filterState[filter.id]
+  const selectedTypes = Array.isArray(currentValue) ? currentValue : []
+
+  const handleToggle = (entityType: string) => {
+    if (filter.multiSelect !== false) {
+      // Multi-select mode
+      const newValues = selectedTypes.includes(entityType)
+        ? selectedTypes.filter((v) => v !== entityType)
+        : [...selectedTypes, entityType]
+      onFilterChange(filter.id, newValues.length > 0 ? newValues : null)
+    } else {
+      // Single-select mode
+      const newValue = selectedTypes.includes(entityType) ? null : entityType
+      onFilterChange(filter.id, newValue)
+    }
+  }
+
+  return (
+    <YStack gap={8}>
+      <Text fontSize={14} fontWeight="600" color="$placeholderColor">
+        {filter.label.toUpperCase()}
+      </Text>
+      <XStack gap={8} flexWrap="wrap">
+        {filter.entityTypes.map((entityType) => {
+          const isSelected = selectedTypes.includes(entityType)
+          const label = filter.typeLabels?.[entityType] ?? entityType
+          return (
+            <Pressable key={entityType} onPress={() => handleToggle(entityType)}>
+              {({ pressed }) => (
+                <XStack
+                  backgroundColor={isSelected ? accentColor : backgroundColor}
+                  paddingHorizontal={12}
+                  paddingVertical={8}
+                  borderRadius={8}
+                  borderWidth={1}
+                  borderColor={isSelected ? accentColor : borderColor}
+                  alignItems="center"
+                  gap={6}
+                  opacity={pressed ? 0.7 : 1}
+                >
+                  {isSelected && <FontAwesome6 name="check" size={12} color="#FFFFFF" />}
+                  <Text fontSize={13} color={isSelected ? '#FFFFFF' : '$color'}>
+                    {label}
+                  </Text>
+                </XStack>
+              )}
+            </Pressable>
+          )
+        })}
+      </XStack>
+    </YStack>
+  )
+}
+
 function FilterControl({ filter, entities, filterState, onFilterChange }: FilterControlProps) {
+  if (isEntityTypeFilter(filter)) {
+    return (
+      <EntityTypeFilterControl
+        filter={filter}
+        filterState={filterState}
+        onFilterChange={onFilterChange}
+      />
+    )
+  }
+
   if (isRelationFilter(filter)) {
     return (
       <RelationFilterControl
