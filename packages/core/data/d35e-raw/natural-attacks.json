@@ -1,0 +1,1429 @@
+[
+  {
+    "name": "Tail",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature attacks with its tail, dealing bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,6,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "",
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/tail.png",
+    "id": "1qF1wXgc9GI5aES6"
+  },
+  {
+    "name": "Bite",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature attacks with its mouth, dealing piercing, slashing, and bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,6,@size,@critMult)",
+            "damage-piercing-or-bludgeoning"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "",
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/bite.png",
+    "id": "3XM7tMSwKivgLxwr"
+  },
+  {
+    "name": "Claw",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature rips with a sharp appendage, dealing piercing and slashing damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,4,@size,@critMult)",
+            "damage-piercing-or-slashing"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/claw.png",
+    "id": "7JC5XSgoJUhYiIvW"
+  },
+  {
+    "name": "Hoof",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature attacks with its hoof, dealing bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,6,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "",
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/hoof.png",
+    "id": "BFGuVVshshDGbTGR"
+  },
+  {
+    "name": "Wing",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature attacks with its wings, dealing bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,6,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "",
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/wing.png",
+    "id": "OuEFxssyV6VeICDG"
+  },
+  {
+    "name": "Breath Weapon (Cone)",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A creature attacking with a breath weapon is actually expelling something from its mouth (rather than conjuring it by means of a spell or some other magical effect). A breath weapon attack usually deals damage and is often based on some type of energy. Such breath weapons allow a Reflex save for half damage (DC 10 + 1/2 breathing creature's racial HD + breathing creature's Con modifier; the exact DC is given in the creature's descriptive text). Some breath weapons allow a Fortitude save or a Will save instead of a Reflex save. Most creatures with breath weapons are limited to a number of uses per day or by a minimum length of time that must pass between uses. Such creatures are usually smart enough to save their breath weapon until they really need it. Using a breath weapon is typically a standard action. No attack roll is necessary. The breath simply fills its stated area. Any character caught in the area must make the appropriate saving throw or suffer the breath weapon's full effect. In many cases, a character who succeeds on his saving throw still takes half damage or some other reduced effect. Breath weapons are supernatural abilities except where noted. Creatures are immune to their own breath weapons unless otherwise noted. Creatures unable to breathe can still use breath weapons. (The term is something of a misnomer.)",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": "ft"
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "cone",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "save",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "",
+            "energy-fire"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": "reflexhalf"
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "misc",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/breath.png",
+    "id": "UuNboOvQPiJaUs6p"
+  },
+  {
+    "name": "Slap",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature batters opponents with an appendage, dealing bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeNaturalRoll(1,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/slap.png",
+    "id": "WmEzIsvcF6O0XvWe"
+  },
+  {
+    "name": "Incorporeal Touch",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "attack"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": "close"
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "",
+            "",
+            "energy-force"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "dex",
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": true
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/touch.png",
+    "id": "a3NKGd6ME7o3dkdj"
+  },
+  {
+    "name": "Slam",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature batters opponents with an appendage, dealing bludgeoning damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,4,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/slam.png",
+    "id": "b75HHzmF4RmjqpNW"
+  },
+  {
+    "name": "Tentacle",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,4,@size,@critMult)",
+            "damage-bludg"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/tentacle.png",
+    "id": "lka0RJBYmprlmAIv"
+  },
+  {
+    "name": "Talon",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature rips with a sharp appendage, dealing piercing and slashing damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,4,@size,@critMult)",
+            "damage-piercing-or-slashing"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/talon.png",
+    "id": "qo7gYHJJwXpTsKUl"
+  },
+  {
+    "name": "Breath Weapon (Ray)",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A creature attacking with a breath weapon is actually expelling something from its mouth (rather than conjuring it by means of a spell or some other magical effect). A breath weapon attack usually deals damage and is often based on some type of energy. Such breath weapons allow a Reflex save for half damage (DC 10 + 1/2 breathing creature's racial HD + breathing creature's Con modifier; the exact DC is given in the creature's descriptive text). Some breath weapons allow a Fortitude save or a Will save instead of a Reflex save. Most creatures with breath weapons are limited to a number of uses per day or by a minimum length of time that must pass between uses. Such creatures are usually smart enough to save their breath weapon until they really need it. Using a breath weapon is typically a standard action. No attack roll is necessary. The breath simply fills its stated area. Any character caught in the area must make the appropriate saving throw or suffer the breath weapon's full effect. In many cases, a character who succeeds on his saving throw still takes half damage or some other reduced effect. Breath weapons are supernatural abilities except where noted. Creatures are immune to their own breath weapons unless otherwise noted. Creatures unable to breathe can still use breath weapons. (The term is something of a misnomer.)",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": "ft"
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "ray",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "save",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "",
+            "energy-force"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "damage": "",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": "reflexhalf"
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "misc",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/breath-ray.png",
+    "id": "sEsYGcRBOqcGE0y3"
+  },
+  {
+    "name": "Sting",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature stabs with a stinger, dealing piercing damage. Sting attacks usually deal damage from poison in addition to hit point damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,4,@size,@critMult)",
+            "damage-piercing"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/sting.png",
+    "id": "sIvwJ6DyqIxV3pXg"
+  },
+  {
+    "name": "Gore",
+    "type": "attack",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The creature spears the opponent with an antler, horn, or similar appendage, dealing piercing damage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": "standard"
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": "",
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "measureTemplate": {
+        "type": "",
+        "size": 0,
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "mwak",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "damage": {
+        "parts": [
+          [
+            "sizeRoll(1,6,@size,@critMult)",
+            "damage-piercing"
+          ]
+        ]
+      },
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "ability": {
+        "attack": "str",
+        "damage": "str",
+        "damageMult": 1,
+        "critRange": 20,
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": "0",
+        "originVersion": 97,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "attackType": "natural",
+      "masterwork": false,
+      "threatRangeExtended": false,
+      "finesseable": false,
+      "proficient": true,
+      "primaryAttack": true,
+      "showInQuickbar": true,
+      "melded": false,
+      "baseWeaponType": "",
+      "nonLethal": false,
+      "originalWeaponCreated": false,
+      "originalWeaponName": "",
+      "originalWeaponImg": "",
+      "alignment": {
+        "good": false,
+        "evil": false,
+        "lawful": false,
+        "chaotic": false
+      }
+    },
+    "img": "systems/D35E/icons/attack/monster/gore.png",
+    "id": "wHF8cxBGZNQCU9bA"
+  }
+]

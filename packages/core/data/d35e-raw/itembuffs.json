@@ -1,0 +1,91 @@
+[
+  {
+    "id": "abORRqyVeFly2KdF",
+    "name": "Tome of Undestanding Bonus",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "@item.level",
+          "ability",
+          "wis",
+          "inherent"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "perm",
+      "active": false,
+      "level": "1",
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Tome of Undestanding Bonus"
+    },
+    "img": "systems/D35E/icons/items/magic/wonders/Book_v2_30.png"
+  }
+]

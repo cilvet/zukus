@@ -1,0 +1,1716 @@
+[
+  {
+    "id": "2fK608aSYU9QDmzw",
+    "name": "Heavy Steel Shield",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You strap a shield to your forearm and grip it with your hand. A heavy shield is so heavy that you can’t use your shield hand for anything else. Wooden or Steel: Wooden and steel shields offer the same basic protection, though they respond differently to special attacks (such as warp wood and heat metal). Shield Bash Attacks: You can bash an opponent with a heavy shield, using it as an off-hand weapon. See Table 7–5: Weapons for the damage dealt by a shield bash. Used this way, a heavy shield is a martial bludgeoning weapon. For the purpose of penalties on attack rolls, treat a heavy shield as a one-handed weapon. If you use your shield as a weapon, you lose its AC bonus until your next action (usually until the next round). An enhancement bonus on a shield does not improve the effectiveness of a shield bash made with it, but the shield can be made into a magic weapon in its own right.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 15,
+      "price": 20,
+      "identified": true,
+      "hp": {
+        "max": 20,
+        "value": 20
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Heavy Steel Shield",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "heavyShield",
+      "armor": {
+        "value": 2,
+        "dex": "",
+        "acp": 2,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 15,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_34.png"
+  },
+  {
+    "id": "3mQTIhwAaZgvJq12",
+    "name": "Tower Shield",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This massive wooden shield is nearly as tall as you are. In most situations, it provides the indicated shield bonus to your AC. However, you can instead use it as total cover, though you must give up your attacks to do so. The shield does not, however, provide cover against targeted spells; a spellcaster can cast a spell on you by targeting the shield you are holding. You cannot bash with a tower shield, nor can you use your shield hand for anything else. When employing a tower shield in combat, you take a -2 penalty on attack rolls because of the shield's encumbrance.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 45,
+      "price": 30,
+      "identified": true,
+      "hp": {
+        "max": 20,
+        "value": 20
+      },
+      "hardness": 5,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Tower Shield",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "towerShield",
+      "armor": {
+        "value": 4,
+        "dex": "2",
+        "acp": 10,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 50,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_25.png"
+  },
+  {
+    "id": "5TzaS38RPAx1oj9p",
+    "name": "Breastplate",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A breastplate covers your front and your back. It comes with a helmet and greaves (plates to cover your lower legs). A light suit or skirt of studded leather beneath the breastplate protects your limbs without restricting movement much.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 30,
+      "price": 200,
+      "identified": true,
+      "hp": {
+        "max": 25,
+        "value": 25
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Breastplate",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "mediumArmor",
+      "armor": {
+        "value": 5,
+        "dex": "3",
+        "acp": 4,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 25,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/Chest_72.png"
+  },
+  {
+    "id": "6YCQkebsf4vR508H",
+    "name": "Leather Armor",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by boiling in oil. The rest of the armor is made of softer and more flexible leather.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 15,
+      "price": 10,
+      "identified": true,
+      "hp": {
+        "max": 10,
+        "value": 10
+      },
+      "hardness": 2,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Leather Armor",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "lightArmor",
+      "armor": {
+        "value": 2,
+        "dex": "6",
+        "acp": 0,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 10,
+      "slot": "slotless",
+      "activation": {
+        "cost": 1,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/Chest_56.png"
+  },
+  {
+    "id": "CRtBIIyBtNCsxztO",
+    "name": "Splint Mail",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor is made of narrow vertical strips of metal riveted to a backing of leather that is worn over cloth padding. Flexible chainmail protects the joints. The suit includes gauntlets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 45,
+      "price": 200,
+      "identified": true,
+      "hp": {
+        "max": 30,
+        "value": 30
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Splint Mail",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "heavyArmor",
+      "armor": {
+        "value": 6,
+        "dex": "0",
+        "acp": 7,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 40,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/Chest_60.png"
+  },
+  {
+    "id": "HpPFigQKr6C6Dej4",
+    "name": "Banded Mail",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor is made of overlapping strips of metal sewn to a backing of leather and chainmail. The strips cover vulnerable areas, while the chain and leather protect the joints and provide freedom of movement. Straps and buckles distribute the weight evenly. The suit includes gauntlets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 35,
+      "price": 250,
+      "identified": true,
+      "hp": {
+        "max": 30,
+        "value": 30
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Banded Mail",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "heavyArmor",
+      "armor": {
+        "value": 6,
+        "dex": "1",
+        "acp": 6,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 35,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/17_Leather_Chest.png"
+  },
+  {
+    "id": "Y10QTnY9wVXg5VCm",
+    "name": "Half-Plate",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor is a combination of chainmail with metal plates (breastplate, epaulettes, elbow guards, gauntlets, tasses, and greaves) covering vital areas. Buckles and straps hold the whole suit together and distribute the weight, but the armor still hangs more loosely than full plate. The suit includes gauntlets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 50,
+      "price": 600,
+      "identified": true,
+      "hp": {
+        "max": 35,
+        "value": 35
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Half-Plate",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "heavyArmor",
+      "armor": {
+        "value": 7,
+        "dex": "0",
+        "acp": 7,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 40,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self(Must have help)"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/Chest_46.png"
+  },
+  {
+    "id": "aI6gSI7gnCLCucw0",
+    "name": "Hide Armor",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor is prepared from multiple layers of leather and animal hides. It is stiff and hard to move in. Druids, who wear only nonmetallic armor, favor hide.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 25,
+      "price": 15,
+      "identified": true,
+      "hp": {
+        "max": 15,
+        "value": 15
+      },
+      "hardness": 2,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Hide Armor",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "mediumArmor",
+      "armor": {
+        "value": 3,
+        "dex": "4",
+        "acp": 3,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 20,
+      "slot": "slotless",
+      "activation": {
+        "cost": 1,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/7_Leather_Chest.png"
+  },
+  {
+    "id": "gsE0PAOmCwivue5A",
+    "name": "Buckler",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This small metal shield is worn strapped to your forearm. You can use a bow or crossbow without penalty while carrying it. You can also use your shield arm to wield a weapon (whether you are using an off-hand weapon or using your off hand to help wield a two-handed weapon), but you take a –1 penalty on attack rolls while doing so because of the extra weight on your arm. This penalty stacks with those that may apply for fighting with your off hand and for fighting with two weapons. In any case, if you use a weapon in your off hand, you don’t get the buckler’s AC bonus for the rest of the round.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 5,
+      "price": 15,
+      "identified": true,
+      "hp": {
+        "max": 5,
+        "value": 5
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Buckler",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "other",
+      "armor": {
+        "value": 1,
+        "dex": "",
+        "acp": 1,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 5,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_03.png"
+  },
+  {
+    "id": "h65qEp22nsyRoeRa",
+    "name": "Full Plate",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor consists of shaped and fitted metal plates riveted and interlocked to cover the entire body. The suit includes gauntlets, heavy leather boots, a visored helmet, and a thick layer of padding that is worn underneath the armor. Buckles and straps distribute the weight over the body, so full plate hampers movement less than splint mail even though splint is lighter. Each suit of full plate must be individually fitted to its owner by a master armorsmith, although a captured suit can be resized to fit a new owner at a cost of 200 to 800 (2d4 x 100) gold pieces. Full plate is also known as field plate.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 50,
+      "price": 1500,
+      "identified": true,
+      "hp": {
+        "max": 40,
+        "value": 40
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Full Plate",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "heavyArmor",
+      "armor": {
+        "value": 8,
+        "dex": "1",
+        "acp": 6,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 35,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self(Must have help)"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/Chest_68.png"
+  },
+  {
+    "id": "iGu21zy6QtroUZ4O",
+    "name": "Chain Shirt",
+    "type": "equipment",
+    "img": "systems/D35E/icons/items/armor/Chest_21.png",
+    "data": {
+      "originVersion": 98,
+      "originPack": "",
+      "originId": "",
+      "possibleUpdate": false,
+      "description": {
+        "value": "A chain shirt protects your torso while leaving your limbs free and mobile. It includes a layer of quilted fabric worn underneath to prevent chafing and to cushion the impact of blows. A chain shirt comes with a steel cap.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "linkId": "",
+      "linkSourceId": "",
+      "linkImported": false,
+      "linkSourceName": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "quantity": 1,
+      "weight": 25,
+      "constantWeight": false,
+      "price": 100,
+      "identified": true,
+      "hp": {
+        "max": 20,
+        "value": 20
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 100,
+        "name": ""
+      },
+      "identifiedName": "Chain Shirt",
+      "container": "None",
+      "containerId": "none",
+      "containerWeightless": false,
+      "equippedWeightless": false,
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "combatChangeCustomDisplayName": "",
+      "combatChangeCustomReferenceName": "",
+      "sizeOverride": "",
+      "counterName": "",
+      "measureTemplate": {
+        "type": "",
+        "size": "",
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "maxDamageDice": 0,
+      "maxDamageDiceFormula": "",
+      "ability": {
+        "damageMult": 1,
+        "critRange": "20",
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": 0,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "baseCl": "0",
+      "sr": false,
+      "pr": false,
+      "metamagicFeats": {
+        "maximized": false,
+        "empowered": false,
+        "enlarged": false,
+        "intensified": false,
+        "enhanced": false,
+        "enhancedHalf": false,
+        "widened": false
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "favorite": false,
+      "rollTableDraw": {
+        "formula": "",
+        "name": "",
+        "pack": "",
+        "id": ""
+      },
+      "enhancements": {
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "autoDeductCharges": true,
+          "allowMultipleUses": false,
+          "commonPool": false
+        },
+        "automation": {
+          "updateName": false,
+          "updatePrice": false
+        },
+        "clFormula": "",
+        "spellcastingAbility": ""
+      },
+      "light": {
+        "color": "#000000",
+        "radius": 0,
+        "opacity": 0,
+        "alpha": 0.5,
+        "lightAngle": 360,
+        "type": "",
+        "animationSpeed": 6,
+        "animationIntensity": 6,
+        "emitLight": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "lightArmor",
+      "armor": {
+        "value": 4,
+        "dex": "4",
+        "acp": 2,
+        "enh": 0
+      },
+      "masterwork": false,
+      "melded": false,
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 20,
+      "slot": "slotless",
+      "activation": {
+        "cost": 1,
+        "type": "minute"
+      },
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false,
+        "isResource": false,
+        "canBeLinked": false
+      },
+      "convertedWeight": 25,
+      "requiresPsionicFocus": false,
+      "senses": {
+        "lowLight": false
+      }
+    }
+  },
+  {
+    "id": "iRB7ACzHf14VIk4M",
+    "name": "Light Steel Shield",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You strap a shield to your forearm and grip it with your hand. A light shield’s weight lets you carry other items in that hand, although you cannot use weapons with it. Wooden or Steel: Wooden and steel shields offer the same basic protection, though they respond differently to special attacks (such as warp wood and heat metal). Shield Bash Attacks: You can bash an opponent with a light shield, using it as an off-hand weapon. See Table 7–5: Weapons for the damage dealt by a shield bash. Used this way, a light shield is a martial bludgeoning weapon. For the purpose of penalties on attack rolls, treat a light shield as a light weapon. If you use your shield as a weapon, you lose its AC bonus until your next action (usually until the next round). An enhancement bonus on a shield does not improve the effectiveness of a shield bash made with it, but theshield can be made into a magic weapon in its own right.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 6,
+      "price": 9,
+      "identified": true,
+      "hp": {
+        "max": 10,
+        "value": 10
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Light Steel Shield",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "lightShield",
+      "armor": {
+        "value": 1,
+        "dex": "",
+        "acp": 1,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 5,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_33.png"
+  },
+  {
+    "id": "ioCsEZc3Shc3t4Sv",
+    "name": "Heavy Wooden Shield",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You strap a shield to your forearm and grip it with your hand. A heavy shield is so heavy that you can’t use your shield hand for anything else. Wooden or Steel: Wooden and steel shields offer the same basic protection, though they respond differently to special attacks (such as warp wood and heat metal). Shield Bash Attacks: You can bash an opponent with a heavy shield, using it as an off-hand weapon. See Table 7–5: Weapons for the damage dealt by a shield bash. Used this way, a heavy shield is a martial bludgeoning weapon. For the purpose of penalties on attack rolls, treat a heavy shield as a one-handed weapon. If you use your shield as a weapon, you lose its AC bonus until your next action (usually until the next round). An enhancement bonus on a shield does not improve the effectiveness of a shield bash made with it, but the shield can be made into a magic weapon in its own right.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 10,
+      "price": 7,
+      "identified": true,
+      "hp": {
+        "max": 15,
+        "value": 15
+      },
+      "hardness": 5,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Heavy Wooden Shield",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "heavyShield",
+      "armor": {
+        "value": 2,
+        "dex": "",
+        "acp": 2,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 15,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_13.png"
+  },
+  {
+    "id": "l1qNkx4xGXelq6yY",
+    "name": "Light Wooden Shield",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You strap a shield to your forearm and grip it with your hand. A light shield’s weight lets you carry other items in that hand, although you cannot use weapons with it. Wooden or Steel: Wooden and steel shields offer the same basic protection, though they respond differently to special attacks (such as warp wood and heat metal). Shield Bash Attacks: You can bash an opponent with a light shield, using it as an off-hand weapon. See Table 7–5: Weapons for the damage dealt by a shield bash. Used this way, a light shield is a martial bludgeoning weapon. For the purpose of penalties on attack rolls, treat a light shield as a light weapon. If you use your shield as a weapon, you lose its AC bonus until your next action (usually until the next round). An enhancement bonus on a shield does not improve the effectiveness of a shield bash made with it, but theshield can be made into a magic weapon in its own right.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 5,
+      "price": 3,
+      "identified": true,
+      "hp": {
+        "max": 7,
+        "value": 7
+      },
+      "hardness": 5,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Light Wooden Shield",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "shield",
+      "equipmentSubtype": "lightShield",
+      "armor": {
+        "value": 1,
+        "dex": "",
+        "acp": 1,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 5,
+      "slot": "shield",
+      "activation": {
+        "cost": 1,
+        "type": "move"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/shield_10.png"
+  },
+  {
+    "id": "nnDSj5NxUb9Q8z8S",
+    "name": "Scale Mail",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 30,
+      "price": 50,
+      "identified": true,
+      "hp": {
+        "max": 20,
+        "value": 20
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Scale Mail",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "mediumArmor",
+      "armor": {
+        "value": 4,
+        "dex": "3",
+        "acp": 4,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 25,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/3_Mail_Chest.png"
+  },
+  {
+    "id": "unY9jt1B8a5bbnzO",
+    "name": "Chainmail",
+    "type": "equipment",
+    "img": "systems/D35E/icons/items/armor/4_Mail_Chest.png",
+    "data": {
+      "originVersion": 98,
+      "originPack": "",
+      "originId": "",
+      "possibleUpdate": false,
+      "description": {
+        "value": "This armor is made of interlocking metal rings. It includes a layer of quilted fabric worn underneath to prevent chafing and to cushion the impact of blows. Several layers of mail are hung over vital areas. Most of the armor’s weight hangs from the shoulders, making chainmail uncomfortable to wear for long periods of time. The suit includes gauntlets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "linkId": "",
+      "linkSourceId": "",
+      "linkImported": false,
+      "linkSourceName": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "quantity": 1,
+      "weight": 40,
+      "constantWeight": false,
+      "price": 150,
+      "identified": true,
+      "hp": {
+        "max": 25,
+        "value": 25
+      },
+      "hardness": 10,
+      "carried": true,
+      "unidentified": {
+        "price": 150,
+        "name": ""
+      },
+      "identifiedName": "Chainmail",
+      "container": "None",
+      "containerId": "none",
+      "containerWeightless": false,
+      "equippedWeightless": false,
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "combatChangeCustomDisplayName": "",
+      "combatChangeCustomReferenceName": "",
+      "sizeOverride": "",
+      "counterName": "",
+      "measureTemplate": {
+        "type": "",
+        "size": "",
+        "overrideColor": false,
+        "customColor": "",
+        "overrideTexture": false,
+        "customTexture": ""
+      },
+      "actionType": "",
+      "attackBonus": "",
+      "critConfirmBonus": "",
+      "autoscaleAttackParts": "",
+      "formula": "",
+      "attackCountFormula": "",
+      "maxDamageDice": 0,
+      "maxDamageDiceFormula": "",
+      "ability": {
+        "damageMult": 1,
+        "critRange": "20",
+        "critMult": 2,
+        "twoHandedOnly": false,
+        "vsTouchAc": false
+      },
+      "save": {
+        "dc": 0,
+        "description": "",
+        "ability": "",
+        "type": ""
+      },
+      "baseCl": "0",
+      "sr": false,
+      "pr": false,
+      "metamagicFeats": {
+        "maximized": false,
+        "empowered": false,
+        "enlarged": false,
+        "intensified": false,
+        "enhanced": false,
+        "enhancedHalf": false,
+        "widened": false
+      },
+      "effectNotes": "",
+      "attackNotes": "",
+      "favorite": false,
+      "rollTableDraw": {
+        "formula": "",
+        "name": "",
+        "pack": "",
+        "id": ""
+      },
+      "enhancements": {
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "autoDeductCharges": true,
+          "allowMultipleUses": false,
+          "commonPool": false
+        },
+        "automation": {
+          "updateName": false,
+          "updatePrice": false
+        },
+        "clFormula": "",
+        "spellcastingAbility": ""
+      },
+      "light": {
+        "color": "#000000",
+        "radius": 0,
+        "opacity": 0,
+        "alpha": 0.5,
+        "lightAngle": 360,
+        "type": "",
+        "animationSpeed": 6,
+        "animationIntensity": 6,
+        "emitLight": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "mediumArmor",
+      "armor": {
+        "value": 5,
+        "dex": "2",
+        "acp": 5,
+        "enh": 0
+      },
+      "masterwork": false,
+      "melded": false,
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 30,
+      "slot": "slotless",
+      "activation": {
+        "cost": 4,
+        "type": "minute"
+      },
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false,
+        "isResource": false,
+        "canBeLinked": false
+      },
+      "convertedWeight": 40,
+      "requiresPsionicFocus": false,
+      "senses": {
+        "lowLight": false
+      }
+    }
+  },
+  {
+    "id": "xeuREriTfdZR1yCD",
+    "name": "Studded Leather Armor",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "This armor is made from tough but flexible leather (not hardened leather as with normal leather armor) reinforced with close-set metal rivets.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 20,
+      "price": 25,
+      "identified": true,
+      "hp": {
+        "max": 15,
+        "value": 15
+      },
+      "hardness": 2,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Studded Leather Armor",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "lightArmor",
+      "armor": {
+        "value": 3,
+        "dex": "5",
+        "acp": 1,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 15,
+      "slot": "slotless",
+      "activation": {
+        "cost": 1,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/14_Leather_Chest.png"
+  },
+  {
+    "id": "ziXQ1DlDMGTAUOe9",
+    "name": "Padded Armor",
+    "type": "equipment",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Padded armor features quilted layers of cloth and batting. It gets hot quickly and can become foul with sweat, grime, lice, and fleas.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "quantity": 1,
+      "weight": 10,
+      "price": 5,
+      "identified": true,
+      "hp": {
+        "max": 5,
+        "value": 5
+      },
+      "hardness": 0,
+      "carried": true,
+      "unidentified": {
+        "price": 0,
+        "name": ""
+      },
+      "identifiedName": "Padded Armor",
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false
+      },
+      "equipped": true,
+      "equipmentType": "armor",
+      "equipmentSubtype": "lightArmor",
+      "armor": {
+        "value": 1,
+        "dex": "8",
+        "acp": 0,
+        "enh": 0
+      },
+      "armorType": {
+        "value": ""
+      },
+      "spellFailure": 5,
+      "slot": "slotless",
+      "activation": {
+        "cost": 1,
+        "type": "minute"
+      },
+      "measureTemplate": {
+        "type": ""
+      },
+      "actionType": "",
+      "target": {
+        "value": "Self"
+      },
+      "range": {
+        "units": "personal"
+      },
+      "duration": {
+        "units": ""
+      },
+      "uses": {
+        "per": "",
+        "autoDeductCharges": false,
+        "allowMultipleUses": false
+      },
+      "conditionFlags": {
+        "dazzled": false
+      }
+    },
+    "img": "systems/D35E/icons/items/armor/2_Leather_Chest.png"
+  }
+]

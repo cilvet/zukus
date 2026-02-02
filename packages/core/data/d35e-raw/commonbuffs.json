@@ -1,0 +1,3624 @@
+[
+  {
+    "id": "1W9YmqCqawLmMXmf",
+    "name": "Owl's Wisdom",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Wisdom.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "wis",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Owl's Wisdom",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/owl-wisdom.png"
+  },
+  {
+    "id": "1z7euBqoJ1ZDCRW4",
+    "name": "Fox's Cunning",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Intelligence.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "int",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Fox's Cunning",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/fox-cunning.png"
+  },
+  {
+    "id": "3czZB6whbQo9WhxR",
+    "name": "Divine Favor",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a luck bonus to attack rolls and weapon damage rolls. Usage : Set the buff's level equal to the caster level Divine Favor.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "min(3, 1 + floor(@item.level / 3))",
+          "attack",
+          "attack",
+          "luck"
+        ],
+        [
+          "min(3, 1 + floor(@item.level / 3))",
+          "damage",
+          "wdamage",
+          "luck"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "1",
+      "identifiedName": "Divine Favor",
+      "timeline": {
+        "enabled": true,
+        "formula": "10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/divine-favor.png"
+  },
+  {
+    "id": "48OrafnMKcy7YZwC",
+    "name": "Virtue",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject of Virtue gains 1 temporary hit point.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1",
+          "misc",
+          "mhp",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 10,
+        "formula": "10",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Virtue"
+    },
+    "img": "systems/D35E/icons/buffs/virtue.png"
+  },
+  {
+    "id": "4KRUe6c23o6L0BDn",
+    "name": "Surging Euhporia",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "",
+        "chat": "",
+        "unidentified": ""
+      },
+      "uniqueId": "",
+      "source": "",
+      "userNonRemovable": false,
+      "changes": [
+        [
+          "1 + (@classes.wilder.level > 11) ? 1 : 0 + (@classes.wilder.level > 19) ? 1 : 0",
+          "attack",
+          "attack",
+          "morale"
+        ],
+        [
+          "1 + (@classes.wilder.level > 11) ? 1 : 0 + (@classes.wilder.level > 19) ? 1 : 0",
+          "damage",
+          "damage",
+          "morale"
+        ],
+        [
+          "1 + (@classes.wilder.level > 11) ? 1 : 0 + (@classes.wilder.level > 19) ? 1 : 0",
+          "savingThrows",
+          "allSavingThrows",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "1",
+      "timeline": {
+        "elapsed": 0,
+        "total": 1,
+        "formula": "1+floor((@classes.wilder.level+1)/4)",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Surging Euhporia",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "classSource": "",
+      "customAttributesLocked": false,
+      "counterName": ""
+    },
+    "img": "systems/D35E/icons/buffs/surging-euphoria.png"
+  },
+  {
+    "id": "5lMHTBMDNyhBIa4c",
+    "name": "Defensive Stance Winded",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "",
+        "chat": "",
+        "unidentified": ""
+      },
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "changes": [
+        [
+          "-2",
+          "ability",
+          "str",
+          "penalty"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "customAttributesLocked": false
+    },
+    "img": "systems/D35E/icons/buffs/defensive-stance-exh.png"
+  },
+  {
+    "id": "ClOy4KHJFDdt0ALh",
+    "name": "Bull's Strength",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Strength.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "str",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Bull's Strength",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/bull-strength.png"
+  },
+  {
+    "id": "D2huasedfGMSetP7",
+    "name": "Bane",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You take a -1 penalty on attack rolls and saving throws vs fear effects.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "-1",
+          "attack",
+          "attack",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "contextNotes": [
+        [
+          "-[[1]] vs Fear effects",
+          "savingThrows",
+          "allSavingThrows"
+        ]
+      ],
+      "identifiedName": "Bane",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/bane.png"
+  },
+  {
+    "id": "FghMA5T8x3xjq9Zd",
+    "name": "Guidance - Skill Bonus",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The target of Guidance gets a +1 competence bonus on a single skill check. It must choose to use the bonus before making the roll to which it applies.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1",
+          "savingThrows",
+          "allSavingThrows",
+          "competence"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 1,
+        "formula": "1",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Guidance - Skill Bonus"
+    },
+    "img": "systems/D35E/icons/buffs/guidance.png"
+  },
+  {
+    "id": "FncbH423wFmrvFyC",
+    "name": "Enraged",
+    "type": "buff",
+    "img": "systems/D35E/icons/buffs/enraged.png",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A barbarian can fly into a rage a certain number of times per day. In a rage, a barbarian temporarily gains a +4 bonus to Strength, a +4 bonus to Constitution, and a +2 morale bonus on Will saves, but he takes a -2 penalty to Armor Class. The increase in Constitution increases the barbarian's hit points by 2 points per level, but these hit points go away at the end of the rage when his Constitution score drops back to normal. (These extra hit points are not lost first the way temporary hit points are.) While raging, a barbarian cannot use any Charisma-, Dexterity-, or Intelligence-based skills (except for Balance, Escape Artist, Intimidate, and Ride), the Concentration skill, or any abilities that require patience or concentration, nor can he cast spells or activate magic items that require a command word, a spell trigger (such as a wand), or spell completion (such as a scroll) to function. He can use any feat he has except Combat Expertise, item creation feats, and metamagic feats. A fit of rage lasts for a number of rounds equal to 3 + the character's (newly improved) Constitution modifier. Usage: Set the buff's level to the 1 for Standard Rage, 2 for Greater Rage and 3 for Mghty Rage",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "linkId": "",
+      "linkSourceId": "",
+      "linkImported": false,
+      "linkSourceName": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "changes": [
+        [
+          "-2",
+          "ac",
+          "ac",
+          "untyped"
+        ],
+        [
+          "2+@item.level*2",
+          "ability",
+          "str",
+          "untyped"
+        ],
+        [
+          "2+@item.level*2",
+          "ability",
+          "con",
+          "untyped"
+        ],
+        [
+          "1+@item.level",
+          "savingThrows",
+          "will",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "combatChangeCustomDisplayName": "",
+      "combatChangeCustomReferenceName": "",
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "recharge": {
+        "enabled": false,
+        "formula": "",
+        "current": 0
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxPerUseFormula": "",
+        "maxFormula": "",
+        "isResource": false,
+        "canBeLinked": false
+      },
+      "requiresPsionicFocus": false,
+      "buffType": "temp",
+      "active": true,
+      "level": "1",
+      "timeline": {
+        "elapsed": 0,
+        "total": 3,
+        "formula": "3 + @abilities.con.mod",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "hideFromToken": false,
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Enraged"
+    }
+  },
+  {
+    "name": "Inertial Armor",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Your mind generates a tangible field of force that provides a +4 armor bonus to Armor Class. Unlike mundane armor, inertial armor entails no armor check penalty or speed reduction. Because inertial armor is composed of psychokinetic force, incorporeal creatures can't bypass it the way they do normal armor. Your inertial armor can be invisible or can appear as a colored glow, at your option. The armor bonus provided by inertial armor does not stack with the armor bonus provided by regular armor.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "4",
+          "ac",
+          "aac",
+          "base"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "total": 600,
+        "formula": "max(1,@item.level)*600",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/interital-armor.png",
+    "id": "FsFbCQs5j8RXLldr"
+  },
+  {
+    "id": "IlO0CNpAIKZtNYu8",
+    "name": "Mage Armor",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "An invisible but tangible field of force surrounds you, providing a +4 armor bonus to AC. Since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ac",
+          "aac",
+          "base"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Mage Armor",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*600",
+        "deleteOnExpiry": true,
+        "total": 600
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/mage-armor.png"
+  },
+  {
+    "id": "KsgdOd5vzGu7UDBe",
+    "name": "Eagle's Splendor",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Charisma.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "cha",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Eagle's Splendor",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/eagle-splendor.png"
+  },
+  {
+    "id": "MFogxSkB5dBmUI5i",
+    "name": "Prayer (Negative)",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a +1 luck bonus on attack rolls, weapon damage rolls, saves and skill checks.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "-1",
+          "attack",
+          "attack",
+          "untyped"
+        ],
+        [
+          "-1",
+          "damage",
+          "wdamage",
+          "untyped"
+        ],
+        [
+          "-1",
+          "savingThrows",
+          "allSavingThrows",
+          "untyped"
+        ],
+        [
+          "-1",
+          "skills",
+          "skills",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Prayer (Negative)",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/prayer-negative.png"
+  },
+  {
+    "id": "OQQYaNxXsb974T8j",
+    "name": "Slow",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You are staggered, and you have a -1 penalty to attack rolls, AC and Reflex saves. In addition, you move at half speed (round down to the next 5-foot increment).",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "-1",
+          "ac",
+          "ac",
+          "untyped"
+        ],
+        [
+          "-1",
+          "attack",
+          "attack",
+          "untyped"
+        ],
+        [
+          "-1",
+          "savingThrows",
+          "ref",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Slow",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/slow.png"
+  },
+  {
+    "id": "PS34Lhu5z6aKjrFj",
+    "name": "Inspire Heroics",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A bard of 15th level or higher with 18 or more ranks in a Perform skill can use music or poetics to inspire tremendous heroism in himself or a single willing ally within 30 feet. For every three bard levels the character attains beyond 15th, he can inspire heroics in one additional creature. To inspire heroics, a bard must sing and an ally must hear the bard sing for a full round. A creature so inspired gains a +4 morale bonus on saving throws and a +4 dodge bonus to AC. The effect lasts for as long as the ally hears the bard sing and for up to 5 rounds thereafter. Inspire heroics is a mind-affecting ability.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "changes": [
+        [
+          "4",
+          "ac",
+          "ac",
+          "dodge"
+        ],
+        [
+          "4",
+          "savingThrows",
+          "allSavingThrows",
+          "morale"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 5,
+        "formula": "5",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/inspire-heroics.png"
+  },
+  {
+    "id": "QYVZS8MfOKzjpCm1",
+    "name": "Bless",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a +1 morale bonus to attack rolls and saves against fear effects.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "1",
+          "attack",
+          "attack",
+          "morale"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "contextNotes": [
+        [
+          "+[[1]] Morale vs Fear effects",
+          "savingThrows",
+          "allSavingThrows"
+        ]
+      ],
+      "identifiedName": "Bless",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/bless.png"
+  },
+  {
+    "id": "S3z30WBaFMAQcW7N",
+    "name": "Guidance - Save Bonus",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The target of Guidance gets a +1 competence bonus on a single saving throw. It must choose to use the bonus before making the roll to which it applies.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1",
+          "savingThrows",
+          "allSavingThrows",
+          "competence"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 1,
+        "formula": "1",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Guidance - Save Bonus"
+    },
+    "img": "systems/D35E/icons/buffs/guidance.png"
+  },
+  {
+    "id": "VK77NLq8WKVi9oba",
+    "name": "Outburst",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Once per day, for up to 4 rounds, a maenad can subjugate her mentality to gain a boost of raw physical power. When she does so, she takes a -2 penalty to Intelligence and Wisdom but gains a +2 bonus to Strength.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "changes": [
+        [
+          "2",
+          "ability",
+          "str",
+          "untyped"
+        ],
+        [
+          "-2",
+          "ability",
+          "wis",
+          "untyped"
+        ],
+        [
+          "-2",
+          "ability",
+          "int",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 4,
+        "formula": "4",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "identifiedName": "Outburst",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "sizeOverride": "",
+      "counterName": "",
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/outburst.png"
+  },
+  {
+    "id": "WgCWQxR53UdVSGPB",
+    "name": "Shield of Faith",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a deflection bonus to AC. Usage : Set this buff's level equal to the caster level of Shield of Faith.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "2 + min(3, floor(@item.level / 6))",
+          "ac",
+          "ac",
+          "deflection"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "1",
+      "identifiedName": "Shield of Faith",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/shield-of-faith.png"
+  },
+  {
+    "id": "XBkm0BzQNiUuNN31",
+    "name": "Guidance - Attack Bonus",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The target of Guidance gets a +1 competence bonus on a single attack roll. It must choose to use the bonus before making the roll to which it applies.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1",
+          "attack",
+          "attack",
+          "competence"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 1,
+        "formula": "1",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Guidance - Attack Bonus"
+    },
+    "img": "systems/D35E/icons/buffs/guidance.png"
+  },
+  {
+    "id": "cQ0Ib48IAoy99g0g",
+    "name": "Augmented Summon",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Summoned creature gains a +4 enhancement bonus to Strength and Constitution for the duration of the spell that summoned it.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "changes": [
+        [
+          "4",
+          "ability",
+          "con",
+          "enh"
+        ],
+        [
+          "4",
+          "ability",
+          "str",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "identifiedName": "Augmented Summon",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "sizeOverride": "",
+      "counterName": "",
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/augmented.png"
+  },
+  {
+    "id": "dVqLY99ECYnLeoB5",
+    "name": "Cat's Grace",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Dexterity.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "dex",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Cat's Grace",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 10
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/cats-grace.png"
+  },
+  {
+    "id": "eMIinxpHl0PFddoK",
+    "name": "Defensive Stance",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "He gains +2 to Strength, +4 to Constitution, a +2 resistance bonus on all saves, and a +4 dodge bonus to AC. The increase in Constitution increases the defender’s hit points by 2 points per level, but these hit points go away at the end of the defensive stance when the Constitution score drops back 4 points. These extra hit points are not lost first the way temporary hit points are. While in a defensive stance, a defender cannot use skills or abilities that would require him to shift his position. A defensive stance lasts for a number of rounds equal to 3 + the character’s (newly improved) Constitution modifier. A defender may end his defensive stance voluntarily prior to this limit. At the end of the defensive stance, the defender is winded and takes a -2 penalty to Strength for the duration of that encounter.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "changes": [
+        [
+          "2",
+          "ability",
+          "str",
+          "untyped"
+        ],
+        [
+          "4",
+          "ability",
+          "con",
+          "untyped"
+        ],
+        [
+          "2",
+          "savingThrows",
+          "allSavingThrows",
+          "untyped"
+        ],
+        [
+          "4",
+          "ac",
+          "ac",
+          "dodge"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 3,
+        "formula": "3 + @abilities.con.mod",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "deactivateActions": [
+        {
+          "name": "Winded",
+          "action": "Create unique \"Defensive Stance Winded\" from D35E.commonbuffs on self;Activate buff \"Defensive Stance Winded\" on self;",
+          "condition": "",
+          "img": ""
+        }
+      ],
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Defensive Stance",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "customAttributesLocked": false
+    },
+    "img": "systems/D35E/icons/buffs/defensive-stance.png"
+  },
+  {
+    "id": "kG8EriOOSJmDmYZd",
+    "name": "Barkskin",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Your skin is toughened, granting you an enhancement bonus to your natural armor as per the barkskin spell. Usage : Set the buff's level to the caster level of Barkskin.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "min(5, 2 + max(0, floor((@item.level - 3) / 3)))",
+          "ac",
+          "nac",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "3",
+      "identifiedName": "Barkskin",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(3,@item.level)*100",
+        "deleteOnExpiry": true,
+        "total": 300
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/bark-skin.png"
+  },
+  {
+    "id": "kXvipUvebDtVfxEv",
+    "name": "Prayer (Positive)",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a +1 luck bonus on attack rolls, weapon damage rolls, saves and skill checks.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "1",
+          "attack",
+          "attack",
+          "luck"
+        ],
+        [
+          "1",
+          "damage",
+          "wdamage",
+          "luck"
+        ],
+        [
+          "1",
+          "savingThrows",
+          "allSavingThrows",
+          "luck"
+        ],
+        [
+          "1",
+          "skills",
+          "skills",
+          "luck"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Prayer (Positive)",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/prayer-positive.png"
+  },
+  {
+    "id": "lV9zpEnZrArmfEFZ",
+    "name": "Bear's Endurance",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject has a +4 enhancement bonus to Constitution.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ability",
+          "con",
+          "enh"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Bear's Endurance",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(3,@item.level)*10",
+        "deleteOnExpiry": true,
+        "total": 30
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/bears-endurance.png"
+  },
+  {
+    "id": "nW13npoXurJHHdAp",
+    "name": "Resistance",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The subject of Resistance gains +1 resistance bonus on saves.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1",
+          "savingThrows",
+          "allSavingThrows",
+          "resist"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 10,
+        "formula": "10",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Resistance"
+    },
+    "img": "systems/D35E/icons/buffs/resistance.png"
+  },
+  {
+    "id": "nn0uFgk7sTpgv1Td",
+    "name": "Inspire Greatness",
+    "type": "buff",
+    "img": "systems/D35E/icons/buffs/inspire-greatness.png",
+    "data": {
+      "originVersion": 98,
+      "originPack": "",
+      "originId": "",
+      "possibleUpdate": false,
+      "description": {
+        "value": "A bard of 9th level or higher with 12 or more ranks in a Perform skill can use music or poetics to inspire greatness in himself or a single willing ally within 30 feet, granting him or her extra fighting capability. For every three levels a bard attains beyond 9th, he can target one additional ally with a single use of this ability (two at 12th level, three at 15th, four at 18th). To inspire greatness, a bard must sing and an ally must hear him sing. The effect lasts for as long as the ally hears the bard sing and for 5 rounds thereafter. A creature inspired with greatness gains 2 bonus Hit Dice (d10s), the commensurate number of temporary hit points (apply the target’s Constitution modifier, if any, to these bonus Hit Dice), a +2 competence bonus on attack rolls, and a +1 competence bonus on Fortitude saves. The bonus Hit Dice count as regular Hit Dice for determining the effect of spells that are Hit Dice dependant. Inspire greatness is a mind-affecting ability.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "linkId": "",
+      "linkSourceId": "",
+      "linkImported": false,
+      "linkSourceName": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "changes": [
+        [
+          "1",
+          "savingThrows",
+          "fort",
+          "untyped"
+        ],
+        [
+          "2",
+          "attack",
+          "attack",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "combatChangeCustomDisplayName": "",
+      "combatChangeCustomReferenceName": "",
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "recharge": {
+        "enabled": false,
+        "formula": "",
+        "current": 0
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxPerUseFormula": "",
+        "maxFormula": "",
+        "isResource": false,
+        "canBeLinked": false
+      },
+      "requiresPsionicFocus": false,
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 5,
+        "formula": "5",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "hideFromToken": false,
+      "identifiedName": "Inspire Greatness"
+    }
+  },
+  {
+    "id": "oIBIvGxSn9GzcFSO",
+    "name": "Haste",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "When making a full attack action, you may make one extra attack with one natural or manufactured weapon at your highest base attack bonus. This effect is not cumulative with similar effects, such as that provided by a speed weapon. You also gain a +1 bonus on attack rolls, dodge AC and Reflex saves. All your modes of movement (including land, fly, burrow, climb and swim) increase by 30ft, to a maximum of twice your normal speed using that form of movement. This increase counts as an enhancement bonus, and it affects the creature's jumping distance as normal for increased speed",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "1",
+          "attack",
+          "attack",
+          "untyped"
+        ],
+        [
+          "1",
+          "ac",
+          "ac",
+          "dodge"
+        ],
+        [
+          "1",
+          "savingThrows",
+          "ref",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noCon": false,
+        "noInt": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "hasted": true
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Haste",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(5,@item.level)",
+        "deleteOnExpiry": true,
+        "total": 5
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "counterName": "",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/haste.png"
+  },
+  {
+    "id": "olTpyao476hOEzzm",
+    "name": "Shield",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "An invisible shield of force hovers in front of you, with the following effects: +4 Shield Bonus to AC Negates Magic Missile attacks direct at you These bonuses apply to incorporeal touch attacks.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "4",
+          "ac",
+          "sac",
+          "base"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Shield",
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/shield.png"
+  },
+  {
+    "id": "pt7a5UwC9S3PKfMt",
+    "name": "Lullaby",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "-5 penalty on Listen and Spot checks and a -2 penalty on Will saves against sleep effects while the Lullaby is in effect. Note: Duration is Concentration + 1 so the buff must be deleted by the GM.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "-5",
+          "skill",
+          "skill.lis",
+          "penalty"
+        ],
+        [
+          "-5",
+          "skill",
+          "skill.spt",
+          "penalty"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "contextNotes": [
+        [
+          "-2 on Will saves vs. Sleep",
+          "savingThrows",
+          "will"
+        ]
+      ],
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Lullaby"
+    },
+    "img": "systems/D35E/icons/buffs/lullaby.png"
+  },
+  {
+    "id": "qmwVJUZ7ZuvF3tAB",
+    "name": "Aid",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You have a +1 morale bonus to attack rolls and saves against fear effects.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "1",
+          "attack",
+          "attack",
+          "morale"
+        ],
+        [
+          "@item.level",
+          "misc",
+          "mhp",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "contextNotes": [
+        [
+          "+[[1]] Morale vs Fear effects",
+          "savingThrows",
+          "allSavingThrows"
+        ]
+      ],
+      "identifiedName": "Aid",
+      "timeline": {
+        "formula": "3*10",
+        "enabled": true,
+        "deleteOnExpiry": true,
+        "total": 30
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/aid.png"
+  },
+  {
+    "name": "Inspire Courage",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Someone is inspiring you with courage. You gain a morale bonus on saves vs charm and fear effects, and a competence bonus on attack rolls and weapon damage rolls. Usage : Set the buff's level to the bard level of the person using Inspire Courage.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "1 + max(0, ceil((@item.level - 7) / 6))",
+          "attack",
+          "attack",
+          "competence"
+        ],
+        [
+          "1 + max(0, ceil((@item.level - 7) / 6))",
+          "damage",
+          "wdamage",
+          "competence"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChanges": [
+        [
+          "savingThrowOptional",
+          "",
+          "",
+          "featSavingThrow",
+          "1 + max(0, ceil((@self.level - 7) / 6))"
+        ]
+      ],
+      "sizeOverride": "",
+      "counterName": "",
+      "contextNotes": [
+        [
+          "+[[1 + max(0, ceil((@item.level - 7) / 6))]] Morale vs Fear and Charm effects",
+          "savingThrows",
+          "allSavingThrows"
+        ]
+      ],
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "1",
+      "timeline": {
+        "total": 5,
+        "formula": "5",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "hideFromToken": false
+    },
+    "img": "systems/D35E/icons/buffs/inspire-courage.png",
+    "id": "rqipVYQRU75CL7sv"
+  },
+  {
+    "id": "rqkvyXOuDHxVVltC",
+    "name": "Burst",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "Increase your speed by 10 feet, plus 10 feet per four character levels beyond 1st, to a maximum increase of 30 feet at 9th character level and higher. These bursts of speed are considered a competence bonus to the your base speed. A burst of speed lasts 3 rounds.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "changes": [
+        [
+          "(@item.level*10)",
+          "speed",
+          "allSpeeds",
+          "competence"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 3,
+        "formula": "3",
+        "enabled": true,
+        "deleteOnExpiry": true
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "sizeOverride": "",
+      "counterName": "",
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/burst.png"
+  },
+  {
+    "id": "ulvEcJsFba6Fg4g9",
+    "name": "Heroism",
+    "type": "buff",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "You gain a +2 morale bonus on attack rolls, saves, and skill checks.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "source": "",
+      "changes": [
+        [
+          "2",
+          "attack",
+          "attack",
+          "morale"
+        ],
+        [
+          "2",
+          "savingThrows",
+          "allSavingThrows",
+          "morale"
+        ],
+        [
+          "2",
+          "skills",
+          "skills",
+          "morale"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "identifiedName": "Heroism",
+      "timeline": {
+        "enabled": true,
+        "formula": "max(1,@item.level)*100",
+        "deleteOnExpiry": false,
+        "total": 100
+      },
+      "sizeOverride": "",
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxFormula": ""
+      },
+      "shapechange": {
+        "type": "polymorph"
+      }
+    },
+    "img": "systems/D35E/icons/buffs/heroism.png"
+  },
+  {
+    "id": "zDJU93ZNTVZbiBP5",
+    "name": "Fatigue",
+    "type": "buff",
+    "img": "systems/D35E/icons/buffs/touch-of-fatigue.png",
+    "data": {
+      "originVersion": 98,
+      "originPack": "",
+      "originId": "",
+      "possibleUpdate": false,
+      "description": {
+        "value": "A fatigued character can neither run nor charge and takes a -2 penalty to Strength and Dexterity. Doing anything that would normally cause fatigue causes the fatigued character to become exhausted. After 8 hours of complete rest, fatigued characters are no longer fatigued.",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "linkId": "",
+      "linkSourceId": "",
+      "linkImported": false,
+      "linkSourceName": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "changes": [
+        [
+          "-2",
+          "ability",
+          "str",
+          "circumstance"
+        ],
+        [
+          "-2",
+          "ability",
+          "dex",
+          "circumstance"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "combatChangeCustomDisplayName": "",
+      "combatChangeCustomReferenceName": "",
+      "sizeOverride": "",
+      "counterName": "",
+      "activation": {
+        "cost": 1,
+        "type": ""
+      },
+      "duration": {
+        "units": ""
+      },
+      "target": {
+        "value": ""
+      },
+      "range": {
+        "units": ""
+      },
+      "recharge": {
+        "enabled": false,
+        "formula": "",
+        "current": 0
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "autoDeductCharges": true,
+        "allowMultipleUses": false,
+        "chargesPerUse": 1,
+        "maxPerUseFormula": "",
+        "maxFormula": "",
+        "isResource": false,
+        "canBeLinked": false
+      },
+      "requiresPsionicFocus": false,
+      "buffType": "temp",
+      "active": false,
+      "level": "",
+      "timeline": {
+        "elapsed": 0,
+        "total": 0,
+        "formula": "",
+        "enabled": false,
+        "deleteOnExpiry": false
+      },
+      "shapechange": {
+        "type": "polymorph"
+      },
+      "hideFromToken": false,
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Fatigue"
+    }
+  }
+]

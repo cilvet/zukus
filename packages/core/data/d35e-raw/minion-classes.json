@@ -1,0 +1,1220 @@
+[
+  {
+    "id": "Ke3JmpbcHjVecxMM",
+    "name": "Animal Companion",
+    "type": "class",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A druid's or ranger's animal companion is different from a normal animal of its kind in many ways. A druid's animal companion is superior to a normal animal of its kind and has special powers, as described below. Class Level Bonus HD Natural Armor Adj. Str/Dex Adj. Bonus Tricks 1st-2nd +0 +0 +0 1 3rd-5th +2 +2 +1 2 6th-8th +4 +4 +2 3 9th-11th +6 +6 +3 4 12th-14th +8 +8 +4 5 15th-17th +10 +10 +5 6 18th-20th +12 +12 +6 7",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "floor(@item.levels/3)*2",
+          "ac",
+          "nac",
+          "untyped"
+        ],
+        [
+          "floor(@item.levels/3)",
+          "ability",
+          "str",
+          "untyped"
+        ],
+        [
+          "floor(@item.levels/3)",
+          "ability",
+          "dex",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "classType": "minion",
+      "levels": 1,
+      "maxLevel": 20,
+      "prestigeLevels": 0,
+      "turnUndeadLevelFormula": "0",
+      "sneakAttackGroup": "none",
+      "automaticFeatures": true,
+      "sneakAttackFormula": "0",
+      "minionGroup": "animalcompanion",
+      "minionLevelFormula": "0",
+      "spellcastingType": "none",
+      "spellcastingSpontaneus": false,
+      "spellcastingDescription": "None",
+      "spellcastingSpellname": "Spell",
+      "spellcastingSpellnamePl": "Spells",
+      "spellPointGroup": "wizard",
+      "spellcastingAbility": "int",
+      "spellPointBonusFormula": "0",
+      "spellPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powerPointBonusBaseAbility": "0",
+      "powerPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersKnown": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersMaxLevel": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "hd": 0,
+      "hp": 0,
+      "bab": "",
+      "skillsPerLevel": 0,
+      "creatureType": "humanoid",
+      "savingThrows": {
+        "fort": {
+          "value": ""
+        },
+        "ref": {
+          "value": ""
+        },
+        "will": {
+          "value": ""
+        }
+      },
+      "fc": {
+        "hp": {
+          "value": 0
+        },
+        "skill": {
+          "value": 0
+        },
+        "alt": {
+          "value": 0
+        }
+      },
+      "classSkills": {
+        "apr": false,
+        "blc": false,
+        "blf": false,
+        "clm": false,
+        "coc": false,
+        "crf": false,
+        "dsc": false,
+        "dip": false,
+        "dev": false,
+        "dis": false,
+        "esc": false,
+        "fog": false,
+        "gif": false,
+        "han": false,
+        "hea": false,
+        "hid": false,
+        "int": false,
+        "jmp": false,
+        "kar": false,
+        "kdu": false,
+        "ken": false,
+        "kge": false,
+        "khi": false,
+        "klo": false,
+        "kna": false,
+        "kno": false,
+        "kpl": false,
+        "kre": false,
+        "kps": false,
+        "lis": false,
+        "mos": false,
+        "opl": false,
+        "prf": false,
+        "pro": false,
+        "rid": false,
+        "src": false,
+        "sen": false,
+        "slt": false,
+        "spl": false,
+        "spt": false,
+        "sur": false,
+        "swm": false,
+        "tmb": false,
+        "umd": false,
+        "uro": false,
+        "aut": false,
+        "psi": false,
+        "upd": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Animal Companion",
+      "customTag": "",
+      "createdBy": "",
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "la": 0,
+      "hdReplace": "",
+      "hdReplaceRacialOnly": false,
+      "hasSpecialSlot": false,
+      "allSpellsKnown": false
+    },
+    "img": "systems/D35E/icons/classfeatures/animal-companion.png"
+  },
+  {
+    "id": "NFMLhZwBD0WP2CEv",
+    "name": "Wizard Familiar",
+    "type": "class",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A familiar is a normal animal that gains new powers and becomes a magical beast when summoned to service by a sorcerer or wizard. It retains the appearance, Hit Dice, base attack bonus, base save bonuses, skills, and feats of the normal animal it once was, but it is treated as a magical beast instead of an animal for the purpose of any effect that depends on its type. Only a normal, unmodified animal may become a familiar. An animal companion cannot also function as a familiar. A familiar also grants special abilities to its master (a sorcerer or wizard), as given on the table below. These special abilities apply only when the master and familiar are within 1 mile of each other. Levels of different classes that are entitled to familiars stack for the purpose of determining any familiar abilities that depend on the master's level. Familiar Ability Descriptions All familiars have special abilities (or impart abilities to their masters) depending on the master's combined level in classes that grant familiars, as shown on the table below and in Progression and Features Tab Master Class Level Natural Armor Adj. Int 1st-2nd +1 6 3rd-4th +2 7 5th-6th +3 8 7th-8th +4 9 9th-10th +5 10 11th-12th +6 11 13th-14th +7 12 15th-16th +8 13 17th-18th +9 14 19th-20th +10 15",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "ceil(@classes.wizardFamiliar.level / 2)+3",
+          "ability",
+          "int",
+          "untyped"
+        ],
+        [
+          "ceil(@classes.wizardFamiliar.level / 2)",
+          "ac",
+          "nac",
+          "untyped"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.fort.base - 2) > 2 ? (@master.data.attributes.savingThrows.fort.base - 2) : 0",
+          "savingThrows",
+          "fort",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.will.base) > 2 ? (@master.data.attributes.savingThrows.will.base) : 0",
+          "savingThrows",
+          "will",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.ref.base - 2) > 2 ? (@master.data.attributes.savingThrows.ref.base - 2) : 0",
+          "savingThrows",
+          "ref",
+          "base"
+        ],
+        [
+          "@master.data.attributes.bab.base",
+          "attack",
+          "babattack",
+          "base"
+        ],
+        [
+          "floor(@master.data.attributes.hp.max / 2)",
+          "misc",
+          "mhp",
+          "base"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "classType": "minion",
+      "levels": 0,
+      "maxLevel": 20,
+      "prestigeLevels": 0,
+      "turnUndeadLevelFormula": "0",
+      "sneakAttackGroup": "none",
+      "automaticFeatures": true,
+      "sneakAttackFormula": "0",
+      "minionGroup": "wizard",
+      "minionLevelFormula": "0",
+      "spellcastingType": "none",
+      "spellcastingSpontaneus": false,
+      "spellcastingDescription": "None",
+      "spellcastingSpellname": "Spell",
+      "spellcastingSpellnamePl": "Spells",
+      "spellPointGroup": "wizard",
+      "spellcastingAbility": "int",
+      "spellPointBonusFormula": "0",
+      "spellPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powerPointBonusBaseAbility": "0",
+      "powerPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersKnown": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersMaxLevel": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "hd": 0,
+      "hp": 0,
+      "bab": "",
+      "skillsPerLevel": 0,
+      "creatureType": "humanoid",
+      "savingThrows": {
+        "fort": {
+          "value": ""
+        },
+        "ref": {
+          "value": ""
+        },
+        "will": {
+          "value": ""
+        }
+      },
+      "fc": {
+        "hp": {
+          "value": 0
+        },
+        "skill": {
+          "value": 0
+        },
+        "alt": {
+          "value": 0
+        }
+      },
+      "classSkills": {
+        "apr": false,
+        "blc": false,
+        "blf": false,
+        "clm": false,
+        "coc": false,
+        "crf": false,
+        "dsc": false,
+        "dip": false,
+        "dev": false,
+        "dis": false,
+        "esc": false,
+        "fog": false,
+        "gif": false,
+        "han": false,
+        "hea": false,
+        "hid": false,
+        "int": false,
+        "jmp": false,
+        "kar": false,
+        "kdu": false,
+        "ken": false,
+        "kge": false,
+        "khi": false,
+        "klo": false,
+        "kna": false,
+        "kno": false,
+        "kpl": false,
+        "kre": false,
+        "kps": false,
+        "lis": false,
+        "mos": false,
+        "opl": false,
+        "prf": false,
+        "pro": false,
+        "rid": false,
+        "src": false,
+        "sen": false,
+        "slt": false,
+        "spl": false,
+        "spt": false,
+        "sur": false,
+        "swm": false,
+        "tmb": false,
+        "umd": false,
+        "uro": false,
+        "aut": false,
+        "psi": false,
+        "upd": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Wizard Familiar",
+      "customTag": "",
+      "createdBy": "",
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "la": 0,
+      "hdReplace": "",
+      "hdReplaceRacialOnly": false,
+      "hasSpecialSlot": false,
+      "allSpellsKnown": false
+    },
+    "img": "systems/D35E/icons/classfeatures/familiar.png"
+  },
+  {
+    "id": "XTcTWTYVe8Ypljlh",
+    "name": "Psicrystal",
+    "type": "class",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "A psicrystal is a fragment of a psionic character's personality, brought into physical form and a semblance of life (via the Psicrystal Affinity feat). A psicrystal appears as a crystalline construct about the size of a human hand. Because it is an extension of its creator's personality, a character's psicrystal is in some ways a part of him. That's why, for example, a psionic character can manifest a personal range power on his psicrystal even though normally he can manifest such a power only on himself. A psicrystal is treated as a construct for the purposes of all effects that depend on its type. A psicrystal grants special abilities to its owner, as shown on the Psicrystal Special Abilities table below. In addition, a psicrystal has a personality (being a fragment of the owner's personality), which gives its owner a bonus on certain types of checks or saving throws, as given on the Psicrystal Personalities table below. These special abilities and bonuses apply only when the owner and the psicrystal are within 1 mile of each other. Psicrystal abilities are based on the owner's levels in psionic classes. Levels from other classes do not count toward the owner's level for purposes of psicrystal abilities. A psicrystal can speak one language of its owner's choice (so long as it is a language the owner knows). A psicrystal can understand all other languages known by its owner, but cannot speak them. This is a supernatural ability. Psicrystal Ability Descriptions All familiars have special abilities (or impart abilities to their masters) depending on the master's combined level in classes that grant familiars, as shown on the table below and in Progression and Features Tab Master Class Level Natural Armor Adj. Int 1st-2nd +0 +0 3rd-4th +1 +1 5th-6th +2 +2 7th-8th +3 +3 9th-10th +4 +4 11th-12th +5 +5 13th-14th +6 +6 15th-16th +7 +7 17th-18th +8 +8 19th-20th +9 +9",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "customTag": "",
+      "createdBy": "",
+      "changes": [
+        [
+          "ceil(@classes.psicrystal.level / 2) - 1",
+          "ability",
+          "int",
+          "untyped"
+        ],
+        [
+          "ceil(@classes.psicrystal.level / 2) - 1",
+          "ac",
+          "nac",
+          "untyped"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.fort.base - 2) > 2 ? (@master.data.attributes.savingThrows.fort.base - 2) : 0",
+          "savingThrows",
+          "fort",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.will.base) > 2 ? (@master.data.attributes.savingThrows.will.base) : 0",
+          "savingThrows",
+          "will",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.ref.base - 2) > 2 ? (@master.data.attributes.savingThrows.ref.base - 2) : 0",
+          "savingThrows",
+          "ref",
+          "base"
+        ],
+        [
+          "@master.data.attributes.bab.base",
+          "attack",
+          "babattack",
+          "base"
+        ],
+        [
+          "floor(@master.data.attributes.hp.max / 2)",
+          "misc",
+          "mhp",
+          "replace"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "noInt": false,
+        "noCon": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "multiAttack": false,
+        "multiweaponAttack": false,
+        "uncannyDodge": false,
+        "hasted": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "sizeOverride": "",
+      "counterName": "",
+      "classType": "minion",
+      "levels": 0,
+      "maxLevel": 20,
+      "prestigeLevels": 0,
+      "la": 0,
+      "hdReplace": "",
+      "hdReplaceRacialOnly": false,
+      "addedAbilities": [
+        {
+          "uid": "psi-self",
+          "level": 1
+        },
+        {
+          "uid": "psi-fly",
+          "level": 9
+        }
+      ],
+      "turnUndeadLevelFormula": "0",
+      "sneakAttackGroup": "none",
+      "automaticFeatures": true,
+      "sneakAttackFormula": "0",
+      "minionGroup": "psion",
+      "minionLevelFormula": "0",
+      "spellcastingType": "none",
+      "spellcastingSpontaneus": false,
+      "spellcastingDescription": "None",
+      "spellcastingSpellname": "Spell",
+      "spellcastingSpellnamePl": "Spells",
+      "hasSpecialSlot": false,
+      "spellPointGroup": "wizard",
+      "spellcastingAbility": "int",
+      "spellPointBonusFormula": "0",
+      "spellPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powerPointBonusBaseAbility": "0",
+      "powerPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersKnown": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersMaxLevel": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "hd": 0,
+      "hp": 0,
+      "bab": "",
+      "skillsPerLevel": 0,
+      "allSpellsKnown": false,
+      "creatureType": "humanoid",
+      "savingThrows": {
+        "fort": {
+          "value": ""
+        },
+        "ref": {
+          "value": ""
+        },
+        "will": {
+          "value": ""
+        }
+      },
+      "fc": {
+        "hp": {
+          "value": 0
+        },
+        "skill": {
+          "value": 0
+        },
+        "alt": {
+          "value": 0
+        }
+      },
+      "classSkills": {
+        "apr": false,
+        "blc": false,
+        "blf": false,
+        "clm": false,
+        "coc": false,
+        "crf": false,
+        "dsc": false,
+        "dip": false,
+        "dev": false,
+        "dis": false,
+        "esc": false,
+        "fog": false,
+        "gif": false,
+        "han": false,
+        "hea": false,
+        "hid": false,
+        "int": false,
+        "jmp": false,
+        "kar": false,
+        "kdu": false,
+        "ken": false,
+        "kge": false,
+        "khi": false,
+        "klo": false,
+        "kna": false,
+        "kno": false,
+        "kpl": false,
+        "kre": false,
+        "kps": false,
+        "lis": false,
+        "mos": false,
+        "opl": false,
+        "prf": false,
+        "pro": false,
+        "rid": false,
+        "src": false,
+        "sen": false,
+        "slt": false,
+        "spl": false,
+        "spt": false,
+        "sur": false,
+        "swm": false,
+        "tmb": false,
+        "umd": false,
+        "uro": false,
+        "aut": false,
+        "psi": false,
+        "upd": false
+      },
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Psicrystal"
+    },
+    "img": "systems/D35E/icons/minions/psicrystal.png"
+  },
+  {
+    "id": "vDGHsQsD1sh9bh4C",
+    "name": "Paladin Mount",
+    "type": "class",
+    "data": {
+      "originVersion": 97,
+      "description": {
+        "value": "The paladin's mount is superior to a normal mount of its kind and has special powers, as described below. The standard mount for a Medium paladin is a heavy warhorse, and the standard mount for a Small paladin is a warpony. Another kind of mount, such as a riding dog (for a halfling paladin) or a Large shark (for a paladin in an aquatic campaign) may be allowed as well. A paladin's mount is treated as a magical beast, not an animal, for the purpose of all effects that depend on its type (though it retains an animal's HD, base attack bonus, saves, skill points, and feats). Paladin Level Bonus HD Natural Armor Adj. Str Adj. Int 5th-7th +2 +4 +1 6 8th-10th +4 +6 +2 7 11th-14th +6 +8 +3 8 15th-20th +8 +10 +4 9",
+        "chat": "",
+        "unidentified": ""
+      },
+      "nameFormula": "",
+      "nameFromFormula": false,
+      "uniqueId": "",
+      "source": "",
+      "classSource": "",
+      "userNonRemovable": false,
+      "customAttributesLocked": false,
+      "changes": [
+        [
+          "(@classes.paladinMount.level > 14 ? 7 : (@classes.paladinMount.level > 10 ? 6 : (@classes.paladinMount.level > 7 ? 5 : 4)))",
+          "ability",
+          "int",
+          "untyped"
+        ],
+        [
+          "(@classes.paladinMount.level > 14 ? 10 : (@classes.paladinMount.level > 10 ? 8 : (@classes.paladinMount.level > 7 ? 6 : 4)))",
+          "ac",
+          "nac",
+          "untyped"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.fort.base - 2) > 2 ? (@master.data.attributes.savingThrows.fort.base - 2) : 0",
+          "savingThrows",
+          "fort",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.will.base) > 2 ? (@master.data.attributes.savingThrows.will.base) : 0",
+          "savingThrows",
+          "will",
+          "base"
+        ],
+        [
+          "(@master.data.attributes.savingThrows.ref.base - 2) > 2 ? (@master.data.attributes.savingThrows.ref.base - 2) : 0",
+          "savingThrows",
+          "ref",
+          "base"
+        ],
+        [
+          "(@classes.paladinMount.level > 14 ? 4 : (@classes.paladinMount.level > 10 ? 3 : (@classes.paladinMount.level > 7 ? 2 : 1)))",
+          "ability",
+          "str",
+          "untyped"
+        ],
+        [
+          "@classes.paladinMount.level > 7 ? 10 : 0",
+          "speed",
+          "allSpeeds",
+          "untyped"
+        ]
+      ],
+      "changeFlags": {
+        "loseDexToAC": false,
+        "noStr": false,
+        "noDex": false,
+        "oneInt": false,
+        "oneWis": false,
+        "oneCha": false,
+        "noEncumbrance": false,
+        "mediumArmorFullSpeed": false,
+        "heavyArmorFullSpeed": false,
+        "uncannyDodge": false,
+        "noInt": false,
+        "noCon": false,
+        "multiAttack": false,
+        "multiweaponAttack": false
+      },
+      "conditionFlags": {
+        "dazzled": false,
+        "wildshaped": false,
+        "polymorphed": false
+      },
+      "sizeOverride": "",
+      "counterName": "",
+      "classType": "minion",
+      "levels": 0,
+      "maxLevel": 20,
+      "prestigeLevels": 0,
+      "turnUndeadLevelFormula": "0",
+      "sneakAttackGroup": "none",
+      "automaticFeatures": true,
+      "sneakAttackFormula": "0",
+      "minionGroup": "paladin",
+      "minionLevelFormula": "0",
+      "spellcastingType": "none",
+      "spellcastingSpontaneus": false,
+      "spellcastingDescription": "None",
+      "spellcastingSpellname": "Spell",
+      "spellcastingSpellnamePl": "Spells",
+      "spellPointGroup": "wizard",
+      "spellcastingAbility": "int",
+      "spellPointBonusFormula": "0",
+      "spellPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powerPointBonusBaseAbility": "0",
+      "powerPointTable": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersKnown": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "powersMaxLevel": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0,
+        "20": 0
+      },
+      "hd": 0,
+      "hp": 0,
+      "bab": "",
+      "skillsPerLevel": 0,
+      "creatureType": "humanoid",
+      "savingThrows": {
+        "fort": {
+          "value": ""
+        },
+        "ref": {
+          "value": ""
+        },
+        "will": {
+          "value": ""
+        }
+      },
+      "fc": {
+        "hp": {
+          "value": 0
+        },
+        "skill": {
+          "value": 0
+        },
+        "alt": {
+          "value": 0
+        }
+      },
+      "classSkills": {
+        "apr": false,
+        "blc": false,
+        "blf": false,
+        "clm": false,
+        "coc": false,
+        "crf": false,
+        "dsc": false,
+        "dip": false,
+        "dev": false,
+        "dis": false,
+        "esc": false,
+        "fog": false,
+        "gif": false,
+        "han": false,
+        "hea": false,
+        "hid": false,
+        "int": false,
+        "jmp": false,
+        "kar": false,
+        "kdu": false,
+        "ken": false,
+        "kge": false,
+        "khi": false,
+        "klo": false,
+        "kna": false,
+        "kno": false,
+        "kpl": false,
+        "kre": false,
+        "kps": false,
+        "lis": false,
+        "mos": false,
+        "opl": false,
+        "prf": false,
+        "pro": false,
+        "rid": false,
+        "src": false,
+        "sen": false,
+        "slt": false,
+        "spl": false,
+        "spt": false,
+        "sur": false,
+        "swm": false,
+        "tmb": false,
+        "umd": false,
+        "uro": false,
+        "aut": false,
+        "psi": false,
+        "upd": false
+      },
+      "nonActiveClassAbilities": [
+        [
+          8,
+          "Improved Speed",
+          "The mount’s speed increases by 10 feet."
+        ]
+      ],
+      "container": "None",
+      "containerWeightless": false,
+      "identifiedName": "Paladin Mount",
+      "customTag": "",
+      "createdBy": "",
+      "combatChangesRange": {
+        "maxFormula": "",
+        "max": 0
+      },
+      "combatChangesAdditionalRanges": {
+        "hasAdditionalRanges": false,
+        "slider1": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider2": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        },
+        "slider3": {
+          "maxFormula": "",
+          "max": 0,
+          "name": ""
+        }
+      },
+      "combatChangesUsesCost": "chargesPerUse",
+      "combatChangesApplySpecialActionsOnce": true,
+      "la": 0,
+      "hdReplace": "",
+      "hdReplaceRacialOnly": false,
+      "hasSpecialSlot": false,
+      "allSpellsKnown": false
+    },
+    "img": "systems/D35E/icons/classfeatures/paladin-mount.png"
+  }
+]
