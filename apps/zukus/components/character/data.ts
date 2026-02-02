@@ -15,7 +15,7 @@ export type CharacterPage = {
 const BASE_PAGES: CharacterPage[] = [
   { key: 'combat', label: 'Combate', icon: 'shield' },
   { key: 'abilities', label: 'Atributos', icon: 'star' },
-  { key: 'equipment', label: 'Equipo', icon: 'suitcase' },
+  { key: 'inventory', label: 'Inventario', icon: 'suitcase' },
   { key: 'description', label: 'Descripcion', icon: 'user' },
   { key: 'notes', label: 'Notas', icon: 'pencil' },
   { key: 'entities', label: 'Entidades', icon: 'list' },

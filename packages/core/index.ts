@@ -53,6 +53,12 @@ export {
   createItemInstance,
   inventorySuccess,
   inventoryWithWarning,
+  // Instance field helpers (per-item operations)
+  isItemEquipped,
+  isItemWielded,
+  isItemActive,
+  // Note: setItem*/toggleItem* for state operations are available via inventoryOps namespace
+  // The per-item helpers are: inventoryOps.setItemEquipped, inventoryOps.toggleItemEquipped (from instanceFields)
 } from "./core/domain/inventory";
 export * as inventoryOps from "./core/domain/inventory";
 

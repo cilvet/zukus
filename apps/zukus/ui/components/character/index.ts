@@ -36,6 +36,13 @@ export {
   type EquipmentDetailLayout,
 } from './equipment'
 export {
+  InventoryItemView,
+  type InventoryLayout,
+  InventoryList,
+  InventoryLayoutToggle,
+  InventoryHeader,
+} from './inventory'
+export {
   AbilityScoresEditor,
   LevelEditor,
   ClassSelectorDetail,

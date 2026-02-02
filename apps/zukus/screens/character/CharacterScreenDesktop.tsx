@@ -29,6 +29,11 @@ import {
   EquipmentLayoutToggle,
   EquipmentDetailPanel,
   type EquipmentLayout,
+  InventoryList,
+  InventoryLayoutToggle,
+  InventoryHeader,
+  type InventoryLayout,
+  useInventoryState,
   SavingThrowCard,
   ArmorClassCard,
   InitiativeCard,
@@ -359,10 +364,13 @@ function CharacterScreenDesktopContent() {
   const editBuff = useCharacterStore((state) => state.editBuff)
   const deleteBuff = useCharacterStore((state) => state.deleteBuff)
   const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
+  const toggleInventoryEquipped = useCharacterStore((state) => state.toggleInventoryEquipped)
   const rest = useCharacterStore((state) => state.rest)
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
+  const inventoryState = useInventoryState()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
+  const [inventoryLayout, setInventoryLayout] = useState<InventoryLayout>('balanced')
 
   const entitiesByType = (() => {
     const groups: Record<string, ComputedEntity[]> = {}
@@ -423,6 +431,10 @@ function CharacterScreenDesktopContent() {
 
   const handleEquipmentPress = (itemId: string, itemName: string) => {
     openPanel(`equipment/${itemId}`, itemName)
+  }
+
+  const handleInventoryItemPress = (instanceId: string, itemName: string) => {
+    openPanel(`inventoryItem/${instanceId}`, itemName)
   }
 
   const handleAttackPress = (attack: { weaponUniqueId?: string; name: string }) => {
@@ -647,28 +659,56 @@ function CharacterScreenDesktopContent() {
           </YStack>
         </VerticalSection>
 
-        {/* Columna 3: Equipment */}
+        {/* Columna 3: Inventory (new entity-based system) */}
         <VerticalSection>
           <YStack width="100%" gap={16}>
             <SectionCard>
               <SectionHeader
-                icon="E"
-                title="Equipment"
-                action={<EquipmentLayoutToggle layout={equipmentLayout} onChange={setEquipmentLayout} />}
+                icon="I"
+                title="Inventario"
+                action={<InventoryLayoutToggle layout={inventoryLayout} onChange={setInventoryLayout} />}
               />
-              {!characterSheet ? (
-                <Text color="$placeholderColor">Cargando...</Text>
-              ) : characterSheet.equipment.items.length === 0 ? (
+              <InventoryHeader
+                currentWeight={inventoryState.items.reduce((total, item) => {
+                  const weight = item.entity?.weight
+                  if (typeof weight === 'number') {
+                    return total + weight * item.quantity
+                  }
+                  return total
+                }, 0)}
+                maxWeight={100}
+                currencies={inventoryState.currencies}
+              />
+              {inventoryState.items.length === 0 ? (
                 <Text color="$placeholderColor">Sin items en el inventario.</Text>
               ) : (
+                <InventoryList
+                  items={inventoryState.items}
+                  layout={inventoryLayout}
+                  onItemPress={(item) => {
+                    const name = item.customName ?? item.entity?.name ?? item.itemId
+                    handleInventoryItemPress(item.instanceId, name)
+                  }}
+                  onToggleEquipped={(item) => toggleInventoryEquipped(item.instanceId)}
+                />
+              )}
+            </SectionCard>
+            {/* Legacy equipment for reference (can be removed later) */}
+            {characterSheet && characterSheet.equipment.items.length > 0 && (
+              <SectionCard>
+                <SectionHeader
+                  icon="E"
+                  title="Equipment (Legacy)"
+                  action={<EquipmentLayoutToggle layout={equipmentLayout} onChange={setEquipmentLayout} />}
+                />
                 <EquipmentList
                   items={characterSheet.equipment.items}
                   layout={equipmentLayout}
                   onItemPress={(item) => handleEquipmentPress(item.uniqueId, item.name)}
                   onToggleEquipped={(item) => toggleItemEquipped(item.uniqueId)}
                 />
-              )}
-            </SectionCard>
+              </SectionCard>
+            )}
           </YStack>
         </VerticalSection>
 
@@ -771,6 +811,9 @@ function CharacterScreenDesktopContent() {
             item={getEquipmentItemForPanel(panelInfo.id)!}
             onToggleEquipped={() => toggleItemEquipped(panelInfo.id)}
           />
+        )}
+        {panelInfo?.type === 'inventoryItem' && panelInfo?.id && (
+          <InventoryItemDetailPanelContainer instanceId={panelInfo.id} />
         )}
         {panelInfo?.type === 'buff' && panelInfo?.id && getBuffForPanel(panelInfo.id) && (
           <BuffDetailPanel
@@ -1120,6 +1163,109 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
       onDelete={isNew ? undefined : handleDelete}
       onCancel={handleCancel}
     />
+  )
+}
+
+function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string }) {
+  const inventoryState = useInventoryState()
+  const toggleInventoryEquipped = useCharacterStore((state) => state.toggleInventoryEquipped)
+  const setWeaponWielded = useCharacterStore((state) => state.setWeaponWielded)
+  const removeFromInventory = useCharacterStore((state) => state.removeFromInventory)
+  const { closePanel } = usePanelNavigation('character')
+
+  const item = inventoryState.items.find((i) => i.instanceId === instanceId)
+
+  if (!item) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Item no encontrado</Text>
+      </YStack>
+    )
+  }
+
+  // Convert InventoryItemInstance to ComputedEntity format for GenericEntityDetailPanel
+  const entity = item.entity
+  if (!entity) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Entity data not available</Text>
+      </YStack>
+    )
+  }
+
+  const computedEntity: ComputedEntity = {
+    ...entity,
+    _meta: {
+      source: {
+        type: 'inventory' as any,
+        instanceId: item.instanceId,
+      },
+      suppressed: false,
+    },
+  }
+
+  const handleToggleEquipped = () => {
+    toggleInventoryEquipped(instanceId)
+  }
+
+  const handleToggleWielded = (wielded: boolean) => {
+    setWeaponWielded(instanceId, wielded)
+  }
+
+  const handleRemove = () => {
+    removeFromInventory(instanceId)
+    closePanel()
+  }
+
+  return (
+    <YStack gap={16}>
+      <GenericEntityDetailPanel entity={computedEntity} />
+      <XStack gap={8} paddingHorizontal={16}>
+        {entity.equipped !== undefined && (
+          <Pressable onPress={handleToggleEquipped}>
+            <YStack
+              padding={8}
+              borderRadius={6}
+              backgroundColor={entity.equipped ? '$blue4' : '$backgroundHover'}
+              borderWidth={1}
+              borderColor={entity.equipped ? '$blue8' : '$borderColor'}
+            >
+              <Text fontSize={12} color={entity.equipped ? '$blue10' : '$color'}>
+                {entity.equipped ? 'Equipped' : 'Equip'}
+              </Text>
+            </YStack>
+          </Pressable>
+        )}
+        {entity.wielded !== undefined && (
+          <Pressable onPress={() => handleToggleWielded(!entity.wielded)}>
+            <YStack
+              padding={8}
+              borderRadius={6}
+              backgroundColor={entity.wielded ? '$orange4' : '$backgroundHover'}
+              borderWidth={1}
+              borderColor={entity.wielded ? '$orange8' : '$borderColor'}
+            >
+              <Text fontSize={12} color={entity.wielded ? '$orange10' : '$color'}>
+                {entity.wielded ? 'Wielded' : 'Wield'}
+              </Text>
+            </YStack>
+          </Pressable>
+        )}
+        <Pressable onPress={handleRemove}>
+          <YStack
+            padding={8}
+            borderRadius={6}
+            backgroundColor="$red4"
+            borderWidth={1}
+            borderColor="$red8"
+          >
+            <Text fontSize={12} color="$red10">
+              Remove
+            </Text>
+          </YStack>
+        </Pressable>
+      </XStack>
+    </YStack>
   )
 }
 

@@ -23,6 +23,11 @@ export {
   useCharacterBackgroundInfo,
   useCGE,
   usePrimaryCGE,
+  // Inventory selectors (new system)
+  useInventoryState,
+  useInventoryItems,
+  useInventoryItem,
+  useCurrencies,
 } from './characterStore'
 
 export { usePanelStore } from './panelStore'

@@ -33,6 +33,7 @@ export type DetailType =
   | 'allBuffs'
   | 'equipment'
   | 'item'
+  | 'inventoryItem'
   | 'hitPoints'
   | 'attack'
   | 'levelDetail'
@@ -105,6 +106,9 @@ export const DETAIL_REGISTRY: Record<DetailType, DetailConfig> = {
   },
   item: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),
+  },
+  inventoryItem: {
+    getTitle: (id) => id, // El nombre real se pasa como customName
   },
   attack: {
     getTitle: (id) => id.charAt(0).toUpperCase() + id.slice(1),

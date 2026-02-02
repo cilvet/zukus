@@ -41,6 +41,13 @@ export {
   type EquipmentDetailLayout,
 } from './character'
 export {
+  InventoryItemView,
+  type InventoryLayout,
+  InventoryList,
+  InventoryLayoutToggle,
+  InventoryHeader,
+} from './character'
+export {
   EntityCard,
   EntityTypeGroup,
   GenericEntityDetailPanel,

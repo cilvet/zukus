@@ -12,6 +12,9 @@ import type {
   ComputedEntity,
   Alignment,
   StandardEntity,
+  InventoryState,
+  InventoryItemInstance,
+  CurrencyDefinition,
 } from '@zukus/core'
 
 /**
@@ -107,6 +110,32 @@ type CharacterActions = {
   unprepareSlotForCGE: (cgeId: string, slotLevel: number, slotIndex: number, trackId?: string) => UpdateResult
   addKnownForCGE: (cgeId: string, entity: StandardEntity, entityLevel: number) => UpdateResult
   removeKnownForCGE: (cgeId: string, entityId: string) => UpdateResult
+
+  // New Inventory Management (entity-based)
+  addToInventory: (params: {
+    itemId: string
+    entityType: string
+    quantity?: number
+    equipped?: boolean
+    customName?: string
+  }) => UpdateResult & { instanceId?: string }
+  removeFromInventory: (instanceId: string, quantity?: number) => UpdateResult
+  updateInventoryItem: (
+    instanceId: string,
+    updates: Partial<Pick<InventoryItemInstance, 'quantity' | 'customName' | 'notes'>>
+  ) => UpdateResult
+  toggleInventoryEquipped: (instanceId: string) => UpdateResult
+  setWeaponWielded: (instanceId: string, wielded: boolean) => UpdateResult
+
+  // Currency Management
+  addCurrency: (currencyId: string, amount: number) => UpdateResult
+  spendCurrency: (currencyId: string, amount: number) => UpdateResult
+  convertCurrency: (
+    fromId: string,
+    toId: string,
+    amount: number,
+    currencyDefs: CurrencyDefinition[]
+  ) => UpdateResult
 }
 
 type CharacterStore = CharacterState & CharacterActions
@@ -416,6 +445,62 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     if (!updater) return notSetResult
     return updater.removeKnownEntityForCGE(cgeId, entityId)
   },
+
+  // =============================================================================
+  // New Inventory Management (entity-based)
+  // =============================================================================
+
+  addToInventory: (params) => {
+    const { updater } = get()
+    if (!updater) return { ...notSetResult, instanceId: undefined }
+    return updater.addToInventory(params)
+  },
+
+  removeFromInventory: (instanceId: string, quantity?: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.removeFromInventory(instanceId, quantity)
+  },
+
+  updateInventoryItem: (instanceId, updates) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.updateInventoryItem(instanceId, updates)
+  },
+
+  toggleInventoryEquipped: (instanceId: string) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.toggleInventoryEquipped(instanceId)
+  },
+
+  setWeaponWielded: (instanceId: string, wielded: boolean) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.setWeaponWielded(instanceId, wielded)
+  },
+
+  // =============================================================================
+  // Currency Management
+  // =============================================================================
+
+  addCurrency: (currencyId: string, amount: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.addCurrency(currencyId, amount)
+  },
+
+  spendCurrency: (currencyId: string, amount: number) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.spendCurrency(currencyId, amount)
+  },
+
+  convertCurrency: (fromId, toId, amount, currencyDefs) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.convertCurrency(fromId, toId, amount, currencyDefs)
+  },
 }))
 
 // =============================================================================
@@ -527,6 +612,30 @@ export function useCharacterBuild() {
 }
 
 // =============================================================================
+// Inventory Selectors (new entity-based system)
+// =============================================================================
+
+const EMPTY_INVENTORY_STATE: InventoryState = { items: [], currencies: {} }
+
+export function useInventoryState() {
+  return useCharacterStore((state) => state.baseData?.inventoryState ?? EMPTY_INVENTORY_STATE)
+}
+
+export function useInventoryItems() {
+  return useCharacterStore((state) => state.baseData?.inventoryState?.items ?? [])
+}
+
+export function useInventoryItem(instanceId: string) {
+  return useCharacterStore((state) =>
+    state.baseData?.inventoryState?.items.find((i) => i.instanceId === instanceId)
+  )
+}
+
+export function useCurrencies() {
+  return useCharacterStore((state) => state.baseData?.inventoryState?.currencies ?? {})
+}
+
+// =============================================================================
 // Selectores de acciones (para componentes que solo necesitan acciones)
 // =============================================================================
 
@@ -580,6 +689,16 @@ export function useCharacterActions() {
     unprepareSlotForCGE: state.unprepareSlotForCGE,
     addKnownForCGE: state.addKnownForCGE,
     removeKnownForCGE: state.removeKnownForCGE,
+    // Inventory (new system)
+    addToInventory: state.addToInventory,
+    removeFromInventory: state.removeFromInventory,
+    updateInventoryItem: state.updateInventoryItem,
+    toggleInventoryEquipped: state.toggleInventoryEquipped,
+    setWeaponWielded: state.setWeaponWielded,
+    // Currency
+    addCurrency: state.addCurrency,
+    spendCurrency: state.spendCurrency,
+    convertCurrency: state.convertCurrency,
   }))
 }
 

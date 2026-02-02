@@ -1,8 +1,38 @@
+import { Pressable } from 'react-native'
 import { YStack, XStack, Text, Card } from 'tamagui'
 import type { ComputedEntity } from '@zukus/core'
+import { Checkbox } from '../../../atoms'
+
+/**
+ * Instance field definition for editable fields.
+ */
+export type InstanceFieldDefinition = {
+  name: string
+  type: 'boolean' | 'number' | 'string'
+  label: string
+  description?: string
+}
+
+/**
+ * Well-known instance fields that can be edited in the panel.
+ */
+const KNOWN_INSTANCE_FIELDS: InstanceFieldDefinition[] = [
+  { name: 'equipped', type: 'boolean', label: 'Equipped', description: 'Whether this item is currently equipped' },
+  { name: 'wielded', type: 'boolean', label: 'Wielded', description: 'Whether this weapon is currently wielded' },
+  { name: 'active', type: 'boolean', label: 'Active', description: 'Whether this entity is currently active' },
+]
 
 type GenericEntityDetailPanelProps = {
   entity: ComputedEntity
+  /**
+   * Optional: Additional instance fields to render as editable.
+   * If not provided, will auto-detect known fields (equipped, wielded, active).
+   */
+  instanceFields?: InstanceFieldDefinition[]
+  /**
+   * Callback when an instance field value changes.
+   */
+  onInstanceFieldChange?: (field: string, value: unknown) => void
 }
 
 const EXCLUDED_FIELDS = new Set([
@@ -13,6 +43,10 @@ const EXCLUDED_FIELDS = new Set([
   '_meta',
   'tags',
   'image',
+  // Instance fields are handled separately
+  'equipped',
+  'wielded',
+  'active',
 ])
 
 function formatFieldLabel(key: string): string {
@@ -142,6 +176,10 @@ function ComplexFieldSection({ label, value }: { label: string; value: unknown }
 }
 
 function SourceInfo({ meta }: { meta: ComputedEntity['_meta'] }) {
+  // Handle both inventory and standard computed entity sources
+  const sourceType = (meta.source as any).originType ?? (meta.source as any).type ?? 'unknown'
+  const sourceId = (meta.source as any).originId ?? (meta.source as any).instanceId ?? '-'
+
   return (
     <Card padding={12} backgroundColor="$uiBackgroundColor" borderRadius={8}>
       <YStack gap={8}>
@@ -150,12 +188,12 @@ function SourceInfo({ meta }: { meta: ComputedEntity['_meta'] }) {
         </Text>
         <XStack justifyContent="space-between">
           <Text fontSize={12} color="$placeholderColor">Tipo</Text>
-          <Text fontSize={12} color="$color">{meta.source.originType}</Text>
+          <Text fontSize={12} color="$color">{sourceType}</Text>
         </XStack>
         <XStack justifyContent="space-between">
           <Text fontSize={12} color="$placeholderColor">ID</Text>
           <Text fontSize={12} color="$color" numberOfLines={1} flex={1} textAlign="right">
-            {meta.source.originId}
+            {sourceId}
           </Text>
         </XStack>
         {meta.suppressed ? (
@@ -180,10 +218,110 @@ function SourceInfo({ meta }: { meta: ComputedEntity['_meta'] }) {
   )
 }
 
-export function GenericEntityDetailPanel({ entity }: GenericEntityDetailPanelProps) {
+/**
+ * Renders editable instance fields section.
+ */
+function InstanceFieldsSection({
+  entity,
+  fields,
+  onChange,
+}: {
+  entity: ComputedEntity
+  fields: InstanceFieldDefinition[]
+  onChange?: (field: string, value: unknown) => void
+}) {
+  // Only show fields that exist in the entity
+  const activeFields = fields.filter((field) => field.name in entity)
+
+  if (activeFields.length === 0) {
+    return null
+  }
+
+  return (
+    <Card padding={12} backgroundColor="$uiBackgroundColor" borderRadius={8}>
+      <YStack gap={12}>
+        <Text fontSize={11} fontWeight="600" color="$placeholderColor" textTransform="uppercase">
+          Estado
+        </Text>
+        {activeFields.map((field) => {
+          const value = (entity as any)[field.name]
+
+          if (field.type === 'boolean') {
+            return (
+              <BooleanFieldRow
+                key={field.name}
+                label={field.label}
+                value={Boolean(value)}
+                onChange={onChange ? (v) => onChange(field.name, v) : undefined}
+              />
+            )
+          }
+
+          // For now, only handle boolean fields
+          // Number and string fields can be added later
+          return (
+            <SimpleFieldRow
+              key={field.name}
+              label={field.label}
+              value={formatValue(value)}
+            />
+          )
+        })}
+      </YStack>
+    </Card>
+  )
+}
+
+function BooleanFieldRow({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: boolean
+  onChange?: (value: boolean) => void
+}) {
+  const content = (
+    <XStack
+      paddingVertical={8}
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Text fontSize={13} color="$color" fontWeight="500">
+        {label}
+      </Text>
+      <Checkbox
+        checked={value}
+        onCheckedChange={onChange ? () => onChange(!value) : undefined}
+        size="small"
+        variant="diamond"
+        disabled={!onChange}
+      />
+    </XStack>
+  )
+
+  if (onChange) {
+    return (
+      <Pressable onPress={() => onChange(!value)}>
+        {content}
+      </Pressable>
+    )
+  }
+
+  return content
+}
+
+export function GenericEntityDetailPanel({
+  entity,
+  instanceFields,
+  onInstanceFieldChange,
+}: GenericEntityDetailPanelProps) {
   const tags = entity.tags ?? []
   const simpleFields: Array<{ key: string; label: string; value: string }> = []
   const complexFields: Array<{ key: string; label: string; value: unknown }> = []
+
+  // Determine which instance fields to show
+  const fieldsToShow = instanceFields ?? KNOWN_INSTANCE_FIELDS
 
   for (const [key, value] of Object.entries(entity)) {
     if (EXCLUDED_FIELDS.has(key)) {
@@ -223,6 +361,13 @@ export function GenericEntityDetailPanel({ entity }: GenericEntityDetailPanelPro
           </Text>
         </YStack>
       ) : null}
+
+      {/* Instance fields section (editable) - prominently placed */}
+      <InstanceFieldsSection
+        entity={entity}
+        fields={fieldsToShow}
+        onChange={onInstanceFieldChange}
+      />
 
       {simpleFields.length > 0 ? (
         <Card padding={0} backgroundColor="$uiBackgroundColor" borderRadius={8} overflow="hidden">
