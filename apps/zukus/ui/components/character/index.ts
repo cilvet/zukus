@@ -37,9 +37,7 @@ export {
 } from './equipment'
 export {
   InventoryItemView,
-  type InventoryLayout,
   InventoryList,
-  InventoryLayoutToggle,
   InventoryHeader,
 } from './inventory'
 export {

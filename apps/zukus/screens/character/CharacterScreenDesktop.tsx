@@ -31,9 +31,7 @@ import {
   EquipmentDetailPanel,
   type EquipmentLayout,
   InventoryList,
-  InventoryLayoutToggle,
   InventoryHeader,
-  type InventoryLayout,
   useInventoryState,
   SavingThrowCard,
   ArmorClassCard,
@@ -375,7 +373,6 @@ function CharacterScreenDesktopContent() {
   const inventoryState = useInventoryState()
   const { themeInfo } = useTheme()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
-  const [inventoryLayout, setInventoryLayout] = useState<InventoryLayout>('balanced')
 
   const entitiesByType = (() => {
     const groups: Record<string, ComputedEntity[]> = {}
@@ -672,27 +669,24 @@ function CharacterScreenDesktopContent() {
                 icon="I"
                 title="Inventario"
                 action={
-                  <XStack gap={12} alignItems="center">
-                    <InventoryLayoutToggle layout={inventoryLayout} onChange={setInventoryLayout} />
-                    <Pressable onPress={() => openPanel('itemBrowser/browse', 'Buscar Items')} hitSlop={8}>
-                      {({ pressed }) => (
-                        <XStack
-                          backgroundColor={themeInfo.colors.accent}
-                          paddingHorizontal={10}
-                          paddingVertical={6}
-                          borderRadius={6}
-                          alignItems="center"
-                          gap={4}
-                          opacity={pressed ? 0.7 : 1}
-                        >
-                          <FontAwesome6 name="plus" size={12} color="#FFFFFF" />
-                          <Text fontSize={12} fontWeight="600" color="#FFFFFF">
-                            Anadir
-                          </Text>
-                        </XStack>
-                      )}
-                    </Pressable>
-                  </XStack>
+                  <Pressable onPress={() => openPanel('itemBrowser/browse', 'Buscar Items')} hitSlop={8}>
+                    {({ pressed }) => (
+                      <XStack
+                        backgroundColor={themeInfo.colors.accent}
+                        paddingHorizontal={10}
+                        paddingVertical={6}
+                        borderRadius={6}
+                        alignItems="center"
+                        gap={4}
+                        opacity={pressed ? 0.7 : 1}
+                      >
+                        <FontAwesome6 name="plus" size={12} color="#FFFFFF" />
+                        <Text fontSize={12} fontWeight="600" color="#FFFFFF">
+                          Anadir
+                        </Text>
+                      </XStack>
+                    )}
+                  </Pressable>
                 }
               />
               <InventoryHeader
@@ -712,7 +706,6 @@ function CharacterScreenDesktopContent() {
               ) : (
                 <InventoryList
                   items={inventoryState.items}
-                  layout={inventoryLayout}
                   onItemPress={(item) => {
                     const name = item.customName ?? item.entity?.name ?? item.itemId
                     handleInventoryItemPress(item.instanceId, name)
@@ -1203,6 +1196,7 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
 function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string }) {
   const inventoryState = useInventoryState()
   const setInventoryInstanceField = useCharacterStore((state) => state.setInventoryInstanceField)
+  const updateInventoryItem = useCharacterStore((state) => state.updateInventoryItem)
   const removeFromInventory = useCharacterStore((state) => state.removeFromInventory)
   const { closePanel } = usePanelNavigation('character')
 
@@ -1226,8 +1220,10 @@ function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string 
     )
   }
 
+  // Merge quantity from item into entity so it appears in instance fields
   const computedEntity: ComputedEntity = {
     ...entity,
+    quantity: item.quantity,
     _meta: {
       source: {
         type: 'inventory' as any,
@@ -1243,7 +1239,12 @@ function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string 
   }
 
   const handleInstanceFieldChange = (field: string, value: unknown) => {
-    // Generic handler for any boolean instance field
+    // Handle quantity separately (it's stored directly on InventoryItemInstance)
+    if (field === 'quantity' && typeof value === 'number') {
+      updateInventoryItem(instanceId, { quantity: value })
+      return
+    }
+    // Handle boolean instance fields (equipped, wielded, active, etc.)
     if (typeof value === 'boolean') {
       setInventoryInstanceField(instanceId, field, value)
     }

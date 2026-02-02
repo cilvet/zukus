@@ -1,17 +1,16 @@
-import { View } from 'react-native'
+import { View, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { YStack, Text } from 'tamagui'
+import { YStack, XStack, Text } from 'tamagui'
+import { FontAwesome6 } from '@expo/vector-icons'
 import { SectionHeader } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 import {
   useCharacterStore,
   useInventoryState,
+  useTheme,
   InventoryList,
-  InventoryLayoutToggle,
   InventoryHeader,
-  type InventoryLayout,
 } from '../../../ui'
-import { useState } from 'react'
 
 /**
  * Seccion de inventario (nuevo sistema basado en entidades).
@@ -20,14 +19,18 @@ export function InventorySection() {
   const navigateToDetail = useNavigateToDetail()
   const inventoryState = useInventoryState()
   const toggleInventoryEquipped = useCharacterStore((state) => state.toggleInventoryEquipped)
-  const [layout, setLayout] = useState<InventoryLayout>('balanced')
+  const { themeInfo } = useTheme()
 
   const handleItemPress = (instanceId: string, itemName: string) => {
     navigateToDetail('inventoryItem', instanceId, itemName)
   }
 
+  const handleAddItem = () => {
+    navigateToDetail('itemBrowser', 'browse', 'Buscar Items')
+  }
+
   const handleCurrenciesPress = () => {
-    // TODO: Open currency edit panel
+    navigateToDetail('currencyEdit', 'edit', 'Monedas')
   }
 
   // Calculate total weight
@@ -57,7 +60,26 @@ export function InventorySection() {
           <SectionHeader
             icon="I"
             title="Inventario"
-            action={<InventoryLayoutToggle layout={layout} onChange={setLayout} />}
+            action={
+              <Pressable onPress={handleAddItem} hitSlop={8}>
+                {({ pressed }) => (
+                  <XStack
+                    backgroundColor={themeInfo.colors.accent}
+                    paddingHorizontal={10}
+                    paddingVertical={6}
+                    borderRadius={6}
+                    alignItems="center"
+                    gap={4}
+                    opacity={pressed ? 0.7 : 1}
+                  >
+                    <FontAwesome6 name="plus" size={12} color="#FFFFFF" />
+                    <Text fontSize={12} fontWeight="600" color="#FFFFFF">
+                      Anadir
+                    </Text>
+                  </XStack>
+                )}
+              </Pressable>
+            }
           />
 
           <InventoryHeader
@@ -72,7 +94,6 @@ export function InventorySection() {
           ) : (
             <InventoryList
               items={items}
-              layout={layout}
               onItemPress={(item) => {
                 const name = item.customName ?? item.entity?.name ?? item.itemId
                 handleItemPress(item.instanceId, name)

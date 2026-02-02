@@ -42,9 +42,7 @@ export {
 } from './character'
 export {
   InventoryItemView,
-  type InventoryLayout,
   InventoryList,
-  InventoryLayoutToggle,
   InventoryHeader,
 } from './character'
 export {

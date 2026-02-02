@@ -331,6 +331,36 @@ export const wieldableAddon: AddonDefinition = {
 };
 
 // =============================================================================
+// Stackable Addon
+// =============================================================================
+
+/**
+ * Addon for items that can be stacked (have quantity > 1).
+ *
+ * Provides a 'quantity' instance field (number, default 1).
+ * Items with this addon can have multiple units in a single inventory slot.
+ *
+ * Use cases:
+ * - Ammunition (arrows, bolts, bullets)
+ * - Consumables (potions, scrolls, food)
+ * - Materials and components
+ */
+export const stackableAddon: AddonDefinition = {
+  id: 'stackable',
+  name: 'Stackable',
+  fields: [],
+  instanceFields: [
+    {
+      name: 'quantity',
+      type: 'number',
+      default: 1,
+      label: 'Quantity',
+      description: 'Number of units in this stack',
+    },
+  ],
+};
+
+// =============================================================================
 // Default Registry
 // =============================================================================
 
@@ -351,5 +381,6 @@ export const defaultAddonRegistry: AddonRegistry = {
   activable: activableAddon,
   equippable: equippableAddon,
   wieldable: wieldableAddon,
+  stackable: stackableAddon,
 };
 

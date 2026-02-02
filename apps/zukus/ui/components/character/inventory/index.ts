@@ -1,3 +1,3 @@
-export { InventoryItemView, type InventoryLayout } from './InventoryItemView'
-export { InventoryList, InventoryLayoutToggle } from './InventoryList'
+export { InventoryItemView } from './InventoryItemView'
+export { InventoryList } from './InventoryList'
 export { InventoryHeader } from './InventoryHeader'

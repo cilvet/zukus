@@ -727,6 +727,7 @@ function ComputedEntityDetail({ entityId }: { entityId: string }) {
 function InventoryItemDetail({ instanceId }: { instanceId: string }) {
   const inventoryState = useInventoryState()
   const setInventoryInstanceField = useCharacterStore((state) => state.setInventoryInstanceField)
+  const updateInventoryItem = useCharacterStore((state) => state.updateInventoryItem)
 
   const item = inventoryState?.items.find((i) => i.instanceId === instanceId)
 
@@ -739,8 +740,10 @@ function InventoryItemDetail({ instanceId }: { instanceId: string }) {
   }
 
   // Create a ComputedEntity from the inventory item
+  // Merge quantity from item into entity so it appears in instance fields
   const computedEntity = {
     ...item.entity,
+    quantity: item.quantity, // Merge quantity from inventory item
     _meta: {
       source: {
         type: 'inventory',
@@ -754,7 +757,12 @@ function InventoryItemDetail({ instanceId }: { instanceId: string }) {
   } as import('@zukus/core').ComputedEntity
 
   const handleInstanceFieldChange = (field: string, value: unknown) => {
-    // Generic handler for any boolean instance field
+    // Handle quantity separately (it's stored directly on InventoryItemInstance)
+    if (field === 'quantity' && typeof value === 'number') {
+      updateInventoryItem(instanceId, { quantity: value })
+      return
+    }
+    // Handle boolean instance fields (equipped, wielded, active, etc.)
     if (typeof value === 'boolean') {
       setInventoryInstanceField(instanceId, field, value)
     }

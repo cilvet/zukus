@@ -255,8 +255,18 @@ function InstanceFieldsSection({
             )
           }
 
-          // For now, only handle boolean fields
-          // Number and string fields can be added later
+          if (field.type === 'number') {
+            return (
+              <NumberFieldRow
+                key={field.name}
+                label={field.label ?? field.name}
+                value={typeof value === 'number' ? value : 1}
+                onChange={onChange ? (v) => onChange(field.name, v) : undefined}
+              />
+            )
+          }
+
+          // For string fields, show as read-only for now
           return (
             <SimpleFieldRow
               key={field.name}
@@ -267,6 +277,98 @@ function InstanceFieldsSection({
         })}
       </YStack>
     </Card>
+  )
+}
+
+function NumberFieldRow({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: number
+  onChange?: (value: number) => void
+}) {
+  const handleDecrement = () => {
+    if (value > 1 && onChange) {
+      onChange(value - 1)
+    }
+  }
+
+  const handleIncrement = () => {
+    if (onChange) {
+      onChange(value + 1)
+    }
+  }
+
+  return (
+    <XStack
+      paddingVertical={8}
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Text fontSize={13} color="$color" fontWeight="500">
+        {label}
+      </Text>
+      {onChange ? (
+        <XStack alignItems="center" gap={4}>
+          <Pressable onPress={handleDecrement} hitSlop={8}>
+            {({ pressed }) => (
+              <YStack
+                width={28}
+                height={28}
+                borderRadius={6}
+                backgroundColor={value <= 1 ? '$backgroundHover' : '$blue4'}
+                alignItems="center"
+                justifyContent="center"
+                opacity={pressed ? 0.7 : 1}
+              >
+                <Text
+                  fontSize={16}
+                  fontWeight="700"
+                  color={value <= 1 ? '$placeholderColor' : '$blue10'}
+                >
+                  -
+                </Text>
+              </YStack>
+            )}
+          </Pressable>
+
+          <YStack
+            minWidth={40}
+            paddingVertical={4}
+            paddingHorizontal={8}
+            alignItems="center"
+          >
+            <Text fontSize={16} fontWeight="600" color="$color">
+              {value}
+            </Text>
+          </YStack>
+
+          <Pressable onPress={handleIncrement} hitSlop={8}>
+            {({ pressed }) => (
+              <YStack
+                width={28}
+                height={28}
+                borderRadius={6}
+                backgroundColor="$blue4"
+                alignItems="center"
+                justifyContent="center"
+                opacity={pressed ? 0.7 : 1}
+              >
+                <Text fontSize={16} fontWeight="700" color="$blue10">
+                  +
+                </Text>
+              </YStack>
+            )}
+          </Pressable>
+        </XStack>
+      ) : (
+        <Text fontSize={16} fontWeight="600" color="$color">
+          {value}
+        </Text>
+      )}
+    </XStack>
   )
 }
 
