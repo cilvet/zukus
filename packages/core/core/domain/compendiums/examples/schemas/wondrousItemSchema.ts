@@ -12,7 +12,7 @@ export const wondrousItemSchema: EntitySchemaDefinition = {
   typeName: 'wondrousItem',
   description: 'D&D 3.5 Wondrous Item',
   version: '1.0.0',
-  addons: ['searchable', 'imageable', 'dnd35item', 'effectful'],
+  addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
   fields: [
     // Slot
     {

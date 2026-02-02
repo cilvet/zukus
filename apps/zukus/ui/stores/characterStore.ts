@@ -118,6 +118,7 @@ type CharacterActions = {
     quantity?: number
     equipped?: boolean
     customName?: string
+    entity?: StandardEntity
   }) => UpdateResult & { instanceId?: string }
   removeFromInventory: (instanceId: string, quantity?: number) => UpdateResult
   updateInventoryItem: (
@@ -126,6 +127,7 @@ type CharacterActions = {
   ) => UpdateResult
   toggleInventoryEquipped: (instanceId: string) => UpdateResult
   setWeaponWielded: (instanceId: string, wielded: boolean) => UpdateResult
+  setInventoryInstanceField: (instanceId: string, fieldName: string, value: boolean) => UpdateResult
 
   // Currency Management
   addCurrency: (currencyId: string, amount: number) => UpdateResult
@@ -480,6 +482,12 @@ export const useCharacterStore = create<CharacterStore>((set, get) => ({
     return updater.setWeaponWielded(instanceId, wielded)
   },
 
+  setInventoryInstanceField: (instanceId: string, fieldName: string, value: boolean) => {
+    const { updater } = get()
+    if (!updater) return notSetResult
+    return updater.setInventoryInstanceField(instanceId, fieldName, value)
+  },
+
   // =============================================================================
   // Currency Management
   // =============================================================================
@@ -695,6 +703,7 @@ export function useCharacterActions() {
     updateInventoryItem: state.updateInventoryItem,
     toggleInventoryEquipped: state.toggleInventoryEquipped,
     setWeaponWielded: state.setWeaponWielded,
+    setInventoryInstanceField: state.setInventoryInstanceField,
     // Currency
     addCurrency: state.addCurrency,
     spendCurrency: state.spendCurrency,

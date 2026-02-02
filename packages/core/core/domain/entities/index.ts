@@ -80,6 +80,7 @@ export type {
   FacetFilterDef,
   RelationFilterDef,
   FilterGroupDef,
+  EntityTypeFilterDef,
   FilterDef,
   EntityFilterConfig,
   FilterValue,
@@ -90,6 +91,7 @@ export {
   isFacetFilter,
   isRelationFilter,
   isFilterGroup,
+  isEntityTypeFilter,
   getNestedValue,
   getRelationSecondaryOptions,
   applyRelationFilter,
@@ -104,7 +106,12 @@ export {
   createSpellFilterConfig,
   classLevelFilter,
   SPELLCASTING_CLASS_OPTIONS,
+  itemFilterConfig,
+  createItemFilterConfig,
+  ITEM_ENTITY_TYPES,
+  ITEM_TYPE_LABELS,
 } from './filtering/configs';
+export type { ItemEntityType } from './filtering/configs';
 
 // Filter Configuration Registry
 export {
@@ -131,3 +138,29 @@ export {
 export {
   createEntityInstance
 } from './instances/creation';
+
+// Instance fields
+export type {
+  InstanceFieldDefinition,
+  InstanceFieldType,
+  InstanceFieldValue,
+  InstanceValues,
+} from './types/instanceFields';
+
+export {
+  isInstanceFieldValue,
+  isValidValueForField,
+  getInstanceFieldValue,
+  setInstanceFieldValue,
+  createDefaultInstanceValues,
+  mergeInstanceFieldDefinitions,
+} from './types/instanceFields';
+
+export {
+  getInstanceFieldsForEntityType,
+  getInstanceFieldsFromCompendium,
+  hasInstanceFields,
+  hasInstanceFieldsFromCompendium,
+  hasInstanceField,
+  getInstanceField,
+} from './instanceFields';

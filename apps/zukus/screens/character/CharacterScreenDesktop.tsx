@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View, Pressable } from 'react-native'
+import { FontAwesome6 } from '@expo/vector-icons'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useCharacterSync } from '../../hooks'
 import {
@@ -51,6 +52,7 @@ import {
   ChangeEditScreen,
   BuffsCompact,
   AllBuffsDetailPanel,
+  useTheme,
 } from '../../ui'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import { usePanelNavigation } from '../../hooks'
@@ -65,6 +67,8 @@ import {
   CGEManagementPanel,
   CGEEntitySelectPanel,
   CGETabView,
+  ItemBrowserPanel,
+  CurrencyEditPanel,
 } from '../../components/character'
 import { ChatScreenWeb } from '../chat/ChatScreenWeb'
 import { CompendiumEntityDetail } from '../../components/compendiums'
@@ -369,6 +373,7 @@ function CharacterScreenDesktopContent() {
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
   const inventoryState = useInventoryState()
+  const { themeInfo } = useTheme()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
   const [inventoryLayout, setInventoryLayout] = useState<InventoryLayout>('balanced')
 
@@ -666,7 +671,29 @@ function CharacterScreenDesktopContent() {
               <SectionHeader
                 icon="I"
                 title="Inventario"
-                action={<InventoryLayoutToggle layout={inventoryLayout} onChange={setInventoryLayout} />}
+                action={
+                  <XStack gap={12} alignItems="center">
+                    <InventoryLayoutToggle layout={inventoryLayout} onChange={setInventoryLayout} />
+                    <Pressable onPress={() => openPanel('itemBrowser/browse', 'Buscar Items')} hitSlop={8}>
+                      {({ pressed }) => (
+                        <XStack
+                          backgroundColor={themeInfo.colors.accent}
+                          paddingHorizontal={10}
+                          paddingVertical={6}
+                          borderRadius={6}
+                          alignItems="center"
+                          gap={4}
+                          opacity={pressed ? 0.7 : 1}
+                        >
+                          <FontAwesome6 name="plus" size={12} color="#FFFFFF" />
+                          <Text fontSize={12} fontWeight="600" color="#FFFFFF">
+                            Anadir
+                          </Text>
+                        </XStack>
+                      )}
+                    </Pressable>
+                  </XStack>
+                }
               />
               <InventoryHeader
                 currentWeight={inventoryState.items.reduce((total, item) => {
@@ -678,6 +705,7 @@ function CharacterScreenDesktopContent() {
                 }, 0)}
                 maxWeight={100}
                 currencies={inventoryState.currencies}
+                onCurrenciesPress={() => openPanel('currencyEdit/edit', 'Monedas')}
               />
               {inventoryState.items.length === 0 ? (
                 <Text color="$placeholderColor">Sin items en el inventario.</Text>
@@ -752,7 +780,7 @@ function CharacterScreenDesktopContent() {
         onBack={goBack}
         canGoBack={canGoBack}
         title={getPanelTitle()}
-        disableScroll={panelInfo?.type === 'chat' || panelInfo?.type === 'cgeEntitySelect' || panelInfo?.type === 'compendiumEntity'}
+        disableScroll={panelInfo?.type === 'chat' || panelInfo?.type === 'cgeEntitySelect' || panelInfo?.type === 'compendiumEntity' || panelInfo?.type === 'itemBrowser'}
       >
         {panelInfo?.type === 'ability' && panelInfo?.id && getAbilityForPanel(panelInfo.id) && (
           <AbilityDetailPanel
@@ -814,6 +842,12 @@ function CharacterScreenDesktopContent() {
         )}
         {panelInfo?.type === 'inventoryItem' && panelInfo?.id && (
           <InventoryItemDetailPanelContainer instanceId={panelInfo.id} />
+        )}
+        {panelInfo?.type === 'itemBrowser' && (
+          <ItemBrowserPanel />
+        )}
+        {panelInfo?.type === 'currencyEdit' && (
+          <CurrencyEditPanel />
         )}
         {panelInfo?.type === 'buff' && panelInfo?.id && getBuffForPanel(panelInfo.id) && (
           <BuffDetailPanel
@@ -1168,8 +1202,7 @@ function ChangeEditPanelContainer({ changeId }: { changeId: string }) {
 
 function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string }) {
   const inventoryState = useInventoryState()
-  const toggleInventoryEquipped = useCharacterStore((state) => state.toggleInventoryEquipped)
-  const setWeaponWielded = useCharacterStore((state) => state.setWeaponWielded)
+  const setInventoryInstanceField = useCharacterStore((state) => state.setInventoryInstanceField)
   const removeFromInventory = useCharacterStore((state) => state.removeFromInventory)
   const { closePanel } = usePanelNavigation('character')
 
@@ -1204,53 +1237,25 @@ function InventoryItemDetailPanelContainer({ instanceId }: { instanceId: string 
     },
   }
 
-  const handleToggleEquipped = () => {
-    toggleInventoryEquipped(instanceId)
-  }
-
-  const handleToggleWielded = (wielded: boolean) => {
-    setWeaponWielded(instanceId, wielded)
-  }
-
   const handleRemove = () => {
     removeFromInventory(instanceId)
     closePanel()
   }
 
+  const handleInstanceFieldChange = (field: string, value: unknown) => {
+    // Generic handler for any boolean instance field
+    if (typeof value === 'boolean') {
+      setInventoryInstanceField(instanceId, field, value)
+    }
+  }
+
   return (
     <YStack gap={16}>
-      <GenericEntityDetailPanel entity={computedEntity} />
+      <GenericEntityDetailPanel
+        entity={computedEntity}
+        onInstanceFieldChange={handleInstanceFieldChange}
+      />
       <XStack gap={8} paddingHorizontal={16}>
-        {entity.equipped !== undefined && (
-          <Pressable onPress={handleToggleEquipped}>
-            <YStack
-              padding={8}
-              borderRadius={6}
-              backgroundColor={entity.equipped ? '$blue4' : '$backgroundHover'}
-              borderWidth={1}
-              borderColor={entity.equipped ? '$blue8' : '$borderColor'}
-            >
-              <Text fontSize={12} color={entity.equipped ? '$blue10' : '$color'}>
-                {entity.equipped ? 'Equipped' : 'Equip'}
-              </Text>
-            </YStack>
-          </Pressable>
-        )}
-        {entity.wielded !== undefined && (
-          <Pressable onPress={() => handleToggleWielded(!entity.wielded)}>
-            <YStack
-              padding={8}
-              borderRadius={6}
-              backgroundColor={entity.wielded ? '$orange4' : '$backgroundHover'}
-              borderWidth={1}
-              borderColor={entity.wielded ? '$orange8' : '$borderColor'}
-            >
-              <Text fontSize={12} color={entity.wielded ? '$orange10' : '$color'}>
-                {entity.wielded ? 'Wielded' : 'Wield'}
-              </Text>
-            </YStack>
-          </Pressable>
-        )}
         <Pressable onPress={handleRemove}>
           <YStack
             padding={8}

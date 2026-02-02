@@ -119,16 +119,19 @@ export type {
   FacetFilterDef,
   RelationFilterDef,
   FilterGroupDef,
+  EntityTypeFilterDef,
   FilterDef,
   EntityFilterConfig,
   FilterValue,
   FilterState,
+  ItemEntityType,
 } from "./core/domain/entities";
 
 export {
   isFacetFilter,
   isRelationFilter,
   isFilterGroup,
+  isEntityTypeFilter,
   getNestedValue,
   getRelationSecondaryOptions,
   applyRelationFilter,
@@ -139,9 +142,33 @@ export {
   createSpellFilterConfig,
   classLevelFilter,
   SPELLCASTING_CLASS_OPTIONS,
+  itemFilterConfig,
+  createItemFilterConfig,
+  ITEM_ENTITY_TYPES,
+  ITEM_TYPE_LABELS,
   registerFilterConfig,
   getFilterConfig,
   hasFilterConfig,
+} from "./core/domain/entities";
+
+// Instance Fields
+export type {
+  InstanceFieldDefinition,
+  InstanceFieldType,
+  InstanceFieldValue,
+  InstanceValues,
+} from "./core/domain/entities";
+
+export {
+  getInstanceFieldsForEntityType,
+  getInstanceFieldsFromCompendium,
+  hasInstanceFields,
+  hasInstanceFieldsFromCompendium,
+  hasInstanceField,
+  getInstanceField,
+  isInstanceFieldValue,
+  getInstanceFieldValue,
+  setInstanceFieldValue,
 } from "./core/domain/entities";
 
 // Types - Updater

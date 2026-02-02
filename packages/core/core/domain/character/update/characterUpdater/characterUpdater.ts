@@ -217,6 +217,7 @@ export class CharacterUpdater implements ICharacterUpdater {
 
   /**
    * Adds an item to the new inventory system.
+   * @param params.entity - The resolved entity from the compendium (with image, etc.)
    * @returns The created instance ID on success
    */
   addToInventory(params: {
@@ -225,6 +226,7 @@ export class CharacterUpdater implements ICharacterUpdater {
     quantity?: number;
     equipped?: boolean;
     customName?: string;
+    entity?: StandardEntity;
   }): UpdateResult & { instanceId?: string } {
     if (!this.character) return { ...this.characterNotSet, instanceId: undefined };
 
@@ -300,6 +302,30 @@ export class CharacterUpdater implements ICharacterUpdater {
     if (!this.character) return this.characterNotSet;
 
     const result = ops.setInventoryWeaponWielded(this.character, instanceId, wielded);
+
+    if (result.warnings.length > 0) {
+      return this.toUpdateResult(result);
+    }
+
+    this.character = result.character;
+    this.notifyUpdate();
+    return { success: true };
+  }
+
+  /**
+   * Sets an instance field value on an inventory item.
+   * This is a generic method that can update any boolean instance field.
+   */
+  setInventoryInstanceField(
+    instanceId: string,
+    fieldName: string,
+    value: boolean
+  ): UpdateResult {
+    if (!this.character) return this.characterNotSet;
+
+    // Build updates object dynamically
+    const updates: Record<string, boolean> = { [fieldName]: value };
+    const result = ops.updateInventoryItem(this.character, instanceId, updates);
 
     if (result.warnings.length > 0) {
       return this.toUpdateResult(result);

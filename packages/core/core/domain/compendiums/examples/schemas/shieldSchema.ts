@@ -11,7 +11,7 @@ export const shieldSchema: EntitySchemaDefinition = {
   typeName: 'shield',
   description: 'D&D 3.5 Shield',
   version: '1.0.0',
-  addons: ['searchable', 'imageable', 'dnd35item', 'effectful'],
+  addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
   fields: [
     // Protection stats
     {

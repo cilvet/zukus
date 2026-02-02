@@ -2,7 +2,7 @@
  * Types for EntityProvider UI components
  */
 
-import type { Selector, FilterResult } from '@zukus/core'
+import type { Selector, FilterResult, Compendium } from '@zukus/core'
 import type { StandardEntity, EntityInstance } from '@zukus/core'
 
 export type EntitySelectorProps = {
@@ -43,6 +43,7 @@ export type ValidationResult = {
 }
 
 export type CompendiumContextValue = {
+  compendium: Compendium
   getEntity: (entityType: string, entityId: string) => StandardEntity | undefined
   getEntityById: (entityId: string) => StandardEntity | undefined
   getAllEntities: (entityType: string) => StandardEntity[]

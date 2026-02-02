@@ -11,7 +11,7 @@ export const armorSchema: EntitySchemaDefinition = {
   typeName: 'armor',
   description: 'D&D 3.5 Armor',
   version: '1.0.0',
-  addons: ['searchable', 'imageable', 'dnd35item', 'effectful'],
+  addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
   fields: [
     // Protection stats
     {

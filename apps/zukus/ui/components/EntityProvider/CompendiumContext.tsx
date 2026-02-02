@@ -11,6 +11,7 @@ import type { StandardEntity } from '@zukus/core'
 import type { CompendiumContextValue } from './types'
 
 const defaultCompendiumContext: CompendiumContextValue = {
+  compendium: dnd35ExampleCompendium,
   getEntity: (entityType: string, entityId: string): StandardEntity | undefined => {
     const entities = dnd35ExampleCompendium.entities[entityType] || []
     return entities.find((e) => e.id === entityId)

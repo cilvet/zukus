@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { View, ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
 import { Text, YStack } from 'tamagui'
-import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions, AllBuffsDetailPanel } from '../../ui'
-import { AbilityDetailPanel, ArmorClassDetailPanel, CGEManagementPanel, CGEEntitySelectPanel } from '../../components/character'
+import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions, AllBuffsDetailPanel, useInventoryState } from '../../ui'
+import { AbilityDetailPanel, ArmorClassDetailPanel, CGEManagementPanel, CGEEntitySelectPanel, ItemBrowserPanel, CurrencyEditPanel } from '../../components/character'
 import { LevelDetail, ClassSelectorDetail, updateLevelHp, updateLevelClass, getAvailableClasses, type ProviderWithResolution } from '../../ui/components/character/editor'
 import type { Ability } from '../../components/character/data'
 import type { CalculatedAbility, CalculatedSavingThrow, ProviderLocation, StandardEntity, EntityInstance } from '@zukus/core'
@@ -724,6 +724,50 @@ function ComputedEntityDetail({ entityId }: { entityId: string }) {
   return <GenericEntityDetailPanel entity={entity} />
 }
 
+function InventoryItemDetail({ instanceId }: { instanceId: string }) {
+  const inventoryState = useInventoryState()
+  const setInventoryInstanceField = useCharacterStore((state) => state.setInventoryInstanceField)
+
+  const item = inventoryState?.items.find((i) => i.instanceId === instanceId)
+
+  if (!item || !item.entity) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Item no encontrado: {instanceId}</Text>
+      </YStack>
+    )
+  }
+
+  // Create a ComputedEntity from the inventory item
+  const computedEntity = {
+    ...item.entity,
+    _meta: {
+      source: {
+        type: 'inventory',
+        instanceId: item.instanceId,
+        originType: item.entityType,
+        originId: item.itemId,
+        name: item.customName ?? item.entity.name ?? item.itemId,
+      },
+      suppressed: false,
+    },
+  } as import('@zukus/core').ComputedEntity
+
+  const handleInstanceFieldChange = (field: string, value: unknown) => {
+    // Generic handler for any boolean instance field
+    if (typeof value === 'boolean') {
+      setInventoryInstanceField(instanceId, field, value)
+    }
+  }
+
+  return (
+    <GenericEntityDetailPanel
+      entity={computedEntity}
+      onInstanceFieldChange={handleInstanceFieldChange}
+    />
+  )
+}
+
 function EntitySelectorDetailWrapper({ locationJson }: { locationJson: string }) {
   // Parse the provider location from JSON
   let providerLocation: ProviderLocation | null = null
@@ -785,7 +829,7 @@ export function DetailScreen() {
   const { themeColors } = useTheme()
   
   const { type, id, extra } = parseSlug(slug)
-  const needsOwnScroll = type === 'chat' || type === 'cgeEntitySelect' || type === 'cgeManagement'
+  const needsOwnScroll = type === 'chat' || type === 'cgeEntitySelect' || type === 'cgeManagement' || type === 'itemBrowser'
   
   // Determinar el título para el header
   const getTitle = (): string => {
@@ -849,6 +893,12 @@ export function DetailScreen() {
         return <CGEManagementPanel />
       case 'cgeEntitySelect':
         return <CGEEntitySelectPanel selectionId={id} />
+      case 'itemBrowser':
+        return <ItemBrowserPanel />
+      case 'currencyEdit':
+        return <CurrencyEditPanel />
+      case 'inventoryItem':
+        return <InventoryItemDetail instanceId={id} />
       default:
         return <InvalidRoute />
     }

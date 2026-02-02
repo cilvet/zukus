@@ -1,32 +1,19 @@
 import { Pressable } from 'react-native'
 import { YStack, XStack, Text, Card } from 'tamagui'
-import type { ComputedEntity } from '@zukus/core'
+import {
+  getInstanceFieldsFromCompendium,
+  type ComputedEntity,
+  type InstanceFieldDefinition,
+} from '@zukus/core'
 import { Checkbox } from '../../../atoms'
-
-/**
- * Instance field definition for editable fields.
- */
-export type InstanceFieldDefinition = {
-  name: string
-  type: 'boolean' | 'number' | 'string'
-  label: string
-  description?: string
-}
-
-/**
- * Well-known instance fields that can be edited in the panel.
- */
-const KNOWN_INSTANCE_FIELDS: InstanceFieldDefinition[] = [
-  { name: 'equipped', type: 'boolean', label: 'Equipped', description: 'Whether this item is currently equipped' },
-  { name: 'wielded', type: 'boolean', label: 'Wielded', description: 'Whether this weapon is currently wielded' },
-  { name: 'active', type: 'boolean', label: 'Active', description: 'Whether this entity is currently active' },
-]
+import { EntityImage } from '../../EntityImage'
+import { useCompendiumContext } from '../../EntityProvider'
 
 type GenericEntityDetailPanelProps = {
   entity: ComputedEntity
   /**
-   * Optional: Additional instance fields to render as editable.
-   * If not provided, will auto-detect known fields (equipped, wielded, active).
+   * Optional: Override instance fields to render as editable.
+   * If not provided, will auto-detect from the entity's schema addons.
    */
   instanceFields?: InstanceFieldDefinition[]
   /**
@@ -35,7 +22,10 @@ type GenericEntityDetailPanelProps = {
   onInstanceFieldChange?: (field: string, value: unknown) => void
 }
 
-const EXCLUDED_FIELDS = new Set([
+/**
+ * Base fields that should always be excluded from the generic field list.
+ */
+const BASE_EXCLUDED_FIELDS = new Set([
   'id',
   'entityType',
   'name',
@@ -43,11 +33,19 @@ const EXCLUDED_FIELDS = new Set([
   '_meta',
   'tags',
   'image',
-  // Instance fields are handled separately
-  'equipped',
-  'wielded',
-  'active',
 ])
+
+/**
+ * Gets the set of excluded fields for a given entity type.
+ * Includes base excluded fields plus any instance field names.
+ */
+function getExcludedFields(instanceFields: InstanceFieldDefinition[]): Set<string> {
+  const excluded = new Set(BASE_EXCLUDED_FIELDS)
+  for (const field of instanceFields) {
+    excluded.add(field.name)
+  }
+  return excluded
+}
 
 function formatFieldLabel(key: string): string {
   return key
@@ -220,6 +218,7 @@ function SourceInfo({ meta }: { meta: ComputedEntity['_meta'] }) {
 
 /**
  * Renders editable instance fields section.
+ * Shows all fields from the schema, using default values if not present in entity.
  */
 function InstanceFieldsSection({
   entity,
@@ -230,10 +229,7 @@ function InstanceFieldsSection({
   fields: InstanceFieldDefinition[]
   onChange?: (field: string, value: unknown) => void
 }) {
-  // Only show fields that exist in the entity
-  const activeFields = fields.filter((field) => field.name in entity)
-
-  if (activeFields.length === 0) {
+  if (fields.length === 0) {
     return null
   }
 
@@ -243,14 +239,16 @@ function InstanceFieldsSection({
         <Text fontSize={11} fontWeight="600" color="$placeholderColor" textTransform="uppercase">
           Estado
         </Text>
-        {activeFields.map((field) => {
-          const value = (entity as any)[field.name]
+        {fields.map((field) => {
+          // Use entity value if present, otherwise use field default
+          const entityValue = (entity as Record<string, unknown>)[field.name]
+          const value = entityValue !== undefined ? entityValue : field.default
 
           if (field.type === 'boolean') {
             return (
               <BooleanFieldRow
                 key={field.name}
-                label={field.label}
+                label={field.label ?? field.name}
                 value={Boolean(value)}
                 onChange={onChange ? (v) => onChange(field.name, v) : undefined}
               />
@@ -262,7 +260,7 @@ function InstanceFieldsSection({
           return (
             <SimpleFieldRow
               key={field.name}
-              label={field.label}
+              label={field.label ?? field.name}
               value={formatValue(value)}
             />
           )
@@ -316,15 +314,23 @@ export function GenericEntityDetailPanel({
   instanceFields,
   onInstanceFieldChange,
 }: GenericEntityDetailPanelProps) {
+  const { compendium } = useCompendiumContext()
   const tags = entity.tags ?? []
   const simpleFields: Array<{ key: string; label: string; value: string }> = []
   const complexFields: Array<{ key: string; label: string; value: unknown }> = []
 
-  // Determine which instance fields to show
-  const fieldsToShow = instanceFields ?? KNOWN_INSTANCE_FIELDS
+  // Get instance fields from schema if not provided
+  const schemaInstanceFields = getInstanceFieldsFromCompendium(
+    entity.entityType,
+    compendium
+  )
+  const fieldsToShow = instanceFields ?? schemaInstanceFields
+
+  // Build excluded fields set (base + instance fields)
+  const excludedFields = getExcludedFields(fieldsToShow)
 
   for (const [key, value] of Object.entries(entity)) {
-    if (EXCLUDED_FIELDS.has(key)) {
+    if (excludedFields.has(key)) {
       continue
     }
 
@@ -341,18 +347,28 @@ export function GenericEntityDetailPanel({
     }
   }
 
+  // Get image from entity (may be a full URL or undefined)
+  const entityImage = (entity as any).image as string | undefined
+
   return (
     <YStack padding={16} gap={16}>
-      <YStack gap={8}>
-        <Text fontSize={24} fontWeight="700" color="$color">
-          {entity.name}
-        </Text>
-        <Text fontSize={12} color="$placeholderColor" textTransform="uppercase">
-          {entity.entityType.replace(/_/g, ' ')}
-        </Text>
-      </YStack>
-
-      {tags.length > 0 ? <TagsRow tags={tags} /> : null}
+      {/* Header with image */}
+      <XStack gap={16} alignItems="flex-start">
+        <EntityImage
+          image={entityImage}
+          fallbackText={entity.name}
+          size={80}
+        />
+        <YStack flex={1} gap={4}>
+          <Text fontSize={22} fontWeight="700" color="$color">
+            {entity.name}
+          </Text>
+          <Text fontSize={12} color="$placeholderColor" textTransform="uppercase">
+            {entity.entityType.replace(/_/g, ' ')}
+          </Text>
+          {tags.length > 0 ? <TagsRow tags={tags} /> : null}
+        </YStack>
+      </XStack>
 
       {entity.description ? (
         <YStack gap={4}>

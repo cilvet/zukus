@@ -2,10 +2,13 @@ import { Pressable } from 'react-native'
 import { XStack, YStack, Text } from 'tamagui'
 import type { InventoryItemInstance } from '@zukus/core'
 import { Checkbox } from '../../../atoms'
+import { EntityImage } from '../../EntityImage'
+import { useCompendiumContext } from '../../EntityProvider'
 import {
   isItemEquipped,
   isItemWielded,
   isItemActive,
+  hasInstanceField,
 } from '@zukus/core'
 
 export type InventoryLayout = 'compact' | 'balanced' | 'detailed'
@@ -50,25 +53,6 @@ function getCostText(item: InventoryItemInstance): string | null {
 function getQuantityText(quantity: number): string | null {
   if (quantity <= 1) return null
   return `x${quantity}`
-}
-
-function ItemImagePlaceholder({ size, label }: { size: number; label: string }) {
-  return (
-    <YStack
-      width={size}
-      height={size}
-      borderRadius={6}
-      backgroundColor="$backgroundHover"
-      borderWidth={1}
-      borderColor="$borderColor"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Text fontSize={10} color="$placeholderColor">
-        {label}
-      </Text>
-    </YStack>
-  )
 }
 
 function StatusIndicators({ item }: { item: InventoryItemInstance }) {
@@ -156,9 +140,11 @@ function EquipToggle({
   item: InventoryItemInstance
   onToggleEquipped?: () => void
 }) {
-  // Only show toggle if the entity supports equipped
-  const hasEquipped = item.entity && 'equipped' in item.entity
-  if (!hasEquipped) return null
+  const { compendium } = useCompendiumContext()
+
+  // Only show toggle if the entityType has the 'equipped' instance field
+  const supportsEquipped = hasInstanceField(item.entityType, 'equipped', compendium)
+  if (!supportsEquipped) return null
 
   return (
     <Checkbox
@@ -193,7 +179,7 @@ function CompactLayout({ item, onPress, onToggleEquipped }: InventoryItemViewPro
       padding={8}
     >
       <XStack alignItems="center" gap={8}>
-        <ItemImagePlaceholder size={28} label={typeLabel} />
+        <EntityImage image={item.entity?.image} fallbackText={name} size={28} />
         <YStack gap={2} flex={1}>
           <XStack gap={6} alignItems="center">
             <Text fontSize={13} fontWeight="600" color="$color" numberOfLines={1} flex={1}>
@@ -241,7 +227,7 @@ function BalancedLayout({ item, onPress, onToggleEquipped }: InventoryItemViewPr
       }
     >
       <XStack alignItems="center" gap={10}>
-        <ItemImagePlaceholder size={36} label={typeLabelShort} />
+        <EntityImage image={item.entity?.image} fallbackText={name} size={36} />
         <YStack gap={4} flex={1}>
           <XStack gap={6} alignItems="center">
             <Text fontSize={14} fontWeight="700" color="$color" numberOfLines={1} flex={1}>
@@ -283,7 +269,7 @@ function DetailedLayout({ item, onPress, onToggleEquipped }: InventoryItemViewPr
       gap={12}
     >
       <XStack alignItems="center" gap={10}>
-        <ItemImagePlaceholder size={44} label={typeLabelShort} />
+        <EntityImage image={item.entity?.image} fallbackText={name} size={44} />
         <Pressable onPress={onPress} style={{ flex: 1 }}>
           <YStack gap={4}>
             <XStack gap={6} alignItems="center">
