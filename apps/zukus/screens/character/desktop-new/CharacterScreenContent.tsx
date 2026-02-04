@@ -90,7 +90,6 @@ export function CharacterScreenContent() {
   const tabs = useTabsBuilder({
     onAttackPress: handleAttackPress,
     onEntityPress: handleEntityPress,
-    onEquipmentPress: handleEquipmentPress,
     onInventoryItemPress: handleInventoryItemPress,
     onOpenItemBrowser: handleOpenItemBrowser,
     onOpenCurrencyEdit: handleOpenCurrencyEdit,

@@ -1,22 +1,17 @@
-import { useState } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { Pressable } from 'react-native'
 import { FontAwesome6 } from '@expo/vector-icons'
 import {
   useCharacterStore,
   useCharacterAttacks,
-  useCharacterSheet,
   useInventoryState,
   useComputedEntities,
   usePrimaryCGE,
   useTheme,
   AttacksSection,
-  EquipmentList,
-  EquipmentLayoutToggle,
   InventoryList,
   InventoryHeader,
   EntityTypeGroup,
-  type EquipmentLayout,
 } from '../../../ui'
 import { CGETabView } from '../../../components/character'
 import { TabEmptyState, type TabItem } from '../../../components/layout'
@@ -26,7 +21,6 @@ import type { ComputedEntity } from '@zukus/core'
 type TabsBuilderProps = {
   onAttackPress: (attack: { weaponUniqueId?: string; name: string }) => void
   onEntityPress: (entity: ComputedEntity) => void
-  onEquipmentPress: (itemId: string, itemName: string) => void
   onInventoryItemPress: (instanceId: string, itemName: string) => void
   onOpenItemBrowser: () => void
   onOpenCurrencyEdit: () => void
@@ -35,20 +29,16 @@ type TabsBuilderProps = {
 export function useTabsBuilder({
   onAttackPress,
   onEntityPress,
-  onEquipmentPress,
   onInventoryItemPress,
   onOpenItemBrowser,
   onOpenCurrencyEdit,
 }: TabsBuilderProps): TabItem[] {
   const attackData = useCharacterAttacks()
-  const characterSheet = useCharacterSheet()
   const inventoryState = useInventoryState()
   const computedEntities = useComputedEntities()
   const primaryCGE = usePrimaryCGE()
   const toggleInventoryEquipped = useCharacterStore((state) => state.toggleInventoryEquipped)
-  const toggleItemEquipped = useCharacterStore((state) => state.toggleItemEquipped)
   const { themeInfo } = useTheme()
-  const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
 
   const entitiesByType = (() => {
     const groups: Record<string, ComputedEntity[]> = {}
@@ -162,26 +152,6 @@ export function useTabsBuilder({
               onEntityPress={onEntityPress}
             />
           ))}
-        </YStack>
-      ),
-    })
-  }
-
-  // Legacy equipment tab (if exists)
-  if (characterSheet && characterSheet.equipment.items.length > 0) {
-    tabs.push({
-      id: 'equipment-legacy',
-      label: 'Equipment (Legacy)',
-      badge: characterSheet.equipment.items.length,
-      content: (
-        <YStack gap={12}>
-          <EquipmentLayoutToggle layout={equipmentLayout} onChange={setEquipmentLayout} />
-          <EquipmentList
-            items={characterSheet.equipment.items}
-            layout={equipmentLayout}
-            onItemPress={(item) => onEquipmentPress(item.uniqueId, item.name)}
-            onToggleEquipped={(item) => toggleItemEquipped(item.uniqueId)}
-          />
         </YStack>
       ),
     })

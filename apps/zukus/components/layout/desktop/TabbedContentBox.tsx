@@ -17,48 +17,32 @@ type TabbedContentBoxProps = {
 function TabButton({
   label,
   isActive,
-  badge,
   onPress,
 }: {
   label: string
   isActive: boolean
-  badge?: number
   onPress: () => void
 }) {
   return (
     <Pressable onPress={onPress}>
-      {({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => (
-        <XStack
-          alignItems="center"
-          gap={6}
-          paddingVertical={10}
-          paddingHorizontal={16}
-          backgroundColor={isActive ? '$accentColor' : pressed ? '$backgroundHover' : hovered ? '$backgroundHover' : 'transparent'}
-          borderRadius={6}
+      {({ hovered }: { pressed: boolean; hovered?: boolean }) => (
+        <YStack
+          paddingVertical={8}
+          paddingHorizontal={12}
           cursor="pointer"
+          borderBottomWidth={2}
+          borderBottomColor={isActive ? '$color' : 'transparent'}
         >
           <Text
-            fontSize={12}
-            fontWeight={isActive ? '700' : '600'}
-            color={isActive ? '#FFFFFF' : '$color'}
-            letterSpacing={0.5}
-            textTransform="uppercase"
+            fontSize={13}
+            fontWeight={isActive ? '700' : '500'}
+            color={isActive ? '$color' : '$placeholderColor'}
+            letterSpacing={0.3}
+            opacity={hovered && !isActive ? 0.8 : 1}
           >
             {label}
           </Text>
-          {typeof badge === 'number' && badge > 0 ? (
-            <YStack
-              backgroundColor={isActive ? 'rgba(255,255,255,0.3)' : '$borderColor'}
-              paddingHorizontal={6}
-              paddingVertical={2}
-              borderRadius={10}
-            >
-              <Text fontSize={10} fontWeight="700" color={isActive ? '#FFFFFF' : '$placeholderColor'}>
-                {badge}
-              </Text>
-            </YStack>
-          ) : null}
-        </XStack>
+        </YStack>
       )}
     </Pressable>
   )
@@ -88,20 +72,18 @@ export function TabbedContentBox({ tabs, defaultTabId }: TabbedContentBoxProps) 
     >
       {/* Tab bar */}
       <XStack
-        alignItems="center"
-        paddingHorizontal={8}
-        paddingVertical={8}
+        alignItems="flex-end"
+        paddingHorizontal={12}
+        paddingTop={8}
         borderBottomWidth={1}
         borderBottomColor="$borderColor"
-        gap={4}
-        flexWrap="wrap"
+        gap={8}
       >
         {tabs.map((tab) => (
           <TabButton
             key={tab.id}
             label={tab.label}
             isActive={activeTabId === tab.id}
-            badge={tab.badge}
             onPress={() => setActiveTabId(tab.id)}
           />
         ))}
