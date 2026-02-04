@@ -8,6 +8,7 @@ export { SafeAreaBottomSpacer } from './SafeAreaBottomSpacer'
 export {
   DesktopCharacterLayout,
   LAYOUT_DIMENSIONS,
+  useLayoutHeights,
   StatsHeaderBar,
   TabbedContentBox,
   TabEmptyState,

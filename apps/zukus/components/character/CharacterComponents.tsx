@@ -31,7 +31,7 @@ export function SectionHeader({
   )
 }
 
-export function SectionCard({ children }: { children: React.ReactNode }) {
+export function SectionCard({ children, flex }: { children: React.ReactNode; flex?: number }) {
   return (
     <YStack
       padding={12}
@@ -41,6 +41,7 @@ export function SectionCard({ children }: { children: React.ReactNode }) {
       borderRadius={4}
       gap={12}
       width="100%"
+      flex={flex}
     >
       {children}
     </YStack>

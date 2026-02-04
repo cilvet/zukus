@@ -27,12 +27,16 @@ function lightenColor(hex: string, amount: number): string {
 }
 
 // Layout dimensions
-const MAX_CONTENT_WIDTH = 1400
-const MAX_CONTENT_HEIGHT = 900
-const LEFT_COLUMN_1_WIDTH = 300
-const LEFT_COLUMN_2_WIDTH = 360
+const CONTENT_WIDTH = 1200 // Total width of columns + gaps
+const CONTENT_PADDING = 24
+const MAX_CONTENT_WIDTH = CONTENT_WIDTH + (CONTENT_PADDING * 2) // Container includes padding
+const LEFT_COLUMN_1_WIDTH = 280
+const LEFT_COLUMN_2_WIDTH = 340
 const COLUMN_GAP = 16
 const LEFT_COLUMNS_TOTAL_WIDTH = LEFT_COLUMN_1_WIDTH + LEFT_COLUMN_2_WIDTH + COLUMN_GAP
+// Right side: 1200 - 636 - 16 = 548
+const RIGHT_SIDE_WIDTH = CONTENT_WIDTH - LEFT_COLUMNS_TOTAL_WIDTH - COLUMN_GAP
+const COMBAT_STATS_HEIGHT = 105 // Approximate height of CombatStatsRow
 
 type DesktopCharacterLayoutProps = {
   /** Top bar with character info and key stats */
@@ -52,22 +56,40 @@ export const LAYOUT_DIMENSIONS = {
   leftColumn1Width: LEFT_COLUMN_1_WIDTH,
   leftColumn2Width: LEFT_COLUMN_2_WIDTH,
   leftColumnsTotalWidth: LEFT_COLUMNS_TOTAL_WIDTH,
+  rightSideWidth: RIGHT_SIDE_WIDTH,
+}
+
+/**
+ * Hook to calculate dynamic layout heights based on viewport.
+ */
+export function useLayoutHeights() {
+  const { height } = useWindowDimensions()
+
+  // Top bar (~140px) + padding (24*2) + gaps (~32) = ~220px overhead
+  const viewportOverhead = 220
+  const availableHeight = height - viewportOverhead
+  // Minimum 450px, maximum based on remaining space
+  const mainAreaHeight = Math.max(450, Math.min(availableHeight, 800))
+  // Height for right bottom = main area minus combat stats and gap
+  const columnsHeight = mainAreaHeight - COMBAT_STATS_HEIGHT - COLUMN_GAP
+
+  return { mainAreaHeight, columnsHeight }
 }
 
 /**
  * Desktop character layout inspired by DnD Beyond.
+ * Left columns align to bottom, matching the height of right bottom.
  *
  * Structure:
  * +-----------------------------------------------------+
  * |                    TOP BAR                          |
  * +-----------------------------------------------------+
- * |  LEFT COLUMNS         |        RIGHT SIDE           |
- * |  +------+  +------+   |  +----------------------+   |
- * |  | Col1 |  | Col2 |   |  |      RIGHT TOP       |   |
- * |  |      |  |      |   |  +----------------------+   |
- * |  |      |  |      |   |  |     RIGHT BOTTOM     |   |
- * |  |      |  |      |   |  |    (Tabbed Box)      |   |
- * |  +------+  +------+   |  +----------------------+   |
+ * |                      |  +----------------------+    |
+ * |                      |  |      RIGHT TOP       |    |
+ * |  +------+  +------+  |  +----------------------+    |
+ * |  | Col1 |  | Col2 |  |  |     RIGHT BOTTOM     |    |
+ * |  |      |  |      |  |  |    (Tabbed Box)      |    |
+ * |  +------+  +------+  |  +----------------------+    |
  * +-----------------------------------------------------+
  */
 export function DesktopCharacterLayout({
@@ -78,16 +100,12 @@ export function DesktopCharacterLayout({
   sidePanel,
 }: DesktopCharacterLayoutProps) {
   const { themeColors } = useTheme()
-  const { height } = useWindowDimensions()
+  const { mainAreaHeight, columnsHeight } = useLayoutHeights()
 
   // Only render on web
   if (Platform.OS !== 'web') {
     return null
   }
-
-  // Available content height (minus top bar, capped at max)
-  const availableHeight = height - 140 // top bar + padding
-  const contentHeight = Math.min(availableHeight, MAX_CONTENT_HEIGHT)
 
   return (
     <YStack position="relative" flex={1} overflow="hidden">
@@ -107,7 +125,7 @@ export function DesktopCharacterLayout({
       >
         <YStack
           flex={1}
-          padding={24}
+          padding={CONTENT_PADDING}
           gap={16}
           maxWidth={MAX_CONTENT_WIDTH}
           width="100%"
@@ -117,19 +135,19 @@ export function DesktopCharacterLayout({
           <YStack>{topBar}</YStack>
 
           {/* Main area: left columns + right side */}
-          <XStack flex={1} gap={COLUMN_GAP}>
-            {/* Left columns */}
-            <XStack gap={COLUMN_GAP} height={contentHeight}>
+          <XStack gap={COLUMN_GAP} alignItems="flex-end">
+            {/* Left columns - full height, aligned to bottom */}
+            <XStack gap={COLUMN_GAP} height={mainAreaHeight}>
               {leftColumns}
             </XStack>
 
-            {/* Right side - same width as left columns total */}
-            <YStack gap={16} height={contentHeight} width={LEFT_COLUMNS_TOTAL_WIDTH}>
-              {/* Right top */}
+            {/* Right side */}
+            <YStack gap={COLUMN_GAP} width={RIGHT_SIDE_WIDTH}>
+              {/* Right top (combat stats) */}
               <YStack>{rightTop}</YStack>
 
               {/* Right bottom (tabbed box) */}
-              <YStack flex={1} minHeight={0}>
+              <YStack height={columnsHeight}>
                 {rightBottom}
               </YStack>
             </YStack>
