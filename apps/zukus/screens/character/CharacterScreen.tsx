@@ -1,7 +1,7 @@
 import { useWindowDimensions, Platform } from 'react-native'
 import { useIsDesktop } from '../../navigation'
 import { CharacterScreenDesktop } from './CharacterScreenDesktop'
-import { CharacterScreenDesktopNew } from './CharacterScreenDesktopNew'
+import { CharacterScreenDesktopNew } from './desktop-new'
 import { CharacterScreenMobile } from './CharacterScreenMobile'
 
 // Large desktop breakpoint (for new DnD Beyond-style layout)
