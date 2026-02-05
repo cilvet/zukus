@@ -8,6 +8,8 @@ type CombatStatCardProps = {
   onPress?: () => void
 }
 
+const CARD_MIN_HEIGHT = 100
+
 function CombatStatCard({ label, value, subValues, onPress }: CombatStatCardProps) {
   const content = (
     <YStack
@@ -19,6 +21,7 @@ function CombatStatCard({ label, value, subValues, onPress }: CombatStatCardProp
       borderColor="$borderColor"
       borderRadius={8}
       minWidth={100}
+      minHeight={CARD_MIN_HEIGHT}
     >
       <Text fontSize={10} fontWeight="700" color="$placeholderColor" letterSpacing={0.5} textTransform="uppercase">
         {label}
@@ -59,6 +62,7 @@ function CombatStatCard({ label, value, subValues, onPress }: CombatStatCardProp
           borderColor={hovered ? '$accentColor' : '$borderColor'}
           borderRadius={8}
           minWidth={100}
+          minHeight={CARD_MIN_HEIGHT}
           cursor="pointer"
         >
           <Text fontSize={10} fontWeight="700" color="$placeholderColor" letterSpacing={0.5} textTransform="uppercase">
@@ -129,6 +133,15 @@ export function CombatStatsRow({
       gap={12}
       flexWrap="wrap"
     >
+      {/* Initiative */}
+      {typeof initiative === 'number' ? (
+        <CombatStatCard
+          label="Initiative"
+          value={initiative}
+          onPress={onInitiativePress}
+        />
+      ) : null}
+
       {/* Armor Class */}
       {armorClass ? (
         <CombatStatCard
@@ -139,15 +152,6 @@ export function CombatStatsRow({
             { label: 'Flat', value: armorClass.flatFooted },
           ]}
           onPress={onArmorClassPress}
-        />
-      ) : null}
-
-      {/* Initiative */}
-      {typeof initiative === 'number' ? (
-        <CombatStatCard
-          label="Initiative"
-          value={initiative}
-          onPress={onInitiativePress}
         />
       ) : null}
 
