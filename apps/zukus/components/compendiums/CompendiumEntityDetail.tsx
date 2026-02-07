@@ -1,8 +1,11 @@
-import { ScrollView } from 'react-native'
-import { YStack, XStack, Text } from 'tamagui'
+import { useState } from 'react'
+import { Pressable, ScrollView } from 'react-native'
+import { YStack, XStack, Text, Card } from 'tamagui'
 import type { StandardEntity } from '@zukus/core'
 import { useTheme, useCompendiumContext, EntityImage } from '../../ui'
 import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity'
+import { LocaleSelector } from '../../ui/components/LocaleSelector'
+import { useDevMode } from '../../ui/stores/devModeStore'
 
 /** Change type from entity.changes array */
 type EntityChange = NonNullable<StandardEntity['changes']>[number]
@@ -37,6 +40,7 @@ export function CompendiumEntityDetail({ entityId }: CompendiumEntityDetailProps
 function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: StandardEntity }) {
   const { themeColors } = useTheme()
   const entity = useLocalizedEntity(rawEntity)
+  const devMode = useDevMode()
 
   return (
     <ScrollView
@@ -46,6 +50,9 @@ function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: Standard
       <YStack gap={20}>
         {/* Header: Image + Name + Tags */}
         <EntityHeader entity={entity} />
+
+        {/* Language selector */}
+        <LocaleSelector />
 
         {/* Description */}
         {entity.description && (
@@ -74,8 +81,45 @@ function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: Standard
             </YStack>
           </Section>
         )}
+
+        {devMode ? <DevJsonSection data={rawEntity} /> : null}
       </YStack>
     </ScrollView>
+  )
+}
+
+function DevJsonSection({ data }: { data: unknown }) {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <Card backgroundColor="$backgroundHover" borderRadius={8} overflow="hidden">
+      <Pressable onPress={() => setExpanded(!expanded)}>
+        <XStack
+          padding={12}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Text fontSize={11} fontWeight="600" color="$orange10" textTransform="uppercase">
+            JSON (Dev)
+          </Text>
+          <Text fontSize={12} color="$placeholderColor">
+            {expanded ? '▲' : '▼'}
+          </Text>
+        </XStack>
+      </Pressable>
+      {expanded ? (
+        <YStack padding={12} paddingTop={0}>
+          <Text
+            fontSize={11}
+            color="$placeholderColor"
+            whiteSpace="pre-wrap"
+            fontFamily="$mono"
+          >
+            {JSON.stringify(data, null, 2)}
+          </Text>
+        </YStack>
+      ) : null}
+    </Card>
   )
 }
 

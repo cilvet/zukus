@@ -132,6 +132,18 @@ export const useTranslationStore = create<TranslationStore>((set, get) => ({
 
 export const useActiveLocale = () => useTranslationStore((s) => s.activeLocale);
 
+export function useAllAvailableLocales(): string[] {
+  return useTranslationStore(
+    useShallow((s) => {
+      const locales = new Set<string>(['en'])
+      for (const pack of s.loadedPacks.values()) {
+        locales.add(pack.locale)
+      }
+      return Array.from(locales).sort()
+    })
+  )
+}
+
 export const useTranslationActions = () =>
   useTranslationStore(
     useShallow((s) => ({

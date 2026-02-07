@@ -1,7 +1,8 @@
 import { View, Text, ScrollView, XStack, YStack } from 'tamagui'
-import { Platform, Pressable, View as RNView } from 'react-native'
+import { Platform, Pressable, Switch, View as RNView } from 'react-native'
 import { useTheme } from '../ui'
 import { useLocale } from '../ui/hooks/useLocale'
+import { useDevModeStore } from '../ui/stores/devModeStore'
 import { SafeAreaBottomSpacer } from '../components/layout'
 
 const AVAILABLE_LANGUAGES = [
@@ -13,6 +14,8 @@ export default function SettingsScreen() {
   'use no memo'
   const { themeName, setTheme, themeInfo, availableThemes, themeColors } = useTheme()
   const { locale, setLocale } = useLocale()
+  const devMode = useDevModeStore((s) => s.enabled)
+  const toggleDevMode = useDevModeStore((s) => s.toggle)
 
   return (
     <RNView style={{ flex: 1, backgroundColor: themeColors.background }}>
@@ -223,6 +226,40 @@ export default function SettingsScreen() {
             )
           })}
         </XStack>
+      </YStack>
+
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text
+          fontSize={14}
+          fontWeight="600"
+          color="$colorFocus"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$3"
+        >
+          Desarrollo
+        </Text>
+        <Pressable onPress={toggleDevMode}>
+          <XStack
+            justifyContent="space-between"
+            alignItems="center"
+            paddingVertical="$3"
+          >
+            <YStack flex={1}>
+              <Text fontSize={15} color="$color">
+                Modo desarrollo
+              </Text>
+              <Text fontSize={12} color="$placeholderColor" marginTop="$1">
+                Muestra datos internos en el detalle de entidades
+              </Text>
+            </YStack>
+            <Switch
+              value={devMode}
+              onValueChange={toggleDevMode}
+              trackColor={{ false: '#767577', true: themeColors.accent }}
+            />
+          </XStack>
+        </Pressable>
       </YStack>
 
       <YStack padding="$6" alignItems="center">

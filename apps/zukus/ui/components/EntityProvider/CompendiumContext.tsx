@@ -14,6 +14,7 @@ import {
 import type { StandardEntity } from '@zukus/core'
 import type { CompendiumContextValue } from './types'
 import { useTranslationStore } from '../../stores/translationStore'
+import { useDevModeStore } from '../../stores/devModeStore'
 import { getDeviceLocale } from '../../hooks/useLocale'
 
 const defaultCompendiumContext: CompendiumContextValue = {
@@ -67,9 +68,12 @@ export function LocalizedCompendiumProvider({ children }: { children: React.Reac
     (state) => state.getActivePackForCompendium(dnd35ExampleCompendium.id)
   )
 
+  const initDevMode = useDevModeStore((s) => s.initialize)
+
   useEffect(() => {
     initialize(getDeviceLocale())
-  }, [initialize])
+    initDevMode()
+  }, [initialize, initDevMode])
 
   const embeddedContext = useMemo<CompendiumContextValue>(() => {
     const embed = (entity: StandardEntity): StandardEntity =>

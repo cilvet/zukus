@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Pressable } from 'react-native'
 import { YStack, XStack, Text, Card } from 'tamagui'
 import {
@@ -9,6 +10,8 @@ import { Checkbox } from '../../../atoms'
 import { EntityImage } from '../../EntityImage'
 import { useCompendiumContext } from '../../EntityProvider'
 import { useLocalizedEntity } from '../../../hooks/useLocalizedEntity'
+import { LocaleSelector } from '../../LocaleSelector'
+import { useDevMode } from '../../../stores/devModeStore'
 
 type GenericEntityDetailPanelProps = {
   entity: ComputedEntity
@@ -420,6 +423,7 @@ export function GenericEntityDetailPanel({
 }: GenericEntityDetailPanelProps) {
   const entity = useLocalizedEntity(rawEntity)
   const { compendium } = useCompendiumContext()
+  const devMode = useDevMode()
   const tags = entity.tags ?? []
   const simpleFields: Array<{ key: string; label: string; value: string }> = []
   const complexFields: Array<{ key: string; label: string; value: unknown }> = []
@@ -475,6 +479,9 @@ export function GenericEntityDetailPanel({
         </YStack>
       </XStack>
 
+      {/* Language selector */}
+      <LocaleSelector />
+
       {entity.description ? (
         <YStack gap={4}>
           <Text fontSize={14} color="$color" lineHeight={22}>
@@ -511,6 +518,43 @@ export function GenericEntityDetailPanel({
       ))}
 
       <SourceInfo meta={entity._meta} />
+
+      {devMode ? <DevJsonSection data={rawEntity} /> : null}
     </YStack>
+  )
+}
+
+function DevJsonSection({ data }: { data: unknown }) {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <Card backgroundColor="$uiBackgroundColor" borderRadius={8} overflow="hidden">
+      <Pressable onPress={() => setExpanded(!expanded)}>
+        <XStack
+          padding={12}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Text fontSize={11} fontWeight="600" color="$orange10" textTransform="uppercase">
+            JSON (Dev)
+          </Text>
+          <Text fontSize={12} color="$placeholderColor">
+            {expanded ? '▲' : '▼'}
+          </Text>
+        </XStack>
+      </Pressable>
+      {expanded ? (
+        <YStack padding={12} paddingTop={0}>
+          <Text
+            fontSize={11}
+            color="$placeholderColor"
+            whiteSpace="pre-wrap"
+            fontFamily="$mono"
+          >
+            {JSON.stringify(data, null, 2)}
+          </Text>
+        </YStack>
+      ) : null}
+    </Card>
   )
 }

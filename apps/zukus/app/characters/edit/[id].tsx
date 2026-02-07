@@ -1,8 +1,9 @@
-import { Stack, useRouter } from 'expo-router'
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { Text, XStack, YStack } from 'tamagui'
 import { Platform, Pressable, useWindowDimensions } from 'react-native'
 import { EditCharacterScreen } from '../../../screens'
 import { useCharacterName, useCharacterBuild } from '../../../ui'
+import { useCharacterSync } from '../../../hooks'
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -40,6 +41,10 @@ function CustomHeaderLeft() {
 }
 
 export default function EditCharacterRoute() {
+  const { id } = useLocalSearchParams<{ id: string }>()
+  const characterId = id ?? ''
+  useCharacterSync(characterId)
+
   const { width } = useWindowDimensions()
   const isWebDesktop = Platform.OS === 'web' && width >= DESKTOP_BREAKPOINT
 

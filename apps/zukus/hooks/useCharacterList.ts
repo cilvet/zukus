@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Platform, useWindowDimensions } from 'react-native'
 import { useRouter } from 'expo-router'
+import { useFocusEffect } from '@react-navigation/native'
 import { useAuth } from '../contexts'
 import { characterRepository, type CharacterListItem } from '../services/characterRepository'
 
@@ -16,35 +17,39 @@ export function useCharacterList() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (!session) return
+  useFocusEffect(
+    useCallback(() => {
+      if (!session) return
 
-    let isMounted = true
+      let isMounted = true
 
-    const loadCharacters = async () => {
-      setIsLoading(true)
-      setError(null)
-      try {
-        const data = await characterRepository.listByUser()
-        if (isMounted) {
-          setCharacters(data)
-          setIsLoading(false)
-        }
-      } catch (err) {
-        if (isMounted) {
-          const message = err instanceof Error ? err.message : 'Error al cargar personajes'
-          setError(message)
-          setIsLoading(false)
+      const loadCharacters = async () => {
+        setIsLoading(true)
+        setError(null)
+        try {
+          const data = await characterRepository.listByUser()
+          if (isMounted) {
+            setCharacters(data)
+            setIsLoading(false)
+          }
+        } catch (err) {
+          if (isMounted) {
+            const message = err instanceof Error ? err.message : 'Error al cargar personajes'
+            setError(message)
+            setIsLoading(false)
+          }
         }
       }
-    }
 
-    loadCharacters()
+      loadCharacters()
 
-    return () => {
-      isMounted = false
-    }
-  }, [session])
+      return () => {
+        isMounted = false
+      }
+    }, [session])
+  )
+
+  const [isCreating, setIsCreating] = useState(false)
 
   const navigateToCharacter = (characterId: string) => {
     // Usar siempre la ruta unificada
@@ -54,11 +59,30 @@ export function useCharacterList() {
     })
   }
 
+  const createCharacter = async () => {
+    if (isCreating) return
+    setIsCreating(true)
+    try {
+      const id = await characterRepository.create()
+      setIsCreating(false)
+      router.push({
+        pathname: '/characters/edit/[id]',
+        params: { id },
+      })
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Error al crear personaje'
+      setError(message)
+      setIsCreating(false)
+    }
+  }
+
   return {
     characters,
     isLoading,
     error,
+    isCreating,
     navigateToCharacter,
+    createCharacter,
   }
 }
 

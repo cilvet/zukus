@@ -79,3 +79,5 @@ export {
   useActiveLocale,
   useTranslationActions,
 } from './translationStore'
+
+export { useDevModeStore, useDevMode } from './devModeStore'
