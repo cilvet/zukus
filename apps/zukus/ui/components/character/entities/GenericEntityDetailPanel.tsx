@@ -9,7 +9,7 @@ import {
 import { Checkbox } from '../../../atoms'
 import { EntityImage } from '../../EntityImage'
 import { useCompendiumContext } from '../../EntityProvider'
-import { useLocalizedEntityWithResult } from '../../../hooks/useLocalizedEntity'
+import { useLocalizedEntity } from '../../../hooks/useLocalizedEntity'
 import { LocaleSelector } from '../../LocaleSelector'
 import { useDevMode } from '../../../stores/devModeStore'
 
@@ -421,8 +421,7 @@ export function GenericEntityDetailPanel({
   instanceFields,
   onInstanceFieldChange,
 }: GenericEntityDetailPanelProps) {
-  const locResult = useLocalizedEntityWithResult(rawEntity)
-  const entity = locResult.entity
+  const entity = useLocalizedEntity(rawEntity)
   const { compendium } = useCompendiumContext()
   const devMode = useDevMode()
   const tags = entity.tags ?? []
@@ -520,29 +519,13 @@ export function GenericEntityDetailPanel({
 
       <SourceInfo meta={entity._meta} />
 
-      {devMode ? <DevJsonSection data={rawEntity} localization={locResult.source !== 'original' ? {
-        locale: locResult.appliedLocale,
-        source: locResult.source,
-        translatedFields: locResult.translatedFields,
-        missingFields: locResult.missingFields,
-      } : undefined} /> : null}
+      {devMode ? <DevJsonSection data={rawEntity} /> : null}
     </YStack>
   )
 }
 
-type LocalizationInfo = {
-  locale: string
-  source: 'pack' | 'embedded'
-  translatedFields: string[]
-  missingFields: string[]
-}
-
-function DevJsonSection({ data, localization }: { data: unknown; localization?: LocalizationInfo }) {
+function DevJsonSection({ data }: { data: unknown }) {
   const [expanded, setExpanded] = useState(false)
-
-  const jsonData = localization
-    ? { ...(data as Record<string, unknown>), _localization: localization }
-    : data
 
   return (
     <Card backgroundColor="$uiBackgroundColor" borderRadius={8} overflow="hidden">
@@ -568,7 +551,7 @@ function DevJsonSection({ data, localization }: { data: unknown; localization?: 
             whiteSpace="pre-wrap"
             fontFamily="$mono"
           >
-            {JSON.stringify(jsonData, null, 2)}
+            {JSON.stringify(data, null, 2)}
           </Text>
         </YStack>
       ) : null}

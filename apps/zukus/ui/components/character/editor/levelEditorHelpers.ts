@@ -5,7 +5,7 @@
  * Estas funciones utilizan las operaciones del updater para modificar los datos del personaje.
  */
 
-import { ops, dnd35ExampleCompendium } from '@zukus/core'
+import { ops, dnd35ExampleCompendium, embedTranslations, dnd35FeatsSpanishPack } from '@zukus/core'
 import type {
   CharacterBaseData,
   CharacterUpdater,
@@ -17,7 +17,22 @@ import type {
 } from '@zukus/core'
 
 /**
- * Creates a CompendiumContext from the dnd35ExampleCompendium
+ * Embeds all available translation packs into an entity.
+ */
+const packs = [dnd35FeatsSpanishPack]
+
+function embedAllTranslations(entity: StandardEntity): StandardEntity {
+  let result = entity
+  for (const pack of packs) {
+    result = embedTranslations(result, pack)
+  }
+  return result
+}
+
+/**
+ * Creates a CompendiumContext from the dnd35ExampleCompendium.
+ * Entities are returned with translations embedded so character entities
+ * carry their translation data.
  */
 function createCompendiumContext() {
   return {
@@ -31,10 +46,12 @@ function createCompendiumContext() {
     },
     getEntity: (entityType: string, entityId: string): StandardEntity | undefined => {
       const entities = dnd35ExampleCompendium.entities[entityType] || []
-      return entities.find((e) => e.id === entityId)
+      const entity = entities.find((e) => e.id === entityId)
+      return entity ? embedAllTranslations(entity) : undefined
     },
     getAllEntities: (entityType: string): StandardEntity[] => {
-      return dnd35ExampleCompendium.entities[entityType] || []
+      const entities = dnd35ExampleCompendium.entities[entityType] || []
+      return entities.map(embedAllTranslations)
     },
   }
 }
@@ -244,6 +261,49 @@ export function updateCurrentLevel(
   targetLevel: number
 ): void {
   characterUpdater.setCurrentCharacterLevel(targetLevel)
+}
+
+/**
+ * Applies a quick build with multiple class entries.
+ * Each entry specifies a classId and how many levels of that class.
+ * Slots are filled sequentially: e.g. [{Fighter, 3}, {Druid, 4}] → slots 0-2 Fighter, 3-6 Druid.
+ * Auto-rolls HP (slot 0 = max, rest random) and saves once.
+ */
+export function applyQuickBuild(
+  baseData: CharacterBaseData,
+  characterUpdater: CharacterUpdater,
+  entries: { classId: string; levels: number }[]
+): void {
+  let updatedData = baseData
+  let slotIndex = 0
+
+  for (const entry of entries) {
+    // Ensure the class exists in classEntities
+    const hasClass = updatedData.classEntities && updatedData.classEntities[entry.classId]
+    if (!hasClass) {
+      const addClassResult = ops.addClass(updatedData, entry.classId, compendiumContext)
+      updatedData = addClassResult.character
+    }
+
+    const hitDie = getClassHitDieFromCompendium(entry.classId)
+
+    for (let i = 0; i < entry.levels; i++) {
+      if (slotIndex >= 20) break
+
+      const setSlotResult = ops.setLevelSlotClass(updatedData, slotIndex, entry.classId)
+      updatedData = setSlotResult.character
+
+      if (hitDie) {
+        const rolledHp = rollHitDie(hitDie, slotIndex)
+        const setHpResult = ops.setLevelSlotHp(updatedData, slotIndex, rolledHp)
+        updatedData = setHpResult.character
+      }
+
+      slotIndex++
+    }
+  }
+
+  characterUpdater.updateCharacterBaseData(updatedData)
 }
 
 // =============================================================================

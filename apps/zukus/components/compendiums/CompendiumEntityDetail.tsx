@@ -3,7 +3,7 @@ import { Pressable, ScrollView } from 'react-native'
 import { YStack, XStack, Text, Card } from 'tamagui'
 import type { StandardEntity } from '@zukus/core'
 import { useTheme, useCompendiumContext, EntityImage } from '../../ui'
-import { useLocalizedEntityWithResult } from '../../ui/hooks/useLocalizedEntity'
+import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity'
 import { LocaleSelector } from '../../ui/components/LocaleSelector'
 import { useDevMode } from '../../ui/stores/devModeStore'
 
@@ -39,8 +39,7 @@ export function CompendiumEntityDetail({ entityId }: CompendiumEntityDetailProps
 
 function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: StandardEntity }) {
   const { themeColors } = useTheme()
-  const locResult = useLocalizedEntityWithResult(rawEntity)
-  const entity = locResult.entity
+  const entity = useLocalizedEntity(rawEntity)
   const devMode = useDevMode()
 
   return (
@@ -83,30 +82,14 @@ function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: Standard
           </Section>
         )}
 
-        {devMode ? <DevJsonSection data={rawEntity} localization={locResult.source !== 'original' ? {
-          locale: locResult.appliedLocale,
-          source: locResult.source,
-          translatedFields: locResult.translatedFields,
-          missingFields: locResult.missingFields,
-        } : undefined} /> : null}
+        {devMode ? <DevJsonSection data={rawEntity} /> : null}
       </YStack>
     </ScrollView>
   )
 }
 
-type LocalizationInfo = {
-  locale: string
-  source: 'pack' | 'embedded'
-  translatedFields: string[]
-  missingFields: string[]
-}
-
-function DevJsonSection({ data, localization }: { data: unknown; localization?: LocalizationInfo }) {
+function DevJsonSection({ data }: { data: unknown }) {
   const [expanded, setExpanded] = useState(false)
-
-  const jsonData = localization
-    ? { ...(data as Record<string, unknown>), _localization: localization }
-    : data
 
   return (
     <Card backgroundColor="$backgroundHover" borderRadius={8} overflow="hidden">
