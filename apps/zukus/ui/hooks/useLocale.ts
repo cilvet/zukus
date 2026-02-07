@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
 import { getLocales } from 'expo-localization'
 import { useActiveLocale, useTranslationActions, useTranslationStore } from '../stores/translationStore'
+import { useShallow } from 'zustand/shallow'
 
 export function getDeviceLocale(): string {
   const locales = getLocales()
@@ -14,15 +14,15 @@ export function useLocale() {
 }
 
 export function useAvailableLocales(compendiumId: string): string[] {
-  const loadedPacks = useTranslationStore((state) => state.loadedPacks)
-
-  return useMemo(() => {
-    const locales = new Set<string>(['en']) // base locale always available
-    for (const pack of loadedPacks.values()) {
-      if (pack.targetCompendiumId === compendiumId) {
-        locales.add(pack.locale)
+  return useTranslationStore(
+    useShallow((state) => {
+      const locales = new Set<string>(['en']) // base locale always available
+      for (const pack of state.loadedPacks.values()) {
+        if (pack.targetCompendiumId === compendiumId) {
+          locales.add(pack.locale)
+        }
       }
-    }
-    return Array.from(locales).sort()
-  }, [loadedPacks, compendiumId])
+      return Array.from(locales).sort()
+    })
+  )
 }

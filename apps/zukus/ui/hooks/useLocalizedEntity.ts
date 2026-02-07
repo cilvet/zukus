@@ -7,21 +7,24 @@ import {
   type LocalizationResult,
 } from '@zukus/core'
 import { useActiveLocale, useTranslationStore } from '../stores/translationStore'
+import { useCompendiumContext } from '../components/EntityProvider/CompendiumContext'
 
 /**
  * Returns a localized entity for display.
  *
- * - With compendiumId: uses pack + embedded translations (compendium entities)
- * - Without compendiumId: uses only embedded translations (character entities)
+ * Automatically uses the active compendium's translation pack.
+ * If compendiumId is not provided, it's resolved from CompendiumContext.
  */
 export function useLocalizedEntity<T extends StandardEntity>(
   entity: T,
   compendiumId?: string,
   compendiumLocale: string = 'en',
 ): T {
+  const { compendium } = useCompendiumContext()
+  const effectiveCompendiumId = compendiumId ?? compendium.id
   const locale = useActiveLocale()
   const activePack = useTranslationStore(
-    (state) => compendiumId ? state.getActivePackForCompendium(compendiumId) : undefined
+    (state) => state.getActivePackForCompendium(effectiveCompendiumId)
   )
 
   const context: LocalizationContext = {
@@ -41,9 +44,11 @@ export function useLocalizedEntities<T extends StandardEntity>(
   compendiumId?: string,
   compendiumLocale: string = 'en',
 ): T[] {
+  const { compendium } = useCompendiumContext()
+  const effectiveCompendiumId = compendiumId ?? compendium.id
   const locale = useActiveLocale()
   const activePack = useTranslationStore(
-    (state) => compendiumId ? state.getActivePackForCompendium(compendiumId) : undefined
+    (state) => state.getActivePackForCompendium(effectiveCompendiumId)
   )
 
   const context: LocalizationContext = {
@@ -60,9 +65,11 @@ export function useLocalizedEntityWithResult<T extends StandardEntity>(
   compendiumLocale: string = 'en',
   translatableFields?: string[],
 ): LocalizationResult<T> {
+  const { compendium } = useCompendiumContext()
+  const effectiveCompendiumId = compendiumId ?? compendium.id
   const locale = useActiveLocale()
   const activePack = useTranslationStore(
-    (state) => compendiumId ? state.getActivePackForCompendium(compendiumId) : undefined
+    (state) => state.getActivePackForCompendium(effectiveCompendiumId)
   )
 
   const context: LocalizationContext = {

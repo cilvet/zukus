@@ -629,8 +629,11 @@ export function useInventoryState() {
   return useCharacterStore((state) => state.baseData?.inventoryState ?? EMPTY_INVENTORY_STATE)
 }
 
+const EMPTY_ITEMS: Item[] = []
+const EMPTY_CURRENCIES: Record<string, number> = {}
+
 export function useInventoryItems() {
-  return useCharacterStore((state) => state.baseData?.inventoryState?.items ?? [])
+  return useCharacterStore((state) => state.baseData?.inventoryState?.items ?? EMPTY_ITEMS)
 }
 
 export function useInventoryItem(instanceId: string) {
@@ -640,7 +643,7 @@ export function useInventoryItem(instanceId: string) {
 }
 
 export function useCurrencies() {
-  return useCharacterStore((state) => state.baseData?.inventoryState?.currencies ?? {})
+  return useCharacterStore((state) => state.baseData?.inventoryState?.currencies ?? EMPTY_CURRENCIES)
 }
 
 // =============================================================================
