@@ -1,6 +1,6 @@
 import { Stack, useRouter, useSegments } from 'expo-router'
 import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native'
-import { TamaguiProvider, Theme } from 'tamagui'
+import { TamaguiProvider, Theme, PortalProvider } from 'tamagui'
 import { config, ThemeProvider, useTheme } from '../ui'
 import { useFonts } from 'expo-font'
 import { useMemo, useEffect } from 'react'
@@ -11,6 +11,7 @@ import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
 import { AuthProvider, useAuth } from '../contexts'
+import { LocalizedCompendiumProvider } from '../ui/components/EntityProvider/CompendiumContext'
 
 const DESKTOP_BREAKPOINT = 768
 
@@ -96,9 +97,10 @@ function ThemedApp() {
   return (
     <TamaguiProvider config={config}>
       <Theme name={themeName}>
-        <NavigationThemeProvider value={navigationTheme}>
-          <StatusBar style="light" />
-          <Stack
+        <PortalProvider>
+          <NavigationThemeProvider value={navigationTheme}>
+            <StatusBar style="light" />
+            <Stack
             screenOptions={{
               headerShown: false,
               contentStyle: { backgroundColor: themeColors.background },
@@ -153,8 +155,9 @@ function ThemedApp() {
                 },
               }}
             />
-          </Stack>
-        </NavigationThemeProvider>
+            </Stack>
+          </NavigationThemeProvider>
+        </PortalProvider>
       </Theme>
     </TamaguiProvider>
   )
@@ -171,7 +174,9 @@ export default function RootLayout() {
         <KeyboardProvider>
           <ThemeProvider>
             <AuthProvider>
-              <ThemedApp />
+              <LocalizedCompendiumProvider>
+                <ThemedApp />
+              </LocalizedCompendiumProvider>
             </AuthProvider>
           </ThemeProvider>
         </KeyboardProvider>

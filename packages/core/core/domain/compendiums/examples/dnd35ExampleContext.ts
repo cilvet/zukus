@@ -108,6 +108,7 @@ const dnd35ExampleCompendium: Compendium = {
   id: 'dnd35-example',
   name: 'D&D 3.5 Example Compendium',
   version: '1.0.0',
+  locale: 'en',
   description: 'Example compendium for D&D 3.5 with spells, feats, buffs, classes, class features, and system-level progressions',
   dependencies: [],
   schemas: [

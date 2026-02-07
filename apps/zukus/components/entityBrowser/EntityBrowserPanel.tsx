@@ -62,6 +62,7 @@ export type EntityBrowserPanelProps<T extends StandardEntity> = {
 // Component
 // ============================================================================
 
+/** @deprecated Use EntitySelectionView instead */
 export function EntityBrowserPanel<T extends StandardEntity>({
   entities,
   filterConfig,

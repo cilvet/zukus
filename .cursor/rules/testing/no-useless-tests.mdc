@@ -1,9 +1,7 @@
 ---
-description: Prohibe crear tests que no ejecuten código funcional
-globs: 
-alwaysApply: true
+description: Usar SIEMPRE que se hagan tests nuevos. Prohibe crear tests que no ejecuten código funcional.
+alwaysApply: false
 ---
-
 # NO Tests Inútiles
 
 ## Regla Fundamental

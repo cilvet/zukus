@@ -1,4 +1,4 @@
-import type { CalculatedCGE, FilterValue, FacetFilterDef } from '@zukus/core'
+import type { CalculatedCGE } from '@zukus/core'
 
 export type SelectionMode = 'prepare' | 'known'
 
@@ -86,53 +86,3 @@ export function findNextEmptySlotIndex(cge: CalculatedCGE | null, level: number)
   return emptySlot ? emptySlot.index : -1
 }
 
-/**
- * Get a nested value from an object using dot notation path.
- */
-export function getNestedValue(obj: unknown, path: string): unknown {
-  const parts = path.split('.')
-  let current: unknown = obj
-
-  for (const part of parts) {
-    if (current === null || current === undefined) return undefined
-    if (typeof current !== 'object') return undefined
-    current = (current as Record<string, unknown>)[part]
-  }
-
-  return current
-}
-
-/**
- * Check if an entity matches a facet filter.
- */
-export function matchesFacetFilter(
-  entity: unknown,
-  filter: FacetFilterDef,
-  filterValue: FilterValue
-): boolean {
-  if (filterValue === null || filterValue === undefined) return true
-
-  const fieldValue = getNestedValue(entity, filter.facetField)
-
-  // Multi-select: filterValue is an array, match if ANY selected value matches
-  if (Array.isArray(filterValue)) {
-    if (filterValue.length === 0) return true
-
-    // Entity field is also an array (e.g., components)
-    if (Array.isArray(fieldValue)) {
-      return filterValue.some((fv) => fieldValue.includes(fv))
-    }
-
-    // Entity field is a single value
-    return (filterValue as string[]).includes(fieldValue as string)
-  }
-
-  // Single select
-  if (filterValue === '') return true
-
-  if (Array.isArray(fieldValue)) {
-    return fieldValue.includes(filterValue)
-  }
-
-  return fieldValue === filterValue
-}

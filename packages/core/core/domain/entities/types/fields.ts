@@ -11,6 +11,9 @@ export type EntityFieldDefinition = {
   allowedValues?: string[] | number[]; // Simple predefined values (deprecated in favor of 'enum' type)
   objectFields?: EntityFieldDefinition[]; // Only applies to 'object' and 'object_array' types - defines nested structure
 
+  // Translation flag - marks this field as translatable
+  translatable?: boolean;
+
   // Formula flag - only applies when type='string'
   // Indicates that this field contains a formula expression for UI autocompletion
   isFormula?: boolean;

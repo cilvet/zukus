@@ -1,14 +1,98 @@
 import { View, Text, ScrollView, XStack, YStack } from 'tamagui'
 import { Platform, Pressable, View as RNView } from 'react-native'
 import { useTheme } from '../ui'
+import { useLocale } from '../ui/hooks/useLocale'
 import { SafeAreaBottomSpacer } from '../components/layout'
 
+const AVAILABLE_LANGUAGES = [
+  { code: 'es', name: 'Espanol', flag: '\u{1F1EA}\u{1F1F8}' },
+  { code: 'en', name: 'English', flag: '\u{1F1EC}\u{1F1E7}' },
+] as const
+
 export default function SettingsScreen() {
+  'use no memo'
   const { themeName, setTheme, themeInfo, availableThemes, themeColors } = useTheme()
+  const { locale, setLocale } = useLocale()
 
   return (
     <RNView style={{ flex: 1, backgroundColor: themeColors.background }}>
       <ScrollView flex={1} backgroundColor="$background">
+
+      <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
+        <Text
+          fontSize={14}
+          fontWeight="600"
+          color="$colorFocus"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$3"
+        >
+          Idioma
+        </Text>
+        <XStack
+          alignItems="center"
+          backgroundColor="$backgroundHover"
+          padding="$4"
+          borderRadius="$4"
+          borderWidth={1}
+          borderColor="$borderColor"
+          marginBottom="$3"
+        >
+          <Text fontSize={28} marginRight="$3">
+            {AVAILABLE_LANGUAGES.find((l) => l.code === locale)?.flag ?? '\u{1F310}'}
+          </Text>
+          <YStack>
+            <Text fontSize={18} fontWeight="600" color="$color">
+              {AVAILABLE_LANGUAGES.find((l) => l.code === locale)?.name ?? locale}
+            </Text>
+            <Text fontSize={13} color="$placeholderColor" marginTop="$1">
+              Idioma actual
+            </Text>
+          </YStack>
+        </XStack>
+        <Text
+          fontSize={12}
+          fontWeight="600"
+          color="$placeholderColor"
+          textTransform="uppercase"
+          letterSpacing={1}
+          marginBottom="$2"
+        >
+          Idiomas disponibles ({AVAILABLE_LANGUAGES.length})
+        </Text>
+        <XStack flexWrap="wrap" gap="$3">
+          {AVAILABLE_LANGUAGES.map((lang) => {
+            const isSelected = lang.code === locale
+            return (
+              <Pressable key={lang.code} onPress={() => setLocale(lang.code)}>
+                <YStack alignItems="center" width={70}>
+                  <View
+                    width={48}
+                    height={48}
+                    borderRadius={24}
+                    alignItems="center"
+                    justifyContent="center"
+                    borderWidth={isSelected ? 3 : 1}
+                    borderColor={isSelected ? '$colorFocus' : '$borderColor'}
+                    backgroundColor="$backgroundHover"
+                  >
+                    <Text fontSize={22}>{lang.flag}</Text>
+                  </View>
+                  <Text
+                    fontSize={10}
+                    color={isSelected ? '$colorFocus' : '$placeholderColor'}
+                    fontWeight={isSelected ? '600' : '400'}
+                    marginTop="$1"
+                    textAlign="center"
+                  >
+                    {lang.name}
+                  </Text>
+                </YStack>
+              </Pressable>
+            )
+          })}
+        </XStack>
+      </YStack>
 
       <YStack padding="$4" borderBottomWidth={1} borderBottomColor="$borderColor">
         <Text

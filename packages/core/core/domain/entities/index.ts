@@ -100,6 +100,9 @@ export {
   createInitialFilterState,
 } from './filtering/filterConfig';
 
+// Generic filtering via config
+export { applyFilterConfig, matchesFacetFilter } from './filtering/applyFilterConfig';
+
 // Filter Configurations (pre-built)
 export {
   spellFilterConfig,

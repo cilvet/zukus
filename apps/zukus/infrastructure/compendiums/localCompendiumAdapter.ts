@@ -15,13 +15,13 @@ import {
  * Esto se puede extender o mover a configuracion.
  */
 const ENTITY_TYPE_DISPLAY_NAMES: Record<string, string> = {
-  spell: 'Conjuros',
-  feat: 'Dotes',
+  spell: 'Spells',
+  feat: 'Feats',
   buff: 'Buffs',
-  class: 'Clases',
-  classFeature: 'Rasgos de Clase',
-  system_levels: 'Niveles del Sistema',
-  character_ability_increase: 'Incrementos de Caracteristica',
+  class: 'Classes',
+  classFeature: 'Class Features',
+  system_levels: 'System Levels',
+  character_ability_increase: 'Ability Increases',
 };
 
 /**

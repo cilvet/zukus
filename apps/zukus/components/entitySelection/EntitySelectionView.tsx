@@ -443,6 +443,7 @@ export function EntitySelectionView<T extends StandardEntity>({
 
       {/* FlashList - takes remaining space */}
       <FlashList
+        style={{ flex: 1 }}
         data={listData}
         keyExtractor={(item) => {
           if (useSelectionRows) {

@@ -14,6 +14,7 @@ export const featSchema: EntitySchemaDefinition = {
       name: 'category',
       type: 'string',
       optional: true,
+      translatable: true,
       description: 'Feat category (General, Combat, Metamagic, etc)',
     },
     {
@@ -26,18 +27,21 @@ export const featSchema: EntitySchemaDefinition = {
     {
       name: 'benefit',
       type: 'string',
+      translatable: true,
       description: 'What the feat provides',
     },
     {
       name: 'normal',
       type: 'string',
       optional: true,
+      translatable: true,
       description: 'Normal behavior without this feat',
     },
     {
       name: 'special',
       type: 'string',
       optional: true,
+      translatable: true,
       description: 'Special notes about the feat',
     },
   ],

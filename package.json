@@ -10,6 +10,8 @@
     "app": "cd apps/zukus && expo start",
     "build": "turbo build",
     "test": "turbo test",
+    "test:views": "bun --cwd apps/zukus vitest run",
+    "test:views:watch": "bun --cwd apps/zukus vitest",
     "typecheck": "turbo typecheck",
     "lint": "turbo lint",
     "clean": "turbo clean && rm -rf node_modules",

@@ -53,6 +53,7 @@ export function addInventoryItem(
     quantity?: number;
     equipped?: boolean;
     customName?: string;
+    entity?: any; // StandardEntity - the resolved entity from compendium
   }
 ): OperationResult & { instance?: InventoryItemInstance } {
   const state = ensureInventoryState(character);

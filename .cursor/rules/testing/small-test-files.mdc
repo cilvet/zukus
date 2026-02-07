@@ -1,9 +1,7 @@
 ---
-description: Mantener archivos de test pequeños y enfocados
-globs: 
-alwaysApply: true
+description: Usar SIEMPRE QUE SE HAGAN TESTS. Mantener archivos de test pequeños y enfocados
+alwaysApply: false
 ---
-
 # Archivos de Test Pequeños
 
 ## Regla

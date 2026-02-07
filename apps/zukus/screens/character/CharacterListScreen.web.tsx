@@ -45,10 +45,6 @@ type ListProps = {
 function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
   return (
     <ScrollView flex={1} backgroundColor="$background">
-      <YStack padding="$4">
-        <Button onPress={onOpenServerList}>Ver lista server</Button>
-      </YStack>
-
       {isLoading ? (
         <YStack padding="$4">
           <Text color="$placeholderColor">Cargando personajes...</Text>
@@ -66,6 +62,7 @@ function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }
           <Text color="$placeholderColor">No hay personajes disponibles.</Text>
         </YStack>
       ) : null}
+
 
       <YStack>
         {characters.map((character, index) => (

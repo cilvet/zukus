@@ -837,7 +837,7 @@ export function DetailScreen() {
   const { themeColors } = useTheme()
   
   const { type, id, extra } = parseSlug(slug)
-  const needsOwnScroll = type === 'chat' || type === 'cgeEntitySelect' || type === 'cgeManagement' || type === 'itemBrowser'
+  const needsOwnScroll = type === 'chat' || type === 'cgeEntitySelect' || type === 'cgeManagement' || type === 'itemBrowser' || type === 'entitySelectorDetail'
   
   // Determinar el título para el header
   const getTitle = (): string => {

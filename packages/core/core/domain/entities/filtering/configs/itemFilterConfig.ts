@@ -24,7 +24,7 @@ export const ITEM_ENTITY_TYPES = [
   'rod',
   'staff',
   'ring',
-  'wonderousItem',
+  'wondrousItem',
   'potion',
   'scroll',
 ] as const
@@ -43,7 +43,7 @@ export const ITEM_TYPE_LABELS: Record<string, string> = {
   rod: 'Varas',
   staff: 'Bastones',
   ring: 'Anillos',
-  wonderousItem: 'Objetos maravillosos',
+  wondrousItem: 'Objetos maravillosos',
   potion: 'Pociones',
   scroll: 'Pergaminos',
 }

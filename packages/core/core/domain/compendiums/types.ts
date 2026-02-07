@@ -18,6 +18,9 @@ export type Compendium = {
   /** Descripción opcional */
   description?: string;
   
+  /** Base locale of the compendium content (default 'en') */
+  locale?: string;
+
   /** IDs de compendios requeridos */
   dependencies: string[];
   

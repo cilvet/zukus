@@ -1,10 +1,7 @@
 import { Pressable } from 'react-native'
 import { Text, XStack } from 'tamagui'
 import { useRouter, usePathname } from 'expo-router'
-import { themes } from '../../ui'
-
-const CURRENT_THEME = 'zukus' as keyof typeof themes
-const theme = themes[CURRENT_THEME]
+import { useTheme } from '../../ui'
 
 type NavItem = {
   label: string
@@ -22,6 +19,7 @@ const NAV_ITEMS: NavItem[] = [
 
 function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
   const router = useRouter()
+  const { themeColors } = useTheme()
 
   const handlePress = () => {
     router.push(item.href as any)
@@ -34,12 +32,12 @@ function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
           paddingHorizontal={16}
           paddingVertical={8}
           borderRadius={4}
-          backgroundColor={pressed ? theme.backgroundHover : 'transparent'}
+          backgroundColor={pressed ? themeColors.backgroundHover : 'transparent'}
         >
           <Text
             fontSize={14}
             fontWeight={isActive ? '700' : '400'}
-            color={isActive ? theme.color : theme.placeholderColor}
+            color={isActive ? themeColors.color : themeColors.placeholderColor}
             letterSpacing={0.5}
           >
             {item.label}
@@ -52,22 +50,23 @@ function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
 
 export function Topbar() {
   const pathname = usePathname()
+  const { themeColors } = useTheme()
 
   return (
     <XStack
       height={56}
       paddingHorizontal={24}
       alignItems="center"
-      backgroundColor={theme.background}
+      backgroundColor={themeColors.background}
       borderBottomWidth={1}
-      borderBottomColor={theme.borderColor}
+      borderBottomColor={themeColors.borderColor}
     >
       {/* Logo / Brand + Navigation Links */}
       <XStack alignItems="center" gap={24}>
         <Text
           fontSize={20}
           fontWeight="800"
-          color={theme.color}
+          color={themeColors.color}
           letterSpacing={1}
         >
           ZUKUS

@@ -77,6 +77,14 @@ function createFieldSchema(field: EntityFieldDefinition): z.ZodTypeAny {
         schema = z.array(z.string());
       }
       break;
+    case 'reference_array':
+      // Reference arrays are arrays of string IDs (same as reference)
+      if (field.nonEmpty) {
+        schema = z.array(z.string()).min(1);
+      } else {
+        schema = z.array(z.string());
+      }
+      break;
     case 'object':
       if (!field.objectFields || field.objectFields.length === 0) {
         throw new Error(`Object field '${field.name}' must have objectFields defined`);

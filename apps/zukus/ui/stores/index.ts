@@ -73,3 +73,9 @@ export {
   useCompendiumActions,
 } from './compendiumBrowserStore'
 export type { FilterCriteria, CompendiumBrowserStore } from './compendiumBrowserStore'
+
+export {
+  useTranslationStore,
+  useActiveLocale,
+  useTranslationActions,
+} from './translationStore'
