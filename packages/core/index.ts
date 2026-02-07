@@ -138,6 +138,8 @@ export {
   getRelationFilterChipLabel,
   getAllFilterIds,
   createInitialFilterState,
+  applyFilterConfig,
+  matchesFacetFilter,
   spellFilterConfig,
   createSpellFilterConfig,
   classLevelFilter,
@@ -271,6 +273,28 @@ export {
   // Validation
   validateCGEConfig,
 } from "./core/domain/cge";
+
+// Translations
+export type {
+  TranslatedFields,
+  TranslationPack,
+  TranslationPackReference,
+  LocalizationContext,
+  LocalizationResult,
+  TranslationValidationResult,
+} from "./core/domain/translations";
+
+export {
+  mergeTranslation,
+  getLocalizedEntity,
+  getLocalizedEntityWithResult,
+  getLocalizedEntities,
+  embedTranslations,
+  embedTranslationsInEntities,
+  isVersionCompatible,
+  validateTranslationPack,
+  dnd35FeatsSpanishPack,
+} from "./core/domain/translations";
 
 // Test Classes (for CGE visual testing - NOT D&D 3.5 SRD)
 export * from "./testClasses";

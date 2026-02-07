@@ -10,6 +10,8 @@
 import { YStack, XStack, Text } from 'tamagui'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import type { EntityProvider, Selector, StandardEntity, EntityInstance } from '@zukus/core'
+import { getLocalizedEntity, type LocalizationContext } from '@zukus/core'
+import { useActiveLocale } from '../../stores/translationStore'
 
 export type ProviderSummaryRowProps = {
   provider: EntityProvider
@@ -28,15 +30,27 @@ export function ProviderSummaryRow({
   onGrantedEntityPress,
   onSelectedEntityPress,
 }: ProviderSummaryRowProps) {
+  'use no memo'
+
+  const locale = useActiveLocale()
+  const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
+
+  const localizedGranted = grantedEntities.map((e) => getLocalizedEntity(e, ctx))
+
+  const localizedSelected = selectedEntities.map((inst) => ({
+    ...inst,
+    entity: getLocalizedEntity(inst.entity, ctx),
+  }))
+
   const selector = provider.selector
-  const hasGranted = grantedEntities.length > 0
+  const hasGranted = localizedGranted.length > 0
   const hasSelector = !!selector
 
   return (
     <YStack width="100%" gap="$2">
       {/* Granted entities */}
       {hasGranted &&
-        grantedEntities.map((entity) => (
+        localizedGranted.map((entity) => (
           <GrantedEntitySummary
             key={entity.id}
             entity={entity}
@@ -48,7 +62,7 @@ export function ProviderSummaryRow({
       {hasSelector && (
         <SelectorSummary
           selector={selector}
-          selectedEntities={selectedEntities}
+          selectedEntities={localizedSelected}
           onSelectorPress={onSelectorPress}
           onSelectedEntityPress={onSelectedEntityPress}
         />

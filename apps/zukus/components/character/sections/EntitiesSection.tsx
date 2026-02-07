@@ -5,6 +5,8 @@ import { useComputedEntities, EntityTypeGroup } from '../../../ui'
 import { SectionHeader } from '../CharacterComponents'
 import { useNavigateToDetail } from '../../../navigation'
 import type { ComputedEntity } from '@zukus/core'
+import { getLocalizedEntity, type LocalizationContext } from '@zukus/core'
+import { useActiveLocale } from '../../../ui/stores/translationStore'
 
 function groupEntitiesByType(entities: readonly ComputedEntity[]): Record<string, ComputedEntity[]> {
   const groups: Record<string, ComputedEntity[]> = {}
@@ -23,12 +25,15 @@ function groupEntitiesByType(entities: readonly ComputedEntity[]): Record<string
 export function EntitiesSection() {
   const computedEntities = useComputedEntities()
   const navigateToDetail = useNavigateToDetail()
+  const locale = useActiveLocale()
 
   const entitiesByType = groupEntitiesByType(computedEntities)
   const entityTypes = Object.keys(entitiesByType).sort()
 
   const handleEntityPress = (entity: ComputedEntity) => {
-    navigateToDetail('computedEntity', entity.id, entity.name)
+    const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
+    const localized = getLocalizedEntity(entity, ctx)
+    navigateToDetail('computedEntity', entity.id, localized.name)
   }
 
   if (computedEntities.length === 0) {

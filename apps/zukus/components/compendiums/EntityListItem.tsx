@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Image } from 'react-native';
 import { XStack, YStack, Text } from 'tamagui';
 import type { StandardEntity } from '@zukus/core';
+import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity';
 
 /**
  * Altura fija del item - DEBE coincidir con estimatedItemSize de FlashList.
@@ -24,11 +25,12 @@ export type EntityListItemProps = {
  * - React Compiler se encarga de la memoizacion
  */
 export function EntityListItem({
-  entity,
+  entity: rawEntity,
   onPress,
   imageBaseUrl,
   primaryColor = '#666',
 }: EntityListItemProps) {
+  const entity = useLocalizedEntity(rawEntity)
 
   const handlePress = () => {
     onPress();

@@ -1,6 +1,7 @@
 import { Pressable } from 'react-native'
 import { XStack, YStack, Text } from 'tamagui'
 import type { ComputedEntity } from '@zukus/core'
+import { useLocalizedEntity } from '../../../hooks/useLocalizedEntity'
 
 type EntityCardProps = {
   entity: ComputedEntity
@@ -43,8 +44,9 @@ function SuppressedBadge() {
   )
 }
 
-export function EntityCard({ entity, onPress }: EntityCardProps) {
-  const isSuppressed = entity._meta.suppressed
+export function EntityCard({ entity: rawEntity, onPress }: EntityCardProps) {
+  const entity = useLocalizedEntity(rawEntity)
+  const isSuppressed = rawEntity._meta.suppressed
 
   return (
     <Pressable onPress={onPress}>

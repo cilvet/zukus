@@ -2,6 +2,7 @@ import { ScrollView } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import type { StandardEntity } from '@zukus/core'
 import { useTheme, useCompendiumContext, EntityImage } from '../../ui'
+import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity'
 
 /** Change type from entity.changes array */
 type EntityChange = NonNullable<StandardEntity['changes']>[number]
@@ -17,12 +18,10 @@ export type CompendiumEntityDetailProps = {
  * Shows entity information based on available fields.
  */
 export function CompendiumEntityDetail({ entityId }: CompendiumEntityDetailProps) {
-  const { themeColors } = useTheme()
   const compendium = useCompendiumContext()
+  const rawEntity = compendium.getEntityById(entityId)
 
-  const entity = compendium.getEntityById(entityId)
-
-  if (!entity) {
+  if (!rawEntity) {
     return (
       <YStack flex={1} alignItems="center" justifyContent="center" padding={16}>
         <Text color="$placeholderColor" textAlign="center">
@@ -31,6 +30,13 @@ export function CompendiumEntityDetail({ entityId }: CompendiumEntityDetailProps
       </YStack>
     )
   }
+
+  return <CompendiumEntityDetailContent entity={rawEntity} />
+}
+
+function CompendiumEntityDetailContent({ entity: rawEntity }: { entity: StandardEntity }) {
+  const { themeColors } = useTheme()
+  const entity = useLocalizedEntity(rawEntity)
 
   return (
     <ScrollView
@@ -148,6 +154,7 @@ function EntityProperties({ entity }: { entity: StandardEntity }) {
     'legacy_specialChanges',
     'effects',
     'suppression',
+    'translations',
   ])
 
   const entries = Object.entries(entity).filter(

@@ -10,6 +10,7 @@ import type { StandardEntity } from '@zukus/core'
 import type { FilterResult } from '@zukus/core'
 import { Checkbox } from '../../atoms'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useLocalizedEntity } from '../../hooks/useLocalizedEntity'
 
 export type EntityOptionRowProps = {
   entity: StandardEntity
@@ -23,7 +24,7 @@ export type EntityOptionRowProps = {
 }
 
 export function EntityOptionRow({
-  entity,
+  entity: rawEntity,
   filterResult,
   isSelected,
   onToggle,
@@ -32,6 +33,7 @@ export function EntityOptionRow({
   showCheckbox = true,
   onInfoPress,
 }: EntityOptionRowProps) {
+  const entity = useLocalizedEntity(rawEntity)
   const { themeColors } = useTheme()
 
   function handlePress() {

@@ -9,6 +9,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import type { StandardEntity, EntityInstance } from '@zukus/core'
 import { Checkbox } from '../../atoms'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useLocalizedEntity } from '../../hooks/useLocalizedEntity'
 
 export type SelectedEntityRowProps = {
   entityInstance: EntityInstance
@@ -22,7 +23,7 @@ export function SelectedEntityRow({
   onInfoPress,
 }: SelectedEntityRowProps) {
   const { themeColors } = useTheme()
-  const { entity } = entityInstance
+  const entity = useLocalizedEntity(entityInstance.entity)
 
   function handleToggle(checked: boolean) {
     if (!checked) {

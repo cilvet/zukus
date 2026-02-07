@@ -10,27 +10,21 @@ import {
 } from '../../../ui'
 import { usePanelNavigation } from '../../../hooks'
 import { useNavigateToDetail } from '../../../navigation'
-import type { StandardEntity, FilterState } from '@zukus/core'
+import type { StandardEntity } from '@zukus/core'
 import {
   spellFilterConfig,
   getFilterConfig,
-  applyRelationFilter,
-  isRelationFilter,
-  isFacetFilter,
-  isFilterGroup,
+  getLocalizedEntity,
   type EntityFilterConfig,
+  type LocalizationContext,
 } from '@zukus/core'
-import {
-  EntityBrowserPanel,
-  type ButtonConfig,
-  type CounterHandlers,
-  type ActionResult,
-} from '../../entityBrowser'
+import { useActiveLocale } from '../../../ui/stores/translationStore'
+import { EntitySelectionView } from '../../entitySelection'
+import type { CounterHandlers, ActionResult } from '../../entityBrowser/types'
 import {
   parseSelectionId,
   calculateSlotProgress,
   findNextEmptySlotIndex,
-  matchesFacetFilter,
 } from './cgeUtils'
 
 // ============================================================================
@@ -69,6 +63,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const panelNav = usePanelNavigation('character')
   const router = useRouter()
   const navigateToDetail = useNavigateToDetail()
+  const locale = useActiveLocale()
 
   // Parse selectionId to determine mode
   const selection = parseSelectionId(selectionId, primaryCGE?.id ?? '')
@@ -99,60 +94,7 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
     }
   }
 
-  // Button configuration - counter type for CGE
-  const buttonConfig: ButtonConfig = {
-    type: 'counter' as const,
-    action: {
-      id: 'prepare',
-      label: mode === 'known' ? 'Aprender' : 'Preparar',
-      icon: mode === 'known' ? 'book' : 'check',
-    },
-    closeOnComplete: true,
-  }
-
-  // Custom filter function - no useCallback with 'use no memo'
-  const customFilter = (entities: EnrichedSpell[], filterState: FilterState) => {
-    let result = entities
-
-    // Process each filter
-    for (const filter of filterConfig.filters) {
-      if (isRelationFilter(filter)) {
-        const primaryValue = filterState[filter.primary.id] as string | null
-        const secondaryValue = filterState[filter.secondary.id] as string | number | null
-
-        if (primaryValue !== null) {
-          result = result.filter((entity) =>
-            applyRelationFilter(entity, filter, primaryValue, secondaryValue)
-          )
-        }
-      } else if (isFacetFilter(filter)) {
-        const value = filterState[filter.id]
-        result = result.filter((entity) => matchesFacetFilter(entity, filter, value))
-      } else if (isFilterGroup(filter)) {
-        for (const child of filter.children) {
-          if (isRelationFilter(child)) {
-            const primaryValue = filterState[child.primary.id] as string | null
-            const secondaryValue = filterState[child.secondary.id] as string | number | null
-
-            if (primaryValue !== null) {
-              result = result.filter((entity) =>
-                applyRelationFilter(entity, child, primaryValue, secondaryValue)
-              )
-            }
-          } else if (isFacetFilter(child)) {
-            const value = filterState[child.id]
-            result = result.filter((entity) => matchesFacetFilter(entity, child, value))
-          }
-        }
-      }
-    }
-
-    return result
-  }
-
   // Calculate progress and next slot outside of callbacks to avoid hook issues
-  // After each successful preparation, the store updates and triggers re-render,
-  // which recalculates these values automatically.
   const currentProgress = calculateSlotProgress(primaryCGE, slotLevel)
   const nextEmptySlotIndex = findNextEmptySlotIndex(primaryCGE, slotLevel)
 
@@ -190,7 +132,6 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
         }
       }
 
-      // La vista de completado se encarga de mostrar el boton OK cuando se llega al maximo
       return {
         success: true,
         shouldClose: false,
@@ -211,7 +152,9 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
   // Navigate to entity detail - plain function, no useCallback with 'use no memo'
   const handleEntityPress = (entity: EnrichedSpell) => {
-    navigateToDetail('compendiumEntity', entity.id, entity.name)
+    const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
+    const localized = getLocalizedEntity(entity, ctx)
+    navigateToDetail('compendiumEntity', entity.id, localized.name)
   }
 
   // Get badge (level for selected class)
@@ -246,14 +189,21 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   const entityLabel = entityType === 'spell' ? 'conjuros' : entityType === 'maneuver' ? 'maniobras' : 'entidades'
 
   return (
-    <EntityBrowserPanel
+    <EntitySelectionView
       entities={allEntities}
+      modeConfig={{
+        mode: 'counter',
+        action: {
+          id: 'prepare',
+          label: mode === 'known' ? 'Aprender' : 'Preparar',
+          icon: mode === 'known' ? 'book' : 'check',
+        },
+        handlers,
+        closeOnComplete: true,
+      }}
       filterConfig={filterConfig}
       initialFilterOverrides={initialFilterOverrides}
-      buttonConfig={buttonConfig}
-      handlers={handlers}
       onEntityPress={handleEntityPress}
-      customFilter={customFilter}
       getBadge={getBadge}
       searchPlaceholder="Buscar por nombre..."
       emptyText={`No hay ${entityLabel} disponibles para esta combinacion.`}

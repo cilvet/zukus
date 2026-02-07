@@ -1,6 +1,7 @@
 import { Pressable, Image, StyleSheet } from 'react-native'
 import { YStack, Text } from 'tamagui'
 import type { StandardEntity } from '@zukus/core'
+import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity'
 
 export type EntityGridCardProps = {
   entity: StandardEntity
@@ -12,7 +13,8 @@ export type EntityGridCardProps = {
  * Card para vista grid de entidades.
  * Muestra imagen prominente con nombre debajo.
  */
-export function EntityGridCard({ entity, onPress, primaryColor = '#666' }: EntityGridCardProps) {
+export function EntityGridCard({ entity: rawEntity, onPress, primaryColor = '#666' }: EntityGridCardProps) {
+  const entity = useLocalizedEntity(rawEntity)
   const hasImage = !!entity.image
 
   return (

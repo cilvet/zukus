@@ -9,16 +9,13 @@ import {
   itemFilterConfig,
   ITEM_ENTITY_TYPES,
   ITEM_TYPE_LABELS,
+  getLocalizedEntity,
+  type LocalizationContext,
 } from '@zukus/core'
+import { useActiveLocale } from '../../../ui/stores/translationStore'
+import { EntitySelectionView } from '../../entitySelection'
+import type { ActionHandlers, ActionResult, ActionState } from '../../entityBrowser/types'
 import {
-  EntityBrowserPanel,
-  type ButtonConfig,
-  type ActionHandlers,
-  type ActionResult,
-  type ActionState,
-} from '../../entityBrowser'
-import {
-  applyItemFilters,
   formatCost,
   getAllItems,
   getInitialFilterOverrides,
@@ -41,26 +38,6 @@ type ItemBrowserPanelProps = {
 }
 
 // ============================================================================
-// Button Configuration
-// ============================================================================
-
-const ITEM_BUTTON_CONFIG: ButtonConfig = {
-  type: 'dropdown',
-  label: 'Anadir',
-  icon: 'plus',
-  groups: [
-    {
-      label: 'Gratis',
-      actions: [{ id: 'add', label: 'Anadir al inventario', icon: 'box-open' }],
-    },
-    {
-      label: 'Comercio',
-      actions: [{ id: 'buy', label: 'Comprar', icon: 'coins' }],
-    },
-  ],
-}
-
-// ============================================================================
 // Main Component
 // ============================================================================
 
@@ -72,6 +49,7 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
   const spendCurrency = useCharacterStore((state) => state.spendCurrency)
   const currencies = useCurrencies()
   const navigateToDetail = useNavigateToDetail()
+  const locale = useActiveLocale()
 
   // Get all items from all item entity types
   const allItems = getAllItems(compendium, ITEM_ENTITY_TYPES)
@@ -86,6 +64,12 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
     const { amount, currency } = item.cost
     const currentAmount = currencies[currency] ?? 0
     return currentAmount >= amount
+  }
+
+  // Helper for localized entity name
+  const localizedName = (entity: EnrichedItem): string => {
+    const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
+    return getLocalizedEntity(entity, ctx).name
   }
 
   // Action handlers - plain object, no useMemo needed with 'use no memo'
@@ -116,7 +100,7 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
         return {
           success: true,
           shouldClose: false,
-          toastMessage: `Has anadido ${entity.name}`,
+          toastMessage: `Has anadido ${localizedName(entity)}`,
         }
       }
 
@@ -139,7 +123,7 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
           return {
             success: true,
             shouldClose: false,
-            toastMessage: `Has anadido ${entity.name}`,
+            toastMessage: `Has anadido ${localizedName(entity)}`,
           }
         }
 
@@ -173,7 +157,7 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
         return {
           success: true,
           shouldClose: false,
-          toastMessage: `Has comprado ${entity.name}`,
+          toastMessage: `Has comprado ${localizedName(entity)}`,
         }
       }
 
@@ -200,12 +184,7 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
 
   // Navigate to entity detail
   const handleEntityPress = (entity: EnrichedItem) => {
-    navigateToDetail('compendiumEntity', entity.id, entity.name)
-  }
-
-  // Custom filter function for items
-  const customFilter = (entities: EnrichedItem[], filterState: FilterState) => {
-    return applyItemFilters(entities, filterState)
+    navigateToDetail('compendiumEntity', entity.id, localizedName(entity))
   }
 
   // Get meta line for each item
@@ -226,14 +205,27 @@ export function ItemBrowserPanel({ defaultEntityTypes, onItemAdded }: ItemBrowse
   }
 
   return (
-    <EntityBrowserPanel
+    <EntitySelectionView
       entities={allItems}
+      modeConfig={{
+        mode: 'dropdown',
+        buttonLabel: 'Anadir',
+        buttonIcon: 'plus',
+        groups: [
+          {
+            label: 'Gratis',
+            actions: [{ id: 'add', label: 'Anadir al inventario', icon: 'box-open' }],
+          },
+          {
+            label: 'Comercio',
+            actions: [{ id: 'buy', label: 'Comprar', icon: 'coins' }],
+          },
+        ],
+        handlers,
+      }}
       filterConfig={itemFilterConfig}
       initialFilterOverrides={initialFilterOverrides}
-      buttonConfig={ITEM_BUTTON_CONFIG}
-      handlers={handlers}
       onEntityPress={handleEntityPress}
-      customFilter={customFilter}
       getMetaLine={getMetaLine}
       searchPlaceholder="Buscar items..."
       emptyText="No hay items disponibles con estos filtros."

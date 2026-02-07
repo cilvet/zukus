@@ -8,6 +8,7 @@ import {
 import { Checkbox } from '../../../atoms'
 import { EntityImage } from '../../EntityImage'
 import { useCompendiumContext } from '../../EntityProvider'
+import { useLocalizedEntity } from '../../../hooks/useLocalizedEntity'
 
 type GenericEntityDetailPanelProps = {
   entity: ComputedEntity
@@ -33,6 +34,7 @@ const BASE_EXCLUDED_FIELDS = new Set([
   '_meta',
   'tags',
   'image',
+  'translations',
 ])
 
 /**
@@ -412,10 +414,11 @@ function BooleanFieldRow({
 }
 
 export function GenericEntityDetailPanel({
-  entity,
+  entity: rawEntity,
   instanceFields,
   onInstanceFieldChange,
 }: GenericEntityDetailPanelProps) {
+  const entity = useLocalizedEntity(rawEntity)
   const { compendium } = useCompendiumContext()
   const tags = entity.tags ?? []
   const simpleFields: Array<{ key: string; label: string; value: string }> = []
