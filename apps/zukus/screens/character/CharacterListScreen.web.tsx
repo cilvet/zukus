@@ -1,13 +1,11 @@
-import { useRouter } from 'expo-router'
 import { Image, Pressable, useWindowDimensions } from 'react-native'
-import { Button, ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
+import { ScrollView, Separator, Spinner, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList, type CharacterListItem } from '../../hooks'
 
 const DESKTOP_BREAKPOINT = 768
 
 export function CharacterListScreen() {
-  const router = useRouter()
-  const { characters, isLoading, error, isCreating, navigateToCharacter, createCharacter } = useCharacterList()
+  const { characters, isLoading, isCreating, navigateToCharacter, createCharacter } = useCharacterList()
   const { width } = useWindowDimensions()
   const isDesktop = width >= DESKTOP_BREAKPOINT
 
@@ -16,9 +14,7 @@ export function CharacterListScreen() {
       <MobileList
         characters={characters}
         isLoading={isLoading}
-        error={error}
         onSelect={navigateToCharacter}
-        onOpenServerList={() => { /* TODO: Añadir ruta /characters/server-list */ }}
       />
     )
   }
@@ -27,11 +23,9 @@ export function CharacterListScreen() {
     <DesktopGrid
       characters={characters}
       isLoading={isLoading}
-      error={error}
       isCreating={isCreating}
       onSelect={navigateToCharacter}
       onCreate={createCharacter}
-      onOpenServerList={() => { /* TODO: Añadir ruta /characters/server-list */ }}
     />
   )
 }
@@ -39,9 +33,7 @@ export function CharacterListScreen() {
 type ListProps = {
   characters: CharacterListItem[]
   isLoading: boolean
-  error: string | null
   onSelect: (id: string) => void
-  onOpenServerList: () => void
 }
 
 type DesktopGridProps = ListProps & {
@@ -49,27 +41,22 @@ type DesktopGridProps = ListProps & {
   onCreate: () => void
 }
 
-function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
+function MobileList({ characters, isLoading, onSelect }: ListProps) {
+  if (isLoading) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center" backgroundColor="$background">
+        <Spinner size="large" color="$accentColor" />
+      </YStack>
+    )
+  }
+
   return (
     <ScrollView flex={1} backgroundColor="$background">
-      {isLoading ? (
-        <YStack padding="$4">
-          <Text color="$placeholderColor">Cargando personajes...</Text>
-        </YStack>
-      ) : null}
-
-      {error ? (
-        <YStack padding="$4">
-          <Text color="$colorFocus">{error}</Text>
-        </YStack>
-      ) : null}
-
-      {!isLoading && !error && characters.length === 0 ? (
+      {characters.length === 0 ? (
         <YStack padding="$4">
           <Text color="$placeholderColor">No hay personajes disponibles.</Text>
         </YStack>
       ) : null}
-
 
       <YStack>
         {characters.map((character, index) => (
@@ -132,7 +119,15 @@ function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }
   )
 }
 
-function DesktopGrid({ characters, isLoading, error, isCreating, onSelect, onCreate, onOpenServerList }: DesktopGridProps) {
+function DesktopGrid({ characters, isLoading, isCreating, onSelect, onCreate }: DesktopGridProps) {
+  if (isLoading) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center" backgroundColor="$background">
+        <Spinner size="large" color="$accentColor" />
+      </YStack>
+    )
+  }
+
   return (
     <ScrollView flex={1} backgroundColor="$background" contentContainerStyle={{ padding: 32 }}>
       <YStack width={900} maxWidth="100%" alignSelf="center" gap="$5">
@@ -166,24 +161,9 @@ function DesktopGrid({ characters, isLoading, error, isCreating, onSelect, onCre
           <Text fontSize={14} color="$placeholderColor">
             Selecciona un personaje para abrir la ficha.
           </Text>
-          <Button alignSelf="flex-start" onPress={onOpenServerList}>
-            Ver lista server
-          </Button>
         </YStack>
 
-        {isLoading ? (
-          <YStack padding="$4" borderRadius="$4" borderWidth={1} borderColor="$borderColor">
-            <Text color="$placeholderColor">Cargando personajes...</Text>
-          </YStack>
-        ) : null}
-
-        {error ? (
-          <YStack padding="$4" borderRadius="$4" borderWidth={1} borderColor="$borderColor">
-            <Text color="$colorFocus">{error}</Text>
-          </YStack>
-        ) : null}
-
-        {!isLoading && !error && characters.length === 0 ? (
+        {characters.length === 0 ? (
           <YStack padding="$4" borderRadius="$4" borderWidth={1} borderColor="$borderColor">
             <Text color="$placeholderColor">No hay personajes disponibles.</Text>
           </YStack>

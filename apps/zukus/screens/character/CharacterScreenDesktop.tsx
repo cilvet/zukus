@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { YStack, XStack, Text } from 'tamagui'
+import { YStack, XStack, Text, Spinner } from 'tamagui'
 import { View, Pressable } from 'react-native'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { useLocalSearchParams, useRouter } from 'expo-router'
@@ -1293,18 +1293,10 @@ export function CharacterScreenDesktop() {
     )
   }
 
-  if (isLoading) {
+  if (isLoading || error) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$placeholderColor">Cargando personaje...</Text>
-      </YStack>
-    )
-  }
-
-  if (error) {
-    return (
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$colorFocus">{error}</Text>
+        <Spinner size="large" color="$accentColor" />
       </YStack>
     )
   }

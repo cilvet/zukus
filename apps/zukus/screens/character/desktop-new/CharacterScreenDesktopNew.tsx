@@ -1,4 +1,4 @@
-import { YStack, Text } from 'tamagui'
+import { YStack, Text, Spinner } from 'tamagui'
 import { useLocalSearchParams } from 'expo-router'
 import { useCharacterSync } from '../../../hooks'
 import { CharacterScreenContent } from './CharacterScreenContent'
@@ -20,18 +20,10 @@ export function CharacterScreenDesktopNew() {
     )
   }
 
-  if (isLoading) {
+  if (isLoading || error) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$placeholderColor">Cargando personaje...</Text>
-      </YStack>
-    )
-  }
-
-  if (error) {
-    return (
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text color="$colorFocus">{error}</Text>
+        <Spinner size="large" color="$accentColor" />
       </YStack>
     )
   }

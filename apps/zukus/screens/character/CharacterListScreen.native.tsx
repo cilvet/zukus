@@ -1,33 +1,29 @@
 import { Image, Pressable, View, StyleSheet } from 'react-native'
-import { ScrollView, Separator, Text, XStack, YStack } from 'tamagui'
+import { ScrollView, Separator, Spinner, Text, XStack, YStack } from 'tamagui'
 import { useCharacterList } from '../../hooks'
 import { useTheme } from '../../ui'
 import { SafeAreaBottomSpacer } from '../../components/layout'
 
 export function CharacterListScreen() {
   const { themeColors } = useTheme()
-  const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
+  const { characters, isLoading, navigateToCharacter } = useCharacterList()
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <YStack flex={1} justifyContent="center" alignItems="center">
+          <Spinner size="large" color="$accentColor" />
+        </YStack>
+        <SafeAreaBottomSpacer />
+      </View>
+    )
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <ScrollView flex={1} backgroundColor="$background">
-      <YStack padding="$4">
-        {/* TODO: Añadir ruta /characters/server-list si se necesita */}
-      </YStack>
 
-      {isLoading ? (
-        <YStack padding="$4">
-          <Text color="$placeholderColor">Cargando personajes...</Text>
-        </YStack>
-      ) : null}
-
-      {error ? (
-        <YStack padding="$4">
-          <Text color="$colorFocus">{error}</Text>
-        </YStack>
-      ) : null}
-
-      {!isLoading && !error && characters.length === 0 ? (
+      {characters.length === 0 ? (
         <YStack padding="$4">
           <Text color="$placeholderColor">No hay personajes disponibles.</Text>
         </YStack>

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { View, StyleSheet, Pressable, Image } from 'react-native'
-import { Text, XStack, YStack } from 'tamagui'
+import { Spinner, Text, XStack, YStack } from 'tamagui'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
@@ -243,33 +243,11 @@ export function CharacterScreenMobile() {
     )
   }
 
-  if (isLoading) {
+  if (isLoading || error || !characterSheet) {
     return (
       <View style={[styles.container, { backgroundColor: themeColors.background }]}>
         <View style={styles.loadingContainer}>
-          <Text color="$placeholderColor">Cargando personaje...</Text>
-        </View>
-        <SafeAreaBottomSpacer />
-      </View>
-    )
-  }
-
-  if (error) {
-    return (
-      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-        <View style={styles.loadingContainer}>
-          <Text color="$colorFocus">{error}</Text>
-        </View>
-        <SafeAreaBottomSpacer />
-      </View>
-    )
-  }
-
-  if (!characterSheet) {
-    return (
-      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-        <View style={styles.loadingContainer}>
-          <Text color="$placeholderColor">Cargando personaje...</Text>
+          <Spinner size="large" color="$accentColor" />
         </View>
         <SafeAreaBottomSpacer />
       </View>
