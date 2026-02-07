@@ -1,11 +1,22 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { Modal, SafeAreaView, Pressable, StyleSheet } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useCharacterStore, useCharacterBaseData } from '../../../stores'
+import { useTheme } from '../../../contexts/ThemeContext'
 import { useNavigateToDetail } from '../../../../navigation'
 import { ops } from '@zukus/core'
 import type { LevelSlot } from '@zukus/core'
 import { LevelSlotRow } from './LevelSlotRow'
 import { CurrentLevelSelector } from './CurrentLevelSelector'
+import { QuickBuildSection, deriveBuildEntries } from './QuickBuildSection'
+import type { BuildEntry } from './QuickBuildSection'
+import { QuickBuildClassSelector } from './QuickBuildClassSelector'
+import {
+  getClassLevelAtSlot,
+  getAvailableClasses,
+  applyQuickBuild,
+} from './levelEditorHelpers'
 
 const TOTAL_LEVELS = 20
 
@@ -20,7 +31,18 @@ export function LevelEditor({
 
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
+  const { themeColors } = useTheme()
   const hasInitialized = useRef(false)
+
+  const currentLevel = baseData?.level?.level ?? 0
+  const levelSlots = baseData?.levelSlots ?? []
+  const classEntities = baseData?.classEntities
+
+  // Quick build state
+  const [buildEntries, setBuildEntries] = useState<BuildEntry[]>(() =>
+    deriveBuildEntries(levelSlots, currentLevel)
+  )
+  const [classPickerRowIndex, setClassPickerRowIndex] = useState<number | null>(null)
 
   // Ensure 20 level slots exist on mount
   useEffect(() => {
@@ -44,10 +66,6 @@ export function LevelEditor({
     }
   }, [baseData, updater])
 
-  const currentLevel = baseData?.level?.level ?? 0
-  const levelSlots = baseData?.levelSlots ?? []
-  const classEntities = baseData?.classEntities
-
   const displaySlots: LevelSlot[] = Array.from({ length: TOTAL_LEVELS }, (_, index) => {
     return levelSlots[index] ?? { classId: null, hpRoll: null }
   })
@@ -58,6 +76,24 @@ export function LevelEditor({
     navigateToDetail('levelDetail', String(levelIndex))
   }, [navigateToDetail])
 
+  const availableClasses = getAvailableClasses()
+
+  const handleQuickBuild = (entries: { classId: string; levels: number }[]) => {
+    if (!baseData || !updater) return
+    applyQuickBuild(baseData, updater, entries)
+    const totalLevels = entries.reduce((sum, e) => sum + e.levels, 0)
+    updater.setCurrentCharacterLevel(Math.min(totalLevels, 20))
+  }
+
+  const handleClassSelected = (classId: string) => {
+    if (classPickerRowIndex !== null) {
+      setBuildEntries(
+        buildEntries.map((e, i) => (i === classPickerRowIndex ? { ...e, classId } : e))
+      )
+    }
+    setClassPickerRowIndex(null)
+  }
+
   if (!baseData) {
     return (
       <YStack padding="$4" alignItems="center">
@@ -66,10 +102,33 @@ export function LevelEditor({
     )
   }
 
+  const pickerEntry = classPickerRowIndex !== null ? buildEntries[classPickerRowIndex] : null
+
   return (
-    <YStack gap={16} flex={1}>
-      {/* Level Selector */}
-      <YStack paddingHorizontal={16}>
+    <YStack gap={16} flex={1} paddingTop={12}>
+      {/* Quick Build */}
+      <QuickBuildSection
+        availableClasses={availableClasses}
+        entries={buildEntries}
+        onEntriesChange={setBuildEntries}
+        onOpenClassSelector={setClassPickerRowIndex}
+        onApply={handleQuickBuild}
+      />
+
+      {/* Header row with "Niveles" + compact level selector */}
+      <XStack
+        paddingHorizontal={16}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <YStack>
+          <Text fontSize={16} fontWeight="600" color="$color">
+            Niveles
+          </Text>
+          <Text fontSize={13} color="$placeholderColor" marginTop={4}>
+            Toca un nivel para configurarlo
+          </Text>
+        </YStack>
         <CurrentLevelSelector
           currentLevel={currentLevel}
           onLevelChange={(level) => {
@@ -78,17 +137,7 @@ export function LevelEditor({
             }
           }}
         />
-      </YStack>
-
-      {/* Header */}
-      <YStack paddingHorizontal={16}>
-        <Text fontSize={16} fontWeight="600" color="$color">
-          Niveles
-        </Text>
-        <Text fontSize={13} color="$placeholderColor" marginTop={4}>
-          Toca un nivel para configurarlo
-        </Text>
-      </YStack>
+      </XStack>
 
       {/* Level List Header */}
       <XStack
@@ -114,12 +163,14 @@ export function LevelEditor({
           const isNextActive = index + 1 < currentLevel
           const isFirstLevel = index === 0
           const isLastLevel = index === displaySlots.length - 1
+          const classLevel = getClassLevelAtSlot(displaySlots, index)
 
           return (
             <LevelSlotRow
               key={index}
               levelIndex={index}
               slot={slot}
+              classLevel={classLevel}
               isActive={isActive}
               isNextActive={isNextActive}
               isFirstLevel={isFirstLevel}
@@ -131,6 +182,44 @@ export function LevelEditor({
           )
         })}
       </YStack>
+
+      {/* Mobile: Modal with EntitySelectionView for class picking */}
+      <Modal
+        visible={classPickerRowIndex !== null}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setClassPickerRowIndex(null)}
+      >
+        <SafeAreaView style={[styles.modalContainer, { backgroundColor: themeColors.background }]}>
+          <XStack
+            paddingHorizontal={16}
+            paddingVertical={12}
+            alignItems="center"
+            justifyContent="space-between"
+            borderBottomWidth={1}
+            borderBottomColor="$borderColor"
+          >
+            <Text fontSize={17} fontWeight="600" color="$color">
+              Seleccionar clase
+            </Text>
+            <Pressable onPress={() => setClassPickerRowIndex(null)} hitSlop={8}>
+              <FontAwesome name="times" size={20} color={themeColors.placeholderColor} />
+            </Pressable>
+          </XStack>
+
+          <QuickBuildClassSelector
+            availableClasses={availableClasses}
+            currentClassId={pickerEntry?.classId ?? null}
+            onSelect={handleClassSelected}
+          />
+        </SafeAreaView>
+      </Modal>
     </YStack>
   )
 }
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+  },
+})

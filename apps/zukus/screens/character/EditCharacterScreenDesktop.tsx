@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View } from 'react-native'
 import { usePanelNavigation } from '../../hooks'
@@ -17,9 +17,15 @@ import {
   updateLevelHp,
   updateLevelClass,
   getAvailableClasses,
+  getClassLevelAtSlot,
+  applyQuickBuild,
+  QuickBuildSection,
+  QuickBuildClassSelector,
+  deriveBuildEntries,
   type ProviderWithResolution,
   type LevelSlotData,
 } from '../../ui/components/character/editor'
+import type { BuildEntry } from '../../ui/components/character/editor/QuickBuildSection'
 import {
   SidePanel,
   SidePanelContainer,
@@ -105,6 +111,12 @@ function EditCharacterScreenDesktopContent() {
   const levelSlots = baseData?.levelSlots ?? []
   const classEntities = baseData?.classEntities
 
+  // Quick build state
+  const [buildEntries, setBuildEntries] = useState<BuildEntry[]>(() =>
+    deriveBuildEntries(levelSlots, currentLevel)
+  )
+  const [quickBuildPendingRow, setQuickBuildPendingRow] = useState<number | null>(null)
+
   const displaySlots: LevelSlot[] = Array.from({ length: TOTAL_LEVELS }, (_, index) => {
     return levelSlots[index] ?? { classId: null, hpRoll: null }
   })
@@ -118,6 +130,28 @@ function EditCharacterScreenDesktopContent() {
       updater.setCurrentCharacterLevel(level)
     }
   }, [updater])
+
+  const handleQuickBuild = useCallback((entries: { classId: string; levels: number }[]) => {
+    if (!baseData || !updater) return
+    applyQuickBuild(baseData, updater, entries)
+    const totalLevels = entries.reduce((sum, e) => sum + e.levels, 0)
+    updater.setCurrentCharacterLevel(Math.min(totalLevels, 20))
+  }, [baseData, updater])
+
+  const handleOpenQuickBuildClassSelector = useCallback((rowIndex: number) => {
+    setQuickBuildPendingRow(rowIndex)
+    openPanel(`quickBuildClassSelector/${rowIndex}`, 'Seleccionar clase')
+  }, [openPanel])
+
+  const handleQuickBuildClassSelected = useCallback((classId: string) => {
+    if (quickBuildPendingRow !== null) {
+      setBuildEntries((prev) =>
+        prev.map((e, i) => (i === quickBuildPendingRow ? { ...e, classId } : e))
+      )
+      setQuickBuildPendingRow(null)
+    }
+    closePanel()
+  }, [quickBuildPendingRow, closePanel])
 
   const getPanelTitle = () => {
     if (!currentPanel) return ''
@@ -173,11 +207,25 @@ function EditCharacterScreenDesktopContent() {
             <SectionCard>
               <SectionHeader icon="#" title="Niveles" />
               <YStack gap={16}>
-                {/* Level Selector */}
-                <CurrentLevelSelector
-                  currentLevel={currentLevel}
-                  onLevelChange={handleLevelChange}
+                {/* Quick Build */}
+                <QuickBuildSection
+                  availableClasses={getAvailableClasses()}
+                  entries={buildEntries}
+                  onEntriesChange={setBuildEntries}
+                  onOpenClassSelector={handleOpenQuickBuildClassSelector}
+                  onApply={handleQuickBuild}
                 />
+
+                {/* Header + Level Selector */}
+                <XStack alignItems="center" justifyContent="space-between">
+                  <Text fontSize={13} color="$placeholderColor">
+                    Toca un nivel para configurarlo
+                  </Text>
+                  <CurrentLevelSelector
+                    currentLevel={currentLevel}
+                    onLevelChange={handleLevelChange}
+                  />
+                </XStack>
 
                 {/* Level List Header */}
                 <XStack
@@ -202,12 +250,14 @@ function EditCharacterScreenDesktopContent() {
                     const isNextActive = index + 1 < currentLevel
                     const isFirstLevel = index === 0
                     const isLastLevel = index === displaySlots.length - 1
+                    const classLevel = getClassLevelAtSlot(displaySlots, index)
 
                     return (
                       <LevelSlotRow
                         key={index}
                         levelIndex={index}
                         slot={slot}
+                        classLevel={classLevel}
                         isActive={isActive}
                         isNextActive={isNextActive}
                         isFirstLevel={isFirstLevel}
@@ -237,6 +287,13 @@ function EditCharacterScreenDesktopContent() {
         )}
         {panelInfo?.type === 'classSelectorDetail' && panelInfo?.id && (
           <EditClassSelectorDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
+        )}
+        {panelInfo?.type === 'quickBuildClassSelector' && (
+          <QuickBuildClassSelector
+            availableClasses={getAvailableClasses()}
+            currentClassId={quickBuildPendingRow !== null ? buildEntries[quickBuildPendingRow]?.classId ?? null : null}
+            onSelect={handleQuickBuildClassSelected}
+          />
         )}
         {panelInfo?.type === 'entitySelectorDetail' && panelInfo?.id && (
           <EditEntitySelectorDetailPanelContainer locationJson={panelInfo.id} />

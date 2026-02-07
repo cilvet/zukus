@@ -6,6 +6,7 @@ import { LevelProgressIndicator } from './LevelProgressIndicator'
 type LevelSlotRowProps = {
   levelIndex: number
   slot: LevelSlot
+  classLevel: number
   isActive: boolean
   isNextActive: boolean
   isFirstLevel: boolean
@@ -31,6 +32,7 @@ function getClassName(
 export function LevelSlotRow({
   levelIndex,
   slot,
+  classLevel,
   isActive,
   isNextActive,
   isFirstLevel,
@@ -51,6 +53,7 @@ export function LevelSlotRow({
 
   const opacity = isActive ? 1 : 0.5
   const className = getClassName(slot.classId, classEntities)
+  const classDisplay = slot.classId ? `${className} ${classLevel}` : '---'
 
   return (
     <Pressable onPress={handleRowPress}>
@@ -60,6 +63,8 @@ export function LevelSlotRow({
           opacity={opacity}
           paddingLeft="$2"
           backgroundColor={pressed ? '$backgroundHover' : 'transparent'}
+          borderBottomWidth={1}
+          borderBottomColor="$borderColor"
         >
           <LevelProgressIndicator
             isCompleted={isActive}
@@ -83,7 +88,7 @@ export function LevelSlotRow({
             </XStack>
 
             <Text flex={1} color={slot.classId ? '$color' : '$placeholderColor'}>
-              {className}
+              {classDisplay}
             </Text>
           </XStack>
         </XStack>

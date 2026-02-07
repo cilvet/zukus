@@ -60,7 +60,7 @@ export const characterRepository = {
       equipment: { items: [], money: 0 },
       skills: defaultBaseSkills,
       classes: [],
-      level: { level: 0, xp: 0, levelsData: [] },
+      level: { level: 1, xp: 0, levelsData: [] },
       skillData: {},
       buffs: [],
     }

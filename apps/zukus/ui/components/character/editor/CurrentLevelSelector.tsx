@@ -9,7 +9,7 @@ export type CurrentLevelSelectorProps = {
 }
 
 /**
- * Selector de nivel con input numerico simple.
+ * Selector de nivel compacto inline: "Nv." + input numérico.
  */
 export function CurrentLevelSelector({
   currentLevel,
@@ -33,17 +33,9 @@ export function CurrentLevelSelector({
   }
 
   return (
-    <XStack
-      alignItems="center"
-      justifyContent="space-between"
-      padding={12}
-      borderRadius={10}
-      borderWidth={1}
-      borderColor={themeColors.borderColor}
-      backgroundColor={themeColors.uiBackgroundColor}
-    >
-      <Text fontSize={14} color="$placeholderColor">
-        Nivel actual
+    <XStack alignItems="center" gap="$1.5">
+      <Text fontSize={14} fontWeight="600" color="$placeholderColor">
+        Nv.
       </Text>
       <TextInput
         value={text}
@@ -65,12 +57,12 @@ export function CurrentLevelSelector({
 
 const styles = StyleSheet.create({
   input: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',
-    width: 50,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    width: 40,
+    paddingVertical: 2,
+    paddingHorizontal: 4,
     borderWidth: 1,
     borderRadius: 6,
   },
