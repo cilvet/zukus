@@ -8,7 +8,7 @@ type AudioWaveformProps = {
 }
 
 const DEFAULT_BAR_COUNT = 24
-const BAR_WIDTH = 4
+const BAR_WIDTH = 3
 const MAX_BAR_HEIGHT = 28
 const MIN_BAR_HEIGHT = 6
 
@@ -45,7 +45,7 @@ export function AudioWaveform({
       // Si hay suficientes datos, usar el valor correspondiente
       // Si no, usar un valor interpolado o el minimo
       const dataIndex = index - (barCount - recentData.length)
-      const normalizedValue = dataIndex >= 0 ? recentData[dataIndex] ?? 0.2 : 0.2
+      const normalizedValue = dataIndex >= 0 ? recentData[dataIndex] ?? 0 : 0
 
       const targetHeight = MIN_BAR_HEIGHT + normalizedValue * (MAX_BAR_HEIGHT - MIN_BAR_HEIGHT)
 

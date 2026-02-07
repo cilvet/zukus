@@ -7,7 +7,7 @@ import {
 } from 'expo-audio'
 import type { UseAudioRecordingResult } from './useAudioRecording.types'
 
-const METERING_HISTORY_SIZE = 20
+const METERING_HISTORY_SIZE = 24
 const METERING_POLL_INTERVAL = 100
 
 export function useAudioRecording(): UseAudioRecordingResult {
