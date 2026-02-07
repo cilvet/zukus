@@ -1,10 +1,8 @@
 import { useRef, useState, useCallback } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text, YStack, XStack } from 'tamagui'
-import { useLocalSearchParams } from 'expo-router'
 import { useTheme, useCharacterSheet, useCharacterStore } from '../../ui'
 import { SafeAreaBottomSpacer } from '../../components/layout'
-import { useCharacterSync } from '../../hooks'
 import {
   LevelEditor,
   AbilityScoresEditor,
@@ -120,9 +118,6 @@ function LevelsColumn({
  */
 export function EditCharacterScreenMobile() {
   const { themeColors } = useTheme()
-  const { id } = useLocalSearchParams<{ id: string }>()
-  const characterId = id ?? ''
-  const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
   const { updater } = useCharacterStore()
 
@@ -140,39 +135,6 @@ export function EditCharacterScreenMobile() {
       updater.setCurrentCharacterLevel(level)
     }
   }, [updater])
-
-  if (!characterId) {
-    return (
-      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-        <View style={styles.loadingContainer}>
-          <Text color="$placeholderColor">Personaje invalido.</Text>
-        </View>
-        <SafeAreaBottomSpacer />
-      </View>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-        <View style={styles.loadingContainer}>
-          <Text color="$placeholderColor">Cargando personaje...</Text>
-        </View>
-        <SafeAreaBottomSpacer />
-      </View>
-    )
-  }
-
-  if (error) {
-    return (
-      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-        <View style={styles.loadingContainer}>
-          <Text color="$colorFocus">{error}</Text>
-        </View>
-        <SafeAreaBottomSpacer />
-      </View>
-    )
-  }
 
   if (!characterSheet) {
     return (

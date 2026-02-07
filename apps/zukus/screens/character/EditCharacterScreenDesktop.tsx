@@ -1,8 +1,7 @@
 import { useCallback } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
-import { View, Pressable } from 'react-native'
-import { useLocalSearchParams } from 'expo-router'
-import { useCharacterSync, usePanelNavigation } from '../../hooks'
+import { View } from 'react-native'
+import { usePanelNavigation } from '../../hooks'
 import {
   useCharacterStore,
   useCharacterSheet,
@@ -42,34 +41,7 @@ const TOTAL_LEVELS = 20
  * Con SidePanel para detalles de nivel.
  */
 export function EditCharacterScreenDesktop() {
-  const { id } = useLocalSearchParams<{ id: string }>()
-  const characterId = id ?? ''
-  const { isLoading, error } = useCharacterSync(characterId)
   const characterSheet = useCharacterSheet()
-
-  if (!characterId) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text color="$placeholderColor">Personaje invalido.</Text>
-      </View>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text color="$placeholderColor">Cargando personaje...</Text>
-      </View>
-    )
-  }
-
-  if (error) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text color="$colorFocus">{error}</Text>
-      </View>
-    )
-  }
 
   if (!characterSheet) {
     return (
