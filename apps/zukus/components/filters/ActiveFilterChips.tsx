@@ -147,11 +147,11 @@ export function ActiveFilterChips({
           <Text fontSize={13} color="$color">
             {chip.label}
           </Text>
-          <Pressable onPress={() => handleClearChip(chip)} hitSlop={4}>
+          <Pressable onPress={() => handleClearChip(chip)} hitSlop={8}>
             {({ pressed }) => (
               <FontAwesome6
                 name="xmark"
-                size={12}
+                size={14}
                 color={placeholderColor}
                 style={{ opacity: pressed ? 0.5 : 1 }}
               />

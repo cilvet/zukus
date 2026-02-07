@@ -88,13 +88,13 @@ export function SelectionBar({
               </Text>
               <Pressable
                 onPress={() => onDeselect(instance.instanceId)}
-                hitSlop={4}
+                hitSlop={8}
                 testID={`selection-bar-chip-remove-${instance.entity.id}`}
               >
                 {({ pressed }) => (
                   <FontAwesome6
                     name="xmark"
-                    size={11}
+                    size={14}
                     color={placeholderColor}
                     style={{ opacity: pressed ? 0.5 : 1 }}
                   />
