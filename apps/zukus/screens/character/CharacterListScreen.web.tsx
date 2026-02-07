@@ -7,7 +7,7 @@ const DESKTOP_BREAKPOINT = 768
 
 export function CharacterListScreen() {
   const router = useRouter()
-  const { characters, isLoading, error, navigateToCharacter } = useCharacterList()
+  const { characters, isLoading, error, isCreating, navigateToCharacter, createCharacter } = useCharacterList()
   const { width } = useWindowDimensions()
   const isDesktop = width >= DESKTOP_BREAKPOINT
 
@@ -28,7 +28,9 @@ export function CharacterListScreen() {
       characters={characters}
       isLoading={isLoading}
       error={error}
+      isCreating={isCreating}
       onSelect={navigateToCharacter}
+      onCreate={createCharacter}
       onOpenServerList={() => { /* TODO: Añadir ruta /characters/server-list */ }}
     />
   )
@@ -40,6 +42,11 @@ type ListProps = {
   error: string | null
   onSelect: (id: string) => void
   onOpenServerList: () => void
+}
+
+type DesktopGridProps = ListProps & {
+  isCreating: boolean
+  onCreate: () => void
 }
 
 function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
@@ -125,14 +132,37 @@ function MobileList({ characters, isLoading, error, onSelect, onOpenServerList }
   )
 }
 
-function DesktopGrid({ characters, isLoading, error, onSelect, onOpenServerList }: ListProps) {
+function DesktopGrid({ characters, isLoading, error, isCreating, onSelect, onCreate, onOpenServerList }: DesktopGridProps) {
   return (
     <ScrollView flex={1} backgroundColor="$background" contentContainerStyle={{ padding: 32 }}>
       <YStack width={900} maxWidth="100%" alignSelf="center" gap="$5">
         <YStack gap="$2">
-          <Text fontSize={28} fontWeight="700" color="$color">
-            Personajes
-          </Text>
+          <XStack justifyContent="space-between" alignItems="center">
+            <Text fontSize={28} fontWeight="700" color="$color">
+              Personajes
+            </Text>
+            <Pressable onPress={onCreate} disabled={isCreating}>
+              {({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => (
+                <XStack
+                  paddingHorizontal="$3"
+                  paddingVertical="$2"
+                  borderRadius="$3"
+                  backgroundColor={pressed ? '$accentBackground' : hovered ? '$backgroundHover' : 'transparent'}
+                  borderWidth={1}
+                  borderColor="$accentColor"
+                  alignItems="center"
+                  gap="$2"
+                  opacity={isCreating ? 0.5 : 1}
+                  cursor={isCreating ? 'not-allowed' : 'pointer'}
+                >
+                  <Text fontSize={16} fontWeight="600" color="$accentColor">+</Text>
+                  <Text fontSize={14} fontWeight="500" color="$accentColor">
+                    {isCreating ? 'Creando...' : 'Nuevo personaje'}
+                  </Text>
+                </XStack>
+              )}
+            </Pressable>
+          </XStack>
           <Text fontSize={14} color="$placeholderColor">
             Selecciona un personaje para abrir la ficha.
           </Text>

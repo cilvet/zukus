@@ -1,4 +1,5 @@
 import type { CharacterBaseData } from '@zukus/core'
+import { defaultBaseSkills } from '@zukus/core/core/domain/character/baseData/skills'
 import { supabase } from './supabaseClient'
 
 export type CharacterListItem = {
@@ -34,6 +35,53 @@ export type CharacterDetailRecord = {
 }
 
 export const characterRepository = {
+  create: async (): Promise<string> => {
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      throw new Error('No hay usuario autenticado')
+    }
+
+    const characterData: CharacterBaseData = {
+      name: 'Nuevo personaje',
+      currentDamage: 0,
+      temporaryHp: 0,
+      currentTemporalHp: 0,
+      updatedAt: new Date().toISOString(),
+      feats: [],
+      sharedBuffs: [],
+      baseAbilityData: {
+        strength: { baseScore: 10 },
+        dexterity: { baseScore: 10 },
+        constitution: { baseScore: 10 },
+        intelligence: { baseScore: 10 },
+        wisdom: { baseScore: 10 },
+        charisma: { baseScore: 10 },
+      },
+      equipment: { items: [], money: 0 },
+      skills: defaultBaseSkills,
+      classes: [],
+      level: { level: 0, xp: 0, levelsData: [] },
+      skillData: {},
+      buffs: [],
+    }
+
+    const { data, error } = await supabase
+      .from('characters')
+      .insert({
+        user_id: user.id,
+        character_data: characterData,
+        modified: new Date().toISOString(),
+      })
+      .select('id')
+      .single()
+
+    if (error) {
+      throw error
+    }
+
+    return data.id as string
+  },
+
   listByUser: async (): Promise<CharacterListItem[]> => {
     const { data, error } = await supabase
       .from('characters')
