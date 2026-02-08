@@ -1,11 +1,13 @@
 import { useState, useCallback } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import { View } from 'react-native'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import { usePanelNavigation } from '../../hooks'
 import {
   useCharacterStore,
   useCharacterSheet,
   useCharacterBaseData,
+  useCharacterName,
 } from '../../ui'
 import {
   LevelDetail,
@@ -27,6 +29,7 @@ import {
 } from '../../ui/components/character/editor'
 import type { BuildEntry } from '../../ui/components/character/editor/QuickBuildSection'
 import {
+  Breadcrumb,
   SidePanel,
   SidePanelContainer,
   ColumnsContainer,
@@ -63,6 +66,9 @@ export function EditCharacterScreenDesktop() {
 function EditCharacterScreenDesktopContent() {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
+  const { id: characterId } = useLocalSearchParams<{ id: string }>()
+  const router = useRouter()
+  const characterName = useCharacterName()
   const hasInitialized = useRef(false)
 
   const {
@@ -173,6 +179,18 @@ function EditCharacterScreenDesktopContent() {
 
   return (
     <SidePanelContainer>
+      <XStack paddingHorizontal={24} paddingVertical={10}>
+        <Breadcrumb
+          segments={[
+            { label: 'Mis Personajes', onPress: () => router.push('/characters') },
+            {
+              label: characterName || 'Personaje',
+              onPress: () => characterId ? router.push(`/characters/${characterId}`) : router.back(),
+            },
+            { label: 'Editar' },
+          ]}
+        />
+      </XStack>
       <ColumnsContainer>
         {/* Columna 1: Info (imagen, nombre, alineamiento, fisico, background) */}
         <VerticalSection width={EDIT_COLUMN_WIDTH}>

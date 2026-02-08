@@ -1,15 +1,15 @@
-import { memo } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import { XStack, YStack, Text } from 'tamagui';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { Pressable, StyleSheet } from 'react-native'
+import { XStack, YStack, Text } from 'tamagui'
+import { FontAwesome6 } from '@expo/vector-icons'
+import { useTheme } from '../../ui'
 
 export type EntityTypeCardProps = {
-  typeName: string;
-  displayName: string;
-  count: number;
-  description?: string;
-  onPress: () => void;
-};
+  typeName: string
+  displayName: string
+  count: number
+  description?: string
+  onPress: () => void
+}
 
 /**
  * Iconos para tipos de entidad comunes.
@@ -22,16 +22,20 @@ const TYPE_ICONS: Record<string, string> = {
   classFeature: 'bolt',
   system_levels: 'chart-line',
   character_ability_increase: 'arrow-up',
-};
+}
 
-function EntityTypeCardComponent({
+export function EntityTypeCard({
   typeName,
   displayName,
   count,
   description,
   onPress,
 }: EntityTypeCardProps) {
-  const iconName = TYPE_ICONS[typeName] || 'cube';
+  'use no memo'
+
+  const { themeInfo, themeColors } = useTheme()
+  const iconName = TYPE_ICONS[typeName] || 'cube'
+  const accentColor = themeInfo.colors.accent
 
   return (
     <Pressable onPress={onPress} style={styles.pressable}>
@@ -57,7 +61,7 @@ function EntityTypeCardComponent({
             <FontAwesome6
               name={iconName as any}
               size={18}
-              color="#a78bfa"
+              color={accentColor}
             />
           </YStack>
 
@@ -83,22 +87,15 @@ function EntityTypeCardComponent({
             </Text>
           </YStack>
 
-          <FontAwesome6 name="chevron-right" size={14} color="#666" />
+          <FontAwesome6 name="chevron-right" size={14} color={themeColors.placeholderColor} />
         </XStack>
       )}
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   pressable: {
     width: '100%',
   },
-});
-
-// Memoizado con comparacion simple
-function arePropsEqual(prev: EntityTypeCardProps, next: EntityTypeCardProps): boolean {
-  return prev.typeName === next.typeName && prev.count === next.count;
-}
-
-export const EntityTypeCard = memo(EntityTypeCardComponent, arePropsEqual);
+})

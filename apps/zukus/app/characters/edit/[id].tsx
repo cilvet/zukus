@@ -1,42 +1,27 @@
-import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
-import { Text, XStack, YStack } from 'tamagui'
-import { Platform, Pressable, useWindowDimensions } from 'react-native'
+import { Stack, useLocalSearchParams } from 'expo-router'
+import { Text, YStack } from 'tamagui'
+import { Platform, useWindowDimensions } from 'react-native'
 import { EditCharacterScreen } from '../../../screens'
 import { useCharacterName, useCharacterBuild } from '../../../ui'
 import { useCharacterSync } from '../../../hooks'
 
 const DESKTOP_BREAKPOINT = 768
 
-function CustomHeaderLeft() {
-  const router = useRouter()
+function CustomHeaderTitle() {
   const name = useCharacterName()
   const build = useCharacterBuild()
 
   return (
-    <XStack alignItems="center" gap="$2" marginLeft={0}>
-      <Pressable onPress={() => router.back()} hitSlop={{ top: 16, bottom: 16, left: 16, right: 40 }}>
-        {({ pressed }) => (
-          <Text
-            fontSize={40}
-            lineHeight={40}
-            color="$color"
-            opacity={pressed ? 0.5 : 1}
-          >
-            ‹
-          </Text>
-        )}
-      </Pressable>
-      <YStack alignItems="flex-start" gap={0}>
-        <Text fontSize={17} fontWeight="600" color="$color" numberOfLines={1}>
-          Editar {name || 'Personaje'}
+    <YStack alignItems="flex-start" gap={0}>
+      <Text fontSize={17} fontWeight="600" color="$color" numberOfLines={1}>
+        Editar {name || 'Personaje'}
+      </Text>
+      {build ? (
+        <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
+          {build}
         </Text>
-        {build ? (
-          <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
-            {build}
-          </Text>
-        ) : null}
-      </YStack>
-    </XStack>
+      ) : null}
+    </YStack>
   )
 }
 
@@ -53,9 +38,7 @@ export default function EditCharacterRoute() {
       <Stack.Screen
         options={{
           headerShown: !isWebDesktop,
-          headerTitle: '',
-          headerLeft: () => <CustomHeaderLeft />,
-          headerBackVisible: false,
+          headerTitle: () => <CustomHeaderTitle />,
         }}
       />
       <EditCharacterScreen />

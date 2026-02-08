@@ -1,50 +1,31 @@
-import { Pressable, StyleSheet, Image } from 'react-native';
-import { XStack, YStack, Text } from 'tamagui';
-import type { StandardEntity } from '@zukus/core';
-import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity';
+import { Pressable, StyleSheet } from 'react-native'
+import { XStack, YStack, Text } from 'tamagui'
+import type { StandardEntity } from '@zukus/core'
+import { EntityImage } from '../../ui'
+import { useLocalizedEntity } from '../../ui/hooks/useLocalizedEntity'
 
 /**
  * Altura fija del item - DEBE coincidir con estimatedItemSize de FlashList.
  */
-export const ENTITY_ITEM_HEIGHT = 68;
+export const ENTITY_ITEM_HEIGHT = 68
 
 export type EntityListItemProps = {
-  entity: StandardEntity;
-  onPress: () => void;
-  // Props primitivas para comparacion eficiente
-  imageBaseUrl?: string;
-  primaryColor?: string;
-};
+  entity: StandardEntity
+  onPress: () => void
+}
 
 /**
  * Item de lista optimizado para FlashList.
- *
- * Optimizaciones aplicadas:
- * - Altura fija para overrideItemLayout
- * - Props primitivas para evitar objetos nuevos
- * - React Compiler se encarga de la memoizacion
+ * Usa EntityImage para mostrar imagenes desde Supabase CDN.
  */
 export function EntityListItem({
   entity: rawEntity,
   onPress,
-  imageBaseUrl,
-  primaryColor = '#666',
 }: EntityListItemProps) {
   const entity = useLocalizedEntity(rawEntity)
 
-  const handlePress = () => {
-    onPress();
-  };
-
-  // Construir URL de imagen si existe
-  const imageUrl = entity.image
-    ? imageBaseUrl
-      ? `${imageBaseUrl}/${encodeURIComponent(entity.image)}`
-      : entity.image
-    : null;
-
   return (
-    <Pressable onPress={handlePress} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       {({ pressed }) => (
         <XStack
           height={ENTITY_ITEM_HEIGHT}
@@ -55,26 +36,11 @@ export function EntityListItem({
           borderBottomColor="$borderColor"
           opacity={pressed ? 0.7 : 1}
         >
-          {imageUrl ? (
-            <Image
-              source={{ uri: imageUrl }}
-              style={styles.image}
-              resizeMode="cover"
-            />
-          ) : (
-            <YStack
-              width={44}
-              height={44}
-              borderRadius={8}
-              backgroundColor={primaryColor}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text fontSize={18} fontWeight="700" color="white">
-                {entity.name.charAt(0).toUpperCase()}
-              </Text>
-            </YStack>
-          )}
+          <EntityImage
+            image={entity.image}
+            fallbackText={entity.name}
+            size={44}
+          />
 
           <YStack flex={1} gap={2}>
             <Text
@@ -104,16 +70,11 @@ export function EntityListItem({
         </XStack>
       )}
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
   },
-  image: {
-    width: 44,
-    height: 44,
-    borderRadius: 8,
-  },
-});
+})

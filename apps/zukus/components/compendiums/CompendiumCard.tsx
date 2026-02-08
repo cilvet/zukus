@@ -1,23 +1,24 @@
-import { memo } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import { XStack, YStack, Text } from 'tamagui';
-import { useTheme } from '../../ui';
+import { Pressable, StyleSheet } from 'react-native'
+import { XStack, YStack, Text } from 'tamagui'
+import { useTheme } from '../../ui'
 
 export type CompendiumCardProps = {
-  id: string;
-  name: string;
-  description?: string;
-  entityCount: number;
-  onPress: () => void;
-};
+  id: string
+  name: string
+  description?: string
+  entityCount: number
+  onPress: () => void
+}
 
-function CompendiumCardComponent({
+export function CompendiumCard({
   name,
   description,
   entityCount,
   onPress,
 }: CompendiumCardProps) {
-  const { themeColors } = useTheme();
+  'use no memo'
+
+  const { themeColors } = useTheme()
 
   return (
     <Pressable onPress={onPress} style={styles.pressable}>
@@ -67,18 +68,11 @@ function CompendiumCardComponent({
         </YStack>
       )}
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   pressable: {
     width: '100%',
   },
-});
-
-// Memoizado con comparacion por ID
-function arePropsEqual(prev: CompendiumCardProps, next: CompendiumCardProps): boolean {
-  return prev.id === next.id && prev.entityCount === next.entityCount;
-}
-
-export const CompendiumCard = memo(CompendiumCardComponent, arePropsEqual);
+})

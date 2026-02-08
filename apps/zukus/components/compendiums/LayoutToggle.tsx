@@ -1,13 +1,17 @@
-import { Pressable, StyleSheet } from 'react-native';
-import { XStack } from 'tamagui';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { Pressable } from 'react-native'
+import { XStack } from 'tamagui'
+import { FontAwesome6 } from '@expo/vector-icons'
+import { useTheme } from '../../ui'
 
 export type LayoutToggleProps = {
-  viewMode: 'grid' | 'list';
-  onToggle: () => void;
-};
+  viewMode: 'grid' | 'list'
+  onToggle: () => void
+}
 
 export function LayoutToggle({ viewMode, onToggle }: LayoutToggleProps) {
+  const { themeInfo } = useTheme()
+  const accentColor = themeInfo.colors.accent
+
   return (
     <Pressable onPress={onToggle} hitSlop={8}>
       <XStack
@@ -18,9 +22,9 @@ export function LayoutToggle({ viewMode, onToggle }: LayoutToggleProps) {
         <FontAwesome6
           name={viewMode === 'grid' ? 'grip' : 'list'}
           size={16}
-          color="#a78bfa"
+          color={accentColor}
         />
       </XStack>
     </Pressable>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 import { Image, View } from 'react-native'
 import { Text, YStack } from 'tamagui'
 
-const ICONS_BASE_URL =
+export const ICONS_BASE_URL =
   'https://utimatychnwjuxogjfwc.supabase.co/storage/v1/object/public/icons'
 
 /** Default size for entity images across the app */

@@ -77,6 +77,7 @@ import type { CalculatedAbility, CalculatedAbilities, CalculatedSavingThrow, Cal
 import { resolveProvider, getSelectedEntityInstances } from '@zukus/core'
 import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
 import {
+  Breadcrumb,
   SidePanel,
   SidePanelContainer,
   ColumnsContainer,
@@ -567,6 +568,14 @@ function CharacterScreenDesktopContent() {
 
   return (
     <SidePanelContainer>
+      <XStack paddingHorizontal={24} paddingVertical={10}>
+        <Breadcrumb
+          segments={[
+            { label: 'Mis Personajes', onPress: () => router.push('/characters') },
+            { label: characterSheet.name || 'Personaje' },
+          ]}
+        />
+      </XStack>
       <ColumnsContainer>
         {/* Columna 1: Avatar + HP + Combat Stats */}
         <VerticalSection>

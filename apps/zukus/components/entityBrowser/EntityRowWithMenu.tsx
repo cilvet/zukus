@@ -22,7 +22,7 @@ export type EntityRowWithMenuProps = {
   color: string
   placeholderColor: string
   accentColor: string
-  buttonConfig: ButtonConfig
+  buttonConfig?: ButtonConfig
   buttonDisabled?: boolean
   /** Called when row is pressed (navigate to detail) */
   onPress: (id: string) => void
@@ -59,11 +59,11 @@ export function EntityRowWithMenu({
 }: EntityRowWithMenuProps) {
   const [popoverOpen, setPopoverOpen] = useState(false)
   const isDesktopWeb = Platform.OS === 'web'
-  const isDropdown = isDropdownConfig(buttonConfig)
+  const isDropdown = buttonConfig ? isDropdownConfig(buttonConfig) : false
 
   // For mobile dropdown - delegate to parent's sheet
   const handleMobileButtonPress = useCallback(() => {
-    if (buttonDisabled) return
+    if (buttonDisabled || !buttonConfig) return
     if (isDropdown) {
       onOpenDropdown?.(id)
     } else {
@@ -171,8 +171,8 @@ export function EntityRowWithMenu({
     )
   }
 
-  // Render action button content (outline style)
-  const actionButtonContent = (
+  // Render action button content (outline style) - only when buttonConfig exists
+  const actionButtonContent = buttonConfig ? (
     <XStack
       backgroundColor="transparent"
       paddingHorizontal={10}
@@ -214,7 +214,7 @@ export function EntityRowWithMenu({
         />
       )}
     </XStack>
-  )
+  ) : null
 
   return (
     <Pressable onPress={() => onPress(id)} style={styles.container}>
@@ -262,7 +262,7 @@ export function EntityRowWithMenu({
           </YStack>
 
           {/* Action button - different handling for desktop vs mobile */}
-          {isDesktopWeb && isDropdown ? (
+          {!buttonConfig ? null : isDesktopWeb && isDropdown ? (
             // Desktop: Popover controls everything
             <Popover
               open={popoverOpen}

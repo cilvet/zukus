@@ -1,41 +1,26 @@
-import { Stack, useRouter } from 'expo-router'
-import { Text, XStack, YStack } from 'tamagui'
-import { Platform, Pressable, useWindowDimensions } from 'react-native'
+import { Stack } from 'expo-router'
+import { Text, YStack } from 'tamagui'
+import { Platform, useWindowDimensions } from 'react-native'
 import { CharacterScreen } from '../../screens'
-import { useCharacterName, useCharacterBuild, useTheme } from '../../ui'
+import { useCharacterName, useCharacterBuild } from '../../ui'
 
 const DESKTOP_BREAKPOINT = 768
 
-function CustomHeaderLeft() {
-  const router = useRouter()
+function CustomHeaderTitle() {
   const name = useCharacterName()
   const build = useCharacterBuild()
 
   return (
-    <XStack alignItems="center" gap="$2" marginLeft={0}>
-      <Pressable onPress={() => router.back()} hitSlop={{ top: 16, bottom: 16, left: 16, right: 40 }}>
-        {({ pressed }) => (
-          <Text
-            fontSize={40}
-            lineHeight={40}
-            color="$color"
-            opacity={pressed ? 0.5 : 1}
-          >
-            ‹
-          </Text>
-        )}
-      </Pressable>
-      <YStack alignItems="flex-start" gap={0}>
-        <Text fontSize={17} fontWeight="600" color="$color" numberOfLines={1}>
-          {name || 'Personaje'}
+    <YStack alignItems="flex-start" gap={0}>
+      <Text fontSize={17} fontWeight="600" color="$color" numberOfLines={1}>
+        {name || 'Personaje'}
+      </Text>
+      {build ? (
+        <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
+          {build}
         </Text>
-        {build ? (
-          <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
-            {build}
-          </Text>
-        ) : null}
-      </YStack>
-    </XStack>
+      ) : null}
+    </YStack>
   )
 }
 
@@ -48,9 +33,7 @@ export default function CharacterDetailRoute() {
       <Stack.Screen
         options={{
           headerShown: !isWebDesktop,
-          headerTitle: '',
-          headerLeft: () => <CustomHeaderLeft />,
-          headerBackVisible: false,
+          headerTitle: () => <CustomHeaderTitle />,
         }}
       />
       <CharacterScreen />
