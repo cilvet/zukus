@@ -1,5 +1,6 @@
-import { Platform } from 'react-native'
-import { XStack, Text } from 'tamagui'
+import { useState } from 'react'
+import { Platform, Pressable } from 'react-native'
+import { XStack, YStack, Text } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import {
@@ -24,6 +25,7 @@ import type { CounterHandlers, ActionResult } from '../../entityBrowser/types'
 import {
   parseSelectionId,
   calculateSlotProgress,
+  calculateKnownProgress,
   findNextEmptySlotIndex,
 } from './cgeUtils'
 
@@ -71,6 +73,12 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
   const entityType = primaryCGE?.entityType ?? 'spell'
   const defaultClassId = primaryCGE?.classId ?? 'wizard'
+  const baseData = useCharacterStore((state) => state.baseData)
+
+  // Source toggle for prepare mode when known exists (spellbook/known list)
+  const hasKnown = !!primaryCGE?.config.known
+  const showSourceToggle = mode === 'prepare' && hasKnown
+  const [source, setSource] = useState<'known' | 'all'>('known')
 
   // Get filter configuration
   const filterConfig: EntityFilterConfig = getFilterConfig(entityType) ?? spellFilterConfig
@@ -85,6 +93,22 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
   // All entities - no useMemo with 'use no memo'
   const allEntities = compendium.getAllEntities(entityType) as EnrichedSpell[]
 
+  // Filter entities by source when in prepare mode with known
+  const knownSelections = baseData?.cgeState?.[cgeId]?.knownSelections ?? {}
+  const knownEntityIds = new Set<string>()
+  if (showSourceToggle) {
+    for (const ids of Object.values(knownSelections)) {
+      for (const id of ids) {
+        knownEntityIds.add(id)
+      }
+    }
+  }
+
+  const filteredEntities =
+    showSourceToggle && source === 'known'
+      ? allEntities.filter((e) => knownEntityIds.has(e.id))
+      : allEntities
+
   // Helper to close panel
   const closePanel = () => {
     if (Platform.OS !== 'web') {
@@ -94,8 +118,12 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
     }
   }
 
-  // Calculate progress and next slot outside of callbacks to avoid hook issues
-  const currentProgress = calculateSlotProgress(primaryCGE, slotLevel)
+  // Calculate progress based on mode
+  const isUnlimitedKnown = mode === 'known' && primaryCGE?.config.known?.type === 'UNLIMITED'
+  const currentProgress =
+    mode === 'known'
+      ? calculateKnownProgress(primaryCGE, slotLevel)
+      : calculateSlotProgress(primaryCGE, slotLevel)
   const nextEmptySlotIndex = findNextEmptySlotIndex(primaryCGE, slotLevel)
 
   // Counter handlers - plain object, no useMemo with 'use no memo'
@@ -142,12 +170,15 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
     getProgressLabel: () => {
       if (mode === 'known') {
-        return `${currentProgress.current} aprendidos`
+        if (isUnlimitedKnown) {
+          return `${currentProgress.current} en el libro`
+        }
+        return `${currentProgress.current} de ${currentProgress.max} aprendidos`
       }
       return `${currentProgress.current} de ${currentProgress.max} preparados`
     },
 
-    onComplete: closePanel,
+    onComplete: isUnlimitedKnown ? undefined : closePanel,
   }
 
   // Navigate to entity detail - plain function, no useCallback with 'use no memo'
@@ -188,29 +219,90 @@ export function CGEEntitySelectPanel({ selectionId }: CGEEntitySelectPanelProps)
 
   const entityLabel = entityType === 'spell' ? 'conjuros' : entityType === 'maneuver' ? 'maniobras' : 'entidades'
 
+  const isKnownLabel = primaryCGE?.config.known?.type === 'UNLIMITED' ? 'Libro' : 'Conocidos'
+
   return (
-    <EntitySelectionView
-      entities={allEntities}
-      modeConfig={{
-        mode: 'counter',
-        action: {
-          id: 'prepare',
-          label: mode === 'known' ? 'Aprender' : 'Preparar',
-          icon: mode === 'known' ? 'book' : 'check',
-        },
-        handlers,
-        closeOnComplete: true,
-      }}
-      filterConfig={filterConfig}
-      initialFilterOverrides={initialFilterOverrides}
-      onEntityPress={handleEntityPress}
-      getBadge={getBadge}
-      searchPlaceholder="Buscar por nombre..."
-      emptyText={`No hay ${entityLabel} disponibles para esta combinacion.`}
-      emptySearchText="No se encontraron resultados."
-      resultLabelSingular="resultado"
-      resultLabelPlural="resultados"
-      filterContextContent={filterContextContent}
-    />
+    <YStack flex={1}>
+      {showSourceToggle && (
+        <XStack paddingHorizontal={16} paddingTop={8} gap={8}>
+          <SourceChip
+            label={isKnownLabel}
+            active={source === 'known'}
+            onPress={() => setSource('known')}
+            accentColor={themeColors.accentColor}
+          />
+          <SourceChip
+            label="Todos"
+            active={source === 'all'}
+            onPress={() => setSource('all')}
+            accentColor={themeColors.accentColor}
+          />
+        </XStack>
+      )}
+      <EntitySelectionView
+        entities={filteredEntities}
+        modeConfig={{
+          mode: 'counter',
+          action: {
+            id: 'prepare',
+            label: mode === 'known' ? 'Aprender' : 'Preparar',
+            icon: mode === 'known' ? 'book' : 'check',
+          },
+          handlers,
+          closeOnComplete: !isUnlimitedKnown,
+        }}
+        filterConfig={filterConfig}
+        initialFilterOverrides={initialFilterOverrides}
+        onEntityPress={handleEntityPress}
+        getBadge={getBadge}
+        searchPlaceholder="Buscar por nombre..."
+        emptyText={
+          showSourceToggle && source === 'known'
+            ? `No hay ${entityLabel} en tu ${isKnownLabel.toLowerCase()}. Cambia a "Todos" para ver la lista completa.`
+            : `No hay ${entityLabel} disponibles para esta combinacion.`
+        }
+        emptySearchText="No se encontraron resultados."
+        resultLabelSingular="resultado"
+        resultLabelPlural="resultados"
+        filterContextContent={filterContextContent}
+      />
+    </YStack>
+  )
+}
+
+// ============================================================================
+// SourceChip
+// ============================================================================
+
+type SourceChipProps = {
+  label: string
+  active: boolean
+  onPress: () => void
+  accentColor: string
+}
+
+function SourceChip({ label, active, onPress, accentColor }: SourceChipProps) {
+  return (
+    <Pressable onPress={onPress}>
+      {({ pressed }) => (
+        <XStack
+          paddingVertical={6}
+          paddingHorizontal={14}
+          borderRadius={16}
+          backgroundColor={active ? accentColor : '$uiBackgroundColor'}
+          borderWidth={1}
+          borderColor={active ? accentColor : '$borderColor'}
+          opacity={pressed ? 0.7 : 1}
+        >
+          <Text
+            fontSize={13}
+            fontWeight={active ? '600' : '400'}
+            color={active ? 'white' : '$color'}
+          >
+            {label}
+          </Text>
+        </XStack>
+      )}
+    </Pressable>
   )
 }

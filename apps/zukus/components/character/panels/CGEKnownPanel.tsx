@@ -52,6 +52,7 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
   const entityTypeLabel = getCGELabel(primaryCGE.entityType)
   const knownLimits = primaryCGE.knownLimits ?? []
   const cgeId = primaryCGE.id
+  const isUnlimited = primaryCGE.config.known?.type === 'UNLIMITED'
 
   // Get known selections from character base data
   const knownSelections = baseData?.cgeState?.[cgeId]?.knownSelections ?? {}
@@ -65,8 +66,8 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
   let totalKnown = 0
   let totalMax = 0
   for (const limit of knownLimits) {
+    totalKnown += limit.current
     if (limit.max > 0) {
-      totalKnown += limit.current
       totalMax += limit.max
     }
   }
@@ -97,6 +98,9 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
     )
   }
 
+  // Labels depending on unlimited vs limited
+  const removeLabel = isUnlimited ? 'Quitar' : 'Olvidar'
+
   return (
     <ScrollView
       style={{ flex: 1 }}
@@ -106,7 +110,9 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
       {/* Summary */}
       <XStack justifyContent="center" paddingVertical={6} paddingHorizontal={16}>
         <Text fontSize={12} color="$placeholderColor">
-          {totalKnown} / {totalMax} {entityTypeLabel} conocidos
+          {isUnlimited
+            ? `${totalKnown} ${entityTypeLabel} en el libro`
+            : `${totalKnown} / ${totalMax} ${entityTypeLabel} conocidos`}
         </Text>
       </XStack>
 
@@ -117,14 +123,17 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
 
           const levelLabel = getLevelLabel(limit.level)
           const knownEntityIds = getKnownByLevel(limit.level)
-          const emptySlots = limit.max - knownEntityIds.length
-          const canAddMore = emptySlots > 0
+          const isLevelUnlimited = limit.max === -1
+          const canAddMore = isLevelUnlimited || knownEntityIds.length < limit.max
+          const countLabel = isLevelUnlimited
+            ? `${knownEntityIds.length}`
+            : `${knownEntityIds.length}/${limit.max}`
 
           return (
             <YStack key={limit.level}>
               <LevelHeader
                 label={levelLabel}
-                count={`${knownEntityIds.length}/${limit.max}`}
+                count={countLabel}
               />
 
               {/* Known entities */}
@@ -151,7 +160,7 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
                       <Pressable onPress={() => handleRemoveKnown(entityId)} hitSlop={8}>
                         {({ pressed }) => (
                           <Text fontSize={11} color="$colorFocus" opacity={pressed ? 0.6 : 1}>
-                            Olvidar
+                            {removeLabel}
                           </Text>
                         )}
                       </Pressable>
@@ -181,7 +190,9 @@ export function CGEKnownPanel({ cge: propsCge }: CGEKnownPanelProps) {
         paddingTop={10}
         paddingHorizontal={16}
       >
-        Selecciona los {entityTypeLabel} que conoces en cada nivel.
+        {isUnlimited
+          ? `Anade ${entityTypeLabel} a tu libro con "Aprender..."`
+          : `Selecciona los ${entityTypeLabel} que conoces en cada nivel.`}
       </Text>
     </ScrollView>
   )

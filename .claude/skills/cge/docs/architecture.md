@@ -110,13 +110,16 @@ Ejemplos:
 ### Almacenamiento de Conocidos
 
 ```typescript
-// Para LIMITED_PER_ENTITY_LEVEL (Sorcerer)
+// Para LIMITED_PER_ENTITY_LEVEL (Sorcerer) y UNLIMITED (Wizard)
+// Se indexa por nivel de entidad
 knownSelections["0"] = ["prestidigitation", "light"]
 knownSelections["1"] = ["magic-missile", "shield"]
 
-// Para LIMITED_TOTAL y UNLIMITED
+// Para LIMITED_TOTAL (Warblade, Warlock)
 knownSelections["-1"] = ["fireball", "fly", "haste"]  // -1 = sin nivel especifico
 ```
+
+**Nota**: UNLIMITED almacena por nivel igual que LIMITED_PER_ENTITY_LEVEL. La diferencia es que `calculateKnownLimits()` genera limites con `max: -1` (ilimitado) en vez de un max numerico.
 
 ### Consumo de Recursos
 

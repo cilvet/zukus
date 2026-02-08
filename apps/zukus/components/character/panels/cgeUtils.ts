@@ -69,6 +69,19 @@ export function calculateSlotProgress(cge: CalculatedCGE | null, level: number):
 }
 
 /**
+ * Calculate progress for CGE known limits at a given level.
+ * Returns max: -1 for UNLIMITED (spellbook).
+ */
+export function calculateKnownProgress(cge: CalculatedCGE | null, level: number): { current: number; max: number } {
+  if (!cge || !cge.knownLimits) return { current: 0, max: 0 }
+
+  const entry = cge.knownLimits.find((l) => l.level === level)
+  if (!entry) return { current: 0, max: 0 }
+
+  return { current: entry.current, max: entry.max }
+}
+
+/**
  * Find the next empty slot index for a given level.
  * Returns -1 if no empty slots available.
  */

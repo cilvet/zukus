@@ -8,7 +8,7 @@
 | resource | `SLOTS` |
 | preparation | `BOUND` |
 
-## Estado: Implementado
+## Estado: Implementado (Core + UI)
 
 La configuracion del Wizard esta implementada en:
 - `/packages/core/srd/wizard/wizardClassFeatures.ts` - CGE config real
@@ -92,14 +92,18 @@ Nivel | 0  1  2  3  4  5  6  7  8  9
 
 ## Flujo de Uso
 
-### 1. Gestion del Libro (known)
-- El jugador selecciona conjuros para su spellbook
-- Como `known.type = 'UNLIMITED'`, no hay limite
-- La UI muestra todos los conjuros accesibles (filtrados por lista "wizard")
+### 1. Gestion del Libro (known) - IMPLEMENTADO
+- **CGEKnownPanel** muestra niveles disponibles (derivados del track SLOTS) con conteo sin max (ej: "3" en vez de "3/5")
+- `calculateKnownLimits()` genera `CalculatedKnownLimit[]` con `max: -1` para cada nivel con slots > 0
+- "Aprender..." siempre disponible (sin limite)
+- "Quitar" en vez de "Olvidar" (es un libro, no memoria)
+- Resumen: "X conjuros en el libro"
 
-### 2. Preparacion Diaria (preparation: BOUND)
+### 2. Preparacion Diaria (preparation: BOUND) - IMPLEMENTADO
 - Cada slot se vincula a UN conjuro especifico
-- Ejemplo nivel 3: 4 cantrips + 2 nivel-1 + 1 nivel-2
+- **CGEEntitySelectPanel** en modo `prepare` muestra toggle "Libro"/"Todos":
+  - "Libro" (default): filtra por `knownSelections` del CGE state
+  - "Todos": muestra todos los conjuros del compendio (sin filtro de libro)
 - El jugador asigna: slot-1-0 = Magic Missile, slot-1-1 = Shield, etc.
 
 ### 3. Lanzamiento

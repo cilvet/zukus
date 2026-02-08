@@ -67,6 +67,14 @@ Como se adquieren entidades al pool de conocidos.
 | `LIMITED_TOTAL` | X totales de cualquier nivel | Warblade, Warlock |
 | *(sin config)* | Acceso directo a lista filtrada | Cleric, Druid |
 
+### UNLIMITED importante
+
+Para `UNLIMITED`, `calculateKnownLimits()` genera `CalculatedKnownLimit[]` con `max: -1` para cada nivel que tiene slots > 0 (derivado del primer track SLOTS). Esto permite que la UI muestre los niveles del libro y permita anadir conjuros sin limite.
+
+- `max: -1` = ilimitado. No mostrar barra de progreso ni "X/max", solo count
+- CGEKnownPanel: "Quitar" en vez de "Olvidar", resumen "X conjuros en el libro"
+- CGEEntitySelectPanel en modo prepare: toggle "Libro"/"Todos" (filtra por knownSelections)
+
 ### LIMITED_TOTAL importante
 
 Para `LIMITED_TOTAL`, los `knownLimits` tienen `level: -1`:
@@ -263,11 +271,14 @@ Las operaciones permiten estados invalidos pero generan warnings:
 
 | Archivo | Proposito |
 |---------|-----------|
-| `cge/types.ts` | CGEConfig, CGEState, CalculatedCGE |
+| `cge/types.ts` | CGEConfig, CGEState, CalculatedCGE, CalculatedKnownLimit |
 | `cge/knownOperations.ts` | Add/remove known |
 | `cge/preparationOperations.ts` | Preparacion de slots |
 | `cge/slotOperations.ts` | Uso y refresco de slots |
-| `character/calculation/cge/calculateCGE.ts` | Calculo de CGE |
+| `character/calculation/cge/calculateCGE.ts` | Calculo de CGE (known limits, tracks) |
+| `panels/CGEKnownPanel.tsx` | UI libro/conocidos (UNLIMITED con max:-1) |
+| `panels/CGEEntitySelectPanel.tsx` | Selector entidades + toggle fuente |
+| `panels/cgeUtils.ts` | calculateSlotProgress, calculateKnownProgress |
 
 ## Siguiente
 

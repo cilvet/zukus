@@ -51,6 +51,7 @@ CGE configura como los personajes usan entidades accionables (conjuros, maniobra
 - Preparation: BOUND, NONE
 - Multiple tracks (Cleric base + domain)
 - Operaciones: addKnownEntity, prepareEntityInSlot, useSlot, useBoundSlot, refreshSlots, calculatePoolCost
+- **UI Libro del Mago**: UNLIMITED genera `knownLimits` con `max: -1` por nivel (derivados del track SLOTS). CGEKnownPanel soporta modo ilimitado (sin conteo max, "Quitar" en vez de "Olvidar"). CGEEntitySelectPanel tiene toggle "Libro"/"Todos" en modo prepare cuando hay known.
 
 ### PENDIENTE
 
@@ -162,12 +163,15 @@ El sistema actual es **primitivo**. Los "contextos" permitiran modificar uso/pre
 
 | Archivo | Proposito |
 |---------|-----------|
-| `cge/types.ts` | Tipos CGEConfig, CalculatedCGE |
+| `cge/types.ts` | Tipos CGEConfig, CalculatedCGE, CalculatedKnownLimit |
 | `cge/knownOperations.ts` | Add/remove known |
 | `cge/preparationOperations.ts` | BOUND preparation only |
 | `cge/slotOperations.ts` | useSlot, refreshSlots |
 | `cge/poolOperations.ts` | calculatePoolCost (coste por entidad) |
-| `calculation/cge/calculateCGE.ts` | Calculo en sheet |
+| `calculation/cge/calculateCGE.ts` | Calculo en sheet (known limits, tracks, slots) |
+| `panels/CGEKnownPanel.tsx` | UI del libro/conocidos (soporta UNLIMITED con max:-1) |
+| `panels/CGEEntitySelectPanel.tsx` | Selector de entidades con toggle fuente (Libro/Todos) |
+| `panels/cgeUtils.ts` | parseSelectionId, calculateSlotProgress, calculateKnownProgress |
 
 ---
 
@@ -209,6 +213,22 @@ La demo permite probar interactivamente todos los tipos de CGE con personajes re
 | Spirit Shaman | OK | NO |
 | Arcanist | OK | NO |
 | Wizard5e | OK | NO |
+
+---
+
+## UNLIMITED Known Limits (max: -1)
+
+Cuando `known.type === 'UNLIMITED'`, `calculateKnownLimits()` genera `CalculatedKnownLimit[]` con `max: -1` para cada nivel que tiene slots > 0 (derivado del primer track SLOTS). Esto permite que la UI muestre los niveles disponibles y permita anadir conjuros al libro.
+
+**Convencion `max: -1`**: Significa "ilimitado". La UI debe:
+- No mostrar barra de progreso ni conteo "X/max"
+- Mostrar solo el count: "3" en vez de "3/5"
+- No bloquear ni auto-cerrar al alcanzar un limite
+- CounterBar con `max <= 0` no muestra progreso ni boton OK (funciona por defecto)
+
+**`calculateKnownProgress(cge, level)`** en `cgeUtils.ts`: Devuelve `{ current, max }` donde `max` puede ser `-1`. CGEEntitySelectPanel usa esta funcion en modo `known` (en vez de `calculateSlotProgress` que es para slots).
+
+**Source toggle (Libro/Todos)**: En modo `prepare`, si el CGE tiene `known` config, CGEEntitySelectPanel muestra chips "Libro"/"Todos" para filtrar por entidades conocidas. Default: "Libro" (solo muestra conjuros del libro/conocidos).
 
 ---
 

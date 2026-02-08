@@ -156,7 +156,24 @@ function calculateKnownLimits(
   const known = config.known;
 
   if (known.type === 'UNLIMITED') {
-    return { limits: undefined, warnings };
+    // Derive available levels from the first SLOTS track
+    const firstTrack = config.tracks[0];
+    if (!firstTrack || firstTrack.resource.type !== 'SLOTS') {
+      return { limits: undefined, warnings };
+    }
+
+    const row = firstTrack.resource.table[classLevel];
+    if (!row) {
+      return { limits: undefined, warnings };
+    }
+
+    const limits: CalculatedKnownLimit[] = [];
+    for (let level = 0; level < row.length; level++) {
+      if (row[level] === 0) continue;
+      const current = knownSelections[String(level)]?.length ?? 0;
+      limits.push({ level, max: -1, current });
+    }
+    return { limits, warnings };
   }
 
   if (known.type === 'LIMITED_PER_ENTITY_LEVEL') {
