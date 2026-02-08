@@ -37,11 +37,14 @@ describe('getInstanceFieldsFromCompendium', () => {
       expect(equippedField?.type).toBe('boolean');
     });
 
-    it('should return empty array for weapon (no equippable addon yet)', () => {
+    it('should return equipped field for weapon', () => {
       const fields = getInstanceFieldsFromCompendium('weapon', dnd35ExampleCompendium);
 
-      // Weapons don't have equippable addon (they would have wieldable)
-      expect(fields).toEqual([]);
+      expect(fields.length).toBeGreaterThan(0);
+      const equippedField = fields.find((f) => f.name === 'equipped');
+      expect(equippedField).toBeDefined();
+      expect(equippedField?.type).toBe('boolean');
+      expect(equippedField?.default).toBe(false);
     });
 
     it('should return empty array for spell (no instance fields)', () => {
@@ -74,8 +77,12 @@ describe('getInstanceFieldsFromCompendium', () => {
       expect(hasInstanceFieldsFromCompendium('spell', dnd35ExampleCompendium)).toBe(false);
     });
 
-    it('should return false for weapon (no equippable addon yet)', () => {
-      expect(hasInstanceFieldsFromCompendium('weapon', dnd35ExampleCompendium)).toBe(false);
+    it('should return true for weapon', () => {
+      expect(hasInstanceFieldsFromCompendium('weapon', dnd35ExampleCompendium)).toBe(true);
+    });
+
+    it('should have equipped instance field for weapon', () => {
+      expect(hasInstanceField('weapon', 'equipped', dnd35ExampleCompendium)).toBe(true);
     });
   });
 

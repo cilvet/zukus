@@ -28,6 +28,9 @@ import { CharacterClass } from "../../domain/class/class";
 import { getDefaultCharacterData } from "./defaultCharacter";
 import { SystemLevelsEntity } from "../../domain/levels/storage/types";
 import { dnd35SystemLevels } from "../../../srd/systemLevels/dnd35SystemLevels";
+import type { StandardEntity } from "../../domain/entities/types/base";
+import type { InventoryItemInstance } from "../../domain/inventory/types";
+import { generateUniqueId } from "../../utils/generateId";
 
 export type CharacterBuilder = {
   withName: (name: string) => CharacterBuilder;
@@ -76,6 +79,10 @@ export type CharacterBuilder = {
   withAbsorbedItems: () => CharacterBuilder;
   withSystemLevels: (systemLevels?: SystemLevelsEntity) => CharacterBuilder;
   withoutSystemLevels: () => CharacterBuilder;
+  withInventoryWeapon: (
+    entity: StandardEntity & Record<string, unknown>,
+    options?: { equipped?: boolean }
+  ) => CharacterBuilder;
   build: () => CharacterBaseData;
   buildCharacterSheet: () => CharacterSheet;
   withSpells: (spells: ProvisionalSpells) => CharacterBuilder;
@@ -265,6 +272,24 @@ export function buildCharacter() {
     },
     withoutSystemLevels: function () {
       delete character.systemLevelsEntity;
+      return this;
+    },
+    withInventoryWeapon: function (
+      entity: StandardEntity & Record<string, unknown>,
+      options?: { equipped?: boolean }
+    ) {
+      if (!character.inventoryState) {
+        character.inventoryState = { items: [], currencies: {} };
+      }
+      const equipped = options?.equipped ?? true;
+      const item: InventoryItemInstance = {
+        instanceId: generateUniqueId(),
+        itemId: entity.id,
+        entityType: 'weapon',
+        quantity: 1,
+        entity: { ...entity, equipped },
+      };
+      character.inventoryState.items.push(item);
       return this;
     },
     build: function () {

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState } from 'react'
 import type {
   CalculatedAttack,
   AttackContextualChange,
@@ -38,16 +38,14 @@ export type UseAttackContextResult = {
 }
 
 /**
- * Obtiene el arma del personaje por su uniqueId.
+ * Finds a weapon by uniqueId in the attack data weapons array.
+ * This includes both legacy equipment weapons and inventory weapons.
  */
-function getWeaponFromCharacter(
-  items: { uniqueId: string; itemType: string }[],
+function findWeaponById(
+  weapons: Weapon[] | undefined,
   weaponUniqueId: string
 ): Weapon | null {
-  const item = items.find(
-    (i) => i.uniqueId === weaponUniqueId && i.itemType === 'WEAPON'
-  )
-  return item as Weapon | null
+  return weapons?.find((w) => w.uniqueId === weaponUniqueId) ?? null
 }
 
 /**
@@ -64,21 +62,16 @@ export function useAttackContext(
   const [variables, setVariables] = useState<Record<string, Record<string, number>>>({})
 
   // Filtra los contextual changes que aplican a este tipo de ataque
-  const availableContextualChanges = useMemo((): AttackContextualChange[] => {
-    if (!attackData?.attackContextChanges) return []
-
-    return attackData.attackContextChanges.filter((change: AttackContextualChange) => {
-      // Solo mostrar cambios opcionales y disponibles
-      if (!change.optional || !change.available) return false
-
-      // Filtrar por tipo de ataque
-      if (change.appliesTo === 'all') return true
-      return change.appliesTo === attack.type
-    })
-  }, [attackData?.attackContextChanges, attack.type])
+  const availableContextualChanges: AttackContextualChange[] = attackData?.attackContextChanges
+    ? attackData.attackContextChanges.filter((change: AttackContextualChange) => {
+        if (!change.optional || !change.available) return false
+        if (change.appliesTo === 'all') return true
+        return change.appliesTo === attack.type
+      })
+    : []
 
   // Obtiene los contextual changes seleccionados con sus variables resueltas
-  const getSelectedContextualChanges = useCallback((): ResolvedAttackContextualChange[] => {
+  const getSelectedContextualChanges = (): ResolvedAttackContextualChange[] => {
     return availableContextualChanges
       .filter((change) => selectedChanges.has(change.name))
       .map((change): ResolvedAttackContextualChange => ({
@@ -88,15 +81,15 @@ export function useAttackContext(
           value: variables[change.name]?.[variable.identifier] ?? variable.min,
         })),
       }))
-  }, [availableContextualChanges, selectedChanges, variables])
+  }
 
   // Calcula el substitution index (para uso en getDamageFormulaText)
-  const substitutionIndex = useMemo((): Record<string, number> => {
+  const substitutionIndex: Record<string, number> = (() => {
     if (!characterSheet) return {}
 
     const resolvedContextualChanges = getSelectedContextualChanges()
     const variablesSubstitutionIndex: Record<string, number> = {}
-    
+
     for (const change of resolvedContextualChanges) {
       for (const variable of change.variables) {
         variablesSubstitutionIndex[variable.identifier] = variable.value
@@ -107,26 +100,20 @@ export function useAttackContext(
       ...characterSheet.substitutionValues,
       ...variablesSubstitutionIndex,
     }
-  }, [characterSheet, getSelectedContextualChanges])
+  })()
 
   // Recalcula el ataque cuando cambian los contextual changes o sus variables
-  const calculatedAttack = useMemo((): CalculatedAttack => {
-    // Si no hay character sheet o el ataque no es de arma, devolver el original
+  const calculatedAttack: CalculatedAttack = (() => {
     if (!characterSheet || attack.attackOriginType !== 'weapon' || !attack.weaponUniqueId) {
       return attack
     }
 
-    // Obtener el arma del personaje
-    const weapon = getWeaponFromCharacter(
-      characterSheet.equipment.items,
-      attack.weaponUniqueId
-    )
+    const weapon = findWeaponById(attackData?.weapons, attack.weaponUniqueId)
 
     if (!weapon) {
       return attack
     }
 
-    // Construir el contexto resuelto
     const resolvedContextualChanges = getSelectedContextualChanges()
 
     const resolvedContext = {
@@ -138,7 +125,6 @@ export function useAttackContext(
       character: characterSheet,
     }
 
-    // Recalcular bonus de ataque y daño
     const newAttackBonus = calculateAttackBonus(resolvedContext, substitutionIndex)
     const newDamage = getAttackDamageFormula(resolvedContext, false)
     const newCriticalDamage = getAttackDamageFormula(resolvedContext, true)
@@ -149,9 +135,9 @@ export function useAttackContext(
       damage: newDamage,
       criticalDamage: newCriticalDamage,
     }
-  }, [attack, attackData?.attackChanges, characterSheet, getSelectedContextualChanges, substitutionIndex])
+  })()
 
-  const toggleChange = useCallback((changeName: string) => {
+  const toggleChange = (changeName: string) => {
     setSelectedChanges((prev) => {
       const next = new Set(prev)
       if (next.has(changeName)) {
@@ -161,20 +147,17 @@ export function useAttackContext(
       }
       return next
     })
-  }, [])
+  }
 
-  const updateVariable = useCallback(
-    (changeName: string, variableId: string, value: number) => {
-      setVariables((prev) => ({
-        ...prev,
-        [changeName]: {
-          ...prev[changeName],
-          [variableId]: value,
-        },
-      }))
-    },
-    []
-  )
+  const updateVariable = (changeName: string, variableId: string, value: number) => {
+    setVariables((prev) => ({
+      ...prev,
+      [changeName]: {
+        ...prev[changeName],
+        [variableId]: value,
+      },
+    }))
+  }
 
   return {
     calculatedAttack,

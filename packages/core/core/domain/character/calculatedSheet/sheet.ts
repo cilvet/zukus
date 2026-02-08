@@ -170,6 +170,7 @@ export function getInitialCharacterSheet(
       attackChanges: [],
       attackContextChanges: [],
       attacks: [],
+      weapons: [],
     },
     skills: {},
     level: calculatedLevel,

@@ -32,7 +32,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "bastard-sword",
@@ -53,7 +54,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "battleaxe",
@@ -74,7 +76,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "bayonet",
@@ -95,7 +98,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "blowgun",
@@ -117,7 +121,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 20
+    "rangeIncrement": 20,
+    "equipped": false
   },
   {
     "id": "bolas",
@@ -139,7 +144,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "club",
@@ -161,7 +167,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "composite-longbow-1",
@@ -183,7 +190,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 110
+    "rangeIncrement": 110,
+    "equipped": false
   },
   {
     "id": "composite-longbow-2",
@@ -205,7 +213,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 110
+    "rangeIncrement": 110,
+    "equipped": false
   },
   {
     "id": "composite-longbow-3",
@@ -227,7 +236,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 110
+    "rangeIncrement": 110,
+    "equipped": false
   },
   {
     "id": "composite-longbow-4",
@@ -249,7 +259,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 110
+    "rangeIncrement": 110,
+    "equipped": false
   },
   {
     "id": "composite-shortbow-1",
@@ -271,7 +282,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 70
+    "rangeIncrement": 70,
+    "equipped": false
   },
   {
     "id": "composite-shortbow-2",
@@ -293,7 +305,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 70
+    "rangeIncrement": 70,
+    "equipped": false
   },
   {
     "id": "composite-shortbow-3",
@@ -315,7 +328,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 70
+    "rangeIncrement": 70,
+    "equipped": false
   },
   {
     "id": "composite-shortbow-4",
@@ -337,7 +351,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 70
+    "rangeIncrement": 70,
+    "equipped": false
   },
   {
     "id": "dagger",
@@ -359,7 +374,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "light",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "dart",
@@ -381,7 +397,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 20
+    "rangeIncrement": 20,
+    "equipped": false
   },
   {
     "id": "dire-flail",
@@ -402,7 +419,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "dwarven-urgrosh",
@@ -423,7 +441,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "dwarven-waraxe",
@@ -444,7 +463,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "falchion",
@@ -465,7 +485,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "flail",
@@ -486,7 +507,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "gauntlet",
@@ -507,7 +529,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "glaive",
@@ -529,7 +552,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   },
   {
     "id": "gnome-hooked-hammer",
@@ -550,7 +574,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "grappling-hook",
@@ -571,7 +596,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "greataxe",
@@ -592,7 +618,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "greatclub",
@@ -613,7 +640,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "greatsword",
@@ -634,7 +662,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "guisarme",
@@ -656,7 +685,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   },
   {
     "id": "halberd",
@@ -677,7 +707,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "hand-crossbow",
@@ -699,7 +730,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 30
+    "rangeIncrement": 30,
+    "equipped": false
   },
   {
     "id": "handaxe",
@@ -720,7 +752,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "heavy-crossbow",
@@ -742,7 +775,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 120
+    "rangeIncrement": 120,
+    "equipped": false
   },
   {
     "id": "heavy-flail",
@@ -763,7 +797,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "heavy-mace",
@@ -784,7 +819,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "heavy-pick",
@@ -805,7 +841,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "heavy-repeating-crossbow",
@@ -827,7 +864,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 120
+    "rangeIncrement": 120,
+    "equipped": false
   },
   {
     "id": "javelin",
@@ -849,7 +887,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 30
+    "rangeIncrement": 30,
+    "equipped": false
   },
   {
     "id": "kama",
@@ -870,7 +909,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "kukri",
@@ -891,7 +931,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "lance",
@@ -913,7 +954,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   },
   {
     "id": "light-crossbow",
@@ -935,7 +977,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 80
+    "rangeIncrement": 80,
+    "equipped": false
   },
   {
     "id": "light-hammer",
@@ -957,7 +1000,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "light",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 20
+    "rangeIncrement": 20,
+    "equipped": false
   },
   {
     "id": "light-mace",
@@ -978,7 +1022,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "light-pick",
@@ -999,7 +1044,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "light-repeating-crossbow",
@@ -1021,7 +1067,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 80
+    "rangeIncrement": 80,
+    "equipped": false
   },
   {
     "id": "longbow",
@@ -1043,7 +1090,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 100
+    "rangeIncrement": 100,
+    "equipped": false
   },
   {
     "id": "longspear",
@@ -1065,7 +1113,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   },
   {
     "id": "longsword",
@@ -1086,7 +1135,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "morningstar",
@@ -1107,7 +1157,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "net",
@@ -1129,7 +1180,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "nunchaku",
@@ -1150,7 +1202,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "orc-double-axe",
@@ -1171,7 +1224,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "punching-dagger",
@@ -1192,7 +1246,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "quarterstaff",
@@ -1213,7 +1268,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "ranseur",
@@ -1235,7 +1291,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   },
   {
     "id": "rapier",
@@ -1256,7 +1313,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": true,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "sai",
@@ -1278,7 +1336,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "light",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "sap",
@@ -1299,7 +1358,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "scimitar",
@@ -1320,7 +1380,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "scythe",
@@ -1341,7 +1402,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "shield-spikes-heavy",
@@ -1362,7 +1424,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "shield-spikes-light",
@@ -1383,7 +1446,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "shortbow",
@@ -1405,7 +1469,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 60
+    "rangeIncrement": 60,
+    "equipped": false
   },
   {
     "id": "shortspear",
@@ -1427,7 +1492,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 20
+    "rangeIncrement": 20,
+    "equipped": false
   },
   {
     "id": "shortsword",
@@ -1448,7 +1514,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "shuriken",
@@ -1470,7 +1537,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "siangham",
@@ -1491,7 +1559,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "sickle",
@@ -1512,7 +1581,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "sling",
@@ -1534,7 +1604,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "two-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 50
+    "rangeIncrement": 50,
+    "equipped": false
   },
   {
     "id": "spear",
@@ -1556,7 +1627,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 20
+    "rangeIncrement": 20,
+    "equipped": false
   },
   {
     "id": "spiked-chain",
@@ -1577,7 +1649,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": true,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "spiked-gauntlet",
@@ -1598,7 +1671,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "throwing-axe",
@@ -1620,7 +1694,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "light",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "trident",
@@ -1642,7 +1717,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": false,
     "isMasterwork": false,
-    "rangeIncrement": 10
+    "rangeIncrement": 10,
+    "equipped": false
   },
   {
     "id": "two-bladed-sword",
@@ -1663,7 +1739,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "unarmed-strike",
@@ -1684,7 +1761,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "light",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "warhammer",
@@ -1705,7 +1783,8 @@ export const srdWeapons: ExtendedEntity[] = [
     "weaponType": "melee",
     "weightClass": "one-handed",
     "finesse": false,
-    "isMasterwork": false
+    "isMasterwork": false,
+    "equipped": false
   },
   {
     "id": "whip",
@@ -1727,6 +1806,7 @@ export const srdWeapons: ExtendedEntity[] = [
     "weightClass": "one-handed",
     "finesse": true,
     "isMasterwork": false,
-    "reach": 10
+    "reach": 10,
+    "equipped": false
   }
 ];

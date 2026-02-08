@@ -23,6 +23,8 @@ export type CalculatedAttackData = {
   attacks: CalculatedAttack[];
   attackContextChanges: AttackContextualChange[];
   attackChanges: ContextualizedChange<AttackChange>[];
+  /** All equipped weapons (legacy + inventory) for contextual change recalculation */
+  weapons: Weapon[];
 };
 
 export type CalculatedAttackBonus = {

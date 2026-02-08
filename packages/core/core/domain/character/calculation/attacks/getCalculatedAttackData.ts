@@ -158,7 +158,9 @@ export const getCalculatedAttackData = function (
     ...(options?.inventoryWeapons ?? []),
   ];
 
-  const attacks = allWeapons.filter(weapon => weapon.equipped).map((weapon) =>
+  const equippedWeapons = allWeapons.filter(weapon => weapon.equipped);
+
+  const attacks = equippedWeapons.map((weapon) =>
     getAttackFromWeapon(weapon, character, attackChanges, attackContextChanges, substitutionValues)
   );
 
@@ -166,6 +168,7 @@ export const getCalculatedAttackData = function (
     attacks,
     attackContextChanges: [...allDefaultAttackContextChanges, ...attackContextChanges],
     attackChanges,
+    weapons: equippedWeapons,
   };
 };
 

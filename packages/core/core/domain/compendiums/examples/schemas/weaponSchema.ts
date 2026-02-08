@@ -11,7 +11,7 @@ export const weaponSchema: EntitySchemaDefinition = {
   typeName: 'weapon',
   description: 'D&D 3.5 Weapon',
   version: '1.0.0',
-  addons: ['searchable', 'imageable', 'dnd35item', 'effectful'],
+  addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
   fields: [
     // Combat stats
     {
