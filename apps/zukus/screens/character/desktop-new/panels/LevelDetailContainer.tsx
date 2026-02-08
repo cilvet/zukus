@@ -117,11 +117,11 @@ export function LevelDetailContainer({ levelIndex }: Props) {
   }
 
   const handleGrantedEntityPress = (entity: StandardEntity) => {
-    navigateToDetail('customEntityDetail', entity.id, entity.name)
+    navigateToDetail('compendiumEntity', entity.id, entity.name)
   }
 
   const handleSelectedEntityPress = (instance: EntityInstance) => {
-    navigateToDetail('customEntityDetail', instance.entity.id, instance.entity.name)
+    navigateToDetail('compendiumEntity', instance.entity.id, instance.entity.name)
   }
 
   return (

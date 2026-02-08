@@ -37,6 +37,7 @@ import {
 } from '../../components/layout'
 import { SectionCard, SectionHeader } from '../../components/character'
 import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
+import { CompendiumEntityDetail } from '../../components/compendiums'
 import { getDetailTitle } from '../../navigation'
 import { resolveProvider, getSelectedEntityInstances, ops } from '@zukus/core'
 import type { ProviderLocation, StandardEntity, EntityInstance, LevelSlot } from '@zukus/core'
@@ -316,6 +317,9 @@ function EditCharacterScreenDesktopContent() {
         {panelInfo?.type === 'entitySelectorDetail' && panelInfo?.id && (
           <EditEntitySelectorDetailPanelContainer locationJson={panelInfo.id} />
         )}
+        {panelInfo?.type === 'compendiumEntity' && panelInfo?.id && (
+          <CompendiumEntityDetail entityId={panelInfo.id} />
+        )}
       </SidePanel>
     </SidePanelContainer>
   )
@@ -421,11 +425,11 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   }
 
   const handleGrantedEntityPress = (entity: StandardEntity) => {
-    openPanel(`customEntityDetail/${entity.id}`, entity.name)
+    openPanel(`compendiumEntity/${entity.id}`, entity.name)
   }
 
   const handleSelectedEntityPress = (instance: EntityInstance) => {
-    openPanel(`customEntityDetail/${instance.entity.id}`, instance.entity.name)
+    openPanel(`compendiumEntity/${instance.entity.id}`, instance.entity.name)
   }
 
   return (
@@ -450,7 +454,7 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
 function EditClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
   const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
-  const { closePanel } = usePanelNavigation('edit')
+  const { goBack } = usePanelNavigation('edit')
 
   if (!baseData || !updater) {
     return (
@@ -465,11 +469,11 @@ function EditClassSelectorDetailPanelContainer({ levelIndex }: { levelIndex: num
 
   const handleSelectClass = (classId: string) => {
     updateLevelClass(baseData, updater, levelIndex, classId)
-    closePanel()
+    goBack()
   }
 
   const handleClose = () => {
-    closePanel()
+    goBack()
   }
 
   const availableClasses = getAvailableClasses()

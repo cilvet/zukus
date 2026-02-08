@@ -147,8 +147,20 @@ export function useProviderSelection({
         return
       }
 
+      // Auto-replace when max=1: deselect current before selecting new (atomic)
+      let currentCharacter = character
+      if (selector.max === 1 && selectedEntities.length > 0) {
+        const currentInstance = selectedEntities[0]!
+        const deselectResult = deselectEntityFromProvider(currentCharacter, providerLocation, currentInstance.instanceId)
+        if (deselectResult.errors.length > 0) {
+          console.error('Deselection errors:', deselectResult.errors)
+          return
+        }
+        currentCharacter = deselectResult.character
+      }
+
       const result = selectEntityInProvider(
-        character,
+        currentCharacter,
         providerLocation,
         entity,
         selector.id
@@ -161,7 +173,7 @@ export function useProviderSelection({
 
       onCharacterChange(result.character)
     },
-    [selector, character, providerLocation, entityMap, onCharacterChange]
+    [selector, character, providerLocation, entityMap, onCharacterChange, selectedEntities]
   )
 
   // Deselect entity action

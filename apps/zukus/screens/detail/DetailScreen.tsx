@@ -645,11 +645,11 @@ function LevelDetailWrapper({ levelIndex }: { levelIndex: number }) {
   }
 
   const handleGrantedEntityPress = (entity: StandardEntity) => {
-    navigateToDetail('customEntityDetail', entity.id, entity.name)
+    navigateToDetail('compendiumEntity', entity.id, entity.name)
   }
 
   const handleSelectedEntityPress = (instance: EntityInstance) => {
-    navigateToDetail('customEntityDetail', instance.entity.id, instance.entity.name)
+    navigateToDetail('compendiumEntity', instance.entity.id, instance.entity.name)
   }
 
   return (
@@ -892,7 +892,7 @@ export function DetailScreen() {
       case 'entitySelectorDetail':
         return <EntitySelectorDetailWrapper locationJson={id} />
       case 'customEntityDetail':
-        return <NotImplementedDetail type={type} id={id} />
+        return <CompendiumEntityDetail entityId={id} />
       case 'computedEntity':
         return <ComputedEntityDetail entityId={id} />
       case 'compendiumEntity':

@@ -122,7 +122,7 @@ function EntitySelectorContent({
   const handleEntityPress = (entity: StandardEntity) => {
     const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
     const localized = getLocalizedEntity(entity, ctx)
-    navigateToDetail('customEntityDetail', entity.id, localized.name)
+    navigateToDetail('compendiumEntity', entity.id, localized.name)
   }
 
   return (

@@ -121,7 +121,7 @@ export function EntitySelectionView<T extends StandardEntity>({
   // ============================================================================
 
   const isSelection = isSelectionMode(modeConfig)
-  const isInstantSelect = isSelection && !!modeConfig.instantSelect
+  const isInstantSelect = isSelection && (!!modeConfig.instantSelect || modeConfig.max === 1)
   const isSmallSelection = isSelection && !isInstantSelect && entities.length <= 15
   const isBrowse = isBrowseMode(modeConfig)
   const showSearchBar = isBrowse || entities.length > 15 || !!filterConfig
@@ -482,8 +482,9 @@ export function EntitySelectionView<T extends StandardEntity>({
         renderItem={({ item }) => {
           if (useInstantSelect) {
             const entity = item as T
+            const isEntitySelected = instantSelectIds!.has(entity.id)
             return (
-              <Pressable onPress={() => (modeConfig as SelectionModeConfig).onSelect(entity.id)}>
+              <Pressable onPress={() => handleEntityPress(entity.id)}>
                 {({ pressed }) => (
                   <XStack
                     height={PICKER_ROW_HEIGHT}
@@ -504,9 +505,34 @@ export function EntitySelectionView<T extends StandardEntity>({
                         </Text>
                       )}
                     </YStack>
-                    {instantSelectIds!.has(entity.id) && (
-                      <FontAwesome6 name="check" size={16} color={accentColor} />
-                    )}
+                    <Pressable
+                      onPress={() => (modeConfig as SelectionModeConfig).onSelect(entity.id)}
+                    >
+                      {({ pressed: btnPressed }) => (
+                        <XStack
+                          backgroundColor={isEntitySelected ? accentColor : 'transparent'}
+                          borderWidth={1}
+                          borderColor={accentColor}
+                          paddingHorizontal={12}
+                          paddingVertical={6}
+                          borderRadius={8}
+                          opacity={btnPressed ? 0.7 : 1}
+                          alignItems="center"
+                          gap={6}
+                        >
+                          {isEntitySelected && (
+                            <FontAwesome6 name="check" size={11} color="#FFFFFF" />
+                          )}
+                          <Text
+                            fontSize={13}
+                            fontWeight="600"
+                            color={isEntitySelected ? '#FFFFFF' : accentColor}
+                          >
+                            {isEntitySelected ? 'Seleccionado' : 'Seleccionar'}
+                          </Text>
+                        </XStack>
+                      )}
+                    </Pressable>
                   </XStack>
                 )}
               </Pressable>

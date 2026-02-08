@@ -55,7 +55,6 @@ export function ClassSelectorDetail({
 
   function handleSelect(entityId: string) {
     onSelectClass(entityId)
-    onClose()
   }
 
   return (
