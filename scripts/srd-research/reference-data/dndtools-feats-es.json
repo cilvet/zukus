@@ -1,0 +1,772 @@
+[
+  {
+    "spanishName": "Acrobático",
+    "englishSlug": "acrobatic",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 de bonificación en las tiradas de Saltar y Dar Volteretas"
+  },
+  {
+    "spanishName": "Ágil",
+    "englishSlug": "agile",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Bonificación de +2 en las comprobaciones de Balance y Escape Artist"
+  },
+  {
+    "spanishName": "Vigilancia",
+    "englishSlug": "alertness",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 de bonificación en las comprobaciones de escucha y puntuales"
+  },
+  {
+    "spanishName": "Afinidad Animal",
+    "englishSlug": "animal-affinity",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 de bonificación en las pruebas de Manejar Animal y Montar"
+  },
+  {
+    "spanishName": "Competencia De Armadura (ligera)",
+    "englishSlug": "armor-proficiency-light",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "No armor check penalty on attack rolls"
+  },
+  {
+    "spanishName": "Competencia De Armadura (media)",
+    "englishSlug": "armor-proficiency-medium",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Habilidad de armadura (ligera).",
+    "spanishBenefit": "No armor check penalty on attack rolls"
+  },
+  {
+    "spanishName": "Competencia De Armadura (pesada)",
+    "englishSlug": "armor-proficiency-heavy",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Habilidad de armadura (ligera), Habilidad de armadura (media).",
+    "spanishBenefit": "No hay penalización de comprobación de armadura en las tiradas de ataque"
+  },
+  {
+    "spanishName": "Atlético",
+    "englishSlug": "athletic",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Climb and Swim checks"
+  },
+  {
+    "spanishName": "Invocación De Aumentos",
+    "englishSlug": "augment-summoning",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Enfoque de hechizos (conjuración).",
+    "spanishBenefit": "Summoned creatures gain +4 Str, +4 Con"
+  },
+  {
+    "spanishName": "Lucha A Ciegas",
+    "englishSlug": "blind-fight",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Reroll miss chance for concealment"
+  },
+  {
+    "spanishName": "Lanzamiento De Combate",
+    "englishSlug": "combat-casting",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+4 bonus on Concentration checks for defensive casting"
+  },
+  {
+    "spanishName": "Pericia En Combate",
+    "englishSlug": "combat-expertise",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Int 13.",
+    "spanishBenefit": "Trade attack bonus for AC (max 5 points)"
+  },
+  {
+    "spanishName": "Desarme Mejorado",
+    "englishSlug": "improved-disarm",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Prerrequisitos: Int 13, Pericia en combate.",
+    "spanishBenefit": "+4 de bonificación en los intentos de desarme; Sin ataque de oportunidad"
+  },
+  {
+    "spanishName": "Finta Mejorada",
+    "englishSlug": "improved-feint",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Int 13, Pericia en Combate.",
+    "spanishBenefit": "Finta en combate como acción de movimiento"
+  },
+  {
+    "spanishName": "Viaje Mejorado",
+    "englishSlug": "improved-trip",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Int 13, Pericia en Combate.",
+    "spanishBenefit": "+4 bonus on trip attempts; no attack of opportunity"
+  },
+  {
+    "spanishName": "Ataque De Torbellino",
+    "englishSlug": "whirlwind-attack",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 13, Int 13, Pericia de combate, Esquivar, Movilidad, Ataque de resorte, bonificación de ataque base +4.",
+    "spanishBenefit": "One melee attack against each opponent within reach"
+  },
+  {
+    "spanishName": "Reflejos De Combate",
+    "englishSlug": "combat-reflexes",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Additional attacks of opportunity"
+  },
+  {
+    "spanishName": "Engañoso",
+    "englishSlug": "deceitful",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 de bonificación en cheques de Disfraz y Falsificación"
+  },
+  {
+    "spanishName": "Manos Hábiles",
+    "englishSlug": "deft-hands",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Sleight of Hand and Use Rope checks"
+  },
+  {
+    "spanishName": "Diligente",
+    "englishSlug": "diligent",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Appraise and Decipher Script checks"
+  },
+  {
+    "spanishName": "Regate",
+    "englishSlug": "dodge",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dic 13.",
+    "spanishBenefit": "+1 dodge bonus to AC against selected target"
+  },
+  {
+    "spanishName": "Movilidad",
+    "englishSlug": "mobility",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 13, Esquivar.",
+    "spanishBenefit": "+4 dodge bonus to AC against some attacks of opportunity"
+  },
+  {
+    "spanishName": "Ataque De Primavera",
+    "englishSlug": "spring-attack",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 13, Esquivar, Movilidad, bonificación de ataque base +4.",
+    "spanishBenefit": "Move before and after melee attack"
+  },
+  {
+    "spanishName": "Resistencia",
+    "englishSlug": "endurance",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+4 bonus on checks or saves to resist nonlethal damage"
+  },
+  {
+    "spanishName": "Empedernido",
+    "englishSlug": "diehard",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Resistencia.",
+    "spanishBenefit": "Permanezca consciente de 1 a 9 hp"
+  },
+  {
+    "spanishName": "Evite Los Materiales",
+    "englishSlug": "eschew-materials",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Cast spells without material components"
+  },
+  {
+    "spanishName": "Dominio De Armas Exóticas",
+    "englishSlug": "exotic-weapon-proficiency",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Bonificación de ataque base +1 (más Str 13 para espada bastarda o hacha de guerra enana).",
+    "spanishBenefit": "No penalty on attacks with specific exotic weapon"
+  },
+  {
+    "spanishName": "Giro Extra",
+    "englishSlug": "extra-turning",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Habilidad para dar la vuelta o reprender a las criaturas.",
+    "spanishBenefit": "Puede dar la vuelta o reprender 4 veces más al día"
+  },
+  {
+    "spanishName": "Gran Fortaleza",
+    "englishSlug": "great-fortitude",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Fortitude saves"
+  },
+  {
+    "spanishName": "Contrahechizo Mejorado",
+    "englishSlug": "improved-counterspell",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Counterspell with spell of same school"
+  },
+  {
+    "spanishName": "Crítica Mejorada",
+    "englishSlug": "improved-critical",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Hábil con el arma, bonificación de ataque base +8.",
+    "spanishBenefit": "Double threat range of weapon"
+  },
+  {
+    "spanishName": "Familiar Mejorado",
+    "englishSlug": "improved-familiar",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Capacidad para adquirir una nueva alineación familiar, compatible, de nivel suficientemente alto",
+    "spanishBenefit": "Obtener una mejor familiaridad"
+  },
+  {
+    "spanishName": "Iniciativa Mejorada",
+    "englishSlug": "improved-initiative",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+4 bonus on initiative checks"
+  },
+  {
+    "spanishName": "Torneado Mejorado",
+    "englishSlug": "improved-turning",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Habilidad para dar la vuelta o reprender a las criaturas.",
+    "spanishBenefit": "+1 level for turning checks"
+  },
+  {
+    "spanishName": "Ataque Desarmado Mejorado",
+    "englishSlug": "improved-unarmed-strike",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Considered armed even when unarmed"
+  },
+  {
+    "spanishName": "Garfio Mejorado",
+    "englishSlug": "improved-grapple",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 13, Golpe desarmado mejorado.",
+    "spanishBenefit": "+4 bonus on grapple checks; no attack of opportunity"
+  },
+  {
+    "spanishName": "Flechas De Desvío",
+    "englishSlug": "deflect-arrows",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 13, Golpe desarmado mejorado.",
+    "spanishBenefit": "Desvío un ataque a distancia por ronda"
+  },
+  {
+    "spanishName": "Arrebatar Flechas",
+    "englishSlug": "snatch-arrows",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 15, Flechas de desvío, Golpe desarmado mejorado.",
+    "spanishBenefit": "Catch a deflected ranged attack"
+  },
+  {
+    "spanishName": "Impresionante Fiebre",
+    "englishSlug": "stunning-fist",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 13, Wis 13, Golpe desarmado mejorado, bonificación de ataque base +8.",
+    "spanishBenefit": "Stun opponent with unarmed strike"
+  },
+  {
+    "spanishName": "Investigador",
+    "englishSlug": "investigator",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Gather Information and Search checks"
+  },
+  {
+    "spanishName": "Voluntad De Hierro",
+    "englishSlug": "iron-will",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Will saves"
+  },
+  {
+    "spanishName": "Liderazgo",
+    "englishSlug": "leadership",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Nivel de personaje 6º",
+    "spanishBenefit": "Atraer cohorte y seguidores"
+  },
+  {
+    "spanishName": "Reflejos De Relámpago",
+    "englishSlug": "lightning-reflexes",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Reflex saves"
+  },
+  {
+    "spanishName": "Aptitud Mágica",
+    "englishSlug": "magical-aptitude",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Spellcraft and Use Magic Device checks"
+  },
+  {
+    "spanishName": "Dominio De Armas Marciales",
+    "englishSlug": "martial-weapon-proficiency",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "No hay penalización en los ataques con un arma marcial específica."
+  },
+  {
+    "spanishName": "Combate Montado",
+    "englishSlug": "mounted-combat",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Monta 1 rango.",
+    "spanishBenefit": "Anula los golpes en la montura con la comprobación de conducción"
+  },
+  {
+    "spanishName": "Tiro Con Arco Montado",
+    "englishSlug": "mounted-archery",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Monta 1 rango, Combate montado.",
+    "spanishBenefit": "Half penalty for ranged attacks while mounted"
+  },
+  {
+    "spanishName": "Ataque De Paso",
+    "englishSlug": "ride-by-attack",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Montar 1 rango, Montado",
+    "spanishBenefit": "Move before and after a mounted charge"
+  },
+  {
+    "spanishName": "Carga Enérgica",
+    "englishSlug": "spirited-charge",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Cabalga 1 rango, Combate montado, Ataque de cabalgadura.",
+    "spanishBenefit": "Double damage with mounted charge"
+  },
+  {
+    "spanishName": "Pisotear",
+    "englishSlug": "trample",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Monta 1 rango, Combate montado.",
+    "spanishBenefit": "Target cannot avoid mounted overrun"
+  },
+  {
+    "spanishName": "Hechizo Natural",
+    "englishSlug": "natural-spell",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Wis 13, habilidad de forma salvaje.",
+    "spanishBenefit": "Cast spells while in wild shape"
+  },
+  {
+    "spanishName": "Negociador",
+    "englishSlug": "negotiator",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Diplomacy and Sense Motive checks"
+  },
+  {
+    "spanishName": "Dedos Ágiles",
+    "englishSlug": "nimble-fingers",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Bonificación de +2 en las comprobaciones de Desactivar dispositivo y Abrir bloqueo"
+  },
+  {
+    "spanishName": "Persuasivo",
+    "englishSlug": "persuasive",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Bluff checks and Intimidate checks"
+  },
+  {
+    "spanishName": "Disparo A Quemarropa",
+    "englishSlug": "point-blank-shot",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+1 bonificación al ataque a distancia y al daño en un radio de 30 pies."
+  },
+  {
+    "spanishName": "Tiro Lejano",
+    "englishSlug": "far-shot",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Disparo a quemarropa.",
+    "spanishBenefit": "Aumenta el incremento de alcance en un 50% o 100%"
+  },
+  {
+    "spanishName": "Disparo Preciso",
+    "englishSlug": "precise-shot",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Disparo a quemarropa.",
+    "spanishBenefit": "No 4 penalty for shooting into melee"
+  },
+  {
+    "spanishName": "Disparo Rápido",
+    "englishSlug": "rapid-shot",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 13, Disparo a quemarropa.",
+    "spanishBenefit": "Un ataque a distancia adicional en cada ronda"
+  },
+  {
+    "spanishName": "Muchos Tiros",
+    "englishSlug": "manyshot",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 17, Disparo a quemarropa, Disparo rápido, bonificación de ataque base +6",
+    "spanishBenefit": "Shoot two or more arrows simultaneously"
+  },
+  {
+    "spanishName": "Disparado A La Fuga",
+    "englishSlug": "shot-on-the-run",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 13, Esquivar, Movilidad, Disparo a quemarropa, bonificación de ataque base +4.",
+    "spanishBenefit": "Move before and after ranged attack"
+  },
+  {
+    "spanishName": "Disparo Preciso Mejorado",
+    "englishSlug": "improved-precise-shot",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 19, Disparo a quemarropa, Disparo preciso, bonificación de ataque base +11.",
+    "spanishBenefit": "Ignore less than total cover/concealment on ranged attack"
+  },
+  {
+    "spanishName": "Ataque De Poder",
+    "englishSlug": "power-attack",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Str 13.",
+    "spanishBenefit": "Trade attack bonus for damage (up to base attack bonus)"
+  },
+  {
+    "spanishName": "Hender",
+    "englishSlug": "cleave",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Str 13, Ataque de poder.",
+    "spanishBenefit": "Ataque cuerpo a cuerpo adicional después de soltar al objetivo"
+  },
+  {
+    "spanishName": "Great Cleave",
+    "englishSlug": "great-cleave",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Str 13, Hendidura, Ataque de poder, bonificación de ataque base +4.",
+    "spanishBenefit": "No hay límite para cortar ataques en cada ronda"
+  },
+  {
+    "spanishName": "Carrera Alcista Mejorada",
+    "englishSlug": "improved-bull-rush",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Str 13, Ataque de poder.",
+    "spanishBenefit": "+4 bonus on bull rush attempts; no attack of opportunity"
+  },
+  {
+    "spanishName": "Desbordamiento Mejorado",
+    "englishSlug": "improved-overrun",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Str 13, Ataque de poder.",
+    "spanishBenefit": "+4 bonus on overrun attempts; no attack of opportunity"
+  },
+  {
+    "spanishName": "Hendidura Mejorada",
+    "englishSlug": "improved-sunder",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Str 13, Ataque de poder.",
+    "spanishBenefit": "+4 bonus on sunder attempts; no attack of opportunity"
+  },
+  {
+    "spanishName": "Sorteo Rápido",
+    "englishSlug": "quick-draw",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Bonificación de ataque base +1.",
+    "spanishBenefit": "Draw weapon as free weapon"
+  },
+  {
+    "spanishName": "Recarga Rápida",
+    "englishSlug": "rapid-reload",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Reload crossbow more quickly"
+  },
+  {
+    "spanishName": "Correr",
+    "englishSlug": "run",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Run 5 times normal speed, +4 bonus on Jump checks made after a running start"
+  },
+  {
+    "spanishName": "Autosuficiente",
+    "englishSlug": "self-sufficient",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on Heal and Survival checks"
+  },
+  {
+    "spanishName": "Competencia En Escudos",
+    "englishSlug": "shield-proficiency",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "No armor check penalty on attack rolls"
+  },
+  {
+    "spanishName": "Golpe De Escudo Mejorado",
+    "englishSlug": "improved-shield-bash",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dominio del escudo.",
+    "spanishBenefit": "Conserva la bonificación de escudo a la CA al golpear el escudo"
+  },
+  {
+    "spanishName": "Dominio Del Escudo De La Torre",
+    "englishSlug": "tower-shield-proficiency",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dominio del escudo.",
+    "spanishBenefit": "No armor check penalty on attack rolls"
+  },
+  {
+    "spanishName": "Dominio Simple De Armas",
+    "englishSlug": "simple-weapon-proficiency",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "No 4 penalty on attack rolls with simple weapons"
+  },
+  {
+    "spanishName": "Enfoque En Las Habilidades",
+    "englishSlug": "skill-focus",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Elige una habilidad.",
+    "spanishBenefit": "+3 bonus on checks with selected skill"
+  },
+  {
+    "spanishName": "Enfoque De Hechizos",
+    "englishSlug": "spell-focus",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Escoge una escuela de magia.",
+    "spanishBenefit": "+1 bonificación al guardar CD contra una escuela de magia específica"
+  },
+  {
+    "spanishName": "Greater Spell Focus",
+    "englishSlug": "greater-spell-focus",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Elige una escuela de magia a la que ya hayas aplicado la proeza Enfoque de hechizos.",
+    "spanishBenefit": "+1 bonus on save DCs against specific school of magic"
+  },
+  {
+    "spanishName": "Maestría De Hechizos",
+    "englishSlug": "spell-mastery",
+    "type": "ESPECIAL",
+    "spanishPrerequisites": "Mago nivel 1º.",
+    "spanishBenefit": "Puede preparar algunos hechizos sin libro de hechizos"
+  },
+  {
+    "spanishName": "Penetración De Hechizos",
+    "englishSlug": "spell-penetration",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on caster level checks to defeat spell resistance"
+  },
+  {
+    "spanishName": "Greater Spell Penetration",
+    "englishSlug": "greater-spell-penetration",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Penetración de hechizos.",
+    "spanishBenefit": "+4 to caster level checks to defeat spell resistance"
+  },
+  {
+    "spanishName": "Furtivo",
+    "englishSlug": "stealthy",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 de bonificación en las comprobaciones de Escondite y Muévete en silencio"
+  },
+  {
+    "spanishName": "Dureza",
+    "englishSlug": "toughness",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+3 hit points"
+  },
+  {
+    "spanishName": "Pista",
+    "englishSlug": "track",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Usa la habilidad de supervivencia para rastrear"
+  },
+  {
+    "spanishName": "Lucha Con Dos Armas",
+    "englishSlug": "two-weapon-fighting",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dic 15.",
+    "spanishBenefit": "Reduce en 2 las penalizaciones por lucha con dos armas."
+  },
+  {
+    "spanishName": "Defensa De Dos Armas",
+    "englishSlug": "two-weapon-defense",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Dex 15, lucha con dos armas.",
+    "spanishBenefit": "El arma de mano izquierda otorga +1 de bonificación de escudo a la CA"
+  },
+  {
+    "spanishName": "Combate Con Dos Armas Mejorado",
+    "englishSlug": "improved-two-weapon-fighting",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 17, Lucha con dos armas, bonificación de ataque base +6.",
+    "spanishBenefit": "Obtienes un segundo ataque con la mano izquierda"
+  },
+  {
+    "spanishName": "Greater Two-weapon Fighting",
+    "englishSlug": "greater-two-weapon-fighting",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Dex 19, Lucha con dos armas mejorada, Lucha con dos armas, bonificación de ataque base +11.",
+    "spanishBenefit": "Gain third off-hand attack"
+  },
+  {
+    "spanishName": "Aletas De Armas",
+    "englishSlug": "weapon-finesse",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Bonificación de ataque base +1.",
+    "spanishBenefit": "Use Dex modifier instead of Str modifier on attack rolls with light melee weapons"
+  },
+  {
+    "spanishName": "Enfoque De Armas",
+    "englishSlug": "weapon-focus",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Habilidad con el arma seleccionada, bonificación de ataque base +1.",
+    "spanishBenefit": "+1 bonus on attack rolls with selected weapon"
+  },
+  {
+    "spanishName": "Especialización De Armas",
+    "englishSlug": "weapon-specialization",
+    "type": "GENERAL",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "+2 bonus on damage rolls with selected weapon"
+  },
+  {
+    "spanishName": "Greater Weapon Focus",
+    "englishSlug": "greater-weapon-focus",
+    "type": "GENERAL",
+    "spanishPrerequisites": "Competencia con el arma seleccionada, Enfoque de arma con el arma seleccionada, nivel de luchador 8º.",
+    "spanishBenefit": "+2 bonus on attack rolls with selected weapon"
+  },
+  {
+    "spanishName": "Especialización De Armas, Mayor",
+    "englishSlug": "greater-weapon-specialization",
+    "type": "GENERALIDADES",
+    "spanishPrerequisites": "Competencia con el arma seleccionada, Mayor enfoque de arma con el arma seleccionada, Enfoque de arma con el arma seleccionada, Especialización de arma con el arma seleccionada, nivel de luchador 12.",
+    "spanishBenefit": "+4 bonus on damage rolls with selected weapon"
+  },
+  {
+    "spanishName": "Poción De Preparación",
+    "englishSlug": "brew-potion",
+    "type": "ARTÍCULO\r\nCREACIÓN",
+    "spanishPrerequisites": "Nivel de lanzador 3º.",
+    "spanishBenefit": "Create magic potions"
+  },
+  {
+    "spanishName": "Fabrica Armas Y Armaduras Mágicas",
+    "englishSlug": "craft-magic-arms-and-armor",
+    "type": "OBJETO\r\nCREACIÓN",
+    "spanishPrerequisites": "Lanzador de nivel 5º.",
+    "spanishBenefit": "Create magic weapons, armor, and shields"
+  },
+  {
+    "spanishName": "Varilla Artesanal",
+    "englishSlug": "craft-rod",
+    "type": "ARTÍCULO\r\nCREACIÓN",
+    "spanishPrerequisites": "Lanzador de nivel 9º.",
+    "spanishBenefit": "Crea varas mágicas"
+  },
+  {
+    "spanishName": "Báculo Artesanal",
+    "englishSlug": "craft-staff",
+    "type": "ARTÍCULO\r\nCREACIÓN",
+    "spanishPrerequisites": "Lanzador nivel 12º.",
+    "spanishBenefit": "Create magic staffs"
+  },
+  {
+    "spanishName": "Varita Mágica",
+    "englishSlug": "craft-wand",
+    "type": "ARTÍCULO\r\nCREACIÓN",
+    "spanishPrerequisites": "Lanzador de nivel 5º.",
+    "spanishBenefit": "Create magic wands"
+  },
+  {
+    "spanishName": "Fabrica Objetos Maravillosos",
+    "englishSlug": "craft-wondrous-item",
+    "type": "OBJETO\r\nCREACIÓN",
+    "spanishPrerequisites": "Nivel de lanzador 3º.",
+    "spanishBenefit": "Crea objetos mágicos maravillosos"
+  },
+  {
+    "spanishName": "Anillo De Forja",
+    "englishSlug": "forge-ring",
+    "type": "ARTÍCULO\r\nCREACIÓN",
+    "spanishPrerequisites": "Lanzador nivel 12º.",
+    "spanishBenefit": "Create magic rings"
+  },
+  {
+    "spanishName": "Pergamino De Escriba",
+    "englishSlug": "scribe-scroll",
+    "type": "CREACIÓN DE OBJETOS",
+    "spanishPrerequisites": "Lanzador nivel 1º.",
+    "spanishBenefit": "Create magic scrolls"
+  },
+  {
+    "spanishName": "Hechizo De Potenciación",
+    "englishSlug": "empower-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Aumenta los efectos numéricos variables de los hechizos en un 50%"
+  },
+  {
+    "spanishName": "Agrandar Hechizo",
+    "englishSlug": "enlarge-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Alcance de hechizos dobles"
+  },
+  {
+    "spanishName": "Extender Hechizo",
+    "englishSlug": "extend-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Duración doble de los hechizos"
+  },
+  {
+    "spanishName": "Hechizo Intensificado",
+    "englishSlug": "heighten-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Cast spells as higher level"
+  },
+  {
+    "spanishName": "Maximizar Hechizo",
+    "englishSlug": "maximize-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Maximiza los efectos numéricos y variables de los hechizos"
+  },
+  {
+    "spanishName": "Hechizo Acelerado",
+    "englishSlug": "quicken-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Lanzar hechizos como acción libre"
+  },
+  {
+    "spanishName": "Hechizo Silencioso",
+    "englishSlug": "silent-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Cast spells without verbal components"
+  },
+  {
+    "spanishName": "Hechizo Quieto",
+    "englishSlug": "still-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Cast spells without somatic components"
+  },
+  {
+    "spanishName": "Hechizo Ensanchado",
+    "englishSlug": "widen-spell",
+    "type": "METAMAGIA",
+    "spanishPrerequisites": "",
+    "spanishBenefit": "Double spells area"
+  }
+]

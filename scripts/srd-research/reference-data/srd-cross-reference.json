@@ -1,0 +1,2447 @@
+{
+  "metadata": {
+    "generatedDate": "2026-02-08",
+    "description": "Cross-reference of D&D 3.5 SRD content lists vs d35e-raw Foundry VTT data"
+  },
+  "summary": {
+    "totalSrdEntities": 2233,
+    "totalD35eEntities": 2854,
+    "totalMatched": 2144,
+    "totalMissing": 89,
+    "totalExtra": 764,
+    "coveragePercent": "96.0"
+  },
+  "results": [
+    {
+      "entityType": "spells",
+      "srdCount": 674,
+      "d35eCount": 673,
+      "matchedCount": 673,
+      "missingFromD35e": [
+        "Blacklight"
+      ],
+      "extraInD35e": [],
+      "nameVariations": [
+        {
+          "srd": "Armor of Darkness",
+          "d35e": "Armor Of Darkness"
+        },
+        {
+          "srd": "Bear’s Endurance",
+          "d35e": "Bear's Endurance"
+        },
+        {
+          "srd": "Bear’s Endurance, Mass",
+          "d35e": "Bear's Endurance, Mass"
+        },
+        {
+          "srd": "Bolt of Glory",
+          "d35e": "Bolt Of Glory"
+        },
+        {
+          "srd": "Bull’s Strength",
+          "d35e": "Bull's Strength"
+        },
+        {
+          "srd": "Bull’s Strength, Mass",
+          "d35e": "Bull's Strength, Mass"
+        },
+        {
+          "srd": "Cat’s Grace",
+          "d35e": "Cat's Grace"
+        },
+        {
+          "srd": "Cat’s Grace, Mass",
+          "d35e": "Cat's Grace, Mass"
+        },
+        {
+          "srd": "Crown of Glory",
+          "d35e": "Crown Of Glory"
+        },
+        {
+          "srd": "Eagle’s Splendor",
+          "d35e": "Eagle's Splendor"
+        },
+        {
+          "srd": "Eagle’s Splendor, Mass",
+          "d35e": "Eagle's Splendor, Mass"
+        },
+        {
+          "srd": "Fox’s Cunning",
+          "d35e": "Fox's Cunning"
+        },
+        {
+          "srd": "Fox’s Cunning, Mass",
+          "d35e": "Fox's Cunning, Mass"
+        },
+        {
+          "srd": "Heroes’ Feast",
+          "d35e": "Heroes' Feast"
+        },
+        {
+          "srd": "Hide From Animals",
+          "d35e": "Hide from Animals"
+        },
+        {
+          "srd": "Hide From Undead",
+          "d35e": "Hide from Undead"
+        },
+        {
+          "srd": "Mage’s Disjunction",
+          "d35e": "Mage's Disjunction"
+        },
+        {
+          "srd": "Mage’s Faithful Hound",
+          "d35e": "Mage's Faithful Hound"
+        },
+        {
+          "srd": "Mage’s Lucubration",
+          "d35e": "Mage's Lucubration"
+        },
+        {
+          "srd": "Mage’s Magnificent Mansion",
+          "d35e": "Mage's Magnificent Mansion"
+        },
+        {
+          "srd": "Mage’s Private Sanctum",
+          "d35e": "Mage's Private Sanctum"
+        },
+        {
+          "srd": "Mage’s Sword",
+          "d35e": "Mage's Sword"
+        },
+        {
+          "srd": "Magic Circle Against Chaos",
+          "d35e": "Magic Circle against Chaos"
+        },
+        {
+          "srd": "Magic Circle Against Evil",
+          "d35e": "Magic Circle against Evil"
+        },
+        {
+          "srd": "Magic Circle Against Good",
+          "d35e": "Magic Circle against Good"
+        },
+        {
+          "srd": "Magic Circle Against Law",
+          "d35e": "Magic Circle against Law"
+        },
+        {
+          "srd": "Meld Into Stone",
+          "d35e": "Meld into Stone"
+        },
+        {
+          "srd": "Owl’s Wisdom",
+          "d35e": "Owl's Wisdom"
+        },
+        {
+          "srd": "Owl’s Wisdom, Mass",
+          "d35e": "Owl's Wisdom, Mass"
+        },
+        {
+          "srd": "Pass Without Trace",
+          "d35e": "Pass without Trace"
+        },
+        {
+          "srd": "Protection From Arrows",
+          "d35e": "Protection from Arrows"
+        },
+        {
+          "srd": "Protection From Chaos",
+          "d35e": "Protection from Chaos"
+        },
+        {
+          "srd": "Protection From Energy",
+          "d35e": "Protection from Energy"
+        },
+        {
+          "srd": "Protection From Evil",
+          "d35e": "Protection from Evil"
+        },
+        {
+          "srd": "Protection From Good",
+          "d35e": "Protection from Good"
+        },
+        {
+          "srd": "Protection From Law",
+          "d35e": "Protection from Law"
+        },
+        {
+          "srd": "Protection From Spells",
+          "d35e": "Protection from Spells"
+        },
+        {
+          "srd": "Touch of Madness",
+          "d35e": "Touch Of Madness"
+        }
+      ]
+    },
+    {
+      "entityType": "feats",
+      "srdCount": 405,
+      "d35eCount": 388,
+      "matchedCount": 404,
+      "missingFromD35e": [
+        "Trap Sense"
+      ],
+      "extraInD35e": [],
+      "nameVariations": [
+        {
+          "srd": "Epic Skill Focus",
+          "d35e": "Epic Skill Focus (Not Set)"
+        },
+        {
+          "srd": "Epic Spell Focus",
+          "d35e": "Epic Spell Focus (No Spell School Selected)"
+        },
+        {
+          "srd": "Epic Weapon Focus",
+          "d35e": "Epic Weapon Focus (No Weapon Selected)"
+        },
+        {
+          "srd": "Greater Spell Focus",
+          "d35e": "Greater Spell Focus (No Spell School Selected)"
+        },
+        {
+          "srd": "Greater Weapon Focus",
+          "d35e": "Greater Weapon Focus (No Weapon Selected)"
+        },
+        {
+          "srd": "Greater Weapon Specialization",
+          "d35e": "Greater Weapon Specialization (No Weapon Selected)"
+        },
+        {
+          "srd": "Improved Critical",
+          "d35e": "Improved Critical (No Weapon Selected)"
+        },
+        {
+          "srd": "Improved Natural Attack",
+          "d35e": "Improved Natural Attack (No Weapon Set)"
+        },
+        {
+          "srd": "Martial Weapon Proficiency",
+          "d35e": "Martial Weapon Proficiency (All)"
+        },
+        {
+          "srd": "Rapid Reload",
+          "d35e": "Rapid Reload (None)"
+        },
+        {
+          "srd": "Ride-by Attack",
+          "d35e": "Ride-By Attack"
+        },
+        {
+          "srd": "Skill Focus",
+          "d35e": "Skill Focus (Not Set)"
+        },
+        {
+          "srd": "Spell Focus",
+          "d35e": "Spell Focus (No Spell School Selected)"
+        },
+        {
+          "srd": "Spell Stowaway",
+          "d35e": "Spell Stowaway (No Spell Set)"
+        },
+        {
+          "srd": "Tenacious Magic",
+          "d35e": "Tenacious Magic (No Spell Set)"
+        },
+        {
+          "srd": "Weapon Focus",
+          "d35e": "Weapon Focus (No Weapon Selected)"
+        },
+        {
+          "srd": "Weapon Specialization",
+          "d35e": "Weapon Specialization (No Weapon Selected)"
+        }
+      ]
+    },
+    {
+      "entityType": "monsters",
+      "srdCount": 409,
+      "d35eCount": 645,
+      "matchedCount": 358,
+      "missingFromD35e": [
+        "Aasimar",
+        "Aquatic Elf",
+        "Celestial Charger",
+        "Celestial Creature",
+        "Cryohydra",
+        "Deep Dwarf",
+        "Deep Halfling",
+        "Demon",
+        "Dinosaur",
+        "Dragon (True)",
+        "Drow",
+        "Duergar",
+        "Dwarf",
+        "Elf",
+        "Fiendish Creature",
+        "Forest Gnome",
+        "Genie",
+        "Ghost",
+        "Gnome",
+        "Goblin",
+        "Gray Elf",
+        "Half-Celestial",
+        "Half-Dragon",
+        "Half-Elf",
+        "Half-Fiend",
+        "Half-Orc",
+        "Halfling",
+        "Hell Hound",
+        "Hobgoblin",
+        "Inevitable",
+        "Kapoacinth",
+        "Kolyarut",
+        "Lemure",
+        "Lycanthrope",
+        "Malenti",
+        "Merfolk",
+        "Merrow",
+        "Monster Centipede",
+        "Mountain Dwarf",
+        "Nightshade",
+        "Noble Djinn",
+        "Planetouched",
+        "Pyrohydra",
+        "Scorpionfolk",
+        "Scrag",
+        "Sprite",
+        "Svirfneblin",
+        "Tallfellow Halfling",
+        "Tiefling",
+        "Wild Elf",
+        "Wood Elf"
+      ],
+      "extraInD35e": [
+        "Aboleth, Psionic",
+        "Adamantine Golem",
+        "Adult Arrowhawk",
+        "Adult Tojanida",
+        "Advanced Megaraptor Skeleton",
+        "Air Elemental, Elder",
+        "Air Elemental, Huge",
+        "Air Elemental, Large",
+        "Air Elemental, Medium",
+        "Air Elemental, Primal",
+        "Air Elemental, Small",
+        "Anaxim",
+        "Animated Object, Colossal",
+        "Animated Object, Gargantuan",
+        "Animated Object, Huge",
+        "Animated Object, Large",
+        "Animated Object, Small",
+        "Animated Object, Tiny",
+        "Atropal",
+        "Average Salamander",
+        "Average Xorn",
+        "Baleen Whale",
+        "Behemoth Eagle",
+        "Behemoth Gorilla",
+        "Black Dragon, Adult",
+        "Black Dragon, Ancient",
+        "Black Dragon, Great wyrm",
+        "Black Dragon, Juvenile",
+        "Black Dragon, Old",
+        "Black Dragon, Very old",
+        "Black Dragon, Very young",
+        "Black Dragon, Wyrm",
+        "Black Dragon, Wyrmling",
+        "Black Dragon, Young",
+        "Black Dragon, Young adult",
+        "Blue Dragon, Adult",
+        "Blue Dragon, Ancient",
+        "Blue Dragon, Great wyrm",
+        "Blue Dragon, Juvenile",
+        "Blue Dragon, Mature adult",
+        "Blue Dragon, Old",
+        "Blue Dragon, Very old",
+        "Blue Dragon, Very young",
+        "Blue Dragon, Wyrm",
+        "Blue Dragon, Young",
+        "Blue Dragon, Young adult",
+        "Brachyurus",
+        "Brain Mole",
+        "Brass Dragon, Adult",
+        "Brass Dragon, Ancient",
+        "Brass Dragon, Great wyrm",
+        "Brass Dragon, Juvenile",
+        "Brass Dragon, Mature adult",
+        "Brass Dragon, Old",
+        "Brass Dragon, Very old",
+        "Brass Dragon, Very young",
+        "Brass Dragon, Wyrm",
+        "Brass Dragon, Young",
+        "Brass Dragon, Young adult",
+        "Bronze Dragon, Adult",
+        "Bronze Dragon, Ancient",
+        "Bronze Dragon, Great wyrm",
+        "Bronze Dragon, Juvenile",
+        "Bronze Dragon, Mature adult",
+        "Bronze Dragon, Old",
+        "Bronze Dragon, Very old",
+        "Bronze Dragon, Very young",
+        "Bronze Dragon, Wyrm",
+        "Bronze Dragon, Wyrmling",
+        "Bronze Dragon, Young",
+        "Bugbear Zombie",
+        "Caller in Darkness",
+        "Cerebrilith",
+        "Chichimec",
+        "Cloud Giant Skeleton",
+        "Constrictor Snake",
+        "Constrictor Snake, Giant",
+        "Copper Dragon, Adult",
+        "Copper Dragon, Ancient",
+        "Copper Dragon, Great wyrm",
+        "Copper Dragon, Juvenile",
+        "Copper Dragon, Mature adult",
+        "Copper Dragon, Very old",
+        "Copper Dragon, Very young",
+        "Copper Dragon, Wyrm",
+        "Copper Dragon, Wyrmling",
+        "Copper Dragon, Young",
+        "Copper Dragon, Young adult",
+        "Couatl, Psionic",
+        "Crysmal",
+        "Devastation Beetle",
+        "Devastation Centipede",
+        "Devastation Scorpion",
+        "Devastation Spider",
+        "Dread Wraith",
+        "Dream Larva",
+        "Earth Elemental, Greater",
+        "Earth Elemental, Huge",
+        "Earth Elemental, Large",
+        "Earth Elemental, Medium",
+        "Earth Elemental, Primal",
+        "Earth Elemental, Small",
+        "Eight-Headed Hydra",
+        "Eleven-Headed Hydra",
+        "Ettin Skeleton",
+        "Fire Elemental, Elder",
+        "Fire Elemental, Greater",
+        "Fire Elemental, Huge",
+        "Fire Elemental, Large",
+        "Fire Elemental, Medium",
+        "Fire Elemental, Small",
+        "Five-Headed Hydra",
+        "Flamebrother Salamander",
+        "Flesh Colossus",
+        "Folugub",
+        "Force Dragon, Adult",
+        "Force Dragon, Ancient",
+        "Force Dragon, Great wyrm",
+        "Force Dragon, Juvenile",
+        "Force Dragon, Mature adult",
+        "Force Dragon, Old",
+        "Force Dragon, Very old",
+        "Force Dragon, Very young",
+        "Force Dragon, Wyrm",
+        "Force Dragon, Wyrmling",
+        "Force Dragon, Young",
+        "Force Dragon, Young adult",
+        "Genius Loci",
+        "Giant Ant, Queen",
+        "Giant Ant, Soldier",
+        "Gibbering Orb",
+        "Gloom",
+        "Gold Dragon, Adult",
+        "Gold Dragon, Ancient",
+        "Gold Dragon, Great wyrm",
+        "Gold Dragon, Juvenile",
+        "Gold Dragon, Mature adult",
+        "Gold Dragon, Old",
+        "Gold Dragon, Very old",
+        "Gold Dragon, Very young",
+        "Gold Dragon, Wyrm",
+        "Gold Dragon, Wyrmling",
+        "Gold Dragon, Young",
+        "Gray Glutton",
+        "Gray Render Zombie",
+        "Green Dragon, Adult",
+        "Green Dragon, Ancient",
+        "Green Dragon, Great wyrm",
+        "Green Dragon, Juvenile",
+        "Green Dragon, Mature adult",
+        "Green Dragon, Old",
+        "Green Dragon, Very old",
+        "Green Dragon, Very young",
+        "Green Dragon, Wyrm",
+        "Green Dragon, Young",
+        "Green Dragon, Young adult",
+        "Ha-Naga",
+        "Hagunemnon",
+        "Hecatoncheires",
+        "Hellhound",
+        "Hill Giant Dire Wereboar Dire Boar Form",
+        "Hill Giant Dire Wereboar Giant Form",
+        "Hill Giant Dire Wereboar Hybrid Boar Form",
+        "Hoary Hunter",
+        "Hoary Steed",
+        "Human Warrior Skeleton",
+        "Hunefer",
+        "Infernal",
+        "Intellect Devourer",
+        "Iron Colossus",
+        "Juvenile Arrowhawk",
+        "Juvenile Tojanida",
+        "Lavawight",
+        "Legendary Bear",
+        "Legendary Tiger",
+        "Leshay",
+        "Living Vault",
+        "Mercane",
+        "Minor Xorn",
+        "Minotaur Zombie",
+        "Mithral Golem",
+        "Monstrous Centipede, Colossal",
+        "Monstrous Centipede, Gargantuan",
+        "Monstrous Centipede, Huge",
+        "Monstrous Centipede, Large",
+        "Monstrous Centipede, Medium",
+        "Monstrous Centipede, Small",
+        "Monstrous Centipede, Tiny",
+        "Monstrous Scorpion, Colossal",
+        "Monstrous Scorpion, Gargantuan",
+        "Monstrous Scorpion, Large",
+        "Monstrous Scorpion, Medium",
+        "Monstrous Scorpion, Small",
+        "Monstrous Scorpion, Tiny",
+        "Monstrous Spider, Colossal",
+        "Monstrous Spider, Gargantuan",
+        "Monstrous Spider, Huge",
+        "Monstrous Spider, Large",
+        "Monstrous Spider, Medium",
+        "Monstrous Spider, Small",
+        "Mu Spore",
+        "Neh-Thalggu",
+        "Neothelid",
+        "Nine-Headed Hydra",
+        "Ogre Zombie",
+        "Owlbear Skeleton",
+        "Phaethon",
+        "Phane",
+        "Phthisic",
+        "Prismasaurus",
+        "Prismatic Dragon, Adult",
+        "Prismatic Dragon, Ancient",
+        "Prismatic Dragon, Great wyrm",
+        "Prismatic Dragon, Juvenile",
+        "Prismatic Dragon, Mature adult",
+        "Prismatic Dragon, Old",
+        "Prismatic Dragon, Very old",
+        "Prismatic Dragon, Very young",
+        "Prismatic Dragon, Wyrm",
+        "Prismatic Dragon, Wyrmling",
+        "Prismatic Dragon, Young",
+        "Prismatic Dragon, Young adult",
+        "Pseudonatural Troll",
+        "Psicrystal",
+        "Psion-Killer",
+        "Puppeteer",
+        "Puppeteer, Flesh Harrower",
+        "Red Dragon, Adult",
+        "Red Dragon, Ancient",
+        "Red Dragon, Great wyrm",
+        "Red Dragon, Juvenile",
+        "Red Dragon, Mature adult",
+        "Red Dragon, Very old",
+        "Red Dragon, Very young",
+        "Red Dragon, Wyrm",
+        "Red Dragon, Wyrmling",
+        "Red Dragon, Young",
+        "Red Dragon, Young adult",
+        "Ruin Swarm",
+        "Shadow of the Void",
+        "Shape of Fire",
+        "Shark, Large",
+        "Shark, Medium",
+        "Silver Dragon, Adult",
+        "Silver Dragon, Ancient",
+        "Silver Dragon, Great wyrm",
+        "Silver Dragon, Juvenile",
+        "Silver Dragon, Mature adult",
+        "Silver Dragon, Old",
+        "Silver Dragon, Very old",
+        "Silver Dragon, Very young",
+        "Silver Dragon, Wyrm",
+        "Silver Dragon, Wyrmling",
+        "Silver Dragon, Young",
+        "Silver Dragon, Young adult",
+        "Sirrush",
+        "Six-Headed Hydra",
+        "Snake, Huge Viper",
+        "Snake, Large Viper",
+        "Snake, Medium Viper",
+        "Snake, Small Viper",
+        "Stone Colossus",
+        "Tayellah",
+        "Temporal Filcher",
+        "Ten-Headed Hydra",
+        "Thorciasid",
+        "Thought Eater",
+        "Thought Slayer",
+        "Three-Headed Sirrush",
+        "Titan, Elder",
+        "Treant, Elder",
+        "Troglodyte Zombie",
+        "Troll Skeleton",
+        "Twelve-Headed Hydra",
+        "Udoroot",
+        "Umbral Blot",
+        "Unbodied",
+        "Uvuudaum",
+        "Vermiurge",
+        "Warhorse, Light",
+        "Water Elemental, Elder",
+        "Water Elemental, Greater",
+        "Water Elemental, Huge",
+        "Water Elemental, Large",
+        "Water Elemental, Primal",
+        "Water Elemental, Small",
+        "Werebear, Human Form",
+        "Werebear, Hybrid Form",
+        "Wereboar, Human Form",
+        "Wereboar, Hybrid Form",
+        "Wererat, Human Form",
+        "Wererat, Hybrid Form",
+        "Weretiger, Human Form",
+        "Weretiger, Tiger Form",
+        "Werewolf Lord, Dire Wolf Form",
+        "Werewolf Lord, Human Form",
+        "Werewolf Lord, Hybrid Form",
+        "Werewolf, Human Form",
+        "Werewolf, Hybrid Form",
+        "Werewolf, Wolf Form",
+        "White Dragon, Adult",
+        "White Dragon, Ancient",
+        "White Dragon, Great wyrm",
+        "White Dragon, Juvenile",
+        "White Dragon, Mature adult",
+        "White Dragon, Old",
+        "White Dragon, Very old",
+        "White Dragon, Wyrm",
+        "White Dragon, Wyrmling",
+        "White Dragon, Young",
+        "White Dragon, Young adult",
+        "Winterwight",
+        "Wolf Skeleton",
+        "Worm that Walks",
+        "Wyvern Zombie",
+        "Xixecal",
+        "Young Adult Red Dragon Skeleton"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Aboleth Mage",
+          "d35e": "Aboleth"
+        },
+        {
+          "srd": "Air Elemental",
+          "d35e": "Air Elemental, Greater"
+        },
+        {
+          "srd": "Angel",
+          "d35e": "Angel, Planetar"
+        },
+        {
+          "srd": "Animated Object",
+          "d35e": "Animated Object, Medium"
+        },
+        {
+          "srd": "Archon",
+          "d35e": "Hound Archon"
+        },
+        {
+          "srd": "Arrowhawk",
+          "d35e": "Elder Arrowhawk"
+        },
+        {
+          "srd": "Astral Deva",
+          "d35e": "Angel, Astral Deva"
+        },
+        {
+          "srd": "Bear (Black)",
+          "d35e": "Bear, Black"
+        },
+        {
+          "srd": "Bear (Brown)",
+          "d35e": "Bear, Brown"
+        },
+        {
+          "srd": "Bear (Polar)",
+          "d35e": "Bear, Polar"
+        },
+        {
+          "srd": "Black Dragon",
+          "d35e": "Black Dragon, Mature adult"
+        },
+        {
+          "srd": "Blue Dragon",
+          "d35e": "Blue Dragon, Wyrmling"
+        },
+        {
+          "srd": "Brass Dragon",
+          "d35e": "Brass Dragon, Wyrmling"
+        },
+        {
+          "srd": "Bronze Dragon",
+          "d35e": "Bronze Dragon, Young adult"
+        },
+        {
+          "srd": "Cauchemar",
+          "d35e": "Nightmare, Cauchemar"
+        },
+        {
+          "srd": "Copper Dragon",
+          "d35e": "Copper Dragon, Old"
+        },
+        {
+          "srd": "Crocodile (Giant)",
+          "d35e": "Crocodile, Giant"
+        },
+        {
+          "srd": "Devil",
+          "d35e": "Chain Devil"
+        },
+        {
+          "srd": "Dog (Riding)",
+          "d35e": "Dog, Riding"
+        },
+        {
+          "srd": "Eagle (Giant)",
+          "d35e": "Eagle, Giant"
+        },
+        {
+          "srd": "Earth Elemental",
+          "d35e": "Earth Elemental, Elder"
+        },
+        {
+          "srd": "Elemental",
+          "d35e": "Water Elemental, Medium"
+        },
+        {
+          "srd": "Fire Elemental",
+          "d35e": "Fire Elemental, Primal"
+        },
+        {
+          "srd": "Formian",
+          "d35e": "Formian Taskmaster"
+        },
+        {
+          "srd": "Frost Giant Jarl",
+          "d35e": "Frost Giant"
+        },
+        {
+          "srd": "Fungus",
+          "d35e": "Phantom Fungus"
+        },
+        {
+          "srd": "Giant",
+          "d35e": "Giant Stag Beetle"
+        },
+        {
+          "srd": "Giant Ant",
+          "d35e": "Giant Ant, Worker"
+        },
+        {
+          "srd": "Gold Dragon",
+          "d35e": "Gold Dragon, Young adult"
+        },
+        {
+          "srd": "Golden Protector",
+          "d35e": "Golden Protector (Celestial Half-Dragon Lammasu)"
+        },
+        {
+          "srd": "Golem",
+          "d35e": "Stone Golem"
+        },
+        {
+          "srd": "Green Dragon",
+          "d35e": "Green Dragon, Wyrmling"
+        },
+        {
+          "srd": "Hag",
+          "d35e": "Night Hag"
+        },
+        {
+          "srd": "Harpy Archer",
+          "d35e": "Harpy"
+        },
+        {
+          "srd": "Hill Giant Dire Wereboar",
+          "d35e": "Hill Giant"
+        },
+        {
+          "srd": "Horse",
+          "d35e": "Warhorse, Heavy"
+        },
+        {
+          "srd": "Horse (Heavy)",
+          "d35e": "Horse, Heavy"
+        },
+        {
+          "srd": "Horse (Light)",
+          "d35e": "Horse, Light"
+        },
+        {
+          "srd": "Hound Archon Hero",
+          "d35e": "Hound Archon"
+        },
+        {
+          "srd": "Hydra",
+          "d35e": "Seven-Headed Hydra"
+        },
+        {
+          "srd": "Kobold",
+          "d35e": "Kobold Zombie"
+        },
+        {
+          "srd": "Lich",
+          "d35e": "Demilich"
+        },
+        {
+          "srd": "Lizard (Monitor)",
+          "d35e": "Lizard, Monitor"
+        },
+        {
+          "srd": "Mephit",
+          "d35e": "Ooze Mephit"
+        },
+        {
+          "srd": "Monstrous Scorpion",
+          "d35e": "Monstrous Scorpion, Huge"
+        },
+        {
+          "srd": "Monstrous Spider",
+          "d35e": "Monstrous Spider, Tiny"
+        },
+        {
+          "srd": "Mummy Lord",
+          "d35e": "Mummy"
+        },
+        {
+          "srd": "Naga",
+          "d35e": "Guardian Naga"
+        },
+        {
+          "srd": "Octopus (Giant)",
+          "d35e": "Octopus, Giant"
+        },
+        {
+          "srd": "Ogre Barbarian",
+          "d35e": "Ogre"
+        },
+        {
+          "srd": "Ooze",
+          "d35e": "Ooze Mephit"
+        },
+        {
+          "srd": "Orc",
+          "d35e": "Orca"
+        },
+        {
+          "srd": "Owl (Giant)",
+          "d35e": "Owl, Giant"
+        },
+        {
+          "srd": "Planetar",
+          "d35e": "Angel, Planetar"
+        },
+        {
+          "srd": "Pony (War)",
+          "d35e": "Pony, War"
+        },
+        {
+          "srd": "Razor Boar",
+          "d35e": "Boar"
+        },
+        {
+          "srd": "Red Dragon",
+          "d35e": "Red Dragon, Old"
+        },
+        {
+          "srd": "Sahuagin Mutants",
+          "d35e": "Sahuagin"
+        },
+        {
+          "srd": "Salamander",
+          "d35e": "Noble Salamander"
+        },
+        {
+          "srd": "Shark",
+          "d35e": "Shark, Huge"
+        },
+        {
+          "srd": "Skeleton",
+          "d35e": "Chimera Skeleton"
+        },
+        {
+          "srd": "Snake",
+          "d35e": "Snake, Tiny Viper"
+        },
+        {
+          "srd": "Snake (Constrictor)",
+          "d35e": "Snake, Tiny Viper"
+        },
+        {
+          "srd": "Snake (Viper)",
+          "d35e": "Snake, Tiny Viper"
+        },
+        {
+          "srd": "Solar",
+          "d35e": "Angel, Solar"
+        },
+        {
+          "srd": "Sphinx",
+          "d35e": "Androsphinx"
+        },
+        {
+          "srd": "Squid (Giant)",
+          "d35e": "Squid, Giant"
+        },
+        {
+          "srd": "Stone Giant Elders",
+          "d35e": "Stone Giant"
+        },
+        {
+          "srd": "Swarm",
+          "d35e": "Bat Swarm"
+        },
+        {
+          "srd": "Tojanida",
+          "d35e": "Elder Tojanida"
+        },
+        {
+          "srd": "Troll Hunter",
+          "d35e": "Troll"
+        },
+        {
+          "srd": "Vampire",
+          "d35e": "Vampire Spawn"
+        },
+        {
+          "srd": "Water Elemental",
+          "d35e": "Water Elemental, Medium"
+        },
+        {
+          "srd": "Werebear",
+          "d35e": "Werebear, Bear Form"
+        },
+        {
+          "srd": "Wereboar",
+          "d35e": "Wereboar, Boar Form"
+        },
+        {
+          "srd": "Wererat",
+          "d35e": "Wererat, Dire Rat Form"
+        },
+        {
+          "srd": "Weretiger",
+          "d35e": "Weretiger, Hybrid Form"
+        },
+        {
+          "srd": "Werewolf",
+          "d35e": "Wolf"
+        },
+        {
+          "srd": "Werewolf Lord",
+          "d35e": "Wolf"
+        },
+        {
+          "srd": "Whale",
+          "d35e": "Cachalot Whale"
+        },
+        {
+          "srd": "White Dragon",
+          "d35e": "White Dragon, Very young"
+        },
+        {
+          "srd": "Xorn",
+          "d35e": "Elder Xorn"
+        },
+        {
+          "srd": "Zombie",
+          "d35e": "Human Commoner Zombie"
+        }
+      ]
+    },
+    {
+      "entityType": "classes",
+      "srdCount": 43,
+      "d35eCount": 33,
+      "matchedCount": 28,
+      "missingFromD35e": [
+        "Cerebremancer",
+        "Dragon Disciple",
+        "Duelist",
+        "Elocater",
+        "Hierophant",
+        "Horizon Walker",
+        "Loremaster",
+        "Metamind",
+        "Psion Uncarnate",
+        "Pyrokineticist",
+        "Shadowdancer",
+        "Slayer",
+        "Thaumaturgist",
+        "Thrallherd",
+        "War Mind"
+      ],
+      "extraInD35e": [
+        "Psion (Egoist)",
+        "Psion (Kineticist)",
+        "Psion (Nomad)",
+        "Psion (Seer)",
+        "Psion (Shaper)"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Adept",
+          "d35e": "Adept (NPC)"
+        },
+        {
+          "srd": "Aristocrat",
+          "d35e": "Aristocrat (NPC)"
+        },
+        {
+          "srd": "Commoner",
+          "d35e": "Commoner (NPC)"
+        },
+        {
+          "srd": "Expert",
+          "d35e": "Expert (NPC)"
+        },
+        {
+          "srd": "Psion",
+          "d35e": "Psion (Telepath)"
+        },
+        {
+          "srd": "Warrior",
+          "d35e": "Warrior (NPC)"
+        }
+      ]
+    },
+    {
+      "entityType": "conditions",
+      "srdCount": 38,
+      "d35eCount": 38,
+      "matchedCount": 38,
+      "missingFromD35e": [],
+      "extraInD35e": [],
+      "nameVariations": []
+    },
+    {
+      "entityType": "psionic_powers",
+      "srdCount": 287,
+      "d35eCount": 441,
+      "matchedCount": 286,
+      "missingFromD35e": [
+        "Deja Vu"
+      ],
+      "extraInD35e": [
+        "Ablating\n",
+        "Adamant Grasp\n",
+        "Amplified Invisibility\n",
+        "Astral Construct I\n",
+        "Astral Construct II\n",
+        "Astral Construct III\n",
+        "Astral Construct IV\n",
+        "Astral Construct IX\n",
+        "Astral Construct V\n",
+        "Astral Construct VI\n",
+        "Astral Construct VII\n",
+        "Astral Construct VIII\n",
+        "Astral Projection\n",
+        "Astral Steed\n",
+        "Augury\n",
+        "Banishment\n",
+        "Biocurrent\n",
+        "Bite of the Tiger\n",
+        "Breath of the Dragon\n",
+        "Brilliant Blast\n",
+        "Burning Ray\n",
+        "Call Cohort\n",
+        "Charm Monster\n",
+        "Charm Person\n",
+        "Clairaudience/Clairvoyance\n",
+        "Clairtangency\n",
+        "Claws of the Bear\n",
+        "Combat Precognition\n",
+        "Combat Prescience\n",
+        "Concussion\n",
+        "Cone of Sound\n",
+        "Confidante\n",
+        "Contingency\n",
+        "Control Shadow\n",
+        "Create Food and Water\n",
+        "Darkvision\n",
+        "Daze\n",
+        "Detect Poison\n",
+        "Detect Thoughts\n",
+        "Detonation\n",
+        "Dimension Door\n",
+        "Dimensional Anchor\n",
+        "Disintegrate\n",
+        "Dismissal\n",
+        "Displacement\n",
+        "Dissolution\n",
+        "Divination\n",
+        "Domination\n",
+        "Duodimensional Hand\n",
+        "Déjà Vu",
+        "Ecto Puppet\n",
+        "Ectoplasmic Armor\n",
+        "Emulate Power\n",
+        "Energy Barrier\n",
+        "Ethereal Jaunt\n",
+        "Etherealness\n",
+        "Expanded Vision\n",
+        "Fabricate\n",
+        "Far Punch\n",
+        "Fatal Attraction\n",
+        "Feather Fall\n",
+        "Feel Light\n",
+        "Feel Sound\n",
+        "Finger of Fire\n",
+        "Firefall\n",
+        "Flaming Shroud\n",
+        "Fly\n",
+        "Forced Mindlink\n",
+        "Foresight\n",
+        "Freedom of Movement\n",
+        "Glide\n",
+        "Grease\n",
+        "Greater Biocurrent\n",
+        "Greater Concussion\n",
+        "Greater Domination\n",
+        "Greater Emulation\n",
+        "Hear Light\n",
+        "Identify\n",
+        "Improved Anchored Navigation\n",
+        "Improved Biofeedback\n",
+        "Improved Clairtangency\n",
+        "Improved Etherealness\n",
+        "Improved Fabricate\n",
+        "Improved Fly\n",
+        "Improved Telekinesis\n",
+        "Improved Vigor\n",
+        "Inkling\n",
+        "Intrusive Sense Link\n",
+        "Invisibility\n",
+        "Invisibility Purge\n",
+        "Iron Body\n",
+        "Knock\n",
+        "Know Direction\n",
+        "Know Location\n",
+        "Lesser Body Adjustment\n",
+        "Lesser Concussion\n",
+        "Lesser Domination\n",
+        "Lesser Metaphysical Weapon\n",
+        "Lesser Mindlink\n",
+        "Lesser Natural Armor\n",
+        "Levitate\n",
+        "Major Creation\n",
+        "Mass Cocoon\n",
+        "Mass Concussion\n",
+        "Mass Domination\n",
+        "Mass Suggestion\n",
+        "Matter Rearrangement\n",
+        "Mind Blank\n",
+        "Mind Store\n",
+        "Monster Domination\n",
+        "Natural Armor\n",
+        "Negate Psionics\n",
+        "Nondetection\n",
+        "Painful Touch\n",
+        "Phase Door\n",
+        "Plane Shift\n",
+        "Poison Sense\n",
+        "Polymorph Self\n",
+        "Power Turning\n",
+        "Probability Travel\n",
+        "Psycholuminescence\n",
+        "Recall Pain\n",
+        "Rejuvenation\n",
+        "See Invisibility\n",
+        "See Sound\n",
+        "Sending\n",
+        "Sense Psionics\n",
+        "Sense Psychoportation\n",
+        "Sequester\n",
+        "Sever the Tie\n",
+        "Shapechange\n",
+        "Shield of Prudence\n",
+        "Spider Climb\n",
+        "Steadfast Gaze\n",
+        "Sudden Minor Creation\n",
+        "Suggestion\n",
+        "Tailor Memory\n",
+        "Talons\n",
+        "Telekinesis\n",
+        "Telekinetic Sphere\n",
+        "Teleport\n",
+        "Teleport without Error\n",
+        "Temporal Velocity\n",
+        "Thrall\n",
+        "Trinket\n",
+        "True Concussion\n",
+        "True Domination\n",
+        "True Seeing\n",
+        "True Telekinesis\n",
+        "Undead Sense\n",
+        "Valor\n",
+        "Verve\n",
+        "Vigilance\n",
+        "Whitefire\n"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Minor Creation, Psionic",
+          "d35e": "Minor Creation"
+        },
+        {
+          "srd": "Psionic Lion's Charge",
+          "d35e": "Psionic Lion’s Charge"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items",
+      "srdCount": 377,
+      "d35eCount": 636,
+      "matchedCount": 357,
+      "missingFromD35e": [
+        "Bag of Tricks",
+        "Figurine of Wondrous Power (Bronze Griffon)",
+        "Figurine of Wondrous Power (Ebony Fly)",
+        "Figurine of Wondrous Power (Golden Lions)",
+        "Figurine of Wondrous Power (Ivory Goats)",
+        "Figurine of Wondrous Power (Marble Elephant)",
+        "Figurine of Wondrous Power (Obsidian Steed)",
+        "Figurine of Wondrous Power (Onyx Dog)",
+        "Figurine of Wondrous Power (Serpentine Owl)",
+        "Figurine of Wondrous Power (Silver Raven)",
+        "Ioun Stone",
+        "Ring of Elemental Command (Air)",
+        "Ring of Elemental Command (Earth)",
+        "Ring of Elemental Command (Fire)",
+        "Ring of Elemental Command (Water)",
+        "Ring of Energy Resistance",
+        "Slaying Arrow",
+        "Stone Horse",
+        "Strand of Prayer Beads",
+        "The Shield of the Sun"
+      ],
+      "extraInD35e": [
+        "Amulet of Catapsi",
+        "Amulet of Epic Natural Armor +10",
+        "Amulet of Epic Natural Armor +6",
+        "Amulet of Epic Natural Armor +7",
+        "Amulet of Epic Natural Armor +8",
+        "Amulet of Epic Natural Armor +9",
+        "Amulet of Health +2",
+        "Amulet of Health +4",
+        "Amulet of Mighty Fists +1",
+        "Amulet of Mighty Fists +3",
+        "Amulet of Mighty Fists +4",
+        "Amulet of Mighty Fists +5",
+        "Amulet of Natural Armor +1",
+        "Amulet of Natural Armor +2",
+        "Amulet of Natural Armor +4",
+        "Amulet of Natural Armor +5",
+        "Annulus",
+        "Antimagic Armor",
+        "Armor of the Abyssal Horde",
+        "Armor of the Celestial Battalion",
+        "Arrow of Death",
+        "Astral Legion",
+        "Axe of the Dwarvish Lords",
+        "Backstabber",
+        "Bag of Holding (Type I)",
+        "Bag of Holding (Type II)",
+        "Bag of Holding (Type III)",
+        "Bag of Tricks, Gray",
+        "Bag of Tricks, Rust",
+        "Bag of Tricks, Tan",
+        "Beast",
+        "Belt of Epic Strength +10",
+        "Belt of Epic Strength +12",
+        "Belt of Epic Strength +8",
+        "Belt of Giant Strength +4",
+        "Boots of Landing",
+        "Boots of Skating",
+        "Boots of Stomping",
+        "Boots of Swiftness",
+        "Boots of Temporal Acceleration",
+        "Bracers of Armor +1",
+        "Bracers of Armor +2",
+        "Bracers of Armor +3",
+        "Bracers of Armor +4",
+        "Bracers of Armor +5",
+        "Bracers of Armor +7",
+        "Bracers of Armor +8",
+        "Bracers of Epic Armor +11",
+        "Bracers of Epic Armor +12",
+        "Bracers of Epic Armor +13",
+        "Bracers of Epic Armor +14",
+        "Bracers of Epic Armor +15",
+        "Bracers of Epic Health +10",
+        "Bracers of Epic Health +12",
+        "Bracers of Epic Health +8",
+        "Bracers of Relentless Might",
+        "Bulwark of the Great Dragon",
+        "Cabinet of Feasting",
+        "Cautious Warrior",
+        "Chaosbringer",
+        "Cloak of Charisma +4",
+        "Cloak of Charisma +6",
+        "Cloak of Epic Charisma +10",
+        "Cloak of Epic Charisma +12",
+        "Cloak of Epic Charisma +8",
+        "Cloak of Epic Resistance +10",
+        "Cloak of Epic Resistance +6",
+        "Cloak of Epic Resistance +7",
+        "Cloak of Epic Resistance +8",
+        "Cloak of Epic Resistance +9",
+        "Cloak of Resistance +1",
+        "Cloak of Resistance +2",
+        "Cloak of Resistance +3",
+        "Cloak of Resistance +4",
+        "Codex of the Infinite Planes",
+        "Crawling Tattoos",
+        "Crystal Anchor",
+        "Crystal Masks",
+        "Cup and Talisman of the Demigod",
+        "Discerning Watcher",
+        "Dominator",
+        "Dragonskin Armor",
+        "Elven Greatbow",
+        "Evader",
+        "Everwhirling Chain",
+        "Eye of the Orc",
+        "Eyes of Expanded Vision",
+        "Eyes of Power Leech",
+        "Eyes of Power Leech, Vampiric",
+        "Fiery Ruin",
+        "Figurines of Wondrous Power",
+        "Finaldeath",
+        "Gate Key",
+        "Gloves of Dexterity +4",
+        "Gloves of Dexterity +6",
+        "Gloves of Epic Dexterity +10",
+        "Gloves of Epic Dexterity +12",
+        "Gloves of Epic Dexterity +8",
+        "Gloves of Object Reading",
+        "Gloves of Titan's Grip",
+        "Golem Armor",
+        "Great Dominator",
+        "Gripsoul",
+        "Headband of Epic Intellect +10",
+        "Headband of Epic Intellect +12",
+        "Headband of Epic Intellect +8",
+        "Headband of Intellect +2",
+        "Headband of Intellect +6",
+        "Holy Devastator",
+        "Horseshoes of the Peerless Steed",
+        "Invulnerable Coat",
+        "Ioun Stones",
+        "Iron Gauntlet of War",
+        "Mace of Ruin",
+        "Mantle of Epic Spell Resistance",
+        "Mantle of Great Stealth",
+        "Manual of Bodily Health +1",
+        "Manual of Bodily Health +2",
+        "Manual of Bodily Health +4",
+        "Manual of Bodily Health +5",
+        "Manual of Gainful Exercise +1",
+        "Manual of Gainful Exercise +2",
+        "Manual of Gainful Exercise +3",
+        "Manual of Gainful Exercise +5",
+        "Manual of Quickness of Action +2",
+        "Manual of Quickness of Action +3",
+        "Manual of Quickness of Action +4",
+        "Manual of Quickness of Action +5",
+        "Mirror of Mind Switch",
+        "Mirror of Suggestion",
+        "Mirror of Time Hop",
+        "Pearl of Power (1st)",
+        "Pearl of Power (2nd)",
+        "Pearl of Power (3rd)",
+        "Pearl of Power (5th)",
+        "Pearl of Power (6th)",
+        "Pearl of Power (7th)",
+        "Pearl of Power (8th)",
+        "Pearl of Power (9th)",
+        "Pearl of Power, Two Spells",
+        "Pearl, Brain Lock",
+        "Pearl, Breath Crisis",
+        "Pearl, Mind Seed",
+        "Pearl, Personality Parasite",
+        "Periapt of Epic Wisdom +10",
+        "Periapt of Epic Wisdom +12",
+        "Periapt of Epic Wisdom +8",
+        "Periapt of Wisdom +2",
+        "Periapt of Wisdom +4",
+        "Psicrown of the Crystal Mind",
+        "Psionatrix",
+        "Psionic Restraints",
+        "Psychoactive Skins",
+        "Quarterstaff of Alacrity",
+        "Reverse Capacitor",
+        "Ring of Adamant Law",
+        "Ring of Chaotic Fury",
+        "Ring of Energy Immunity",
+        "Ring of Energy Resistance, Greater",
+        "Ring of Energy Resistance, Major",
+        "Ring of Energy Resistance, Minor",
+        "Ring of Epic Psionics IX",
+        "Ring of Epic Psionics V",
+        "Ring of Epic Psionics VI",
+        "Ring of Epic Psionics VII",
+        "Ring of Epic Psionics VIII",
+        "Ring of Epic Wizardry IX",
+        "Ring of Epic Wizardry V",
+        "Ring of Epic Wizardry VI",
+        "Ring of Epic Wizardry VII",
+        "Ring of Epic Wizardry VIII",
+        "Ring of Ineffable Evil",
+        "Ring of Ironskin",
+        "Ring of Nine Facets",
+        "Ring of Protection +1",
+        "Ring of Protection +10",
+        "Ring of Protection +2",
+        "Ring of Protection +3",
+        "Ring of Protection +5",
+        "Ring of Protection +6",
+        "Ring of Protection +7",
+        "Ring of Protection +8",
+        "Ring of Protection +9",
+        "Ring of Rapid Healing",
+        "Ring of Ring of Elemental Command (Water)",
+        "Ring of Sequestering",
+        "Ring of Universal Energy Immunity",
+        "Ring of Universal Energy Resistance, Greater",
+        "Ring of Universal Energy Resistance, Minor",
+        "Ring of Virtuous Good",
+        "Ring of Weaponbreaking",
+        "Ring of Wizardry I",
+        "Ring of Wizardry II",
+        "Ring of Wizardry IV",
+        "Rod of Besiegement",
+        "Rod of Epic Absorption",
+        "Rod of Epic Cancellation",
+        "Rod of Epic Might",
+        "Rod of Epic Negation",
+        "Rod of Epic Rulership",
+        "Rod of Epic Spellcaster",
+        "Rod of Epic Splendor",
+        "Rod of Excellent Magic",
+        "Rod of Fortification",
+        "Rod of Invulnerability",
+        "Rod of Metamagic, Empower, Lesser",
+        "Rod of Metamagic, Empower, Normal",
+        "Rod of Metamagic, Enlarge, Greater",
+        "Rod of Metamagic, Enlarge, Lesser",
+        "Rod of Metamagic, Enlarge, Normal",
+        "Rod of Metamagic, Extend, Greater",
+        "Rod of Metamagic, Extend, Lesser",
+        "Rod of Metamagic, Extend, Normal",
+        "Rod of Metamagic, Maximize, Greater",
+        "Rod of Metamagic, Maximize, Lesser",
+        "Rod of Metamagic, Maximize, Normal",
+        "Rod of Metamagic, Quicken, Greater",
+        "Rod of Metamagic, Quicken, Lesser",
+        "Rod of Metamagic, Quicken, Normal",
+        "Rod of Metamagic, Silent, Greater",
+        "Rod of Metamagic, Silent, Lesser",
+        "Rod of Metamagic, Silent, Normal",
+        "Rod of Nightmares",
+        "Rod of Paradise",
+        "Rod of Restless Death",
+        "Rod of The Path",
+        "Rod of Wyrm, Black",
+        "Rod of Wyrm, Blue",
+        "Rod of Wyrm, Brass",
+        "Rod of Wyrm, Bronze",
+        "Rod of Wyrm, Copper",
+        "Rod of Wyrm, Gold",
+        "Rod of Wyrm, Green",
+        "Rod of Wyrm, Red",
+        "Rod of Wyrm, Silver",
+        "Rod of Wyrm, White",
+        "Shapeshifter's Armor",
+        "Shards +1",
+        "Shards +10",
+        "Shards +2",
+        "Shards +3",
+        "Shards +4",
+        "Shards +5",
+        "Shards +6",
+        "Shards +7",
+        "Shards +8",
+        "Shards +9",
+        "Slaying Arrow, Greater",
+        "Souldrinker",
+        "Staff of Cosmos",
+        "Staff of Domination",
+        "Staff of Fiery Power",
+        "Staff of Mighty Force",
+        "Staff of Nature's Fury",
+        "Staff of Planar Might",
+        "Staff of Prism",
+        "Staff of Rapid Barrage",
+        "Staff of Spheres",
+        "Staff of The Hierophants",
+        "Staff of Walls",
+        "Staff of Winter",
+        "Stone Horse, Courser",
+        "Stone Horse, Destrier",
+        "Stormbrand",
+        "Strand of Prayer Beads, Greater",
+        "Strand of Prayer Beads, Lesser",
+        "Strand of Prayer Beads, Standard",
+        "Sutra of Tranquil Thought",
+        "Temporal Juggler",
+        "Third Eyes",
+        "Tome of Clear Thought +1",
+        "Tome of Clear Thought +3",
+        "Tome of Clear Thought +4",
+        "Tome of Clear Thought +5",
+        "Tome of Leadership and Influence +2",
+        "Tome of Leadership and Influence +3",
+        "Tome of Leadership and Influence +4",
+        "Tome of Leadership and Influence +5",
+        "Tome of Understanding +1",
+        "Tome of Understanding +2",
+        "Tome of Understanding +3",
+        "Tome of Understanding +4",
+        "Torc of Free Will",
+        "Torc of Leech Freedom",
+        "Torc of Power Preservation",
+        "Traveler",
+        "Unholy Despoiler",
+        "Warlord's Breastplate"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Amulet of Health",
+          "d35e": "Amulet of Health +6"
+        },
+        {
+          "srd": "Amulet of Mighty Fists",
+          "d35e": "Amulet of Mighty Fists +2"
+        },
+        {
+          "srd": "Amulet of Natural Armor",
+          "d35e": "Amulet of Natural Armor +3"
+        },
+        {
+          "srd": "Amulet of Proof against Detection and Location",
+          "d35e": "Amulet of Proof Against Detection and Location"
+        },
+        {
+          "srd": "Bag of Holding",
+          "d35e": "Bag of Holding (Type IV)"
+        },
+        {
+          "srd": "Belt (Monk's)",
+          "d35e": "Belt, Monk's"
+        },
+        {
+          "srd": "Belt of Giant Strength",
+          "d35e": "Belt of Giant Strength +6"
+        },
+        {
+          "srd": "Boat (Folding)",
+          "d35e": "Boat, Folding"
+        },
+        {
+          "srd": "Boots (Winged)",
+          "d35e": "Boots, Winged"
+        },
+        {
+          "srd": "Bracers of Archery (Greater)",
+          "d35e": "Bracers of Archery, Greater"
+        },
+        {
+          "srd": "Bracers of Archery (Lesser)",
+          "d35e": "Bracers of Archery, Lesser"
+        },
+        {
+          "srd": "Bracers of Armor",
+          "d35e": "Bracers of Armor +6"
+        },
+        {
+          "srd": "Circlet of Blasting (Major)",
+          "d35e": "Circlet of Blasting, Major"
+        },
+        {
+          "srd": "Circlet of Blasting (Minor)",
+          "d35e": "Circlet of Blasting, Minor"
+        },
+        {
+          "srd": "Cloak of Charisma",
+          "d35e": "Cloak of Charisma +2"
+        },
+        {
+          "srd": "Cloak of Displacement (Major)",
+          "d35e": "Cloak of Displacement, Major"
+        },
+        {
+          "srd": "Cloak of Displacement (Minor)",
+          "d35e": "Cloak of Displacement, Minor"
+        },
+        {
+          "srd": "Cloak of Resistance",
+          "d35e": "Cloak of Resistance +5"
+        },
+        {
+          "srd": "Feather Token (Anchor)",
+          "d35e": "Feather Token, Anchor"
+        },
+        {
+          "srd": "Feather Token (Bird)",
+          "d35e": "Feather Token, Bird"
+        },
+        {
+          "srd": "Feather Token (Fan)",
+          "d35e": "Feather Token, Fan"
+        },
+        {
+          "srd": "Feather Token (Swan Boat)",
+          "d35e": "Feather Token, Swan Boat"
+        },
+        {
+          "srd": "Feather Token (Tree)",
+          "d35e": "Feather Token, Tree"
+        },
+        {
+          "srd": "Feather Token (Whip)",
+          "d35e": "Feather Token, Whip"
+        },
+        {
+          "srd": "Gloves of Dexterity",
+          "d35e": "Gloves of Dexterity +2"
+        },
+        {
+          "srd": "Golem Manual (Clay)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Flesh)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Iron)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Stone Greater)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Stone)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Headband of Intellect",
+          "d35e": "Headband of Intellect +4"
+        },
+        {
+          "srd": "Horn of Blasting (Greater)",
+          "d35e": "Horn of Blasting, Greater"
+        },
+        {
+          "srd": "Horseshoes of a Zephyr",
+          "d35e": "Horseshoes of A Zephyr"
+        },
+        {
+          "srd": "Manual of Bodily Health",
+          "d35e": "Manual of Bodily Health +3"
+        },
+        {
+          "srd": "Manual of Gainful Exercise",
+          "d35e": "Manual of Gainful Exercise +4"
+        },
+        {
+          "srd": "Manual of Quickness of Action",
+          "d35e": "Manual of Quickness of Action +1"
+        },
+        {
+          "srd": "Pearl of Power",
+          "d35e": "Pearl of Power (4th)"
+        },
+        {
+          "srd": "Periapt of Proof against Poison",
+          "d35e": "Periapt of Proof Against Poison"
+        },
+        {
+          "srd": "Periapt of Wisdom",
+          "d35e": "Periapt of Wisdom +6"
+        },
+        {
+          "srd": "Ring of Climbing (Improved)",
+          "d35e": "Ring of Climbing, Improved"
+        },
+        {
+          "srd": "Ring of Jumping (Improved)",
+          "d35e": "Ring of Jumping, Improved"
+        },
+        {
+          "srd": "Ring of Protection",
+          "d35e": "Ring of Protection +4"
+        },
+        {
+          "srd": "Ring of Spell Storing (Major)",
+          "d35e": "Ring of Spell Storing, Major"
+        },
+        {
+          "srd": "Ring of Spell Storing (Minor)",
+          "d35e": "Ring of Spell Storing, Minor"
+        },
+        {
+          "srd": "Ring of Swimming (Improved)",
+          "d35e": "Ring of Swimming, Improved"
+        },
+        {
+          "srd": "Ring of Wizardry",
+          "d35e": "Ring of Wizardry III"
+        },
+        {
+          "srd": "Rod of Metamagic (Empower)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Enlarge)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Extend)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Maximize)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Quicken)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Silent)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Scarab (Golembane)",
+          "d35e": "Scarab, Golembane"
+        },
+        {
+          "srd": "Silver Dagger (Masterwork)",
+          "d35e": "Silver Dagger, Masterwork"
+        },
+        {
+          "srd": "Spear (Cursed Backbiter)",
+          "d35e": "Spear, Cursed Backbiter"
+        },
+        {
+          "srd": "Sword (Berserking)",
+          "d35e": "Sword, Berserking"
+        },
+        {
+          "srd": "Sword (Cursed -2)",
+          "d35e": "Sword of the Planes"
+        },
+        {
+          "srd": "Tome of Clear Thought",
+          "d35e": "Tome of Clear Thought +2"
+        },
+        {
+          "srd": "Tome of Leadership and Influence",
+          "d35e": "Tome of Leadership and Influence +1"
+        },
+        {
+          "srd": "Tome of Understanding",
+          "d35e": "Tome of Understanding +5"
+        },
+        {
+          "srd": "Vestment (Druid's)",
+          "d35e": "Vestment, Druid's"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items_ring",
+      "srdCount": 37,
+      "d35eCount": 73,
+      "matchedCount": 32,
+      "missingFromD35e": [
+        "Ring of Elemental Command (Air)",
+        "Ring of Elemental Command (Earth)",
+        "Ring of Elemental Command (Fire)",
+        "Ring of Elemental Command (Water)",
+        "Ring of Energy Resistance"
+      ],
+      "extraInD35e": [
+        "Ring Gates",
+        "Ring of Adamant Law",
+        "Ring of Chaotic Fury",
+        "Ring of Clumsiness",
+        "Ring of Energy Immunity",
+        "Ring of Energy Resistance, Greater",
+        "Ring of Energy Resistance, Major",
+        "Ring of Energy Resistance, Minor",
+        "Ring of Epic Psionics IX",
+        "Ring of Epic Psionics V",
+        "Ring of Epic Psionics VI",
+        "Ring of Epic Psionics VII",
+        "Ring of Epic Psionics VIII",
+        "Ring of Epic Wizardry IX",
+        "Ring of Epic Wizardry V",
+        "Ring of Epic Wizardry VI",
+        "Ring of Epic Wizardry VII",
+        "Ring of Epic Wizardry VIII",
+        "Ring of Ineffable Evil",
+        "Ring of Ironskin",
+        "Ring of Nine Facets",
+        "Ring of Protection +1",
+        "Ring of Protection +10",
+        "Ring of Protection +2",
+        "Ring of Protection +3",
+        "Ring of Protection +5",
+        "Ring of Protection +6",
+        "Ring of Protection +7",
+        "Ring of Protection +8",
+        "Ring of Protection +9",
+        "Ring of Rapid Healing",
+        "Ring of Ring of Elemental Command (Water)",
+        "Ring of Sequestering",
+        "Ring of Universal Energy Immunity",
+        "Ring of Universal Energy Resistance, Greater",
+        "Ring of Universal Energy Resistance, Minor",
+        "Ring of Virtuous Good",
+        "Ring of Weaponbreaking",
+        "Ring of Wizardry I",
+        "Ring of Wizardry II",
+        "Ring of Wizardry IV"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Ring of Climbing (Improved)",
+          "d35e": "Ring of Climbing, Improved"
+        },
+        {
+          "srd": "Ring of Jumping (Improved)",
+          "d35e": "Ring of Jumping, Improved"
+        },
+        {
+          "srd": "Ring of Protection",
+          "d35e": "Ring of Protection +4"
+        },
+        {
+          "srd": "Ring of Spell Storing (Major)",
+          "d35e": "Ring of Spell Storing, Major"
+        },
+        {
+          "srd": "Ring of Spell Storing (Minor)",
+          "d35e": "Ring of Spell Storing, Minor"
+        },
+        {
+          "srd": "Ring of Swimming (Improved)",
+          "d35e": "Ring of Swimming, Improved"
+        },
+        {
+          "srd": "Ring of Wizardry",
+          "d35e": "Ring of Wizardry III"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items_rod",
+      "srdCount": 24,
+      "d35eCount": 60,
+      "matchedCount": 23,
+      "missingFromD35e": [
+        "Immovable Rod"
+      ],
+      "extraInD35e": [
+        "Rod of Besiegement",
+        "Rod of Epic Absorption",
+        "Rod of Epic Cancellation",
+        "Rod of Epic Might",
+        "Rod of Epic Negation",
+        "Rod of Epic Rulership",
+        "Rod of Epic Spellcaster",
+        "Rod of Epic Splendor",
+        "Rod of Excellent Magic",
+        "Rod of Fortification",
+        "Rod of Invulnerability",
+        "Rod of Metamagic, Empower, Lesser",
+        "Rod of Metamagic, Empower, Normal",
+        "Rod of Metamagic, Enlarge, Greater",
+        "Rod of Metamagic, Enlarge, Lesser",
+        "Rod of Metamagic, Enlarge, Normal",
+        "Rod of Metamagic, Extend, Greater",
+        "Rod of Metamagic, Extend, Lesser",
+        "Rod of Metamagic, Extend, Normal",
+        "Rod of Metamagic, Maximize, Greater",
+        "Rod of Metamagic, Maximize, Lesser",
+        "Rod of Metamagic, Maximize, Normal",
+        "Rod of Metamagic, Quicken, Greater",
+        "Rod of Metamagic, Quicken, Lesser",
+        "Rod of Metamagic, Quicken, Normal",
+        "Rod of Metamagic, Silent, Greater",
+        "Rod of Metamagic, Silent, Lesser",
+        "Rod of Metamagic, Silent, Normal",
+        "Rod of Nightmares",
+        "Rod of Paradise",
+        "Rod of Restless Death",
+        "Rod of The Path",
+        "Rod of Wyrm, Black",
+        "Rod of Wyrm, Blue",
+        "Rod of Wyrm, Brass",
+        "Rod of Wyrm, Bronze",
+        "Rod of Wyrm, Copper",
+        "Rod of Wyrm, Gold",
+        "Rod of Wyrm, Green",
+        "Rod of Wyrm, Red",
+        "Rod of Wyrm, Silver",
+        "Rod of Wyrm, White"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Rod of Metamagic (Empower)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Enlarge)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Extend)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Maximize)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Quicken)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        },
+        {
+          "srd": "Rod of Metamagic (Silent)",
+          "d35e": "Rod of Metamagic, Empower, Greater"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items_staff",
+      "srdCount": 21,
+      "d35eCount": 34,
+      "matchedCount": 21,
+      "missingFromD35e": [],
+      "extraInD35e": [
+        "Staff of Cosmos",
+        "Staff of Domination",
+        "Staff of Fiery Power",
+        "Staff of Mighty Force",
+        "Staff of Nature's Fury",
+        "Staff of Planar Might",
+        "Staff of Prism",
+        "Staff of Rapid Barrage",
+        "Staff of Spheres",
+        "Staff of The Hierophants",
+        "Staff of Walls",
+        "Staff of Winter"
+      ],
+      "nameVariations": []
+    },
+    {
+      "entityType": "magic_items_specificWeapon",
+      "srdCount": 30,
+      "d35eCount": 50,
+      "matchedCount": 29,
+      "missingFromD35e": [
+        "Slaying Arrow"
+      ],
+      "extraInD35e": [
+        "Arrow of Death",
+        "Backstabber",
+        "Chaosbringer",
+        "Elven Greatbow",
+        "Everwhirling Chain",
+        "Finaldeath",
+        "Gripsoul",
+        "Hammer of Thunderbolts",
+        "Holy Devastator",
+        "Mace of Blood",
+        "Mace of Ruin",
+        "Mattock of the Titans",
+        "Maul of the Titans",
+        "Quarterstaff of Alacrity",
+        "Slaying Arrow, Greater",
+        "Souldrinker",
+        "Spear, Cursed Backbiter",
+        "Stormbrand",
+        "Sword, Berserking",
+        "The Saint's Mace",
+        "Unholy Despoiler"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Silver Dagger (Masterwork)",
+          "d35e": "Silver Dagger, Masterwork"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items_specificArmor",
+      "srdCount": 12,
+      "d35eCount": 22,
+      "matchedCount": 12,
+      "missingFromD35e": [],
+      "extraInD35e": [
+        "Antimagic Armor",
+        "Armor of Arrow Attraction",
+        "Armor of Rage",
+        "Armor of the Abyssal Horde",
+        "Armor of the Celestial Battalion",
+        "Dragonskin Armor",
+        "Golem Armor",
+        "Invulnerable Coat",
+        "Shapeshifter's Armor",
+        "Warlord's Breastplate"
+      ],
+      "nameVariations": []
+    },
+    {
+      "entityType": "magic_items_specificShield",
+      "srdCount": 8,
+      "d35eCount": 9,
+      "matchedCount": 8,
+      "missingFromD35e": [],
+      "extraInD35e": [
+        "Bulwark of the Great Dragon"
+      ],
+      "nameVariations": []
+    },
+    {
+      "entityType": "magic_items_wondrousItem",
+      "srdCount": 201,
+      "d35eCount": 372,
+      "matchedCount": 185,
+      "missingFromD35e": [
+        "Bag of Tricks",
+        "Figurine of Wondrous Power (Bronze Griffon)",
+        "Figurine of Wondrous Power (Ebony Fly)",
+        "Figurine of Wondrous Power (Golden Lions)",
+        "Figurine of Wondrous Power (Ivory Goats)",
+        "Figurine of Wondrous Power (Marble Elephant)",
+        "Figurine of Wondrous Power (Obsidian Steed)",
+        "Figurine of Wondrous Power (Onyx Dog)",
+        "Figurine of Wondrous Power (Serpentine Owl)",
+        "Figurine of Wondrous Power (Silver Raven)",
+        "Ioun Stone",
+        "Mattock of the Titans",
+        "Maul of the Titans",
+        "Ring Gates",
+        "Stone Horse",
+        "Strand of Prayer Beads"
+      ],
+      "extraInD35e": [
+        "Amulet of Catapsi",
+        "Amulet of Epic Natural Armor +10",
+        "Amulet of Epic Natural Armor +6",
+        "Amulet of Epic Natural Armor +7",
+        "Amulet of Epic Natural Armor +8",
+        "Amulet of Epic Natural Armor +9",
+        "Amulet of Health +2",
+        "Amulet of Health +4",
+        "Amulet of Inescapable Location",
+        "Amulet of Mighty Fists +1",
+        "Amulet of Mighty Fists +3",
+        "Amulet of Mighty Fists +4",
+        "Amulet of Mighty Fists +5",
+        "Amulet of Natural Armor +1",
+        "Amulet of Natural Armor +2",
+        "Amulet of Natural Armor +4",
+        "Amulet of Natural Armor +5",
+        "Astral Legion",
+        "Bag of Devouring",
+        "Bag of Holding (Type I)",
+        "Bag of Holding (Type II)",
+        "Bag of Holding (Type III)",
+        "Bag of Tricks, Gray",
+        "Bag of Tricks, Rust",
+        "Bag of Tricks, Tan",
+        "Beast",
+        "Belt of Epic Strength +10",
+        "Belt of Epic Strength +12",
+        "Belt of Epic Strength +8",
+        "Belt of Giant Strength +4",
+        "Boots of Dancing",
+        "Boots of Landing",
+        "Boots of Skating",
+        "Boots of Stomping",
+        "Boots of Swiftness",
+        "Boots of Temporal Acceleration",
+        "Bracers of Armor +1",
+        "Bracers of Armor +2",
+        "Bracers of Armor +3",
+        "Bracers of Armor +4",
+        "Bracers of Armor +5",
+        "Bracers of Armor +7",
+        "Bracers of Armor +8",
+        "Bracers of Defenselessness",
+        "Bracers of Epic Armor +11",
+        "Bracers of Epic Armor +12",
+        "Bracers of Epic Armor +13",
+        "Bracers of Epic Armor +14",
+        "Bracers of Epic Armor +15",
+        "Bracers of Epic Health +10",
+        "Bracers of Epic Health +12",
+        "Bracers of Epic Health +8",
+        "Bracers of Relentless Might",
+        "Broom of Animated Attack",
+        "Cabinet of Feasting",
+        "Cautious Warrior",
+        "Cloak of Charisma +4",
+        "Cloak of Charisma +6",
+        "Cloak of Epic Charisma +10",
+        "Cloak of Epic Charisma +12",
+        "Cloak of Epic Charisma +8",
+        "Cloak of Epic Resistance +10",
+        "Cloak of Epic Resistance +6",
+        "Cloak of Epic Resistance +7",
+        "Cloak of Epic Resistance +8",
+        "Cloak of Epic Resistance +9",
+        "Cloak of Poisonousness",
+        "Cloak of Resistance +1",
+        "Cloak of Resistance +2",
+        "Cloak of Resistance +3",
+        "Cloak of Resistance +4",
+        "Crawling Tattoos",
+        "Crystal Anchor",
+        "Crystal Masks",
+        "Cup and Talisman of the Demigod",
+        "Discerning Watcher",
+        "Dominator",
+        "Dust of Sneezing and Choking",
+        "Evader",
+        "Eye of the Orc",
+        "Eyes of Expanded Vision",
+        "Eyes of Power Leech",
+        "Eyes of Power Leech, Vampiric",
+        "Fiery Ruin",
+        "Figurines of Wondrous Power",
+        "Flask of Curses",
+        "Gate Key",
+        "Gauntlets of Fumbling",
+        "Gloves of Dexterity +4",
+        "Gloves of Dexterity +6",
+        "Gloves of Epic Dexterity +10",
+        "Gloves of Epic Dexterity +12",
+        "Gloves of Epic Dexterity +8",
+        "Gloves of Object Reading",
+        "Gloves of Titan's Grip",
+        "Great Dominator",
+        "Headband of Epic Intellect +10",
+        "Headband of Epic Intellect +12",
+        "Headband of Epic Intellect +8",
+        "Headband of Intellect +2",
+        "Headband of Intellect +6",
+        "Helm of Opposite Alignment",
+        "Horseshoes of the Peerless Steed",
+        "Immovable Rod",
+        "Incense of Obsession",
+        "Ioun Stones",
+        "Iron Gauntlet of War",
+        "Mantle of Epic Spell Resistance",
+        "Mantle of Great Stealth",
+        "Manual of Bodily Health +1",
+        "Manual of Bodily Health +2",
+        "Manual of Bodily Health +4",
+        "Manual of Bodily Health +5",
+        "Manual of Gainful Exercise +1",
+        "Manual of Gainful Exercise +2",
+        "Manual of Gainful Exercise +3",
+        "Manual of Gainful Exercise +5",
+        "Manual of Quickness of Action +2",
+        "Manual of Quickness of Action +3",
+        "Manual of Quickness of Action +4",
+        "Manual of Quickness of Action +5",
+        "Medallion of Thought Projection",
+        "Mirror of Mind Switch",
+        "Mirror of Suggestion",
+        "Mirror of Time Hop",
+        "Necklace of Strangulation",
+        "Net of Snaring",
+        "Pearl of Power (1st)",
+        "Pearl of Power (2nd)",
+        "Pearl of Power (3rd)",
+        "Pearl of Power (5th)",
+        "Pearl of Power (6th)",
+        "Pearl of Power (7th)",
+        "Pearl of Power (8th)",
+        "Pearl of Power (9th)",
+        "Pearl of Power, Two Spells",
+        "Pearl, Brain Lock",
+        "Pearl, Breath Crisis",
+        "Pearl, Mind Seed",
+        "Pearl, Personality Parasite",
+        "Periapt of Epic Wisdom +10",
+        "Periapt of Epic Wisdom +12",
+        "Periapt of Epic Wisdom +8",
+        "Periapt of Foul Rotting",
+        "Periapt of Wisdom +2",
+        "Periapt of Wisdom +4",
+        "Philosopher's Stone",
+        "Potion of Poison",
+        "Psionatrix",
+        "Psionic Restraints",
+        "Psychoactive Skins",
+        "Reverse Capacitor",
+        "Robe of Powerlessness",
+        "Robe of Vermin",
+        "Scarab of Death",
+        "Shards +1",
+        "Shards +10",
+        "Shards +2",
+        "Shards +3",
+        "Shards +4",
+        "Shards +5",
+        "Shards +6",
+        "Shards +7",
+        "Shards +8",
+        "Shards +9",
+        "Stone Horse, Courser",
+        "Stone Horse, Destrier",
+        "Stone of Weight (Loadstone)",
+        "Strand of Prayer Beads, Greater",
+        "Strand of Prayer Beads, Lesser",
+        "Strand of Prayer Beads, Standard",
+        "Sutra of Tranquil Thought",
+        "Temporal Juggler",
+        "Third Eyes",
+        "Tome of Clear Thought +1",
+        "Tome of Clear Thought +3",
+        "Tome of Clear Thought +4",
+        "Tome of Clear Thought +5",
+        "Tome of Leadership and Influence +2",
+        "Tome of Leadership and Influence +3",
+        "Tome of Leadership and Influence +4",
+        "Tome of Leadership and Influence +5",
+        "Tome of Understanding +1",
+        "Tome of Understanding +2",
+        "Tome of Understanding +3",
+        "Tome of Understanding +4",
+        "Torc of Free Will",
+        "Torc of Leech Freedom",
+        "Torc of Power Preservation",
+        "Traveler",
+        "Vacuous Grimoire"
+      ],
+      "nameVariations": [
+        {
+          "srd": "Amulet of Health",
+          "d35e": "Amulet of Health +6"
+        },
+        {
+          "srd": "Amulet of Mighty Fists",
+          "d35e": "Amulet of Mighty Fists +2"
+        },
+        {
+          "srd": "Amulet of Natural Armor",
+          "d35e": "Amulet of Natural Armor +3"
+        },
+        {
+          "srd": "Amulet of Proof against Detection and Location",
+          "d35e": "Amulet of Proof Against Detection and Location"
+        },
+        {
+          "srd": "Bag of Holding",
+          "d35e": "Bag of Holding (Type IV)"
+        },
+        {
+          "srd": "Belt (Monk's)",
+          "d35e": "Belt, Monk's"
+        },
+        {
+          "srd": "Belt of Giant Strength",
+          "d35e": "Belt of Giant Strength +6"
+        },
+        {
+          "srd": "Boat (Folding)",
+          "d35e": "Boat, Folding"
+        },
+        {
+          "srd": "Boots (Winged)",
+          "d35e": "Boots, Winged"
+        },
+        {
+          "srd": "Bracers of Archery (Greater)",
+          "d35e": "Bracers of Archery, Greater"
+        },
+        {
+          "srd": "Bracers of Archery (Lesser)",
+          "d35e": "Bracers of Archery, Lesser"
+        },
+        {
+          "srd": "Bracers of Armor",
+          "d35e": "Bracers of Armor +6"
+        },
+        {
+          "srd": "Circlet of Blasting (Major)",
+          "d35e": "Circlet of Blasting, Major"
+        },
+        {
+          "srd": "Circlet of Blasting (Minor)",
+          "d35e": "Circlet of Blasting, Minor"
+        },
+        {
+          "srd": "Cloak of Charisma",
+          "d35e": "Cloak of Charisma +2"
+        },
+        {
+          "srd": "Cloak of Displacement (Major)",
+          "d35e": "Cloak of Displacement, Major"
+        },
+        {
+          "srd": "Cloak of Displacement (Minor)",
+          "d35e": "Cloak of Displacement, Minor"
+        },
+        {
+          "srd": "Cloak of Resistance",
+          "d35e": "Cloak of Resistance +5"
+        },
+        {
+          "srd": "Feather Token (Anchor)",
+          "d35e": "Feather Token, Anchor"
+        },
+        {
+          "srd": "Feather Token (Bird)",
+          "d35e": "Feather Token, Bird"
+        },
+        {
+          "srd": "Feather Token (Fan)",
+          "d35e": "Feather Token, Fan"
+        },
+        {
+          "srd": "Feather Token (Swan Boat)",
+          "d35e": "Feather Token, Swan Boat"
+        },
+        {
+          "srd": "Feather Token (Tree)",
+          "d35e": "Feather Token, Tree"
+        },
+        {
+          "srd": "Feather Token (Whip)",
+          "d35e": "Feather Token, Whip"
+        },
+        {
+          "srd": "Gloves of Dexterity",
+          "d35e": "Gloves of Dexterity +2"
+        },
+        {
+          "srd": "Golem Manual (Clay)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Flesh)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Iron)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Stone Greater)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Golem Manual (Stone)",
+          "d35e": "Golem Manual"
+        },
+        {
+          "srd": "Headband of Intellect",
+          "d35e": "Headband of Intellect +4"
+        },
+        {
+          "srd": "Horn of Blasting (Greater)",
+          "d35e": "Horn of Blasting, Greater"
+        },
+        {
+          "srd": "Horseshoes of a Zephyr",
+          "d35e": "Horseshoes of A Zephyr"
+        },
+        {
+          "srd": "Manual of Bodily Health",
+          "d35e": "Manual of Bodily Health +3"
+        },
+        {
+          "srd": "Manual of Gainful Exercise",
+          "d35e": "Manual of Gainful Exercise +4"
+        },
+        {
+          "srd": "Manual of Quickness of Action",
+          "d35e": "Manual of Quickness of Action +1"
+        },
+        {
+          "srd": "Pearl of Power",
+          "d35e": "Pearl of Power (4th)"
+        },
+        {
+          "srd": "Periapt of Proof against Poison",
+          "d35e": "Periapt of Proof Against Poison"
+        },
+        {
+          "srd": "Periapt of Wisdom",
+          "d35e": "Periapt of Wisdom +6"
+        },
+        {
+          "srd": "Scarab (Golembane)",
+          "d35e": "Scarab, Golembane"
+        },
+        {
+          "srd": "Tome of Clear Thought",
+          "d35e": "Tome of Clear Thought +2"
+        },
+        {
+          "srd": "Tome of Leadership and Influence",
+          "d35e": "Tome of Leadership and Influence +1"
+        },
+        {
+          "srd": "Tome of Understanding",
+          "d35e": "Tome of Understanding +5"
+        },
+        {
+          "srd": "Vestment (Druid's)",
+          "d35e": "Vestment, Druid's"
+        }
+      ]
+    },
+    {
+      "entityType": "magic_items_artifact",
+      "srdCount": 15,
+      "d35eCount": 16,
+      "matchedCount": 11,
+      "missingFromD35e": [
+        "Hammer of Thunderbolts",
+        "Philosopher's Stone",
+        "The Saint's Mace",
+        "The Shield of the Sun"
+      ],
+      "extraInD35e": [
+        "Annulus",
+        "Axe of the Dwarvish Lords",
+        "Codex of the Infinite Planes",
+        "Crystal Hypnosis Ball",
+        "Psicrown of the Crystal Mind"
+      ],
+      "nameVariations": []
+    }
+  ]
+}

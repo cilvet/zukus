@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "description": "D&D 3.5 SRD Race List",
+    "source": "d20srd.org",
+    "generatedDate": "2026-02-08"
+  },
+  "races": [
+    "Human", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling"
+  ]
+}

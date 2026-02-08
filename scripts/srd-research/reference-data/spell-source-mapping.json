@@ -1,0 +1,4818 @@
+[
+  {
+    "d35eName": "Acid Arrow",
+    "d35eId": "gHsd4OQuyZLelImO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "acid-arrow",
+    "spanishName": "Flecha ácida"
+  },
+  {
+    "d35eName": "Acid Fog",
+    "d35eId": "zzcqJfvwOWV6xK5Q",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "acid-fog",
+    "spanishName": "Niebla ácida"
+  },
+  {
+    "d35eName": "Acid Splash",
+    "d35eId": "SNkiF2IUmQ8nq7S1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "acid-splash",
+    "spanishName": "Salpicadura de ácido"
+  },
+  {
+    "d35eName": "Aid",
+    "d35eId": "48DiiH7TbUsIDKtu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "aid",
+    "spanishName": "Ayuda"
+  },
+  {
+    "d35eName": "Air Walk",
+    "d35eId": "nreHcYonQMUKiQLB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "air-walk",
+    "spanishName": "Paseo aéreo"
+  },
+  {
+    "d35eName": "Alarm",
+    "d35eId": "ZYuMmpfhGAaKi3YB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "alarm",
+    "spanishName": "Alarma"
+  },
+  {
+    "d35eName": "Align Weapon",
+    "d35eId": "cxx2Ym85UCSHeZ2e",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "align-weapon",
+    "spanishName": "Alinear arma"
+  },
+  {
+    "d35eName": "Alter Self",
+    "d35eId": "q1oxGkhKHoXO1uBb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "alter-self",
+    "spanishName": "Alterar el yo"
+  },
+  {
+    "d35eName": "Analyze Dweomer",
+    "d35eId": "NHxi2s8sVHWRsxOr",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "analyze-dweomer",
+    "spanishName": "Analizar Dweomer"
+  },
+  {
+    "d35eName": "Animal Growth",
+    "d35eId": "ilnVJaj25TPxuWBF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animal-growth",
+    "spanishName": "Crecimiento animal"
+  },
+  {
+    "d35eName": "Animal Messenger",
+    "d35eId": "ThUa0yp88R7O2FmZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animal-messenger",
+    "spanishName": "Mensajero animal"
+  },
+  {
+    "d35eName": "Animal Shapes",
+    "d35eId": "64K3Q8Ph5wu33Rp0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animal-shapes",
+    "spanishName": "Formas de animales"
+  },
+  {
+    "d35eName": "Animal Trance",
+    "d35eId": "2QATt4q9pNwiX6tg",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animal-trance",
+    "spanishName": "Animal Trance"
+  },
+  {
+    "d35eName": "Animate Dead",
+    "d35eId": "aiKxhgmRFNQGxpf5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animate-dead",
+    "spanishName": "Animar a los muertos"
+  },
+  {
+    "d35eName": "Animate Objects",
+    "d35eId": "1PLVs2ToCB4e9vAW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animate-objects",
+    "spanishName": "Animar objetos"
+  },
+  {
+    "d35eName": "Animate Plants",
+    "d35eId": "SpVDdBA4tH2FUiT6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animate-plants",
+    "spanishName": "Animar plantas"
+  },
+  {
+    "d35eName": "Animate Rope",
+    "d35eId": "BSPYxg2zzATksBmM",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "animate-rope",
+    "spanishName": "Animar cuerda"
+  },
+  {
+    "d35eName": "Antilife Shell",
+    "d35eId": "hSM3agteY74M3wvP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "antilife-shell",
+    "spanishName": "Caparazón antivida"
+  },
+  {
+    "d35eName": "Antimagic Field",
+    "d35eId": "448slhNhQIXqAspZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "antimagic-field",
+    "spanishName": "Campo antimágico"
+  },
+  {
+    "d35eName": "Antipathy",
+    "d35eId": "mdR4sSED2Fu0sVBQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "antipathy",
+    "spanishName": "Antipatía"
+  },
+  {
+    "d35eName": "Antiplant Shell",
+    "d35eId": "IgINJsUbkdJL066w",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "antiplant-shell",
+    "spanishName": "Cáscara antiplanta"
+  },
+  {
+    "d35eName": "Arcane Eye",
+    "d35eId": "IxFfpTXtwDFdrIDU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "arcane-eye",
+    "spanishName": "Ojo Arcano"
+  },
+  {
+    "d35eName": "Arcane Lock",
+    "d35eId": "m7rNf2xUn1nBD52x",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "arcane-lock",
+    "spanishName": "Cerradura Arcana"
+  },
+  {
+    "d35eName": "Arcane Mark",
+    "d35eId": "MXpyOKWjqwLjNPEU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "arcane-mark",
+    "spanishName": "Marca Arcana"
+  },
+  {
+    "d35eName": "Arcane Sight",
+    "d35eId": "2u5aB8yzd6LQGLmy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "arcane-sight",
+    "spanishName": "Visión Arcana"
+  },
+  {
+    "d35eName": "Astral Projection",
+    "d35eId": "LiXhNFYuNIlKVI7Z",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "astral-projection",
+    "spanishName": "Proyección astral"
+  },
+  {
+    "d35eName": "Atonement",
+    "d35eId": "eGddjnTFD3bU49AK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "atonement",
+    "spanishName": "Expiación"
+  },
+  {
+    "d35eName": "Augury",
+    "d35eId": "3sjlcq6x73d4MmfM",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "augury",
+    "spanishName": "Augurio"
+  },
+  {
+    "d35eName": "Awaken",
+    "d35eId": "eccQypUaSUTsP0u0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "awaken",
+    "spanishName": "Despertar"
+  },
+  {
+    "d35eName": "Baleful Polymorph",
+    "d35eId": "PhwpDCuahz9zSSx7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "baleful-polymorph",
+    "spanishName": "Polimorfia siniestra"
+  },
+  {
+    "d35eName": "Bane",
+    "d35eId": "RwErUMoyd0uCGn7R",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bane",
+    "spanishName": "Pesadilla"
+  },
+  {
+    "d35eName": "Banishment",
+    "d35eId": "jVlXPuZgjq82O8vk",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "banishment",
+    "spanishName": "Destierro"
+  },
+  {
+    "d35eName": "Barkskin",
+    "d35eId": "h2rP6QYk5SZeqYg5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "barkskin",
+    "spanishName": "Piel de corteza"
+  },
+  {
+    "d35eName": "Bear's Endurance",
+    "d35eId": "o9xFfE46PWcwV4vQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bears-endurance",
+    "spanishName": "Resistencia del oso"
+  },
+  {
+    "d35eName": "Bestow Curse",
+    "d35eId": "qd0jSlGfECAPMdfq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bestow-curse",
+    "spanishName": "Otorgar maldición"
+  },
+  {
+    "d35eName": "Binding",
+    "d35eId": "akxy4iAQvqnd8uFg",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "binding",
+    "spanishName": "Encuadernación"
+  },
+  {
+    "d35eName": "Black Tentacles",
+    "d35eId": "u0a697lNjRUwYw65",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "black-tentacles",
+    "spanishName": "Tentáculos negros"
+  },
+  {
+    "d35eName": "Blade Barrier",
+    "d35eId": "UQkfYYSMao9Bc0Zm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blade-barrier",
+    "spanishName": "Barrera de cuchillas"
+  },
+  {
+    "d35eName": "Blasphemy",
+    "d35eId": "dJP4aTjLuNrPX0sW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blasphemy",
+    "spanishName": "Blasfemia"
+  },
+  {
+    "d35eName": "Bless",
+    "d35eId": "7lIiKvIuEVVbr9dn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bless",
+    "spanishName": "Bendecir"
+  },
+  {
+    "d35eName": "Bless Water",
+    "d35eId": "1XQjpgi2rFKOxjfs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bless-water",
+    "spanishName": "Bendice el agua"
+  },
+  {
+    "d35eName": "Bless Weapon",
+    "d35eId": "0Am8ojHTHMWHn24j",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bless-weapon",
+    "spanishName": "Bendición del arma"
+  },
+  {
+    "d35eName": "Blight",
+    "d35eId": "XIFEMyOBJ2gQ0fOa",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blight",
+    "spanishName": "Plaga"
+  },
+  {
+    "d35eName": "Blindness/Deafness",
+    "d35eId": "J4jCvV7TlNNQXwNq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blindness/deafness",
+    "spanishName": "Ceguera/Sordera"
+  },
+  {
+    "d35eName": "Blink",
+    "d35eId": "V46KdSa4KpbYLn70",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blink",
+    "spanishName": "Parpadear"
+  },
+  {
+    "d35eName": "Blur",
+    "d35eId": "bKylbcvdpqLjjebC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "blur",
+    "spanishName": "Desdibujar"
+  },
+  {
+    "d35eName": "Brain Spider",
+    "d35eId": "rgmWc7F67QOGJ2DR",
+    "sourceCode": "spellsCDiv",
+    "sourceBook": "Complete Divine",
+    "dndtoolsSlug": "brain-spider",
+    "spanishName": "Araña cerebral"
+  },
+  {
+    "d35eName": "Break Enchantment",
+    "d35eId": "naZhUzoyA82gaKQv",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "break-enchantment",
+    "spanishName": "Romper encantamiento"
+  },
+  {
+    "d35eName": "Bull's Strength",
+    "d35eId": "JCW98LiIRWEoHHex",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "bulls-strength",
+    "spanishName": "La fuerza del toro"
+  },
+  {
+    "d35eName": "Burning Hands",
+    "d35eId": "Rn7g1pzZCkMLAlw0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "burning-hands",
+    "spanishName": "Manos ardientes"
+  },
+  {
+    "d35eName": "Call Lightning",
+    "d35eId": "EbSCb5BGKDwbiS8l",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "call-lightning",
+    "spanishName": "Llamar a Lightning"
+  },
+  {
+    "d35eName": "Call Lightning Storm",
+    "d35eId": "TQG0wIUy4L8lkroA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "call-lightning-storm",
+    "spanishName": "Llamar a Tormenta Eléctrica"
+  },
+  {
+    "d35eName": "Calm Animals",
+    "d35eId": "6BG19ULqrAIiFaPj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "calm-animals",
+    "spanishName": "Animales tranquilos"
+  },
+  {
+    "d35eName": "Calm Emotions",
+    "d35eId": "ivFe3rtZDaxpr7QP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "calm-emotions",
+    "spanishName": "Calma las emociones"
+  },
+  {
+    "d35eName": "Cat's Grace",
+    "d35eId": "oUGewqHKI85iXaus",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cats-grace",
+    "spanishName": "Gracia de gato"
+  },
+  {
+    "d35eName": "Cause Fear",
+    "d35eId": "jUlagUDBCwBk3p6m",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cause-fear",
+    "spanishName": "Causar miedo"
+  },
+  {
+    "d35eName": "Chain Lightning",
+    "d35eId": "o6Hx4ks8FB0nn2zD",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "chain-lightning",
+    "spanishName": "Cadena de relámpagos"
+  },
+  {
+    "d35eName": "Changestaff",
+    "d35eId": "7NZNxWVeIfY7oMOQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "changestaff",
+    "spanishName": "Bastón de cambio"
+  },
+  {
+    "d35eName": "Charm Animal",
+    "d35eId": "rD8aBYtxgP73TWu9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "charm-animal",
+    "spanishName": "Encanto animal"
+  },
+  {
+    "d35eName": "Charm Monster",
+    "d35eId": "3HZityT2ZO97abpN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "charm-monster",
+    "spanishName": "Monstruo de encanto"
+  },
+  {
+    "d35eName": "Charm Person",
+    "d35eId": "al3PpAW92d6bb5PS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "charm-person",
+    "spanishName": "Persona encantadora"
+  },
+  {
+    "d35eName": "Chill Metal",
+    "d35eId": "2HUzZtFJLpwdiySG",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "chill-metal",
+    "spanishName": "Enfriar el metal"
+  },
+  {
+    "d35eName": "Chill Touch",
+    "d35eId": "9csks9RJQVh68yn0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "chill-touch",
+    "spanishName": "Toque Chill"
+  },
+  {
+    "d35eName": "Circle of Death",
+    "d35eId": "AwfANXzxiZvgR8Md",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "circle-of-death",
+    "spanishName": "Círculo de la muerte"
+  },
+  {
+    "d35eName": "Clairaudience/Clairvoyance",
+    "d35eId": "Ih7GmzIZkgEb7bfW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "clairaudience/clairvoyance",
+    "spanishName": "Clariaudiencia/Clarividencia"
+  },
+  {
+    "d35eName": "Clenched Fist",
+    "d35eId": "1T86vD66NyZ3Agkf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "clenched-fist",
+    "spanishName": "Puño cerrado"
+  },
+  {
+    "d35eName": "Cloak of Chaos",
+    "d35eId": "ejTbbzhPEVwbsHnC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cloak-of-chaos",
+    "spanishName": "Capa del caos"
+  },
+  {
+    "d35eName": "Clone",
+    "d35eId": "Ci9vj0LwkQgbP0Xx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "clone",
+    "spanishName": "Clon"
+  },
+  {
+    "d35eName": "Cloudkill",
+    "d35eId": "1VuyAC4gvYndmyY9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cloudkill",
+    "spanishName": "Muerte en las nubes"
+  },
+  {
+    "d35eName": "Color Spray",
+    "d35eId": "QnljaWn61ORQBYs1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "color-spray",
+    "spanishName": "Color Spray"
+  },
+  {
+    "d35eName": "Command",
+    "d35eId": "UzPNyONFwjgTXZ3S",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "command",
+    "spanishName": "Mandar"
+  },
+  {
+    "d35eName": "Command Plants",
+    "d35eId": "JavSoyWkCZpKEHjE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "command-plants",
+    "spanishName": "Plantas de mando"
+  },
+  {
+    "d35eName": "Command Undead",
+    "d35eId": "98Msb2LidcoPRNEZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "command-undead",
+    "spanishName": "Ordena a los muertos vivientes"
+  },
+  {
+    "d35eName": "Commune",
+    "d35eId": "AlyFYfAnqWxsgHnj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "commune",
+    "spanishName": "Comuna"
+  },
+  {
+    "d35eName": "Commune with Nature",
+    "d35eId": "mRviAmnVbZAMbYmY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "commune-with-nature",
+    "spanishName": "Comulgar con la naturaleza"
+  },
+  {
+    "d35eName": "Comprehend Languages",
+    "d35eId": "BGeAhjtsnDcY6iTV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "comprehend-languages",
+    "spanishName": "Comprender idiomas"
+  },
+  {
+    "d35eName": "Cone of Cold",
+    "d35eId": "yRt88wZPWSSwu4Ho",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cone-of-cold",
+    "spanishName": "Cono de frío"
+  },
+  {
+    "d35eName": "Confusion",
+    "d35eId": "aTksZx8GiMbeWzMf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "confusion",
+    "spanishName": "Confusión"
+  },
+  {
+    "d35eName": "Consecrate",
+    "d35eId": "IwZW1igoPFYhnDPE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "consecrate",
+    "spanishName": "Consagrar"
+  },
+  {
+    "d35eName": "Contact Other Plane",
+    "d35eId": "uJnAJ0dkk2MyCVpf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "contact-other-plane",
+    "spanishName": "Contacta con otro avión"
+  },
+  {
+    "d35eName": "Contagion",
+    "d35eId": "A6OzqkKDwOdfSCFq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "contagion",
+    "spanishName": "Contagio"
+  },
+  {
+    "d35eName": "Contingency",
+    "d35eId": "xZcnKp7sFYAbKuyK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "contingency",
+    "spanishName": "Contingencia"
+  },
+  {
+    "d35eName": "Continual Flame",
+    "d35eId": "V13HaBxmB2REfcP3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "continual-flame",
+    "spanishName": "Llama continua"
+  },
+  {
+    "d35eName": "Control Plants",
+    "d35eId": "TmiJ3aIm8Pj3d2jY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "control-plants",
+    "spanishName": "Plantas de control"
+  },
+  {
+    "d35eName": "Control Undead",
+    "d35eId": "91VAS4HClq6cAO9X",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "control-undead",
+    "spanishName": "Controla a los muertos vivientes"
+  },
+  {
+    "d35eName": "Control Water",
+    "d35eId": "BpGhXSJ16pDLMQii",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "control-water",
+    "spanishName": "Controlar el agua"
+  },
+  {
+    "d35eName": "Control Weather",
+    "d35eId": "gPrhyHACnFtybVfh",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "control-weather",
+    "spanishName": "Controlar el clima"
+  },
+  {
+    "d35eName": "Control Winds",
+    "d35eId": "ollx1hOpJvtk3tyN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "control-winds",
+    "spanishName": "Controlar los vientos"
+  },
+  {
+    "d35eName": "Create Food and Water",
+    "d35eId": "Pn3mswM2nSXe8uYv",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "create-food-and-water",
+    "spanishName": "Crear comida y agua"
+  },
+  {
+    "d35eName": "Create Greater Undead",
+    "d35eId": "6KC1WFyeaiVwG0Hk",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "create-greater-undead",
+    "spanishName": "Crea muertos vivientes más grandes"
+  },
+  {
+    "d35eName": "Create Undead",
+    "d35eId": "budcjvyz0928jjMq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "create-undead",
+    "spanishName": "Crear muertos vivientes"
+  },
+  {
+    "d35eName": "Create Water",
+    "d35eId": "rbvuFQQ2fTFmgIGH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "create-water",
+    "spanishName": "Crear agua"
+  },
+  {
+    "d35eName": "Creeping Doom",
+    "d35eId": "N5k4wd7vWqwaeSrK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "creeping-doom",
+    "spanishName": "Perdición sigilosa"
+  },
+  {
+    "d35eName": "Crushing Despair",
+    "d35eId": "8C8g2CC3c9R5FJMY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "crushing-despair",
+    "spanishName": "Desesperación aplastante"
+  },
+  {
+    "d35eName": "Crushing Hand",
+    "d35eId": "89DUhO2qKpSwQJa0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "crushing-hand",
+    "spanishName": "Mano aplastante"
+  },
+  {
+    "d35eName": "Cure Critical Wounds",
+    "d35eId": "2lHwVVUfHYjS10dj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cure-critical-wounds",
+    "spanishName": "Cura heridas críticas"
+  },
+  {
+    "d35eName": "Cure Light Wounds",
+    "d35eId": "lx681rDErdOKErnV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cure-light-wounds",
+    "spanishName": "Cura heridas leves"
+  },
+  {
+    "d35eName": "Cure Minor Wounds",
+    "d35eId": "VCcwW0xCkj6vVTed",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cure-minor-wounds",
+    "spanishName": "Cura heridas menores"
+  },
+  {
+    "d35eName": "Cure Moderate Wounds",
+    "d35eId": "XDUOxKSwjF8BOpY4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cure-moderate-wounds",
+    "spanishName": "Cura heridas moderadas"
+  },
+  {
+    "d35eName": "Cure Serious Wounds",
+    "d35eId": "7wBkhLIOLd0Y6OSu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "cure-serious-wounds",
+    "spanishName": "Curar heridas graves"
+  },
+  {
+    "d35eName": "Curse Water",
+    "d35eId": "FIXdXtHQHaNqO9qR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "curse-water",
+    "spanishName": "Agua maldita"
+  },
+  {
+    "d35eName": "Dancing Lights",
+    "d35eId": "hKsQ9sMkqQ157IFA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dancing-lights",
+    "spanishName": "Luces danzantes"
+  },
+  {
+    "d35eName": "Darkness",
+    "d35eId": "7oANjVX03tXwV9Tx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "darkness",
+    "spanishName": "Oscuridad"
+  },
+  {
+    "d35eName": "Darkvision",
+    "d35eId": "YTBT4srCra9tGISq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "darkvision",
+    "spanishName": "Visión oscura"
+  },
+  {
+    "d35eName": "Daylight",
+    "d35eId": "LZ53UIHBtT4V3Sq4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "daylight",
+    "spanishName": "Luz del día"
+  },
+  {
+    "d35eName": "Daze",
+    "d35eId": "PumNOn05E9LTYmSV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "daze",
+    "spanishName": "Aturdir"
+  },
+  {
+    "d35eName": "Daze Monster",
+    "d35eId": "NcXD80ZUAC501aGH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "daze-monster",
+    "spanishName": "Monstruo aturdido"
+  },
+  {
+    "d35eName": "Death Knell",
+    "d35eId": "GAyNn31D1vtpPBDl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "death-knell",
+    "spanishName": "Sentencia de muerte"
+  },
+  {
+    "d35eName": "Death Ward",
+    "d35eId": "tVAFx8IN3akLSPLU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "death-ward",
+    "spanishName": "Guardián de la muerte"
+  },
+  {
+    "d35eName": "Deathwatch",
+    "d35eId": "eF22Ab1hfrV9hwfQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "deathwatch",
+    "spanishName": "Deathwatch"
+  },
+  {
+    "d35eName": "Deep Slumber",
+    "d35eId": "JBPy9iirHDFOZKqb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "deep-slumber",
+    "spanishName": "Sueño profundo"
+  },
+  {
+    "d35eName": "Deeper Darkness",
+    "d35eId": "MWIL4eVrTnHiDoGj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "deeper-darkness",
+    "spanishName": "Oscuridad más profunda"
+  },
+  {
+    "d35eName": "Delay Poison",
+    "d35eId": "eTtunohE97YfKXth",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "delay-poison",
+    "spanishName": "Veneno de retardo"
+  },
+  {
+    "d35eName": "Delayed Blast Fireball",
+    "d35eId": "JzpHpUS3oHdXfmlx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "delayed-blast-fireball",
+    "spanishName": "Bola de fuego de explosión retardada"
+  },
+  {
+    "d35eName": "Demand",
+    "d35eId": "88iPMkKzlXsL7lmt",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "demand",
+    "spanishName": "Demanda"
+  },
+  {
+    "d35eName": "Desecrate",
+    "d35eId": "MDfp5Dl7k1nJtZJ6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "desecrate",
+    "spanishName": "Profanar"
+  },
+  {
+    "d35eName": "Destruction",
+    "d35eId": "l9dGjuvmSaIIcnRy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "destruction",
+    "spanishName": "Destrucción"
+  },
+  {
+    "d35eName": "Detect Animals or Plants",
+    "d35eId": "cVocfPsRuX40E8ZN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-animals-or-plants",
+    "spanishName": "Detectar animales o plantas"
+  },
+  {
+    "d35eName": "Detect Law",
+    "d35eId": "sq0GVJvG06Wy4gFu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-law",
+    "spanishName": "Ley"
+  },
+  {
+    "d35eName": "Detect Magic",
+    "d35eId": "VQ0QrFKM2yYHt9lm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-magic",
+    "spanishName": "Detectar magia"
+  },
+  {
+    "d35eName": "Detect Poison",
+    "d35eId": "4Fft2YFK5hYgwroJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-poison",
+    "spanishName": "Detectar veneno"
+  },
+  {
+    "d35eName": "Detect Scrying",
+    "d35eId": "cuaeNcyVCOXvtXDI",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-scrying",
+    "spanishName": "Detección de adivinación"
+  },
+  {
+    "d35eName": "Detect Secret Doors",
+    "d35eId": "VP5wHcGta9ovJxhf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-secret-doors",
+    "spanishName": "Detectar puertas secretas"
+  },
+  {
+    "d35eName": "Detect Snares and Pits",
+    "d35eId": "gQcKVw6aLZW84X9a",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-snares-and-pits",
+    "spanishName": "Detectar trampas y pozos"
+  },
+  {
+    "d35eName": "Detect Thoughts",
+    "d35eId": "o3RiGJdh6e4vJ0v1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-thoughts",
+    "spanishName": "Detectar pensamientos"
+  },
+  {
+    "d35eName": "Detect Undead",
+    "d35eId": "cQN4hJnnNRKj09SL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "detect-undead",
+    "spanishName": "Detectar muertos vivientes"
+  },
+  {
+    "d35eName": "Dictum",
+    "d35eId": "KqyIyAo9UfY7z2Vz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dictum",
+    "spanishName": "Dictum"
+  },
+  {
+    "d35eName": "Dimension Door",
+    "d35eId": "m52bs85t9XUmQQ6T",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dimension-door",
+    "spanishName": "Puerta de dimensión"
+  },
+  {
+    "d35eName": "Dimensional Anchor",
+    "d35eId": "8gyZIoiXjQcQ57pq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dimensional-anchor",
+    "spanishName": "Anclaje dimensional"
+  },
+  {
+    "d35eName": "Dimensional Lock",
+    "d35eId": "kjuyWnsAgSicfTuF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dimensional-lock",
+    "spanishName": "Cerradura dimensional"
+  },
+  {
+    "d35eName": "Diminish Plants",
+    "d35eId": "p6by93Lc8RNKAbOR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "diminish-plants",
+    "spanishName": "Disminuir las plantas"
+  },
+  {
+    "d35eName": "Discern Lies",
+    "d35eId": "T01qml94rxAf8Njo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "discern-lies",
+    "spanishName": "Discernir mentiras"
+  },
+  {
+    "d35eName": "Discern Location",
+    "d35eId": "cn0KgW9Tc61dTJMf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "discern-location",
+    "spanishName": "Discernir la ubicación"
+  },
+  {
+    "d35eName": "Disguise Self",
+    "d35eId": "Tf0kQRVs5eCTfjAI",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "disguise-self",
+    "spanishName": "Disfrazarse a sí mismo"
+  },
+  {
+    "d35eName": "Disintegrate",
+    "d35eId": "dbzLkfBfQHCpcuao",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "disintegrate",
+    "spanishName": "Desintegrar"
+  },
+  {
+    "d35eName": "Dismissal",
+    "d35eId": "Kjstvtj9MhKuOiVD",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dismissal",
+    "spanishName": "Despido"
+  },
+  {
+    "d35eName": "Dispel Chaos",
+    "d35eId": "L5dCKMHhQlW8ENuS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dispel-chaos",
+    "spanishName": "Disipar el caos"
+  },
+  {
+    "d35eName": "Dispel Evil",
+    "d35eId": "WVp3qvbS5faWEqmh",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dispel-evil",
+    "spanishName": "Disipar el mal"
+  },
+  {
+    "d35eName": "Dispel Law",
+    "d35eId": "Iu5Jmwu4Ai987eng",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dispel-law",
+    "spanishName": "Ley"
+  },
+  {
+    "d35eName": "Dispel Magic",
+    "d35eId": "Q3ZxRzrxld8P0t1v",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dispel-magic",
+    "spanishName": "Disipar magia"
+  },
+  {
+    "d35eName": "Displacement",
+    "d35eId": "C7Yi8lOzceDvLivl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "displacement",
+    "spanishName": "Desplazamiento"
+  },
+  {
+    "d35eName": "Disrupt Undead",
+    "d35eId": "HuG4m96DjaRKDPCs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "disrupt-undead",
+    "spanishName": "Perturbar a los muertos vivientes"
+  },
+  {
+    "d35eName": "Disrupting Weapon",
+    "d35eId": "AeSVgukb9HjdLxQ3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "disrupting-weapon",
+    "spanishName": "Arma disruptiva"
+  },
+  {
+    "d35eName": "Divination",
+    "d35eId": "T3PpyvMY5abxs6Vd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "divination",
+    "spanishName": "Adivinación"
+  },
+  {
+    "d35eName": "Divine Favor",
+    "d35eId": "qIdVROi2KGyeF8Ta",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "divine-favor",
+    "spanishName": "Favor divino"
+  },
+  {
+    "d35eName": "Divine Power",
+    "d35eId": "azlX5f7Y6FgCgraF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "divine-power",
+    "spanishName": "Poder divino"
+  },
+  {
+    "d35eName": "Dominate Animal",
+    "d35eId": "k3fJj0wYKAUTL2w5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dominate-animal",
+    "spanishName": "Dominar animal"
+  },
+  {
+    "d35eName": "Dominate Monster",
+    "d35eId": "mZatXlQCqqSwPBxu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dominate-monster",
+    "spanishName": "Monstruo dominador"
+  },
+  {
+    "d35eName": "Dominate Person",
+    "d35eId": "eWrsXRG3zUNKkOkL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dominate-person",
+    "spanishName": "Dominar a la persona"
+  },
+  {
+    "d35eName": "Doom",
+    "d35eId": "eoNb90oF8gUZjk4M",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "doom",
+    "spanishName": "Condenar"
+  },
+  {
+    "d35eName": "Dream",
+    "d35eId": "TShSM87waQ7s8GOL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "dream",
+    "spanishName": "Soñar"
+  },
+  {
+    "d35eName": "Eagle's Splendor",
+    "d35eId": "2SutQYPELV2cBPhC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "eagles-splendor",
+    "spanishName": "Esplendor del Águila"
+  },
+  {
+    "d35eName": "Earthquake",
+    "d35eId": "R84pWimeUvLYQPV9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "earthquake",
+    "spanishName": "Terremoto"
+  },
+  {
+    "d35eName": "Elemental Swarm",
+    "d35eId": "gl974KOYdXBh6ics",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "elemental-swarm",
+    "spanishName": "Enjambre elemental"
+  },
+  {
+    "d35eName": "Endure Elements",
+    "d35eId": "MKZBlD9shmhCN8CO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "endure-elements",
+    "spanishName": "Elementos de resistencia"
+  },
+  {
+    "d35eName": "Energy Drain",
+    "d35eId": "ICbH2Ta3PIKTCD9Y",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "energy-drain",
+    "spanishName": "Drenaje de energía"
+  },
+  {
+    "d35eName": "Enervation",
+    "d35eId": "fA9C8npfKIGZlfa4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "enervation",
+    "spanishName": "Enervación"
+  },
+  {
+    "d35eName": "Enlarge Person",
+    "d35eId": "kRfTmmH5sBfYEd8Y",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "enlarge-person",
+    "spanishName": "Agrandar persona"
+  },
+  {
+    "d35eName": "Entangle",
+    "d35eId": "UmqKutXg5i8czZj9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "entangle",
+    "spanishName": "Enredar"
+  },
+  {
+    "d35eName": "Enthrall",
+    "d35eId": "o2pnGuRFC7AYEsOu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "enthrall",
+    "spanishName": "Esclavizar"
+  },
+  {
+    "d35eName": "Entropic Shield",
+    "d35eId": "ztCcHLNlBNEPMmtT",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "entropic-shield",
+    "spanishName": "Escudo entrópico"
+  },
+  {
+    "d35eName": "Erase",
+    "d35eId": "qDYgaZpuqg0EDcQb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "erase",
+    "spanishName": "Borrar"
+  },
+  {
+    "d35eName": "Ethereal Jaunt",
+    "d35eId": "fxkHqgOBmOxeX7f9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ethereal-jaunt",
+    "spanishName": "Excursión etérea"
+  },
+  {
+    "d35eName": "Etherealness",
+    "d35eId": "6PZpdd9LmskqLFuW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "etherealness",
+    "spanishName": "Etéreo"
+  },
+  {
+    "d35eName": "Expeditious Retreat",
+    "d35eId": "UhltFHfH9Bvl5vL8",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "expeditious-retreat",
+    "spanishName": "Retiro expedito"
+  },
+  {
+    "d35eName": "Explosive Runes",
+    "d35eId": "F0jrZnKV3IZFAtfx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "explosive-runes",
+    "spanishName": "Runas explosivas"
+  },
+  {
+    "d35eName": "Eyebite",
+    "d35eId": "Yw0hJKW4wRPFgnqL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "eyebite",
+    "spanishName": "Mordedura de ojo"
+  },
+  {
+    "d35eName": "Fabricate",
+    "d35eId": "gfKkkQjFezSKNaRs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fabricate",
+    "spanishName": "Fabricar"
+  },
+  {
+    "d35eName": "Faerie Fire",
+    "d35eId": "3EgXhabKN6z7sUTQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "faerie-fire",
+    "spanishName": "Fuego feérico"
+  },
+  {
+    "d35eName": "False Life",
+    "d35eId": "jticw6hCusqBpZrH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "false-life",
+    "spanishName": "Vida falsa"
+  },
+  {
+    "d35eName": "False Vision",
+    "d35eId": "r5tW82iYyFtdul4Y",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "false-vision",
+    "spanishName": "Visión falsa"
+  },
+  {
+    "d35eName": "Fear",
+    "d35eId": "SjzZZsvtDYZWAIEf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fear",
+    "spanishName": "Miedo"
+  },
+  {
+    "d35eName": "Feather Fall",
+    "d35eId": "cVbi3hdgRjfWvpwH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "feather-fall",
+    "spanishName": "Caída de plumas"
+  },
+  {
+    "d35eName": "Feeblemind",
+    "d35eId": "wG3siePw7Qadtf57",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "feeblemind",
+    "spanishName": "Débil mental"
+  },
+  {
+    "d35eName": "Find the Path",
+    "d35eId": "sGNVfiLKm18UKMbe",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "find-the-path",
+    "spanishName": "Encuentra el camino"
+  },
+  {
+    "d35eName": "Find Traps",
+    "d35eId": "w7VSXFI6v9WgRR3x",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "find-traps",
+    "spanishName": "Buscar trampas"
+  },
+  {
+    "d35eName": "Finger of Death",
+    "d35eId": "C3Urh4w2v1DUyIDU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "finger-of-death",
+    "spanishName": "Dedo de la muerte"
+  },
+  {
+    "d35eName": "Fire Seeds",
+    "d35eId": "zjP5diRPaLjmtujc",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fire-seeds",
+    "spanishName": "Semillas de fuego"
+  },
+  {
+    "d35eName": "Fire Shield",
+    "d35eId": "yT2GoqIuPRJP3R7w",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fire-shield",
+    "spanishName": "Escudo de fuego"
+  },
+  {
+    "d35eName": "Fire Storm",
+    "d35eId": "I55KnqaEXhS1lPjE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fire-storm",
+    "spanishName": "Tormenta de fuego"
+  },
+  {
+    "d35eName": "Fire Trap",
+    "d35eId": "MPvqeo8R2Kg2sXVS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fire-trap",
+    "spanishName": "Trampa de fuego"
+  },
+  {
+    "d35eName": "Fireball",
+    "d35eId": "D1KgQc1fRyoNPNwY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fireball",
+    "spanishName": "Bola de fuego"
+  },
+  {
+    "d35eName": "Flame Arrow",
+    "d35eId": "h9GFtIfoZ9asRvnb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flame-arrow",
+    "spanishName": "Flecha de llamas"
+  },
+  {
+    "d35eName": "Flame Blade",
+    "d35eId": "4TADJNLRmWFW3diW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flame-blade",
+    "spanishName": "Hoja de fuego"
+  },
+  {
+    "d35eName": "Flame Strike",
+    "d35eId": "33IaP5Cu8pc77nrP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flame-strike",
+    "spanishName": "Golpe de llamas"
+  },
+  {
+    "d35eName": "Flaming Sphere",
+    "d35eId": "1l4d3SLTWmhsBwry",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flaming-sphere",
+    "spanishName": "Esfera llameante"
+  },
+  {
+    "d35eName": "Flare",
+    "d35eId": "DrawdRvngr5BROZ3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flare",
+    "spanishName": "Bengala"
+  },
+  {
+    "d35eName": "Flesh to Stone",
+    "d35eId": "HwtT5onkGNaTEawn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "flesh-to-stone",
+    "spanishName": "De la carne a la piedra"
+  },
+  {
+    "d35eName": "Floating Disk",
+    "d35eId": "HWwvwanBw8vZj2qH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "floating-disk",
+    "spanishName": "Disco flotante"
+  },
+  {
+    "d35eName": "Fly",
+    "d35eId": "7V1PIzImnnFj5ApS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fly",
+    "spanishName": "Volar"
+  },
+  {
+    "d35eName": "Fog Cloud",
+    "d35eId": "NSymc8VJcujb9KbU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "fog-cloud",
+    "spanishName": "Nube de niebla"
+  },
+  {
+    "d35eName": "Forbiddance",
+    "d35eId": "LJTmNlGX4G8VI937",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "forbiddance",
+    "spanishName": "Prohibición"
+  },
+  {
+    "d35eName": "Forcecage",
+    "d35eId": "2LRiC1jwp98Sh099",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "forcecage",
+    "spanishName": "Jaula de fuerza"
+  },
+  {
+    "d35eName": "Forceful Hand",
+    "d35eId": "0CufKUNi0F8yb15h",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "forceful-hand",
+    "spanishName": "Mano contundente"
+  },
+  {
+    "d35eName": "Foresight",
+    "d35eId": "LGpkoBko85bfMGGR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "foresight",
+    "spanishName": "Previsión"
+  },
+  {
+    "d35eName": "Fox's Cunning",
+    "d35eId": "uFNncGNlYcbfXwyF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "foxs-cunning",
+    "spanishName": "La astucia del zorro"
+  },
+  {
+    "d35eName": "Freedom",
+    "d35eId": "aRnnsOZ7GMxl9YEv",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "freedom",
+    "spanishName": "Libertad"
+  },
+  {
+    "d35eName": "Freedom of Movement",
+    "d35eId": "lGqW1HXBJ9RFlmq7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "freedom-of-movement",
+    "spanishName": "Libertad de circulación"
+  },
+  {
+    "d35eName": "Freezing Sphere",
+    "d35eId": "eYWRJetLousfA3fq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "freezing-sphere",
+    "spanishName": "Esfera de congelación"
+  },
+  {
+    "d35eName": "Gaseous Form",
+    "d35eId": "WnffsVkcpoGRh7pW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "gaseous-form",
+    "spanishName": "Forma gaseosa"
+  },
+  {
+    "d35eName": "Gate",
+    "d35eId": "SyUS4aTUUiUX36ru",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "gate",
+    "spanishName": "Puerta"
+  },
+  {
+    "d35eName": "Geas/Quest",
+    "d35eId": "PmuATY5IsYxnqqJr",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "geas/quest",
+    "spanishName": "Geas/Misión"
+  },
+  {
+    "d35eName": "Gentle Repose",
+    "d35eId": "eUI071FPP0Oh3n3o",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "gentle-repose",
+    "spanishName": "Reposo suave"
+  },
+  {
+    "d35eName": "Ghost Sound",
+    "d35eId": "NnostdvA9EgsItK1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ghost-sound",
+    "spanishName": "Sonido fantasma"
+  },
+  {
+    "d35eName": "Ghoul Touch",
+    "d35eId": "sdtuLi4vpOSjvruR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ghoul-touch",
+    "spanishName": "Toque necrófago"
+  },
+  {
+    "d35eName": "Giant Vermin",
+    "d35eId": "4lurhzdg4dKVo1GW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "giant-vermin",
+    "spanishName": "Alimañas gigantes"
+  },
+  {
+    "d35eName": "Glibness",
+    "d35eId": "KyXeLlsoNcf9FXbx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "glibness",
+    "spanishName": "Psicópata"
+  },
+  {
+    "d35eName": "Glitterdust",
+    "d35eId": "IHDtX1q1IKwpsWWV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "glitterdust",
+    "spanishName": "Polvo de purpurina"
+  },
+  {
+    "d35eName": "Globe of Invulnerability",
+    "d35eId": "U359HTtJoZGdAGL9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "globe-of-invulnerability",
+    "spanishName": "Globo de invulnerabilidad"
+  },
+  {
+    "d35eName": "Glyph of Warding",
+    "d35eId": "CI6AORRQdWyH3y6Q",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "glyph-of-warding",
+    "spanishName": "Glifo de Resguardo"
+  },
+  {
+    "d35eName": "Good Hope",
+    "d35eId": "WFPAOR1iNQNQPwjF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "good-hope",
+    "spanishName": "Buena esperanza"
+  },
+  {
+    "d35eName": "Goodberry",
+    "d35eId": "DTIpYZl8AD3AK0Lv",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "goodberry",
+    "spanishName": "Goodberry"
+  },
+  {
+    "d35eName": "Grasping Hand",
+    "d35eId": "kQrSkAvtKfzenVI2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "grasping-hand",
+    "spanishName": "Mano que agarra"
+  },
+  {
+    "d35eName": "Grease",
+    "d35eId": "RoNN3vErCW37IJYO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "grease",
+    "spanishName": "Grasa"
+  },
+  {
+    "d35eName": "Arcane Sight, Greater",
+    "d35eId": "FTDFdTuQzZ8hDFEd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-arcane-sight",
+    "spanishName": "Visión Arcana, Mayor"
+  },
+  {
+    "d35eName": "Command, Greater",
+    "d35eId": "ky6v3zyFawbmHrC4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-command",
+    "spanishName": "Comando, Mayor"
+  },
+  {
+    "d35eName": "Dispel Magic, Greater",
+    "d35eId": "CvZsZBYyEmKtZgBf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-dispel-magic",
+    "spanishName": "Disipar magia, mayor"
+  },
+  {
+    "d35eName": "Glyph of Warding, Greater",
+    "d35eId": "XDVYVdgkaYzf64tV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-glyph-of-warding",
+    "spanishName": "Glifo de Resguardo, Mayor"
+  },
+  {
+    "d35eName": "Heroism, Greater",
+    "d35eId": "7yOTXbsbrlzhUmJP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-heroism",
+    "spanishName": "Heroísmo, mayor"
+  },
+  {
+    "d35eName": "Invisibility, Greater",
+    "d35eId": "uaB47M8fYNuZ8mwO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-invisibility",
+    "spanishName": "Invisibilidad, Mayor"
+  },
+  {
+    "d35eName": "Magic Fang, Greater",
+    "d35eId": "h6gW9VgxNItQEvwj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-magic-fang",
+    "spanishName": "Colmillo mágico, mayor"
+  },
+  {
+    "d35eName": "Magic Weapon, Greater",
+    "d35eId": "NAGahbSLUOX6gY5F",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-magic-weapon",
+    "spanishName": "Arma mágica, mayor"
+  },
+  {
+    "d35eName": "Planar Ally, Greater",
+    "d35eId": "cbWV50feANugYcUC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-planar-ally",
+    "spanishName": "Aliado Planar, Mayor"
+  },
+  {
+    "d35eName": "Planar Binding, Greater",
+    "d35eId": "0rmXLGEwzknQiLHC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-planar-binding",
+    "spanishName": "Encuadernación plana, mayor"
+  },
+  {
+    "d35eName": "Prying Eyes, Greater",
+    "d35eId": "Jueq1zWf5giPyyTT",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-prying-eyes",
+    "spanishName": "Miradas indiscretas, mayor"
+  },
+  {
+    "d35eName": "Restoration, Greater",
+    "d35eId": "uqA7lJwSvvF8VlJs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-restoration",
+    "spanishName": "Restauración, Mayor"
+  },
+  {
+    "d35eName": "Scrying, Greater",
+    "d35eId": "PkWr6vlf8aGWjWXq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-scrying",
+    "spanishName": "Adivinación, Mayor"
+  },
+  {
+    "d35eName": "Shadow Conjuration, Greater",
+    "d35eId": "UpSwu3pVvfmlabwl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-shadow-conjuration",
+    "spanishName": "Conjuro de las Sombras, Mayor"
+  },
+  {
+    "d35eName": "Shadow Evocation, Greater",
+    "d35eId": "RK1DTvfNFjpy4HV7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-shadow-evocation",
+    "spanishName": "Evocación de las Sombras, Mayor"
+  },
+  {
+    "d35eName": "Shout, Greater",
+    "d35eId": "d4H8qB8A8reojhMW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-shout",
+    "spanishName": "Grita, más grande"
+  },
+  {
+    "d35eName": "Spell Immunity, Greater",
+    "d35eId": "p2cucgiwmSU00x92",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-spell-immunity",
+    "spanishName": "Inmunidad a hechizos, mayor"
+  },
+  {
+    "d35eName": "Status, Greater",
+    "d35eId": "UJok3rfGMsAptqRq",
+    "sourceCode": "spellsboed",
+    "sourceBook": "Book of Exalted Deeds",
+    "dndtoolsSlug": "greater-status",
+    "spanishName": "Mayor estatus"
+  },
+  {
+    "d35eName": "Teleport, Greater",
+    "d35eId": "9oUQnFJTAtz91x3d",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "greater-teleport",
+    "spanishName": "Teletransportación, Mayor"
+  },
+  {
+    "d35eName": "Guards and Wards",
+    "d35eId": "jXEivCiOdWAaoKvh",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "guards-and-wards",
+    "spanishName": "Guardias y Guardianes"
+  },
+  {
+    "d35eName": "Guidance",
+    "d35eId": "bFeljW0Ema74SKa1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "guidance",
+    "spanishName": "Orientación"
+  },
+  {
+    "d35eName": "Gust of Wind",
+    "d35eId": "3SNjukRaYrME0PTP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "gust-of-wind",
+    "spanishName": "Ráfaga de viento"
+  },
+  {
+    "d35eName": "Hallow",
+    "d35eId": "8p6ZzocExHZg4YIg",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hallow",
+    "spanishName": "Santificar"
+  },
+  {
+    "d35eName": "Hallucinatory Terrain",
+    "d35eId": "IVSLIDMaRkhG0far",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hallucinatory-terrain",
+    "spanishName": "Terreno alucinatorio"
+  },
+  {
+    "d35eName": "Halt Undead",
+    "d35eId": "33HPqDEgkCyQW6h2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "halt-undead",
+    "spanishName": "Detener a los muertos vivientes"
+  },
+  {
+    "d35eName": "Harm",
+    "d35eId": "t0So1S0tJsnGsX4e",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "harm",
+    "spanishName": "Daño"
+  },
+  {
+    "d35eName": "Haste",
+    "d35eId": "p8hKPtpj8yYC1Lg5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "haste",
+    "spanishName": "Prisa"
+  },
+  {
+    "d35eName": "Heal",
+    "d35eId": "fz3Y3vSN2dMZE27G",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "heal",
+    "spanishName": "Curar"
+  },
+  {
+    "d35eName": "Heal Mount",
+    "d35eId": "YZXsVTBioRJfQzbA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "heal-mount",
+    "spanishName": "Montura de curación"
+  },
+  {
+    "d35eName": "Heat Metal",
+    "d35eId": "gAFT7x9HWtGcj9D4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "heat-metal",
+    "spanishName": "Metal de calor"
+  },
+  {
+    "d35eName": "Helping Hand",
+    "d35eId": "XsKQQHQDQFnokzBp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "helping-hand",
+    "spanishName": "Mano amiga"
+  },
+  {
+    "d35eName": "Heroes' Feast",
+    "d35eId": "XT362nAY9eoVk5yf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "heroes-feast",
+    "spanishName": "Fiesta de los héroes"
+  },
+  {
+    "d35eName": "Heroism",
+    "d35eId": "gaxsae97RMnt8Am2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "heroism",
+    "spanishName": "Heroísmo"
+  },
+  {
+    "d35eName": "Hide from Animals",
+    "d35eId": "Zg5VfwwBlm9vOAsa",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hide-from-animals",
+    "spanishName": "Escóndete de los animales"
+  },
+  {
+    "d35eName": "Hide from Undead",
+    "d35eId": "Wqm23JNKLZQjLLxE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hide-from-undead",
+    "spanishName": "Escóndete de los muertos vivientes"
+  },
+  {
+    "d35eName": "Hideous Laughter",
+    "d35eId": "yL7veeY07HlZM5Ch",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hideous-laughter",
+    "spanishName": "Risa espantosa"
+  },
+  {
+    "d35eName": "Hold Animal",
+    "d35eId": "UWT4zVqajvW36C69",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hold-animal",
+    "spanishName": "Sujetar animal"
+  },
+  {
+    "d35eName": "Hold Monster",
+    "d35eId": "3x2Mwz0AcZ7dCwbo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hold-monster",
+    "spanishName": "Sostén al monstruo"
+  },
+  {
+    "d35eName": "Hold Person",
+    "d35eId": "MT2bmt4IREqtKAJW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hold-person",
+    "spanishName": "Persona de retención"
+  },
+  {
+    "d35eName": "Hold Portal",
+    "d35eId": "ttRav7jzrsyuF4c6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hold-portal",
+    "spanishName": "Mantener el portal"
+  },
+  {
+    "d35eName": "Holy Aura",
+    "d35eId": "Sal6tSoWHT24Ynlm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "holy-aura",
+    "spanishName": "Aura sagrada"
+  },
+  {
+    "d35eName": "Holy Sword",
+    "d35eId": "qq8xKx3us1lab4sz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "holy-sword",
+    "spanishName": "Espada sagrada"
+  },
+  {
+    "d35eName": "Holy Word",
+    "d35eId": "uf411P9rEywFquJ0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "holy-word",
+    "spanishName": "Palabra sagrada"
+  },
+  {
+    "d35eName": "Horrid Wilting",
+    "d35eId": "6t1rGE1LuHrLYmG7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "horrid-wilting",
+    "spanishName": "Marchitez horrible"
+  },
+  {
+    "d35eName": "Hypnotic Pattern",
+    "d35eId": "YOvRcRLZadbsaFPW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hypnotic-pattern",
+    "spanishName": "Patrón hipnótico"
+  },
+  {
+    "d35eName": "Hypnotism",
+    "d35eId": "droNb0P83Sgkb75I",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "hypnotism",
+    "spanishName": "Hipnotismo"
+  },
+  {
+    "d35eName": "Ice Storm",
+    "d35eId": "lFKgDb8voH6AIqjZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ice-storm",
+    "spanishName": "Tormenta de hielo"
+  },
+  {
+    "d35eName": "Identify",
+    "d35eId": "Iq6AMFhnc8sT5WF8",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "identify",
+    "spanishName": "Identificar"
+  },
+  {
+    "d35eName": "Illusory Script",
+    "d35eId": "olTqrte8hmw7W6eN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "illusory-script",
+    "spanishName": "Guión ilusorio"
+  },
+  {
+    "d35eName": "Illusory Wall",
+    "d35eId": "phXizH89X0vz2qC1",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "illusory-wall",
+    "spanishName": "Muro ilusorio"
+  },
+  {
+    "d35eName": "Imbue with Spell Ability",
+    "d35eId": "O4nCUyy4xCpGGXRs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "imbue-with-spell-ability",
+    "spanishName": "Imbuir con habilidad de hechizo"
+  },
+  {
+    "d35eName": "Implosion",
+    "d35eId": "lvd8gq1kRYc0NW24",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "implosion",
+    "spanishName": "Implosión"
+  },
+  {
+    "d35eName": "Imprisonment",
+    "d35eId": "vL3tGVUoDFx61yVd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "imprisonment",
+    "spanishName": "Encarcelamiento"
+  },
+  {
+    "d35eName": "Incendiary Cloud",
+    "d35eId": "ev6r7Ud5hagQNraA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "incendiary-cloud",
+    "spanishName": "Nube incendiaria"
+  },
+  {
+    "d35eName": "Inflict Critical Wounds",
+    "d35eId": "v5xdVyLaHmCk9lZS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "inflict-critical-wounds",
+    "spanishName": "Inflige heridas críticas"
+  },
+  {
+    "d35eName": "Inflict Light Wounds",
+    "d35eId": "7St8VlszF8ENPvIF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "inflict-light-wounds",
+    "spanishName": "Inflige heridas leves"
+  },
+  {
+    "d35eName": "Inflict Minor Wounds",
+    "d35eId": "x1QaYOxTLVookEYl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "inflict-minor-wounds",
+    "spanishName": "Inflige heridas leves"
+  },
+  {
+    "d35eName": "Inflict Moderate Wounds",
+    "d35eId": "dT3tiaTdqqI1Aynm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "inflict-moderate-wounds",
+    "spanishName": "Infligir heridas moderadas"
+  },
+  {
+    "d35eName": "Inflict Serious Wounds",
+    "d35eId": "wXyA1mYJsTArOzjA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "inflict-serious-wounds",
+    "spanishName": "Infligir heridas graves"
+  },
+  {
+    "d35eName": "Insanity",
+    "d35eId": "scgFFZYADaG8j5Go",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "insanity",
+    "spanishName": "Locura"
+  },
+  {
+    "d35eName": "Insect Plague",
+    "d35eId": "qoHDZK08h2KLTZxR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "insect-plague",
+    "spanishName": "Plaga de insectos"
+  },
+  {
+    "d35eName": "Instant Summons",
+    "d35eId": "GvtClidkMz5hrzyG",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "instant-summons",
+    "spanishName": "Invocación instantánea"
+  },
+  {
+    "d35eName": "Interposing Hand",
+    "d35eId": "3eiVBAP28y6v3GmR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "interposing-hand",
+    "spanishName": "Mano que se interpone"
+  },
+  {
+    "d35eName": "Invisibility",
+    "d35eId": "mI78cxrch38mNAcr",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "invisibility",
+    "spanishName": "Invisibilidad"
+  },
+  {
+    "d35eName": "Invisibility Purge",
+    "d35eId": "TUUEg4WZYwkb4dgV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "invisibility-purge",
+    "spanishName": "Purga de invisibilidad"
+  },
+  {
+    "d35eName": "Invisibility Sphere",
+    "d35eId": "x7E9HBvysxKVzXTB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "invisibility-sphere",
+    "spanishName": "Esfera de invisibilidad"
+  },
+  {
+    "d35eName": "Iron Body",
+    "d35eId": "jSEVGMhpt7uTrHd7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "iron-body",
+    "spanishName": "Cuerpo de hierro"
+  },
+  {
+    "d35eName": "Ironwood",
+    "d35eId": "eVEt4di8e7syh338",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ironwood",
+    "spanishName": "Ironwood"
+  },
+  {
+    "d35eName": "Irresistible Dance",
+    "d35eId": "1CrubIxVlkuKEINR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "irresistible-dance",
+    "spanishName": "Danza irresistible"
+  },
+  {
+    "d35eName": "Jump",
+    "d35eId": "EbpF0mSwjXMZWrAB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "jump",
+    "spanishName": "Saltar"
+  },
+  {
+    "d35eName": "Keen Edge",
+    "d35eId": "xy47XmGWD1sf1RKP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "keen-edge",
+    "spanishName": "Filo agudo"
+  },
+  {
+    "d35eName": "Knock",
+    "d35eId": "sdjOwf2uVBZwoX7v",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "knock",
+    "spanishName": "Golpear"
+  },
+  {
+    "d35eName": "Know Direction",
+    "d35eId": "H7tNvFoBfMoRG0sH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "know-direction",
+    "spanishName": "Conozca la dirección"
+  },
+  {
+    "d35eName": "Legend Lore",
+    "d35eId": "MLQznVN66w9bSiHD",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "legend-lore",
+    "spanishName": "Leyenda"
+  },
+  {
+    "d35eName": "Confusion, Lesser",
+    "d35eId": "bjIXmooF6vHFysYO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-confusion",
+    "spanishName": "Menor confusión"
+  },
+  {
+    "d35eName": "Geas, Lesser",
+    "d35eId": "mBuHKRHhLDVQGEvl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-geas",
+    "spanishName": "Geas, Menor"
+  },
+  {
+    "d35eName": "Globe of Invulnerability, Lesser",
+    "d35eId": "UQtkTO6zlBf8t9DF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-globe-of-invulnerability",
+    "spanishName": "Globo de invulnerabilidad, menor"
+  },
+  {
+    "d35eName": "Planar Ally, Lesser",
+    "d35eId": "iTtAQctWYoklAcy6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-planar-ally",
+    "spanishName": "Aliado Planar, Menor"
+  },
+  {
+    "d35eName": "Planar Binding, Lesser",
+    "d35eId": "JzxDJJKQiSdoMloZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-planar-binding",
+    "spanishName": "Encuadernación plana, menor"
+  },
+  {
+    "d35eName": "Restoration, Lesser",
+    "d35eId": "HNTuPBtf1vxJ2Wqd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lesser-restoration",
+    "spanishName": "Restauración, Menor"
+  },
+  {
+    "d35eName": "Levitate",
+    "d35eId": "3bj6czaESLyPQl3t",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "levitate",
+    "spanishName": "Levitar"
+  },
+  {
+    "d35eName": "Light",
+    "d35eId": "6vRdB7yfgB8WjzKF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "light",
+    "spanishName": "Luz"
+  },
+  {
+    "d35eName": "Lightning Bolt",
+    "d35eId": "2Z9C0SLa5VZYvWph",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lightning-bolt",
+    "spanishName": "Rayo"
+  },
+  {
+    "d35eName": "Limited Wish",
+    "d35eId": "S0qy6pSRZpJkD9eA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "limited-wish",
+    "spanishName": "Deseo limitado"
+  },
+  {
+    "d35eName": "Liveoak",
+    "d35eId": "m4DRsPESLmWSsV90",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "liveoak",
+    "spanishName": "Roble vivo"
+  },
+  {
+    "d35eName": "Locate Creature",
+    "d35eId": "27qrZqZvjiCgTlWS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "locate-creature",
+    "spanishName": "Localizar criatura"
+  },
+  {
+    "d35eName": "Locate Object",
+    "d35eId": "Z8YFxwQS7Y1PWUri",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "locate-object",
+    "spanishName": "Localizar objeto"
+  },
+  {
+    "d35eName": "Longstrider",
+    "d35eId": "tV9gtWMItVM5ttCN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "longstrider",
+    "spanishName": "Zancudo Largo"
+  },
+  {
+    "d35eName": "Lullaby",
+    "d35eId": "frCME2IswsJC6aIz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "lullaby",
+    "spanishName": "Arrullo"
+  },
+  {
+    "d35eName": "Mage Armor",
+    "d35eId": "efxfgetTchHAaRew",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mage-armor",
+    "spanishName": "Armadura de mago"
+  },
+  {
+    "d35eName": "Mage Hand",
+    "d35eId": "QfRUvtMX8WLIFxfZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mage-hand",
+    "spanishName": "Mano de mago"
+  },
+  {
+    "d35eName": "Mage's Disjunction",
+    "d35eId": "DZF03WNN5xg9EwDc",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-disjunction",
+    "spanishName": "Disyunción del mago"
+  },
+  {
+    "d35eName": "Mage's Faithful Hound",
+    "d35eId": "S30tyvQv3gwIMo65",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-faithful-hound",
+    "spanishName": "Sabueso fiel del mago"
+  },
+  {
+    "d35eName": "Mage's Lucubration",
+    "d35eId": "Rx9IGDnIcilmgcgA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-lucubration",
+    "spanishName": "Lucubración del mago"
+  },
+  {
+    "d35eName": "Mage's Magnificent Mansion",
+    "d35eId": "qFvaqD629m0V3prF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-magnificent-mansion",
+    "spanishName": "Magnífica mansión del mago"
+  },
+  {
+    "d35eName": "Mage's Private Sanctum",
+    "d35eId": "HZfmwHL5d6RF3JAm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-private-sanctum",
+    "spanishName": "Sagrario privado del mago"
+  },
+  {
+    "d35eName": "Mage's Sword",
+    "d35eId": "a9kBNzC9YB4tpRri",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mages-sword",
+    "spanishName": "Espada de mago"
+  },
+  {
+    "d35eName": "Magic Aura",
+    "d35eId": "zBQsdXOpB8vRuqHL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-aura",
+    "spanishName": "Aura mágica"
+  },
+  {
+    "d35eName": "Magic Circle against Chaos",
+    "d35eId": "utmodHDPA4lS4S5E",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-circle-against-chaos",
+    "spanishName": "Círculo mágico contra el caos"
+  },
+  {
+    "d35eName": "Magic Circle against Evil",
+    "d35eId": "t18uWSJHzF5thvNz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-circle-against-chaos/evil/good/law",
+    "spanishName": "Círculo Mágico contra\r\nCaos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Magic Circle against Good",
+    "d35eId": "VGELuQuUXaH6vX1M",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-circle-against-chaos/evil/good/law",
+    "spanishName": "Círculo Mágico contra\r\nCaos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Magic Circle against Law",
+    "d35eId": "OhzAggNJ0Ax2oncn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-circle-against-chaos/evil/good/law",
+    "spanishName": "Círculo Mágico contra\r\nCaos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Magic Fang",
+    "d35eId": "h0IQ3FOk2Xqu3X0N",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-fang",
+    "spanishName": "Colmillo mágico"
+  },
+  {
+    "d35eName": "Magic Jar",
+    "d35eId": "UX1gcwD8zLF1uK2G",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-jar",
+    "spanishName": "Tarro mágico"
+  },
+  {
+    "d35eName": "Magic Missile",
+    "d35eId": "POLwho3lpuKuCo6q",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-missile",
+    "spanishName": "Misil mágico"
+  },
+  {
+    "d35eName": "Magic Mouth",
+    "d35eId": "AdmiQIYCUNl57ZTb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-mouth",
+    "spanishName": "Boca mágica"
+  },
+  {
+    "d35eName": "Magic Stone",
+    "d35eId": "OJonRnjtQUFZdVNs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-stone",
+    "spanishName": "Piedra mágica"
+  },
+  {
+    "d35eName": "Magic Vestment",
+    "d35eId": "7OmyaAC9Sxttewng",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-vestment",
+    "spanishName": "Vestimenta mágica"
+  },
+  {
+    "d35eName": "Magic Weapon",
+    "d35eId": "QDpyTUANZ48we0hy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "magic-weapon",
+    "spanishName": "Arma mágica"
+  },
+  {
+    "d35eName": "Major Creation",
+    "d35eId": "GTbeGmHQLSgZjABY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "major-creation",
+    "spanishName": "Creación mayor"
+  },
+  {
+    "d35eName": "Major Image",
+    "d35eId": "kL42pkde0feFxsCl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "major-image",
+    "spanishName": "Imagen principal"
+  },
+  {
+    "d35eName": "Make Whole",
+    "d35eId": "TsiQS4npZPs3uBl4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "make-whole",
+    "spanishName": "Hacer todo"
+  },
+  {
+    "d35eName": "Mark of Justice",
+    "d35eId": "BZv6ctgbaUqSjs1C",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mark-of-justice",
+    "spanishName": "Marca de la justicia"
+  },
+  {
+    "d35eName": "Bear's Endurance, Mass",
+    "d35eId": "KvD2Geua0ZhiCJbp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-bears-endurance",
+    "spanishName": "Resistencia del oso, Masa"
+  },
+  {
+    "d35eName": "Bull's Strength, Mass",
+    "d35eId": "rrUcXymGqertnPAW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-bulls-strength",
+    "spanishName": "Fuerza del toro, masa"
+  },
+  {
+    "d35eName": "Cat's Grace, Mass",
+    "d35eId": "xXfto0tjm48gFoQV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-cats-grace",
+    "spanishName": "Gracia de Gato, Misa"
+  },
+  {
+    "d35eName": "Charm Monster, Mass",
+    "d35eId": "lx2QhnFppAATWFdo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-charm-monster",
+    "spanishName": "Monstruo de encanto, Masa"
+  },
+  {
+    "d35eName": "Cure Critical Wounds, Mass",
+    "d35eId": "Vme978gZNLneAun9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-cure-critical-wounds",
+    "spanishName": "Cura heridas críticas, masa"
+  },
+  {
+    "d35eName": "Cure Light Wounds, Mass",
+    "d35eId": "jJRxRQgRm8DndDI5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-cure-light-wounds",
+    "spanishName": "Cura heridas leves, masa"
+  },
+  {
+    "d35eName": "Cure Moderate Wounds, Mass",
+    "d35eId": "bduIKwZ1et1D9MzX",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-cure-moderate-wounds",
+    "spanishName": "curar heridas moderadas, masa"
+  },
+  {
+    "d35eName": "Cure Serious Wounds, Mass",
+    "d35eId": "u4KsAYFzixN7O0nq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-cure-serious-wounds",
+    "spanishName": "curar heridas graves, masa"
+  },
+  {
+    "d35eName": "Eagle's Splendor, Mass",
+    "d35eId": "yXZLaFTyP2gUPpmN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-eagles-splendor",
+    "spanishName": "Esplendor del Águila, Misa"
+  },
+  {
+    "d35eName": "Enlarge Person, Mass",
+    "d35eId": "h3zZNi9YENfr3vtk",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-enlarge-person",
+    "spanishName": "Agrandar Persona, Misa"
+  },
+  {
+    "d35eName": "Fox's Cunning, Mass",
+    "d35eId": "DSNvBYXZo5jKqAAM",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-foxs-cunning",
+    "spanishName": "La astucia del zorro, Misa"
+  },
+  {
+    "d35eName": "Heal, Mass",
+    "d35eId": "clHUQraBWbH9h6Ij",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-heal",
+    "spanishName": "Sanar, Misa"
+  },
+  {
+    "d35eName": "Hold Monster, Mass",
+    "d35eId": "jDzIdD4zuh3kYVby",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-hold-monster",
+    "spanishName": "Hold Monster, Mass"
+  },
+  {
+    "d35eName": "Hold Person, Mass",
+    "d35eId": "fpvFhSVoZCAdveR4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-hold-person",
+    "spanishName": "Persona de retención, Misa"
+  },
+  {
+    "d35eName": "Inflict Critical Wounds, Mass",
+    "d35eId": "GiwSPjJYAnBtNApI",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-inflict-critical-wounds",
+    "spanishName": "Inflige heridas críticas, masa"
+  },
+  {
+    "d35eName": "Inflict Light Wounds, Mass",
+    "d35eId": "hzLQGqN6ZNQ1aYCZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-inflict-light-wounds",
+    "spanishName": "Inflige heridas leves, masa"
+  },
+  {
+    "d35eName": "Inflict Moderate Wounds, Mass",
+    "d35eId": "IwoVi60rqB00vnSx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-inflict-moderate-wounds",
+    "spanishName": "infligir heridas moderadas, masa"
+  },
+  {
+    "d35eName": "Inflict Serious Wounds, Mass",
+    "d35eId": "zI0J05oeucGc6rb3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-inflict-serious-wounds",
+    "spanishName": "infligir heridas graves, masa"
+  },
+  {
+    "d35eName": "Invisibility, Mass",
+    "d35eId": "Vd9NqBv5BItOKzm0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-invisibility",
+    "spanishName": "Invisibilidad, Masa"
+  },
+  {
+    "d35eName": "Owl's Wisdom, Mass",
+    "d35eId": "429lUg9bcdi6ae8U",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-owls-wisdom",
+    "spanishName": "Sabiduría del Búho, Misa"
+  },
+  {
+    "d35eName": "Reduce Person, Mass",
+    "d35eId": "UfR5kod02nvJH99U",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-reduce-person",
+    "spanishName": "Reducir Persona, Masa"
+  },
+  {
+    "d35eName": "Suggestion, Mass",
+    "d35eId": "x8dxzcNnkvjChOt6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mass-suggestion",
+    "spanishName": "Sugerencia, Misa"
+  },
+  {
+    "d35eName": "Maze",
+    "d35eId": "ZvASwJ1nFTrPpBI4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "maze",
+    "spanishName": "Laberinto"
+  },
+  {
+    "d35eName": "Meld into Stone",
+    "d35eId": "8h8qhB5ZNrJuCodn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "meld-into-stone",
+    "spanishName": "Fusión con la piedra"
+  },
+  {
+    "d35eName": "Mending",
+    "d35eId": "E7ronZxQYLHrS0CT",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mending",
+    "spanishName": "Reparación"
+  },
+  {
+    "d35eName": "Message",
+    "d35eId": "qpsVSvRyg20PyfGY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "message",
+    "spanishName": "Mensaje"
+  },
+  {
+    "d35eName": "Meteor Swarm",
+    "d35eId": "Zkm78BCSouKbeVkP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "meteor-swarm",
+    "spanishName": "Enjambre de meteoritos"
+  },
+  {
+    "d35eName": "Mind Blank",
+    "d35eId": "WoIAwlWaqE2tfQNp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mind-blank",
+    "spanishName": "Mente en blanco"
+  },
+  {
+    "d35eName": "Mind Fog",
+    "d35eId": "FvrCTxoxbxX00pmr",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mind-fog",
+    "spanishName": "Niebla mental"
+  },
+  {
+    "d35eName": "Minor Creation",
+    "d35eId": "D0QchsP9kjfreRLL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "minor-creation",
+    "spanishName": "Creación menor"
+  },
+  {
+    "d35eName": "Minor Image",
+    "d35eId": "InYHOVrFlFbOiFxd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "minor-image",
+    "spanishName": "Imagen menor"
+  },
+  {
+    "d35eName": "Miracle",
+    "d35eId": "nISse79c8rrg0DWW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "miracle",
+    "spanishName": "Milagro"
+  },
+  {
+    "d35eName": "Mirage Arcana",
+    "d35eId": "OdzpqPzvzKZ5QcGD",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mirage-arcana",
+    "spanishName": "Arcanos de espejismo"
+  },
+  {
+    "d35eName": "Mirror Image",
+    "d35eId": "ySYznGgMZ8R9BvQc",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mirror-image",
+    "spanishName": "Imagen especular"
+  },
+  {
+    "d35eName": "Misdirection",
+    "d35eId": "3Sy4IrWBSWl0aPbC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "misdirection",
+    "spanishName": "Distracción"
+  },
+  {
+    "d35eName": "Mislead",
+    "d35eId": "vwKfjX3dHVN0ulYl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mislead",
+    "spanishName": "Desencaminar"
+  },
+  {
+    "d35eName": "Mnemonic Enhancer",
+    "d35eId": "fYLZcaTzeAep4Duq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mnemonic-enhancer",
+    "spanishName": "Potenciador mnemotécnico"
+  },
+  {
+    "d35eName": "Modify Memory",
+    "d35eId": "C4zjJoLy2zQqpPHj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "modify-memory",
+    "spanishName": "Modificar memoria"
+  },
+  {
+    "d35eName": "Moment of Prescience",
+    "d35eId": "xQE2a8kxJPPqCsbA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "moment-of-prescience",
+    "spanishName": "Momento de presciencia"
+  },
+  {
+    "d35eName": "Mount",
+    "d35eId": "Cur5s26FBAIADdVW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "mount",
+    "spanishName": "Montar"
+  },
+  {
+    "d35eName": "Move Earth",
+    "d35eId": "S4F44QcgR2Bc1Il7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "move-earth",
+    "spanishName": "Mover la Tierra"
+  },
+  {
+    "d35eName": "Neutralize Poison",
+    "d35eId": "mApz1PnW2hQ1qLBs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "neutralize-poison",
+    "spanishName": "Neutralizar el veneno"
+  },
+  {
+    "d35eName": "Nightmare",
+    "d35eId": "0aFn0X31u0yNPI16",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "nightmare",
+    "spanishName": "Pesadilla"
+  },
+  {
+    "d35eName": "Nondetection",
+    "d35eId": "56cybtDZIYN5JzbB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "nondetection",
+    "spanishName": "Falta de detección"
+  },
+  {
+    "d35eName": "Obscure Object",
+    "d35eId": "5DF4TDx3sMoQEPSQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "obscure-object",
+    "spanishName": "Objeto oscuro"
+  },
+  {
+    "d35eName": "Obscuring Mist",
+    "d35eId": "kdC23NoqRSKjBHzY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "obscuring-mist",
+    "spanishName": "Niebla oscurecidora"
+  },
+  {
+    "d35eName": "Open/Close",
+    "d35eId": "PhQRdFr1NpQXw1em",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "open-close",
+    "spanishName": "Abrir/Cerrar"
+  },
+  {
+    "d35eName": "Overland Flight",
+    "d35eId": "V5shqIbhTtESvLGS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "overland-flight",
+    "spanishName": "Vuelo por tierra"
+  },
+  {
+    "d35eName": "Owl's Wisdom",
+    "d35eId": "HlDYOIS1Bjb5eE2H",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "owls-wisdom",
+    "spanishName": "Sabiduría del búho"
+  },
+  {
+    "d35eName": "Pass without Trace",
+    "d35eId": "zvWbKLu8FYxwbFbl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "pass-without-trace",
+    "spanishName": "Pasar sin dejar rastro"
+  },
+  {
+    "d35eName": "Passwall",
+    "d35eId": "vWk8dFyxODXmTvDN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "passwall",
+    "spanishName": "Muro de paso"
+  },
+  {
+    "d35eName": "Permanency",
+    "d35eId": "CFyRFIkx6f3jBART",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "permanency",
+    "spanishName": "Permanencia"
+  },
+  {
+    "d35eName": "Permanent Image",
+    "d35eId": "yirRXZHcZYBcYkPh",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "permanent-image",
+    "spanishName": "Imagen permanente"
+  },
+  {
+    "d35eName": "Persistent Image",
+    "d35eId": "b8hhPXZpB7zWbfwL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "persistent-image",
+    "spanishName": "Imagen persistente"
+  },
+  {
+    "d35eName": "Phantasmal Killer",
+    "d35eId": "TzIsycztcEfDEvvk",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "phantasmal-killer",
+    "spanishName": "Asesino fantasmal"
+  },
+  {
+    "d35eName": "Phantom Steed",
+    "d35eId": "S4seqbPKEbISS0xH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "phantom-steed",
+    "spanishName": "Corcel fantasma"
+  },
+  {
+    "d35eName": "Phantom Trap",
+    "d35eId": "FOVQx7yEmqFVTGKW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "phantom-trap",
+    "spanishName": "Trampa fantasma"
+  },
+  {
+    "d35eName": "Phase Door",
+    "d35eId": "TW641GGd9wFVH657",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "phase-door",
+    "spanishName": "Puerta de fase"
+  },
+  {
+    "d35eName": "Planar Ally",
+    "d35eId": "NryCnU5W4k41f5m6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "planar-ally",
+    "spanishName": "Aliado planar"
+  },
+  {
+    "d35eName": "Planar Binding",
+    "d35eId": "qkcINtksizSGMQJq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "planar-binding",
+    "spanishName": "Enlace planar"
+  },
+  {
+    "d35eName": "Plane Shift",
+    "d35eId": "LScF2AlGZ2kZqvjj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "plane-shift",
+    "spanishName": "Cambio de plano"
+  },
+  {
+    "d35eName": "Plant Growth",
+    "d35eId": "jwgtUADc2ygj6tfP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "plant-growth",
+    "spanishName": "Crecimiento de las plantas"
+  },
+  {
+    "d35eName": "Poison",
+    "d35eId": "HjLw7ZfbGOjpqSbN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "poison",
+    "spanishName": "Veneno"
+  },
+  {
+    "d35eName": "Polar Ray",
+    "d35eId": "47MRIFZeS3YKbCoC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "polar-ray",
+    "spanishName": "Rayo Polar"
+  },
+  {
+    "d35eName": "Polymorph",
+    "d35eId": "b6tshkluJWhKRFrY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "polymorph",
+    "spanishName": "Polimorfo"
+  },
+  {
+    "d35eName": "Polymorph Any Object",
+    "d35eId": "v5FQGRbPWZkDzbbz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "polymorph-any-object",
+    "spanishName": "Polimorfia Cualquier objeto"
+  },
+  {
+    "d35eName": "Power Word Blind",
+    "d35eId": "dC4yecInATydpbC6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "power-word-blind",
+    "spanishName": "Palabra de poder ciega"
+  },
+  {
+    "d35eName": "Power Word Kill",
+    "d35eId": "Qwmd4u9KGGY9QwOz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "power-word-kill",
+    "spanishName": "Palabra de poder para matar"
+  },
+  {
+    "d35eName": "Power Word Stun",
+    "d35eId": "px2RjwigDmFDmPYf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "power-word-stun",
+    "spanishName": "Aturdimiento de Palabra de Poder"
+  },
+  {
+    "d35eName": "Prayer",
+    "d35eId": "yWRcQhWD5xxkjs9N",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prayer",
+    "spanishName": "Oración"
+  },
+  {
+    "d35eName": "Prestidigitation",
+    "d35eId": "njeeBZqgk6dWkXJ3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prestidigitation",
+    "spanishName": "Prestidigitación"
+  },
+  {
+    "d35eName": "Prismatic Sphere",
+    "d35eId": "CKjFdWrMadftCRpR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prismatic-sphere",
+    "spanishName": "Esfera prismática"
+  },
+  {
+    "d35eName": "Prismatic Spray",
+    "d35eId": "ot0EZQpeBw5zS92R",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prismatic-spray",
+    "spanishName": "Spray prismático"
+  },
+  {
+    "d35eName": "Prismatic Wall",
+    "d35eId": "VwvIpv2NPzNbSpLP",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prismatic-wall",
+    "spanishName": "Pared prismática"
+  },
+  {
+    "d35eName": "Probe Thoughts",
+    "d35eId": "7NfnFPyOTNRUP9kh",
+    "sourceCode": "spellsCDiv",
+    "sourceBook": "Complete Divine",
+    "dndtoolsSlug": "probe-thoughts",
+    "spanishName": "Pensamientos de sondeo"
+  },
+  {
+    "d35eName": "Produce Flame",
+    "d35eId": "sERXgl8pphczLobe",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "produce-flame",
+    "spanishName": "Producir llama"
+  },
+  {
+    "d35eName": "Programmed Image",
+    "d35eId": "fkNmgOeoE9VIssLy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "programmed-image",
+    "spanishName": "Imagen programada"
+  },
+  {
+    "d35eName": "Project Image",
+    "d35eId": "8LTiEf74ls9PnuSA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "project-image",
+    "spanishName": "Imagen del proyecto"
+  },
+  {
+    "d35eName": "Protection from Arrows",
+    "d35eId": "KMHsPqjnDcbMD4UC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-arrows",
+    "spanishName": "Protección contra flechas"
+  },
+  {
+    "d35eName": "Protection from Chaos",
+    "d35eId": "rC9D9Jw37b3xMqiU",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-chaos/evil/good/law",
+    "spanishName": "Protección contra el Caos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Protection from Evil",
+    "d35eId": "HAPP1TTL9tu40LyF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-chaos/evil/good/law",
+    "spanishName": "Protección contra el Caos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Protection from Good",
+    "d35eId": "B2sGPfbpclfgSyOh",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-chaos/evil/good/law",
+    "spanishName": "Protección contra el Caos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Protection from Law",
+    "d35eId": "0xCENsUBViSQFswa",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-chaos/evil/good/law",
+    "spanishName": "Protección contra el Caos/Mal/Bien/Ley"
+  },
+  {
+    "d35eName": "Protection from Energy",
+    "d35eId": "UlFLGXeXSDzFVZwp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-energy",
+    "spanishName": "Protección contra la energía"
+  },
+  {
+    "d35eName": "Protection from Spells",
+    "d35eId": "5zizeCtzAXuQn2go",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "protection-from-spells",
+    "spanishName": "Protección contra hechizos"
+  },
+  {
+    "d35eName": "Prying Eyes",
+    "d35eId": "VnE91RfRnELayUI5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "prying-eyes",
+    "spanishName": "Miradas indiscretas"
+  },
+  {
+    "d35eName": "Purify Food and Drink",
+    "d35eId": "zCnQtebWD74LK75X",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "purify-food-and-drink",
+    "spanishName": "Purificar alimentos y bebidas"
+  },
+  {
+    "d35eName": "Pyrotechnics",
+    "d35eId": "3r6B7LEpdMjETvTE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "pyrotechnics",
+    "spanishName": "Pirotecnia"
+  },
+  {
+    "d35eName": "Quench",
+    "d35eId": "rRCZB7e9njG10P0s",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "quench",
+    "spanishName": "Apagar"
+  },
+  {
+    "d35eName": "Rage",
+    "d35eId": "3HYqrdyreOVyTEfJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "rage",
+    "spanishName": "Rabia"
+  },
+  {
+    "d35eName": "Rainbow Pattern",
+    "d35eId": "4b33Jwm9VnyRhvbK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "rainbow-pattern",
+    "spanishName": "Patrón de arco iris"
+  },
+  {
+    "d35eName": "Raise Dead",
+    "d35eId": "Rn73xj1IZfNc8rzt",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "raise-dead",
+    "spanishName": "Resucitar a los muertos"
+  },
+  {
+    "d35eName": "Ray of Enfeeblement",
+    "d35eId": "WNmmVoOIzevR9DIm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ray-of-enfeeblement",
+    "spanishName": "Rayo de debilitamiento"
+  },
+  {
+    "d35eName": "Ray of Exhaustion",
+    "d35eId": "ZmU74g1TDQjZwlIB",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ray-of-exhaustion",
+    "spanishName": "Rayo de agotamiento"
+  },
+  {
+    "d35eName": "Ray of Frost",
+    "d35eId": "ez4b47T5fe6Frgvz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ray-of-frost",
+    "spanishName": "Rayo de escarcha"
+  },
+  {
+    "d35eName": "Read Magic",
+    "d35eId": "TPjZCWxk1iXsJpqj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "read-magic",
+    "spanishName": "Leer magia"
+  },
+  {
+    "d35eName": "Reduce Animal",
+    "d35eId": "Lpkx9I6Po1eG4U6s",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "reduce-animal",
+    "spanishName": "Reducir el consumo de animales"
+  },
+  {
+    "d35eName": "Reduce Person",
+    "d35eId": "igRZjPAhFPTvHMfL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "reduce-person",
+    "spanishName": "Reducir persona"
+  },
+  {
+    "d35eName": "Refuge",
+    "d35eId": "y1UEJG6hIHWxSR8W",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "refuge",
+    "spanishName": "Refugio"
+  },
+  {
+    "d35eName": "Regenerate",
+    "d35eId": "yZcHdDkkA4r8Sv8O",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "regenerate",
+    "spanishName": "Regenerar"
+  },
+  {
+    "d35eName": "Reincarnate",
+    "d35eId": "5jOtmyyBrOrsLtGk",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "reincarnate",
+    "spanishName": "Reencarnar"
+  },
+  {
+    "d35eName": "Remove Blindness/Deafness",
+    "d35eId": "DLnWrnXIit23wT5k",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "remove-blindness/deafness",
+    "spanishName": "Eliminar la ceguera/sordera"
+  },
+  {
+    "d35eName": "Remove Curse",
+    "d35eId": "GkY5YikMURNEAiLK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "remove-curse",
+    "spanishName": "Eliminar maldición"
+  },
+  {
+    "d35eName": "Remove Disease",
+    "d35eId": "6YQpRbuNWic0VR1b",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "remove-disease",
+    "spanishName": "Eliminar enfermedades"
+  },
+  {
+    "d35eName": "Remove Fear",
+    "d35eId": "tEIMJCfMkZ9Cyw4S",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "remove-fear",
+    "spanishName": "Eliminar el miedo"
+  },
+  {
+    "d35eName": "Remove Paralysis",
+    "d35eId": "tJoUDOalSM2WaQF3",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "remove-paralysis",
+    "spanishName": "Eliminar la parálisis"
+  },
+  {
+    "d35eName": "Repel Metal or Stone",
+    "d35eId": "x9XCMY6XBNQgg8SE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "repel-metal-or-stone",
+    "spanishName": "Repeler metal o piedra"
+  },
+  {
+    "d35eName": "Repel Vermin",
+    "d35eId": "zIlhQBIHSVEbJzTu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "repel-vermin",
+    "spanishName": "Repele las alimañas"
+  },
+  {
+    "d35eName": "Repel Wood",
+    "d35eId": "8k1tIRsReZbkRmzz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "repel-wood",
+    "spanishName": "Repeler madera"
+  },
+  {
+    "d35eName": "Repulsion",
+    "d35eId": "iIBlNolak65QdzFl",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "repulsion",
+    "spanishName": "Repulsión"
+  },
+  {
+    "d35eName": "Resilient Sphere",
+    "d35eId": "0uDmTX3FLu4HqXDW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "resilient-sphere",
+    "spanishName": "Esfera resiliente"
+  },
+  {
+    "d35eName": "Resist Energy",
+    "d35eId": "cwOdOxFDzabOOxnW",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "resist-energy",
+    "spanishName": "Resistir la energía"
+  },
+  {
+    "d35eName": "Resistance",
+    "d35eId": "vA9VfsvGG4UxZHaV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "resistance",
+    "spanishName": "Resistencia"
+  },
+  {
+    "d35eName": "Restoration",
+    "d35eId": "xlot1wFt80WHYJdy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "restoration",
+    "spanishName": "Restauración"
+  },
+  {
+    "d35eName": "Resurrection",
+    "d35eId": "0W1i2QMcZuNrkITC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "resurrection",
+    "spanishName": "Resurrección"
+  },
+  {
+    "d35eName": "Reverse Gravity",
+    "d35eId": "QzL8OyCNFlIasow7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "reverse-gravity",
+    "spanishName": "Gravedad inversa"
+  },
+  {
+    "d35eName": "Righteous Might",
+    "d35eId": "FrDhKjuhOSdJc2Yb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "righteous-might",
+    "spanishName": "Poder justo"
+  },
+  {
+    "d35eName": "Rope Trick",
+    "d35eId": "3PFLc3ITJLKlCoxC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "rope-trick",
+    "spanishName": "Truco de la cuerda"
+  },
+  {
+    "d35eName": "Rusting Grasp",
+    "d35eId": "UVOzrB2aU1UPTAsQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "rusting-grasp",
+    "spanishName": "Agarre oxidado"
+  },
+  {
+    "d35eName": "Sanctuary",
+    "d35eId": "brE3cbfR5fGakP5r",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sanctuary",
+    "spanishName": "Santuario"
+  },
+  {
+    "d35eName": "Scare",
+    "d35eId": "eT9355UKiqfKNXpc",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "scare",
+    "spanishName": "Asustar"
+  },
+  {
+    "d35eName": "Scintillating Pattern",
+    "d35eId": "BE2rD1pYiuZLg7kv",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "scintillating-pattern",
+    "spanishName": "Patrón centelleante"
+  },
+  {
+    "d35eName": "Scorching Ray",
+    "d35eId": "vazHxxE1Lk5QndgQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "scorching-ray",
+    "spanishName": "Rayo abrasador"
+  },
+  {
+    "d35eName": "Screen",
+    "d35eId": "tXZi9VLV5ERCnvaw",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "screen",
+    "spanishName": "Pantalla"
+  },
+  {
+    "d35eName": "Scrying",
+    "d35eId": "i3NB6SzjTKwD9siQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "scrying",
+    "spanishName": "Adivinación"
+  },
+  {
+    "d35eName": "Sculpt Sound",
+    "d35eId": "4jbrLVioYLalgpp6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sculpt-sound",
+    "spanishName": "Esculpir sonido"
+  },
+  {
+    "d35eName": "Searing Light",
+    "d35eId": "dNR6lD887zrt88nz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "searing-light",
+    "spanishName": "Luz abrasadora"
+  },
+  {
+    "d35eName": "Secret Chest",
+    "d35eId": "hbYvAroNoKiQ5lnY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "secret-chest",
+    "spanishName": "Cofre secreto"
+  },
+  {
+    "d35eName": "Secret Page",
+    "d35eId": "zmZLvkzAF8l9AE1G",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "secret-page",
+    "spanishName": "Página secreta"
+  },
+  {
+    "d35eName": "Secure Shelter",
+    "d35eId": "1e16CmTWmuxHGQP8",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "secure-shelter",
+    "spanishName": "Refugio seguro"
+  },
+  {
+    "d35eName": "See Invisibility",
+    "d35eId": "y8UkqVtLk8mTZlpp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "see-invisibility",
+    "spanishName": "Véase Invisibilidad"
+  },
+  {
+    "d35eName": "Seeming",
+    "d35eId": "6dyrVpLadZ1ygUDj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "seeming",
+    "spanishName": "Aparente"
+  },
+  {
+    "d35eName": "Sending",
+    "d35eId": "HTf6AIX1Wmhh3ZoH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sending",
+    "spanishName": "Envío"
+  },
+  {
+    "d35eName": "Sepia Snake Sigil",
+    "d35eId": "wZYvJ7nS9NWscjKy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sepia-snake-sigil",
+    "spanishName": "Sello de serpiente sepia"
+  },
+  {
+    "d35eName": "Sequester",
+    "d35eId": "4rWDTfhBWqbaljOR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sequester",
+    "spanishName": "Secuestrar"
+  },
+  {
+    "d35eName": "Shades",
+    "d35eId": "WXns1uHI8gNxlj71",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shades",
+    "spanishName": "Gafas de sol"
+  },
+  {
+    "d35eName": "Shadow Conjuration",
+    "d35eId": "LZtMBQkbAmjcKfnJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shadow-conjuration",
+    "spanishName": "Conjuro de las Sombras"
+  },
+  {
+    "d35eName": "Shadow Evocation",
+    "d35eId": "baQJGqttii1NMVtO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shadow-evocation",
+    "spanishName": "Evocación de sombras"
+  },
+  {
+    "d35eName": "Shadow Walk",
+    "d35eId": "iJoqCPmX2JpG0O1O",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shadow-walk",
+    "spanishName": "Paseo de las sombras"
+  },
+  {
+    "d35eName": "Shambler",
+    "d35eId": "InbYzmCmii1YvXDA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shambler",
+    "spanishName": "Shambler"
+  },
+  {
+    "d35eName": "Shapechange",
+    "d35eId": "uSof3dZWraRmkyX0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shapechange",
+    "spanishName": "Cambio de forma"
+  },
+  {
+    "d35eName": "Shatter",
+    "d35eId": "H8ihwWp7CSKHNmSt",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shatter",
+    "spanishName": "Romper"
+  },
+  {
+    "d35eName": "Shield",
+    "d35eId": "TqoDccTS9rBw6vXj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shield",
+    "spanishName": "Escudo"
+  },
+  {
+    "d35eName": "Shield of Faith",
+    "d35eId": "d6WN7BnDUWpLaDef",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shield-of-faith",
+    "spanishName": "Escudo de la fe"
+  },
+  {
+    "d35eName": "Shield of Law",
+    "d35eId": "xs4hpfo4ARjqpDOp",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shield-of-law",
+    "spanishName": "Escudo de la ley"
+  },
+  {
+    "d35eName": "Shield Other",
+    "d35eId": "zR1vLtwDiF58zXOY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shield-other",
+    "spanishName": "Escudo Otro"
+  },
+  {
+    "d35eName": "Shillelagh",
+    "d35eId": "e2g2oRR6KoU8usad",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shillelagh",
+    "spanishName": "Shillelagh"
+  },
+  {
+    "d35eName": "Shocking Grasp",
+    "d35eId": "jJUux0BmomhATHoC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shocking-grasp",
+    "spanishName": "Agarre impactante"
+  },
+  {
+    "d35eName": "Shout",
+    "d35eId": "1qWROto186XuJxzx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shout",
+    "spanishName": "Gritar"
+  },
+  {
+    "d35eName": "Shrink Item",
+    "d35eId": "LpSMsL1EBdnzCeBa",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "shrink-item",
+    "spanishName": "Encogimiento de artículo"
+  },
+  {
+    "d35eName": "Silence",
+    "d35eId": "HKQOchnBI88uBjoJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "silence",
+    "spanishName": "Silencio"
+  },
+  {
+    "d35eName": "Silent Image",
+    "d35eId": "MGanl33b057zdKgw",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "silent-image",
+    "spanishName": "Imagen silenciosa"
+  },
+  {
+    "d35eName": "Simulacrum",
+    "d35eId": "U3SrCq5KHPn7CAjF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "simulacrum",
+    "spanishName": "Simulacro"
+  },
+  {
+    "d35eName": "Slay Living",
+    "d35eId": "R5hHnIhl51uwTdPw",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "slay-living",
+    "spanishName": "Matar la vida"
+  },
+  {
+    "d35eName": "Sleep",
+    "d35eId": "RxKhjymcQfSCfsk6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sleep",
+    "spanishName": "Dormir"
+  },
+  {
+    "d35eName": "Sleet Storm",
+    "d35eId": "72lS5ab4mhJzLFtT",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sleet-storm",
+    "spanishName": "Tormenta de aguanieve"
+  },
+  {
+    "d35eName": "Slow",
+    "d35eId": "RlxtEpZUh4fTe23q",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "slow",
+    "spanishName": "Lento"
+  },
+  {
+    "d35eName": "Snare",
+    "d35eId": "tv2kiJymPxtroKWo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "snare",
+    "spanishName": "Trampa"
+  },
+  {
+    "d35eName": "Soften Earth and Stone",
+    "d35eId": "cMCSfalW7JslC1T2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "soften-earth-and-stone",
+    "spanishName": "Suavizar la tierra y la piedra"
+  },
+  {
+    "d35eName": "Solid Fog",
+    "d35eId": "Hr3V6K3E03JBzsdg",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "solid-fog",
+    "spanishName": "Niebla sólida"
+  },
+  {
+    "d35eName": "Song of Discord",
+    "d35eId": "rSS3b8mut498jdIu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "song-of-discord",
+    "spanishName": "Canción de la discordia"
+  },
+  {
+    "d35eName": "Soul Bind",
+    "d35eId": "uB8GGIFj66kZ7wkL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "soul-bind",
+    "spanishName": "Lazo de alma"
+  },
+  {
+    "d35eName": "Sound Burst",
+    "d35eId": "42P20GYv2tI0FGby",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sound-burst",
+    "spanishName": "Ráfaga de sonido"
+  },
+  {
+    "d35eName": "Speak with Animals",
+    "d35eId": "Xw5zcqmc5OM793kX",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "speak-with-animals",
+    "spanishName": "Habla con los animales"
+  },
+  {
+    "d35eName": "Speak with Dead",
+    "d35eId": "tq3rvg9KGsTxDB9r",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "speak-with-dead",
+    "spanishName": "Habla con los muertos"
+  },
+  {
+    "d35eName": "Speak with Plants",
+    "d35eId": "R7Ee2rEuka4dlYoi",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "speak-with-plants",
+    "spanishName": "Habla con las plantas"
+  },
+  {
+    "d35eName": "Spectral Hand",
+    "d35eId": "Hjt7kuFANi3iMmxx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spectral-hand",
+    "spanishName": "Mano espectral"
+  },
+  {
+    "d35eName": "Spell Immunity",
+    "d35eId": "IuJqlfUbJ7Tqglla",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spell-immunity",
+    "spanishName": "Inmunidad a hechizos"
+  },
+  {
+    "d35eName": "Spell Resistance",
+    "d35eId": "ojZkiBpo0WrPeNlz",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spell-resistance",
+    "spanishName": "Resistencia a hechizos"
+  },
+  {
+    "d35eName": "Spell Turning",
+    "d35eId": "i22porkCPv7NtKLK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spell-turning",
+    "spanishName": "Giro de hechizos"
+  },
+  {
+    "d35eName": "Spellstaff",
+    "d35eId": "uxq6ayaDrEc302lR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spellstaff",
+    "spanishName": "Bastón de hechizos"
+  },
+  {
+    "d35eName": "Spider Climb",
+    "d35eId": "Z5JXBkkKvoklXyno",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spider-climb",
+    "spanishName": "Escalada de arañas"
+  },
+  {
+    "d35eName": "Spike Growth",
+    "d35eId": "Xl94kvNkeqG0RSNA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spike-growth",
+    "spanishName": "Crecimiento de la espiga"
+  },
+  {
+    "d35eName": "Spike Stones",
+    "d35eId": "ZxXbPHmvRxT2FyIq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spike-stones",
+    "spanishName": "Piedras de púas"
+  },
+  {
+    "d35eName": "Spiritual Weapon",
+    "d35eId": "FL2IZ9dkpBpCd8MI",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "spiritual-weapon",
+    "spanishName": "Arma espiritual"
+  },
+  {
+    "d35eName": "Statue",
+    "d35eId": "LO6gSHlBYAWnWEf0",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "statue",
+    "spanishName": "Estatua"
+  },
+  {
+    "d35eName": "Status",
+    "d35eId": "0jr9KEPv1Tqd58AJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "status",
+    "spanishName": "Estado"
+  },
+  {
+    "d35eName": "Status, Greater",
+    "d35eId": "UJok3rfGMsAptqRq",
+    "sourceCode": "spellshob",
+    "sourceBook": "Heroes of Battle",
+    "dndtoolsSlug": "status,-greater",
+    "spanishName": "Estado, Mayor"
+  },
+  {
+    "d35eName": "Stinking Cloud",
+    "d35eId": "VFwLL4uAFlbn9dOs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "stinking-cloud",
+    "spanishName": "Nube apestosa"
+  },
+  {
+    "d35eName": "Stone Shape",
+    "d35eId": "57AqsypcfqPPP7IQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "stone-shape",
+    "spanishName": "Forma de piedra"
+  },
+  {
+    "d35eName": "Stone Tell",
+    "d35eId": "YJjO30wyraWQ8yFi",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "stone-tell",
+    "spanishName": "Tell de piedra"
+  },
+  {
+    "d35eName": "Stone to Flesh",
+    "d35eId": "AqU7RiBTvhsH3fOd",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "stone-to-flesh",
+    "spanishName": "De la piedra a la carne"
+  },
+  {
+    "d35eName": "Stoneskin",
+    "d35eId": "398RRWNlIdm9AN3o",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "stoneskin",
+    "spanishName": "Piel de piedra"
+  },
+  {
+    "d35eName": "Storm of Vengeance",
+    "d35eId": "xyMXIsTvJ9oBdcRx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "storm-of-vengeance",
+    "spanishName": "Tormenta de venganza"
+  },
+  {
+    "d35eName": "Suggestion",
+    "d35eId": "XLlE7Y7WElmrIy5p",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "suggestion",
+    "spanishName": "Sugerencia"
+  },
+  {
+    "d35eName": "Summon Instrument",
+    "d35eId": "XeVUwkb93HQqi9AF",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-instrument",
+    "spanishName": "Instrumento de invocación"
+  },
+  {
+    "d35eName": "Summon Monster I",
+    "d35eId": "eEyDI6q41iGOabdX",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-i",
+    "spanishName": "Invocar monstruo I"
+  },
+  {
+    "d35eName": "Summon Monster II",
+    "d35eId": "13NYEyfAjXSGOTxM",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-ii",
+    "spanishName": "Invocar monstruo II"
+  },
+  {
+    "d35eName": "Summon Monster III",
+    "d35eId": "Yofr0OEvERk2HZFn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-iii",
+    "spanishName": "Invocar Monstruo III"
+  },
+  {
+    "d35eName": "Summon Monster IV",
+    "d35eId": "5C4AIShsfP8hwL9A",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-iv",
+    "spanishName": "Invocar monstruo IV"
+  },
+  {
+    "d35eName": "Summon Monster IX",
+    "d35eId": "JfA2R9PWZ5Qdj0qL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-ix",
+    "spanishName": "Invocar Monstruo IX"
+  },
+  {
+    "d35eName": "Summon Monster V",
+    "d35eId": "rbAPPxBBqxJdSSqm",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-v",
+    "spanishName": "Invocar monstruo V"
+  },
+  {
+    "d35eName": "Summon Monster VI",
+    "d35eId": "K2fXfD3gf3lIdBR5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-vi",
+    "spanishName": "Invocar Monstruo VI"
+  },
+  {
+    "d35eName": "Summon Monster VII",
+    "d35eId": "XUcYqgaNCDdmWYvZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-vii",
+    "spanishName": "Invocar monstruo VII"
+  },
+  {
+    "d35eName": "Summon Monster VIII",
+    "d35eId": "dQbdmFNVBlNfe4LV",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-monster-viii",
+    "spanishName": "Invocar monstruo VIII"
+  },
+  {
+    "d35eName": "Summon Nature's Ally I",
+    "d35eId": "pwToH2PNia9Ts6Ed",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-i",
+    "spanishName": "Invocar al aliado de la naturaleza I"
+  },
+  {
+    "d35eName": "Summon Nature's Ally II",
+    "d35eId": "rFdx1I4TASCLaOSi",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-ii",
+    "spanishName": "Invocar al aliado de la naturaleza II"
+  },
+  {
+    "d35eName": "Summon Nature's Ally III",
+    "d35eId": "wIh9HmwgTKZ2OsL7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-iii",
+    "spanishName": "Invocar al aliado de la naturaleza III"
+  },
+  {
+    "d35eName": "Summon Nature's Ally IV",
+    "d35eId": "sf4kDHTOsJqwKKF2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-iv",
+    "spanishName": "Invocar al aliado de la naturaleza IV"
+  },
+  {
+    "d35eName": "Summon Nature's Ally IX",
+    "d35eId": "R9FrmmKH7faXfkrY",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-ix",
+    "spanishName": "Invoca al aliado de la naturaleza IX"
+  },
+  {
+    "d35eName": "Summon Nature's Ally V",
+    "d35eId": "3Htd80RU83vSvhwc",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-v",
+    "spanishName": "Invocar al aliado de la naturaleza V"
+  },
+  {
+    "d35eName": "Summon Nature's Ally VI",
+    "d35eId": "asbchNLsPKwKH3n2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-vi",
+    "spanishName": "Invocar al aliado de la naturaleza VI"
+  },
+  {
+    "d35eName": "Summon Nature's Ally VII",
+    "d35eId": "rOl43IEPz4q3zrDZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-vii",
+    "spanishName": "Invocar al aliado de la naturaleza VII"
+  },
+  {
+    "d35eName": "Summon Nature's Ally VIII",
+    "d35eId": "wtlvh1TIAZY5Yyep",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-natures-ally-viii",
+    "spanishName": "Invocar al aliado de la naturaleza VIII"
+  },
+  {
+    "d35eName": "Summon Swarm",
+    "d35eId": "JjM4gdylG5zvvue4",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "summon-swarm",
+    "spanishName": "Invocar enjambre"
+  },
+  {
+    "d35eName": "Sunbeam",
+    "d35eId": "2sLjQ4sAnShJrLkq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sunbeam",
+    "spanishName": "Rayo de sol"
+  },
+  {
+    "d35eName": "Sunburst",
+    "d35eId": "GvT7kiKZsmvnNz7i",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sunburst",
+    "spanishName": "Sunburst"
+  },
+  {
+    "d35eName": "Symbol of Death",
+    "d35eId": "VmzKFvPxeZ6X45hZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-death",
+    "spanishName": "Símbolo de la muerte"
+  },
+  {
+    "d35eName": "Symbol of Fear",
+    "d35eId": "7wb7FZjJvouJCaMI",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-fear",
+    "spanishName": "Símbolo del miedo"
+  },
+  {
+    "d35eName": "Symbol of Insanity",
+    "d35eId": "zogIvzg4EmntiqKS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-insanity",
+    "spanishName": "Símbolo de locura"
+  },
+  {
+    "d35eName": "Symbol of Pain",
+    "d35eId": "rxwWKv3VLoFvYVxZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-pain",
+    "spanishName": "Símbolo de dolor"
+  },
+  {
+    "d35eName": "Symbol of Persuasion",
+    "d35eId": "MK059UwGFPhUpuWA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-persuasion",
+    "spanishName": "Símbolo de persuasión"
+  },
+  {
+    "d35eName": "Symbol of Sleep",
+    "d35eId": "BLFdygVQaAXW4QYw",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-sleep",
+    "spanishName": "Símbolo del sueño"
+  },
+  {
+    "d35eName": "Symbol of Stunning",
+    "d35eId": "RPQLKhYXWAT95um2",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-stunning",
+    "spanishName": "Símbolo de deslumbramiento"
+  },
+  {
+    "d35eName": "Symbol of Weakness",
+    "d35eId": "PuNg9l8IYeZ5rPXt",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "symbol-of-weakness",
+    "spanishName": "Símbolo de debilidad"
+  },
+  {
+    "d35eName": "Sympathetic Vibration",
+    "d35eId": "rNjTcsXJ5mYiXTVn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sympathetic-vibration",
+    "spanishName": "Vibración simpática"
+  },
+  {
+    "d35eName": "Sympathy",
+    "d35eId": "CuZml5sBYIzUiIcr",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "sympathy",
+    "spanishName": "Simpatía"
+  },
+  {
+    "d35eName": "Telekinesis",
+    "d35eId": "qXFnPH9elCjCHc5X",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "telekinesis",
+    "spanishName": "Telequinesis"
+  },
+  {
+    "d35eName": "Telekinetic Sphere",
+    "d35eId": "gG0GD60twZiBeGln",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "telekinetic-sphere",
+    "spanishName": "Esfera telequinética"
+  },
+  {
+    "d35eName": "Telepathic Bond",
+    "d35eId": "6ZYWsnkw4GQ69ZOR",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "telepathic-bond",
+    "spanishName": "Vínculo telepático"
+  },
+  {
+    "d35eName": "Telepathic Bond, Lesser",
+    "d35eId": "MsvKOO0pbhbUtgnb",
+    "sourceCode": "spellsCDiv",
+    "sourceBook": "Complete Divine",
+    "dndtoolsSlug": "telepathic-bond,-lesser",
+    "spanishName": "Vínculo Telepático, Menor"
+  },
+  {
+    "d35eName": "Teleport",
+    "d35eId": "N9J5CrFQ0GjU19bE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "teleport",
+    "spanishName": "Teletransportar"
+  },
+  {
+    "d35eName": "Teleport Object",
+    "d35eId": "Nxdrpny7sAScO3fE",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "teleport-object",
+    "spanishName": "Objeto de teletransporte"
+  },
+  {
+    "d35eName": "Teleportation Circle",
+    "d35eId": "QBXrgGzqwcYrb9i9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "teleportation-circle",
+    "spanishName": "Círculo de teletransportación"
+  },
+  {
+    "d35eName": "Temporal Stasis",
+    "d35eId": "OYEBKICB968YYYjJ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "temporal-stasis",
+    "spanishName": "Estasis temporal"
+  },
+  {
+    "d35eName": "Time Stop",
+    "d35eId": "p3lOHPkh13ToBOIG",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "time-stop",
+    "spanishName": "Detención del tiempo"
+  },
+  {
+    "d35eName": "Tiny Hut",
+    "d35eId": "QJr0qUGRRGmfcrl6",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "tiny-hut",
+    "spanishName": "Cabaña diminuta"
+  },
+  {
+    "d35eName": "Tongues",
+    "d35eId": "X6DmImn7OOZzPtUa",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "tongues",
+    "spanishName": "Lenguas"
+  },
+  {
+    "d35eName": "Touch of Fatigue",
+    "d35eId": "mSCwCqSuQO59d3SZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "touch-of-fatigue",
+    "spanishName": "Toque de fatiga"
+  },
+  {
+    "d35eName": "Touch of Idiocy",
+    "d35eId": "MEGRRIjGZ4alFinQ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "touch-of-idiocy",
+    "spanishName": "Toque de idiotez"
+  },
+  {
+    "d35eName": "Transformation",
+    "d35eId": "8b65Z64SZiURTcDZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "transformation",
+    "spanishName": "Transformación"
+  },
+  {
+    "d35eName": "Transmute Metal to Wood",
+    "d35eId": "elWGB7149dSp2Owb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "transmute-metal-to-wood",
+    "spanishName": "Transmutar metal en madera"
+  },
+  {
+    "d35eName": "Transmute Mud to Rock",
+    "d35eId": "8JrRdH8i83Co3zu8",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "transmute-mud-to-rock",
+    "spanishName": "Transmutar el barro en roca"
+  },
+  {
+    "d35eName": "Transmute Rock to Mud",
+    "d35eId": "LSY1I3jiUlEXEoQf",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "transmute-rock-to-mud",
+    "spanishName": "Transmutar roca en barro"
+  },
+  {
+    "d35eName": "Transport via Plants",
+    "d35eId": "5NKMxNc5dm2byNgC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "transport-via-plants",
+    "spanishName": "Transporte a través de plantas"
+  },
+  {
+    "d35eName": "Trap the Soul",
+    "d35eId": "9RIZgVre7AeeJBll",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "trap-the-soul",
+    "spanishName": "Atrapa el alma"
+  },
+  {
+    "d35eName": "Tree Shape",
+    "d35eId": "bhrX2sYbmXXabnrw",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "tree-shape",
+    "spanishName": "Forma del árbol"
+  },
+  {
+    "d35eName": "Tree Stride",
+    "d35eId": "6al5TruNtGXXqhp7",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "tree-stride",
+    "spanishName": "Zancada de árbol"
+  },
+  {
+    "d35eName": "True Resurrection",
+    "d35eId": "ra4epZZhQd8mqIEy",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "true-resurrection",
+    "spanishName": "La verdadera resurrección"
+  },
+  {
+    "d35eName": "True Seeing",
+    "d35eId": "qftXpeBL3XWLYe2W",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "true-seeing",
+    "spanishName": "Visión verdadera"
+  },
+  {
+    "d35eName": "True Strike",
+    "d35eId": "HRwHOOJ5LehzR1Er",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "true-strike",
+    "spanishName": "Golpe verdadero"
+  },
+  {
+    "d35eName": "Undeath to Death",
+    "d35eId": "6A3qaL6L2QbjSBSL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "undeath-to-death",
+    "spanishName": "De la no-muerte a la muerte"
+  },
+  {
+    "d35eName": "Undetectable Alignment",
+    "d35eId": "BuybUdCapWTbYgNN",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "undetectable-alignment",
+    "spanishName": "Alineación indetectable"
+  },
+  {
+    "d35eName": "Unhallow",
+    "d35eId": "Sx4hk9tpxU965VXo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "unhallow",
+    "spanishName": "Santificado"
+  },
+  {
+    "d35eName": "Unholy Aura",
+    "d35eId": "MOhRFRxvi3ffnPeZ",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "unholy-aura",
+    "spanishName": "Aura profana"
+  },
+  {
+    "d35eName": "Unseen Servant",
+    "d35eId": "HTWgHfX0lOJvmjNe",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "unseen-servant",
+    "spanishName": "Sirviente invisible"
+  },
+  {
+    "d35eName": "Vampiric Touch",
+    "d35eId": "i6Ya2PCXxBkeiC7q",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "vampiric-touch",
+    "spanishName": "Toque vampírico"
+  },
+  {
+    "d35eName": "Veil",
+    "d35eId": "OMf4eYBKxmvJTChi",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "veil",
+    "spanishName": "Velo"
+  },
+  {
+    "d35eName": "Ventriloquism",
+    "d35eId": "Xm6Tj1goW8EsFiuK",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "ventriloquism",
+    "spanishName": "Ventriloquia"
+  },
+  {
+    "d35eName": "Virtue",
+    "d35eId": "v2F30N4k7lzfu1jO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "virtue",
+    "spanishName": "Virtud"
+  },
+  {
+    "d35eName": "Vision",
+    "d35eId": "qoJytXbn4c1DbdMb",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "vision",
+    "spanishName": "Visión"
+  },
+  {
+    "d35eName": "Wail of the Banshee",
+    "d35eId": "BPzATZHcF8b5k2KH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wail-of-the-banshee",
+    "spanishName": "Lamento de la Banshee"
+  },
+  {
+    "d35eName": "Wall of Fire",
+    "d35eId": "PNZc3amjAdlurJsq",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-fire",
+    "spanishName": "Muro de fuego"
+  },
+  {
+    "d35eName": "Wall of Force",
+    "d35eId": "eaKsdQOGwDLH0TjO",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-force",
+    "spanishName": "Muro de Fuerza"
+  },
+  {
+    "d35eName": "Wall of Ice",
+    "d35eId": "hxJF0o0a8rgvTvd9",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-ice",
+    "spanishName": "Muro de hielo"
+  },
+  {
+    "d35eName": "Wall of Iron",
+    "d35eId": "4FPf1G98eJWcfBBo",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-iron",
+    "spanishName": "Muro de hierro"
+  },
+  {
+    "d35eName": "Wall of Stone",
+    "d35eId": "sbWeoalthjQWh9il",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-stone",
+    "spanishName": "Muro de piedra"
+  },
+  {
+    "d35eName": "Wall of Thorns",
+    "d35eId": "axP6pw5qZDNWnVZu",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wall-of-thorns",
+    "spanishName": "Muro de espinas"
+  },
+  {
+    "d35eName": "Warp Wood",
+    "d35eId": "bgagWkGKleZTd7hg",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "warp-wood",
+    "spanishName": "Madera de urdimbre"
+  },
+  {
+    "d35eName": "Water Breathing",
+    "d35eId": "uehkdmLS8jDmHdQj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "water-breathing",
+    "spanishName": "Respiración de agua"
+  },
+  {
+    "d35eName": "Water Walk",
+    "d35eId": "69VGjAJljDpLDQDH",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "water-walk",
+    "spanishName": "Paseo por el agua"
+  },
+  {
+    "d35eName": "Waves of Exhaustion",
+    "d35eId": "HQcknr0NgGLRiijA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "waves-of-exhaustion",
+    "spanishName": "Olas de agotamiento"
+  },
+  {
+    "d35eName": "Waves of Fatigue",
+    "d35eId": "e2j5Clgac5NhJApx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "waves-of-fatigue",
+    "spanishName": "Olas de fatiga"
+  },
+  {
+    "d35eName": "Web",
+    "d35eId": "0X7OpnVunSsGsXi5",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "web",
+    "spanishName": "Telaraña"
+  },
+  {
+    "d35eName": "Weird",
+    "d35eId": "h6uHHdqvWwPESHjA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "weird",
+    "spanishName": "Extraño"
+  },
+  {
+    "d35eName": "Whirlwind",
+    "d35eId": "USUYHtfCs1wRzqeL",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "whirlwind",
+    "spanishName": "Torbellino"
+  },
+  {
+    "d35eName": "Whispering Wind",
+    "d35eId": "KSNi8f40P4awiDTx",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "whispering-wind",
+    "spanishName": "Viento susurrante"
+  },
+  {
+    "d35eName": "Wind Walk",
+    "d35eId": "z7Kw2aWjqutaUeVj",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wind-walk",
+    "spanishName": "Paseo del viento"
+  },
+  {
+    "d35eName": "Wind Wall",
+    "d35eId": "3d8BnUiZndbJ7PAe",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wind-wall",
+    "spanishName": "Muro de viento"
+  },
+  {
+    "d35eName": "Wish",
+    "d35eId": "8wXGQBm2IqTbQxsS",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wish",
+    "spanishName": "Deseo"
+  },
+  {
+    "d35eName": "Wood Shape",
+    "d35eId": "2Df8HKA6wdbeVqOC",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "wood-shape",
+    "spanishName": "Forma de madera"
+  },
+  {
+    "d35eName": "Word of Chaos",
+    "d35eId": "WOCJR3mNQ569iUCn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "word-of-chaos",
+    "spanishName": "Palabra de caos"
+  },
+  {
+    "d35eName": "Word of Recall",
+    "d35eId": "eNqPvy2zpBfFjgPs",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "word-of-recall",
+    "spanishName": "Palabra de recuerdo"
+  },
+  {
+    "d35eName": "Zone of Silence",
+    "d35eId": "Eh0tA1ky9H1U64oA",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "zone-of-silence",
+    "spanishName": "Zona de silencio"
+  },
+  {
+    "d35eName": "Zone of Truth",
+    "d35eId": "VzvYq4NRbE44XJsn",
+    "sourceCode": "spellsAllCore",
+    "sourceBook": "Player's Handbook (SRD)",
+    "dndtoolsSlug": "zone-of-truth",
+    "spanishName": "Zona de la verdad"
+  }
+]

@@ -1,0 +1,3389 @@
+{
+  "metadata": {
+    "description": "D&D 3.5 SRD Spell Reference List (deduplicated)",
+    "sources": [
+      "github.com/Obsidian-TTRPG-Community/DnD-3.5-SRD-Markdown",
+      "D35E Foundry VTT system (d35e-raw/spells.json)"
+    ],
+    "generatedDate": "2026-02-08",
+    "notes": "Deduplicated by normalized name. Obsidian naming preferred where available.",
+    "counts": {
+      "total": 674,
+      "core": 617,
+      "epic": 46,
+      "domain": 11
+    }
+  },
+  "spells": [
+    {
+      "name": "Acid Arrow",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Acid Fog",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Acid Splash",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Aid",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Air Walk",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Alarm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Align Weapon",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Alter Self",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Analyze Dweomer",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animal Growth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animal Messenger",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animal Shapes",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animal Trance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animate Dead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animate Objects",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animate Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animate Rope",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Animus Blast",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Animus Blizzard",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Antilife Shell",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Antimagic Field",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Antipathy",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Antiplant Shell",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Arcane Eye",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Arcane Lock",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Arcane Mark",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Arcane Sight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Arcane Sight, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Armor of Darkness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Astral Projection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Atonement",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Augury",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Awaken",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Baleful Polymorph",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Baleful Transportation",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Bane",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Banishment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Barkskin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bear\u2019s Endurance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bear\u2019s Endurance, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bestow Curse",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Binding",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Black Tentacles",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blacklight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Blade Barrier",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blasphemy",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bless",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bless Water",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bless Weapon",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blindness/Deafness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blink",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Blur",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bolt of Glory",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Bolts of Bedevilment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Brain Spider",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Break Enchantment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bull\u2019s Strength",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Bull\u2019s Strength, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Burning Hands",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Call Lightning",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Call Lightning Storm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Calm Animals",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Calm Emotions",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cat\u2019s Grace",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cat\u2019s Grace, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cause Fear",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Chain Lightning",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Changestaff",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Chaos Hammer",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Charm Animal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Charm Monster",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Charm Monster, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Charm Person",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Chill Metal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Chill Touch",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Circle of Death",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Clairaudience/Clairvoyance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Clenched Fist",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cloak of Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Clone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cloudkill",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Color Spray",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Command",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Command Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Command Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Command, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Commune",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Commune with Nature",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Comprehend Languages",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cone of Cold",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Confusion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Confusion, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Consecrate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Contact Other Plane",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Contagion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Contingency",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Contingent Resurrection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Continual Flame",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Control Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Control Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Control Water",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Control Weather",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Control Winds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Corrupt Weapon",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Create Food and Water",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Create Greater Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Create Living Vault (Ritual)",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Create Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Create Water",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Creeping Doom",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Crown of Glory",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Crown of Vermin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Crushing Despair",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Crushing Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Critical Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Critical Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Light Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Light Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Minor Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Moderate Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Moderate Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Serious Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Cure Serious Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Curse Water",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Damnation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Dancing Lights",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Darkness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Darkvision",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Daylight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Daze",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Daze Monster",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Death Knell",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Death Ward",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Deathwatch",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Deep Slumber",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Deeper Darkness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Delay Poison",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Delayed Blast Fireball",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Demand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Demise Unseen",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Desecrate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Destruction",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Animals or Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Evil",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Good",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Law",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Magic",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Poison",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Scrying",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Secret Doors",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Snares and Pits",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Thoughts",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Detect Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dictum",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dimension Door",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dimensional Anchor",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dimensional Lock",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Diminish Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dire Winter",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Discern Lies",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Discern Location",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Disguise Self",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Disintegrate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dismissal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Evil",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Good",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Law",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Magic",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dispel Magic, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Displacement",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Disrupt Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Disrupting Weapon",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Divination",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Divine Favor",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Divine Power",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dominate Animal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dominate Monster",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dominate Person",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Doom",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dragon Knight (Ritual)",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Dragon Strike (Ritual)",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Dream",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Dreamscape",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Dweomer of Transference",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Eagle\u2019s Splendor",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Eagle\u2019s Splendor, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Earthquake",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Eclipse",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Eidolon",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Elemental Swarm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Endure Elements",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Energy Drain",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Enervation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Enlarge Person",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Enlarge Person, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Enslave (Ritual)",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Entangle",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Enthrall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Entropic Shield",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Epic Counterspell",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Mage Armor",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Repulsion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Spell Reflection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Erase",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Eternal Freedom",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Ethereal Jaunt",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Etherealness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Expeditious Retreat",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Explosive Runes",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Eyebite",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fabricate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Faerie Fire",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "False Life",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "False Vision",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fear",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Feather Fall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Feeblemind",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Find the Path",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Find Traps",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Finger of Death",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fire Seeds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fire Shield",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fire Storm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fire Trap",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fireball",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flame Arrow",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flame Blade",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flame Strike",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flaming Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flare",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Flesh to Stone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Floating Disk",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fly",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fog Cloud",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Forbiddance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Forcecage",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Forceful Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Foresight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fox\u2019s Cunning",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Fox\u2019s Cunning, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Freedom",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Freedom of Movement",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Freezing Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Gaseous Form",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Gate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "GATHERING OF MAGGOTS",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Geas, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Geas/Quest",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Genesis",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Gentle Repose",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ghost Sound",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ghoul Touch",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Giant Vermin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Glibness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Glitterdust",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Globe of Invulnerability",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Globe of Invulnerability, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Glossolalia",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Glyph of Warding",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Glyph of Warding, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Good Hope",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Goodberry",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Grasping Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Grease",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Greater Ruin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Greater Spell Resistance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Guards and Wards",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Guidance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Gust of Wind",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hallow",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hallucinatory Terrain",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Halt Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hardening",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Harm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Haste",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heal Mount",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heal, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heat Metal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hellball",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Helping Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heroes\u2019 Feast",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heroism",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Heroism, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hide From Animals",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hide From Undead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hideous Laughter",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Animal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Monster",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Monster, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Person",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Person, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hold Portal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Holy Aura",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Holy Smite",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Holy Sword",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Holy Word",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Horrid Wilting",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hypnotic Pattern",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Hypnotism",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ice Storm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Identify",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Illusory Script",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Illusory Wall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Imbue with Spell Ability",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Implosion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Imprisonment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Incendiary Cloud",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Critical Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Critical Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Light Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Light Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Minor Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Moderate Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Moderate Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Serious Wounds",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Inflict Serious Wounds, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Insanity",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Insect Plague",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Instant Summons",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Interposing Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Invisibility",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Invisibility Purge",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Invisibility Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Invisibility, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Invisibility, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Iron Body",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ironwood",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Irresistible Dance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Jump",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Keen Edge",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Kinetic Control",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Knock",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Know Direction",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Legend Lore",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Let Go of Me",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Levitate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Light",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Lightning Bolt",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Limited Wish",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Liveoak",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Living Lightning",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Locate Creature",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Locate Object",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Longstrider",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Lord of Nightmares",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Lullaby",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Maddening Scream",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Mage Armor",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage Hand",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Disjunction",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Faithful Hound",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Lucubration",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Magnificent Mansion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Private Sanctum",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mage\u2019s Sword",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Aura",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Circle Against Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Circle Against Evil",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Circle Against Good",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Circle Against Law",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Fang",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Fang, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Jar",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Missile",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Mouth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Stone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Vestment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Weapon",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Magic Weapon, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Major Creation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Major Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Make Whole",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mark of Justice",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mass Frog",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Maze",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Meld Into Stone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mending",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mental Pinnacle",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Message",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Meteor Swarm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mind Blank",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mind Fog",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Minor Creation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Minor Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Miracle",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mirage Arcana",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mirror Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Misdirection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mislead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mnemonic Enhancer",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Modify Memory",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Moment of Prescience",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Momento Mori",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Mount",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Move Earth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Mummy Dust",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Nailed to the Sky",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Neutralize Poison",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Nightmare",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Nondetection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Obscure Object",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Obscuring Mist",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Open/Close",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Order\u2019s Wrath",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Origin of Species: Achaierai",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Overland Flight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Owl\u2019s Wisdom",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Owl\u2019s Wisdom, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Pass Without Trace",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Passwall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Peripety",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Permanency",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Permanent Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Persistent Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Pestilence",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Phantasmal Killer",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Phantom Steed",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Phantom Trap",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Phase Door",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Ally",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Ally, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Ally, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Binding",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Binding, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Planar Binding, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Plane Shift",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Plant Growth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Poison",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Polar Ray",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Polymorph",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Polymorph Any Object",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Power Word Blind",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Power Word Kill",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Power Word Stun",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prayer",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prestidigitation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prismatic Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prismatic Spray",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prismatic Wall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Probe Thoughts",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Produce Flame",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Programmed Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Project Image",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Arrows",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Energy",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Evil",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Good",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Law",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Protection From Spells",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prying Eyes",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Prying Eyes, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Psychic Turmoil",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Psychic Turmoil, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Purify Food and Drink",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Pyrotechnics",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Quench",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Rage",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Rain of Fire",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Rainbow Pattern",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Raise Dead",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Raise Island",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Ray of Enfeeblement",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ray of Exhaustion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ray of Frost",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Read Magic",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Reduce Animal",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Reduce Person",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Reduce Person, Mass",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Refuge",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Regenerate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Reincarnate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Remove Blindness/Deafness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Remove Curse",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Remove Disease",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Remove Fear",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Remove Paralysis",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Repel Metal or Stone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Repel Vermin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Repel Wood",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Repulsion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Resilient Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Resist Energy",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Resistance",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Restoration",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Restoration, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Restoration, Lesser",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Resurrection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Reverse Gravity",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Righteous Might",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Rope Trick",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Ruin",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Rusting Grasp",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Safe Time",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Sanctuary",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Scare",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Scintillating Pattern",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Scorching Ray",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Screen",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Scrying",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Scrying, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sculpt Sound",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Searing Light",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Secret Chest",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Secret Page",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Secure Shelter",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "See Invisibility",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Seeming",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sending",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sepia Snake Sigil",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sequester",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shades",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shadow Conjuration",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shadow Conjuration, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shadow Evocation",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shadow Evocation, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shadow Walk",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shambler",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shapechange",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shatter",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shield",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shield of Faith",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shield of Law",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shield Other",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shillelagh",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shocking Grasp",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shout",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Shout, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Shrink Item",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Silence",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Silent Image",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Simulacrum",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Slay Living",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sleep",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Sleet Storm",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Slow",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Snare",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Soften Earth and Stone",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Solid Fog",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Song of Discord",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Soul Bind",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Soul Dominion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Soul Scry",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Sound Burst",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Speak with Animals",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Speak with Dead",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Speak with Plants",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spectral Hand",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spell Immunity",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spell Immunity, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spell Resistance",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spell Turning",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spell Worm",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Spellstaff",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spider Climb",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spike Growth",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spike Stones",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Spiritual Weapon",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Statue",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Status",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Status, Greater",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Stinking Cloud",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Stone Shape",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Stone Tell",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Stone to Flesh",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Stoneskin",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Storm of Vengeance",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Suggestion",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Suggestion, Mass",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Behemoth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Summon Instrument",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster I",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster II",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster III",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster IV",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster IX",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster V",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster VI",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster VII",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Monster VIII",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally I",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally II",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally III",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally IV",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally IX",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally V",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally VI",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally VII",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Nature's Ally VIII",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Summon Swarm",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sunbeam",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sunburst",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Superb Dispelling",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Surelife",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Symbol of Death",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Fear",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Insanity",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Pain",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Persuasion",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Sleep",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Stunning",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Symbol of Weakness",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sympathetic Vibration",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Sympathy",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Telekinesis",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Telekinetic Sphere",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Telepathic Bond",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Telepathic Bond, Lesser",
+      "verifiedSource": "d35e-foundry",
+      "category": "core"
+    },
+    {
+      "name": "Teleport",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Teleport Object",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Teleport, Greater",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Teleportation Circle",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Temporal Stasis",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Time Duplicate",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Time Stop",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Tiny Hut",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Tongues",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Touch of Fatigue",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Touch of Idiocy",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Touch of Madness",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "Transformation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Transmute Metal to Wood",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Transmute Mud to Rock",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Transmute Rock to Mud",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Transport via Plants",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Trap the Soul",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Tree Shape",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Tree Stride",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "True Creation",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "domain"
+    },
+    {
+      "name": "True Resurrection",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "True Seeing",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "True Strike",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Undeath to Death",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Undetectable Alignment",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Unhallow",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Unholy Aura",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Unholy Blight",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Unseen Servant",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Vampiric Touch",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Veil",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Vengeful Gaze of God",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Ventriloquism",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Verdigris",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Verdigris Tsunami",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "epic"
+    },
+    {
+      "name": "Virtue",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Vision",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wail of the Banshee",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Fire",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Force",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Ice",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Iron",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Stone",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wall of Thorns",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Warp Wood",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Water Breathing",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Water Walk",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Waves of Exhaustion",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Waves of Fatigue",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Web",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Weird",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Whirlwind",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Whispering Wind",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wind Walk",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wind Wall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wish",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Wood Shape",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Word of Chaos",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Word of Recall",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Zone of Silence",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    },
+    {
+      "name": "Zone of Truth",
+      "verifiedSource": "obsidian-srd-markdown",
+      "category": "core"
+    }
+  ]
+}

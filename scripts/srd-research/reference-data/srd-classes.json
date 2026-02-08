@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "description": "D&D 3.5 SRD Class Lists",
+    "source": "d20srd.org",
+    "generatedDate": "2026-02-08"
+  },
+  "base": [
+    "Barbarian", "Bard", "Cleric", "Druid", "Fighter",
+    "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Wizard"
+  ],
+  "prestige": [
+    "Arcane Archer", "Arcane Trickster", "Archmage", "Assassin", "Blackguard",
+    "Dragon Disciple", "Duelist", "Dwarven Defender", "Eldritch Knight",
+    "Hierophant", "Horizon Walker", "Loremaster", "Mystic Theurge",
+    "Shadowdancer", "Thaumaturgist"
+  ],
+  "npc": [
+    "Adept", "Aristocrat", "Commoner", "Expert", "Warrior"
+  ],
+  "psionic": [
+    "Psion", "Psychic Warrior", "Soulknife", "Wilder"
+  ],
+  "psionicPrestige": [
+    "Cerebremancer", "Elocater", "Metamind", "Psion Uncarnate",
+    "Pyrokineticist", "Slayer", "Thrallherd", "War Mind"
+  ]
+}

@@ -1,0 +1,1639 @@
+{
+  "metadata": {
+    "description": "D&D 3.5 SRD Feat Reference List",
+    "sources": [
+      "github.com/Obsidian-TTRPG-Community/DnD-3.5-SRD-Markdown (3.5 Feat List.md, epic-feats.md, Psionic Feats.md, 3.5 Monster Feats.md)",
+      "D35E Foundry VTT system (d35e-raw/feats.json)"
+    ],
+    "generatedDate": "2026-02-08",
+    "counts": {
+      "total": 405,
+      "core": 149,
+      "epic": 162,
+      "psionic": 81,
+      "monster": 13
+    }
+  },
+  "feats": [
+    {
+      "name": "Ability Focus",
+      "category": "monster"
+    },
+    {
+      "name": "Acrobatic",
+      "category": "core"
+    },
+    {
+      "name": "Additional Magic Item Space",
+      "category": "epic"
+    },
+    {
+      "name": "Agile",
+      "category": "core"
+    },
+    {
+      "name": "Alertness",
+      "category": "core"
+    },
+    {
+      "name": "Aligned Attack",
+      "category": "psionic"
+    },
+    {
+      "name": "Animal Affinity",
+      "category": "core"
+    },
+    {
+      "name": "Antipsionic Magic",
+      "category": "psionic"
+    },
+    {
+      "name": "Armor Proficiency (Heavy)",
+      "category": "core"
+    },
+    {
+      "name": "Armor Proficiency (Light)",
+      "category": "core"
+    },
+    {
+      "name": "Armor Proficiency (Medium)",
+      "category": "core"
+    },
+    {
+      "name": "Armor Skin",
+      "category": "epic"
+    },
+    {
+      "name": "Athletic",
+      "category": "core"
+    },
+    {
+      "name": "Augment Summoning",
+      "category": "core"
+    },
+    {
+      "name": "Augmented Alchemy",
+      "category": "epic"
+    },
+    {
+      "name": "Automatic Quicken Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Automatic Silent Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Automatic Still Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Autonomous",
+      "category": "psionic"
+    },
+    {
+      "name": "Awesome Blow",
+      "category": "monster"
+    },
+    {
+      "name": "Bane of Enemies",
+      "category": "epic"
+    },
+    {
+      "name": "Blind-Fight",
+      "category": "core"
+    },
+    {
+      "name": "Blinding Speed",
+      "category": "epic"
+    },
+    {
+      "name": "Blindsight, 5-ft. Radius",
+      "category": "core"
+    },
+    {
+      "name": "Body Fuel",
+      "category": "psionic"
+    },
+    {
+      "name": "Bonus Domain",
+      "category": "epic"
+    },
+    {
+      "name": "Boost Construct",
+      "category": "psionic"
+    },
+    {
+      "name": "Brew Potion",
+      "category": "core"
+    },
+    {
+      "name": "Bulwark of Defense",
+      "category": "epic"
+    },
+    {
+      "name": "Burrowing Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Chain Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Chaotic Mind",
+      "category": "psionic"
+    },
+    {
+      "name": "Chaotic Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Cleave",
+      "category": "core"
+    },
+    {
+      "name": "Cloak Dance",
+      "category": "psionic"
+    },
+    {
+      "name": "Closed Mind",
+      "category": "psionic"
+    },
+    {
+      "name": "Colossal Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Combat Archery",
+      "category": "epic"
+    },
+    {
+      "name": "Combat Casting",
+      "category": "core"
+    },
+    {
+      "name": "Combat Expertise",
+      "category": "core"
+    },
+    {
+      "name": "Combat Manifestation",
+      "category": "psionic"
+    },
+    {
+      "name": "Combat Reflexes",
+      "category": "core"
+    },
+    {
+      "name": "Craft Cognizance Crystal",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Construct",
+      "category": "monster"
+    },
+    {
+      "name": "Craft Dorje",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Epic Magic Arms and Armor",
+      "category": "epic"
+    },
+    {
+      "name": "Craft Epic Rod",
+      "category": "epic"
+    },
+    {
+      "name": "Craft Epic Staff",
+      "category": "epic"
+    },
+    {
+      "name": "Craft Epic Wondrous Item",
+      "category": "epic"
+    },
+    {
+      "name": "Craft Magic Arms and Armor",
+      "category": "core"
+    },
+    {
+      "name": "Craft Psicrown",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Psionic Arms and Armor",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Psionic Construct",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Rod",
+      "category": "core"
+    },
+    {
+      "name": "Craft Staff",
+      "category": "core"
+    },
+    {
+      "name": "Craft Universal Item",
+      "category": "psionic"
+    },
+    {
+      "name": "Craft Wand",
+      "category": "core"
+    },
+    {
+      "name": "Craft Wondrous Item",
+      "category": "core"
+    },
+    {
+      "name": "Damage Reduction",
+      "category": "epic"
+    },
+    {
+      "name": "Deadly Precision",
+      "category": "psionic"
+    },
+    {
+      "name": "Deafening Song",
+      "category": "epic"
+    },
+    {
+      "name": "Death of Enemies",
+      "category": "epic"
+    },
+    {
+      "name": "Deceitful",
+      "category": "core"
+    },
+    {
+      "name": "Deep Impact",
+      "category": "psionic"
+    },
+    {
+      "name": "Deflect Arrows",
+      "category": "core"
+    },
+    {
+      "name": "Deft Hands",
+      "category": "core"
+    },
+    {
+      "name": "Delay Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Devastating Critical",
+      "category": "epic"
+    },
+    {
+      "name": "Dexterous Fortitude",
+      "category": "epic"
+    },
+    {
+      "name": "Dexterous Will",
+      "category": "epic"
+    },
+    {
+      "name": "Diehard",
+      "category": "core"
+    },
+    {
+      "name": "Diligent",
+      "category": "core"
+    },
+    {
+      "name": "Diminutive Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Dire Charge",
+      "category": "epic"
+    },
+    {
+      "name": "Disguise Spell",
+      "category": "core"
+    },
+    {
+      "name": "Distant Shot",
+      "category": "epic"
+    },
+    {
+      "name": "Divine Might",
+      "category": "core"
+    },
+    {
+      "name": "Divine Vengeance",
+      "category": "core"
+    },
+    {
+      "name": "Dodge",
+      "category": "core"
+    },
+    {
+      "name": "Dragon Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Efficient Item Creation",
+      "category": "epic"
+    },
+    {
+      "name": "Empower Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Empower Spell",
+      "category": "core"
+    },
+    {
+      "name": "Empower Spell-Like Ability",
+      "category": "monster"
+    },
+    {
+      "name": "Endurance",
+      "category": "core"
+    },
+    {
+      "name": "Energy Resistance",
+      "category": "epic"
+    },
+    {
+      "name": "Energy Substitution",
+      "category": "core"
+    },
+    {
+      "name": "Enhance Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Enlarge Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Enlarge Spell",
+      "category": "core"
+    },
+    {
+      "name": "Epic Dodge",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Endurance",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Expanded Knowledge",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Fortitude",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Inspiration",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Leadership",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Manifestation",
+      "category": "psionic"
+    },
+    {
+      "name": "Epic Prowess",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Psionic Focus",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Reflexes",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Reputation",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Skill Focus",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Skill Focus (Not Set)",
+      "category": "core"
+    },
+    {
+      "name": "Epic Speed",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Spell Focus",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Spell Focus (No Spell School Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Epic Spell Penetration",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Spellcasting",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Toughness",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Weapon Focus",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Weapon Focus (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Epic Weapon Specialization",
+      "category": "epic"
+    },
+    {
+      "name": "Epic Will",
+      "category": "epic"
+    },
+    {
+      "name": "Eschew Materials",
+      "category": "core"
+    },
+    {
+      "name": "Exceptional Deflection",
+      "category": "epic"
+    },
+    {
+      "name": "Exotic Weapon Proficiency",
+      "category": "core"
+    },
+    {
+      "name": "Expanded Knowledge",
+      "category": "psionic"
+    },
+    {
+      "name": "Extend Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Extend Spell",
+      "category": "core"
+    },
+    {
+      "name": "Extended Life Span",
+      "category": "epic"
+    },
+    {
+      "name": "Extra Music",
+      "category": "core"
+    },
+    {
+      "name": "Extra Turning",
+      "category": "core"
+    },
+    {
+      "name": "Eyes in the Back of Your Head",
+      "category": "core"
+    },
+    {
+      "name": "Familiar Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Far Shot",
+      "category": "core"
+    },
+    {
+      "name": "Fast Healing",
+      "category": "epic"
+    },
+    {
+      "name": "Fell Shot",
+      "category": "psionic"
+    },
+    {
+      "name": "Fine Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Fleet of Foot",
+      "category": "core"
+    },
+    {
+      "name": "Flyby Attack",
+      "category": "monster"
+    },
+    {
+      "name": "Focused Sunder",
+      "category": "psionic"
+    },
+    {
+      "name": "Force of Will",
+      "category": "psionic"
+    },
+    {
+      "name": "Forge Epic Ring",
+      "category": "epic"
+    },
+    {
+      "name": "Forge Ring",
+      "category": "core"
+    },
+    {
+      "name": "Gargantuan Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Ghost Attack",
+      "category": "psionic"
+    },
+    {
+      "name": "Great Charisma",
+      "category": "epic"
+    },
+    {
+      "name": "Great Cleave",
+      "category": "core"
+    },
+    {
+      "name": "Great Constitution",
+      "category": "epic"
+    },
+    {
+      "name": "Great Dexterity",
+      "category": "epic"
+    },
+    {
+      "name": "Great Fortitude",
+      "category": "core"
+    },
+    {
+      "name": "Great Intelligence",
+      "category": "epic"
+    },
+    {
+      "name": "Great Smiting",
+      "category": "epic"
+    },
+    {
+      "name": "Great Strength",
+      "category": "epic"
+    },
+    {
+      "name": "Great Wisdom",
+      "category": "epic"
+    },
+    {
+      "name": "Greater Manyshot",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Multiweapon Fighting",
+      "category": "epic"
+    },
+    {
+      "name": "Greater Power Penetration",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Power Specialization",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Psionic Endowment",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Psionic Fist",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Psionic Shot",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Psionic Weapon",
+      "category": "psionic"
+    },
+    {
+      "name": "Greater Spell Focus",
+      "category": "core"
+    },
+    {
+      "name": "Greater Spell Focus (No Spell School Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Greater Spell Penetration",
+      "category": "core"
+    },
+    {
+      "name": "Greater Two-Weapon Fighting",
+      "category": "core"
+    },
+    {
+      "name": "Greater Weapon Focus",
+      "category": "core"
+    },
+    {
+      "name": "Greater Weapon Focus (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Greater Weapon Specialization",
+      "category": "core"
+    },
+    {
+      "name": "Greater Weapon Specialization (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Group Inspiration",
+      "category": "epic"
+    },
+    {
+      "name": "Heighten Spell",
+      "category": "core"
+    },
+    {
+      "name": "Hindering Song",
+      "category": "epic"
+    },
+    {
+      "name": "Hold the Line",
+      "category": "core"
+    },
+    {
+      "name": "Holy Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Hostile Mind",
+      "category": "psionic"
+    },
+    {
+      "name": "Hover",
+      "category": "monster"
+    },
+    {
+      "name": "Ignore Material Components",
+      "category": "epic"
+    },
+    {
+      "name": "Imprint Stone",
+      "category": "psionic"
+    },
+    {
+      "name": "Improved Alignment-Based Casting",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Arrow of Death",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Aura of Courage",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Aura of Despair",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Bull Rush",
+      "category": "core"
+    },
+    {
+      "name": "Improved Combat Casting",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Combat Reflexes",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Counterspell",
+      "category": "core"
+    },
+    {
+      "name": "Improved Critical",
+      "category": "core"
+    },
+    {
+      "name": "Improved Critical (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Improved Darkvision",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Death Attack",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Disarm",
+      "category": "core"
+    },
+    {
+      "name": "Improved Elemental Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Familiar",
+      "category": "core"
+    },
+    {
+      "name": "Improved Favored Enemy",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Feint",
+      "category": "core"
+    },
+    {
+      "name": "Improved Flyby Attack",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Grapple",
+      "category": "core"
+    },
+    {
+      "name": "Improved Heighten Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Initiative",
+      "category": "core"
+    },
+    {
+      "name": "Improved Ki Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Low-Light Vision",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Manifestation",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Manyshot",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Metamagic",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Metapsionics",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Multiattack",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Multiweapon Fighting",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Natural Armor",
+      "category": "monster"
+    },
+    {
+      "name": "Improved Natural Attack",
+      "category": "monster"
+    },
+    {
+      "name": "Improved Natural Attack (No Weapon Set)",
+      "category": "core"
+    },
+    {
+      "name": "Improved Overrun",
+      "category": "core"
+    },
+    {
+      "name": "Improved Precise Shot",
+      "category": "core"
+    },
+    {
+      "name": "Improved Psicrystal",
+      "category": "psionic"
+    },
+    {
+      "name": "Improved Shield Bash",
+      "category": "core"
+    },
+    {
+      "name": "Improved Sneak Attack",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Spell Capacity",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Spell Resistance",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Stunning Fist",
+      "category": "epic"
+    },
+    {
+      "name": "Improved Sunder",
+      "category": "core"
+    },
+    {
+      "name": "Improved Trip",
+      "category": "core"
+    },
+    {
+      "name": "Improved Turning",
+      "category": "core"
+    },
+    {
+      "name": "Improved Two-Weapon Fighting",
+      "category": "core"
+    },
+    {
+      "name": "Improved Unarmed Strike",
+      "category": "core"
+    },
+    {
+      "name": "Improved Whirlwind Attack",
+      "category": "epic"
+    },
+    {
+      "name": "Incite Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Infinite Deflection",
+      "category": "epic"
+    },
+    {
+      "name": "Inquisitor",
+      "category": "psionic"
+    },
+    {
+      "name": "Inspire Excellence",
+      "category": "epic"
+    },
+    {
+      "name": "Instant Reload",
+      "category": "epic"
+    },
+    {
+      "name": "Intensify Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Intuitive Trapfinding",
+      "category": "core"
+    },
+    {
+      "name": "Investigator",
+      "category": "core"
+    },
+    {
+      "name": "Iron Will",
+      "category": "core"
+    },
+    {
+      "name": "Jack of All Trades",
+      "category": "core"
+    },
+    {
+      "name": "Keen Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Knock-Down",
+      "category": "core"
+    },
+    {
+      "name": "Lasting Inspiration",
+      "category": "epic"
+    },
+    {
+      "name": "Leadership",
+      "category": "core"
+    },
+    {
+      "name": "Legendary Climber",
+      "category": "epic"
+    },
+    {
+      "name": "Legendary Commander",
+      "category": "epic"
+    },
+    {
+      "name": "Legendary Leaper",
+      "category": "epic"
+    },
+    {
+      "name": "Legendary Rider",
+      "category": "epic"
+    },
+    {
+      "name": "Legendary Tracker",
+      "category": "epic"
+    },
+    {
+      "name": "Legendary Wrestler",
+      "category": "epic"
+    },
+    {
+      "name": "Lightning Reflexes",
+      "category": "core"
+    },
+    {
+      "name": "Lingering Damage",
+      "category": "epic"
+    },
+    {
+      "name": "Magical Aptitude",
+      "category": "core"
+    },
+    {
+      "name": "Magical Beast Companion",
+      "category": "epic"
+    },
+    {
+      "name": "Magical Beast Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Manyshot",
+      "category": "core"
+    },
+    {
+      "name": "Martial Weapon Proficiency",
+      "category": "core"
+    },
+    {
+      "name": "Martial Weapon Proficiency (All)",
+      "category": "core"
+    },
+    {
+      "name": "Master Staff",
+      "category": "epic"
+    },
+    {
+      "name": "Master Wand",
+      "category": "epic"
+    },
+    {
+      "name": "Maximize Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Maximize Spell",
+      "category": "core"
+    },
+    {
+      "name": "Mental Leap",
+      "category": "psionic"
+    },
+    {
+      "name": "Mental Resistance",
+      "category": "psionic"
+    },
+    {
+      "name": "Metamorphic Transfer",
+      "category": "psionic"
+    },
+    {
+      "name": "Mighty Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Mind Over Body",
+      "category": "psionic"
+    },
+    {
+      "name": "Mobile Defense",
+      "category": "epic"
+    },
+    {
+      "name": "Mobility",
+      "category": "core"
+    },
+    {
+      "name": "Mounted Archery",
+      "category": "core"
+    },
+    {
+      "name": "Mounted Combat",
+      "category": "core"
+    },
+    {
+      "name": "Multiattack",
+      "category": "monster"
+    },
+    {
+      "name": "Multispell",
+      "category": "epic"
+    },
+    {
+      "name": "Multiweapon Fighting",
+      "category": "monster"
+    },
+    {
+      "name": "Multiweapon Rend",
+      "category": "epic"
+    },
+    {
+      "name": "Music of the Gods",
+      "category": "epic"
+    },
+    {
+      "name": "Narrow Mind",
+      "category": "psionic"
+    },
+    {
+      "name": "Natural Spell",
+      "category": "core"
+    },
+    {
+      "name": "Negative Energy Burst",
+      "category": "epic"
+    },
+    {
+      "name": "Negotiator",
+      "category": "core"
+    },
+    {
+      "name": "Nimble Fingers",
+      "category": "core"
+    },
+    {
+      "name": "Open Minded",
+      "category": "psionic"
+    },
+    {
+      "name": "Opportunity Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Overchannel",
+      "category": "psionic"
+    },
+    {
+      "name": "Overwhelming Critical",
+      "category": "epic"
+    },
+    {
+      "name": "Penetrate Damage Reduction",
+      "category": "epic"
+    },
+    {
+      "name": "Perfect Health",
+      "category": "epic"
+    },
+    {
+      "name": "Perfect Multiweapon Fighting",
+      "category": "epic"
+    },
+    {
+      "name": "Perfect Two-Weapon Fighting",
+      "category": "epic"
+    },
+    {
+      "name": "Permanent Emanation",
+      "category": "epic"
+    },
+    {
+      "name": "Persistent Spell",
+      "category": "core"
+    },
+    {
+      "name": "Persuasive",
+      "category": "core"
+    },
+    {
+      "name": "Planar Turning",
+      "category": "epic"
+    },
+    {
+      "name": "Plant Control",
+      "category": "core"
+    },
+    {
+      "name": "Plant Defiance",
+      "category": "core"
+    },
+    {
+      "name": "Plant Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Point Blank Shot",
+      "category": "core"
+    },
+    {
+      "name": "Polyglot",
+      "category": "epic"
+    },
+    {
+      "name": "Positive Energy Aura",
+      "category": "epic"
+    },
+    {
+      "name": "Power Attack",
+      "category": "core"
+    },
+    {
+      "name": "Power Critical",
+      "category": "core"
+    },
+    {
+      "name": "Power Knowledge",
+      "category": "epic"
+    },
+    {
+      "name": "Power Penetration",
+      "category": "psionic"
+    },
+    {
+      "name": "Power Specialization",
+      "category": "psionic"
+    },
+    {
+      "name": "Precise Shot",
+      "category": "core"
+    },
+    {
+      "name": "Psicrystal Affinity",
+      "category": "psionic"
+    },
+    {
+      "name": "Psicrystal Containment",
+      "category": "psionic"
+    },
+    {
+      "name": "Psicrystal Power",
+      "category": "epic"
+    },
+    {
+      "name": "Psionic Affinity",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Body",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Charge",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Dodge",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Endowment",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Fist",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Hole",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Meditation",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Shot",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Talent",
+      "category": "psionic"
+    },
+    {
+      "name": "Psionic Weapon",
+      "category": "psionic"
+    },
+    {
+      "name": "Quick Draw",
+      "category": "core"
+    },
+    {
+      "name": "Quicken Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Quicken Spell",
+      "category": "core"
+    },
+    {
+      "name": "Quicken Spell-Like Ability",
+      "category": "monster"
+    },
+    {
+      "name": "Ranged Inspiration",
+      "category": "epic"
+    },
+    {
+      "name": "Rapid Inspiration",
+      "category": "epic"
+    },
+    {
+      "name": "Rapid Metabolism",
+      "category": "psionic"
+    },
+    {
+      "name": "Rapid Reload",
+      "category": "core"
+    },
+    {
+      "name": "Rapid Reload (None)",
+      "category": "core"
+    },
+    {
+      "name": "Rapid Shot",
+      "category": "core"
+    },
+    {
+      "name": "Reach Spell",
+      "category": "core"
+    },
+    {
+      "name": "Reactive Countersong",
+      "category": "epic"
+    },
+    {
+      "name": "Reckless Offense",
+      "category": "psionic"
+    },
+    {
+      "name": "Reflect Arrows",
+      "category": "epic"
+    },
+    {
+      "name": "Repeat Spell",
+      "category": "core"
+    },
+    {
+      "name": "Return Shot",
+      "category": "psionic"
+    },
+    {
+      "name": "Ride-by Attack",
+      "category": "core"
+    },
+    {
+      "name": "Righteous Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Ruinous Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Run",
+      "category": "core"
+    },
+    {
+      "name": "Sacred Spell",
+      "category": "core"
+    },
+    {
+      "name": "Scribe Epic Scroll",
+      "category": "epic"
+    },
+    {
+      "name": "Scribe Scroll",
+      "category": "core"
+    },
+    {
+      "name": "Scribe Tattoo",
+      "category": "psionic"
+    },
+    {
+      "name": "Self-Concealment",
+      "category": "epic"
+    },
+    {
+      "name": "Self-Sufficient",
+      "category": "core"
+    },
+    {
+      "name": "Sharp-Shooting",
+      "category": "core"
+    },
+    {
+      "name": "Shattering Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Shield Proficiency",
+      "category": "core"
+    },
+    {
+      "name": "Shot on the Run",
+      "category": "core"
+    },
+    {
+      "name": "Sidestep Charge",
+      "category": "psionic"
+    },
+    {
+      "name": "Silent Spell",
+      "category": "core"
+    },
+    {
+      "name": "Simple Weapon Proficiency",
+      "category": "core"
+    },
+    {
+      "name": "Skill Focus",
+      "category": "core"
+    },
+    {
+      "name": "Skill Focus (Not Set)",
+      "category": "core"
+    },
+    {
+      "name": "Snatch",
+      "category": "monster"
+    },
+    {
+      "name": "Snatch Arrows",
+      "category": "core"
+    },
+    {
+      "name": "Sneak Attack of Opportunity",
+      "category": "epic"
+    },
+    {
+      "name": "Spectral Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Speed of Thought",
+      "category": "psionic"
+    },
+    {
+      "name": "Spell Focus",
+      "category": "core"
+    },
+    {
+      "name": "Spell Focus (No Spell School Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Spell Knowledge",
+      "category": "epic"
+    },
+    {
+      "name": "Spell Mastery",
+      "category": "core"
+    },
+    {
+      "name": "Spell Opportunity",
+      "category": "epic"
+    },
+    {
+      "name": "Spell Penetration",
+      "category": "core"
+    },
+    {
+      "name": "Spell Stowaway",
+      "category": "epic"
+    },
+    {
+      "name": "Spell Stowaway (No Spell Set)",
+      "category": "core"
+    },
+    {
+      "name": "Spellcasting Harrier",
+      "category": "epic"
+    },
+    {
+      "name": "Spirited Charge",
+      "category": "core"
+    },
+    {
+      "name": "Split Psionic Ray",
+      "category": "psionic"
+    },
+    {
+      "name": "Spontaneous Domain Access",
+      "category": "epic"
+    },
+    {
+      "name": "Spontaneous Spell",
+      "category": "epic"
+    },
+    {
+      "name": "Spring Attack",
+      "category": "core"
+    },
+    {
+      "name": "Stand Still",
+      "category": "psionic"
+    },
+    {
+      "name": "Stealthy",
+      "category": "core"
+    },
+    {
+      "name": "Still Spell",
+      "category": "core"
+    },
+    {
+      "name": "Storm of Throws",
+      "category": "epic"
+    },
+    {
+      "name": "Stunning Fist",
+      "category": "core"
+    },
+    {
+      "name": "Subdual Substitution",
+      "category": "core"
+    },
+    {
+      "name": "Superior Expertise",
+      "category": "core"
+    },
+    {
+      "name": "Superior Initiative",
+      "category": "epic"
+    },
+    {
+      "name": "Swarm of Arrows",
+      "category": "epic"
+    },
+    {
+      "name": "Talented",
+      "category": "psionic"
+    },
+    {
+      "name": "Tenacious Magic",
+      "category": "epic"
+    },
+    {
+      "name": "Tenacious Magic (No Spell Set)",
+      "category": "core"
+    },
+    {
+      "name": "Terrifying Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Thundering Rage",
+      "category": "epic"
+    },
+    {
+      "name": "Toughness",
+      "category": "core"
+    },
+    {
+      "name": "Tower Shield Proficiency",
+      "category": "core"
+    },
+    {
+      "name": "Track",
+      "category": "core"
+    },
+    {
+      "name": "Trample",
+      "category": "core"
+    },
+    {
+      "name": "Trap Sense",
+      "category": "epic"
+    },
+    {
+      "name": "Twin Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Two-Weapon Defense",
+      "category": "core"
+    },
+    {
+      "name": "Two-Weapon Fighting",
+      "category": "core"
+    },
+    {
+      "name": "Two-Weapon Rend",
+      "category": "epic"
+    },
+    {
+      "name": "Unavoidable Strike",
+      "category": "psionic"
+    },
+    {
+      "name": "Uncanny Accuracy",
+      "category": "epic"
+    },
+    {
+      "name": "Unconditional Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Undead Mastery",
+      "category": "epic"
+    },
+    {
+      "name": "Unholy Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Up the Walls",
+      "category": "psionic"
+    },
+    {
+      "name": "Vermin Wild Shape",
+      "category": "epic"
+    },
+    {
+      "name": "Vorpal Strike",
+      "category": "epic"
+    },
+    {
+      "name": "Weapon Finesse",
+      "category": "core"
+    },
+    {
+      "name": "Weapon Focus",
+      "category": "core"
+    },
+    {
+      "name": "Weapon Focus (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Weapon Proficiency (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Weapon Specialization",
+      "category": "core"
+    },
+    {
+      "name": "Weapon Specialization (No Weapon Selected)",
+      "category": "core"
+    },
+    {
+      "name": "Whirlwind Attack",
+      "category": "core"
+    },
+    {
+      "name": "Widen Aura of Courage",
+      "category": "epic"
+    },
+    {
+      "name": "Widen Aura of Despair",
+      "category": "epic"
+    },
+    {
+      "name": "Widen Power",
+      "category": "psionic"
+    },
+    {
+      "name": "Widen Spell",
+      "category": "core"
+    },
+    {
+      "name": "Wild Talent",
+      "category": "psionic"
+    },
+    {
+      "name": "Wingover",
+      "category": "monster"
+    },
+    {
+      "name": "Wounding Attack",
+      "category": "psionic"
+    },
+    {
+      "name": "Zone of Animation",
+      "category": "epic"
+    }
+  ]
+}

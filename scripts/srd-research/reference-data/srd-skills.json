@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "description": "D&D 3.5 SRD Skill List",
+    "source": "d20srd.org",
+    "generatedDate": "2026-02-08"
+  },
+  "skills": [
+    "Appraise", "Balance", "Bluff", "Climb", "Concentration", "Craft",
+    "Decipher Script", "Diplomacy", "Disable Device", "Disguise", "Escape Artist",
+    "Forgery", "Gather Information", "Handle Animal", "Heal", "Hide", "Intimidate",
+    "Jump", "Knowledge", "Listen", "Move Silently", "Open Lock", "Perform",
+    "Profession", "Ride", "Search", "Sense Motive", "Sleight Of Hand",
+    "Speak Language", "Spellcraft", "Spot", "Survival", "Swim", "Tumble",
+    "Use Magic Device", "Use Rope"
+  ]
+}
