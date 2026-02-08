@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Pressable } from 'react-native'
-import { YStack, XStack, Text, Input as TamaguiInput } from 'tamagui'
+import { YStack, XStack, Text, Input as TamaguiInput, Separator } from 'tamagui'
 import { useCharacterStore, useCharacterBaseData } from '../../../stores'
 import { Button } from '../../../atoms'
 import type {
@@ -76,16 +76,16 @@ function MethodChip({
     <Pressable onPress={onPress}>
       {({ pressed }) => (
         <XStack
-          paddingHorizontal={14}
-          paddingVertical={7}
-          borderRadius={20}
+          paddingHorizontal={12}
+          paddingVertical={5}
+          borderRadius={16}
           borderWidth={1.5}
           backgroundColor={isActive ? '$accent' : 'transparent'}
           borderColor={isActive ? '$accent' : '$borderColor'}
           opacity={pressed ? 0.7 : 1}
         >
           <Text
-            fontSize={13}
+            fontSize={12}
             fontWeight="600"
             color={isActive ? '$accentContrastText' : '$color'}
           >
@@ -101,10 +101,10 @@ function ModifierDisplay({ score }: { score: number }) {
   const modifier = calculateAbilityModifier(score)
   return (
     <Text
-      fontSize="$5"
+      fontSize={13}
       fontWeight="bold"
       color={modifier >= 0 ? '$green10' : '$red10'}
-      width={40}
+      width={32}
       textAlign="center"
     >
       {formatModifier(modifier)}
@@ -114,7 +114,7 @@ function ModifierDisplay({ score }: { score: number }) {
 
 function AbilityLabel({ abilityKey }: { abilityKey: AbilityKey }) {
   return (
-    <Text flex={1} fontSize="$4" fontWeight="500" color="$color">
+    <Text flex={1} fontSize={13} fontWeight="500" color="$color">
       {ABILITY_LABELS[abilityKey]}
     </Text>
   )
@@ -135,10 +135,10 @@ function RolledValueChip({
     <Pressable onPress={onPress} disabled={isAssigned && !isSelected}>
       {({ pressed }) => (
         <XStack
-          width={44}
-          height={44}
-          borderRadius={22}
-          borderWidth={2}
+          width={36}
+          height={36}
+          borderRadius={18}
+          borderWidth={1.5}
           borderColor={isSelected ? '$accent' : '$borderColor'}
           backgroundColor={isSelected ? '$accent' : 'transparent'}
           alignItems="center"
@@ -146,7 +146,7 @@ function RolledValueChip({
           opacity={isAssigned && !isSelected ? 0.4 : pressed ? 0.7 : 1}
         >
           <Text
-            fontSize="$5"
+            fontSize={14}
             fontWeight="bold"
             color={isSelected ? '$accentContrastText' : '$color'}
           >
@@ -171,20 +171,19 @@ function AssignableAbilityRow({
     <Pressable onPress={onPress}>
       {({ pressed }) => (
         <XStack
-          gap="$3"
+          gap="$2"
           alignItems="center"
-          paddingVertical="$2"
-          paddingHorizontal="$3"
-          borderRadius="$2"
+          paddingVertical="$1.5"
+          paddingHorizontal="$2.5"
           backgroundColor={pressed ? '$backgroundHover' : 'transparent'}
           hoverStyle={{ backgroundColor: '$backgroundHover' }}
         >
           <AbilityLabel abilityKey={abilityKey} />
-          <XStack alignItems="center" gap="$2">
+          <XStack alignItems="center" gap="$1.5">
             <XStack
-              width={60}
-              height={40}
-              borderRadius="$2"
+              width={50}
+              height={34}
+              borderRadius="$1"
               borderWidth={1}
               borderColor={assignedValue != null ? '$accent' : '$borderColor'}
               borderStyle={assignedValue != null ? 'solid' : 'dashed'}
@@ -193,7 +192,7 @@ function AssignableAbilityRow({
               backgroundColor="$background"
             >
               <Text
-                fontSize="$4"
+                fontSize={14}
                 fontWeight="bold"
                 color={assignedValue != null ? '$color' : '$placeholderColor'}
               >
@@ -203,7 +202,7 @@ function AssignableAbilityRow({
             {assignedValue != null ? (
               <ModifierDisplay score={assignedValue} />
             ) : (
-              <Text width={40} textAlign="center" color="$placeholderColor">
+              <Text width={32} textAlign="center" fontSize="$3" color="$placeholderColor">
                 —
               </Text>
             )}
@@ -249,15 +248,14 @@ function ManualAbilityScoreRow({
 
   return (
     <XStack
-      gap="$3"
+      gap="$2"
       alignItems="center"
-      paddingVertical="$2"
-      paddingHorizontal="$3"
-      borderRadius="$2"
+      paddingVertical="$1.5"
+      paddingHorizontal="$2.5"
       hoverStyle={{ backgroundColor: '$backgroundHover' }}
     >
       <AbilityLabel abilityKey={abilityKey} />
-      <XStack alignItems="center" gap="$2">
+      <XStack alignItems="center" gap="$1.5">
         <TamaguiInput
           value={inputValue}
           onChangeText={setInputValue}
@@ -265,9 +263,11 @@ function ManualAbilityScoreRow({
           selectTextOnFocus
           keyboardType="numeric"
           textAlign="center"
-          width={60}
-          height={40}
-          fontSize="$4"
+          width={50}
+          height={34}
+          fontSize={14}
+          paddingHorizontal={4}
+          paddingVertical={0}
           placeholder="0"
           borderColor="$borderColor"
           backgroundColor="$background"
@@ -288,13 +288,15 @@ function ManualMode({
 }) {
   return (
     <YStack>
-      {ABILITY_ORDER.map((key) => (
-        <ManualAbilityScoreRow
-          key={key}
-          abilityKey={key}
-          abilityData={abilities[key]}
-          onScoreChange={onScoreChange}
-        />
+      {ABILITY_ORDER.map((key, index) => (
+        <YStack key={key}>
+          {index > 0 && <Separator borderColor="$borderColor" />}
+          <ManualAbilityScoreRow
+            abilityKey={key}
+            abilityData={abilities[key]}
+            onScoreChange={onScoreChange}
+          />
+        </YStack>
       ))}
     </YStack>
   )
@@ -366,9 +368,9 @@ function AssignmentMode({
   }
 
   return (
-    <YStack gap="$3">
+    <YStack gap="$2">
       {headerContent}
-      <XStack gap="$2" flexWrap="wrap" justifyContent="center">
+      <XStack gap="$1.5" flexWrap="wrap" justifyContent="center">
         {values.map((value, index) => (
           <RolledValueChip
             key={index}
@@ -381,13 +383,15 @@ function AssignmentMode({
       </XStack>
 
       <YStack>
-        {ABILITY_ORDER.map((key) => (
-          <AssignableAbilityRow
-            key={key}
-            abilityKey={key}
-            assignedValue={assignments[key]}
-            onPress={() => handleRowPress(key)}
-          />
+        {ABILITY_ORDER.map((key, index) => (
+          <YStack key={key}>
+            {index > 0 && <Separator borderColor="$borderColor" />}
+            <AssignableAbilityRow
+              abilityKey={key}
+              assignedValue={assignments[key]}
+              onPress={() => handleRowPress(key)}
+            />
+          </YStack>
         ))}
       </YStack>
 
@@ -420,8 +424,8 @@ function Roll4d6Mode({
 
   if (!results) {
     return (
-      <YStack alignItems="center" paddingVertical="$4" gap="$3">
-        <Text fontSize="$3" color="$placeholderColor" textAlign="center">
+      <YStack alignItems="center" paddingVertical="$3" gap="$2">
+        <Text fontSize="$2" color="$placeholderColor" textAlign="center">
           Tira 4d6 y descarta el menor para cada puntuacion
         </Text>
         <Button variant="primary" size="medium" onPress={handleRoll}>
@@ -460,7 +464,7 @@ function StandardArrayMode({
       values={[...STANDARD_ARRAY]}
       onApply={onApply}
       headerContent={
-        <Text fontSize="$3" color="$placeholderColor" textAlign="center">
+        <Text fontSize="$2" color="$placeholderColor" textAlign="center">
           Asigna los valores de la serie estandar a cada habilidad
         </Text>
       }
@@ -487,21 +491,20 @@ function PointBuyAbilityRow({
 }) {
   return (
     <XStack
-      gap="$2"
+      gap="$1.5"
       alignItems="center"
       paddingVertical="$1.5"
-      paddingHorizontal="$3"
-      borderRadius="$2"
+      paddingHorizontal="$2.5"
       hoverStyle={{ backgroundColor: '$backgroundHover' }}
     >
       <AbilityLabel abilityKey={abilityKey} />
-      <XStack alignItems="center" gap="$2">
+      <XStack alignItems="center" gap="$1.5">
         <Pressable onPress={onDecrement} disabled={!canDecrement}>
           {({ pressed }) => (
             <XStack
-              width={28}
-              height={28}
-              borderRadius={14}
+              width={24}
+              height={24}
+              borderRadius={12}
               borderWidth={1.5}
               borderColor={canDecrement ? '$color' : '$borderColor'}
               alignItems="center"
@@ -509,7 +512,7 @@ function PointBuyAbilityRow({
               opacity={!canDecrement ? 0.3 : pressed ? 0.6 : 1}
             >
               <Text
-                fontSize={16}
+                fontSize={14}
                 fontWeight="bold"
                 color={canDecrement ? '$color' : '$placeholderColor'}
                 marginTop={-1}
@@ -521,10 +524,10 @@ function PointBuyAbilityRow({
         </Pressable>
 
         <Text
-          fontSize="$5"
+          fontSize={14}
           fontWeight="bold"
           color="$color"
-          width={32}
+          width={28}
           textAlign="center"
         >
           {score}
@@ -533,9 +536,9 @@ function PointBuyAbilityRow({
         <Pressable onPress={onIncrement} disabled={!canIncrement}>
           {({ pressed }) => (
             <XStack
-              width={28}
-              height={28}
-              borderRadius={14}
+              width={24}
+              height={24}
+              borderRadius={12}
               borderWidth={1.5}
               borderColor={canIncrement ? '$color' : '$borderColor'}
               alignItems="center"
@@ -543,7 +546,7 @@ function PointBuyAbilityRow({
               opacity={!canIncrement ? 0.3 : pressed ? 0.6 : 1}
             >
               <Text
-                fontSize={16}
+                fontSize={14}
                 fontWeight="bold"
                 color={canIncrement ? '$color' : '$placeholderColor'}
                 marginTop={-1}
@@ -595,13 +598,13 @@ function PointBuyMode({
   }
 
   return (
-    <YStack gap="$3">
+    <YStack gap="$2">
       {/* Budget selector */}
-      <YStack gap="$2">
-        <Text fontSize="$3" color="$placeholderColor" textAlign="center">
+      <YStack gap="$1.5">
+        <Text fontSize="$2" color="$placeholderColor" textAlign="center">
           Presupuesto
         </Text>
-        <XStack gap="$2" flexWrap="wrap" justifyContent="center">
+        <XStack gap="$1.5" flexWrap="wrap" justifyContent="center">
           {POINT_BUY_PRESETS.map((preset) => (
             <MethodChip
               key={preset}
@@ -614,15 +617,15 @@ function PointBuyMode({
       </YStack>
 
       {/* Points display */}
-      <XStack justifyContent="center" gap="$2" alignItems="baseline">
+      <XStack justifyContent="center" gap="$1.5" alignItems="baseline">
         <Text
-          fontSize="$6"
+          fontSize="$5"
           fontWeight="bold"
           color={overBudget ? '$red10' : '$green10'}
         >
           {totalSpent}
         </Text>
-        <Text fontSize="$4" color="$placeholderColor">
+        <Text fontSize="$3" color="$placeholderColor">
           / {budget} puntos
         </Text>
       </XStack>
@@ -630,15 +633,17 @@ function PointBuyMode({
       {/* Ability rows */}
       <YStack>
         {ABILITY_ORDER.map((key, index) => (
-          <PointBuyAbilityRow
-            key={key}
-            abilityKey={key}
-            score={scores[index]}
-            canIncrement={canIncrementPointBuy(scores[index], totalSpent, budget)}
-            canDecrement={canDecrementPointBuy(scores[index])}
-            onIncrement={() => handleIncrement(key)}
-            onDecrement={() => handleDecrement(key)}
-          />
+          <YStack key={key}>
+            {index > 0 && <Separator borderColor="$borderColor" />}
+            <PointBuyAbilityRow
+              abilityKey={key}
+              score={scores[index]}
+              canIncrement={canIncrementPointBuy(scores[index], totalSpent, budget)}
+              canDecrement={canDecrementPointBuy(scores[index])}
+              onIncrement={() => handleIncrement(key)}
+              onDecrement={() => handleDecrement(key)}
+            />
+          </YStack>
         ))}
       </YStack>
 
@@ -699,18 +704,18 @@ export function AbilityScoresEditor() {
   }
 
   return (
-    <YStack gap="$4" width="100%">
-      <YStack gap="$2" paddingTop="$2">
-        <Text fontSize="$6" fontWeight="bold" color="$color">
+    <YStack gap="$3" width="100%">
+      <YStack gap="$1" paddingTop="$1">
+        <Text fontSize="$5" fontWeight="bold" color="$color">
           Puntuaciones de Habilidad
         </Text>
-        <Text fontSize="$3" color="$placeholderColor">
+        <Text fontSize="$2" color="$placeholderColor">
           Configura las puntuaciones base de tu personaje
         </Text>
       </YStack>
 
       {/* Method selector */}
-      <XStack gap="$2" flexWrap="wrap">
+      <XStack gap="$1.5" flexWrap="wrap">
         {(['manual', 'roll4d6', 'pointBuy', 'standardArray'] as const).map((m) => (
           <MethodChip
             key={m}
