@@ -1,5 +1,4 @@
 import { Pressable, StyleSheet } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { XStack, YStack, Text } from 'tamagui'
 
 type CounterBarProps = {
@@ -23,14 +22,12 @@ export const COUNTER_BAR_HEIGHT = 56
  * When complete, shows an OK button next to the label.
  */
 export function CounterBar({ current, max, label, accentColor, onComplete }: CounterBarProps) {
-  const insets = useSafeAreaInsets()
-
   const progress = max > 0 ? current / max : 0
   const isComplete = current >= max && max > 0
 
   return (
     <YStack
-      style={[styles.container, { paddingBottom: insets.bottom || 8 }]}
+      style={[styles.container, { paddingBottom: 8 }]}
       backgroundColor="$background"
       borderTopWidth={1}
       borderTopColor="$borderColor"

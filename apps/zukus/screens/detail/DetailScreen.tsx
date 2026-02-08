@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { View, ScrollView, StyleSheet, Pressable } from 'react-native'
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 import { Text, YStack } from 'tamagui'
 import { useCharacterStore, useCharacterSheet, useCharacterAbilities, useCharacterSavingThrows, useCharacterArmorClass, useCharacterInitiative, useCharacterBAB, useCharacterSkills, useCharacterHitPoints, useCharacterAttacks, useTheme, SavingThrowDetailPanel, InitiativeDetailPanel, BABDetailPanel, SkillDetailPanel, HitPointsDetailPanel, AttackDetailPanel, EquipmentDetailPanel, useCharacterBaseData, useComputedEntities, GenericEntityDetailPanel, useCharacterBuffs, BuffDetailPanel, BuffEditScreen, ChangeEditScreen, useBuffEditStore, useDraftBuff, useBuffEditActions, AllBuffsDetailPanel, useInventoryState } from '../../ui'
 import { AbilityDetailPanel, ArmorClassDetailPanel, CGEManagementPanel, CGEEntitySelectPanel, ItemBrowserPanel, CurrencyEditPanel } from '../../components/character'
@@ -922,14 +923,18 @@ export function DetailScreen() {
       {needsOwnScroll ? (
         <View style={[styles.container, { backgroundColor: themeColors.background }]}>
           {renderContent()}
+          <SafeAreaBottomSpacer />
         </View>
       ) : (
-        <ScrollView
-          style={[styles.container, { backgroundColor: themeColors.background }]}
-          contentContainerStyle={styles.content}
-        >
-          {renderContent()}
-        </ScrollView>
+        <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={styles.content}
+          >
+            {renderContent()}
+          </ScrollView>
+          <SafeAreaBottomSpacer />
+        </View>
       )}
     </>
   )

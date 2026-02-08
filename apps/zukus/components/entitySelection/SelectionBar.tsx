@@ -1,7 +1,6 @@
 import { Pressable, ScrollView, StyleSheet } from 'react-native'
 import { YStack, XStack, Text } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import type { EntityInstance } from '@zukus/core'
 import { getLocalizedEntity, type LocalizationContext } from '@zukus/core'
 import { useActiveLocale } from '../../ui/stores/translationStore'
@@ -37,7 +36,6 @@ export function SelectionBar({
 }: SelectionBarProps) {
   'use no memo'
 
-  const insets = useSafeAreaInsets()
   const locale = useActiveLocale()
 
   const ctx: LocalizationContext = { locale, compendiumLocale: 'en' }
@@ -52,7 +50,7 @@ export function SelectionBar({
 
   return (
     <YStack
-      style={[styles.container, { paddingBottom: insets.bottom || 8 }]}
+      style={[styles.container, { paddingBottom: 8 }]}
       backgroundColor="$background"
       borderTopWidth={1}
       borderTopColor="$borderColor"

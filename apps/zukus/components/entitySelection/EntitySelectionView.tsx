@@ -1,6 +1,5 @@
 import { View, Pressable, StyleSheet } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { YStack, XStack, Text } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { useState } from 'react'
@@ -91,7 +90,6 @@ export function EntitySelectionView<T extends StandardEntity>({
 
   const entities = useLocalizedEntities(rawEntities) as T[]
   const { themeColors, themeInfo } = useTheme()
-  const insets = useSafeAreaInsets()
 
   // ============================================================================
   // Filter State
@@ -375,12 +373,11 @@ export function EntitySelectionView<T extends StandardEntity>({
   // List View
   // ============================================================================
 
-  const safeBottom = insets.bottom || 8
   const listBottomPadding = showCounterBar
-    ? COUNTER_BAR_HEIGHT + safeBottom + 16
+    ? COUNTER_BAR_HEIGHT + 16
     : showSelectionBar
-      ? SELECTION_BAR_HEIGHT + safeBottom + 16
-      : safeBottom
+      ? SELECTION_BAR_HEIGHT + 16
+      : 8
 
   // Determine which data array and renderItem to use
   const useSelectionRows = isSelection && isSmallSelection && selectionItems

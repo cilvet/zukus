@@ -3,6 +3,7 @@ import { useLocalSearchParams } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { usePrimaryCGE, useTheme } from '../../ui'
 import { CGEEntitySelectPanel } from '../../components/character'
+import { SafeAreaBottomSpacer } from '../../components/layout'
 
 /**
  * CGE Entity Select Screen - Wrapper for mobile stack navigation.
@@ -29,6 +30,7 @@ export function CGEEntitySelectScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: themeColors.background, paddingTop: insets.top }}>
       <CGEEntitySelectPanel selectionId={selectionId} />
+      <SafeAreaBottomSpacer />
     </View>
   )
 }
