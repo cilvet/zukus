@@ -7,6 +7,7 @@ import { useMemo, useEffect } from 'react'
 import { Platform, useWindowDimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { KeyboardProvider } from 'react-native-keyboard-controller'
@@ -98,6 +99,7 @@ function ThemedApp() {
     <TamaguiProvider config={config}>
       <Theme name={themeName}>
         <PortalProvider>
+          <BottomSheetModalProvider>
           <NavigationThemeProvider value={navigationTheme}>
             <StatusBar style="light" />
             <Stack
@@ -157,6 +159,7 @@ function ThemedApp() {
             />
             </Stack>
           </NavigationThemeProvider>
+          </BottomSheetModalProvider>
         </PortalProvider>
       </Theme>
     </TamaguiProvider>

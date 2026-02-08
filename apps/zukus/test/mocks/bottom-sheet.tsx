@@ -3,16 +3,28 @@
  */
 import React from 'react'
 
-const BottomSheet = React.forwardRef<any, any>(({ children }, ref) => (
-  <div ref={ref}>{children}</div>
-))
+const BottomSheet = React.forwardRef<any, any>(({ children }, ref) => {
+  React.useImperativeHandle(ref, () => ({
+    expand: () => {},
+    collapse: () => {},
+    close: () => {},
+    snapToIndex: () => {},
+  }))
+  return <div ref={ref}>{children}</div>
+})
 BottomSheet.displayName = 'BottomSheet'
 
 export default BottomSheet
 
-export const BottomSheetModal = React.forwardRef<any, any>(({ children }, ref) => (
-  <div ref={ref}>{children}</div>
-))
+export const BottomSheetModal = React.forwardRef<any, any>(({ children }, ref) => {
+  React.useImperativeHandle(ref, () => ({
+    present: () => {},
+    dismiss: () => {},
+    close: () => {},
+    snapToIndex: () => {},
+  }))
+  return <div>{children}</div>
+})
 BottomSheetModal.displayName = 'BottomSheetModal'
 
 export const BottomSheetModalProvider = ({ children }: any) => <>{children}</>

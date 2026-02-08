@@ -1,14 +1,13 @@
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
+import { Pressable } from 'react-native'
 import {
-  Modal,
-  Pressable,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Dimensions,
-} from 'react-native'
+  BottomSheetModal,
+  BottomSheetBackdrop,
+  BottomSheetScrollView,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { YStack, XStack, Text, ScrollView } from 'tamagui'
+import { XStack, Text } from 'tamagui'
 import { useTheme } from '../../contexts/ThemeContext'
 
 type BottomSheetProps = {
@@ -24,11 +23,9 @@ type BottomSheetProps = {
   scrollable?: boolean
 }
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window')
-
 /**
- * BottomSheet reutilizable.
- * Se desliza desde abajo, con fondo semitransparente.
+ * BottomSheet reutilizable basado en @gorhom/bottom-sheet.
+ * Se desliza desde abajo con gesto nativo, fondo semitransparente.
  */
 export function BottomSheet({
   visible,
@@ -39,102 +36,77 @@ export function BottomSheet({
   heightPercent = 0.85,
   scrollable = true,
 }: BottomSheetProps) {
+  const ref = useRef<BottomSheetModal>(null)
   const insets = useSafeAreaInsets()
   const { themeColors } = useTheme()
 
-  const sheetHeight = SCREEN_HEIGHT * heightPercent
+  const snapPoints = [`${Math.round(heightPercent * 100)}%`]
+
+  useEffect(() => {
+    if (visible) {
+      ref.current?.present()
+    } else {
+      ref.current?.dismiss()
+    }
+  }, [visible])
+
+  const renderBackdrop = (props: any) => (
+    <BottomSheetBackdrop
+      {...props}
+      disappearsOnIndex={-1}
+      appearsOnIndex={0}
+      opacity={0.5}
+      pressBehavior="close"
+    />
+  )
 
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent
-      onRequestClose={onClose}
+    <BottomSheetModal
+      ref={ref}
+      snapPoints={snapPoints}
+      onDismiss={onClose}
+      backdropComponent={renderBackdrop}
+      backgroundStyle={{ backgroundColor: themeColors.background }}
+      handleIndicatorStyle={{ backgroundColor: themeColors.placeholderColor }}
+      enableDynamicSizing={false}
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-      >
-        {/* Backdrop */}
-        <Pressable style={styles.backdrop} onPress={onClose} />
-
-        {/* Sheet */}
-        <YStack
-          height={sheetHeight}
-          backgroundColor={themeColors.background}
-          borderTopLeftRadius={16}
-          borderTopRightRadius={16}
-          paddingBottom={insets.bottom}
-          style={styles.sheet}
+      {/* Header */}
+      {(title || showCloseButton) && (
+        <XStack
+          paddingHorizontal={16}
+          paddingBottom={12}
+          alignItems="center"
+          justifyContent="space-between"
+          borderBottomWidth={1}
+          borderBottomColor="$borderColor"
         >
-          {/* Handle */}
-          <YStack alignItems="center" paddingVertical={8}>
-            <YStack
-              width={40}
-              height={4}
-              borderRadius={2}
-              backgroundColor="$borderColor"
-            />
-          </YStack>
-
-          {/* Header */}
-          {(title || showCloseButton) && (
-            <XStack
-              paddingHorizontal={16}
-              paddingBottom={12}
-              alignItems="center"
-              justifyContent="space-between"
-              borderBottomWidth={1}
-              borderBottomColor="$borderColor"
-            >
-              <Text fontSize={18} fontWeight="700" color="$color">
-                {title ?? ''}
+          <Text fontSize={18} fontWeight="700" color="$color">
+            {title ?? ''}
+          </Text>
+          {showCloseButton && (
+            <Pressable onPress={onClose} hitSlop={8}>
+              <Text fontSize={16} color="$placeholderColor">
+                Done
               </Text>
-              {showCloseButton && (
-                <Pressable onPress={onClose} hitSlop={8}>
-                  <Text fontSize={16} color="$placeholderColor">
-                    Done
-                  </Text>
-                </Pressable>
-              )}
-            </XStack>
+            </Pressable>
           )}
+        </XStack>
+      )}
 
-          {/* Content */}
-          {scrollable ? (
-            <ScrollView
-              flex={1}
-              contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}
-            >
-              {children}
-            </ScrollView>
-          ) : (
-            <YStack flex={1} padding={16}>
-              {children}
-            </YStack>
-          )}
-        </YStack>
-      </KeyboardAvoidingView>
-    </Modal>
+      {/* Content */}
+      {scrollable ? (
+        <BottomSheetScrollView
+          contentContainerStyle={{ padding: 16, paddingBottom: insets.bottom + 32 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          {children}
+        </BottomSheetScrollView>
+      ) : (
+        <BottomSheetView style={{ flex: 1 }}>
+          {children}
+        </BottomSheetView>
+      )}
+    </BottomSheetModal>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  backdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  sheet: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 20,
-  },
-})
