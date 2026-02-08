@@ -14,6 +14,25 @@ export type { CharacterBaseData, SpecialFeature, Alignment } from "./core/domain
 
 // Types - Abilities
 export type { CalculatedAbility, CalculatedAbilities } from "./core/domain/character/calculatedSheet/calculatedAbilities";
+export type { BaseAbilitiesData, BaseAbilityData } from "./core/domain/character/baseData/abilities";
+
+// Ability Score Generation
+export {
+  type AbilityScoreMethod,
+  type Roll4d6Result,
+  STANDARD_ARRAY,
+  roll4d6DropLowest,
+  generateAbilityScoreSet,
+  POINT_BUY_PRESETS,
+  DEFAULT_POINT_BUY_BUDGET,
+  POINT_BUY_MIN,
+  POINT_BUY_MAX,
+  getPointBuyIncrementCost,
+  getPointBuyDecrementRefund,
+  calculatePointBuyTotal,
+  canIncrementPointBuy,
+  canDecrementPointBuy,
+} from "./core/domain/character/abilityScoreGeneration";
 
 // Types - Saving Throws
 export type { CalculatedSavingThrow, CalculatedSavingThrows } from "./core/domain/character/calculatedSheet/calculatedSavingThrows";
