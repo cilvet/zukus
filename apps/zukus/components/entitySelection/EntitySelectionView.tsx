@@ -22,8 +22,8 @@ import { SearchBar } from './SearchBar'
 import { SelectionHeader } from './SelectionHeader'
 import { SelectionRow, SELECTION_ROW_HEIGHT } from './SelectionRow'
 import { SelectionBar, SELECTION_BAR_HEIGHT } from './SelectionBar'
-import type { EntitySelectionViewProps, ModeConfig } from './types'
-import { isDropdownMode, isCounterMode, isSelectionMode } from './types'
+import type { EntitySelectionViewProps, ModeConfig, SelectionModeConfig } from './types'
+import { isDropdownMode, isCounterMode, isSelectionMode, isBrowseMode } from './types'
 import type { StandardEntity, FilterState, FilterValue, EntityFilterConfig } from '@zukus/core'
 import { applyFilterConfig, createInitialFilterState } from '@zukus/core'
 import { useLocalizedEntities } from '../../ui/hooks/useLocalizedEntity'
@@ -37,6 +37,10 @@ import { useLocalizedEntities } from '../../ui/hooks/useLocalizedEntity'
  * Selection mode in large lists uses a counter-style button labeled "Seleccionar".
  */
 function buildButtonConfig(modeConfig: ModeConfig): ButtonConfig | null {
+  if (isBrowseMode(modeConfig)) {
+    return null
+  }
+
   if (isDropdownMode(modeConfig)) {
     return {
       type: 'dropdown',
@@ -60,6 +64,8 @@ function buildButtonConfig(modeConfig: ModeConfig): ButtonConfig | null {
     action: { id: 'select', label: 'Seleccionar', icon: 'check' },
   }
 }
+
+const PICKER_ROW_HEIGHT = 56
 
 // ============================================================================
 // Component
@@ -115,11 +121,13 @@ export function EntitySelectionView<T extends StandardEntity>({
   // ============================================================================
 
   const isSelection = isSelectionMode(modeConfig)
-  const isSmallSelection = isSelection && entities.length <= 15
-  const showSearchBar = entities.length > 15 || !!filterConfig
+  const isInstantSelect = isSelection && !!modeConfig.instantSelect
+  const isSmallSelection = isSelection && !isInstantSelect && entities.length <= 15
+  const isBrowse = isBrowseMode(modeConfig)
+  const showSearchBar = isBrowse || entities.length > 15 || !!filterConfig
 
   // Max reached for selection mode (used for disabling rows/buttons)
-  const isMaxReached = isSelection && modeConfig.selectedEntities.length >= modeConfig.max
+  const isMaxReached = isSelection && !modeConfig.instantSelect && modeConfig.max !== 1 && modeConfig.selectedEntities.length >= modeConfig.max
 
   // ============================================================================
   // Filtering
@@ -183,8 +191,8 @@ export function EntitySelectionView<T extends StandardEntity>({
         item.disabled = true
       }
 
-      // Disable if max reached and not already selected
-      if (!isEntitySelected && modeConfig.selectedEntities.length >= modeConfig.max) {
+      // Disable if max reached and not already selected (skip for single-select = radio behavior)
+      if (!isEntitySelected && modeConfig.selectedEntities.length >= modeConfig.max && modeConfig.max !== 1) {
         item.disabled = true
       }
 
@@ -204,13 +212,18 @@ export function EntitySelectionView<T extends StandardEntity>({
 
   let largeSelectionEntities: T[] | null = null
 
-  if (isSelection && !isSmallSelection) {
+  if (isSelection && !isSmallSelection && !isInstantSelect) {
     const selectedIds = new Set(
       modeConfig.selectedEntities.map((inst) => inst.entity.id)
     )
     // Filter out already selected entities
     largeSelectionEntities = filteredEntities.filter((e) => !selectedIds.has(e.id))
   }
+
+  // Pre-compute selected IDs for instantSelect mode
+  const instantSelectIds = isInstantSelect
+    ? new Set(modeConfig.selectedEntities.map((inst) => inst.entity.id))
+    : null
 
   // ============================================================================
   // Handlers
@@ -241,7 +254,11 @@ export function EntitySelectionView<T extends StandardEntity>({
     } else if (isCounterMode(modeConfig)) {
       modeConfig.handlers.onExecute(actionId, entityId)
     } else if (isSelectionMode(modeConfig)) {
-      // Large selection mode: "select" action
+      // Radio behavior: auto-deselect current when max=1
+      if (modeConfig.max === 1 && modeConfig.selectedEntities.length > 0) {
+        const current = modeConfig.selectedEntities[0]!
+        modeConfig.onDeselect(current.instanceId)
+      }
       modeConfig.onSelect(entityId)
     }
   }
@@ -280,6 +297,11 @@ export function EntitySelectionView<T extends StandardEntity>({
     if (!isSelectionMode(modeConfig)) return
 
     if (checked) {
+      // Radio behavior: auto-deselect current when max=1
+      if (modeConfig.max === 1 && modeConfig.selectedEntities.length > 0) {
+        const current = modeConfig.selectedEntities[0]!
+        modeConfig.onDeselect(current.instanceId)
+      }
       modeConfig.onSelect(entityId)
     } else {
       // Find the instanceId for this entity
@@ -362,13 +384,17 @@ export function EntitySelectionView<T extends StandardEntity>({
 
   // Determine which data array and renderItem to use
   const useSelectionRows = isSelection && isSmallSelection && selectionItems
-  const listData = useSelectionRows
-    ? selectionItems
-    : isSelection && !isSmallSelection && largeSelectionEntities
-      ? largeSelectionEntities
-      : filteredEntities
+  const useInstantSelect = isInstantSelect
 
-  const displayCount = isSelection && !isSmallSelection
+  const listData = useInstantSelect
+    ? filteredEntities
+    : useSelectionRows
+      ? selectionItems
+      : isSelection && !isSmallSelection && largeSelectionEntities
+        ? largeSelectionEntities
+        : filteredEntities
+
+  const displayCount = isSelection && !isSmallSelection && !isInstantSelect
     ? filteredEntities.length // Show total count, not just non-selected
     : listData.length
 
@@ -377,7 +403,7 @@ export function EntitySelectionView<T extends StandardEntity>({
       {/* Sticky header - outside FlashList */}
       <YStack padding={16} gap={12}>
         {/* Selection header */}
-        {isSelection && (
+        {isSelection && !isInstantSelect && (
           <SelectionHeader
             label={modeConfig.selectionLabel ?? 'Seleccion'}
             current={modeConfig.selectedEntities.length}
@@ -451,9 +477,42 @@ export function EntitySelectionView<T extends StandardEntity>({
           }
           return (item as T).id
         }}
-        estimatedItemSize={useSelectionRows ? SELECTION_ROW_HEIGHT : ENTITY_ROW_HEIGHT}
+        estimatedItemSize={useInstantSelect ? PICKER_ROW_HEIGHT : useSelectionRows ? SELECTION_ROW_HEIGHT : ENTITY_ROW_HEIGHT}
         contentContainerStyle={{ paddingBottom: listBottomPadding }}
         renderItem={({ item }) => {
+          if (useInstantSelect) {
+            const entity = item as T
+            return (
+              <Pressable onPress={() => (modeConfig as SelectionModeConfig).onSelect(entity.id)}>
+                {({ pressed }) => (
+                  <XStack
+                    height={PICKER_ROW_HEIGHT}
+                    alignItems="center"
+                    paddingHorizontal={16}
+                    gap={12}
+                    opacity={pressed ? 0.6 : 1}
+                    borderBottomWidth={StyleSheet.hairlineWidth}
+                    borderBottomColor="$borderColor"
+                  >
+                    <YStack flex={1} gap={2}>
+                      <Text fontSize={15} fontWeight="500" color="$color" numberOfLines={1}>
+                        {entity.name}
+                      </Text>
+                      {entity.description && (
+                        <Text fontSize={12} color="$placeholderColor" numberOfLines={1}>
+                          {entity.description}
+                        </Text>
+                      )}
+                    </YStack>
+                    {instantSelectIds!.has(entity.id) && (
+                      <FontAwesome6 name="check" size={16} color={accentColor} />
+                    )}
+                  </XStack>
+                )}
+              </Pressable>
+            )
+          }
+
           if (useSelectionRows) {
             const selItem = item as SelectionItem
             return (
@@ -482,7 +541,7 @@ export function EntitySelectionView<T extends StandardEntity>({
               color={textColor}
               placeholderColor={placeholderColor}
               accentColor={accentColor}
-              buttonConfig={buttonConfig!}
+              buttonConfig={buttonConfig ?? undefined}
               buttonDisabled={isMaxReached}
               onPress={handleEntityPress}
               onOpenDropdown={handleOpenDropdown}
@@ -507,8 +566,8 @@ export function EntitySelectionView<T extends StandardEntity>({
         }
       />
 
-      {/* Selection bar (for selection mode) */}
-      {isSelection && (
+      {/* Selection bar (for selection mode, not browse) */}
+      {isSelection && !isInstantSelect && !isBrowseMode(modeConfig) && (
         <SelectionBar
           selectedEntities={modeConfig.selectedEntities}
           onDeselect={modeConfig.onDeselect}

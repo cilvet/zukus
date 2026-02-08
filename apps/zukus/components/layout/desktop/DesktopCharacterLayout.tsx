@@ -49,6 +49,8 @@ type DesktopCharacterLayoutProps = {
   rightBottom: React.ReactNode
   /** Side panel (detail panel) */
   sidePanel?: React.ReactNode
+  /** Full-screen overlay (e.g., spotlight search) */
+  overlay?: React.ReactNode
 }
 
 // Export dimensions for use in CharacterScreenDesktopNew
@@ -98,6 +100,7 @@ export function DesktopCharacterLayout({
   rightTop,
   rightBottom,
   sidePanel,
+  overlay,
 }: DesktopCharacterLayoutProps) {
   const { themeColors } = useTheme()
   const { mainAreaHeight, columnsHeight } = useLayoutHeights()
@@ -157,6 +160,9 @@ export function DesktopCharacterLayout({
 
       {/* Side panel */}
       {sidePanel}
+
+      {/* Overlay (spotlight search, etc.) */}
+      {overlay}
     </YStack>
   )
 }

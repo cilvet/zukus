@@ -187,6 +187,9 @@ export {
 } from "./core/domain/levels/updater/entitySelectionApi";
 export { getProvider } from "./core/domain/levels/updater/selectionOperations";
 
+// System Levels
+export { setSystemLevels } from "./core/domain/levels/updater/systemLevelOperations";
+
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";
 export type {

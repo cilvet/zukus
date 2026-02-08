@@ -5,7 +5,7 @@
  * Estas funciones utilizan las operaciones del updater para modificar los datos del personaje.
  */
 
-import { ops, dnd35ExampleCompendium, embedTranslations, dnd35FeatsSpanishPack } from '@zukus/core'
+import { ops, dnd35ExampleCompendium, embedTranslations, dnd35FeatsSpanishPack, setSystemLevels } from '@zukus/core'
 import type {
   CharacterBaseData,
   CharacterUpdater,
@@ -74,6 +74,19 @@ export function getAvailableClasses(): ClassOption[] {
     name: classEntity.name,
     hitDie: (classEntity as unknown as { hitDie: number }).hitDie,
   }))
+}
+
+const SYSTEM_LEVELS_ID = 'dnd35-system-levels'
+
+/**
+ * Returns baseData with systemLevelsEntity initialized if missing.
+ * Pure function — does not persist; caller is responsible for saving.
+ */
+export function initializeSystemLevels(
+  baseData: CharacterBaseData,
+): CharacterBaseData {
+  if (baseData.systemLevelsEntity) return baseData
+  return setSystemLevels(baseData, SYSTEM_LEVELS_ID, compendiumContext).character
 }
 
 /**

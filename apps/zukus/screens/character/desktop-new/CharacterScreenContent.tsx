@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react'
+import { Platform } from 'react-native'
 import { YStack, Text } from 'tamagui'
+import { useRouter } from 'expo-router'
 import {
   useCharacterSheet,
   useCharacterAbilities,
@@ -15,6 +18,7 @@ import {
 } from '../../../ui'
 import { isValidDetailType, getDetailTitle } from '../../../navigation'
 import {
+  Breadcrumb,
   SidePanel,
   DesktopCharacterLayout,
   StatsHeaderBar,
@@ -22,6 +26,7 @@ import {
   TabEmptyState,
   CombatStatsRow,
 } from '../../../components/layout'
+import { SpotlightSearch } from '../../../components/search'
 import { SidePanelContent } from './SidePanelContent'
 import { useTabsBuilder } from './TabsBuilder'
 import { LeftColumnsContent } from './LeftColumnsContent'
@@ -46,6 +51,8 @@ function parsePanelPath(path: string | undefined): { type: string; id: string } 
 }
 
 export function CharacterScreenContent() {
+  const router = useRouter()
+
   // Character data
   const characterSheet = useCharacterSheet()
   const abilities = useCharacterAbilities()
@@ -60,11 +67,28 @@ export function CharacterScreenContent() {
   const imageUrl = useCharacterImageUrl()
   const computedEntities = useComputedEntities()
 
+  // Cmd+K search
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  useEffect(() => {
+    if (Platform.OS !== 'web') return
+    const handler = (e: KeyboardEvent) => {
+      const isMac = navigator.platform.toUpperCase().includes('MAC')
+      if ((isMac ? e.metaKey : e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsSearchOpen(true)
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [])
+
   // Panel navigation
   const {
     currentPanel,
     isPanelOpen,
     canGoBack,
+    openPanel,
     closePanel,
     goBack,
     handleAbilityPress,
@@ -122,6 +146,13 @@ export function CharacterScreenContent() {
   return (
     <DesktopCharacterLayout
       topBar={
+        <>
+        <Breadcrumb
+          segments={[
+            { label: 'Mis Personajes', onPress: () => router.push('/characters') },
+            { label: characterSheet.name || 'Personaje' },
+          ]}
+        />
         <StatsHeaderBar
           name={characterSheet.name}
           level={levelNumber}
@@ -136,6 +167,7 @@ export function CharacterScreenContent() {
           onRestPress={handleRestPress}
           onChatPress={handleChatPress}
         />
+        </>
       }
       leftColumns={<LeftColumnsContent onSavingThrowPress={handleSavingThrowPress} />}
       rightTop={
@@ -195,6 +227,16 @@ export function CharacterScreenContent() {
             characterSheet={characterSheet}
           />
         </SidePanel>
+      }
+      overlay={
+        <SpotlightSearch
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          onSelectResult={(result) => {
+            openPanel(`compendiumEntity/${result.id}`, result.title)
+            setIsSearchOpen(false)
+          }}
+        />
       }
     />
   )

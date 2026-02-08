@@ -2,14 +2,13 @@
  * LevelDetail - Panel for editing a specific level slot
  *
  * Shows:
- * - Level number header
- * - Class selector (with navigation to ClassSelectorDetail)
+ * - Class selector row
  * - HP Roll section with manual input and roll button
  * - System-level providers (feats, ability increases)
  * - Class-level providers (class features)
  */
 
-import { YStack, XStack, Text, ScrollView, Button, Input, Separator } from 'tamagui'
+import { YStack, XStack, Text, Button, Input, Separator } from 'tamagui'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import type {
   EntityProvider,
@@ -94,170 +93,131 @@ export function LevelDetail({
   }
 
   return (
-    <ScrollView>
-      <YStack padding="$4" gap="$4">
-        {/* Header */}
-        <Text fontSize={24} fontWeight="700" color="$color">
-          Nivel {levelNumber}
-        </Text>
+    <YStack>
+      {/* Class Selector Row */}
+      <XStack
+        paddingVertical={12}
+        alignItems="center"
+        justifyContent="space-between"
+        {...(!hasClass && { backgroundColor: '$yellow3', paddingHorizontal: 12 })}
+        cursor="pointer"
+        pressStyle={{ scale: 0.98 }}
+        onPress={onOpenClassSelector}
+      >
+        <YStack flex={1}>
+          <Text fontSize={12} color="$placeholderColor">
+            Clase
+          </Text>
+          <Text fontSize={16} fontWeight="500" color="$color">
+            {className || 'Seleccionar clase'}
+          </Text>
+        </YStack>
+        <FontAwesome name="chevron-right" size={16} color="#9ca3af" />
+      </XStack>
 
-        {/* Class Selector */}
-        <XStack
-          width="100%"
-          paddingVertical="$2"
-          paddingHorizontal="$3"
-          backgroundColor={hasClass ? '$backgroundHover' : '$yellow3'}
-          borderRadius="$2"
-          alignItems="center"
-          justifyContent="space-between"
-          cursor="pointer"
-          hoverStyle={{ backgroundColor: hasClass ? '$backgroundPress' : '$yellow4' }}
-          pressStyle={{ scale: 0.98 }}
-          onPress={onOpenClassSelector}
-        >
-          <YStack flex={1}>
-            <Text fontSize={12} color="$placeholderColor">
-              Clase
-            </Text>
-            <Text fontSize={16} fontWeight="500" color="$color">
-              {className || 'Seleccionar clase'}
-            </Text>
-          </YStack>
-          <FontAwesome name="chevron-right" size={16} color="#9ca3af" />
-        </XStack>
+      <Separator borderColor="$borderColor" />
 
-        {/* HP Roll Section - only if class is selected */}
-        {hasClass && hitDie && (
-          <YStack
-            backgroundColor="$background"
-            padding="$3"
-            borderRadius="$3"
-            borderWidth={1}
-            borderColor="$borderColor"
-            gap="$2"
-          >
-            <Text fontSize={16} fontWeight="700" color="$color">
-              HP Roll
-            </Text>
-            <XStack gap="$3" alignItems="center">
-              <Text fontSize={20} fontWeight="700" color="$placeholderColor">
-                d{hitDie}
-              </Text>
+      {/* Hit Die Row - only if class is selected and hitDie exists */}
+      {hasClass && hitDie && (
+        <>
+          <YStack>
+            <XStack paddingVertical={12} alignItems="center" gap={12}>
+              <YStack flex={1}>
+                <Text fontSize={12} color="$placeholderColor">
+                  Dado de Vida
+                </Text>
+                <Text fontSize={16} fontWeight="500" color="$color">
+                  {levelSlot.hpRoll ?? `d${hitDie}`}
+                </Text>
+              </YStack>
               <Input
-                width={80}
-                value={levelSlot.hpRoll?.toString() ?? ''}
-                onChangeText={handleHpInputChange}
+                width={60}
+                textAlign="center"
                 keyboardType="numeric"
                 placeholder={`1-${hitDie}`}
-                textAlign="center"
+                value={levelSlot.hpRoll?.toString() ?? ''}
+                onChangeText={handleHpInputChange}
               />
-              <Button
-                size="$3"
-                onPress={handleRollHp}
-                icon={<FontAwesome name="random" size={16} />}
-                aria-label="Roll hit die"
-              />
+              <Button size="$2" onPress={handleRollHp} aria-label="Roll hit die">
+                <FontAwesome name="refresh" size={14} />
+              </Button>
             </XStack>
             <Text fontSize={12} color="$placeholderColor">
               {isFirstLevel
-                ? `Nivel 1 siempre obtiene HP maximo (${hitDie})`
+                ? `Nivel 1 siempre obtiene HP máximo (${hitDie})`
                 : `Tira 1d${hitDie} para HP (1-${hitDie})`}
             </Text>
           </YStack>
-        )}
+        </>
+      )}
 
-        {/* Separator between HP and System Features */}
-        {hasClass && hasSystemProviders && <Separator borderColor="$borderColor" />}
+      {/* Separator before providers */}
+      {(hasSystemProviders || hasClassProviders) && <Separator borderColor="$borderColor" />}
 
-        {/* System Features (Feats, Ability Increases) */}
-        {hasSystemProviders && (
-          <YStack
-            backgroundColor="$background"
-            paddingVertical="$3"
-            borderRadius="$3"
-            borderWidth={1}
-            borderColor="$borderColor"
-            gap="$3"
+      {/* System Providers */}
+      {hasSystemProviders && (
+        <YStack>
+          <Text
+            fontSize={12}
+            fontWeight="700"
+            color="$placeholderColor"
+            letterSpacing={1.5}
+            textTransform="uppercase"
+            marginTop={16}
+            marginBottom={8}
           >
-            <Text fontSize={16} fontWeight="700" paddingHorizontal="$3" color="$color">
-              Nivel {levelNumber}
-            </Text>
-            {systemProviders.map((providerData) => (
-              <YStack key={`system-${providerData.providerLocation.providerIndex}`} paddingHorizontal="$3">
-                <ProviderSummaryRow
-                  provider={providerData.provider}
-                  grantedEntities={providerData.grantedEntities}
-                  selectedEntities={providerData.selectedEntities}
-                  onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
-                  onGrantedEntityPress={onGrantedEntityPress}
-                  onSelectedEntityPress={onSelectedEntityPress}
-                />
-              </YStack>
-            ))}
-          </YStack>
-        )}
+            NIVEL {levelNumber}
+          </Text>
+          {systemProviders.map((providerData) => (
+            <ProviderSummaryRow
+              key={`system-${providerData.providerLocation.providerIndex}`}
+              provider={providerData.provider}
+              grantedEntities={providerData.grantedEntities}
+              selectedEntities={providerData.selectedEntities}
+              onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
+              onGrantedEntityPress={onGrantedEntityPress}
+              onSelectedEntityPress={onSelectedEntityPress}
+            />
+          ))}
+        </YStack>
+      )}
 
-        {/* Separator between System and Class Features */}
-        {hasSystemProviders && hasClassProviders && <Separator borderColor="$borderColor" />}
-
-        {/* Class Features */}
-        {hasClassProviders && (
-          <YStack
-            backgroundColor="$background"
-            paddingVertical="$3"
-            borderRadius="$3"
-            borderWidth={1}
-            borderColor="$borderColor"
-            gap="$3"
+      {/* Class Providers */}
+      {hasClassProviders && (
+        <YStack>
+          <Text
+            fontSize={12}
+            fontWeight="700"
+            color="$placeholderColor"
+            letterSpacing={1.5}
+            textTransform="uppercase"
+            marginTop={16}
+            marginBottom={8}
           >
-            <Text fontSize={16} fontWeight="700" paddingHorizontal="$3" color="$color">
-              {className} {classLevel}
-            </Text>
-            {classProviders.map((providerData) => (
-              <YStack key={`class-${providerData.providerLocation.providerIndex}`} paddingHorizontal="$3">
-                <ProviderSummaryRow
-                  provider={providerData.provider}
-                  grantedEntities={providerData.grantedEntities}
-                  selectedEntities={providerData.selectedEntities}
-                  onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
-                  onGrantedEntityPress={onGrantedEntityPress}
-                  onSelectedEntityPress={onSelectedEntityPress}
-                />
-              </YStack>
-            ))}
-          </YStack>
-        )}
+            {className} {classLevel}
+          </Text>
+          {classProviders.map((providerData) => (
+            <ProviderSummaryRow
+              key={`class-${providerData.providerLocation.providerIndex}`}
+              provider={providerData.provider}
+              grantedEntities={providerData.grantedEntities}
+              selectedEntities={providerData.selectedEntities}
+              onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
+              onGrantedEntityPress={onGrantedEntityPress}
+              onSelectedEntityPress={onSelectedEntityPress}
+            />
+          ))}
+        </YStack>
+      )}
 
-        {/* Message when no class is selected */}
-        {!hasClass && !hasSystemProviders && (
-          <YStack
-            backgroundColor="$background"
-            padding="$3"
-            borderRadius="$3"
-            borderWidth={1}
-            borderColor="$borderColor"
-          >
-            <Text fontSize={14} color="$placeholderColor">
-              Selecciona una clase para este nivel primero
-            </Text>
-          </YStack>
-        )}
-
-        {/* Message when no class but has system features */}
-        {!hasClass && hasSystemProviders && (
-          <YStack
-            backgroundColor="$background"
-            padding="$3"
-            borderRadius="$3"
-            borderWidth={1}
-            borderColor="$borderColor"
-          >
-            <Text fontSize={14} color="$placeholderColor">
-              Selecciona una clase para este nivel para configurar HP
-            </Text>
-          </YStack>
-        )}
-      </YStack>
-    </ScrollView>
+      {/* Message when no class is selected */}
+      {!hasClass && (
+        <Text fontSize={14} color="$placeholderColor" paddingVertical={16}>
+          {hasSystemProviders
+            ? 'Selecciona una clase para este nivel para configurar HP'
+            : 'Selecciona una clase para este nivel primero'}
+        </Text>
+      )}
+    </YStack>
   )
 }

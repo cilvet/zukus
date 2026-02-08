@@ -50,9 +50,13 @@ export type SelectionModeConfig = {
   min: number
   max: number
   selectionLabel?: string
+  /** When true, renders simple tappable rows without checkboxes/selection UI. Tap fires onSelect immediately. */
+  instantSelect?: boolean
 }
 
-export type ModeConfig = DropdownModeConfig | CounterModeConfig | SelectionModeConfig
+export type BrowseModeConfig = { mode: 'browse' }
+
+export type ModeConfig = DropdownModeConfig | CounterModeConfig | SelectionModeConfig | BrowseModeConfig
 
 // ============================================================================
 // Component Props
@@ -103,4 +107,8 @@ export function isCounterMode(config: ModeConfig): config is CounterModeConfig {
 
 export function isSelectionMode(config: ModeConfig): config is SelectionModeConfig {
   return config.mode === 'selection'
+}
+
+export function isBrowseMode(config: ModeConfig): config is BrowseModeConfig {
+  return config.mode === 'browse'
 }

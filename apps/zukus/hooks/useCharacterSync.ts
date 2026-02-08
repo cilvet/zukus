@@ -4,6 +4,7 @@ import { calculateCharacterSheet, type CharacterBaseData } from '@zukus/core'
 import { useAuth } from '../contexts'
 import { useCharacterStore, setSyncHandler, clearSyncHandlerIfMatch } from '../ui/stores/characterStore'
 import { characterRepository } from '../services/characterRepository'
+import { initializeSystemLevels } from '../ui/components/character/editor/levelEditorHelpers'
 
 type CharacterSyncState = {
   isLoading: boolean
@@ -114,8 +115,9 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
           setIsLoading(false)
           return
         }
-        const sheet = calculateCharacterSheet(record.characterData)
-        setCharacter(sheet, record.characterData)
+        const enrichedData = initializeSystemLevels(record.characterData)
+        const sheet = calculateCharacterSheet(enrichedData)
+        setCharacter(sheet, enrichedData)
         setIsLoading(false)
       })
       .catch((err) => {
@@ -146,8 +148,9 @@ export function useCharacterSync(characterId: string): CharacterSyncState {
       console.log('[SYNC] Aplicando cambio de otro dispositivo (esperando interacciones)')
       InteractionManager.runAfterInteractions(() => {
         if (!isMounted) return
-        const sheet = calculateCharacterSheet(data)
-        setCharacter(sheet, data)
+        const enrichedData = initializeSystemLevels(data)
+        const sheet = calculateCharacterSheet(enrichedData)
+        setCharacter(sheet, enrichedData)
       })
     })
 

@@ -949,8 +949,9 @@ describe('EntitySelectionView - selection mode small interactions', () => {
     expect(onDeselect).toHaveBeenCalledWith('power-attack@test')
   })
 
-  it('does not call onSelect when max is reached and row is not selected', () => {
+  it('radio behavior: calls onDeselect then onSelect when max=1 and clicking different entity', () => {
     const onSelect = vi.fn()
+    const onDeselect = vi.fn()
     const selectedInstance = entityInstance(feats[0]!)
 
     const selectionConfig: ModeConfig = {
@@ -958,7 +959,7 @@ describe('EntitySelectionView - selection mode small interactions', () => {
       selectedEntities: [selectedInstance],
       eligibleEntities,
       onSelect,
-      onDeselect: vi.fn(),
+      onDeselect,
       min: 1,
       max: 1,
     }
@@ -972,10 +973,12 @@ describe('EntitySelectionView - selection mode small interactions', () => {
       { wrapper }
     )
 
-    // Cleave is not selected and max is reached
+    // Click Cleave (not currently selected)
     fireEvent.click(screen.getByText('Cleave'))
 
-    expect(onSelect).not.toHaveBeenCalled()
+    // Should deselect current and select new
+    expect(onDeselect).toHaveBeenCalledWith('power-attack@test')
+    expect(onSelect).toHaveBeenCalledWith('cleave')
   })
 
   it('does not call onSelect for ineligible entity', () => {
@@ -1242,7 +1245,7 @@ describe('EntitySelectionView - SelectionBar', () => {
 // ============================================================================
 
 describe('EntitySelectionView - disabled when max reached', () => {
-  it('disables "Seleccionar" button in large selection when max is reached', () => {
+  it('radio behavior in large list: calls onDeselect then onSelect when max=1', () => {
     const feats = Array.from({ length: 20 }, (_, i) =>
       entity(`feat-${i}`, `Feat ${i}`, { entityType: 'feat' })
     )
@@ -1251,13 +1254,14 @@ describe('EntitySelectionView - disabled when max reached', () => {
     )
     const selected = entityInstance(feats[0]!)
     const onSelect = vi.fn()
+    const onDeselect = vi.fn()
 
     const selectionConfig: ModeConfig = {
       mode: 'selection',
       selectedEntities: [selected],
       eligibleEntities,
       onSelect,
-      onDeselect: vi.fn(),
+      onDeselect,
       min: 1,
       max: 1,
     }
@@ -1271,8 +1275,43 @@ describe('EntitySelectionView - disabled when max reached', () => {
       { wrapper }
     )
 
-    // All "Seleccionar" buttons should be present but clicking them should not call onSelect
-    // because handleMobileButtonPress in EntityRowWithMenu checks buttonDisabled
+    // Click "Seleccionar" on first available (non-selected) entity
+    const selectButtons = screen.getAllByText('Seleccionar')
+    fireEvent.click(selectButtons[0]!)
+
+    expect(onDeselect).toHaveBeenCalledWith('feat-0@test')
+    expect(onSelect).toHaveBeenCalled()
+  })
+
+  it('disables "Seleccionar" button in large selection when max>1 is reached', () => {
+    const feats = Array.from({ length: 20 }, (_, i) =>
+      entity(`feat-${i}`, `Feat ${i}`, { entityType: 'feat' })
+    )
+    const eligibleEntities: FilterResult<StandardEntity>[] = feats.map((f) =>
+      filterResult(f, true)
+    )
+    const selected = [entityInstance(feats[0]!), entityInstance(feats[1]!)]
+    const onSelect = vi.fn()
+
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: selected,
+      eligibleEntities,
+      onSelect,
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 2,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={feats}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
     const selectButtons = screen.getAllByText('Seleccionar')
     fireEvent.click(selectButtons[0]!)
 
@@ -1318,5 +1357,193 @@ describe('EntitySelectionView - sticky header', () => {
     const flashList = screen.getByTestId('flash-list')
     const searchInput = screen.getByTestId('search-input')
     expect(flashList.contains(searchInput)).toBe(false)
+  })
+})
+
+// ============================================================================
+// Scenario: instantSelect mode - simple picker list
+// ============================================================================
+
+describe('EntitySelectionView - instantSelect mode', () => {
+  const classes = [
+    entity('fighter', 'Fighter', { entityType: 'class', description: 'Hit Die: d10' }),
+    entity('wizard', 'Wizard', { entityType: 'class', description: 'Hit Die: d4' }),
+    entity('cleric', 'Cleric', { entityType: 'class', description: 'Hit Die: d8' }),
+    entity('rogue', 'Rogue', { entityType: 'class', description: 'Hit Die: d6' }),
+  ]
+
+  const eligibleEntities: FilterResult<StandardEntity>[] = classes.map((c) =>
+    filterResult(c, true)
+  )
+
+  it('renders simple rows without checkboxes or selection UI', () => {
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [],
+      eligibleEntities,
+      onSelect: vi.fn(),
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      selectionLabel: 'Clase',
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={classes}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    // All entities visible
+    expect(screen.getByText('Fighter')).toBeInTheDocument()
+    expect(screen.getByText('Wizard')).toBeInTheDocument()
+    expect(screen.getByText('Cleric')).toBeInTheDocument()
+
+    // No SelectionHeader (no selection badge)
+    expect(screen.queryByTestId('selection-badge')).not.toBeInTheDocument()
+
+    // No SelectionBar
+    expect(screen.queryByTestId('selection-bar')).not.toBeInTheDocument()
+  })
+
+  it('calls onSelect when tapping a row', () => {
+    const onSelect = vi.fn()
+
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [],
+      eligibleEntities,
+      onSelect,
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={classes}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    fireEvent.click(screen.getByText('Fighter'))
+
+    expect(onSelect).toHaveBeenCalledWith('fighter')
+  })
+
+  it('shows check mark on selected entity', () => {
+    const selectedInstance = entityInstance(classes[0]!)
+
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [selectedInstance],
+      eligibleEntities,
+      onSelect: vi.fn(),
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={classes}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    // Fighter should have a check icon (testID from FontAwesome6 mock)
+    expect(screen.getByText('Fighter')).toBeInTheDocument()
+    // All entities still visible (selected not filtered out)
+    expect(screen.getByText('Wizard')).toBeInTheDocument()
+  })
+
+  it('does not show search bar for small list', () => {
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [],
+      eligibleEntities,
+      onSelect: vi.fn(),
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={classes}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    expect(screen.queryByTestId('search-input')).not.toBeInTheDocument()
+  })
+
+  it('shows search bar for large list', () => {
+    const manyClasses = Array.from({ length: 20 }, (_, i) =>
+      entity(`class-${i}`, `Class ${i}`, { entityType: 'class' })
+    )
+    const manyEligible: FilterResult<StandardEntity>[] = manyClasses.map((c) =>
+      filterResult(c, true)
+    )
+
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [],
+      eligibleEntities: manyEligible,
+      onSelect: vi.fn(),
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={manyClasses}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    expect(screen.getByTestId('search-input')).toBeInTheDocument()
+  })
+
+  it('shows entity descriptions', () => {
+    const selectionConfig: ModeConfig = {
+      mode: 'selection',
+      selectedEntities: [],
+      eligibleEntities,
+      onSelect: vi.fn(),
+      onDeselect: vi.fn(),
+      min: 1,
+      max: 1,
+      instantSelect: true,
+    }
+
+    render(
+      <EntitySelectionView
+        entities={classes}
+        modeConfig={selectionConfig}
+        onEntityPress={vi.fn()}
+      />,
+      { wrapper }
+    )
+
+    expect(screen.getByText('Hit Die: d10')).toBeInTheDocument()
+    expect(screen.getByText('Hit Die: d4')).toBeInTheDocument()
   })
 })
