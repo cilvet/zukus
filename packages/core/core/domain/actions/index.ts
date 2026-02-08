@@ -11,6 +11,7 @@ export type {
   DiceRollResult,
   HealResult,
   ResourceType,
+  ResolvedResourceType,
   ActionDefinition,
   ActionableFields,
   ContextualEffectGroup,
@@ -39,6 +40,7 @@ export { compileContextualEffects, applyContextualEffects } from './contextualEf
 export { executeInjectEntity } from './results/injectEntity';
 export { executeModifyHP } from './results/modifyHP';
 export { executeDiceRoll } from './results/diceRoll';
+export { executeConsumeResource } from './results/consumeResource';
 
 // Orchestrator
 export { executeAction } from './executeAction';

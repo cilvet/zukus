@@ -4,6 +4,7 @@ import type {
   ActionDefinition,
   ContextualEffectGroup,
   ContextualEffectState,
+  ConsumeResourceOutcome,
 } from '../types';
 import type { StandardEntity } from '../../entities/types/base';
 
@@ -501,6 +502,128 @@ describe('Test 7: Simple action without contextual effects', () => {
       // 1d8 (1-8) + 1 = 2-9
       expect(result.outcomes[1].amount).toBeGreaterThanOrEqual(2);
       expect(result.outcomes[1].amount).toBeLessThanOrEqual(9);
+    }
+  });
+});
+
+// =============================================================================
+// Test 8: Metamagic — Energy Admixture (+2d6 damage, +1 slot level)
+// =============================================================================
+
+describe('Test 8: Metamagic — Energy Admixture (+2d6 damage, +1 slot level)', () => {
+  const fireballSpell: StandardEntity & { school: string; level: number } = {
+    id: 'spell-fireball',
+    entityType: 'spell',
+    name: 'Fireball',
+    school: 'evocation',
+    level: 3,
+  };
+
+  const fireballAction: ActionDefinition = {
+    id: 'cast',
+    name: 'Cast Fireball',
+    actionType: 'cast_spell',
+    params: [
+      {
+        id: 'casterLevel',
+        name: 'Caster Level',
+        source: { type: 'character', path: 'class.wizard.level' },
+      },
+      {
+        id: 'spellLevel',
+        name: 'Spell Level',
+        source: { type: 'entity', path: 'level' },
+      },
+      {
+        id: 'damageDiceCount',
+        name: 'Damage Dice Count',
+        source: { type: 'formula', expression: 'min(@param.casterLevel, 10)' },
+      },
+    ],
+    results: [
+      { type: 'consume_resource', resourceType: { kind: 'cge_pool', cost: '@param.spellLevel' } },
+      { type: 'dice_roll', id: 'damage', label: 'Fireball Damage', diceFormula: '(@param.damageDiceCount)d6' },
+    ],
+  };
+
+  // Energy Admixture: +2d6 extra damage, spell uses +1 slot level
+  const energyAdmixture: ContextualEffectGroup = {
+    id: 'energy-admixture',
+    name: 'Energy Admixture',
+    context: 'casting',
+    effects: [
+      { target: 'param.damageDiceCount', formula: '2' },
+      { target: 'param.spellLevel', formula: '1' },
+    ],
+    optional: true,
+  };
+
+  const characterEntities = [
+    { contextualEffects: [energyAdmixture] },
+  ];
+
+  it('should add 2d6 damage and increase slot cost when metamagic is active', () => {
+    const result = executeAction({
+      action: fireballAction,
+      entity: fireballSpell,
+      substitutionIndex: { 'class.wizard.level': 7 },
+      contextualEffectState: {
+        activeGroupIds: ['energy-admixture'],
+        variableValues: {},
+      },
+      characterEntities,
+      entityLookup,
+    });
+
+    // damageDiceCount = min(7,10) + 2 = 9, spellLevel = 3 + 1 = 4
+    expect(result.resolvedParams.damageDiceCount).toBe(9);
+    expect(result.resolvedParams.spellLevel).toBe(4);
+
+    // consume_resource: slot cost resolved to 4
+    const consumeOutcome = result.outcomes[0] as ConsumeResourceOutcome;
+    expect(consumeOutcome.type).toBe('consume_resource');
+    expect(consumeOutcome.resourceType.kind).toBe('cge_pool');
+    if (consumeOutcome.resourceType.kind === 'cge_pool') {
+      expect(consumeOutcome.resourceType.cost).toBe(4);
+    }
+
+    // dice_roll: (min(7,10) + 2)d6 = 9d6 → 9-54
+    const diceOutcome = result.outcomes[1];
+    expect(diceOutcome.type).toBe('dice_roll');
+    if (diceOutcome.type === 'dice_roll') {
+      expect(diceOutcome.result).toBeGreaterThanOrEqual(9);
+      expect(diceOutcome.result).toBeLessThanOrEqual(54);
+    }
+  });
+
+  it('should use base damage and slot cost when metamagic is NOT active', () => {
+    const result = executeAction({
+      action: fireballAction,
+      entity: fireballSpell,
+      substitutionIndex: { 'class.wizard.level': 7 },
+      contextualEffectState: {
+        activeGroupIds: [],
+        variableValues: {},
+      },
+      characterEntities,
+      entityLookup,
+    });
+
+    // damageDiceCount = min(7,10) = 7, spellLevel = 3
+    expect(result.resolvedParams.damageDiceCount).toBe(7);
+    expect(result.resolvedParams.spellLevel).toBe(3);
+
+    // consume_resource: slot cost = 3
+    const consumeOutcome = result.outcomes[0] as ConsumeResourceOutcome;
+    if (consumeOutcome.resourceType.kind === 'cge_pool') {
+      expect(consumeOutcome.resourceType.cost).toBe(3);
+    }
+
+    // dice_roll: (min(7,10) + 0)d6 = 7d6 → 7-42
+    const diceOutcome = result.outcomes[1];
+    if (diceOutcome.type === 'dice_roll') {
+      expect(diceOutcome.result).toBeGreaterThanOrEqual(7);
+      expect(diceOutcome.result).toBeLessThanOrEqual(42);
     }
   });
 });

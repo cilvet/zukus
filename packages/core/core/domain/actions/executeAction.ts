@@ -15,6 +15,7 @@ import { applyContextualEffects, compileContextualEffects } from './contextualEf
 import { executeInjectEntity } from './results/injectEntity';
 import { executeModifyHP } from './results/modifyHP';
 import { executeDiceRoll } from './results/diceRoll';
+import { executeConsumeResource } from './results/consumeResource';
 
 export type ExecuteActionInput = {
   action: ActionDefinition;
@@ -90,7 +91,8 @@ export function executeAction(input: ExecuteActionInput): ActionExecutionResult 
         break;
       }
       case 'consume_resource': {
-        outcomes.push({ type: 'consume_resource', resourceType: result.resourceType });
+        const outcome = executeConsumeResource(result, resolvedParams);
+        outcomes.push(outcome);
         break;
       }
     }

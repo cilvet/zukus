@@ -16,17 +16,18 @@ Sistema generico para definir, parametrizar y ejecutar acciones que producen res
 
 | Archivo | Funcion |
 |---------|---------|
-| `types.ts` | Todos los tipos del sistema |
+| `types.ts` | Todos los tipos del sistema (incluye `ResolvedResourceType` para outcomes) |
 | `resolveParams.ts` | Resolucion de params (character, entity, formula, dynamic) |
 | `resolveOutputs.ts` | Calculo de outputs para inyeccion en entidades resultado |
 | `contextualEffects.ts` | `compileContextualEffects()` + `applyContextualEffects()` |
 | `results/injectEntity.ts` | Primitiva: copiar entidad, aplicar outputs, resolver dados |
 | `results/modifyHP.ts` | Primitiva: evaluar formula de heal/damage |
 | `results/diceRoll.ts` | Primitiva: evaluar formula de dados |
+| `results/consumeResource.ts` | Primitiva: resolver formulas en cost de cge_pool/resource |
 | `executeAction.ts` | Orquestador del flujo completo |
 | `index.ts` | Re-exports del modulo |
 
-Tests: 47 pass en 4 archivos (`__tests__/resolveParams.test.ts`, `contextualEffects.test.ts`, `results.test.ts`, `integration.test.ts`).
+Tests: 49 pass en 4 archivos (`__tests__/resolveParams.test.ts`, `contextualEffects.test.ts`, `results.test.ts`, `integration.test.ts`).
 
 ### Decisiones de diseno confirmadas (post-PoC review)
 
@@ -35,6 +36,13 @@ Tests: 47 pass en 4 archivos (`__tests__/resolveParams.test.ts`, `contextualEffe
 3. **Falta `damage` result.** `modify_hp` con `mode: 'heal' | 'damage'` esta en los tipos pero no hay `DamageResult` — solo `HealResult`. Unificar en un solo result con `mode`.
 4. **`defaultParamValues` es dead code** — nunca se lee en `resolveParams`.
 5. **`availabilityConditions` no se evaluan** — el filtrado se hace via `activeGroupIds`. Para el futuro: evaluar conditions pasando la entidad de contexto.
+6. **Las acciones deben ser genericas por tipo de entidad, NO por entidad concreta.** La accion es "Cast Spell" (asociada a todas las entidades de tipo `spell`), NO "Cast Fireball". Cada conjuro parametriza la accion generica con sus datos (nivel, school, etc. via `entity` params). Los tests actuales nombran acciones por entidad ("Cast Mage Armor") — esto es incorrecto y debe corregirse al salir del PoC.
+
+### Limitaciones tecnicas descubiertas
+
+1. **Params derivados no se recalculan tras efectos contextuales.** Los params se resuelven en orden (paso 2), luego los efectos contextuales modifican params (paso 3). Si un param `damageDiceCount = min(casterLevel, 10)` depende de otro param que los efectos modifican, el derivado NO se recalcula. **Solucion**: los efectos contextuales deben apuntar al param final que quieren modificar, no a intermedios.
+2. **El dice roller no soporta `(expr + expr)dN` con funciones anidadas.** `(min(7, 10) + 2)d6` falla porque el parser split por coma dentro de parens anidados. **Workaround**: pre-calcular la cantidad de dados en un param y usar `(@param.diceCount)d6` — el `)` separa la variable del `d6` en el regex de sustitucion.
+3. **El regex de sustitucion `/@([a-zA-Z0-9._-]+)/g` captura `d6` pegado a un param.** `@param.countd6` → busca key `param.countd6`. Necesario separar con caracter no alfanumerico: `(@param.count)d6`.
 
 ---
 
@@ -292,6 +300,34 @@ contextualEffects: [{
 }]
 ```
 
+### Metamagia — Energy Admixture (+2d6 damage, +1 slot level)
+```typescript
+// Accion generica de conjuro con damageDiceCount pre-calculado
+actions: [{
+  id: 'cast', name: 'Cast Spell', context: 'cast_spell',
+  params: [
+    { id: 'casterLevel', source: { type: 'character', path: 'class.wizard.level' } },
+    { id: 'spellLevel', source: { type: 'entity', path: 'level' } },
+    { id: 'damageDiceCount', source: { type: 'formula', expression: 'min(@param.casterLevel, 10)' } },
+  ],
+  results: [
+    { type: 'consume_resource', resourceType: { kind: 'cge_pool', cost: '@param.spellLevel' } },
+    { type: 'dice_roll', id: 'damage', label: 'Damage', diceFormula: '(@param.damageDiceCount)d6' },
+  ]
+}]
+
+// Metamagia como efecto contextual — modifica params directamente
+contextualEffects: [{
+  id: 'energy-admixture', name: 'Energy Admixture', context: 'casting',
+  effects: [
+    { target: 'param.damageDiceCount', formula: '2' },  // +2d6
+    { target: 'param.spellLevel', formula: '1' },        // +1 slot level
+  ],
+  optional: true,
+}]
+// NOTA: consume_resource ahora resuelve la formula de cost con los params modificados
+```
+
 ---
 
 ## 7. Flujo de Ejecucion
@@ -378,13 +414,14 @@ Esto requiere que el dice roller acepte **modificadores de tirada** como concept
 ### Implementados
 | Archivo | Proposito |
 |---------|-----------|
-| `domain/actions/types.ts` | Todos los tipos |
+| `domain/actions/types.ts` | Todos los tipos (incluye `ResolvedResourceType`) |
 | `domain/actions/resolveParams.ts` | Resolucion de params |
 | `domain/actions/resolveOutputs.ts` | Calculo de outputs |
 | `domain/actions/contextualEffects.ts` | Compilacion + aplicacion de efectos contextuales |
 | `domain/actions/results/injectEntity.ts` | Primitiva inject |
 | `domain/actions/results/modifyHP.ts` | Primitiva heal/damage |
 | `domain/actions/results/diceRoll.ts` | Primitiva tirada |
+| `domain/actions/results/consumeResource.ts` | Primitiva consume (resuelve formulas en cost) |
 | `domain/actions/executeAction.ts` | Orquestador |
 | `domain/actions/index.ts` | Exports |
 

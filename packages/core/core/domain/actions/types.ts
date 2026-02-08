@@ -197,9 +197,15 @@ export type ModifyHPOutcome = {
   formula: string;
 };
 
+export type ResolvedResourceType =
+  | { kind: 'cge_slot'; trackId?: string }
+  | { kind: 'cge_pool'; trackId?: string; cost: number }
+  | { kind: 'resource'; resourceId: string; cost: number }
+  | { kind: 'inventory_quantity'; amount: number };
+
 export type ConsumeResourceOutcome = {
   type: 'consume_resource';
-  resourceType: ResourceType;
+  resourceType: ResolvedResourceType;
 };
 
 export type ActionOutcome =
