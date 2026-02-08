@@ -33,7 +33,7 @@ export default defineConfig({
       { find: /^@expo\/vector-icons(\/.*)?$/, replacement: mock('expo-vector-icons.tsx') },
       { find: 'expo-router', replacement: mock('expo-router.tsx') },
       { find: 'expo-haptics', replacement: mock('expo-noop.ts') },
-      { find: 'expo-audio', replacement: mock('expo-noop.ts') },
+      { find: 'expo-audio', replacement: mock('expo-audio.ts') },
       { find: 'expo-font', replacement: mock('expo-noop.ts') },
       { find: 'expo-linear-gradient', replacement: mock('expo-linear-gradient.tsx') },
       { find: 'expo-constants', replacement: mock('expo-noop.ts') },

@@ -26,6 +26,7 @@ import { isDropdownMode, isCounterMode, isSelectionMode, isBrowseMode } from './
 import type { StandardEntity, FilterState, FilterValue, EntityFilterConfig } from '@zukus/core'
 import { applyFilterConfig, createInitialFilterState } from '@zukus/core'
 import { useLocalizedEntities } from '../../ui/hooks/useLocalizedEntity'
+import { hapticLight } from '../../utils/haptics'
 
 // ============================================================================
 // Helpers
@@ -252,6 +253,7 @@ export function EntitySelectionView<T extends StandardEntity>({
     } else if (isCounterMode(modeConfig)) {
       modeConfig.handlers.onExecute(actionId, entityId)
     } else if (isSelectionMode(modeConfig)) {
+      hapticLight()
       // Radio behavior: auto-deselect current when max=1
       if (modeConfig.max === 1 && modeConfig.selectedEntities.length > 0) {
         const current = modeConfig.selectedEntities[0]!
@@ -503,7 +505,10 @@ export function EntitySelectionView<T extends StandardEntity>({
                       )}
                     </YStack>
                     <Pressable
-                      onPress={() => (modeConfig as SelectionModeConfig).onSelect(entity.id)}
+                      onPress={() => {
+                        hapticLight()
+                        ;(modeConfig as SelectionModeConfig).onSelect(entity.id)
+                      }}
                     >
                       {({ pressed: btnPressed }) => (
                         <XStack

@@ -12,6 +12,7 @@
 
 import { YStack, XStack, Text, Button, Input, Separator } from 'tamagui'
 import { FontAwesome6 } from '@expo/vector-icons'
+import { useAudioPlayer } from 'expo-audio'
 import type {
   EntityProvider,
   StandardEntity,
@@ -20,6 +21,9 @@ import type {
 } from '@zukus/core'
 import { ProviderSummaryRow } from '../../EntityProvider'
 import { useTheme } from '../../../contexts/ThemeContext'
+import { hapticMedium } from '../../../../utils/haptics'
+
+const diceRollSound = require('../../../../assets/sounds/dice-roll.mp3')
 
 export type LevelSlotData = {
   classId: string | null
@@ -70,6 +74,7 @@ export function LevelDetail({
   onSelectedEntityPress,
 }: LevelDetailProps) {
   const { themeColors } = useTheme()
+  const dicePlayer = useAudioPlayer(diceRollSound)
   const levelNumber = levelIndex + 1
   const isFirstLevel = levelIndex === 0
   const hasClass = levelSlot.classId !== null
@@ -91,6 +96,9 @@ export function LevelDetail({
 
   function handleRollHp() {
     if (!hitDie) return
+    hapticMedium()
+    dicePlayer.seekTo(0)
+    dicePlayer.play()
     const rolledHp = rollHitDie(hitDie, isFirstLevel)
     onHpChange(rolledHp)
     onRollHp()

@@ -4,6 +4,7 @@ import { FontAwesome6 } from '@expo/vector-icons'
 import type { EntityInstance } from '@zukus/core'
 import { getLocalizedEntity, type LocalizationContext } from '@zukus/core'
 import { useActiveLocale } from '../../ui/stores/translationStore'
+import { hapticLight } from '../../utils/haptics'
 
 export type SelectionBarProps = {
   selectedEntities: EntityInstance[]
@@ -85,7 +86,10 @@ export function SelectionBar({
                 {instance.entity.name}
               </Text>
               <Pressable
-                onPress={() => onDeselect(instance.instanceId)}
+                onPress={() => {
+                  hapticLight()
+                  onDeselect(instance.instanceId)
+                }}
                 hitSlop={8}
                 testID={`selection-bar-chip-remove-${instance.entity.id}`}
               >
