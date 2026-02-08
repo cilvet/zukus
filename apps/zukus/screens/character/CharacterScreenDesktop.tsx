@@ -3,6 +3,7 @@ import { YStack, XStack, Text, Spinner } from 'tamagui'
 import { View, Pressable } from 'react-native'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { useLocalSearchParams, useRouter } from 'expo-router'
+import { getBuildString } from '@zukus/core'
 import { useCharacterSync } from '../../hooks'
 import {
   useCharacterStore,
@@ -372,6 +373,7 @@ function CharacterScreenDesktopContent() {
   const navigateToDetail = useNavigateToDetail()
   const router = useRouter()
   const inventoryState = useInventoryState()
+  const baseData = useCharacterBaseData()
   const { themeInfo } = useTheme()
   const [equipmentLayout, setEquipmentLayout] = useState<EquipmentLayout>('balanced')
 
@@ -562,7 +564,7 @@ function CharacterScreenDesktopContent() {
   }
 
   const levelNumber = level?.level ?? 0
-  const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
+  const buildString = baseData ? getBuildString(baseData) : null
   const currentHp = hitPoints?.currentHp ?? 0
   const maxHp = hitPoints?.maxHp ?? 0
 
@@ -582,9 +584,7 @@ function CharacterScreenDesktopContent() {
           <YStack width="100%" gap={16}>
             <CharacterHeader
               name={characterSheet.name}
-              level={levelNumber}
-              race=""
-              characterClass={className}
+              build={buildString}
               imageUrl={imageUrl}
               onRestPress={handleRestPress}
               onFormulaPlaygroundPress={handleFormulaPlaygroundPress}

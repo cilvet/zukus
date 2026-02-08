@@ -173,9 +173,7 @@ export function ItemCard({
 
 export function CharacterHeader({
   name,
-  level,
-  race,
-  characterClass,
+  build,
   imageUrl,
   onFormulaPlaygroundPress,
   onChatPress,
@@ -183,9 +181,7 @@ export function CharacterHeader({
   onEditPress,
 }: {
   name: string
-  level: number
-  race: string
-  characterClass: string
+  build: string | null
   imageUrl?: string | null
   onFormulaPlaygroundPress?: () => void
   onChatPress?: () => void
@@ -308,7 +304,7 @@ export function CharacterHeader({
                 backgroundColor={pressed ? '$backgroundHover' : 'transparent'}
               >
                 <Text fontSize={12} color="$placeholderColor">
-                  Level {level} {race} {characterClass}
+                  {build ?? 'Sin clase'}
                 </Text>
                 <Text fontSize={10} color="$placeholderColor">
                   {'>'}
@@ -318,7 +314,7 @@ export function CharacterHeader({
           </Pressable>
         ) : (
           <Text fontSize={12} color="$placeholderColor">
-            Level {level} {race} {characterClass}
+            {build ?? 'Sin clase'}
           </Text>
         )}
       </YStack>
@@ -375,13 +371,11 @@ export function HpBar({ current, max, onPress }: { current: number; max: number;
  * Layout: [Nivel+Clase] [Avatar] [HP]
  */
 export function CompactCharacterHeader({
-  level,
-  characterClass,
+  build,
   hpCurrent,
   hpMax,
 }: {
-  level: number
-  characterClass: string
+  build: string | null
   hpCurrent: number
   hpMax: number
 }) {
@@ -395,13 +389,10 @@ export function CompactCharacterHeader({
       borderBottomWidth={1}
       borderBottomColor="$borderColor"
     >
-      {/* Izquierda: Nivel + Clase */}
+      {/* Izquierda: Build */}
       <YStack alignItems="flex-start" flex={1}>
-        <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
-          Nivel {level}
-        </Text>
-        <Text fontSize={14} fontWeight="700" color="$color">
-          {characterClass}
+        <Text fontSize={14} fontWeight="700" color="$color" numberOfLines={1}>
+          {build ?? 'Sin clase'}
         </Text>
       </YStack>
 

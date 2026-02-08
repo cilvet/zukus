@@ -2,6 +2,7 @@
 export * from "./core/tests/character/buildCharacter";
 export * from "./core/tests/character/defaultCharacter";
 export { calculateCharacterSheet } from "./core/domain/character/calculation/calculateCharacterSheet";
+export { getBuildString } from "./core/domain/character/calculation/classLevels/getBuildString";
 
 // CharacterUpdater
 export { CharacterUpdater } from "./core/domain/character/update/characterUpdater/characterUpdater";

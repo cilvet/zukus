@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Platform } from 'react-native'
 import { YStack, Text } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { getBuildString } from '@zukus/core'
 import {
   useCharacterSheet,
   useCharacterAbilities,
@@ -15,6 +16,7 @@ import {
   useCharacterImageUrl,
   useCharacterAttacks,
   useComputedEntities,
+  useCharacterBaseData,
 } from '../../../ui'
 import { isValidDetailType, getDetailTitle } from '../../../navigation'
 import {
@@ -66,6 +68,7 @@ export function CharacterScreenContent() {
   const attackData = useCharacterAttacks()
   const imageUrl = useCharacterImageUrl()
   const computedEntities = useComputedEntities()
+  const baseData = useCharacterBaseData()
 
   // Cmd+K search
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -129,7 +132,7 @@ export function CharacterScreenContent() {
   }
 
   const levelNumber = level?.level ?? 0
-  const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
+  const buildString = baseData ? getBuildString(baseData) : null
   const currentHp = hitPoints?.currentHp ?? 0
   const maxHp = hitPoints?.maxHp ?? 0
 
@@ -155,8 +158,7 @@ export function CharacterScreenContent() {
         />
         <StatsHeaderBar
           name={characterSheet.name}
-          level={levelNumber}
-          characterClass={className}
+          build={buildString}
           imageUrl={imageUrl}
           abilities={abilities}
           currentHp={currentHp}

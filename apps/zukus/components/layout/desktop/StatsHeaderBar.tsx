@@ -5,8 +5,7 @@ import type { CalculatedAbilities } from '@zukus/core'
 
 type StatsHeaderBarProps = {
   name: string
-  level: number
-  characterClass: string
+  build: string | null
   imageUrl?: string | null
   abilities: CalculatedAbilities
   currentHp: number
@@ -182,8 +181,7 @@ function ActionButton({
  */
 export function StatsHeaderBar({
   name,
-  level,
-  characterClass,
+  build,
   imageUrl,
   abilities,
   currentHp,
@@ -251,7 +249,7 @@ export function StatsHeaderBar({
             ) : null}
           </XStack>
           <Text fontSize={12} color="$placeholderColor">
-            Level {level} {characterClass}
+            {build ?? 'Sin clase'}
           </Text>
         </YStack>
       </XStack>

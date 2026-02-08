@@ -3,6 +3,7 @@ import { View, StyleSheet, Pressable, Image } from 'react-native'
 import { Spinner, Text, XStack, YStack } from 'tamagui'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { getBuildString } from '@zukus/core'
 import {
   useTheme,
   useCharacterName,
@@ -10,6 +11,7 @@ import {
   useCharacterHitPoints,
   useCharacterSheet,
   useCharacterImageUrl,
+  useCharacterBaseData,
   useVisiblePageStore,
   useCharacterStore,
 } from '../../ui'
@@ -45,12 +47,13 @@ function Header() {
   const level = useCharacterLevel()
   const hitPoints = useCharacterHitPoints()
   const imageUrl = useCharacterImageUrl()
+  const baseData = useCharacterBaseData()
   const router = useRouter()
   const { id } = useLocalSearchParams<{ id: string }>()
   const rest = useCharacterStore((state) => state.rest)
 
   const levelNumber = level?.level ?? 0
-  const className = level?.levelsData[0]?.classUniqueId ?? 'Sin clase'
+  const buildString = baseData ? getBuildString(baseData) : null
   const currentHp = hitPoints?.currentHp ?? 0
   const maxHp = hitPoints?.maxHp ?? 0
 
@@ -84,8 +87,8 @@ function Header() {
             <Text fontSize={11} color="$placeholderColor" textTransform="uppercase">
               Nivel {levelNumber}
             </Text>
-            <Text fontSize={14} fontWeight="700" color="$color">
-              {className}
+            <Text fontSize={14} fontWeight="700" color="$color" numberOfLines={1}>
+              {buildString ?? 'Sin clase'}
             </Text>
           </YStack>
         )}
