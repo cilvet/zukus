@@ -1,13 +1,18 @@
 import { useState } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView, Pressable } from 'react-native'
 import { Text, YStack, XStack } from 'tamagui'
-import { useTheme, useCharacterSheet, useCharacterStore } from '../../ui'
+import { FontAwesome6 } from '@expo/vector-icons'
+import { useTheme, useCharacterSheet, useCharacterStore, useCharacterBaseData } from '../../ui'
 import { SafeAreaBottomSpacer } from '../../components/layout'
 import {
   LevelEditor,
   AbilityScoresEditor,
   CharacterInfoSection,
+  RaceSelectorDetail,
 } from '../../ui/components/character/editor'
+import { useCompendiumContext } from '../../ui/components/EntityProvider'
+import { changeRace } from '@zukus/core'
+import type { CompendiumContext as RaceCompendiumContext } from '@zukus/core'
 
 const EDITOR_PAGES = [
   { key: 'info', label: 'Info' },
@@ -72,12 +77,43 @@ function EditorTabs({
 }
 
 /**
+ * Header con boton de volver para subpaneles mobile.
+ */
+function MobileSubpanelHeader({
+  title,
+  onBack,
+}: {
+  title: string
+  onBack: () => void
+}) {
+  const { themeColors } = useTheme()
+  return (
+    <XStack
+      height={44}
+      alignItems="center"
+      paddingHorizontal={12}
+      gap={8}
+      borderBottomWidth={1}
+      borderBottomColor="$borderColor"
+      backgroundColor="$background"
+    >
+      <Pressable onPress={onBack} hitSlop={8}>
+        <FontAwesome6 name="arrow-left" size={16} color={themeColors.color} />
+      </Pressable>
+      <Text fontSize={16} fontWeight="600" color="$color" flex={1}>
+        {title}
+      </Text>
+    </XStack>
+  )
+}
+
+/**
  * Columna 1: Info basica
  */
-function InfoColumn() {
+function InfoColumn({ onRacePress }: { onRacePress: () => void }) {
   return (
     <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-      <CharacterInfoSection />
+      <CharacterInfoSection onRacePress={onRacePress} />
     </ScrollView>
   )
 }
@@ -112,20 +148,46 @@ function LevelsColumn({
 
 /**
  * Pantalla de edicion de personaje para mobile.
- * Usa ViewPager para swipe entre columnas.
+ * Usa tabs para navegacion entre columnas.
  */
 export function EditCharacterScreenMobile() {
   const { themeColors } = useTheme()
   const characterSheet = useCharacterSheet()
+  const baseData = useCharacterBaseData()
   const { updater } = useCharacterStore()
+  const { getAllEntities, getEntity } = useCompendiumContext()
 
   const [currentPage, setCurrentPage] = useState(0)
+  const [showRaceSelector, setShowRaceSelector] = useState(false)
 
   // Level change from dot press - direct change (no confirmation needed)
   const handleRequestLevelChange = (level: number) => {
     if (updater) {
       updater.setCurrentCharacterLevel(level)
     }
+  }
+
+  const handleRacePress = () => {
+    setShowRaceSelector(true)
+  }
+
+  const handleSelectRace = (raceId: string) => {
+    if (!baseData || !updater) return
+
+    const compendiumContext: RaceCompendiumContext = {
+      getClass: () => undefined,
+      getSystemLevels: () => undefined,
+      getRace: (id: string) => {
+        const entity = getEntity('race', id)
+        return entity as any
+      },
+      getEntity: (entityType: string, entityId: string) => getEntity(entityType, entityId),
+      getAllEntities: (entityType: string) => getAllEntities(entityType),
+    }
+
+    const result = changeRace(baseData, raceId, compendiumContext)
+    updater.updateCharacterBaseData(result.character)
+    setShowRaceSelector(false)
   }
 
   if (!characterSheet) {
@@ -139,11 +201,34 @@ export function EditCharacterScreenMobile() {
     )
   }
 
+  // Race selector subpanel (replaces main content)
+  if (showRaceSelector) {
+    const currentRaceId = baseData?.raceEntity?.id ?? null
+    const availableRaces = getAllEntities('race')
+
+    return (
+      <View style={[styles.container, { backgroundColor: themeColors.background }]}>
+        <MobileSubpanelHeader
+          title="Seleccionar Raza"
+          onBack={() => setShowRaceSelector(false)}
+        />
+        <View style={styles.page}>
+          <RaceSelectorDetail
+            currentRaceId={currentRaceId}
+            availableRaces={availableRaces}
+            onSelectRace={handleSelectRace}
+          />
+        </View>
+        <SafeAreaBottomSpacer />
+      </View>
+    )
+  }
+
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <EditorTabs currentPage={currentPage} onPageChange={setCurrentPage} />
       <View style={styles.page}>
-        {currentPage === 0 && <InfoColumn />}
+        {currentPage === 0 && <InfoColumn onRacePress={handleRacePress} />}
         {currentPage === 1 && <AbilitiesColumn />}
         {currentPage === 2 && <LevelsColumn onRequestLevelChange={handleRequestLevelChange} />}
       </View>

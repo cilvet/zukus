@@ -12,6 +12,7 @@ import {
 import {
   LevelDetail,
   ClassSelectorDetail,
+  RaceSelectorDetail,
   AbilityScoresEditor,
   CharacterInfoSection,
   CurrentLevelSelector,
@@ -39,8 +40,8 @@ import { SectionCard, SectionHeader } from '../../components/character'
 import { useCompendiumContext, EntitySelectorDetail } from '../../ui/components/EntityProvider'
 import { CompendiumEntityDetail } from '../../components/compendiums'
 import { getDetailTitle } from '../../navigation'
-import { resolveProvider, getSelectedEntityInstances, ops } from '@zukus/core'
-import type { ProviderLocation, StandardEntity, EntityInstance, LevelSlot } from '@zukus/core'
+import { resolveProvider, getSelectedEntityInstances, changeRace, ops } from '@zukus/core'
+import type { ProviderLocation, StandardEntity, EntityInstance, LevelSlot, RaceCompendiumContext } from '@zukus/core'
 import { useEffect, useRef } from 'react'
 
 const TOTAL_LEVELS = 20
@@ -202,7 +203,9 @@ function EditCharacterScreenDesktopContent() {
             borderColor="$borderColor"
             borderRadius={4}
           >
-            <CharacterInfoSection />
+            <CharacterInfoSection
+              onRacePress={() => openPanel('raceSelectorDetail/0', 'Seleccionar Raza')}
+            />
           </YStack>
         </VerticalSection>
 
@@ -307,6 +310,9 @@ function EditCharacterScreenDesktopContent() {
         {panelInfo?.type === 'classSelectorDetail' && panelInfo?.id && (
           <EditClassSelectorDetailPanelContainer levelIndex={parseInt(panelInfo.id)} />
         )}
+        {panelInfo?.type === 'raceSelectorDetail' && (
+          <EditRaceSelectorDetailPanelContainer />
+        )}
         {panelInfo?.type === 'quickBuildClassSelector' && (
           <QuickBuildClassSelector
             availableClasses={getAvailableClasses()}
@@ -407,6 +413,28 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
     })
   }
 
+  // Get racial providers (only for level 1)
+  const raceProviders: ProviderWithResolution[] = []
+  const raceEntity = baseData.raceEntity
+  if (raceEntity && levelNumber === 1) {
+    const raceLevelRow = raceEntity.levels?.['1']
+    const providers = raceLevelRow?.providers || []
+    providers.forEach((provider, providerIndex) => {
+      const providerLocation: ProviderLocation = {
+        type: 'raceLevel',
+        raceLevel: 1,
+        providerIndex,
+      }
+      const entityType = provider.selector?.entityType
+      const allEntities = entityType ? getAllEntities(entityType) : getAllEntitiesFromAllTypes()
+      const getEntityFn = (id: string) => entityType ? getEntity(entityType, id) : getEntityById(id)
+      const resolution = resolveProvider(provider, allEntities, getEntityFn, { '@characterLevel': levelNumber })
+      const grantedEntities = resolution.granted?.entities || []
+      const selectedEntities = getSelectedEntityInstances(baseData, providerLocation)
+      raceProviders.push({ provider, providerLocation, grantedEntities, selectedEntities })
+    })
+  }
+
   const handleOpenClassSelector = () => {
     openPanel(`classSelectorDetail/${levelIndex}`, 'Seleccionar Clase')
   }
@@ -441,6 +469,8 @@ function EditLevelDetailPanelContainer({ levelIndex }: { levelIndex: number }) {
       hitDie={hitDie}
       systemProviders={systemProviders}
       classProviders={classProviders}
+      raceProviders={raceProviders}
+      raceName={raceEntity?.name}
       onOpenClassSelector={handleOpenClassSelector}
       onHpChange={handleHpChange}
       onRollHp={handleRollHp}
@@ -506,4 +536,47 @@ function EditEntitySelectorDetailPanelContainer({ locationJson }: { locationJson
   }
 
   return <EntitySelectorDetail providerLocation={providerLocation} />
+}
+
+function EditRaceSelectorDetailPanelContainer() {
+  const baseData = useCharacterBaseData()
+  const { updater } = useCharacterStore()
+  const { goBack } = usePanelNavigation('edit')
+  const { getAllEntities, getEntity } = useCompendiumContext()
+
+  if (!baseData || !updater) {
+    return (
+      <YStack flex={1} justifyContent="center" alignItems="center">
+        <Text color="$placeholderColor">Cargando...</Text>
+      </YStack>
+    )
+  }
+
+  const currentRaceId = baseData.raceEntity?.id ?? null
+  const availableRaces = getAllEntities('race')
+
+  const handleSelectRace = (raceId: string) => {
+    const compendiumContext: RaceCompendiumContext = {
+      getClass: () => undefined,
+      getSystemLevels: () => undefined,
+      getRace: (id: string) => {
+        const entity = getEntity('race', id)
+        return entity as any
+      },
+      getEntity: (entityType: string, entityId: string) => getEntity(entityType, entityId),
+      getAllEntities: (entityType: string) => getAllEntities(entityType),
+    }
+
+    const result = changeRace(baseData, raceId, compendiumContext)
+    updater.updateCharacterBaseData(result.character)
+    goBack()
+  }
+
+  return (
+    <RaceSelectorDetail
+      currentRaceId={currentRaceId}
+      availableRaces={availableRaces}
+      onSelectRace={handleSelectRace}
+    />
+  )
 }

@@ -87,6 +87,7 @@ export type CompileEffectsOptions = {
  * Compiles all effects from character base data and computed entities.
  *
  * Supports effects from:
+ * - Race entity (ability score modifiers) - via raceEntity.effects
  * - Buffs (buff.effects)
  * - Custom Entities (entity.effects) - via computedEntities parameter
  * - Equipped Inventory Items (item.effects) - via stored entity on item
@@ -112,6 +113,9 @@ export function compileCharacterEffects(
     ? { computedEntities: options }
     : options ?? {};
 
+  // Compile effects from race entity (ability score modifiers, etc.)
+  compileRaceEntityEffects(characterBaseData, compiled);
+
   // Compile effects from buffs
   compileBuffEffects(characterBaseData, compiled);
 
@@ -126,6 +130,30 @@ export function compileCharacterEffects(
   }
 
   return compiled;
+}
+
+/**
+ * Compiles effects from the race entity (ability score modifiers, etc.).
+ * Effects from the raceEntity.effects field are compiled with sourceType "race".
+ */
+function compileRaceEntityEffects(
+  characterBaseData: CharacterBaseData,
+  compiled: CompiledEffects
+): void {
+  const raceEntity = characterBaseData.raceEntity;
+  if (!raceEntity?.effects || raceEntity.effects.length === 0) {
+    return;
+  }
+
+  for (const effect of raceEntity.effects) {
+    const sourcedEffect = toSourcedEffect(
+      effect,
+      "race",
+      raceEntity.id,
+      raceEntity.name || raceEntity.id
+    );
+    addEffect(compiled, sourcedEffect);
+  }
 }
 
 /**

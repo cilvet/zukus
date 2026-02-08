@@ -35,6 +35,13 @@ export {
   removeSystemLevels,
 } from './systemLevelOperations';
 
+// Race Operations
+export {
+  addRace,
+  removeRace,
+  changeRace,
+} from './raceOperations';
+
 // Entity Operations
 export {
   editEntity,

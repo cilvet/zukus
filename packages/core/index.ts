@@ -124,7 +124,7 @@ export { getResolvedRollExpression } from "./core/domain/rolls/DiceRoller/diceRo
 export * as ops from "./core/domain/character/updater/operations";
 
 // Types - Levels
-export type { LevelSlot, ClassEntity, SystemLevelsEntity, EntityInstance } from "./core/domain/levels/storage/types";
+export type { LevelSlot, ClassEntity, SystemLevelsEntity, RaceEntity, EntityInstance } from "./core/domain/levels/storage/types";
 export type { EntityProvider, Selector } from "./core/domain/levels/providers/types";
 export type { StandardEntity, ComputedEntity, ComputedEntityMeta } from "./core/domain/entities/types/base";
 export type { EntitySchemaDefinition } from "./core/domain/entities/types/schema";
@@ -209,6 +209,10 @@ export { getProvider } from "./core/domain/levels/updater/selectionOperations";
 
 // System Levels
 export { setSystemLevels } from "./core/domain/levels/updater/systemLevelOperations";
+
+// Race Operations
+export { addRace, removeRace, changeRace } from "./core/domain/levels/updater/raceOperations";
+export type { CompendiumContext as RaceCompendiumContext } from "./core/domain/levels/updater/types";
 
 // Compendiums
 export { dnd35ExampleCompendium, dnd35ExampleCalculationContext } from "./core/domain/compendiums";

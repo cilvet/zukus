@@ -1,5 +1,6 @@
-import { TextInput, StyleSheet } from 'react-native'
-import { YStack, Text } from 'tamagui'
+import { TextInput, StyleSheet, Pressable } from 'react-native'
+import { YStack, XStack, Text } from 'tamagui'
+import { FontAwesome6 } from '@expo/vector-icons'
 import type { Alignment } from '@zukus/core'
 import { useTheme } from '../../../contexts/ThemeContext'
 import {
@@ -7,21 +8,27 @@ import {
   useCharacterName,
   useCharacterDescription,
   useCharacterAlignment,
+  useCharacterBaseData,
 } from '../../../stores/characterStore'
 import { AlignmentGrid } from './AlignmentGrid'
 import { ImagePlaceholder } from './ImagePlaceholder'
 import { CharacterFieldsSection } from './CharacterFieldsSection'
 import { BackgroundSection } from './BackgroundSection'
 
+export type CharacterInfoSectionProps = {
+  onRacePress?: () => void
+}
+
 /**
  * Seccion de informacion completa del personaje.
- * Incluye imagen, identidad, alineamiento, datos fisicos y trasfondo.
+ * Incluye imagen, identidad, raza, alineamiento, datos fisicos y trasfondo.
  */
-export function CharacterInfoSection() {
+export function CharacterInfoSection({ onRacePress }: CharacterInfoSectionProps = {}) {
   const { themeColors } = useTheme()
   const name = useCharacterName()
   const description = useCharacterDescription()
   const alignment = useCharacterAlignment()
+  const baseData = useCharacterBaseData()
 
   const updateName = useCharacterStore((state) => state.updateName)
   const updateDescription = useCharacterStore((state) => state.updateDescription)
@@ -89,6 +96,44 @@ export function CharacterInfoSection() {
           />
         </YStack>
       </YStack>
+
+      {/* Raza */}
+      {onRacePress && (
+        <YStack gap={12}>
+          <Text fontSize={13} fontWeight="600" color="$placeholderColor">
+            Raza
+          </Text>
+          <Pressable onPress={onRacePress}>
+            {({ pressed }) => {
+              const hasRace = !!baseData?.raceEntity
+              return (
+                <XStack
+                  alignItems="center"
+                  justifyContent="space-between"
+                  paddingVertical={12}
+                  paddingHorizontal={12}
+                  backgroundColor={hasRace ? '$uiBackgroundColor' : '$yellow3'}
+                  borderWidth={1}
+                  borderColor={hasRace ? '$borderColor' : '$yellow8'}
+                  borderRadius={8}
+                  opacity={pressed ? 0.7 : 1}
+                >
+                  <YStack flex={1}>
+                    <Text
+                      fontSize={14}
+                      fontWeight={hasRace ? '500' : '400'}
+                      color={hasRace ? '$color' : '$placeholderColor'}
+                    >
+                      {baseData?.raceEntity?.name ?? 'Seleccionar raza'}
+                    </Text>
+                  </YStack>
+                  <FontAwesome6 name="chevron-right" size={12} color={themeColors.placeholderColor} />
+                </XStack>
+              )
+            }}
+          </Pressable>
+        </YStack>
+      )}
 
       {/* Alineamiento */}
       <YStack gap={12}>

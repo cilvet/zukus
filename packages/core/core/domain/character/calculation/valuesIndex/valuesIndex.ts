@@ -68,6 +68,10 @@ export const valueIndexKeys = {
   AC_TOUCH: "ac.touch.total",
   AC_NATURAL_BASE: "ac.natural.base",
   AC_NATURAL_TOTAL: "ac.natural.total",
+  ECL: "ecl",
+  TOTAL_HD: "totalHD",
+  RACIAL_HD: "racialHD",
+  LEVEL_ADJUSTMENT: "levelAdjustment",
   CUSTOM_VARIABLE: (variableId: string) => `customVariable.${variableId}`,
   REST_HEALING_FORMULA: "restHealingFormula",
 } as const;
@@ -115,6 +119,14 @@ export function getInitialValuesIndex(
   valuesIndex[valueIndexKeys.BAB_TOTAL] = babValue;
   valuesIndex[valueIndexKeys.HIT_DICE_BASE] = characterLevel;
   valuesIndex[valueIndexKeys.HIT_DICE_TOTAL] = characterLevel;
+
+  // Race-derived system variables
+  const levelAdjustment = characterBaseData.race?.levelAdjustment ?? 0;
+  const racialHD = characterBaseData.race?.racialHD ?? 0;
+  valuesIndex[valueIndexKeys.LEVEL_ADJUSTMENT] = levelAdjustment;
+  valuesIndex[valueIndexKeys.RACIAL_HD] = racialHD;
+  valuesIndex[valueIndexKeys.TOTAL_HD] = characterLevel + racialHD;
+  valuesIndex[valueIndexKeys.ECL] = characterLevel + levelAdjustment;
 
   const raceSize = characterBaseData.race?.size ?? "MEDIUM";
   valuesIndex[valueIndexKeys.SIZE_BASE] = sizeCategories[raceSize].numericValue;

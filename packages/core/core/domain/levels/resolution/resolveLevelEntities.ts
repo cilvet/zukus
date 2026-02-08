@@ -17,7 +17,7 @@
  */
 
 import type { CharacterBaseData } from '../../character/baseData/character';
-import type { EntityInstance, ClassEntity, ClassLevelRow, SystemLevelRow } from '../storage/types';
+import type { EntityInstance, ClassEntity, ClassLevelRow, SystemLevelRow, RaceEntity, RaceLevelRow } from '../storage/types';
 import type { EntityProvider } from '../providers/types';
 import type { ResolutionResult, ResolutionWarning } from './types';
 
@@ -63,9 +63,33 @@ export function resolveLevelEntities(character: CharacterBaseData): ResolutionRe
     ? Math.min(levelSlots.length, characterLevel)
     : levelSlots.length;
   
+  // =========================================================================
+  // STEP 0: Process race-level providers (once, before level slots)
+  // =========================================================================
+  const raceEntity = character.raceEntity;
+  if (raceEntity) {
+    for (const [levelKey, levelRow] of Object.entries(raceEntity.levels)) {
+      if (!levelRow.providers) {
+        continue;
+      }
+
+      const raceLevel = parseInt(levelKey, 10);
+      const { updatedEntities: raceUpdated, providerWarnings: raceWarnings } = processRaceProviders(
+        levelRow.providers,
+        entities,
+        visitedInstanceIds,
+        raceEntity.id,
+        raceLevel
+      );
+
+      entities = raceUpdated;
+      warnings.push(...raceWarnings);
+    }
+  }
+
   // Get system levels entity (if present)
   const systemLevels = character.systemLevelsEntity;
-  
+
   for (let i = 0; i < effectiveSlotCount; i++) {
     const slot = levelSlots[i];
     const currentCharacterLevel = i + 1; // Level slots are 0-indexed
@@ -165,9 +189,24 @@ function resetApplicability(
 /**
  * Origin type for provider processing.
  */
-type ProviderOrigin = 
+type ProviderOrigin =
   | { type: 'class'; classId: string; classLevel: number }
-  | { type: 'characterLevel'; characterLevel: number };
+  | { type: 'characterLevel'; characterLevel: number }
+  | { type: 'race'; raceId: string; raceLevel: number };
+
+/**
+ * Processes race-level providers (racial traits, bonus feats).
+ */
+function processRaceProviders(
+  providers: EntityProvider[],
+  entities: Record<string, EntityInstance[]>,
+  visitedInstanceIds: Set<string>,
+  raceId: string,
+  raceLevel: number
+): { updatedEntities: Record<string, EntityInstance[]>; providerWarnings: ResolutionWarning[] } {
+  const origin: ProviderOrigin = { type: 'race', raceId, raceLevel };
+  return processProvidersWithOrigin(providers, entities, visitedInstanceIds, origin);
+}
 
 /**
  * Processes system-level providers (feats, ability increases).
@@ -307,6 +346,9 @@ function processProvider(
 function buildOriginString(origin: ProviderOrigin): string {
   if (origin.type === 'class') {
     return `classLevel:${origin.classId}-${origin.classLevel}`;
+  }
+  if (origin.type === 'race') {
+    return `race:${origin.raceId}-${origin.raceLevel}`;
   }
   return `characterLevel:${origin.characterLevel}`;
 }

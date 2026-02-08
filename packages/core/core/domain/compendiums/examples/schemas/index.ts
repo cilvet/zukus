@@ -22,6 +22,13 @@ export { wondrousItemSchema } from './wondrousItemSchema';
 export { weaponPropertySchema } from './weaponPropertySchema';
 export { armorPropertySchema } from './armorPropertySchema';
 
+// Race schemas
+export { raceSchema } from './raceSchema';
+export { racialTraitSchema } from './racialTraitSchema';
+
+// Spell-like ability schema
+export { spellLikeAbilitySchema } from './spellLikeAbilitySchema';
+
 // Class schema is defined in srd/fighter/fighterClass.ts
 // and re-exported here for convenience
 export { classSchema } from '../../../../../srd/fighter/fighterClass';

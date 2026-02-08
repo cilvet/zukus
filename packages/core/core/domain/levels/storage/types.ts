@@ -16,9 +16,10 @@ import type { EntityProvider } from '../providers/types';
  * Origin types for entity instances.
  * Indicates where an entity came from.
  */
-export type EntityOrigin = 
+export type EntityOrigin =
   | `classLevel:${string}`                    // e.g., "classLevel:rogue-2"
   | `characterLevel:${number}`                // e.g., "characterLevel:4" (system-level features)
+  | `race:${string}`                          // e.g., "race:elf-1" (racial features)
   | `entityInstance.${string}:${string}`      // e.g., "entityInstance.classFeature:combat-trick@rogue-2-rogue-talent"
   | 'custom';                                 // User-created entity
 
@@ -178,6 +179,112 @@ export type ClassEntity = Entity
     
     /** Prerequisites (for prestige classes) */
     prerequisites?: string;
+  };
+
+// =============================================================================
+// RaceEntity
+// =============================================================================
+
+/**
+ * D&D 3.5 size categories.
+ */
+export type SizeCategory =
+  | 'FINE'
+  | 'DIMINUTIVE'
+  | 'TINY'
+  | 'SMALL'
+  | 'MEDIUM'
+  | 'LARGE'
+  | 'HUGE'
+  | 'GARGANTUAN'
+  | 'COLOSSAL';
+
+/**
+ * Racial hit dice configuration (for non-standard races).
+ */
+export type RacialHitDice = {
+  /** Number of racial hit dice */
+  count: number;
+  /** Hit die size (4, 6, 8, 10, or 12) */
+  hitDie: number;
+  /** Creature type for the hit dice (e.g., "outsider") */
+  type: string;
+};
+
+/**
+ * A single row in the race levels table.
+ * Contains providers for that level (racial features, bonus feats, SLAs).
+ */
+export type RaceLevelRow = {
+  /**
+   * Providers for this race level.
+   * Each provider can have granted entities and/or selectors.
+   * Selectors will have selectedInstanceIds populated with user choices.
+   */
+  providers?: EntityProvider[];
+};
+
+/**
+ * A race entity as stored in the character.
+ *
+ * This is a copy of the race definition from the compendium,
+ * with providers containing user selections (selectedInstanceIds).
+ */
+export type RaceEntity = Entity
+  & SearchableFields
+  & Partial<TaggableFields>
+  & Partial<SourceableFields>
+  & {
+    /** Always "race" for race entities */
+    entityType: 'race';
+
+    /** Creature size category */
+    size: SizeCategory;
+
+    /** Base land speed in feet */
+    baseLandSpeed: number;
+
+    /** Base swim speed in feet */
+    baseSwimSpeed?: number;
+
+    /** Base fly speed in feet */
+    baseFlySpeed?: number;
+
+    /** Base climb speed in feet */
+    baseClimbSpeed?: number;
+
+    /** Base burrow speed in feet */
+    baseBurrowSpeed?: number;
+
+    /** Automatic languages */
+    languages: string[];
+
+    /** Available bonus languages */
+    bonusLanguages?: string[];
+
+    /** Level adjustment for ECL calculation (default 0) */
+    levelAdjustment: number;
+
+    /** Racial hit dice (for non-standard races) */
+    racialHitDice?: RacialHitDice;
+
+    /** Favored class ID (or "any" for humans) */
+    favoredClass?: string;
+
+    /** Creature type (e.g., "humanoid", "monstrous humanoid") */
+    racialType: string;
+
+    /** Creature subtypes (e.g., ["elf", "human"]) */
+    racialSubtypes?: string[];
+
+    /**
+     * Levels data keyed by level number (as string).
+     * Most races have a single level "1" with providers.
+     */
+    levels: Record<string, RaceLevelRow>;
+
+    /** Effects for ability score modifiers, etc. */
+    effects?: import('../../character/baseData/effects').Effect[];
   };
 
 // =============================================================================

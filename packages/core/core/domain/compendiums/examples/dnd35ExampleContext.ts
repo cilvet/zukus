@@ -32,6 +32,9 @@ import {
   wondrousItemSchema,
   weaponPropertySchema,
   armorPropertySchema,
+  raceSchema,
+  racialTraitSchema,
+  spellLikeAbilitySchema,
 } from './schemas';
 import { 
   systemLevelsSchemaDefinition, 
@@ -71,6 +74,14 @@ import { wizard5eClass, wizard5eClassFeatures } from '../../../../testClasses/wi
 // System levels from SRD
 import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLevels';
 
+// Races from SRD
+import {
+  allRaces,
+  allRacialTraits,
+  allRacialSpellLikeAbilities,
+  allRacialClassFeatures,
+} from '../../../../srd/races';
+
 // =============================================================================
 // Compendium Definition
 // =============================================================================
@@ -95,6 +106,11 @@ import { dnd35SystemLevels, allAbilityIncreases } from '../../../../srd/systemLe
  * - Wondrous Items: 581 magic items (rings, cloaks, belts, etc.)
  * - Weapon Properties: 47 (Flaming, Keen, Vorpal, etc.)
  * - Armor Properties: 31 (Fortification, Shadow, etc.)
+ *
+ * Races:
+ * - 8 races (Human, Dwarf, Elf, Gnome, Half-Elf, Half-Orc, Halfling, Drow)
+ * - Racial traits for each race
+ * - Racial SLAs (Gnome, Drow)
  *
  * Test Classes (for CGE visual testing):
  * - Warblade: maneuvers with LIST GLOBAL + consumeOnUse
@@ -126,6 +142,9 @@ const dnd35ExampleCompendium: Compendium = {
     wondrousItemSchema,
     weaponPropertySchema,
     armorPropertySchema,
+    raceSchema,
+    racialTraitSchema,
+    spellLikeAbilitySchema,
     systemLevelsSchemaDefinition,
     characterAbilityIncreaseSchemaDefinition,
   ],
@@ -142,6 +161,9 @@ const dnd35ExampleCompendium: Compendium = {
     wondrousItem: srdWondrousItems,
     weaponProperty: srdWeaponProperties,
     armorProperty: srdArmorProperties,
+    race: allRaces,
+    racialTrait: allRacialTraits,
+    spellLikeAbility: allRacialSpellLikeAbilities,
     class: [
       // D&D 3.5 SRD Classes
       fighterClass,
@@ -164,6 +186,8 @@ const dnd35ExampleCompendium: Compendium = {
       ...druidClassFeatures,
       ...sorcererClassFeatures,
       ...wizardClassFeatures,
+      // Racial class features (SLA CGE definitions)
+      ...allRacialClassFeatures,
       // Test class features
       ...warbladeClassFeatures,
       ...psionClassFeatures,
@@ -224,7 +248,7 @@ export { dnd35ExampleCompendium };
 /**
  * Re-export schemas for convenience
  */
-export { spellSchema, featSchema, classSchema, classFeatureSchema, buffSchema };
+export { spellSchema, featSchema, classSchema, classFeatureSchema, buffSchema, raceSchema, racialTraitSchema, spellLikeAbilitySchema };
 
 /**
  * Re-export entities for convenience
@@ -257,3 +281,8 @@ export { wizard5eClass, wizard5eClassFeatures };
  * Re-export system levels for convenience
  */
 export { dnd35SystemLevels, allAbilityIncreases };
+
+/**
+ * Re-export races for convenience
+ */
+export { allRaces, allRacialTraits, allRacialSpellLikeAbilities, allRacialClassFeatures };

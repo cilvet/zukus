@@ -47,7 +47,7 @@ export function resolveLevelSystemEntities(
 ): ResolvedCharacterResult {
   const warnings: CharacterWarning[] = [];
   
-  const hasLevelSystemData = characterBaseData.entities || characterBaseData.classEntities;
+  const hasLevelSystemData = characterBaseData.entities || characterBaseData.classEntities || characterBaseData.raceEntity;
   if (!hasLevelSystemData) {
     return { characterData: characterBaseData, warnings };
   }

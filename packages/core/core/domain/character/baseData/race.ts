@@ -13,6 +13,7 @@ export type Race = {
   languages: LocatedString[];
   racialFeatures: Feature[];
   levelAdjustment?: number;
+  racialHD?: number;
   changes?: Change[];
   resources?: Resource[];
 };

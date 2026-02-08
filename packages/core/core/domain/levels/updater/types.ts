@@ -7,7 +7,7 @@
 
 import type { CharacterBaseData } from '../../character/baseData/character';
 import type { StandardEntity } from '../../entities/types/base';
-import type { ClassEntity, SystemLevelsEntity } from '../storage/types';
+import type { ClassEntity, SystemLevelsEntity, RaceEntity } from '../storage/types';
 
 // =============================================================================
 // Compendium Context
@@ -27,6 +27,11 @@ export type CompendiumContext = {
    * Get a system levels entity by ID from the compendium.
    */
   getSystemLevels: (systemLevelsId: string) => SystemLevelsEntity | undefined;
+
+  /**
+   * Get a race by ID from the compendium.
+   */
+  getRace?: (raceId: string) => RaceEntity | undefined;
   
   /**
    * Get an entity by ID and type from the compendium.
@@ -47,21 +52,26 @@ export type CompendiumContext = {
  * Location of a provider for selection updates.
  * Identifies where in the character data a provider lives.
  */
-export type ProviderLocation = 
-  | { 
-      type: 'classLevel'; 
-      classId: string; 
-      classLevel: number; 
+export type ProviderLocation =
+  | {
+      type: 'classLevel';
+      classId: string;
+      classLevel: number;
       providerIndex: number;
     }
-  | { 
-      type: 'systemLevel'; 
-      characterLevel: number; 
+  | {
+      type: 'systemLevel';
+      characterLevel: number;
       providerIndex: number;
     }
-  | { 
-      type: 'entity'; 
-      parentInstanceId: string; 
+  | {
+      type: 'raceLevel';
+      raceLevel: number;
+      providerIndex: number;
+    }
+  | {
+      type: 'entity';
+      parentInstanceId: string;
       providerIndex: number;
     };
 
@@ -85,7 +95,7 @@ export type UpdateResult = {
  * Warning from an update operation.
  */
 export type UpdateWarning = {
-  type: 'entity_not_found' | 'class_not_found' | 'system_levels_not_found' | 'invalid_index' | 'provider_not_found';
+  type: 'entity_not_found' | 'class_not_found' | 'system_levels_not_found' | 'race_not_found' | 'invalid_index' | 'provider_not_found';
   message: string;
   entityId?: string;
 };

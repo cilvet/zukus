@@ -6,7 +6,7 @@
  */
 
 import type { CharacterBaseData } from '../../character/baseData/character';
-import type { ClassEntity, ClassLevelRow, SystemLevelRow } from '../storage/types';
+import type { ClassEntity, ClassLevelRow, SystemLevelRow, RaceEntity, RaceLevelRow } from '../storage/types';
 import type { EntityProvider } from '../providers/types';
 import type { ProviderLocation, UpdateResult, UpdateWarning } from './types';
 
@@ -48,7 +48,16 @@ export function updateProviderSelection(
       selectedInstanceIds
     );
   }
-  
+
+  if (location.type === 'raceLevel') {
+    return updateRaceLevelProviderSelection(
+      character,
+      location.raceLevel,
+      location.providerIndex,
+      selectedInstanceIds
+    );
+  }
+
   return updateEntityProviderSelection(
     character,
     location.parentInstanceId,
@@ -223,6 +232,86 @@ function updateSystemLevelProviderSelection(
 }
 
 // =============================================================================
+// Race Level Provider Selection
+// =============================================================================
+
+/**
+ * Updates selection in a race level provider.
+ */
+function updateRaceLevelProviderSelection(
+  character: CharacterBaseData,
+  raceLevel: number,
+  providerIndex: number,
+  selectedInstanceIds: string[]
+): UpdateResult {
+  const warnings: UpdateWarning[] = [];
+
+  // Get race entity
+  if (!character.raceEntity) {
+    warnings.push({
+      type: 'race_not_found',
+      message: 'No race entity in character',
+    });
+    return { character, warnings };
+  }
+
+  const raceEntity = character.raceEntity;
+  const levelKey = String(raceLevel);
+
+  // Get level row
+  if (!raceEntity.levels[levelKey]) {
+    warnings.push({
+      type: 'provider_not_found',
+      message: `Race level ${raceLevel} not found in race entity`,
+    });
+    return { character, warnings };
+  }
+
+  const levelRow = raceEntity.levels[levelKey];
+
+  // Get provider
+  if (!levelRow.providers || providerIndex >= levelRow.providers.length) {
+    warnings.push({
+      type: 'provider_not_found',
+      message: `Provider index ${providerIndex} not found in race level ${raceLevel}`,
+    });
+    return { character, warnings };
+  }
+
+  // Update provider
+  const updatedProviders = levelRow.providers.map((provider, index) => {
+    if (index === providerIndex) {
+      return {
+        ...provider,
+        selectedInstanceIds,
+      };
+    }
+    return provider;
+  });
+
+  const updatedLevelRow: RaceLevelRow = {
+    ...levelRow,
+    providers: updatedProviders,
+  };
+
+  const updatedRace: RaceEntity = {
+    ...raceEntity,
+    levels: {
+      ...raceEntity.levels,
+      [levelKey]: updatedLevelRow,
+    },
+  };
+
+  return {
+    character: {
+      ...character,
+      raceEntity: updatedRace,
+    },
+    warnings,
+  };
+}
+
+// =============================================================================
 // Entity Provider Selection
 // =============================================================================
 
@@ -332,11 +421,21 @@ export function getProvider(
     if (!systemLevelsEntity) {
       return undefined;
     }
-    
+
     const levelRow = systemLevelsEntity.levels[String(location.characterLevel)];
     return levelRow?.providers?.[location.providerIndex];
   }
-  
+
+  if (location.type === 'raceLevel') {
+    const raceEntity = character.raceEntity;
+    if (!raceEntity) {
+      return undefined;
+    }
+
+    const levelRow = raceEntity.levels[String(location.raceLevel)];
+    return levelRow?.providers?.[location.providerIndex];
+  }
+
   // Entity provider
   if (!character.entities) {
     return undefined;

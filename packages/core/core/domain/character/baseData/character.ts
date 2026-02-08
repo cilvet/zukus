@@ -13,7 +13,7 @@ import { ContextualChange } from "./contextualChange";
 import { SpecialChange } from "./specialChanges";
 import { Resource } from "../../spells/resources";
 import type { StandardEntity } from "../../entities/types/base";
-import type { EntityInstance, LevelSlot, ClassEntity, SystemLevelsEntity } from "../../levels/storage/types";
+import type { EntityInstance, LevelSlot, ClassEntity, SystemLevelsEntity, RaceEntity } from "../../levels/storage/types";
 import type { CGEState } from "../../cge/types";
 import type { InventoryState } from "../../inventory/types";
 
@@ -138,7 +138,14 @@ export type CharacterBaseData = {
    * Processed before class providers during resolution.
    */
   systemLevelsEntity?: SystemLevelsEntity;
-  
+
+  /**
+   * Race entity (new level system).
+   * Copied from compendium, contains user selections for racial providers.
+   * Coexists with legacy `race` field.
+   */
+  raceEntity?: RaceEntity;
+
   /**
    * If true, forces the use of the legacy level system (levelsData).
    * If false or undefined, the system will use the new level system

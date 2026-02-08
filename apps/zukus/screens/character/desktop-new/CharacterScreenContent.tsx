@@ -132,7 +132,16 @@ export function CharacterScreenContent() {
   }
 
   const levelNumber = level?.level ?? 0
-  const buildString = baseData ? getBuildString(baseData) : null
+  const classBuildString = baseData ? getBuildString(baseData) : null
+  const raceName = baseData?.raceEntity?.name ?? null
+  const levelAdjustment = (baseData?.raceEntity as any)?.levelAdjustment as number | undefined
+  const buildString = (() => {
+    const parts: string[] = []
+    if (raceName) parts.push(raceName)
+    if (classBuildString) parts.push(classBuildString)
+    if (levelAdjustment && levelAdjustment > 0) parts.push(`(LA +${levelAdjustment})`)
+    return parts.length > 0 ? parts.join(' ') : null
+  })()
   const currentHp = hitPoints?.currentHp ?? 0
   const maxHp = hitPoints?.maxHp ?? 0
 

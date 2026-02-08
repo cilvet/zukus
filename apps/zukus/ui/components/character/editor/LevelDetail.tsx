@@ -45,6 +45,8 @@ export type LevelDetailProps = {
   hitDie: number | null
   systemProviders: ProviderWithResolution[]
   classProviders: ProviderWithResolution[]
+  raceProviders?: ProviderWithResolution[]
+  raceName?: string | null
   onOpenClassSelector: () => void
   onHpChange: (hp: number | null) => void
   onRollHp: () => void
@@ -66,6 +68,8 @@ export function LevelDetail({
   hitDie,
   systemProviders,
   classProviders,
+  raceProviders = [],
+  raceName,
   onOpenClassSelector,
   onHpChange,
   onRollHp,
@@ -81,6 +85,7 @@ export function LevelDetail({
 
   const hasSystemProviders = systemProviders.length > 0
   const hasClassProviders = classProviders.length > 0
+  const hasRaceProviders = raceProviders.length > 0
 
   function handleHpInputChange(text: string) {
     const trimmed = text.trim()
@@ -159,7 +164,7 @@ export function LevelDetail({
       )}
 
       {/* Separator before providers */}
-      {(hasSystemProviders || hasClassProviders) && <Separator borderColor="$borderColor" />}
+      {(hasSystemProviders || hasClassProviders || hasRaceProviders) && <Separator borderColor="$borderColor" />}
 
       {/* System Providers */}
       {hasSystemProviders && (
@@ -178,6 +183,34 @@ export function LevelDetail({
           {systemProviders.map((providerData) => (
             <ProviderSummaryRow
               key={`system-${providerData.providerLocation.providerIndex}`}
+              provider={providerData.provider}
+              grantedEntities={providerData.grantedEntities}
+              selectedEntities={providerData.selectedEntities}
+              onSelectorPress={() => onSelectorPress(providerData.providerLocation)}
+              onGrantedEntityPress={onGrantedEntityPress}
+              onSelectedEntityPress={onSelectedEntityPress}
+            />
+          ))}
+        </YStack>
+      )}
+
+      {/* Race Providers */}
+      {hasRaceProviders && (
+        <YStack>
+          <Text
+            fontSize={12}
+            fontWeight="700"
+            color="$placeholderColor"
+            letterSpacing={1.5}
+            textTransform="uppercase"
+            marginTop={16}
+            marginBottom={8}
+          >
+            {raceName ?? 'RAZA'}
+          </Text>
+          {raceProviders.map((providerData) => (
+            <ProviderSummaryRow
+              key={`race-${providerData.providerLocation.providerIndex}`}
               provider={providerData.provider}
               grantedEntities={providerData.grantedEntities}
               selectedEntities={providerData.selectedEntities}
