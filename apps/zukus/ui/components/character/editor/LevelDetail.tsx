@@ -8,8 +8,10 @@
  * - Class-level providers (class features)
  */
 
+'use no memo'
+
 import { YStack, XStack, Text, Button, Input, Separator } from 'tamagui'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import { FontAwesome6 } from '@expo/vector-icons'
 import type {
   EntityProvider,
   StandardEntity,
@@ -17,6 +19,7 @@ import type {
   ProviderLocation,
 } from '@zukus/core'
 import { ProviderSummaryRow } from '../../EntityProvider'
+import { useTheme } from '../../../contexts/ThemeContext'
 
 export type LevelSlotData = {
   classId: string | null
@@ -66,6 +69,7 @@ export function LevelDetail({
   onGrantedEntityPress,
   onSelectedEntityPress,
 }: LevelDetailProps) {
+  const { themeColors } = useTheme()
   const levelNumber = levelIndex + 1
   const isFirstLevel = levelIndex === 0
   const hasClass = levelSlot.classId !== null
@@ -112,43 +116,38 @@ export function LevelDetail({
             {className || 'Seleccionar clase'}
           </Text>
         </YStack>
-        <FontAwesome name="chevron-right" size={16} color="#9ca3af" />
+        <FontAwesome6 name="chevron-right" size={14} color="#9ca3af" />
       </XStack>
 
       <Separator borderColor="$borderColor" />
 
       {/* Hit Die Row - only if class is selected and hitDie exists */}
       {hasClass && hitDie && (
-        <>
-          <YStack>
-            <XStack paddingVertical={12} alignItems="center" gap={12}>
-              <YStack flex={1}>
-                <Text fontSize={12} color="$placeholderColor">
-                  Dado de Vida
-                </Text>
-                <Text fontSize={16} fontWeight="500" color="$color">
-                  {levelSlot.hpRoll ?? `d${hitDie}`}
-                </Text>
-              </YStack>
-              <Input
-                width={60}
-                textAlign="center"
-                keyboardType="numeric"
-                placeholder={`1-${hitDie}`}
-                value={levelSlot.hpRoll?.toString() ?? ''}
-                onChangeText={handleHpInputChange}
-              />
-              <Button size="$2" onPress={handleRollHp} aria-label="Roll hit die">
-                <FontAwesome name="refresh" size={14} />
-              </Button>
-            </XStack>
+        <XStack paddingVertical={12} alignItems="center" gap={12}>
+          <YStack flex={1}>
             <Text fontSize={12} color="$placeholderColor">
-              {isFirstLevel
-                ? `Nivel 1 siempre obtiene HP máximo (${hitDie})`
-                : `Tira 1d${hitDie} para HP (1-${hitDie})`}
+              Dado de Golpe
+            </Text>
+            <Text fontSize={16} fontWeight="700" color="$accent">
+              1d{hitDie}
             </Text>
           </YStack>
-        </>
+          <Input
+            width={60}
+            textAlign="center"
+            keyboardType="numeric"
+            placeholder={`${hitDie}`}
+            value={levelSlot.hpRoll?.toString() ?? ''}
+            onChangeText={handleHpInputChange}
+          />
+          <Button
+            size="$3"
+            onPress={handleRollHp}
+            aria-label="Tirar dado de golpe"
+          >
+            <FontAwesome6 name="dice" size={20} color={themeColors.color} />
+          </Button>
+        </XStack>
       )}
 
       {/* Separator before providers */}

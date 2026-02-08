@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react'
+import { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text, YStack, XStack } from 'tamagui'
 import { useTheme, useCharacterSheet, useCharacterStore } from '../../ui'
@@ -7,8 +7,6 @@ import {
   LevelEditor,
   AbilityScoresEditor,
   CharacterInfoSection,
-  EditorPager,
-  type EditorPagerRef,
 } from '../../ui/components/character/editor'
 
 const EDITOR_PAGES = [
@@ -122,19 +120,13 @@ export function EditCharacterScreenMobile() {
   const { updater } = useCharacterStore()
 
   const [currentPage, setCurrentPage] = useState(0)
-  const pagerRef = useRef<EditorPagerRef>(null)
-
-  const handleTabPress = (index: number) => {
-    pagerRef.current?.setPage(index)
-    setCurrentPage(index)
-  }
 
   // Level change from dot press - direct change (no confirmation needed)
-  const handleRequestLevelChange = useCallback((level: number) => {
+  const handleRequestLevelChange = (level: number) => {
     if (updater) {
       updater.setCurrentCharacterLevel(level)
     }
-  }, [updater])
+  }
 
   if (!characterSheet) {
     return (
@@ -149,18 +141,12 @@ export function EditCharacterScreenMobile() {
 
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background }]}>
-      <EditorTabs currentPage={currentPage} onPageChange={handleTabPress} />
-      <EditorPager ref={pagerRef} onPageChange={setCurrentPage}>
-        <View key="info" style={styles.page}>
-          <InfoColumn />
-        </View>
-        <View key="abilities" style={styles.page}>
-          <AbilitiesColumn />
-        </View>
-        <View key="levels" style={styles.page}>
-          <LevelsColumn onRequestLevelChange={handleRequestLevelChange} />
-        </View>
-      </EditorPager>
+      <EditorTabs currentPage={currentPage} onPageChange={setCurrentPage} />
+      <View style={styles.page}>
+        {currentPage === 0 && <InfoColumn />}
+        {currentPage === 1 && <AbilitiesColumn />}
+        {currentPage === 2 && <LevelsColumn onRequestLevelChange={handleRequestLevelChange} />}
+      </View>
       <SafeAreaBottomSpacer />
     </View>
   )
