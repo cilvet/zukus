@@ -272,9 +272,13 @@ function compileInventoryItemEffects(
         continue;
       }
 
+      // Resolve @entity.X placeholders with entity property values
+      // This allows effects to use formulas like @entity.armorBonus
+      const entityResolved = resolveEffectEntityPlaceholders(effect, entity);
+
       // Resolve @instance.X conditions with actual item instance values
       // This allows effects to have conditions like @instance.active == 1
-      const resolvedEffect = resolveInstanceConditions(effect, item);
+      const resolvedEffect = resolveInstanceConditions(entityResolved, item);
 
       const sourcedEffect = toSourcedEffect(
         resolvedEffect,

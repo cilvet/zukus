@@ -12,6 +12,21 @@ export const armorSchema: EntitySchemaDefinition = {
   description: 'D&D 3.5 Armor',
   version: '1.0.0',
   addons: ['searchable', 'imageable', 'dnd35item', 'effectful', 'equippable'],
+  autoEffects: [
+    {
+      target: 'ac.total',
+      formula: '@entity.armorBonus',
+      bonusType: 'ARMOR',
+      conditions: [
+        {
+          type: 'simple',
+          firstFormula: '@instance.equipped',
+          operator: '==',
+          secondFormula: '1',
+        },
+      ],
+    },
+  ],
   fields: [
     // Protection stats
     {

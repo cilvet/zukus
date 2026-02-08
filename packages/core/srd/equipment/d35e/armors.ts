@@ -5,12 +5,33 @@
  */
 
 import type { StandardEntity } from '@zukus/core';
+import type { Effect } from '../../../core/domain/character/baseData/effects';
 
 /**
  * Extended entity type with dynamic fields.
  * The fields are defined by the schema addons (dnd35item, effectful, etc.)
  */
 type ExtendedEntity = StandardEntity & Record<string, unknown>;
+
+/**
+ * Auto effects copied from armorSchema.autoEffects.
+ * In production, the CMS would do this automatically when creating entities.
+ */
+const armorAutoEffects: Effect[] = [
+  {
+    target: 'ac.total',
+    formula: '@entity.armorBonus',
+    bonusType: 'ARMOR',
+    conditions: [
+      {
+        type: 'simple',
+        firstFormula: '@instance.equipped',
+        operator: '==',
+        secondFormula: '1',
+      },
+    ],
+  },
+];
 
 export const srdArmors: ExtendedEntity[] = [
   {
@@ -31,7 +52,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 20,
     "speed20": 15,
     "armorType": "heavy",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "breastplate",
@@ -51,7 +73,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "medium",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "chain-shirt",
@@ -71,7 +94,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "light",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "chainmail",
@@ -91,7 +115,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "medium",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "full-plate",
@@ -111,7 +136,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 20,
     "speed20": 15,
     "armorType": "heavy",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "half-plate",
@@ -131,7 +157,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 20,
     "speed20": 15,
     "armorType": "heavy",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "hide-armor",
@@ -151,7 +178,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "medium",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "leather-armor",
@@ -171,7 +199,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "light",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "padded-armor",
@@ -191,7 +220,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "light",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "scale-mail",
@@ -211,7 +241,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "medium",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "splint-mail",
@@ -231,7 +262,8 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 20,
     "speed20": 15,
     "armorType": "heavy",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   },
   {
     "id": "studded-leather-armor",
@@ -251,6 +283,7 @@ export const srdArmors: ExtendedEntity[] = [
     "speed30": 30,
     "speed20": 20,
     "armorType": "light",
-    "isMasterwork": false
+    "isMasterwork": false,
+    effects: armorAutoEffects,
   }
 ];
