@@ -319,5 +319,38 @@ export {
   dnd35FeatsSpanishPack,
 } from "./core/domain/translations";
 
+// Actions System
+export type {
+  ActionType,
+  ActionParam,
+  ParamSource,
+  DynamicInput,
+  ActionOutput,
+  ActionResult,
+  ActionDefinition,
+  ActionableFields,
+  ContextualEffectGroup,
+  ResolvedContextualEffectGroup,
+  CompiledContextualEffects,
+  ContextualFields,
+  ContextualEffectState,
+  ResolvedParams,
+  ActionOutcome,
+  ActionExecutionResult,
+  ExecuteActionInput,
+} from "./core/domain/actions";
+
+export {
+  ACTION_TYPE_TO_CONTEXT,
+  executeAction,
+  resolveParams,
+  resolveOutputs,
+  compileContextualEffects,
+  applyContextualEffects,
+  executeInjectEntity,
+  executeModifyHP,
+  executeDiceRoll,
+} from "./core/domain/actions";
+
 // Test Classes (for CGE visual testing - NOT D&D 3.5 SRD)
 export * from "./testClasses";
