@@ -83,7 +83,17 @@ function extractCGEDefinitions(specialChanges: SpecialChange[]): CGEDefinitionCh
 
 function getClassLevel(baseData: CharacterBaseData, classId: string): number {
   const classLevels = getClassLevels(baseData);
-  return classLevels[classId] ?? 0;
+  const level = classLevels[classId] ?? 0;
+  if (level > 0) return level;
+
+  // For racial CGEs, classId is the raceId (e.g., 'gnome').
+  // If the character has a matching raceEntity, use character level.
+  if (baseData.raceEntity?.id === classId) {
+    const characterLevel = baseData.levelSlots?.filter(s => s.classId !== null).length ?? 0;
+    return Math.max(characterLevel, 1);
+  }
+
+  return 0;
 }
 
 type SingleCGEResult = {

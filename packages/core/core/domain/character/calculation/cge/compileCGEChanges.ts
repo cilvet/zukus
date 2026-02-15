@@ -24,7 +24,14 @@ export function compileCGEVariableDefinitions(
 
   for (const definition of cgeDefinitions) {
     const { config } = definition;
-    const classLevel = classLevels[config.classId] ?? 0;
+    let classLevel = classLevels[config.classId] ?? 0;
+
+    // For racial CGEs, classId is the raceId (e.g., 'gnome').
+    // If the character has a matching raceEntity, use character level.
+    if (classLevel === 0 && characterBaseData.raceEntity?.id === config.classId) {
+      const characterLevel = characterBaseData.levelSlots?.filter(s => s.classId !== null).length ?? 0;
+      classLevel = Math.max(characterLevel, 1);
+    }
 
     if (classLevel === 0) {
       continue;
